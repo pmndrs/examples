@@ -1,0 +1,40 @@
+@import url('https://rsms.me/inter/inter.css');
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overscroll-behavior: none;
+  background: #151515;
+  color: #a0a0a0;
+  font-family: 'Inter var', sans-serif;
+}
+
+h1 {
+  font-size: 30vw;
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  line-height: 0.7em;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  pointer-events: all;
+  color: #a0a0a0;
+  text-decoration: none;
+}
+
+svg {
+  fill: #a0a0a0;
+}

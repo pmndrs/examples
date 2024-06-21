@@ -1,0 +1,35 @@
+{
+  "name": "instanced-vertex-colors",
+  "version": "1.0.0",
+  "description": "Instancing objectes with variable colors and effects.",
+  "keywords": [
+    "vertex-colors",
+    "ambient-occlusion",
+    "bloom",
+    "instancing"
+  ],
+  "main": "src/index.js",
+  "dependencies": {
+    "@react-three/drei": "9.96.1",
+    "@react-three/fiber": "8.15.14",
+    "@react-three/postprocessing": "2.15.12",
+    "nice-color-palettes": "3.0.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-scripts": "5.0.1",
+    "three": "0.160.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "name": "bestservedbold-christmas-baubles",
+  "version": "1.0.0",
+  "description": "Physics, effects, lights and colors.",
+  "keywords": [
+    "effects",
+    "physics",
+    "baubles"
+  ],
+  "main": "src/index.js",
+  "dependencies": {
+    "@react-three/cannon": "6.5.2",
+    "@react-three/drei": "9.69.1",
+    "@react-three/fiber": "8.13.0",
+    "@react-three/postprocessing": "2.13.0",
+    "@react-three/rapier": "0.13.2",
+    "@types/three": "0.153.0",
+    "leva": "0.9.34",
+    "maath": "0.5.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-scripts": "5.0.1",
+    "three": "0.152.2"
+  },
+  "devDependencies": {
+    "typescript": "3.8.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

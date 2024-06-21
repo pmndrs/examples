@@ -1,0 +1,39 @@
+{
+  "name": "bruno-simons-20k-challenge",
+  "version": "1.0.0",
+  "description": "https://twitter.com/bruno_simon/status/1557355710089920513",
+  "keywords": [
+    "csg",
+    "rapier",
+    "postprocessing",
+    "drei",
+    "physics"
+  ],
+  "main": "src/index.js",
+  "dependencies": {
+    "@react-three/csg": "3.0.0",
+    "@react-three/drei": "9.74.12",
+    "@react-three/fiber": "8.15.15",
+    "@react-three/postprocessing": "2.15.12",
+    "@react-three/rapier": "1.2.1",
+    "@types/three": "0.144.0",
+    "leva": "0.9.31",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-scripts": "5.0.1",
+    "three": "0.145.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

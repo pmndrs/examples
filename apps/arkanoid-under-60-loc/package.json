@@ -1,0 +1,37 @@
+{
+  "name": "arkanoid-under-60-loc",
+  "version": "1.0.0",
+  "description": "Super small Arkanoid barebones implementation.",
+  "keywords": [
+    "collisions",
+    "cannon",
+    "arkanoid",
+    "physics"
+  ],
+  "main": "src/index.js",
+  "dependencies": {
+    "@react-three/fiber": "8.11.2",
+    "@react-three/rapier": "0.13.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-scripts": "5.0.1",
+    "three": "0.149.0"
+  },
+  "devDependencies": {
+    "customize-cra": "^0.9.1",
+    "customize-cra-react-refresh": "^1.0.1",
+    "react-app-rewired": "^2.1.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "name": "simple-audio-analyser",
+  "version": "1.0.0",
+  "description": "Audio frequency analysis.",
+  "keywords": [
+    "analyser",
+    "audio"
+  ],
+  "main": "src/index.js",
+  "dependencies": {
+    "@pmndrs/branding": "0.0.8",
+    "@react-three/drei": "8.10.2",
+    "@react-three/fiber": "7.0.26",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-scripts": "5.0.0",
+    "suspend-react": "0.0.8",
+    "three": "0.137.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

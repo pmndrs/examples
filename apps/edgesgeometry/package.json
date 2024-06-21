@@ -1,0 +1,26 @@
+{
+  "name": "edgesgeometry",
+  "version": "1.0.0",
+  "description": "How to use EdgesGeometry, which expects its target as a constructor argument.",
+  "keywords": ["outlines", "gltf", "geometry"],
+  "main": "src/index.js",
+  "dependencies": {
+    "@react-three/drei": "9.102.2",
+    "@react-three/fiber": "latest",
+    "@types/three": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-scripts": "latest",
+    "three": "latest"
+  },
+  "devDependencies": {
+    "typescript": "3.3.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"]
+}

@@ -1,0 +1,30 @@
+{
+  "name": "flying-bananas",
+  "version": "1.0.0",
+  "description": "Shows how to form self-contained components with their own state and user interaction.",
+  "keywords": [],
+  "main": "src/index.js",
+  "dependencies": {
+    "@react-three/drei": "9.92.3",
+    "@react-three/fiber": "8.15.12",
+    "@react-three/postprocessing": "2.15.11",
+    "@types/three": "0.159.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-scripts": "5.0.1",
+    "styled-components": "6.1.1",
+    "three": "0.159.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

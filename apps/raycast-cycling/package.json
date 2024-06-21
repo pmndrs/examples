@@ -1,0 +1,32 @@
+{
+  "name": "raycast-cycling",
+  "version": "1.0.0",
+  "description": "Bringing multiple objects underneath the cursor up front through raycast cycling",
+  "keywords": [
+    "raycast",
+    "cycling"
+  ],
+  "main": "src/index.js",
+  "dependencies": {
+    "@react-three/drei": "9.0.3",
+    "@react-three/fiber": "8.0.7",
+    "react": "18.0.0",
+    "react-dom": "18.0.0",
+    "react-scripts": "5.0.0",
+    "styled-components": "5.3.5",
+    "three": "0.139.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

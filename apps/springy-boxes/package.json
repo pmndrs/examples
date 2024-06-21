@@ -1,0 +1,33 @@
+{
+  "name": "springy-boxes",
+  "version": "1.0.0",
+  "description": "Colorfull boxes changing position with spring physics",
+  "keywords": [
+    "springs",
+    "react-spring",
+    "physics",
+    "animation"
+  ],
+  "main": "src/index.js",
+  "dependencies": {
+    "@react-spring/three": "9.7.0",
+    "@react-three/fiber": "8.11.5",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-scripts": "5.0.1",
+    "three": "0.150.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

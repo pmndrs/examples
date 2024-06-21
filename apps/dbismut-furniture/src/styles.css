@@ -1,0 +1,56 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background: #d6d5cf;
+  font-family: system-ui, sans-serif;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  position: relative;
+  z-index: 10;
+  font-weight: 600;
+  font-size: 2.5em;
+  width: 90%;
+}
+
+.scene {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inset: 0;
+}
+
+.container > span {
+  cursor: pointer;
+  margin-right: 0.15em;
+}
+
+.item {
+  opacity: 0.2;
+}
+
+span.active,
+.item:hover {
+  text-decoration-skip-ink: none;
+  text-underline-offset: 0.07em;
+  text-decoration: underline;
+}

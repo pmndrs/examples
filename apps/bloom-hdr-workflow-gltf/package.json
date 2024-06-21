@@ -1,0 +1,39 @@
+{
+  "name": "bloom-hdr-workflow-gltf",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [
+    "bloom",
+    "hdr",
+    "glow",
+    "gltf",
+    "selective"
+  ],
+  "main": "src/index.js",
+  "dependencies": {
+    "@react-three/drei": "^9.4.2",
+    "@react-three/fiber": "^8.0.11",
+    "@splinetool/r3f-spline": "^1.0.1",
+    "@splinetool/loader": "^0.9.51",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-scripts": "^4.0.0",
+    "three": "^0.140.0"
+  },
+  "devDependencies": {
+    "@babel/runtime": "7.13.8",
+    "typescript": "4.1.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

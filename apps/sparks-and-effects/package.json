@@ -1,0 +1,36 @@
+{
+  "name": "sparks-and-effects",
+  "version": "1.0.0",
+  "description": "Demonstrating fake-particles, mesh-lines and effect composition.",
+  "keywords": [
+    "glow",
+    "mesh-line",
+    "effects",
+    "particles",
+    "text-geometry"
+  ],
+  "main": "src/index.js",
+  "dependencies": {
+    "@react-three/fiber": "7.0.24",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-scripts": "5.0.0",
+    "three": "0.125.0",
+    "threejs-meshline": "2.0.12"
+  },
+  "devDependencies": {
+    "typescript": "3.3.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "name": "shader-hmr",
+  "version": "1.0.0",
+  "description": "Shows how to create HMR shaders",
+  "keywords": [],
+  "main": "src/index.js",
+  "dependencies": {
+    "@pmndrs/assets": "1.5.4",
+    "@react-three/drei": "9.74.13",
+    "@react-three/fiber": "8.13.3",
+    "@types/three": "0.152.1",
+    "nanoid": "4.0.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-scripts": "5.0.1",
+    "short-uuid": "4.2.2",
+    "three": "0.153.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

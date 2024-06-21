@@ -1,0 +1,32 @@
+{
+  "name": "ground-reflections-and-video-textures",
+  "version": "1.0.0",
+  "description": "This example shows drei's new Reflector in combination with video textures.",
+  "keywords": [
+    "reflections"
+  ],
+  "main": "src/index.js",
+  "dependencies": {
+    "@pmndrs/branding": "0.0.8",
+    "@react-three/drei": "7.27.5",
+    "@react-three/fiber": "7.0.29",
+    "postprocessing": "6.29.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-scripts": "4.0.3",
+    "three": "0.135.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

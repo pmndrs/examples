@@ -1,0 +1,36 @@
+{
+  "name": "gltfjsx-400kb-drone",
+  "version": "1.0.0",
+  "description": "Shows the results of gltfjsx transform compression.",
+  "keywords": [
+    "bloom",
+    "gltfjsx",
+    "drone"
+  ],
+  "main": "src/index.js",
+  "dependencies": {
+    "@pmndrs/branding": "0.0.8",
+    "@react-three/drei": "9.92.7",
+    "@react-three/fiber": "8.15.12",
+    "@react-three/postprocessing": "2.15.11",
+    "@types/three": "0.160.0",
+    "maath": "0.10.7",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-scripts": "5.0.1",
+    "three": "0.160.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

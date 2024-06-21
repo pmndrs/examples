@@ -1,0 +1,40 @@
+{
+  "name": "gpgpu-curl-noise-dof",
+  "version": "1.0.0",
+  "description": "Curl noise and depth of field.",
+  "keywords": [
+    "gpu",
+    "shader",
+    "curl",
+    "dof"
+  ],
+  "main": "src/index.js",
+  "dependencies": {
+    "@babel/core": "7.15.5",
+    "@react-three/drei": "9.17.3",
+    "@react-three/fiber": "8.2.2",
+    "babel-plugin-glsl": "1.0.0",
+    "babel-plugin-macros": "3.1.0",
+    "glsl-curl-noise2": "0.0.4",
+    "glsl-noise": "0.0.0",
+    "leva": "0.9.29",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-scripts": "5.0.1",
+    "three": "0.142.0",
+    "v8": "0.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

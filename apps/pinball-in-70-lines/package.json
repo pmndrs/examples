@@ -1,0 +1,40 @@
+{
+  "name": "pinball-in-70-lines",
+  "version": "1.0.0",
+  "description": "Super small pinball barebones implementation.",
+  "keywords": [
+    "cannon-es",
+    "physics",
+    "pinball",
+    "arkanoid",
+    "game"
+  ],
+  "main": "src/index.js",
+  "dependencies": {
+    "@react-three/cannon": "2.5.1",
+    "@react-three/drei": "7.3.1",
+    "@react-three/fiber": "7.0.6",
+    "@types/three": "0.130.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-scripts": "4.0.3",
+    "three": "0.131.1"
+  },
+  "devDependencies": {
+    "customize-cra": "^0.9.1",
+    "customize-cra-react-refresh": "^1.0.1",
+    "react-app-rewired": "^2.1.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

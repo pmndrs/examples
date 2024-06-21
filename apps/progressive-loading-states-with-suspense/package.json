@@ -1,0 +1,33 @@
+{
+  "name": "progressive-loading-states-with-suspense",
+  "version": "1.0.0",
+  "description": "Demonstrates how to load a model progressively with fallbacks via React.Suspense.",
+  "keywords": [
+    "gltf",
+    "suspense",
+    "loading"
+  ],
+  "main": "src/index.js",
+  "dependencies": {
+    "@pmndrs/branding": "0.0.8",
+    "@react-three/drei": "7.22.0",
+    "@react-three/fiber": "7.0.19",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-scripts": "4.0.3",
+    "three": "0.134.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

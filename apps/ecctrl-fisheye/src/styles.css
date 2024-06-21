@@ -1,0 +1,44 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body {
+  position: fixed;
+  overflow: hidden;
+}
+
+.controlKeys {
+  position: absolute;
+  width: 11rem;
+  left: 5%;
+  bottom: 5%;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.title {
+  right: 5%;
+  font-size: 0.8rem;
+  color: darkgray;
+  position: absolute;
+  width: 40%;
+  bottom: 2%;
+  text-align: center;
+}
+
+.title > a {
+  color: rgb(79, 189, 249);
+}

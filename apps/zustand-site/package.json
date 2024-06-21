@@ -1,0 +1,57 @@
+{
+  "name": "zustand-site",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@react-three/drei": "9.78.2",
+    "@react-three/fiber": "8.13.5",
+    "@react-three/postprocessing": "2.14.13",
+    "meshline": "3.1.6",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-scripts": "5.0.1",
+    "three": "0.154.0"
+  },
+  "scripts": {
+    "start": "create-react-app start",
+    "build": "create-react-app build",
+    "test": "create-react-app test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "prettier": {
+    "semi": false,
+    "trailingComma": "es5",
+    "singleQuote": true,
+    "jsxBracketSameLine": true,
+    "tabWidth": 2,
+    "printWidth": 120
+  },
+  "devDependencies": {
+    "customize-cra": "^1.0.0",
+    "customize-cra-react-refresh": "^1.1.0",
+    "react-app-rewired": "^2.1.6",
+    "webpack-bundle-analyzer": "^3.8.0"
+  },
+  "keywords": [
+    "parallax",
+    "animation",
+    "dof",
+    "particles"
+  ],
+  "description": "Shows how to parallax layers with dept of field and particles."
+}

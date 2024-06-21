@@ -1,0 +1,34 @@
+{
+  "name": "ragdoll-physics",
+  "version": "1.0.0",
+  "description": "A mini game using cannon ragdoll physics. Throw the little guy around.",
+  "keywords": [
+    "game",
+    "ragdoll",
+    "cannon",
+    "physics"
+  ],
+  "main": "src/index.js",
+  "dependencies": {
+    "@react-three/cannon": "6.3.0",
+    "@react-three/drei": "9.16.0",
+    "@react-three/fiber": "8.0.27",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-scripts": "5.0.1",
+    "three": "0.142.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

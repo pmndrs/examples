@@ -1,0 +1,35 @@
+{
+  "name": "backdrop-and-cables",
+  "version": "1.0.0",
+  "description": "Using a studio backdrop, quadratic bezier line and contact shadows.",
+  "keywords": [
+    "quadraticbezierline",
+    "contact-shadows",
+    "backdrop"
+  ],
+  "main": "src/index.js",
+  "dependencies": {
+    "@react-three/drei": "9.77.1",
+    "@react-three/fiber": "8.8.3",
+    "@react-three/postprocessing": "2.6.2",
+    "@types/three": "0.144.0",
+    "leva": "0.9.31",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-scripts": "5.0.1",
+    "three": "0.144.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "name": "sky-dome-with-annotations",
+  "version": "1.0.0",
+  "description": "Dome projecting texture and HTML annotations.",
+  "keywords": [
+    "annotations",
+    "html",
+    "dome"
+  ],
+  "main": "src/index.js",
+  "dependencies": {
+    "@react-three/drei": "9.71.0",
+    "@react-three/fiber": "8.13.0",
+    "antd": "5.5.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-scripts": "5.0.1",
+    "three": "0.153.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

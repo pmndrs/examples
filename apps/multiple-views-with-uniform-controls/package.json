@@ -1,0 +1,35 @@
+{
+  "name": "multiple-views-with-uniform-controls",
+  "version": "1.0.0",
+  "description": "Shows how to form self-contained components with their own state and user interaction.",
+  "keywords": [],
+  "main": "src/index.js",
+  "dependencies": {
+    "@emotion/react": "11.10.5",
+    "@mantine/core": "5.10.1",
+    "@mantine/hooks": "5.10.1",
+    "@react-three/drei": "9.94.0",
+    "@react-three/fiber": "8.15.14",
+    "@tabler/icons": "1.119.0",
+    "@types/three": "0.148.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-scripts": "5.0.1",
+    "react-use-refs": "1.0.1",
+    "three": "0.148.0",
+    "tunnel-rat": "0.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

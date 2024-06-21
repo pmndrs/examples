@@ -1,0 +1,138 @@
+@import url('https://rsms.me/inter/inter.css');
+
+html {
+  font-family: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #f0f0f0;
+}
+
+a {
+  all: unset;
+  cursor: pointer;
+}
+
+.container {
+  display: grid;
+  padding: 3em 5em 3em 5em;
+  grid-template-rows: auto 1fr;
+  gap: 3em;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.nav {
+  display: grid;
+  grid-template-columns: auto 0.25fr 1fr 0.25fr auto auto;
+  gap: 1em;
+}
+
+.label {
+  margin: 0;
+  font-size: 2.5em;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.label::after {
+  content: 'POIMANDRES';
+}
+
+.caption {
+  font-size: 2.5em;
+  display: inline-block;
+  max-width: 500px;
+}
+
+.caption::after {
+  content: 'Open source developer collective for the creative space';
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #141622;
+  color: white;
+  height: 52px;
+  border-radius: 30px;
+  padding: 0em 2em;
+  white-space: pre;
+}
+
+.button.gray {
+  background: #ccc;
+  color: #141622;
+}
+
+@media (max-width: 1200px) {
+  .container {
+    padding: 2em 4em 2em 4em;
+    gap: 2em;
+  }
+  .button {
+    height: 48px;
+    border-radius: 30px;
+    padding: 0em 2em;
+  }
+  .label {
+    font-size: 2em;
+  }
+  .caption {
+    font-size: 1.5em;
+  }
+}
+
+@media (max-width: 800px) {
+  .caption::after {
+    content: 'OSS dev collective  for the creative space';
+  }
+  .label::after {
+    content: 'PMNDRS';
+  }
+  .container {
+    padding: 2em 3em 2em 3em;
+    gap: 2em;
+  }
+  .button {
+    height: 36px;
+    border-radius: 30px;
+    padding: 0em 1.25em;
+    font-size: 0.7em;
+  }
+  .label {
+    font-size: 1em;
+  }
+  .caption {
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 600px) {
+  .nav {
+    gap: 0.5em;
+  }
+  .caption::after {
+    content: 'OSS dev collective';
+  }
+  .container {
+    padding: 2em 2em 2em 2em;
+    gap: 2em;
+  }
+}

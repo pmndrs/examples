@@ -1,0 +1,38 @@
+{
+  "name": "useintersect-and-scrollcontrols",
+  "version": "1.0.0",
+  "description": "Combining useIntersect with scrollcontrols.",
+  "keywords": [
+    "vertical",
+    "useintersect",
+    "intersection",
+    "scrollcontrols"
+  ],
+  "main": "src/index.js",
+  "dependencies": {
+    "@pmndrs/branding": "0.0.8",
+    "@react-three/drei": "9.1.4",
+    "@react-three/fiber": "8.0.10",
+    "@types/three": "0.139.0",
+    "lodash-es": "4.17.21",
+    "react": "18.0.0",
+    "react-dom": "18.0.0",
+    "react-scripts": "5.0.0",
+    "styled-components": "5.3.5",
+    "three": "0.139.2",
+    "valtio": "1.5.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

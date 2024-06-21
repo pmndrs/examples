@@ -1,0 +1,30 @@
+{
+  "name": "interactive-spline-scene-live-html",
+  "version": "1.0.0",
+  "description": "Scene exported with Spline",
+  "keywords": ["spline", "stencil"],
+  "main": "src/index.js",
+  "dependencies": {
+    "@headlessui/react": "1.6.5",
+    "@heroicons/react": "1.0.6",
+    "@react-three/drei": "latest",
+    "@react-three/fiber": "latest",
+    "@splinetool/loader": "0.9.73",
+    "@splinetool/r3f-spline": "^1.0.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-scripts": "5.0.1",
+    "three": "0.142.0"
+  },
+  "devDependencies": {
+    "@babel/runtime": "7.13.8",
+    "typescript": "4.1.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"]
+}

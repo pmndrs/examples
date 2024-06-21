@@ -1,0 +1,36 @@
+{
+  "name": "camera-scroll",
+  "version": "1.0.0",
+  "description": "Tying scroll to a GLTF camera path with snapping points.",
+  "keywords": [
+    "snap",
+    "scroll",
+    "gtlf",
+    "html"
+  ],
+  "main": "src/index.js",
+  "dependencies": {
+    "@react-three/drei": "9.77.1",
+    "@react-three/fiber": "8.9.0",
+    "@react-three/postprocessing": "2.7.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-scripts": "5.0.1",
+    "three": "0.146.0"
+  },
+  "devDependencies": {
+    "typescript": "3.3.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

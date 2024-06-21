@@ -1,0 +1,34 @@
+{
+  "name": "portal-shapes",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "main": "src/index.js",
+  "dependencies": {
+    "@pmndrs/branding": "0.0.8",
+    "@react-three/cannon": "6.5.2",
+    "@react-three/drei": "9.76.0",
+    "@react-three/fiber": "8.13.3",
+    "@react-three/rapier": "1.0.1",
+    "@types/three": "0.152.1",
+    "r3f-perf": "7.1.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-scripts": "5.0.1",
+    "three": "0.153.0",
+    "three-stdlib": "2.23.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

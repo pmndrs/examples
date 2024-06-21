@@ -1,0 +1,37 @@
+{
+  "name": "shoe-configurator",
+  "version": "1.0.0",
+  "description": "A super small configurator that shows you how to make GLTF assets dynamic.",
+  "keywords": [
+    "valtio",
+    "state",
+    "gltf",
+    "configurator"
+  ],
+  "main": "src/index.js",
+  "dependencies": {
+    "@react-three/drei": "9.76.0",
+    "@react-three/fiber": "8.13.3",
+    "react": "18.2.0",
+    "react-colorful": "5.6.1",
+    "react-dom": "18.2.0",
+    "react-scripts": "5.0.1",
+    "three": "0.153.0",
+    "valtio": "1.10.3"
+  },
+  "devDependencies": {
+    "typescript": "3.8.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

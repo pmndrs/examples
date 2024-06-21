@@ -1,0 +1,35 @@
+{
+  "name": "mixing-controls",
+  "version": "1.0.0",
+  "description": "Switching off one control while the other is active.",
+  "keywords": [
+    "orbit-controls",
+    "controls",
+    "transform-controls"
+  ],
+  "main": "src/index.js",
+  "dependencies": {
+    "@react-three/drei": "7.13.1",
+    "@react-three/fiber": "7.0.10",
+    "@types/three": "0.133.0",
+    "leva": "0.9.14",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-scripts": "4.0.3",
+    "three": "0.133.1",
+    "valtio": "1.2.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

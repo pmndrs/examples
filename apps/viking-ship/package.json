@@ -1,0 +1,46 @@
+{
+  "name": "viking-ship",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@react-three/drei": "9.77.1",
+    "@react-three/fiber": "8.10.0",
+    "@types/three": "0.147.1",
+    "leva": "0.9.34",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-scripts": "5.0.1",
+    "three": "0.148.0"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "customize-cra": "^0.9.1",
+    "customize-cra-react-refresh": "^1.0.1",
+    "react-app-rewired": "^2.1.5"
+  },
+  "keywords": [
+    "gltfjsx",
+    "gltf"
+  ],
+  "description": "GLTF workflow with GLTFJSX and camera rotations."
+}

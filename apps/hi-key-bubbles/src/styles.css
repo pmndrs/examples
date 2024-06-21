@@ -1,0 +1,77 @@
+@import url('https://rsms.me/inter/inter.css');
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: 'Inter var', sans-serif;
+  color: #101015;
+  cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxNiIgY3k9IjE2IiByPSIxMCIgZmlsbD0iI2ZmNmI2YiIvPjwvc3ZnPg=='),
+    auto;
+}
+
+.overlay {
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  pointer-events: all;
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  color: #505055;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 0.8em;
+}
+
+a.right {
+  left: unset;
+  right: 40px;
+}
+
+h1 {
+  text-transform: uppercase;
+  text-align: left;
+  font-size: 7em;
+  letter-spacing: 0px;
+  font-weight: 100;
+  padding: 0;
+  margin: 0;
+  line-height: 0.9em;
+  padding: 25px;
+  border: solid 3px #101015;
+}
+
+h1 > span {
+  letter-spacing: -8px;
+}
+
+h2 {
+  position: absolute;
+  bottom: 40px;
+  margin-top: 2em;
+  text-align: center;
+  font-weight: 400;
+  font-size: 0.7em;
+  line-height: 1.5em;
+  letter-spacing: 0px;
+  color: #17174d;
+}

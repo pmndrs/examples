@@ -1,0 +1,53 @@
+@import url('https://rsms.me/inter/inter.css');
+@import url('https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css');
+
+* {
+  box-sizing: border-box;
+  cursor: none !important;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+* {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: rgb(255, 240, 246);
+  background: radial-gradient(circle, rgba(255, 240, 246, 1) 0%, rgba(249, 206, 224, 1) 35%, rgba(255, 163, 201, 1) 100%);
+}
+
+.content-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.content-embed {
+  position: relative;
+  background: white;
+  border-radius: 37.5px;
+  width: 375px;
+  height: 825px;
+  overflow: scroll;
+}
+
+canvas {
+  position: absolute;
+  z-index: 1;
+}

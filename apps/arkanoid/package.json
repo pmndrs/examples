@@ -1,0 +1,40 @@
+{
+  "name": "arkanoid",
+  "version": "1.0.0",
+  "description": "Simple arkanoid implementation using cannon physics.",
+  "keywords": [
+    "physics",
+    "cannon",
+    "game",
+    "audio"
+  ],
+  "main": "src/index.js",
+  "dependencies": {
+    "@react-spring/three": "9.1.1",
+    "@react-three/cannon": "1.1.0",
+    "@react-three/drei": "4.1.8",
+    "@react-three/fiber": "6.0.14",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-scripts": "4.0.3",
+    "three": "0.127.0",
+    "zustand": "3.4.1"
+  },
+  "devDependencies": {
+    "customize-cra": "^0.9.1",
+    "customize-cra-react-refresh": "^1.0.1",
+    "react-app-rewired": "^2.1.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

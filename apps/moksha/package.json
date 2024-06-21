@@ -1,0 +1,37 @@
+{
+  "name": "moksha",
+  "version": "1.0.0",
+  "description": "Exploration into scroll containers tied to webgl content made for codrops.",
+  "keywords": [
+    "codrops",
+    "shaders",
+    "refraction",
+    "scroll",
+    "gltf"
+  ],
+  "main": "src/index.js",
+  "dependencies": {
+    "@react-three/drei": "4.1.8",
+    "@react-three/fiber": "6.0.14",
+    "lerp": "1.0.3",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-scripts": "4.0.3",
+    "three": "0.127.0"
+  },
+  "devDependencies": {
+    "typescript": "3.3.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
