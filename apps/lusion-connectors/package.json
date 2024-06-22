@@ -6,15 +6,15 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
-    "@react-three/drei": "9.78.1",
-    "@react-three/fiber": "8.13.4",
+    "@react-three/drei": "9.107.0",
+    "@react-three/fiber": "8.16.8",
     "@react-three/postprocessing": "2.15.1",
     "@react-three/rapier": "1.1.1",
-    "@types/three": "0.153.0",
+    "@types/three": "0.144.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-scripts": "5.0.1",
-    "three": "0.154.0"
+    "three": "0.144.0"
   },
   "scripts": {
     "start": "react-scripts start",

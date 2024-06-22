@@ -7,12 +7,12 @@
   "main": "src/index.js",
   "dependencies": {
     "@react-spring/three": "9.7.1",
-    "@react-three/drei": "9.56.28",
-    "@react-three/fiber": "8.11.5",
+    "@react-three/drei": "9.107.0",
+    "@react-three/fiber": "8.16.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-scripts": "5.0.1",
-    "three": "0.150.1"
+    "three": "0.144.0"
   },
   "devDependencies": {
     "typescript": "3.3.3"
