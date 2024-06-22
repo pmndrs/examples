@@ -11,13 +11,13 @@
   ],
   "main": "src/index.js",
   "dependencies": {
-    "@react-three/drei": "9.77.1",
-    "@react-three/fiber": "8.9.0",
+    "@react-three/drei": "9.107.0",
+    "@react-three/fiber": "8.16.8",
     "@react-three/postprocessing": "2.7.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-scripts": "5.0.1",
-    "three": "0.146.0"
+    "three": "0.144.0"
   },
   "devDependencies": {
     "typescript": "3.3.3"

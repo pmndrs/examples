@@ -8,14 +8,14 @@
   ],
   "main": "src/index.jsx",
   "dependencies": {
-    "@react-three/drei": "9.36.0",
-    "@react-three/fiber": "8.8.10",
+    "@react-three/drei": "9.107.0",
+    "@react-three/fiber": "8.16.8",
     "@react-three/postprocessing": "2.7.0",
     "@react-three/rapier": "0.8.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-scripts": "5.0.1",
-    "three": "0.145.0"
+    "three": "0.144.0"
   },
   "scripts": {
     "start": "react-scripts start",

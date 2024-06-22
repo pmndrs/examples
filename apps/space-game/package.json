@@ -11,12 +11,12 @@
   ],
   "main": "src/index.js",
   "dependencies": {
-    "@react-three/fiber": "6.0.15",
+    "@react-three/fiber": "8.16.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-scripts": "5.0.1",
     "styled-components": "5.1.0",
-    "three": "0.127.0",
+    "three": "0.144.0",
     "zustand": "3.4.1"
   },
   "devDependencies": {

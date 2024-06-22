@@ -11,11 +11,11 @@
   "main": "src/index.js",
   "dependencies": {
     "@react-three/cannon": "2.5.0",
-    "@react-three/fiber": "7.0.6",
+    "@react-three/fiber": "8.16.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-scripts": "5.0.1",
-    "three": "0.130.1"
+    "three": "0.144.0"
   },
   "devDependencies": {},
   "scripts": {

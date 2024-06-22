@@ -10,13 +10,13 @@
   "main": "src/index.js",
   "dependencies": {
     "@pmndrs/branding": "^0.0.8",
-    "@react-three/drei": "8.16.7",
-    "@react-three/fiber": "7.0.26",
+    "@react-three/drei": "9.107.0",
+    "@react-three/fiber": "8.16.8",
     "lamina": "1.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-scripts": "5.0.1",
-    "three": "0.138.3"
+    "three": "0.144.0"
   },
   "devDependencies": {},
   "scripts": {

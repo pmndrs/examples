@@ -10,14 +10,14 @@
   ],
   "main": "src/index.js",
   "dependencies": {
-    "@react-three/drei": "7.13.1",
-    "@react-three/fiber": "7.0.10",
-    "@types/three": "0.133.0",
+    "@react-three/drei": "9.107.0",
+    "@react-three/fiber": "8.16.8",
+    "@types/three": "0.144.0",
     "leva": "0.9.14",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-scripts": "5.0.1",
-    "three": "0.133.1",
+    "three": "0.144.0",
     "valtio": "1.2.4"
   },
   "devDependencies": {},

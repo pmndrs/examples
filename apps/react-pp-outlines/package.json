@@ -8,8 +8,8 @@
   ],
   "main": "src/index.js",
   "dependencies": {
-    "@react-three/drei": "9.16.0",
-    "@react-three/fiber": "8.0.27",
+    "@react-three/drei": "9.107.0",
+    "@react-three/fiber": "8.16.8",
     "@react-three/postprocessing": "2.4.6",
     "leva": "0.9.28",
     "lodash-es": "4.17.21",
@@ -17,7 +17,7 @@
     "react-colorful": "5.5.1",
     "react-dom": "18.2.0",
     "react-scripts": "5.0.1",
-    "three": "0.142.0",
+    "three": "0.144.0",
     "valtio": "1.6.1"
   },
   "devDependencies": {

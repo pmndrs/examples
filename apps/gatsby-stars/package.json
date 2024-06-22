@@ -13,15 +13,15 @@
   "main": "src/index.js",
   "dependencies": {
     "@pmndrs/branding": "^0.0.8",
-    "@react-three/drei": "8.10.7",
-    "@react-three/fiber": "7.0.26",
-    "@types/three": "0.137.0",
+    "@react-three/drei": "9.107.0",
+    "@react-three/fiber": "8.16.8",
+    "@types/three": "0.144.0",
     "lamina": "1.0.6",
     "maath": "0.0.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-scripts": "5.0.1",
-    "three": "0.138.0"
+    "three": "0.144.0"
   },
   "devDependencies": {},
   "scripts": {

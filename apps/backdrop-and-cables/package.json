@@ -10,8 +10,8 @@
   ],
   "main": "src/index.js",
   "dependencies": {
-    "@react-three/drei": "9.77.1",
-    "@react-three/fiber": "8.8.3",
+    "@react-three/drei": "9.107.0",
+    "@react-three/fiber": "8.16.8",
     "@react-three/postprocessing": "2.6.2",
     "@types/three": "0.144.0",
     "leva": "0.9.31",

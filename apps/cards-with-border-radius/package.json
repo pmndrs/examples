@@ -8,15 +8,15 @@
   "dependencies": {
     "@pmndrs/assets": "1.6.0",
     "@pmndrs/branding": "^0.0.8",
-    "@react-three/drei": "9.96.0",
-    "@react-three/fiber": "8.15.12",
+    "@react-three/drei": "9.107.0",
+    "@react-three/fiber": "8.16.8",
     "@react-three/postprocessing": "2.15.11",
-    "@types/three": "0.158.3",
+    "@types/three": "0.144.0",
     "random-words": "2.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-scripts": "5.0.1",
-    "three": "0.159.0"
+    "three": "0.144.0"
   },
   "scripts": {
     "start": "react-scripts start",
