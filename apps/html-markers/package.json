@@ -6,7 +6,7 @@
     "build": "react-scripts build"
   },
   "devDependencies": {
-    "react-scripts": "4.0.3"
+    "react-scripts": "5.0.1"
   },
   "dependencies": {
     "@react-three/drei": "9.77.1",

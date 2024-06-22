@@ -6,14 +6,14 @@
     "build": "react-scripts build"
   },
   "devDependencies": {
-    "react-scripts": "4.0.3"
+    "react-scripts": "5.0.1"
   },
   "dependencies": {
     "@react-three/drei": "9.77.3",
     "@react-three/fiber": "8.0.12",
     "@types/three": "0.139.0",
-    "react": "18.0.0",
-    "react-dom": "18.0.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "three": "0.139.2"
   },
   "browserslist": [
