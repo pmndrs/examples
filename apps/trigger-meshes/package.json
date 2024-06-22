@@ -4,7 +4,6 @@
   "description": "Shows how to implement trigger meshes that inform the application of collisions.",
   "homepage": "https://codesandbox.io/s/h545c",
   "keywords": [],
-  "main": "src/index.js",
   "dependencies": {
     "@react-three/cannon": "2.1.2",
     "@react-three/drei": "9.107.0",
@@ -14,17 +13,24 @@
     "react-scripts": "5.0.1",
     "three": "0.144.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/react": "18.2.0",
+    "@types/react-dom": "18.2.0",
+    "@types/three": "0.144.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1"
+  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "dev": "vite --host",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "type": "module"
 }

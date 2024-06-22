@@ -1,12 +1,17 @@
 {
   "scripts": {
-    "test": "react-scripts test --env=jsdom",
-    "start": "react-scripts start",
-    "eject": "react-scripts eject",
-    "build": "react-scripts build"
+    "dev": "vite --host",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "devDependencies": {
-    "react-scripts": "5.0.1"
+    "@types/react": "18.2.0",
+    "@types/react-dom": "18.2.0",
+    "@types/three": "0.144.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "react-scripts": "5.0.1",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1"
   },
   "dependencies": {
     "@react-three/drei": "9.107.0",
@@ -30,6 +35,8 @@
     "markers"
   ],
   "name": "html-markers",
+  "version": "1.0.0",
   "description": "Occluding HTML annotations/markers.",
-  "homepage": "https://codesandbox.io/s/6oei7"
+  "homepage": "https://codesandbox.io/s/6oei7",
+  "type": "module"
 }

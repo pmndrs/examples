@@ -7,7 +7,6 @@
     "custom-renderer",
     "svg-renderer"
   ],
-  "main": "src/index.js",
   "dependencies": {
     "@react-three/fiber": "8.16.8",
     "react": "18.2.0",
@@ -16,17 +15,24 @@
     "three": "0.144.0",
     "three-stdlib": "2.27.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/react": "18.2.0",
+    "@types/react-dom": "18.2.0",
+    "@types/three": "0.144.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1"
+  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "dev": "vite --host",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "type": "module"
 }

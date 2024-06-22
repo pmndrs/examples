@@ -4,7 +4,6 @@
   "description": "This examples shows how to blend GLTF animation keyframes and to re-use an existing model even it's being keyframed.",
   "homepage": "https://codesandbox.io/s/k8phr",
   "keywords": [],
-  "main": "src/index.js",
   "dependencies": {
     "@react-spring/three": "9.7.1",
     "@react-three/drei": "9.107.0",
@@ -15,18 +14,23 @@
     "three": "0.144.0"
   },
   "devDependencies": {
-    "typescript": "3.3.3"
+    "@types/react": "18.2.0",
+    "@types/react-dom": "18.2.0",
+    "@types/three": "0.144.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "dev": "vite --host",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "type": "module"
 }

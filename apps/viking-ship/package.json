@@ -13,10 +13,9 @@
     "three": "0.144.0"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
-    "eject": "react-scripts eject"
+    "dev": "vite --host",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -34,14 +33,21 @@
     ]
   },
   "devDependencies": {
+    "@types/react": "18.2.0",
+    "@types/react-dom": "18.2.0",
+    "@types/three": "0.144.0",
+    "@vitejs/plugin-react": "^4.3.1",
     "customize-cra": "^0.9.1",
     "customize-cra-react-refresh": "^1.0.1",
-    "react-app-rewired": "^2.1.5"
+    "react-app-rewired": "^2.1.5",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1"
   },
   "keywords": [
     "gltfjsx",
     "gltf"
   ],
   "description": "GLTF workflow with GLTFJSX and camera rotations.",
-  "homepage": "https://codesandbox.io/s/0buje"
+  "homepage": "https://codesandbox.io/s/0buje",
+  "type": "module"
 }

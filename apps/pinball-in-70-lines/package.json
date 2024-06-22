@@ -10,7 +10,6 @@
     "arkanoid",
     "game"
   ],
-  "main": "src/index.js",
   "dependencies": {
     "@react-three/cannon": "2.5.1",
     "@react-three/drei": "9.107.0",
@@ -22,20 +21,26 @@
     "three": "0.144.0"
   },
   "devDependencies": {
+    "@types/react": "18.2.0",
+    "@types/react-dom": "18.2.0",
+    "@types/three": "0.144.0",
+    "@vitejs/plugin-react": "^4.3.1",
     "customize-cra": "^0.9.1",
     "customize-cra-react-refresh": "^1.0.1",
-    "react-app-rewired": "^2.1.5"
+    "react-app-rewired": "^2.1.5",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "dev": "vite --host",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "type": "module"
 }

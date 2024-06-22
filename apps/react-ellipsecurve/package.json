@@ -6,7 +6,6 @@
   "keywords": [
     "trails"
   ],
-  "main": "src/index.jsx",
   "dependencies": {
     "@react-three/drei": "9.107.0",
     "@react-three/fiber": "8.16.8",
@@ -18,10 +17,9 @@
     "three": "0.144.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "dev": "vite --host",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "browserslist": {
     "production": [
@@ -34,5 +32,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "type": "module",
+  "devDependencies": {
+    "@types/react": "18.2.0",
+    "@types/react-dom": "18.2.0",
+    "@types/three": "0.144.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1"
   }
 }

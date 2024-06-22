@@ -6,7 +6,6 @@
   "keywords": [
     "rapier"
   ],
-  "main": "src/index.tsx",
   "dependencies": {
     "@react-three/drei": "9.107.0",
     "@react-three/fiber": "8.16.8",
@@ -20,20 +19,23 @@
     "three": "0.144.0"
   },
   "devDependencies": {
-    "@types/react": "17.0.20",
-    "@types/react-dom": "17.0.9",
-    "typescript": "4.4.2"
+    "@types/react": "18.2.0",
+    "@types/react-dom": "18.2.0",
+    "@types/three": "0.144.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "dev": "vite --host",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "type": "module"
 }

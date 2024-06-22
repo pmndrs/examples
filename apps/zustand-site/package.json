@@ -13,10 +13,9 @@
     "three": "0.144.0"
   },
   "scripts": {
-    "start": "create-react-app start",
-    "build": "create-react-app build",
-    "test": "create-react-app test",
-    "eject": "react-scripts eject"
+    "dev": "vite --host",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -42,9 +41,15 @@
     "printWidth": 120
   },
   "devDependencies": {
+    "@types/react": "18.2.0",
+    "@types/react-dom": "18.2.0",
+    "@types/three": "0.144.0",
+    "@vitejs/plugin-react": "^4.3.1",
     "customize-cra": "^1.0.0",
     "customize-cra-react-refresh": "^1.1.0",
     "react-app-rewired": "^2.1.6",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1",
     "webpack-bundle-analyzer": "^3.8.0"
   },
   "keywords": [
@@ -54,5 +59,6 @@
     "particles"
   ],
   "description": "Shows how to parallax layers with dept of field and particles.",
-  "homepage": "https://codesandbox.io/s/gpioq"
+  "homepage": "https://codesandbox.io/s/gpioq",
+  "type": "module"
 }

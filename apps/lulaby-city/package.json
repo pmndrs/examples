@@ -12,10 +12,9 @@
     "three": "0.144.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "vite --host",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -36,9 +35,15 @@
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.8.3",
+    "@types/react": "18.2.0",
+    "@types/react-dom": "18.2.0",
+    "@types/three": "0.144.0",
+    "@vitejs/plugin-react": "^4.3.1",
     "husky": "^4.0.10",
     "lint-staged": "^9.5.0",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1"
   },
   "browserslist": {
     "production": [
@@ -58,5 +63,6 @@
     "audio"
   ],
   "description": "Panning around a city with positional audio.",
-  "homepage": "https://codesandbox.io/s/gkfhr"
+  "homepage": "https://codesandbox.io/s/gkfhr",
+  "type": "module"
 }

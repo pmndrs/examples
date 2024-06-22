@@ -4,27 +4,34 @@
   "description": "",
   "homepage": "https://codesandbox.io/s/nvk9pf",
   "keywords": [],
-  "main": "src/index.js",
   "dependencies": {
     "@react-three/drei": "9.107.0",
     "@react-three/fiber": "8.16.8",
-    "@react-three/rapier": "1.1.1",
+    "@react-three/rapier": "^1.4.0",
     "@use-gesture/core": "10.3.0",
-    "ecctrl": "1.0.30",
+    "ecctrl": "^1.0.82",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "three": "0.144.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "dev": "vite --host",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "type": "module",
+  "devDependencies": {
+    "@types/react": "18.2.0",
+    "@types/react-dom": "18.2.0",
+    "@types/three": "0.144.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1"
+  }
 }
