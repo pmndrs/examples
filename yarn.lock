@@ -2464,7 +2464,7 @@
   resolved "https://registry.yarnpkg.com/@pmndrs/assets/-/assets-1.6.0.tgz#d5df66d107d64db98331b45a93483f5ecb980561"
   integrity sha512-fOFrjV6FNYIr29iEhF3JrdTAAo3v98TatmYF3efC1MNiMeN0Sx2BGvGnwgu55s6E9gBxR6yXcm/mkk7gRDT9Bg==
 
-"@pmndrs/branding@0.0.8":
+"@pmndrs/branding@^0.0.8":
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/@pmndrs/branding/-/branding-0.0.8.tgz#1ebdafdfe03fa2a394fc038313f083a9a4d15186"
   integrity sha512-AIWJJDiUhIWNJqhN+bz1FIlQRURqQDIaJ2FokEIHAJ/k0XIYI6VM5UgVBRupS4YkMXtvdBAYnfsDpFx8C7N4Xw==

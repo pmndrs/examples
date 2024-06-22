@@ -9,7 +9,7 @@
   ],
   "main": "src/index.js",
   "dependencies": {
-    "@pmndrs/branding": "0.0.8",
+    "@pmndrs/branding": "^0.0.8",
     "@react-three/drei": "8.16.7",
     "@react-three/fiber": "7.0.26",
     "lamina": "1.1.6",

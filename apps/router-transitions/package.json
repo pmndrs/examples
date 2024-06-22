@@ -11,7 +11,7 @@
   "main": "src/index.js",
   "dependencies": {
     "@pmndrs/assets": "1.6.0",
-    "@pmndrs/branding": "0.0.8",
+    "@pmndrs/branding": "^0.0.8",
     "@react-spring/web": "9.7.3",
     "@react-three/drei": "9.78.1",
     "@react-three/fiber": "8.13.0",

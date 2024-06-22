@@ -6,7 +6,7 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
-    "@pmndrs/branding": "0.0.8",
+    "@pmndrs/branding": "^0.0.8",
     "@react-three/drei": "9.56.1",
     "@react-three/fiber": "8.10.1",
     "@types/three": "0.148.1",

@@ -9,7 +9,7 @@
   ],
   "main": "src/index.js",
   "dependencies": {
-    "@pmndrs/branding": "0.0.8",
+    "@pmndrs/branding": "^0.0.8",
     "@react-three/cannon": "6.6.0",
     "@react-three/drei": "9.102.6",
     "@react-three/fiber": "8.15.19",

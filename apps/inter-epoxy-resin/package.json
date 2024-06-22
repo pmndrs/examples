@@ -11,7 +11,7 @@
   ],
   "main": "src/index.js",
   "dependencies": {
-    "@pmndrs/branding": "0.0.8",
+    "@pmndrs/branding": "^0.0.8",
     "@react-three/drei": "9.65.5",
     "@react-three/fiber": "8.12.2",
     "@react-three/postprocessing": "2.7.1",

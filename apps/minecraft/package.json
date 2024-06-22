@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@pmndrs/branding": "0.0.8",
+    "@pmndrs/branding": "^0.0.8",
     "@react-three/drei": "9.34.4",
     "@react-three/fiber": "8.8.10",
     "@react-three/rapier": "0.8.2",

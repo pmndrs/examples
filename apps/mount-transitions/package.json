@@ -12,7 +12,7 @@
   ],
   "main": "src/index.js",
   "dependencies": {
-    "@pmndrs/branding": "0.0.8",
+    "@pmndrs/branding": "^0.0.8",
     "@react-spring/three": "9.7.2",
     "@react-three/drei": "9.72.2",
     "@react-three/fiber": "8.13.0",
