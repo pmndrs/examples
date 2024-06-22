@@ -2,6 +2,7 @@
   "name": "mixing-controls",
   "version": "1.0.0",
   "description": "Switching off one control while the other is active.",
+  "homepage": "https://codesandbox.io/s/hf1cs",
   "keywords": [
     "orbit-controls",
     "controls",

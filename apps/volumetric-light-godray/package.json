@@ -2,6 +2,7 @@
   "name": "volumetric-light-godray",
   "version": "1.0.0",
   "description": "Experimenting with volumetric lights.",
+  "homepage": "https://codesandbox.io/s/yggpw5",
   "keywords": [
     "postprocessing",
     "godray"

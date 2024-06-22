@@ -53,5 +53,6 @@
     "dof",
     "particles"
   ],
-  "description": "Shows how to parallax layers with dept of field and particles."
+  "description": "Shows how to parallax layers with dept of field and particles.",
+  "homepage": "https://codesandbox.io/s/gpioq"
 }

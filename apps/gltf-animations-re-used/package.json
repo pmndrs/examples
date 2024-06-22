@@ -2,6 +2,7 @@
   "name": "gltf-animations-re-used",
   "version": "1.0.0",
   "description": "This examples shows how to blend GLTF animation keyframes and to re-use an existing model even it's being keyframed.",
+  "homepage": "https://codesandbox.io/s/k8phr",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {

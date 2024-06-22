@@ -35,5 +35,6 @@
     "animation",
     "gltf"
   ],
-  "description": "Small example made for a Learn-with-Jason episode."
+  "description": "Small example made for a Learn-with-Jason episode.",
+  "homepage": "https://codesandbox.io/s/oep9o"
 }

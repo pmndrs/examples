@@ -18,5 +18,6 @@
     "transmission",
     "glas"
   ],
-  "description": "PBR transmission and thickness to emulate glas."
+  "description": "PBR transmission and thickness to emulate glas.",
+  "homepage": "https://codesandbox.io/s/kv7tv"
 }

@@ -14,5 +14,6 @@
     "instances"
   ],
   "name": "floating-instanced-shoes",
-  "description": "Using drei/instances and events."
+  "description": "Using drei/instances and events.",
+  "homepage": "https://codesandbox.io/s/h8o2d"
 }

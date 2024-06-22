@@ -2,6 +2,7 @@
   "name": "canvas-text",
   "version": "1.0.0",
   "description": "Shows how to form self-contained components with their own state and user interaction.",
+  "homepage": "https://codesandbox.io/s/p9umgf",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {

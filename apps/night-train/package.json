@@ -2,6 +2,7 @@
   "name": "night-train",
   "version": "1.0.0",
   "description": "Stacking a couple of drei helpers",
+  "homepage": "https://codesandbox.io/s/l900i",
   "keywords": [
     "merged",
     "scroll-controls",

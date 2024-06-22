@@ -2,6 +2,7 @@
   "name": "scrollcontrols-gltf",
   "version": "1.0.0",
   "description": "Connecting models with useScroll",
+  "homepage": "https://codesandbox.io/s/4jr4p",
   "keywords": [
     "gltf",
     "scrollcontrols"

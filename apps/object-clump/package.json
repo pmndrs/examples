@@ -2,6 +2,7 @@
   "name": "object-clump",
   "version": "1.0.0",
   "description": "How to make a clump of objects that move towards the center point.",
+  "homepage": "https://codesandbox.io/s/ssbdsw",
   "keywords": [
     "physics",
     "cannon-es",

@@ -2,6 +2,7 @@
   "name": "aquarium",
   "version": "1.0.0",
   "description": "",
+  "homepage": "https://codesandbox.io/s/n7jf0f",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {

@@ -41,5 +41,6 @@
     "game",
     "minecraft"
   ],
-  "description": "Mini Minecraft implementation."
+  "description": "Mini Minecraft implementation.",
+  "homepage": "https://codesandbox.io/s/vkgi6"
 }

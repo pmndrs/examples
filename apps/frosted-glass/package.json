@@ -2,6 +2,7 @@
   "name": "frosted-glass",
   "version": "1.0.0",
   "description": "Shader mip-map blur to mimic frosted glass. ",
+  "homepage": "https://codesandbox.io/s/imn42",
   "keywords": [
     "frosted-glas",
     "shaders"

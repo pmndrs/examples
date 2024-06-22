@@ -1,7 +1,8 @@
 {
   "name": "envmap-ground-projection",
   "version": "1.0.0",
-  "description": null,
+  "description": "",
+  "homepage": "https://codesandbox.io/s/q48jgy",
   "keywords": [
     "cube camera",
     "reflections"

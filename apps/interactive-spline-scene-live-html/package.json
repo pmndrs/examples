@@ -2,7 +2,11 @@
   "name": "interactive-spline-scene-live-html",
   "version": "1.0.0",
   "description": "Scene exported with Spline",
-  "keywords": ["spline", "stencil"],
+  "homepage": "https://codesandbox.io/s/f79ucc",
+  "keywords": [
+    "spline",
+    "stencil"
+  ],
   "main": "src/index.js",
   "dependencies": {
     "@headlessui/react": "1.6.5",
@@ -26,5 +30,10 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"]
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

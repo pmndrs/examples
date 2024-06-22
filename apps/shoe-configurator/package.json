@@ -2,6 +2,7 @@
   "name": "shoe-configurator",
   "version": "1.0.0",
   "description": "A super small configurator that shows you how to make GLTF assets dynamic.",
+  "homepage": "https://codesandbox.io/s/qxjoj",
   "keywords": [
     "valtio",
     "state",

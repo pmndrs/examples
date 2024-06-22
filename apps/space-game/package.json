@@ -2,6 +2,7 @@
   "name": "space-game",
   "version": "1.0.0",
   "description": "A small demo that shows how to manage game entities.",
+  "homepage": "https://codesandbox.io/s/i2160",
   "keywords": [
     "zustand",
     "physics",

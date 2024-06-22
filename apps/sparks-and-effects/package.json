@@ -2,6 +2,7 @@
   "name": "sparks-and-effects",
   "version": "1.0.0",
   "description": "Demonstrating fake-particles, mesh-lines and effect composition.",
+  "homepage": "https://codesandbox.io/s/sbf2i",
   "keywords": [
     "glow",
     "mesh-line",

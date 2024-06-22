@@ -2,7 +2,13 @@
   "name": "diamond-refraction",
   "version": "1.0.0",
   "description": "Diamon refraction material",
-  "keywords": ["diamond", "refraction", "raycast", "bvh"],
+  "homepage": "https://codesandbox.io/s/zqrreo",
+  "keywords": [
+    "diamond",
+    "refraction",
+    "raycast",
+    "bvh"
+  ],
   "main": "src/index.js",
   "dependencies": {
     "@react-three/drei": "9.102.6",
@@ -23,5 +29,10 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"]
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

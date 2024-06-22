@@ -2,6 +2,7 @@
   "name": "cards",
   "version": "1.0.0",
   "description": "",
+  "homepage": "https://codesandbox.io/s/dc5fjy",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {

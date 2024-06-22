@@ -2,6 +2,7 @@
   "name": "portals",
   "version": "1.0.0",
   "description": "",
+  "homepage": "https://codesandbox.io/s/ik11ln",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {

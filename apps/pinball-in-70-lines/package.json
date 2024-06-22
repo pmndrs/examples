@@ -2,6 +2,7 @@
   "name": "pinball-in-70-lines",
   "version": "1.0.0",
   "description": "Super small pinball barebones implementation.",
+  "homepage": "https://codesandbox.io/s/rmfcq",
   "keywords": [
     "cannon-es",
     "physics",

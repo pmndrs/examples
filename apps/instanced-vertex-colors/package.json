@@ -2,6 +2,7 @@
   "name": "instanced-vertex-colors",
   "version": "1.0.0",
   "description": "Instancing objectes with variable colors and effects.",
+  "homepage": "https://codesandbox.io/s/8fo01",
   "keywords": [
     "vertex-colors",
     "ambient-occlusion",

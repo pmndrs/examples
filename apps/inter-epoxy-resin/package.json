@@ -1,7 +1,8 @@
 {
   "name": "inter-epoxy-resin",
   "version": "1.0.0",
-  "description": null,
+  "description": "",
+  "homepage": "https://codesandbox.io/s/lxvqek",
   "keywords": [
     "refraction",
     "shaders",

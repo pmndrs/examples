@@ -2,6 +2,7 @@
   "name": "dbismut-furniture",
   "version": "1.0.0",
   "description": "",
+  "homepage": "https://codesandbox.io/s/62o18n",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {

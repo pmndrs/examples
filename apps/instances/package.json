@@ -2,6 +2,7 @@
   "name": "instances",
   "version": "1.0.0",
   "description": "Creating fixed-position instances with varying vertex colors.",
+  "homepage": "https://codesandbox.io/s/h873k",
   "keywords": [
     "instances",
     "vertex-colors"

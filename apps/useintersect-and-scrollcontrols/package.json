@@ -2,6 +2,7 @@
   "name": "useintersect-and-scrollcontrols",
   "version": "1.0.0",
   "description": "Combining useIntersect with scrollcontrols.",
+  "homepage": "https://codesandbox.io/s/gsm1y",
   "keywords": [
     "vertical",
     "useintersect",

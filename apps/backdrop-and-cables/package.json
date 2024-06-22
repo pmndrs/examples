@@ -2,6 +2,7 @@
   "name": "backdrop-and-cables",
   "version": "1.0.0",
   "description": "Using a studio backdrop, quadratic bezier line and contact shadows.",
+  "homepage": "https://codesandbox.io/s/2ij9u",
   "keywords": [
     "quadraticbezierline",
     "contact-shadows",

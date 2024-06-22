@@ -2,6 +2,7 @@
   "name": "csg-bunny-usegroups",
   "version": "1.0.0",
   "description": "",
+  "homepage": "https://codesandbox.io/s/mlgzsc",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {

@@ -30,5 +30,6 @@
     "markers"
   ],
   "name": "html-markers",
-  "description": "Occluding HTML annotations/markers."
+  "description": "Occluding HTML annotations/markers.",
+  "homepage": "https://codesandbox.io/s/6oei7"
 }

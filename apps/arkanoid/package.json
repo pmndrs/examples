@@ -2,6 +2,7 @@
   "name": "arkanoid",
   "version": "1.0.0",
   "description": "Simple arkanoid implementation using cannon physics.",
+  "homepage": "https://codesandbox.io/s/2yqpv",
   "keywords": [
     "physics",
     "cannon",

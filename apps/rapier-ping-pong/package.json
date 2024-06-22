@@ -2,6 +2,7 @@
   "name": "rapier-ping-pong",
   "version": "1.0.0",
   "description": "Mini ping-pong implementation using rapier-physics.",
+  "homepage": "https://codesandbox.io/s/ptdgrn",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {

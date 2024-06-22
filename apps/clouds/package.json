@@ -1,6 +1,7 @@
 {
   "name": "clouds",
   "version": "0.1.0",
+  "homepage": "https://codesandbox.io/s/mbfzf",
   "private": true,
   "dependencies": {
     "@react-three/drei": "9.86.1",

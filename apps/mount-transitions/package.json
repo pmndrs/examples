@@ -2,6 +2,7 @@
   "name": "mount-transitions",
   "version": "1.0.0",
   "description": "Shows how to use react-spring mount/unmount transitions, soft-shadows and AO.",
+  "homepage": "https://codesandbox.io/s/1sccp",
   "keywords": [
     "soft-shadows",
     "animation",

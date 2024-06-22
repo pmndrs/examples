@@ -2,6 +2,7 @@
   "name": "enter-portals",
   "version": "1.0.0",
   "description": "",
+  "homepage": "https://codesandbox.io/s/9m4tpc",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {

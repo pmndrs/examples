@@ -2,6 +2,7 @@
   "name": "simple-audio-analyser",
   "version": "1.0.0",
   "description": "Audio frequency analysis.",
+  "homepage": "https://codesandbox.io/s/wu51m",
   "keywords": [
     "analyser",
     "audio"

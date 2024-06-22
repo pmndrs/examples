@@ -1,6 +1,7 @@
 {
   "name": "flexbox-yoga-in-webgl",
   "version": "0.1.0",
+  "homepage": "https://codesandbox.io/s/7psew",
   "private": true,
   "dependencies": {
     "@react-spring/web": "9.1.1",

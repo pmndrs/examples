@@ -1,7 +1,8 @@
 {
   "name": "gatsby-stars",
   "version": "1.0.0",
-  "description": null,
+  "description": "",
+  "homepage": "https://codesandbox.io/s/2csbr1",
   "keywords": [
     "stars",
     "text",

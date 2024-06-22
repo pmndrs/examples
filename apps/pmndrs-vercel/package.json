@@ -1,7 +1,8 @@
 {
   "name": "pmndrs-vercel",
   "version": "1.0.0",
-  "description": null,
+  "description": "",
+  "homepage": "https://codesandbox.io/s/go0b4w",
   "keywords": [
     "gradient",
     "lamina"

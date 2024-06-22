@@ -2,6 +2,7 @@
   "name": "html-annotations",
   "version": "1.0.0",
   "description": "Shows how to set up annotations with a distance factor.",
+  "homepage": "https://codesandbox.io/s/zu2wo",
   "keywords": [
     "distance",
     "html",

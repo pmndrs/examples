@@ -2,6 +2,7 @@
   "name": "csg-house",
   "version": "1.0.0",
   "description": "",
+  "homepage": "https://codesandbox.io/s/y52tmt",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {

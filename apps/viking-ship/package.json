@@ -42,5 +42,6 @@
     "gltfjsx",
     "gltf"
   ],
-  "description": "GLTF workflow with GLTFJSX and camera rotations."
+  "description": "GLTF workflow with GLTFJSX and camera rotations.",
+  "homepage": "https://codesandbox.io/s/0buje"
 }

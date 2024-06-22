@@ -2,6 +2,7 @@
   "name": "inverted-stencil-buffer",
   "version": "1.0.0",
   "description": "How to invert a masked stencil.",
+  "homepage": "https://codesandbox.io/s/7n2yru",
   "keywords": [
     "stencil",
     "drei",

@@ -2,6 +2,7 @@
   "name": "cards-with-border-radius",
   "version": "1.0.0",
   "description": "",
+  "homepage": "https://codesandbox.io/s/9s2wd9",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {

@@ -2,6 +2,7 @@
   "name": "scrollcontrols-with-minimap",
   "version": "1.0.0",
   "description": "Vertical scrollcontrols and minimaps.",
+  "homepage": "https://codesandbox.io/s/yjhzv",
   "keywords": [
     "vertical",
     "minimap"

@@ -2,6 +2,7 @@
   "name": "clones",
   "version": "1.0.0",
   "description": "Shows how to form self-contained components with their own state and user interaction.",
+  "homepage": "https://codesandbox.io/s/42glz0",
   "keywords": [
     "gltf",
     "drei",

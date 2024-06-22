@@ -2,6 +2,7 @@
   "name": "wobbling-sphere",
   "version": "1.0.0",
   "description": "Experimenting with environment maps.",
+  "homepage": "https://codesandbox.io/s/5oufp",
   "keywords": [
     "environment",
     "reflections",

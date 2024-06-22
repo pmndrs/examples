@@ -2,6 +2,7 @@
   "name": "ragdoll-physics",
   "version": "1.0.0",
   "description": "A mini game using cannon ragdoll physics. Throw the little guy around.",
+  "homepage": "https://codesandbox.io/s/wdzv4",
   "keywords": [
     "game",
     "ragdoll",

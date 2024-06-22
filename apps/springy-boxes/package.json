@@ -2,6 +2,7 @@
   "name": "springy-boxes",
   "version": "1.0.0",
   "description": "Colorfull boxes changing position with spring physics",
+  "homepage": "https://codesandbox.io/s/jz9l97qn89",
   "keywords": [
     "springs",
     "react-spring",

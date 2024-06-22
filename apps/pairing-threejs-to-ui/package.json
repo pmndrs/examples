@@ -2,6 +2,7 @@
   "name": "pairing-threejs-to-ui",
   "version": "1.0.0",
   "description": "",
+  "homepage": "https://codesandbox.io/s/wlz1o0",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {

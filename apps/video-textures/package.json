@@ -2,6 +2,7 @@
   "name": "video-textures",
   "version": "1.0.0",
   "description": "How to load, apply and play video textures, and how to calculate fullscreen, or \"cover\" aspect ratio. ",
+  "homepage": "https://codesandbox.io/s/39hg8",
   "keywords": [
     "video",
     "texture",

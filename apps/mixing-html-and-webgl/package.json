@@ -2,6 +2,7 @@
   "name": "mixing-html-and-webgl",
   "version": "1.0.0",
   "description": "Adding HTML into the scene.",
+  "homepage": "https://codesandbox.io/s/7ucso",
   "keywords": [
     "html",
     "transforms",

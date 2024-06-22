@@ -28,5 +28,6 @@
     "controls"
   ],
   "name": "staging-and-camerashake",
-  "description": "How to stage and shake models while using controls at the same time."
+  "description": "How to stage and shake models while using controls at the same time.",
+  "homepage": "https://codesandbox.io/s/0ycwe"
 }

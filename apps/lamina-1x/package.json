@@ -1,7 +1,8 @@
 {
   "name": "lamina-1x",
   "version": "1.0.0",
-  "description": null,
+  "description": "",
+  "homepage": "https://codesandbox.io/s/ledhe1",
   "keywords": [
     "lamina",
     "depth"

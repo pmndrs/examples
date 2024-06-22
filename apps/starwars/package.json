@@ -2,6 +2,7 @@
   "name": "starwars",
   "version": "1.0.0",
   "description": "",
+  "homepage": "https://codesandbox.io/s/fslt99",
   "keywords": [
     "ssr",
     "bloom",

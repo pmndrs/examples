@@ -2,6 +2,7 @@
   "name": "transformcontrols-and-makedefault",
   "version": "1.0.0",
   "description": "Combining TransformControls, OrbitControls and Valtio.",
+  "homepage": "https://codesandbox.io/s/btsbj",
   "keywords": [
     "controls",
     "makedefault",

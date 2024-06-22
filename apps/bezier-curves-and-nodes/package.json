@@ -2,6 +2,7 @@
   "name": "bezier-curves-and-nodes",
   "version": "1.0.0",
   "description": "Creating node diagrams with drei's Line and bezier curves.",
+  "homepage": "https://codesandbox.io/s/3k4g6",
   "keywords": [
     "line2",
     "graph",

@@ -2,6 +2,7 @@
   "name": "gpgpu-curl-noise-dof",
   "version": "1.0.0",
   "description": "Curl noise and depth of field.",
+  "homepage": "https://codesandbox.io/s/zgsyn",
   "keywords": [
     "gpu",
     "shader",

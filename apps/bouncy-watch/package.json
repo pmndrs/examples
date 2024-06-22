@@ -2,6 +2,7 @@
   "name": "bouncy-watch",
   "version": "1.0.0",
   "description": "Custom springy controls using use-gesture and react-spring.",
+  "homepage": "https://codesandbox.io/s/qyz5r",
   "keywords": [
     "use-gesture",
     "custom-controls",
