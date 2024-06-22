@@ -16,8 +16,8 @@
     "@react-three/fiber": "^8.0.11",
     "@splinetool/r3f-spline": "^1.0.1",
     "@splinetool/loader": "^0.9.51",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-scripts": "^4.0.0",
     "three": "^0.140.0"
   },
