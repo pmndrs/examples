@@ -17,13 +17,14 @@
     "@react-three/fiber": "8.16.8",
     "@react-three/postprocessing": "2.15.12",
     "@react-three/rapier": "1.2.1",
-    "@types/three": "0.144.0",
     "leva": "0.9.31",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "three": "0.144.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/three": "0.144.0"
+  },
   "scripts": {},
   "browserslist": [
     ">0.2%",

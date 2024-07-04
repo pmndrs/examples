@@ -8,7 +8,6 @@
     "@pmndrs/assets": "1.5.4",
     "@react-three/drei": "9.107.0",
     "@react-three/fiber": "8.16.8",
-    "@types/three": "0.144.0",
     "nanoid": "4.0.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",

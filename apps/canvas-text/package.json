@@ -6,7 +6,6 @@
   "keywords": [],
   "dependencies": {
     "@react-three/fiber": "8.16.8",
-    "@types/three": "0.144.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "three": "0.144.0"

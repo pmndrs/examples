@@ -14,7 +14,6 @@
     "@react-three/fiber": "8.16.8",
     "@react-three/postprocessing": "2.13.0",
     "@react-three/rapier": "0.13.2",
-    "@types/three": "0.144.0",
     "leva": "0.9.34",
     "maath": "0.5.3",
     "react": "18.2.0",

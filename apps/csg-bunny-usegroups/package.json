@@ -9,13 +9,14 @@
     "@react-three/csg": "2.2.0",
     "@react-three/drei": "9.107.0",
     "@react-three/fiber": "8.16.8",
-    "@types/three": "0.144.0",
     "leva": "0.9.34",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "three": "0.144.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/three": "0.144.0"
+  },
   "scripts": {},
   "browserslist": [
     ">0.2%",
