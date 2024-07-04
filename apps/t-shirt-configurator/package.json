@@ -18,16 +18,10 @@
     "react-colorful": "5.6.1",
     "react-dom": "18.2.0",
     "react-icons": "4.7.1",
-    "react-scripts": "5.0.1",
     "three": "0.144.0",
     "valtio": "1.10.3"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  },
+  "scripts": {},
   "browserslist": [
     ">1%",
     "not dead",

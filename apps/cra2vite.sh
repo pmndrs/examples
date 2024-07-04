@@ -16,11 +16,6 @@ yarn add -D @types/react@18.2.0 @types/react-dom@18.2.0 @types/three@0.144.0 vit
 
 # Remove scripts: start, build, test, eject
 
-jq 'del(.scripts["start"])' package.json > tmp.json && mv tmp.json package.json
-jq 'del(.scripts["build"])' package.json > tmp.json && mv tmp.json package.json
-jq 'del(.scripts["test"])' package.json > tmp.json && mv tmp.json package.json
-jq 'del(.scripts["eject"])' package.json > tmp.json && mv tmp.json package.json
-
 jq '.scripts += {"dev": "vite --host", "build": "tsc && vite build", "preview": "vite preview"}' package.json > tmp.json && mv tmp.json package.json
 
 # TS config

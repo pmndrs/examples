@@ -13,5 +13,5 @@ $ yarn
 # dev
 
 ```sh
-$ yarn workspace cards-with-border-radius start
+$ yarn workspace cards-with-border-radius dev
 ```

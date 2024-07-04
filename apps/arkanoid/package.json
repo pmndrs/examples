@@ -16,7 +16,6 @@
     "@react-three/fiber": "6.0.14",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-scripts": "5.0.1",
     "three": "0.127.0",
     "zustand": "3.4.1"
   },
