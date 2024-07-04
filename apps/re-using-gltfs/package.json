@@ -30,5 +30,9 @@
     "dev": "vite --host",
     "build": "tsc && vite build",
     "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pmndrs/examples/tree/main/apps/re-using-gltfs"
   }
 }

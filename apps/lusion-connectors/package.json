@@ -34,5 +34,9 @@
     "@vitejs/plugin-react": "^4.3.1",
     "typescript": "^5.5.2",
     "vite": "^5.3.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pmndrs/examples/tree/main/apps/lusion-connectors"
   }
 }
