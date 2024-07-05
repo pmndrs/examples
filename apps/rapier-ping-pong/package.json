@@ -21,11 +21,7 @@
     "valtio": "1.13.0",
     "zustand": "4.5.0"
   },
-  "devDependencies": {
-    "customize-cra": "^0.9.1",
-    "customize-cra-react-refresh": "^1.0.1",
-    "react-app-rewired": "^2.1.5"
-  },
+  "devDependencies": {},
   "scripts": {},
   "browserslist": [
     ">0.2%",
