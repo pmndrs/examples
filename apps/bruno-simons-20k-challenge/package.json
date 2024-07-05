@@ -18,8 +18,8 @@
     "@react-three/postprocessing": "2.15.12",
     "@react-three/rapier": "1.2.1",
     "leva": "0.9.31",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "three": "0.144.0"
   },
   "devDependencies": {

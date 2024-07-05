@@ -15,12 +15,12 @@
     "@react-three/drei": "9.107.0",
     "@react-three/fiber": "8.16.8",
     "lerp": "1.0.3",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "three": "0.144.0"
   },
   "devDependencies": {
-    "typescript": "3.3.3"
+    "typescript": "^5.5.2"
   },
   "scripts": {},
   "browserslist": [

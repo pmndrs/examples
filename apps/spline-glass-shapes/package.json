@@ -11,13 +11,13 @@
     "@splinetool/loader": "0.9.199",
     "@splinetool/r3f-spline": "1.0.2",
     "leva": "0.9.34",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "three": "0.144.0"
   },
   "devDependencies": {
     "@babel/runtime": "7.13.8",
-    "typescript": "4.1.3"
+    "typescript": "^5.5.2"
   },
   "scripts": {},
   "browserslist": [
