@@ -18,7 +18,7 @@
     "react-dom": "^18.2.0",
     "react-icons": "4.7.1",
     "three": "0.144.0",
-    "valtio": "1.10.3"
+    "valtio": "^1.10.3"
   },
   "devDependencies": {
     "@types/three": "0.144.0"
