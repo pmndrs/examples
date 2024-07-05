@@ -3,15 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@react-spring/three": "9.6.1",
-    "@react-three/drei": "9.77.3",
-    "@react-three/fiber": "8.10.0",
-    "@types/three": "0.148.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-scripts": "5.0.1",
-    "styled-components": "5.3.6",
-    "three": "0.148.0"
+    "@react-spring/three": "^9.6.1",
+    "@react-three/drei": "^9.107.0",
+    "@react-three/fiber": "^8.16.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "styled-components": "^5.3.6",
+    "three": "^0.165.0"
   },
   "keywords": [
     "reflections",
@@ -19,5 +17,23 @@
     "glas"
   ],
   "description": "PBR transmission and thickness to emulate glas.",
-  "homepage": "https://codesandbox.io/s/kv7tv"
+  "homepage": "https://codesandbox.io/s/kv7tv",
+  "type": "module",
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@types/three": "^0.165.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1"
+  },
+  "scripts": {
+    "dev": "vite --host --open",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pmndrs/examples/tree/main/apps/transparent-aesop-bottles"
+  }
 }

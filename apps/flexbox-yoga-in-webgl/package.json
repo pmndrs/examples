@@ -4,20 +4,18 @@
   "homepage": "https://codesandbox.io/s/7psew",
   "private": true,
   "dependencies": {
-    "@react-spring/web": "9.1.1",
-    "@react-three/drei": "4.1.8",
-    "@react-three/fiber": "6.0.14",
-    "@react-three/flex": "0.6.0",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-scripts": "4.0.3",
-    "three": "0.127.0"
+    "@react-spring/web": "^9.1.1",
+    "@react-three/drei": "^9.107.0",
+    "@react-three/fiber": "^8.16.8",
+    "@react-three/flex": "^1.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "three": "^0.165.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "vite --host --open",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -35,10 +33,12 @@
     ]
   },
   "devDependencies": {
-    "customize-cra": "^1.0.0",
-    "customize-cra-react-refresh": "^1.1.0",
-    "react-app-rewired": "^2.1.6",
-    "webpack-bundle-analyzer": "^3.8.0"
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@types/three": "^0.165.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1"
   },
   "keywords": [
     "layout",
@@ -47,5 +47,10 @@
     "flexbox",
     "text"
   ],
-  "description": "This example uses yoga to create flex-box layouts."
+  "description": "This example uses yoga to create flex-box layouts.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pmndrs/examples/tree/main/apps/flexbox-yoga-in-webgl"
+  },
+  "type": "module"
 }

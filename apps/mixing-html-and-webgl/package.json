@@ -8,27 +8,36 @@
     "transforms",
     "drei"
   ],
-  "main": "src/index.js",
   "dependencies": {
-    "@react-three/drei": "9.74.8",
-    "@react-three/fiber": "8.13.1",
-    "antd": "5.6.1",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-scripts": "5.0.1",
-    "three": "0.153.0"
+    "@react-three/drei": "^9.107.0",
+    "@react-three/fiber": "^8.16.8",
+    "antd": "^5.6.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "three": "^0.165.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@types/three": "^0.165.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1"
+  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "dev": "vite --host --open",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pmndrs/examples/tree/main/apps/mixing-html-and-webgl"
+  }
 }

@@ -6,32 +6,41 @@
   "keywords": [
     "decals"
   ],
-  "main": "src/index.js",
   "dependencies": {
-    "@pmndrs/branding": "0.0.8",
-    "@react-three/drei": "9.74.8",
-    "@react-three/fiber": "8.13.1",
-    "@types/three": "0.152.1",
-    "framer-motion": "10.0.1",
-    "maath": "0.6.0",
-    "react": "18.2.0",
-    "react-colorful": "5.6.1",
-    "react-dom": "18.2.0",
-    "react-icons": "4.7.1",
-    "react-scripts": "5.0.1",
-    "three": "0.153.0",
-    "valtio": "1.10.3"
+    "@pmndrs/branding": "^0.0.8",
+    "@react-three/drei": "^9.107.0",
+    "@react-three/fiber": "^8.16.8",
+    "framer-motion": "^10.0.1",
+    "maath": "^0.6.0",
+    "react": "^18.2.0",
+    "react-colorful": "^5.6.1",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.7.1",
+    "three": "^0.165.0",
+    "valtio": "^1.10.3"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@types/three": "^0.165.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "dev": "vite --host --open",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "browserslist": [
     ">1%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pmndrs/examples/tree/main/apps/t-shirt-configurator"
+  },
+  "type": "module"
 }

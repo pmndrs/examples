@@ -4,20 +4,18 @@
   "homepage": "https://codesandbox.io/s/mbfzf",
   "private": true,
   "dependencies": {
-    "@react-three/drei": "9.86.1",
-    "@react-three/fiber": "8.14.3",
-    "leva": "0.9.33",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-scripts": "5.0.1",
-    "three": "0.157.0",
-    "uuid": "9.0.1"
+    "@react-three/drei": "^9.107.0",
+    "@react-three/fiber": "^8.16.8",
+    "leva": "^0.9.35",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "three": "^0.165.0",
+    "uuid": "^9.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "vite --host --open",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "eslintConfig": {
     "extends": [
@@ -41,5 +39,18 @@
     "clouds",
     "drei"
   ],
-  "description": "Trying out drei's new cloud component."
+  "description": "Trying out drei's new cloud component.",
+  "type": "module",
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@types/three": "^0.165.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pmndrs/examples/tree/main/apps/clouds"
+  }
 }

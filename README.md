@@ -7,11 +7,11 @@ index: [apps](apps)
 # INSTALL
 
 ```sh
-$ yarn
+$ npm ci
 ```
 
 # dev
 
 ```sh
-$ yarn workspace cards-with-border-radius start
+$ npm run -w apps/cards-with-border-radius dev
 ```

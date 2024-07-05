@@ -1,13 +1,10 @@
 {
-  "react-scripts": "4.0.3",
   "dependencies": {
-    "@react-three/drei": "9.105.6",
-    "@react-three/fiber": "8.16.6",
-    "@types/three": "0.164.0",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "react-scripts": "5.0.1",
-    "three": "0.164.1"
+    "@react-three/drei": "^9.107.0",
+    "@react-three/fiber": "^8.16.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "three": "^0.165.0"
   },
   "keywords": [
     "gltfjsx",
@@ -15,6 +12,25 @@
     "gltf"
   ],
   "name": "re-using-gltfs",
+  "version": "1.0.0",
   "description": "When you use GLTFJSX it creates a immutable snapshot of your assets, these can be reused.",
-  "homepage": "https://codesandbox.io/s/dix1y"
+  "homepage": "https://codesandbox.io/s/dix1y",
+  "type": "module",
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@types/three": "^0.165.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1"
+  },
+  "scripts": {
+    "dev": "vite --host --open",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pmndrs/examples/tree/main/apps/re-using-gltfs"
+  }
 }

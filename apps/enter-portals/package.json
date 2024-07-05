@@ -4,30 +4,38 @@
   "description": "",
   "homepage": "https://codesandbox.io/s/9m4tpc",
   "keywords": [],
-  "main": "src/index.js",
   "dependencies": {
-    "@pmndrs/assets": "1.6.0",
-    "@pmndrs/branding": "0.0.8",
-    "@react-three/drei": "9.75.0",
-    "@react-three/fiber": "8.13.3",
-    "@types/three": "0.152.1",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-scripts": "5.0.1",
-    "three": "0.153.0",
-    "wouter": "2.11.0"
+    "@pmndrs/assets": "^1.6.0",
+    "@pmndrs/branding": "^0.0.8",
+    "@react-three/drei": "^9.107.0",
+    "@react-three/fiber": "^8.16.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "three": "^0.165.0",
+    "wouter": "^2.11.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@types/three": "^0.165.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1"
+  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "dev": "vite --host --open",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "browserslist": [
     ">1%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pmndrs/examples/tree/main/apps/enter-portals"
+  }
 }

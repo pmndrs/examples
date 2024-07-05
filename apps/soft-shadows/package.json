@@ -8,30 +8,37 @@
     "soft-shadows",
     "drei"
   ],
-  "main": "src/index.js",
   "dependencies": {
-    "@react-three/drei": "9.57.0",
-    "@react-three/fiber": "8.11.5",
-    "leva": "0.9.34",
+    "@react-three/drei": "^9.107.0",
+    "@react-three/fiber": "^8.16.8",
+    "leva": "^0.9.35",
     "r3f-perf": "7.1.2",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-scripts": "5.0.1",
-    "three": "0.150.1"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "three": "^0.165.0"
   },
   "devDependencies": {
-    "typescript": "3.3.3"
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@types/three": "^0.165.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "dev": "vite --host --open",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pmndrs/examples/tree/main/apps/soft-shadows"
+  }
 }

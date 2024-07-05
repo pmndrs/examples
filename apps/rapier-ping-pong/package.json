@@ -4,39 +4,44 @@
   "description": "Mini ping-pong implementation using rapier-physics.",
   "homepage": "https://codesandbox.io/s/ptdgrn",
   "keywords": [],
-  "main": "src/index.js",
   "dependencies": {
-    "@pmndrs/branding": "0.0.8",
-    "@react-three/cannon": "4.5.0",
-    "@react-three/drei": "9.96.1",
-    "@react-three/fiber": "8.15.14",
-    "@react-three/postprocessing": "2.15.12",
-    "@react-three/rapier": "1.2.1",
-    "lerp": "1.0.3",
-    "lodash-es": "4.17.21",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-scripts": "5.0.1",
-    "three": "0.160.0",
-    "three-stdlib": "2.29.4",
-    "valtio": "1.13.0",
-    "zustand": "4.5.0"
+    "@pmndrs/branding": "^0.0.8",
+    "@react-three/cannon": "^4.5.0",
+    "@react-three/drei": "^9.107.0",
+    "@react-three/fiber": "^8.16.8",
+    "@react-three/postprocessing": "^2.15.12",
+    "@react-three/rapier": "^1.4.0",
+    "lerp": "^1.0.3",
+    "lodash-es": "^4.17.21",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "three": "^0.165.0",
+    "three-stdlib": "^2.29.4",
+    "valtio": "^1.13.0",
+    "zustand": "^4.5.0"
   },
   "devDependencies": {
-    "customize-cra": "^0.9.1",
-    "customize-cra-react-refresh": "^1.0.1",
-    "react-app-rewired": "^2.1.5"
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@types/three": "^0.165.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "dev": "vite --host --open",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pmndrs/examples/tree/main/apps/rapier-ping-pong"
+  },
+  "type": "module"
 }
