@@ -8,8 +8,8 @@
   "dependencies": {
     "@pmndrs/branding": "^0.0.8",
     "@react-three/cannon": "4.5.0",
-    "@react-three/drei": "9.107.0",
-    "@react-three/fiber": "8.16.8",
+    "@react-three/drei": "^9.107.0",
+    "@react-three/fiber": "^8.16.8",
     "@react-three/postprocessing": "2.15.12",
     "@react-three/rapier": "1.2.1",
     "lerp": "1.0.3",

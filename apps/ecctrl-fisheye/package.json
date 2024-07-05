@@ -5,8 +5,8 @@
   "homepage": "https://codesandbox.io/s/nvk9pf",
   "keywords": [],
   "dependencies": {
-    "@react-three/drei": "9.107.0",
-    "@react-three/fiber": "8.16.8",
+    "@react-three/drei": "^9.107.0",
+    "@react-three/fiber": "^8.16.8",
     "@react-three/rapier": "^1.4.0",
     "@use-gesture/core": "10.3.0",
     "ecctrl": "^1.0.82",

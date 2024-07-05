@@ -6,8 +6,8 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
-    "@react-three/drei": "9.107.0",
-    "@react-three/fiber": "8.16.8",
+    "@react-three/drei": "^9.107.0",
+    "@react-three/fiber": "^8.16.8",
     "@splinetool/loader": "0.9.199",
     "@splinetool/r3f-spline": "1.0.2",
     "leva": "0.9.34",

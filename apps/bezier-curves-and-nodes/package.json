@@ -10,8 +10,8 @@
     "bezier"
   ],
   "dependencies": {
-    "@react-three/drei": "9.107.0",
-    "@react-three/fiber": "8.16.8",
+    "@react-three/drei": "^9.107.0",
+    "@react-three/fiber": "^8.16.8",
     "@use-gesture/react": "10.2.17",
     "leva": "0.9.30",
     "lodash-es": "4.17.21",

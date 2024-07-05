@@ -11,8 +11,8 @@
   "main": "src/index.tsx",
   "dependencies": {
     "@babel/core": "7.22.1",
-    "@react-three/drei": "9.107.0",
-    "@react-three/fiber": "8.16.8",
+    "@react-three/drei": "^9.107.0",
+    "@react-three/fiber": "^8.16.8",
     "babel-plugin-glsl": "1.0.0",
     "babel-plugin-macros": "3.1.0",
     "glsl-noise": "0.0.0",

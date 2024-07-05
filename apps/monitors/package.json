@@ -9,8 +9,8 @@
   "dependencies": {
     "@pmndrs/assets": "1.6.0",
     "@pmndrs/branding": "^0.0.8",
-    "@react-three/drei": "9.107.0",
-    "@react-three/fiber": "8.16.8",
+    "@react-three/drei": "^9.107.0",
+    "@react-three/fiber": "^8.16.8",
     "@react-three/postprocessing": "2.16.2",
     "maath": "0.10.7",
     "postprocessing": "6.34.3",

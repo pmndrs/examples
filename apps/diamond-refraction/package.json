@@ -10,8 +10,8 @@
     "bvh"
   ],
   "dependencies": {
-    "@react-three/drei": "9.107.0",
-    "@react-three/fiber": "8.16.8",
+    "@react-three/drei": "^9.107.0",
+    "@react-three/fiber": "^8.16.8",
     "@react-three/postprocessing": "2.15.1",
     "leva": "0.9.9",
     "r3f-perf": "7.1.2",

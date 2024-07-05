@@ -4,8 +4,8 @@
   "homepage": "https://codesandbox.io/s/mbfzf",
   "private": true,
   "dependencies": {
-    "@react-three/drei": "9.107.0",
-    "@react-three/fiber": "8.16.8",
+    "@react-three/drei": "^9.107.0",
+    "@react-three/fiber": "^8.16.8",
     "leva": "0.9.33",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

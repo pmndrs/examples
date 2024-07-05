@@ -9,8 +9,8 @@
     "drei"
   ],
   "dependencies": {
-    "@react-three/drei": "9.107.0",
-    "@react-three/fiber": "8.16.8",
+    "@react-three/drei": "^9.107.0",
+    "@react-three/fiber": "^8.16.8",
     "antd": "5.6.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

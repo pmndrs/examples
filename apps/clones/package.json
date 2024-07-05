@@ -10,8 +10,8 @@
   ],
   "dependencies": {
     "@pmndrs/branding": "^0.0.8",
-    "@react-three/drei": "9.107.0",
-    "@react-three/fiber": "8.16.8",
+    "@react-three/drei": "^9.107.0",
+    "@react-three/fiber": "^8.16.8",
     "@react-three/postprocessing": "2.4.4",
     "lamina": "1.1.20",
     "react": "^18.2.0",
