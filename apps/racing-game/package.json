@@ -15,7 +15,7 @@
     "@react-three/cannon": "6.3.0",
     "@react-three/drei": "^9.107.0",
     "@react-three/fiber": "^8.16.8",
-    "@react-three/postprocessing": "2.4.6",
+    "@react-three/postprocessing": "^2.4.6",
     "inter-ui": "3.19.3",
     "leva": "^0.9.35",
     "lodash-es": "4.17.21",

@@ -11,9 +11,9 @@
     "@pmndrs/branding": "^0.0.8",
     "@react-three/drei": "^9.107.0",
     "@react-three/fiber": "^8.16.8",
-    "@react-three/postprocessing": "2.16.2",
-    "maath": "0.10.7",
-    "postprocessing": "6.34.3",
+    "@react-three/postprocessing": "^2.16.2",
+    "maath": "^0.10.7",
+    "postprocessing": "^6.34.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "three": "0.144.0"

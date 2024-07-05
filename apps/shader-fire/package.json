@@ -12,7 +12,7 @@
   "dependencies": {
     "@react-three/drei": "^9.107.0",
     "@react-three/fiber": "^8.16.8",
-    "@react-three/postprocessing": "2.15.1",
+    "@react-three/postprocessing": "^2.15.1",
     "babel-plugin-glsl": "1.0.0",
     "glsl-noise": "0.0.0",
     "react": "^18.2.0",
