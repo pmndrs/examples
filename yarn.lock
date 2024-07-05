@@ -353,21 +353,6 @@
   resolved "https://registry.yarnpkg.com/@ctrl/tinycolor/-/tinycolor-3.6.1.tgz#b6c75a56a1947cc916ea058772d666a2c8932f31"
   integrity sha512-SITSV6aIXsuVNV3f3O0f2n/cgyEDWoSqtZMYiAmcsYHydcKrOz3gUxB/iXd/Qf08+IZX4KpgNbvUdMBmWz+kcA==
 
-"@dimforge/rapier3d-compat@0.10.0":
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/@dimforge/rapier3d-compat/-/rapier3d-compat-0.10.0.tgz#d8c3c75ea5183cfdc0db616a6ee9b0983a219d4c"
-  integrity sha512-3SPxyAnPQz9P3cIhgF8VncwJwrqyAW2xsNEYgXbxDhvB2IaIG63eTX7rNIJUnec5FDYqgvVo/nqY1XarzT5T2Q==
-
-"@dimforge/rapier3d-compat@0.11.1":
-  version "0.11.1"
-  resolved "https://registry.yarnpkg.com/@dimforge/rapier3d-compat/-/rapier3d-compat-0.11.1.tgz#24cdf14ea7c6551242f186133c0b09ada310803d"
-  integrity sha512-Xt3KcvwxnTZxjZ3uA4Qx5S9LoAqCvj4mTzcSwdPnVpM0F/ZPU7cY9bjGiNqB3+/IvUSCQB1eVamAd2IQX7hzTA==
-
-"@dimforge/rapier3d-compat@0.11.2":
-  version "0.11.2"
-  resolved "https://registry.yarnpkg.com/@dimforge/rapier3d-compat/-/rapier3d-compat-0.11.2.tgz#ae2b335f545decf1e82ff45bb10368e143de0fcb"
-  integrity sha512-vdWmlkpS3G8nGAzLuK7GYTpNdrkn/0NKCe0l1Jqxc7ZZOB3N0q9uG/Ap9l9bothWuAvxscIt0U97GVLr0lXWLg==
-
 "@dimforge/rapier3d-compat@0.13.1":
   version "0.13.1"
   resolved "https://registry.yarnpkg.com/@dimforge/rapier3d-compat/-/rapier3d-compat-0.13.1.tgz#d9da32941de5fcfae55ffb6ac26c38539f57ddf4"
@@ -1709,24 +1694,6 @@
     postprocessing "^6.32.1"
     three-stdlib "^2.23.4"
 
-"@react-three/rapier@0.12.2":
-  version "0.12.2"
-  resolved "https://registry.yarnpkg.com/@react-three/rapier/-/rapier-0.12.2.tgz#602c37617476397f3d91d586b31d98e76785b328"
-  integrity sha512-h0WMnw2BOKBULRobxrPGGM+ZTIqjrEydqv1bxbDNoRNtyEtljq8hTkDnpOzWpE2YnHbc/pEN/dznn8P6w075ow==
-  dependencies:
-    "@dimforge/rapier3d-compat" "0.10.0"
-    three-stdlib "^2.15.0"
-    use-asset "^1.0.4"
-
-"@react-three/rapier@0.13.2":
-  version "0.13.2"
-  resolved "https://registry.yarnpkg.com/@react-three/rapier/-/rapier-0.13.2.tgz#73347e9e1d1dd6d423262b61610b390b32b3a2c3"
-  integrity sha512-zdajV4X+P449lTV9BiuxOvXZMeTQ7HTtc5YVBztKFZBOaib1kXWGhnirdv0ZrYvetvr1JZKmnl1UtgipCBKcTg==
-  dependencies:
-    "@dimforge/rapier3d-compat" "0.11.1"
-    three-stdlib "2.21.6"
-    use-asset "1.0.4"
-
 "@react-three/rapier@0.8.2":
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/@react-three/rapier/-/rapier-0.8.2.tgz#7c0896503a571c38ac9b392d86050a7a66412b2b"
@@ -1735,42 +1702,6 @@
     "@dimforge/rapier3d-compat" "0.9.0"
     three-stdlib "^2.15.0"
     use-asset "^1.0.4"
-
-"@react-three/rapier@1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@react-three/rapier/-/rapier-1.0.1.tgz#b5734fc9929a26cffa30759d270af83f9fc8dced"
-  integrity sha512-Ym9s2rHs8nN+ublf93ZRKqaOt6Za6J8Ec/FlDS8TCvo/b7+aZx4lFIoW0Wy+Vg2PQJQu0zEU6vYCbfDDvW8HFg==
-  dependencies:
-    "@dimforge/rapier3d-compat" "0.11.2"
-    three-stdlib "2.21.6"
-    use-asset "1.0.4"
-
-"@react-three/rapier@1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@react-three/rapier/-/rapier-1.1.1.tgz#7813b90958c764f05cca69fe6c5c309d76c3accd"
-  integrity sha512-DlMHJRIErr9753C4CO3V06rgrP4b5/LyDnwzeNOCPrWgasILbkjYIe37RcQ+MZN2n6YpmQNSFD3WpnU9XD/QxA==
-  dependencies:
-    "@dimforge/rapier3d-compat" "0.11.2"
-    three-stdlib "2.23.9"
-    use-asset "1.0.4"
-
-"@react-three/rapier@1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@react-three/rapier/-/rapier-1.1.2.tgz#778717c56cfdba03d5d0f8f6429a8cc0c4e9a922"
-  integrity sha512-xnMUEqVgAwUyLTzIzWfTrA5WeQ9BtfC/6QfZ3U2ZCnqTWpRtdYF09uTynzcsEiJFFb2JXD7ly0J0ppWl9kNJ+Q==
-  dependencies:
-    "@dimforge/rapier3d-compat" "0.11.2"
-    three-stdlib "2.23.9"
-    use-asset "1.0.4"
-
-"@react-three/rapier@1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@react-three/rapier/-/rapier-1.2.1.tgz#c752770b7b0fc27b1079e04a55fee0cc62b3507a"
-  integrity sha512-h22uqwvMBVVmwfe37fs0tF3u+gNDJv/LzS4lRYnZ4IaHZPlprAjvccef6R7pFlW2EU/o26HhzTMoE5/Btkdcew==
-  dependencies:
-    "@dimforge/rapier3d-compat" "0.11.2"
-    three-stdlib "2.23.9"
-    use-asset "1.0.4"
 
 "@react-three/rapier@^1.4.0":
   version "1.4.0"
@@ -8271,23 +8202,6 @@ three-stdlib@2.19.0:
     potpack "^1.0.1"
     zstddec "^0.0.2"
 
-three-stdlib@2.21.6:
-  version "2.21.6"
-  resolved "https://registry.yarnpkg.com/three-stdlib/-/three-stdlib-2.21.6.tgz#764711f317a355a47138a8a5abe95bff0a0bbd45"
-  integrity sha512-J3DyCVKIpYJw7TWG4mQKKPpMgswq4pRRPMtxgipKedpUj8e4EgGtNLt623ws9RHvphPPamTHXacaEzOrm3dFsA==
-  dependencies:
-    "@babel/runtime" "^7.16.7"
-    "@types/offscreencanvas" "^2019.6.4"
-    "@webgpu/glslang" "^0.0.15"
-    chevrotain "^10.1.2"
-    draco3d "^1.4.1"
-    fflate "^0.6.9"
-    ktx-parse "^0.4.5"
-    mmd-parser "^1.0.4"
-    opentype.js "^1.3.3"
-    potpack "^1.0.1"
-    zstddec "^0.0.2"
-
 three-stdlib@2.21.8:
   version "2.21.8"
   resolved "https://registry.yarnpkg.com/three-stdlib/-/three-stdlib-2.21.8.tgz#37b11b7f62d07b10742c212153b14db21433b3c6"
@@ -8396,7 +8310,19 @@ three-stdlib@^1.2.3:
     potpack "^1.0.1"
     zstddec "^0.0.2"
 
-three-stdlib@^2.15.0, three-stdlib@^2.23.4, three-stdlib@^2.29.9:
+three-stdlib@^2.15.0:
+  version "2.30.4"
+  resolved "https://registry.yarnpkg.com/three-stdlib/-/three-stdlib-2.30.4.tgz#5c6b7b2cb4c046e81a3017c4421eed9ed8c54767"
+  integrity sha512-E7sN8UkaorSq2uRZU14AE7wXkdCBa2oFwPkPt92zaecuzrgd98BXkTt+2tFQVF1tPJRvfs7aMZV5dSOq4/vNVg==
+  dependencies:
+    "@types/draco3d" "^1.4.0"
+    "@types/offscreencanvas" "^2019.6.4"
+    "@types/webxr" "^0.5.2"
+    draco3d "^1.4.1"
+    fflate "^0.6.9"
+    potpack "^1.0.1"
+
+three-stdlib@^2.23.4, three-stdlib@^2.29.9:
   version "2.30.3"
   resolved "https://registry.yarnpkg.com/three-stdlib/-/three-stdlib-2.30.3.tgz#134562f52e6661d10bb2b9409c3d627b25a00481"
   integrity sha512-rYr8PqMljMza+Ct8kQk90Y7y+YcWoPu1thfYv5YGCp0hytNRbxSQWXY4GpdTGymCj3bDggEBpxso53C3pPwhIw==
