@@ -10,7 +10,7 @@
     "@react-three/fiber": "^8.16.8",
     "@splinetool/loader": "0.9.199",
     "@splinetool/r3f-spline": "1.0.2",
-    "leva": "0.9.34",
+    "leva": "^0.9.35",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "three": "0.144.0"
