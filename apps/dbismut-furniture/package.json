@@ -5,7 +5,7 @@
   "homepage": "https://codesandbox.io/s/62o18n",
   "keywords": [],
   "dependencies": {
-    "@react-spring/three": "9.7.1",
+    "@react-spring/three": "^9.7.1",
     "@react-three/drei": "^9.107.0",
     "@react-three/fiber": "^8.16.8",
     "glsl-fxaa": "3.0.0",
