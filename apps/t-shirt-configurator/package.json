@@ -6,7 +6,6 @@
   "keywords": [
     "decals"
   ],
-  "main": "src/index.js",
   "dependencies": {
     "@pmndrs/branding": "^0.0.8",
     "@react-three/drei": "^9.107.0",
@@ -21,9 +20,18 @@
     "valtio": "^1.10.3"
   },
   "devDependencies": {
-    "@types/three": "0.144.0"
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@types/three": "0.144.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1"
   },
-  "scripts": {},
+  "scripts": {
+    "dev": "vite --host --open",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
   "browserslist": [
     ">1%",
     "not dead",
@@ -33,5 +41,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/pmndrs/examples/tree/main/apps/t-shirt-configurator"
-  }
+  },
+  "type": "module"
 }

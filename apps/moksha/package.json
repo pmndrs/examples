@@ -10,7 +10,6 @@
     "scroll",
     "gltf"
   ],
-  "main": "src/index.js",
   "dependencies": {
     "@react-three/drei": "^9.107.0",
     "@react-three/fiber": "^8.16.8",
@@ -20,9 +19,18 @@
     "three": "0.144.0"
   },
   "devDependencies": {
-    "typescript": "^5.5.2"
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@types/three": "0.144.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1"
   },
-  "scripts": {},
+  "scripts": {
+    "dev": "vite --host --open",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
   "browserslist": [
     ">0.2%",
     "not dead",
@@ -32,5 +40,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/pmndrs/examples/tree/main/apps/moksha"
-  }
+  },
+  "type": "module"
 }

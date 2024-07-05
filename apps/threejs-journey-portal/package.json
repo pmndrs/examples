@@ -8,7 +8,6 @@
     "particles",
     "shaders"
   ],
-  "main": "src/index.tsx",
   "dependencies": {
     "@react-three/drei": "^9.107.0",
     "@react-three/fiber": "^8.16.8",
@@ -21,12 +20,18 @@
     "v8": "0.1.0"
   },
   "devDependencies": {
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
     "@types/three": "0.144.0",
-    "typescript": "^5.5.2"
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1"
   },
-  "scripts": {},
+  "scripts": {
+    "dev": "vite --host --open",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
   "browserslist": [
     ">0.2%",
     "not dead",
@@ -36,5 +41,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/pmndrs/examples/tree/main/apps/threejs-journey-portal"
-  }
+  },
+  "type": "module"
 }
