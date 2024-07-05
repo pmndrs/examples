@@ -11,9 +11,9 @@
   ],
   "dependencies": {
     "@react-spring/three": "^9.1.1",
-    "@react-three/cannon": "1.1.0",
-    "@react-three/drei": "4.1.8",
-    "@react-three/fiber": "6.0.14",
+    "@react-three/cannon": "^1.1.0",
+    "@react-three/drei": "^4.1.8",
+    "@react-three/fiber": "^6.0.14",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "three": "0.127.0",

@@ -5,12 +5,12 @@
   "homepage": "https://codesandbox.io/s/dc5fjy",
   "keywords": [],
   "dependencies": {
-    "@pmndrs/assets": "1.6.0",
+    "@pmndrs/assets": "^1.6.0",
     "@pmndrs/branding": "^0.0.8",
     "@react-three/drei": "^9.107.0",
     "@react-three/fiber": "^8.16.8",
     "@react-three/postprocessing": "^2.15.11",
-    "random-words": "2.0.0",
+    "random-words": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "three": "0.144.0"

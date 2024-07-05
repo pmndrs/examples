@@ -11,7 +11,7 @@
     "@react-three/postprocessing": "^2.15.11",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "styled-components": "6.1.1",
+    "styled-components": "^6.1.1",
     "three": "0.144.0"
   },
   "devDependencies": {

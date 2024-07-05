@@ -5,17 +5,17 @@
   "homepage": "https://codesandbox.io/s/r9w2ob",
   "keywords": [],
   "dependencies": {
-    "@emotion/react": "11.10.5",
-    "@mantine/core": "5.10.1",
-    "@mantine/hooks": "5.10.1",
+    "@emotion/react": "^11.10.5",
+    "@mantine/core": "^5.10.1",
+    "@mantine/hooks": "^5.10.1",
     "@react-three/drei": "^9.107.0",
     "@react-three/fiber": "^8.16.8",
-    "@tabler/icons": "1.119.0",
+    "@tabler/icons": "^1.119.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-use-refs": "1.0.1",
+    "react-use-refs": "^1.0.1",
     "three": "0.144.0",
-    "tunnel-rat": "0.1.2"
+    "tunnel-rat": "^0.1.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",

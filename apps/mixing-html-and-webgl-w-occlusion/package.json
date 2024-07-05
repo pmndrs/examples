@@ -9,8 +9,8 @@
     "html"
   ],
   "dependencies": {
-    "@headlessui/react": "1.4.0",
-    "@heroicons/react": "1.0.6",
+    "@headlessui/react": "^1.4.0",
+    "@heroicons/react": "^1.0.6",
     "@react-three/drei": "^9.107.0",
     "@react-three/fiber": "^8.16.8",
     "react": "^18.2.0",

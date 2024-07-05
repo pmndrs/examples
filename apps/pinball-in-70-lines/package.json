@@ -11,7 +11,7 @@
     "game"
   ],
   "dependencies": {
-    "@react-three/cannon": "2.5.1",
+    "@react-three/cannon": "^2.5.1",
     "@react-three/drei": "^9.107.0",
     "@react-three/fiber": "^8.16.8",
     "react": "^18.2.0",

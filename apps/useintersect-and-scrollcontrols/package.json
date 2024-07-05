@@ -13,10 +13,10 @@
     "@pmndrs/branding": "^0.0.8",
     "@react-three/drei": "^9.107.0",
     "@react-three/fiber": "^8.16.8",
-    "lodash-es": "4.17.21",
+    "lodash-es": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "styled-components": "5.3.5",
+    "styled-components": "^5.3.5",
     "three": "0.144.0",
     "valtio": "^1.5.1"
   },

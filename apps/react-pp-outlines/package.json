@@ -11,9 +11,9 @@
     "@react-three/fiber": "^8.16.8",
     "@react-three/postprocessing": "^2.4.6",
     "leva": "^0.9.35",
-    "lodash-es": "4.17.21",
+    "lodash-es": "^4.17.21",
     "react": "^18.2.0",
-    "react-colorful": "5.5.1",
+    "react-colorful": "^5.5.1",
     "react-dom": "^18.2.0",
     "three": "0.144.0",
     "valtio": "^1.6.1"

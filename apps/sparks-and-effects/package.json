@@ -16,7 +16,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "three": "0.144.0",
-    "threejs-meshline": "2.0.12"
+    "threejs-meshline": "^2.0.12"
   },
   "devDependencies": {
     "typescript": "^5.5.2"

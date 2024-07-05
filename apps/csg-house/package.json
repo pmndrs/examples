@@ -6,7 +6,7 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
-    "@react-three/csg": "3.0.0",
+    "@react-three/csg": "^3.0.0",
     "@react-three/drei": "^9.107.0",
     "@react-three/fiber": "^8.16.8",
     "@react-three/postprocessing": "^2.14.13",

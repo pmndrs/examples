@@ -9,7 +9,7 @@
     "baubles"
   ],
   "dependencies": {
-    "@react-three/cannon": "6.5.2",
+    "@react-three/cannon": "^6.5.2",
     "@react-three/drei": "^9.107.0",
     "@react-three/fiber": "^8.16.8",
     "@react-three/postprocessing": "^2.13.0",

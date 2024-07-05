@@ -12,17 +12,17 @@
   ],
   "dependencies": {
     "@pmndrs/branding": "^0.0.8",
-    "@react-three/cannon": "6.3.0",
+    "@react-three/cannon": "^6.3.0",
     "@react-three/drei": "^9.107.0",
     "@react-three/fiber": "^8.16.8",
     "@react-three/postprocessing": "^2.4.6",
-    "inter-ui": "3.19.3",
+    "inter-ui": "^3.19.3",
     "leva": "^0.9.35",
-    "lodash-es": "4.17.21",
+    "lodash-es": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "three": "0.144.0",
-    "use-asset": "1.0.4"
+    "use-asset": "^1.0.4"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",

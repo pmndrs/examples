@@ -9,10 +9,10 @@
   ],
   "dependencies": {
     "@pmndrs/branding": "^0.0.8",
-    "@react-three/cannon": "6.6.0",
+    "@react-three/cannon": "^6.6.0",
     "@react-three/drei": "^9.107.0",
     "@react-three/fiber": "^8.16.8",
-    "lamina": "1.1.23",
+    "lamina": "^1.1.23",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "three": "0.144.0"
