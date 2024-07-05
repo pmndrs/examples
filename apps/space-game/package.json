@@ -16,7 +16,7 @@
     "react-dom": "^18.2.0",
     "styled-components": "5.1.0",
     "three": "0.144.0",
-    "zustand": "3.4.1"
+    "zustand": "^3.4.1"
   },
   "devDependencies": {
     "typescript": "^5.5.2"

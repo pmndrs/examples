@@ -17,7 +17,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "three": "0.127.0",
-    "zustand": "3.4.1"
+    "zustand": "^3.4.1"
   },
   "scripts": {
     "dev": "vite --host --open",
