@@ -25,7 +25,6 @@
     "use-asset": "1.0.4"
   },
   "devDependencies": {
-    "@babel/runtime": "7.13.8",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "@types/three": "0.144.0",

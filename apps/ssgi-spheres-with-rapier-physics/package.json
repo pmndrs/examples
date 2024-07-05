@@ -5,6 +5,7 @@
   "homepage": "https://codesandbox.io/s/5w35n6",
   "keywords": [],
   "dependencies": {
+    "@babel/runtime": "^7.24.7",
     "@react-three/drei": "^9.107.0",
     "@react-three/fiber": "^8.16.8",
     "@react-three/postprocessing": "2.15.11",

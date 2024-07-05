@@ -11,7 +11,6 @@
   ],
   "main": "src/index.js",
   "dependencies": {
-    "@babel/core": "7.15.5",
     "@react-three/drei": "^9.107.0",
     "@react-three/fiber": "^8.16.8",
     "babel-plugin-glsl": "1.0.0",
