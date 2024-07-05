@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "vite --host",
+    "dev": "vite --host --open",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },

@@ -17,7 +17,7 @@
     "three": "0.144.0"
   },
   "scripts": {
-    "dev": "vite --host",
+    "dev": "vite --host --open",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },

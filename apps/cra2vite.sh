@@ -12,11 +12,11 @@ jq 'del(.main)' package.json > tmp.json && mv tmp.json package.json
 
 # New dev deps
 
-yarn add -D @types/react@18.2.0 @types/react-dom@18.2.0 @types/three@0.144.0 vite@^5.3.1 @vitejs/plugin-react@^4.3.1 typescript@^5.5.2
+yarn add -D @types/react@^18.2.0 @types/react-dom@^18.2.0 @types/three@0.144.0 vite@^5.3.1 @vitejs/plugin-react@^4.3.1 typescript@^5.5.2
 
 # Remove scripts: start, build, test, eject
 
-jq '.scripts += {"dev": "vite --host", "build": "tsc && vite build", "preview": "vite preview"}' package.json > tmp.json && mv tmp.json package.json
+jq '.scripts += {"dev": "vite --host --open", "build": "tsc && vite build", "preview": "vite preview"}' package.json > tmp.json && mv tmp.json package.json
 
 # TS config
 
