@@ -6,22 +6,30 @@
   "keywords": [
     "lightformer"
   ],
-  "main": "src/index.js",
   "dependencies": {
     "@pmndrs/branding": "^0.0.8",
     "@react-three/drei": "^9.107.0",
     "@react-three/fiber": "^8.16.8",
     "lamina": "^1.1.23",
     "leva": "^0.9.35",
+    "r3f-perf": "7.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "three": "^0.165.0",
-    "r3f-perf": "7.2.1"
+    "three": "^0.165.0"
   },
   "devDependencies": {
-    "@types/three": "^0.165.0"
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@types/three": "^0.165.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.3",
+    "vite": "^5.3.3"
   },
-  "scripts": {},
+  "scripts": {
+    "dev": "vite --host --open",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
   "browserslist": [
     ">1%",
     "not dead",
@@ -31,5 +39,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/pmndrs/examples/tree/main/apps/building-live-envmaps"
-  }
+  },
+  "type": "module"
 }
