@@ -54,7 +54,14 @@ function Card({ url, ...props }) {
     easing.damp(ref.current.material, 'zoom', hovered ? 1 : 1.5, 0.2, delta)
   })
   return (
-    <Image ref={ref} url={url} transparent side={THREE.DoubleSide} onPointerOver={pointerOver} onPointerOut={pointerOut} {...props}>
+    <Image
+      ref={ref}
+      url={new URL(`${import.meta.env.BASE_URL}${url}`, import.meta.url).href}
+      transparent
+      side={THREE.DoubleSide}
+      onPointerOver={pointerOver}
+      onPointerOut={pointerOut}
+      {...props}>
       <bentPlaneGeometry args={[0.1, 1, 1, 20, 20]} />
     </Image>
   )
@@ -62,7 +69,7 @@ function Card({ url, ...props }) {
 
 function Banner(props) {
   const ref = useRef()
-  const texture = useTexture('/work_.png')
+  const texture = useTexture(new URL(`${import.meta.env.BASE_URL}/work_.png`, import.meta.url).href)
   texture.wrapS = texture.wrapT = THREE.RepeatWrapping
   const scroll = useScroll()
   useFrame((state, delta) => {
