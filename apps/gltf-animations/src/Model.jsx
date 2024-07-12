@@ -10,11 +10,14 @@ import { useFrame } from "@react-three/fiber"
 import { useGLTF, useTexture, useAnimations } from "@react-three/drei"
 import { easing } from "maath"
 
+import stacyImg from "./stacy.jpg"
+import stacyModel from "./stacy.glb"
+
 export default function Model(props) {
   const halo = useRef()
   // Fetch model and a separate texture
-  const texture = useTexture("/stacy.jpg")
-  const { nodes, animations } = useGLTF("/stacy.glb")
+  const texture = useTexture(stacyImg)
+  const { nodes, animations } = useGLTF(stacyModel)
   // Extract animation actions
   const { ref, actions, names } = useAnimations(animations)
   // Hover and animation-index states

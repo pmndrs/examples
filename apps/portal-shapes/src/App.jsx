@@ -9,6 +9,8 @@ import Shoe from './sandboxes/Shoe'
 import Stencil from './sandboxes/Stencil'
 import Rocket from './sandboxes/Rocket'
 
+import boldFont from './bold.blob?url'
+
 export default function App() {
   return (
     <Canvas dpr={[1.5, 2]} camera={{ position: [-20, 40, 30], fov: 45, near: 1, far: 300 }}>
@@ -78,7 +80,7 @@ function Letter({ char, children, stencilBuffer = false, ...props }) {
         <Text3D
           bevelEnabled
           onDoubleClick={(e) => (e.stopPropagation(), controls.fitToBox(main.current, true))}
-          font="/bold.blob"
+          font={boldFont}
           smooth={1}
           scale={0.125}
           size={80}

@@ -2,6 +2,9 @@ import React, { Suspense, useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
 
+import bustLoModel from './bust-lo-draco.glb'
+import bustHiModel from './bust-hi.glb'
+
 // This sandbox shows how to prgressively load an asset through nested suspense blocks
 // 1. A generic fallback
 // 2. Lesser resolution
@@ -16,8 +19,8 @@ export default function App() {
         <directionalLight position={[-10, 20, 0]} intensity={1.5} />
         <directionalLight position={[0, -10, 0]} intensity={0.25} />
         <Rotate position-y={-0.5} scale={0.2}>
-          <Suspense fallback={<Model url="/bust-lo-draco.glb" />}>
-            <Model url="/bust-hi.glb" />
+          <Suspense fallback={<Model url={bustLoModel} />}>
+            <Model url={bustHiModel} />
           </Suspense>
         </Rotate>
       </Canvas>

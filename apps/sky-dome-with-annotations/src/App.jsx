@@ -4,9 +4,12 @@ import { Canvas, useLoader } from '@react-three/fiber'
 import { Html, Preload, OrbitControls } from '@react-three/drei'
 import { Popconfirm } from 'antd'
 
+import outsideImg from './2294472375_24a3b8ef46_o.jpg'
+import insideImg from './Photosphere1.jpg'
+
 const store = [
-  { name: 'outside', color: 'lightpink', position: [10, 0, -15], url: '/2294472375_24a3b8ef46_o.jpg', link: 1 },
-  { name: 'inside', color: 'lightblue', position: [15, 0, 0], url: '/Photosphere1.jpg', link: 0 }
+  { name: 'outside', color: 'lightpink', position: [10, 0, -15], url: outsideImg, link: 1 },
+  { name: 'inside', color: 'lightblue', position: [15, 0, 0], url: insideImg, link: 0 }
   // ...
 ]
 

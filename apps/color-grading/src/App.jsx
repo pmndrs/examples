@@ -2,10 +2,13 @@ import { Canvas, extend, useLoader } from '@react-three/fiber'
 import { OrbitControls, Environment, Effects, useTexture } from '@react-three/drei'
 import { LUTPass, LUTCubeLoader } from 'three-stdlib'
 
+import cubicleTex from './cubicle-99.cube'
+import terrazoImage from './terrazo.png'
+
 extend({ LUTPass })
 
 function Grading() {
-  const { texture3D } = useLoader(LUTCubeLoader, '/cubicle-99.CUBE')
+  const { texture3D } = useLoader(LUTCubeLoader, cubicleTex)
   return (
     <Effects>
       <lUTPass lut={texture3D} intensity={0.75} />
@@ -14,7 +17,7 @@ function Grading() {
 }
 
 function Sphere(props) {
-  const texture = useTexture('/terrazo.png')
+  const texture = useTexture(terrazoImage)
   return (
     <mesh {...props}>
       <sphereGeometry args={[1, 64, 64]} />

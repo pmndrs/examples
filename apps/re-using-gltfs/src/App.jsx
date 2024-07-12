@@ -1,6 +1,8 @@
 import { Canvas } from '@react-three/fiber'
 import { useGLTF, AccumulativeShadows, RandomizedLight, Environment, CameraControls } from '@react-three/drei'
 
+import shoeModel from './shoe.gltf?url'
+
 export default function App() {
   return (
     <Canvas shadows camera={{ position: [5, 0, 5], fov: 35 }}>
@@ -17,7 +19,7 @@ export default function App() {
 }
 
 function Shoe(props) {
-  const { nodes, materials } = useGLTF('/shoe.gltf')
+  const { nodes, materials } = useGLTF(shoeModel)
   return (
     <group {...props} dispose={null}>
       <mesh castShadow receiveShadow geometry={nodes.shoe.geometry} material={materials.laces} />

@@ -4,6 +4,8 @@ import { useLoader, useFrame } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import useStore from '../store'
 
+import spacedroneModel from './spacedrone.gltf?url'
+
 export default function Enemies() {
   const enemies = useStore((state) => state.enemies)
   return enemies.map((data, i) => <Drone key={i} data={data} />)
@@ -16,7 +18,7 @@ const bodyMaterial = new THREE.MeshPhongMaterial({ color: new THREE.Color('black
 
 const Drone = React.memo(({ data }) => {
   const { clock } = useStore((state) => state.mutation)
-  const { nodes, materials } = useLoader(GLTFLoader, '/spacedrone.gltf')
+  const { nodes, materials } = useLoader(GLTFLoader, spacedroneModel)
   const ref = useRef()
 
   useFrame(() => {

@@ -3,10 +3,12 @@ import { Canvas } from '@react-three/fiber'
 import { useGLTF, useCursor, Outlines, AccumulativeShadows, RandomizedLight, OrbitControls, Bounds, Environment } from '@react-three/drei'
 import { useControls } from 'leva'
 
+import faucetModel from './faucet-transformed.glb'
+
 function Faucet({ name }) {
   const ref = useRef()
   const [hovered, hover] = useState()
-  const { nodes } = useGLTF('/faucet-transformed.glb')
+  const { nodes } = useGLTF(faucetModel)
   // Filter out all meshes belonging to a particular faucet
   const meshes = Object.values(nodes).filter((node) => node.isMesh && node.name.startsWith(name))
   useCursor(hovered)

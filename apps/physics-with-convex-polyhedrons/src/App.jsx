@@ -5,6 +5,8 @@ import { Physics, usePlane, useConvexPolyhedron } from "@react-three/cannon";
 import { useGLTF } from "@react-three/drei";
 import { Geometry } from "three-stdlib";
 
+import diamondModel from "./diamond.glb";
+
 /**
  * Returns legacy geometry vertices, faces for ConvP
  * @param {THREE.BufferGeometry} bufferGeometry
@@ -18,7 +20,7 @@ function toConvexProps(bufferGeometry) {
 }
 
 function Diamond(props) {
-  const { nodes } = useGLTF("/diamond.glb");
+  const { nodes } = useGLTF(diamondModel);
   const geo = useMemo(() => toConvexProps(nodes.Cylinder.geometry), [nodes]);
   const [ref] = useConvexPolyhedron(() => ({ mass: 100, ...props, args: geo }));
   return (

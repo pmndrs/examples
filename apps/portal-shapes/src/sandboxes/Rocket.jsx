@@ -2,6 +2,8 @@ import { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 
+import rocketModel from './rocket-transformed.glb'
+
 export default function App(props) {
   const ref = useRef()
   useFrame((state, delta) => (ref.current.rotation.y += delta / 2))
@@ -10,7 +12,7 @@ export default function App(props) {
       <ambientLight intensity={0.75} />
       <pointLight intensity={1} position={[-10, -25, -10]} />
       <spotLight intensity={2.25} angle={0.2} penumbra={1} position={[-25, 20, -15]} />
-      <Model url="/rocket-transformed.glb" />
+      <Model url={rocketModel} />
     </group>
   )
 }

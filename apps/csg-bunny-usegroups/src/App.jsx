@@ -4,6 +4,8 @@ import { useGLTF, AccumulativeShadows, RandomizedLight, OrbitControls, PivotCont
 import { useRef } from 'react'
 import { Geometry, Base, Addition, Subtraction } from '@react-three/csg'
 
+import bunnyModel from './bunny-transformed.glb'
+
 export default function App() {
   return (
     <Canvas shadows camera={{ position: [4, 0.5, 10], fov: 25 }}>
@@ -26,7 +28,7 @@ export default function App() {
 
 function Bunny() {
   const csg = useRef()
-  const { nodes } = useGLTF('/bunny-transformed.glb')
+  const { nodes } = useGLTF(bunnyModel)
   return (
     <mesh receiveShadow castShadow>
       {/** This will yield a regular THREE.BufferGeometry that needs to be paired with a mesh.

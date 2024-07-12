@@ -4,6 +4,8 @@ import { useGLTF, ContactShadows, Environment, OrbitControls } from "@react-thre
 import { HexColorPicker } from "react-colorful"
 import { proxy, useSnapshot } from "valtio"
 
+import shoeModel from "./shoe-draco.glb?url"
+
 const state = proxy({
   current: null,
   items: { laces: "#fff", mesh: "#fff", caps: "#fff", inner: "#fff", sole: "#fff", stripes: "#fff", band: "#fff", patch: "#fff" },
@@ -28,7 +30,7 @@ export default function App() {
 function Shoe() {
   const ref = useRef()
   const snap = useSnapshot(state)
-  const { nodes, materials } = useGLTF("shoe-draco.glb")
+  const { nodes, materials } = useGLTF(shoeModel)
   const [hovered, set] = useState(null)
 
   useFrame((state) => {

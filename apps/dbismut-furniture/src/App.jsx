@@ -1,11 +1,16 @@
 import React, { useState, useMemo, useRef } from 'react'
 import { Scene } from './Scene'
 
+import stoolModel from './stool.glb'
+import tableModel from './table.glb'
+import benchModel from './bench.glb'
+
 const objects = ['Stool', 'Table', 'Bench']
-const models = objects.map((k) => './' + k.toLowerCase() + '.glb')
-const fakeObjects = 'Lamp base. Stool. Outside table. Dish drainer. Closet door. Table. Square stool. Clothes rack. Bench. Bird feeder. Shelf. Handeplane surfing. Marking knife. Cutting board. Watch display'.split(
-  '. ',
-)
+const models = [stoolModel, tableModel, benchModel]
+const fakeObjects =
+  'Lamp base. Stool. Outside table. Dish drainer. Closet door. Table. Square stool. Clothes rack. Bench. Bird feeder. Shelf. Handeplane surfing. Marking knife. Cutting board. Watch display'.split(
+    '. ',
+  )
 
 const Item = ({ text, onHover, index, active }) => {
   const modelIdx = useMemo(() => objects.indexOf(text), [text])

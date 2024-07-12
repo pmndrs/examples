@@ -3,13 +3,13 @@ import { forwardRef, useRef } from 'react'
 import { useTexture, Instances, Instance } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 
+import tex1 from '../textures/lensflare/lensflare2.png'
+import tex2 from '../textures/lensflare/lensflare3.png'
+import tex3 from '../textures/lensflare/lensflare0_bw.png'
+
 export const Flare = forwardRef(({ streak = [8, 20, 1], visible, ...props }, fRef) => {
   const ref = useRef(null)
-  const [streakTexture, dotTexture, glowTexture] = useTexture([
-    '/textures/lensflare/lensflare2.png',
-    '/textures/lensflare/lensflare3.png',
-    '/textures/lensflare/lensflare0_bw.png'
-  ])
+  const [streakTexture, dotTexture, glowTexture] = useTexture([tex1, tex2, tex3])
   const config = {
     transparent: true,
     opacity: 1,

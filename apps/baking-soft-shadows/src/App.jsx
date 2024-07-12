@@ -4,6 +4,8 @@ import { Canvas } from '@react-three/fiber'
 import { Center, AccumulativeShadows, RandomizedLight, OrbitControls, Environment, useGLTF } from '@react-three/drei'
 import { FlakesTexture } from 'three-stdlib'
 
+import suziModel from './suzi-model.gltf'
+
 export default function App() {
   return (
     <Canvas shadows camera={{ position: [4, 2.5, 8], fov: 35 }}>
@@ -34,7 +36,7 @@ export default function App() {
 }
 
 function Suzi(props) {
-  const { scene, materials } = useGLTF('https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/suzanne-high-poly/model.gltf')
+  const { scene, materials } = useGLTF(suziModel)
   useLayoutEffect(() => {
     scene.traverse((obj) => obj.isMesh && (obj.receiveShadow = obj.castShadow = true))
     materials.default.color.set('orange')

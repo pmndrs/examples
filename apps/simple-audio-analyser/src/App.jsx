@@ -3,15 +3,19 @@ import { Suspense, useEffect, useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { suspend } from 'suspend-react'
 
+import synthSound from './synth.mp3'
+import snareSound from './snare.mp3'
+import drumsSound from './drums.mp3'
+
 export default function App(props) {
   return (
     <Canvas shadows dpr={[1, 2]} camera={{ position: [-1, 1.5, 2], fov: 25 }}>
       <spotLight position={[-4, 4, -4]} angle={0.06} penumbra={1} castShadow shadow-mapSize={[2048, 2048]} />
       <Suspense fallback={null}>
-        <Track position-z={-0.25} url="/synth.mp3" />
-        <Track position-z={0} url="/snare.mp3" />
-        <Track position-z={0.25} url="/drums.mp3" />
-        <Zoom url="/drums.mp3" />
+        <Track position-z={-0.25} url={synthSound} />
+        <Track position-z={0} url={snareSound} />
+        <Track position-z={0.25} url={drumsSound} />
+        <Zoom url={drumsSound} />
       </Suspense>
       <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.025, 0]}>
         <planeGeometry />

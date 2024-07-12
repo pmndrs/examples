@@ -11,9 +11,11 @@ import { useEffect, useRef, useState } from 'react'
 import { useGLTF, Clone, MeshDistortMaterial } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 
+import sceneModel from './scene-transformed.glb'
+
 export function Room({ ...props }) {
   const group = useRef()
-  const { nodes } = useGLTF('/scene-transformed.glb')
+  const { nodes } = useGLTF(sceneModel)
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="_Chambre" rotation={[-Math.PI / 2, 0, 0]}>
@@ -51,7 +53,7 @@ function Lights() {
   const ref = useRef()
   const light = useRef()
   const [color] = useState(() => new THREE.Color('white'))
-  const { nodes } = useGLTF('/scene-transformed.glb')
+  const { nodes } = useGLTF(sceneModel)
   useEffect(() => {
     const timeout = setInterval(() => color.setRGB(Math.random(), Math.random(), Math.random()), 3000)
     return () => clearInterval(timeout)
@@ -102,4 +104,4 @@ function Screen() {
   )
 }
 
-useGLTF.preload('/scene-transformed.glb')
+useGLTF.preload(sceneModel)

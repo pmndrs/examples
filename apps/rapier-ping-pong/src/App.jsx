@@ -10,6 +10,7 @@ import { easing } from "maath"
 import pingSound from "./resources/ping.mp3"
 import logo from "./resources/crossp.jpg"
 import bg from "./resources/bg.jpg"
+import pingpongModel from "./resources/pingpong.glb?url"
 
 const ping = new Audio(pingSound)
 const state = proxy({
@@ -49,7 +50,7 @@ function Paddle({ vec = new THREE.Vector3(), dir = new THREE.Vector3() }) {
   const api = useRef()
   const model = useRef()
   const { count } = useSnapshot(state)
-  const { nodes, materials } = useGLTF("/pingpong.glb")
+  const { nodes, materials } = useGLTF(pingpongModel)
   const contactForce = useCallback((payload) => {
     state.api.pong(payload.totalForceMagnitude / 100)
     model.current.position.y = -payload.totalForceMagnitude / 10000

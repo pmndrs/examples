@@ -6,6 +6,10 @@ import { EffectComposer, TiltShift2, HueSaturation, DotScreen } from '@react-thr
 import { useControls } from 'leva'
 import * as CURVES from './curves'
 
+import sonyModel from './sony_cinema_camera-transformed.glb'
+import stickerImg from './Sticjer_1024x1024@2x.png'
+import stickerInvertImg from './Sticjer_1024x1024@2x_invert.png'
+
 export function App() {
   const poi = useRef()
   const motionRef = useRef()
@@ -25,7 +29,7 @@ export function App() {
         <Curve />
         <Loop />
       </MotionPathControls>
-      <Gltf visible={!attachCamera} src="/sony_cinema_camera-transformed.glb" scale={0.03} ref={motionRef} />
+      <Gltf visible={!attachCamera} src={sonyModel} scale={0.03} ref={motionRef} />
       <Float floatIntensity={20} rotationIntensity={25} speed={float ? 4 : 0}>
         <Sticker position={[1, 0, 1]} scale={2} ref={poi} />
       </Float>
@@ -48,7 +52,7 @@ function Loop({ factor = 0.2 }) {
 }
 
 const Sticker = forwardRef(({ url, ...props }, ref) => {
-  const [smiley, invert] = useTexture(['Sticjer_1024x1024@2x.png', 'Sticjer_1024x1024@2x_invert.png'])
+  const [smiley, invert] = useTexture([stickerImg, stickerInvertImg])
   return (
     <mesh ref={ref} {...props}>
       <planeGeometry args={[1, 1, 32, 32]} />

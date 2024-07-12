@@ -4,6 +4,10 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { useGLTF, Float, Preload } from '@react-three/drei'
 import { Effects } from './Effects'
 
+import hallModel from './hall-transformed.glb?url'
+import probeModel from './probe-transformed.glb?url'
+import darthModel from './darth-transformed.glb?url'
+
 export default function App() {
   return (
     <Canvas gl={{ antialias: false, stencil: false }} camera={{ position: [5, 0, 0], fov: 80 }}>
@@ -38,12 +42,12 @@ function Rig() {
 }
 
 function Hall({ ...props }) {
-  const { scene } = useGLTF('/hall-transformed.glb')
+  const { scene } = useGLTF(hallModel)
   return <primitive object={scene} {...props} />
 }
 
 function Probe({ ...props }) {
-  const { scene, materials } = useGLTF('/probe-transformed.glb')
+  const { scene, materials } = useGLTF(probeModel)
   useLayoutEffect(() => {
     Object.values(materials).forEach((material) => (material.roughness = 0))
     Object.assign(materials.light, {
@@ -57,7 +61,7 @@ function Probe({ ...props }) {
 }
 
 function Darth({ ...props }) {
-  const { scene, materials } = useGLTF('/darth-transformed.glb')
+  const { scene, materials } = useGLTF(darthModel)
   useLayoutEffect(() => {
     Object.assign(materials.Sabel_svart, {
       color: new THREE.Color('#ff2060'),

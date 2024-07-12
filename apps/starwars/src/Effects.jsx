@@ -3,8 +3,10 @@ import { EffectComposer, SSR, Bloom, LUT } from '@react-three/postprocessing'
 import { useControls } from 'leva'
 import { LUTCubeLoader } from 'postprocessing'
 
+import lutTex from './F-6800-STD.cube?url'
+
 export function Effects() {
-  const texture = useLoader(LUTCubeLoader, '/F-6800-STD.cube')
+  const texture = useLoader(LUTCubeLoader, lutTex)
   const { enabled, ...props } = useControls({
     enabled: true,
     temporalResolve: true,

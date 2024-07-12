@@ -5,6 +5,8 @@ import { CubeCamera, Float, MeshReflectorMaterial } from '@react-three/drei'
 import { EffectComposer, GodRays, Bloom } from '@react-three/postprocessing'
 import { easing } from 'maath'
 
+import vid10 from './10.mp4'
+
 export default function App() {
   return (
     <Canvas camera={{ position: [0, 0, 30], fov: 35, near: 1, far: 60 }} gl={{ antialias: false }}>
@@ -56,7 +58,7 @@ const Floor = () => (
 )
 
 const Emitter = forwardRef((props, forwardRef) => {
-  const [video] = useState(() => Object.assign(document.createElement('video'), { src: '/10.mp4', crossOrigin: 'Anonymous', loop: true, muted: true }))
+  const [video] = useState(() => Object.assign(document.createElement('video'), { src: vid10, crossOrigin: 'Anonymous', loop: true, muted: true }))
   useEffect(() => void video.play(), [video])
   return (
     <mesh ref={forwardRef} position={[0, 0, -16]} {...props}>

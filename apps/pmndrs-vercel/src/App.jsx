@@ -4,6 +4,9 @@ import { useGLTF, Edges } from '@react-three/drei'
 import { Physics, useCompoundBody, useCylinder } from '@react-three/cannon'
 import { LayerMaterial, Depth, Fresnel } from 'lamina'
 
+import pmndrsModel from './pmndrs.glb'
+import cursorModel from './cursor.glb'
+
 const vec = new THREE.Vector3()
 const white = new THREE.MeshBasicMaterial({ color: '#fefefe', toneMapped: false })
 const black = new THREE.MeshBasicMaterial({ color: 'black', toneMapped: false })
@@ -32,7 +35,7 @@ function Vercel(props) {
 }
 
 function Pmndrs(props) {
-  const { nodes } = useGLTF('/pmndrs.glb')
+  const { nodes } = useGLTF(pmndrsModel)
   const [ref, api] = useCompoundBody(() => ({
     ...props,
     shapes: [
@@ -52,7 +55,7 @@ function Pmndrs(props) {
 }
 
 function Cursor({ speed = 10, gradient = 0.7, ...props }) {
-  const { nodes } = useGLTF('/cursor.glb')
+  const { nodes } = useGLTF(cursorModel)
   const viewport = useThree((state) => state.viewport)
   const [ref, api] = useCompoundBody(() => ({
     ...props,

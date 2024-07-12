@@ -15,19 +15,22 @@ import { EffectComposer, Bloom } from '@react-three/postprocessing'
 import { useControls } from 'leva'
 import { RGBELoader } from 'three-stdlib'
 
+import dflatModel from './dflat.glb'
+import aeroHdr from './aerodynamics_workshop_1k.hdr'
+
 function Diamond(props) {
   const ref = useRef()
-  const { nodes } = useGLTF('/dflat.glb')
+  const { nodes } = useGLTF(dflatModel)
   // Use a custom envmap/scene-backdrop for the diamond material
   // This way we can have a clear BG while cube-cam can still film other objects
-  const texture = useLoader(RGBELoader, 'https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/aerodynamics_workshop_1k.hdr')
+  const texture = useLoader(RGBELoader, aeroHdr)
   // Optional config
   const config = useControls({
     bounces: { value: 3, min: 0, max: 8, step: 1 },
     aberrationStrength: { value: 0.01, min: 0, max: 0.1, step: 0.01 },
     ior: { value: 2.75, min: 0, max: 10 },
     fresnel: { value: 1, min: 0, max: 1 },
-    color: 'white',
+    color: 'white'
   })
   return (
     <CubeCamera resolution={256} frames={1} envMap={texture}>

@@ -6,9 +6,11 @@ import { EffectComposer, Bloom } from '@react-three/postprocessing'
 import { RGBELoader } from 'three-stdlib'
 import { HexColorPicker } from 'react-colorful'
 
+import ringModel from './ring-transformed.glb'
+
 function Ring({ map, ...props }) {
   const [color, setColor] = useState('white')
-  const { nodes, materials } = useGLTF('/ring-transformed.glb')
+  const { nodes, materials } = useGLTF(ringModel)
   return (
     <group {...props} dispose={null}>
       <mesh geometry={nodes.diamonds.geometry}>

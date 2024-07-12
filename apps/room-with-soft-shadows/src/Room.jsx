@@ -9,8 +9,10 @@ Title: Room
 
 import { useGLTF } from "@react-three/drei"
 
+import roomModel from "./room-transformed.glb"
+
 export function Model(props) {
-  const { nodes, materials } = useGLTF("/room-transformed.glb")
+  const { nodes, materials } = useGLTF(roomModel)
   return (
     <group {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
@@ -38,4 +40,4 @@ export function Model(props) {
   )
 }
 
-useGLTF.preload("/room-transformed.glb")
+useGLTF.preload(roomModel)

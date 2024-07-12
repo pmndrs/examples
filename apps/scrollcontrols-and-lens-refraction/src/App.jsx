@@ -4,6 +4,19 @@ import { Canvas, createPortal, useFrame, useThree } from '@react-three/fiber'
 import { useFBO, useGLTF, useScroll, Text, Image, Scroll, Preload, ScrollControls, MeshTransmissionMaterial } from '@react-three/drei'
 import { easing } from 'maath'
 
+import lensModel from './lens-transformed.glb?url'
+
+import img1 from './img1.jpg'
+import img3 from './img3.jpg'
+import img6 from './img6.jpg'
+import img7 from './img7.jpg'
+import img8 from './img8.jpg'
+
+import trip2 from './trip2.jpg'
+import trip4 from './trip4.jpg'
+
+import interFont from './Inter-Regular.woff?url'
+
 export default function App() {
   return (
     <Canvas camera={{ position: [0, 0, 20], fov: 15 }}>
@@ -35,7 +48,7 @@ export default function App() {
 
 function Lens({ children, damping = 0.15, ...props }) {
   const ref = useRef()
-  const { nodes } = useGLTF('/lens-transformed.glb')
+  const { nodes } = useGLTF(lensModel)
   const buffer = useFBO()
   const viewport = useThree((state) => state.viewport)
   const [scene] = useState(() => new THREE.Scene())
@@ -89,13 +102,13 @@ function Images() {
   })
   return (
     <group ref={group}>
-      <Image position={[-2, 0, 0]} scale={[4, height, 1]} url="/img1.jpg" />
-      <Image position={[2, 0, 3]} scale={3} url="/img6.jpg" />
-      <Image position={[-2.05, -height, 6]} scale={[1, 3, 1]} url="/trip2.jpg" />
-      <Image position={[-0.6, -height, 9]} scale={[1, 2, 1]} url="/img8.jpg" />
-      <Image position={[0.75, -height, 10.5]} scale={1.5} url="/trip4.jpg" />
-      <Image position={[0, -height * 1.5, 7.5]} scale={[1.5, 3, 1]} url="/img3.jpg" />
-      <Image position={[0, -height * 2 - height / 4, 0]} scale={[width, height / 1.1, 1]} url="/img7.jpg" />
+      <Image position={[-2, 0, 0]} scale={[4, height, 1]} url={img1} />
+      <Image position={[2, 0, 3]} scale={3} url={img6} />
+      <Image position={[-2.05, -height, 6]} scale={[1, 3, 1]} url={trip2} />
+      <Image position={[-0.6, -height, 9]} scale={[1, 2, 1]} url={img8} />
+      <Image position={[0.75, -height, 10.5]} scale={1.5} url={trip4} />
+      <Image position={[0, -height * 1.5, 7.5]} scale={[1.5, 3, 1]} url={img3} />
+      <Image position={[0, -height * 2 - height / 4, 0]} scale={[width, height / 1.1, 1]} url={img7} />
     </group>
   )
 }
@@ -103,7 +116,7 @@ function Images() {
 function Typography() {
   const state = useThree()
   const { width, height } = state.viewport.getCurrentViewport(state.cameta, [0, 0, 12])
-  const shared = { font: '/Inter-Regular.woff', letterSpacing: -0.1, color: 'black' }
+  const shared = { font: interFont, letterSpacing: -0.1, color: 'black' }
   return (
     <>
       <Text children="to" anchorX="left" position={[-width / 2.5, -height / 10, 12]} {...shared} />

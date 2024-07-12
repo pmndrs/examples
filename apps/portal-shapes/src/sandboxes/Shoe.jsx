@@ -2,6 +2,8 @@ import { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { useGLTF, PivotControls, Environment } from '@react-three/drei'
 
+import shoeModel from './shoe-draco.glb'
+
 export default function App(props) {
   return (
     <group {...props}>
@@ -17,7 +19,7 @@ export default function App(props) {
 
 function Shoe() {
   const ref = useRef()
-  const { nodes, materials } = useGLTF('shoe-draco.glb')
+  const { nodes, materials } = useGLTF(shoeModel)
   useFrame((state) => {
     const t = state.clock.getElapsedTime() * 2
     ref.current.rotation.set(Math.cos(t / 4) / 8, Math.sin(t / 4) / 8, -0.2 - (1 + Math.sin(t / 1.5)) / 20)

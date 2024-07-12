@@ -8,8 +8,10 @@ title: Minecraft Diamond Axe
 
 import { useGLTF } from "@react-three/drei"
 
+import axeModel from "./axe.glb"
+
 export default function Axe(props) {
-  const { nodes, materials } = useGLTF("/axe.glb")
+  const { nodes, materials } = useGLTF(axeModel)
   return (
     <group dispose={null} {...props}>
       <group rotation={[0, Math.PI / 1.8, -0.3]} scale={0.5}>
@@ -20,4 +22,4 @@ export default function Axe(props) {
   )
 }
 
-useGLTF.preload("/axe.glb")
+useGLTF.preload(axeModel)

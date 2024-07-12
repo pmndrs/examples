@@ -4,6 +4,8 @@ import { applyProps, Canvas } from '@react-three/fiber'
 import { useGLTF, useBoxProjectedEnv, CubeCamera, Environment, OrbitControls, BakeShadows } from '@react-three/drei'
 import { useControls } from 'leva'
 
+import courtModel from './court.glb'
+
 export default function App() {
   return (
     <Canvas frameloop="demand" dpr={[1, 1.5]} shadows camera={{ near: 0.1, far: 40, fov: 75 }}>
@@ -24,7 +26,7 @@ export default function App() {
 }
 
 function Court(props) {
-  const { scene } = useGLTF('/court.glb')
+  const { scene } = useGLTF(courtModel)
   useLayoutEffect(() => {
     scene.traverse((o) => {
       if (o.isMesh) {
@@ -38,7 +40,7 @@ function Court(props) {
 }
 
 function Floor(props) {
-  const { nodes, materials } = useGLTF('/court.glb')
+  const { nodes, materials } = useGLTF(courtModel)
   const { up, scale, ...config } = useControls({
     up: { value: -0.5, min: -10, max: 10 },
     scale: { value: 27, min: 0, max: 50 },

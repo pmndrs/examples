@@ -6,9 +6,11 @@ import * as THREE from 'three'
 import { useLayoutEffect, useRef } from 'react'
 import { useGLTF, CubeCamera } from '@react-three/drei'
 
+import porscheModel from './porsche-transformed.glb'
+
 export default function Model({ ...props }) {
   const group = useRef()
-  const { nodes, materials } = useGLTF('/porsche-transformed.glb')
+  const { nodes, materials } = useGLTF(porscheModel)
 
   useLayoutEffect(() => {
     materials.paint.color.set('#ffdf71')
@@ -73,4 +75,4 @@ export default function Model({ ...props }) {
   )
 }
 
-useGLTF.preload('/porsche-transformed.glb')
+useGLTF.preload(porscheModel)

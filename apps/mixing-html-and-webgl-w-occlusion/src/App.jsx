@@ -4,10 +4,12 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { Html, Environment, useGLTF, ContactShadows, OrbitControls } from '@react-three/drei'
 import HeroPage from './HeroPage'
 
+import macModel from './mac-draco.glb'
+
 function Model(props) {
   const group = useRef()
   // Load model
-  const { nodes, materials } = useGLTF('/mac-draco.glb')
+  const { nodes, materials } = useGLTF(macModel)
   // Make it float
   useFrame((state) => {
     const t = state.clock.getElapsedTime()

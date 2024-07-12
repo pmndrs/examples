@@ -11,10 +11,13 @@ import { useGraph } from "@react-three/fiber"
 import { a, useSpring } from "@react-spring/three"
 import { SkeletonUtils } from "three-stdlib"
 
+import stacyImg from "./stacy.jpg"
+import stacyModel from "./stacy.glb"
+
 export default function Model({ pose, ...props }) {
   // Fetch model and a separate texture
-  const { scene, animations } = useGLTF("/stacy.glb")
-  const texture = useTexture("/stacy.jpg")
+  const { scene, animations } = useGLTF(stacyModel)
+  const texture = useTexture(stacyImg)
 
   // Skinned meshes cannot be re-used in threejs without cloning them
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene])

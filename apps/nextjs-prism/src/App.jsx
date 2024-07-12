@@ -11,8 +11,11 @@ import { Flare } from './components/Flare'
 import { Box } from './components/Box'
 import { calculateRefractionAngle, lerp, lerpV3 } from './util'
 
+import lutTex from './lut/F-6800-STD.cube?url'
+import inter from './fonts/Inter_Bold.json'
+
 export default function App() {
-  const texture = useLoader(LUTCubeLoader, '/lut/F-6800-STD.cube')
+  const texture = useLoader(LUTCubeLoader, lutTex)
   return (
     <Canvas orthographic gl={{ antialias: false }} camera={{ position: [0, 0, 100], zoom: 70 }}>
       <color attach="background" args={['black']} />
@@ -86,7 +89,7 @@ function Scene() {
       <spotLight ref={spot} intensity={1} distance={7} angle={1} penumbra={1} position={[0, 0, 1]} />
       {/* Caption */}
       <Center top bottom position={[0, 2, 0]}>
-        <Text3D size={0.7} letterSpacing={-0.05} height={0.05} font="/fonts/Inter_Bold.json">
+        <Text3D size={0.7} letterSpacing={-0.05} height={0.05} font={inter}>
           Dynamic without Limits
           <meshStandardMaterial color="white" />
         </Text3D>

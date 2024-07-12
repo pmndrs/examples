@@ -7,6 +7,8 @@ import { useGLTF, Detailed, Environment } from '@react-three/drei'
 // https://github.com/vanruesc/postprocessing
 import { EffectComposer, DepthOfField, ToneMapping } from '@react-three/postprocessing'
 
+import bananaModel from './banana-v1-transformed.glb'
+
 function Banana({ index, z, speed }) {
   const ref = useRef()
   // useThree gives you access to the R3F state model
@@ -16,7 +18,7 @@ function Banana({ index, z, speed }) {
   // useGLTF is an abstraction around R3F's useLoader(GLTFLoader, url)
   // It can automatically handle draco and meshopt-compressed assets without you having to
   // worry about binaries and such ...
-  const { nodes, materials } = useGLTF('/banana-v1-transformed.glb')
+  const { nodes, materials } = useGLTF(bananaModel)
   // By the time we're here the model is loaded, this is possible through React suspense
 
   // Local component state, it is safe to mutate because it's fixed data

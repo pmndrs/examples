@@ -4,9 +4,12 @@ import { useGLTF, useTexture, Shadow, meshBounds } from "@react-three/drei"
 // We take the "a" element from /three here because we want to animate threejs objects
 import { a } from "@react-spring/three"
 
+import switchModel from "./switch.glb?url"
+import crossImg from "./cross.jpg"
+
 function Switch({ x, set }) {
-  const { nodes, materials } = useGLTF("/switch.glb")
-  const texture = useTexture("/cross.jpg")
+  const { nodes, materials } = useGLTF(switchModel)
+  const texture = useTexture(crossImg)
   // Hover state
   const [hovered, setHover] = useState(false)
   useEffect(() => void (document.body.style.cursor = hovered ? "pointer" : "auto"), [hovered])

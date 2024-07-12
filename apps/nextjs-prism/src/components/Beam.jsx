@@ -4,11 +4,14 @@ import { useFrame } from '@react-three/fiber'
 import { useTexture } from '@react-three/drei'
 import { Reflect } from './Reflect'
 
+import tex1 from '../textures/lensflare/lensflare2.png'
+import tex2 from '../textures/lensflare/lensflare0_bw.jpg'
+
 export const Beam = forwardRef(({ children, position, stride = 4, width = 8, ...props }, fRef) => {
   const streaks = useRef(null)
   const glow = useRef(null)
   const reflect = useRef(null)
-  const [streakTexture, glowTexture] = useTexture(['/textures/lensflare/lensflare2.png', '/textures/lensflare/lensflare0_bw.jpg'])
+  const [streakTexture, glowTexture] = useTexture([tex1, tex2])
 
   const obj = new THREE.Object3D()
   const f = new THREE.Vector3()

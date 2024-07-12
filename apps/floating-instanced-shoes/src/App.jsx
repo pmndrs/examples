@@ -4,6 +4,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { Bvh, Instances, Instance, OrbitControls, Environment, useGLTF } from '@react-three/drei'
 import { useControls } from 'leva'
 
+import shoeModel from './shoe.glb'
 import { data } from './store'
 
 export default function App() {
@@ -22,7 +23,7 @@ export default function App() {
 }
 
 function Shoes({ data, range }) {
-  const { nodes, materials } = useGLTF('/shoe.glb')
+  const { nodes, materials } = useGLTF(shoeModel)
   return (
     <Instances range={range} material={materials.phong1SG} geometry={nodes.Shoe.geometry}>
       {data.map((props, i) => (

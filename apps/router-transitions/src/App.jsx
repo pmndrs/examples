@@ -5,8 +5,10 @@ import { Route, Link, useLocation } from "wouter"
 import { suspend } from "suspend-react"
 import { easing } from "maath"
 
+import bombModel from "./bomb-gp.glb?url"
+
 const inter = import("@pmndrs/assets/fonts/inter_regular.woff")
-useGLTF.preload("/bomb-gp.glb")
+useGLTF.preload(bombModel)
 
 export const App = () => (
   <>
@@ -70,7 +72,7 @@ const Knot = (props) => (
 )
 
 function Bomb(props) {
-  const { nodes } = useGLTF("/bomb-gp.glb")
+  const { nodes } = useGLTF(bombModel)
   return (
     <mesh receiveShadow castShadow geometry={nodes.Little_Boy_Little_Boy_Material_0.geometry} {...props}>
       <MeshTransmissionMaterial backside backsideThickness={10} thickness={5} />

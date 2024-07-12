@@ -5,6 +5,9 @@ import { Physics, useSphere } from "@react-three/cannon"
 import { EffectComposer, N8AO, SMAA } from "@react-three/postprocessing"
 import { useControls } from "leva"
 
+import adamsbridgeHdr from "./adamsbridge.hdr?url"
+import crossImg from "./cross.jpg"
+
 const rfs = THREE.MathUtils.randFloatSpread
 const sphereGeometry = new THREE.SphereGeometry(1, 32, 32)
 const baubleMaterial = new THREE.MeshStandardMaterial({ color: "white", roughness: 0, envMapIntensity: 1 })
@@ -18,7 +21,7 @@ export const App = () => (
       <Pointer />
       <Clump />
     </Physics>
-    <Environment files="/adamsbridge.hdr" />
+    <Environment files={adamsbridgeHdr} />
     <EffectComposer disableNormalPass multisampling={0}>
       <N8AO halfRes color="black" aoRadius={2} intensity={1} aoSamples={6} denoiseSamples={4} />
       <SMAA />
@@ -28,7 +31,7 @@ export const App = () => (
 
 function Clump({ mat = new THREE.Matrix4(), vec = new THREE.Vector3(), ...props }) {
   const { outlines } = useControls({ outlines: { value: 0.0, step: 0.01, min: 0, max: 0.05 } })
-  const texture = useTexture("/cross.jpg")
+  const texture = useTexture(crossImg)
   const [ref, api] = useSphere(() => ({ args: [1], mass: 1, angularDamping: 0.1, linearDamping: 0.65, position: [rfs(20), rfs(20), rfs(20)] }))
   useFrame((state) => {
     for (let i = 0; i < 40; i++) {

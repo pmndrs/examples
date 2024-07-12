@@ -8,9 +8,11 @@ import RefractionMaterial from "./RefractionMaterial"
 import { useBlock } from "../blocks"
 import state from "../store"
 
+import diamondModel from "./diamond.glb"
+
 const dummy = new Object3D()
 export default function Diamonds() {
-  const { nodes } = useLoader(GLTFLoader, "/diamond.glb")
+  const { nodes } = useLoader(GLTFLoader, diamondModel)
   useLayoutEffect(() => nodes.pCone1_lambert1_0.geometry.center(), [])
 
   const { size, gl, scene, camera, clock } = useThree()

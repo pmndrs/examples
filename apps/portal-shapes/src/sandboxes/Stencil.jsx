@@ -1,6 +1,8 @@
 import { Suspense } from 'react'
 import { Mask, useMask, useGLTF, PivotControls, RoundedBox, Float } from '@react-three/drei'
 
+import reactModel from './react-transformed.glb'
+
 export default function App(props) {
   return (
     <group {...props}>
@@ -43,7 +45,7 @@ function Frame(props) {
 
 function Atom({ invert, ...props }) {
   const stencil = useMask(1, invert)
-  const { nodes } = useGLTF('/react-transformed.glb')
+  const { nodes } = useGLTF(reactModel)
   return (
     <mesh castShadow receiveShadow geometry={nodes.atom.geometry} {...props} dispose={null}>
       <meshPhongMaterial color="#33BBFF" {...stencil} />

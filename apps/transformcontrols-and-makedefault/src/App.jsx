@@ -3,6 +3,8 @@ import { Canvas, useThree } from '@react-three/fiber'
 import { OrbitControls, TransformControls, ContactShadows, useGLTF, useCursor } from '@react-three/drei'
 import { proxy, useSnapshot } from 'valtio'
 
+import model from './compressed.glb'
+
 // Reactive state model, using Valtio ...
 const modes = ['translate', 'rotate', 'scale']
 const state = proxy({ current: null, mode: 0 })
@@ -12,7 +14,7 @@ function Model({ name, ...props }) {
   const snap = useSnapshot(state)
   // Fetching the GLTF, nodes is a collection of all the meshes
   // It's cached/memoized, it only gets loaded and parsed once
-  const { nodes } = useGLTF('/compressed.glb')
+  const { nodes } = useGLTF(model)
   // Feed hover state into useCursor, which sets document.body.style.cursor to pointer|auto
   const [hovered, setHovered] = useState(false)
   useCursor(hovered)

@@ -2,6 +2,8 @@ import { Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { Bounds, useBounds, OrbitControls, ContactShadows, useGLTF } from '@react-three/drei'
 
+import model from './compressed.glb'
+
 export default function App() {
   return (
     <Canvas camera={{ position: [0, -10, 80], fov: 50 }} dpr={[1, 2]}>
@@ -29,7 +31,7 @@ export default function App() {
 }
 
 function Model({ name, ...props }) {
-  const { nodes } = useGLTF('/compressed.glb')
+  const { nodes } = useGLTF(model)
   return <mesh geometry={nodes[name].geometry} material={nodes[name].material} material-emissive="red" material-roughness={1} {...props} dispose={null} />
 }
 

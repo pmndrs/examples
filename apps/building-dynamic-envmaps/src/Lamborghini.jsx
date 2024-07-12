@@ -3,6 +3,8 @@ import { useMemo } from 'react'
 import { applyProps } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
 
+import lamboModel from './lambo.glb'
+
 /*
 Author: Steven Grey (https://sketchfab.com/Steven007)
 License: CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
@@ -10,7 +12,7 @@ Source: https://sketchfab.com/3d-models/lamborghini-urus-2650599973b649ddb4460ff
 Title: Lamborghini Urus
 */
 export function Lamborghini(props) {
-  const { scene, nodes, materials } = useGLTF('/lambo.glb')
+  const { scene, nodes, materials } = useGLTF(lamboModel)
   useMemo(() => {
     // ⬇⬇⬇ All this is probably better fixed in Blender ...
     Object.values(nodes).forEach((node) => {

@@ -4,6 +4,8 @@ import { useGLTF, MeshPortalMaterial, CameraControls, Text, Sky } from '@react-t
 import { geometry } from 'maath'
 import { suspend } from 'suspend-react'
 
+import mccreeModel from './low_poly_mccree-transformed.glb'
+
 extend(geometry)
 const GOLDENRATIO = 1.61803398875
 const regular = import('@pmndrs/assets/fonts/inter_regular.woff')
@@ -32,7 +34,7 @@ Source: https://sketchfab.com/3d-models/low-poly-mccree-38aedc02c0b2412babdc4d0e
 Title: Low poly McCree
 */
 function Model({ clip, ...props }) {
-  const { nodes, materials } = useGLTF('/low_poly_mccree-transformed.glb')
+  const { nodes, materials } = useGLTF(mccreeModel)
   return (
     <mesh geometry={nodes.base.geometry} {...props} dispose={null}>
       <meshBasicMaterial map={materials.PaletteMaterial001.map} side={THREE.DoubleSide} clippingPlanes={clip ? [zPlane, yPlane] : null} />

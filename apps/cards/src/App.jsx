@@ -6,6 +6,19 @@ import { suspend } from 'suspend-react'
 import { generate } from 'random-words'
 import { easing, geometry } from 'maath'
 
+import img1 from './img1.jpg'
+import img2 from './img2.jpg'
+import img3 from './img3.jpg'
+import img4 from './img4.jpg'
+import img5 from './img5.jpg'
+import img6 from './img6.jpg'
+import img7 from './img7.jpg'
+import img8 from './img8.jpg'
+import img9 from './img9.jpg'
+import img10 from './img10.jpg'
+
+const imgs = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10]
+
 extend(geometry)
 const inter = import('@pmndrs/assets/fonts/inter_regular.woff')
 
@@ -60,7 +73,7 @@ function Cards({ category, data, from = 0, len = Math.PI * 2, radius = 5.25, onP
             rotation={[0, Math.PI / 2 + angle, 0]}
             active={hovered !== null}
             hovered={hovered === i}
-            url={`/img${Math.floor(i % 10) + 1}.jpg`}
+            url={imgs[Math.floor(i % 10)]}
           />
         )
       })}
@@ -95,7 +108,7 @@ function ActiveCard({ hovered, ...props }) {
       <Text font={suspend(inter).default} fontSize={0.5} position={[2.15, 3.85, 0]} anchorX="left" color="black">
         {hovered !== null && `${name}\n${hovered}`}
       </Text>
-      <Image ref={ref} transparent radius={0.3} position={[0, 1.5, 0]} scale={[3.5, 1.618 * 3.5, 0.2, 1]} url={`/img${Math.floor(hovered % 10) + 1}.jpg`} />
+      <Image ref={ref} transparent radius={0.3} position={[0, 1.5, 0]} scale={[3.5, 1.618 * 3.5, 0.2, 1]} url={imgs[Math.floor(hovered % 10)]} />
     </Billboard>
   )
 }

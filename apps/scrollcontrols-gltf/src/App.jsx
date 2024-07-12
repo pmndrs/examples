@@ -3,6 +3,8 @@ import { Suspense, useEffect, useLayoutEffect } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { ScrollControls, Sky, useScroll, useGLTF, useAnimations } from '@react-three/drei'
 
+import tokyoModel from './LittlestTokyo-transformed.glb?url'
+
 export default function App() {
   return (
     <Canvas shadows camera={{ position: [0, 0, 10] }}>
@@ -23,7 +25,7 @@ export default function App() {
 function LittlestTokyo({ ...props }) {
   // This hook gives you offets, ranges and other useful things
   const scroll = useScroll()
-  const { scene, nodes, animations } = useGLTF('/LittlestTokyo-transformed.glb')
+  const { scene, nodes, animations } = useGLTF(tokyoModel)
   const { actions } = useAnimations(animations, scene)
   useLayoutEffect(() => Object.values(nodes).forEach((node) => (node.receiveShadow = node.castShadow = true)))
   useEffect(() => void (actions['Take 001'].play().paused = true), [actions])
@@ -43,4 +45,4 @@ author: glenatron (https://sketchfab.com/glenatron)
 license: CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
 source: https://sketchfab.com/models/94b24a60dc1b48248de50bf087c0f042
 title: Littlest Tokyo */
-useGLTF.preload('/LittlestTokyo-transformed.glb')
+useGLTF.preload(tokyoModel)

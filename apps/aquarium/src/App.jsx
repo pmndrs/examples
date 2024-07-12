@@ -3,6 +3,10 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { useMask, useGLTF, useAnimations, Float, Instance, Instances, CameraControls } from '@react-three/drei'
 import { Lightformer, Environment, RandomizedLight, AccumulativeShadows, MeshTransmissionMaterial } from '@react-three/drei'
 
+import shapesModel from './shapes-transformed.glb'
+import turtleModel from './model_52a_-_kemps_ridley_sea_turtle_no_id-transformed.glb'
+
+console.log('cpoucou')
 export default function App({ spheres }) {
   return (
     <Canvas shadows camera={{ position: [30, 0, -3], fov: 35, near: 1, far: 50 }}>
@@ -42,7 +46,7 @@ export default function App({ spheres }) {
 
 function Aquarium({ children, ...props }) {
   const ref = useRef()
-  const { nodes } = useGLTF('/shapes-transformed.glb')
+  const { nodes } = useGLTF(shapesModel)
   const stencil = useMask(1, false)
   useLayoutEffect(() => {
     // Apply stencil to all contents
@@ -85,7 +89,7 @@ Source: https://sketchfab.com/3d-models/model-52a-kemps-ridley-sea-turtle-no-id-
 Title: Model 52A - Kemps Ridley Sea Turtle (no ID)
 */
 function Turtle(props) {
-  const { scene, animations } = useGLTF('/model_52a_-_kemps_ridley_sea_turtle_no_id-transformed.glb')
+  const { scene, animations } = useGLTF(turtleModel)
   const { actions, mixer } = useAnimations(animations, scene)
   useEffect(() => {
     mixer.timeScale = 0.5

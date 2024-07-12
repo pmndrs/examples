@@ -6,10 +6,12 @@ import { useSpring } from '@react-spring/core'
 import { a as three } from '@react-spring/three'
 import { a as web } from '@react-spring/web'
 
+import macModel from './mac-draco.glb'
+
 function Model({ open, hinge, ...props }) {
   const group = useRef()
   // Load model
-  const { nodes, materials } = useGLTF('/mac-draco.glb')
+  const { nodes, materials } = useGLTF(macModel)
   // Take care of cursor state on hover
   const [hovered, setHovered] = useState(false)
   useEffect(() => void (document.body.style.cursor = hovered ? 'pointer' : 'auto'), [hovered])

@@ -9,9 +9,11 @@ import { useGLTF, OrbitControls, Stage, CameraShake, useAnimations } from '@reac
 // Should your own components rely on default controls, throughout the three they're available as:
 //   const controls = useThree(state => state.controls)
 
-useGLTF.preload('/robot.gltf')
+import robotModel from './robot-draco.glb?url'
+
+useGLTF.preload(robotModel)
 function Model(props) {
-  const { scene, animations } = useGLTF('/robot-draco.glb')
+  const { scene, animations } = useGLTF(robotModel)
   const { actions } = useAnimations(animations, scene)
   useEffect(() => {
     actions.Idle.play()

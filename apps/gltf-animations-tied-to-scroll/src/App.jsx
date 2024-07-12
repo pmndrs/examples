@@ -3,9 +3,11 @@ import { Canvas, useFrame } from "@react-three/fiber"
 import { useGLTF, useAnimations, useScroll, ScrollControls, SoftShadows } from "@react-three/drei"
 import { EffectComposer, TiltShift2 } from "@react-three/postprocessing"
 
+import jumpModel from "./jump-transformed.glb"
+
 function Model(props) {
   const scroll = useScroll()
-  const { nodes, materials, animations } = useGLTF("/jump-transformed.glb")
+  const { nodes, materials, animations } = useGLTF(jumpModel)
   const { ref, actions } = useAnimations(animations)
   useEffect(() => void (actions.jump.reset().play().paused = true), [])
   useFrame(() => (actions.jump.time = actions.jump.getClip().duration * scroll.offset))
