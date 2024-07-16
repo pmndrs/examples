@@ -23,7 +23,8 @@
   },
   "scripts": {
     "dev": "vite --host --open",
-    "build": "tsc && vite-build $npm_package_name",
+    "build": "tsc && vite build",
+    "build2": "tsc && vite-build $npm_package_name",
     "preview": "vite preview"
   },
   "browserslist": ">1%, not dead, not ie <= 11, not op_mini all",

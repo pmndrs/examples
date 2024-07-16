@@ -22,12 +22,12 @@
     "@types/three": "^0.165.0",
     "@vitejs/plugin-react": "^4.3.1",
     "typescript": "^5.5.2",
-    "vite": "^5.3.1",
-    "@repo/tools": "*"
+    "vite": "^5.3.1"
   },
   "scripts": {
     "dev": "vite --host --open",
-    "build": "tsc && vite-build $npm_package_name",
+    "build": "tsc && vite build",
+    "build2": "tsc && vite-build $npm_package_name",
     "preview": "vite preview"
   },
   "browserslist": [

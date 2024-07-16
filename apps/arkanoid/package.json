@@ -21,7 +21,8 @@
   },
   "scripts": {
     "dev": "vite --host --open",
-    "bbuild": "tsc && vite-build $npm_package_name",
+    "build": "tsc && vite build",
+    "bbuild2": "tsc && vite-build $npm_package_name",
     "preview": "vite preview"
   },
   "browserslist": [
