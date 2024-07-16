@@ -82,7 +82,7 @@ export function Outlines({ color = "black", opacity = 1, transparent = false, th
         group.remove(mesh)
       }
     }
-  }, [angle, ref.current?.parent?.geometry])
+  }, [angle, ref.current?.parent])
 
   React.useLayoutEffect(() => {
     const group = ref.current

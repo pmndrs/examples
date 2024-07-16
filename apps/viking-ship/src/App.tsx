@@ -1,10 +1,10 @@
 import * as THREE from "three"
-import React, { Suspense, useRef } from "react"
+import React, { Suspense, useRef, ReactNode } from "react"
 import { Canvas, useFrame } from "@react-three/fiber"
 import { OrbitControls, Environment, Loader } from "@react-three/drei"
 import Model from "./Model"
 
-function Rig({ children }) {
+function Rig({ children }: { children: ReactNode }) {
   const outer = useRef<THREE.Group>(null!)
   const inner = useRef<THREE.Group>(null!)
   useFrame(({ camera, clock }) => {
