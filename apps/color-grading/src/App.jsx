@@ -2,7 +2,7 @@ import { Canvas, extend, useLoader } from '@react-three/fiber'
 import { OrbitControls, Environment, Effects, useTexture } from '@react-three/drei'
 import { LUTPass, LUTCubeLoader } from 'three-stdlib'
 
-import cubicleTex from './cubicle-99.cube'
+import cubicleTex from './cubicle-99.cube?url'
 import terrazoImage from './terrazo.png'
 
 extend({ LUTPass })
