@@ -3,7 +3,7 @@ import { Canvas } from '@react-three/fiber'
 import { Mask, useMask, useGLTF, Bounds, PivotControls, Environment, OrbitControls, RoundedBox, Float } from '@react-three/drei'
 import { useControls } from 'leva'
 
-import reactModel from './react-transformed.glb'
+import reactModel from './react-transformed.glb?url'
 
 export function App() {
   const { invert } = useControls({ invert: false })

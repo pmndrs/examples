@@ -3,7 +3,7 @@ import { Canvas } from '@react-three/fiber'
 import { useGLTF, useCursor, Outlines, AccumulativeShadows, RandomizedLight, OrbitControls, Bounds, Environment } from '@react-three/drei'
 import { useControls } from 'leva'
 
-import faucetModel from './faucet-transformed.glb'
+import faucetModel from './faucet-transformed.glb?url'
 
 function Faucet({ name }) {
   const ref = useRef()

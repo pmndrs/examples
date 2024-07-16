@@ -3,7 +3,7 @@ import { Canvas, useFrame } from "@react-three/fiber"
 import { useGLTF, useAnimations, useScroll, ScrollControls, SoftShadows } from "@react-three/drei"
 import { EffectComposer, TiltShift2 } from "@react-three/postprocessing"
 
-import jumpModel from "./jump-transformed.glb"
+import jumpModel from "./jump-transformed.glb?url"
 
 function Model(props) {
   const scroll = useScroll()

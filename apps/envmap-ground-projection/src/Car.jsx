@@ -6,7 +6,7 @@ import * as THREE from 'three'
 import { useLayoutEffect, useRef } from 'react'
 import { useGLTF, CubeCamera } from '@react-three/drei'
 
-import porscheModel from './porsche-transformed.glb'
+import porscheModel from './porsche-transformed.glb?url'
 
 export default function Model({ ...props }) {
   const group = useRef()

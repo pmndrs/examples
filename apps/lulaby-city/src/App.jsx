@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useGLTF, PositionalAudio } from '@react-three/drei'
 
-import sceneModel from './scene-draco.glb'
+import sceneModel from './scene-draco.glb?url'
 import zapsplatAudio from './zapsplat_icecream.mp3'
 
 export default function App({ ready }) {

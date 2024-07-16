@@ -5,7 +5,7 @@ import { useGLTF, Bounds, Edges } from '@react-three/drei'
 import { LayerMaterial, Depth, Fresnel } from 'lamina'
 import { useControls } from 'leva'
 
-import cursorModel from './cursor.glb'
+import cursorModel from './cursor.glb?url'
 
 export const App = () => (
   <Canvas orthographic dpr={[1, 2]} camera={{ position: [0, 0, 10], zoom: 200 }}>

@@ -11,7 +11,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useGLTF, Clone, MeshDistortMaterial } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 
-import sceneModel from './scene-transformed.glb'
+import sceneModel from './scene-transformed.glb?url'
 
 export function Room({ ...props }) {
   const group = useRef()

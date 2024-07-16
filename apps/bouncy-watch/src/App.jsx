@@ -1,7 +1,7 @@
 import { Canvas } from '@react-three/fiber'
 import { useGLTF, PresentationControls, Environment, ContactShadows, Html } from '@react-three/drei'
 
-import watchModel from './watch-v1.glb'
+import watchModel from './watch-v1.glb?url'
 
 export default function App() {
   return (

@@ -6,9 +6,9 @@ import { useRoute, useLocation } from 'wouter'
 import { easing, geometry } from 'maath'
 import { suspend } from 'suspend-react'
 
-import picklesModel from './pickles_3d_version_of_hyuna_lees_illustration-transformed.glb'
-import teaModel from './fiesta_tea-transformed.glb'
-import stillModel from './still_life_based_on_heathers_artwork-transformed.glb'
+import picklesModel from './pickles_3d_version_of_hyuna_lees_illustration-transformed.glb?url'
+import teaModel from './fiesta_tea-transformed.glb?url'
+import stillModel from './still_life_based_on_heathers_artwork-transformed.glb?url'
 
 extend(geometry)
 const regular = import('@pmndrs/assets/fonts/inter_regular.woff')

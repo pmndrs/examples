@@ -3,9 +3,9 @@ import { Physics, RigidBody } from '@react-three/rapier'
 import { Gltf, Environment, Fisheye, KeyboardControls } from '@react-three/drei'
 import Controller from 'ecctrl'
 
-import nightHdr from './night.hdr'
-import ghostModel from './ghost_w_tophat-transformed.glb'
-import fantasyGameModel from './fantasy_game_inn2-transformed.glb'
+import nightHdr from './night.hdr?url'
+import ghostModel from './ghost_w_tophat-transformed.glb?url'
+import fantasyGameModel from './fantasy_game_inn2-transformed.glb?url'
 
 export default function App() {
   const keyboardMap = [

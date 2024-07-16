@@ -4,7 +4,7 @@ import { useGLTF, AccumulativeShadows, RandomizedLight, OrbitControls, PivotCont
 import { useRef } from 'react'
 import { Geometry, Base, Addition, Subtraction } from '@react-three/csg'
 
-import bunnyModel from './bunny-transformed.glb'
+import bunnyModel from './bunny-transformed.glb?url'
 
 export default function App() {
   return (

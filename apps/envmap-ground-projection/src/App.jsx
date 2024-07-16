@@ -6,7 +6,7 @@ import { Fisheye, Environment, ContactShadows, OrbitControls, PerspectiveCamera 
 import Car from './Car'
 import { Perf } from 'r3f-perf'
 
-import depotHdr from './old_depot_2k.hdr'
+import depotHdr from './old_depot_2k.hdr?url'
 
 export default function App() {
   const { mapping, exposure } = useControls({

@@ -9,7 +9,7 @@ Title: Room
 
 import { useGLTF } from "@react-three/drei"
 
-import roomModel from "./room-transformed.glb"
+import roomModel from "./room-transformed.glb?url"
 
 export function Model(props) {
   const { nodes, materials } = useGLTF(roomModel)

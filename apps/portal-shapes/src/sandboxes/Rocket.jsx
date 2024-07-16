@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 
-import rocketModel from './rocket-transformed.glb'
+import rocketModel from './rocket-transformed.glb?url'
 
 export default function App(props) {
   const ref = useRef()

@@ -5,7 +5,7 @@ import { useGLTF, Merged, RenderTexture, PerspectiveCamera, Text } from '@react-
 import { SpinningBox } from './SpinningBox'
 THREE.ColorManagement.legacyMode = false
 
-import computersModel from './computers_1-transformed.glb'
+import computersModel from './computers_1-transformed.glb?url'
 import inter from './Inter-Medium.woff'
 
 /*

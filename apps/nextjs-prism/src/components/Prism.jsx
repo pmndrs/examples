@@ -2,7 +2,7 @@ import { useLoader } from '@react-three/fiber'
 import { MeshTransmissionMaterial } from '@react-three/drei'
 import { GLTFLoader } from 'three-stdlib'
 
-import prismModel from '../gltf/prism.glb'
+import prismModel from '../gltf/prism.glb?url'
 
 export function Prism({ onRayOver, onRayOut, onRayMove, ...props }) {
   const { nodes } = useLoader(GLTFLoader, prismModel)

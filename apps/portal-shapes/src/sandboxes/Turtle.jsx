@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { useGLTF, useAnimations, Float, Instance, Instances } from '@react-three/drei'
 
-import turtleModel from './model_52a_-_kemps_ridley_sea_turtle_no_id-transformed.glb'
+import turtleModel from './model_52a_-_kemps_ridley_sea_turtle_no_id-transformed.glb?url'
 
 const spheres = [
   [1, 'orange', 0.05, [-4, -1, -1]],

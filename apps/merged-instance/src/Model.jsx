@@ -7,7 +7,7 @@ But here it re-uses re-occuring parts. GLTFJSX does this automatically now.
 import React, { useRef, useMemo } from 'react'
 import { useGLTF, Merged } from '@react-three/drei'
 
-import sceneModel from './scene-draco.glb'
+import sceneModel from './scene-draco.glb?url'
 
 export default function InstancedModel(props) {
   const { nodes } = useGLTF(sceneModel)

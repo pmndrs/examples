@@ -14,7 +14,7 @@ import {
   MeshTransmissionMaterial
 } from '@react-three/drei'
 
-import glassModel from './glass-transformed.glb'
+import glassModel from './glass-transformed.glb?url'
 
 const innerMaterial = new THREE.MeshStandardMaterial({
   transparent: true,

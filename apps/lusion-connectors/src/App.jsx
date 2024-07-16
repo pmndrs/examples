@@ -9,7 +9,7 @@ import { CuboidCollider, BallCollider, Physics, RigidBody } from '@react-three/r
 import { EffectComposer, N8AO } from '@react-three/postprocessing'
 import { easing } from 'maath'
 
-import cModel from './c-transformed.glb'
+import cModel from './c-transformed.glb?url'
 
 const accents = ['#4060ff', '#20ffa0', '#ff4060', '#ffcc00']
 const shuffle = (accent = 0) => [

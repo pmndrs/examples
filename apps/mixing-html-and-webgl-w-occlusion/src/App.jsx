@@ -4,7 +4,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { Html, Environment, useGLTF, ContactShadows, OrbitControls } from '@react-three/drei'
 import HeroPage from './HeroPage'
 
-import macModel from './mac-draco.glb'
+import macModel from './mac-draco.glb?url'
 
 function Model(props) {
   const group = useRef()

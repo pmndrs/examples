@@ -4,7 +4,7 @@ import { useGLTF, MeshTransmissionMaterial, ContactShadows, Environment } from '
 import { easing } from 'maath'
 import { useStore } from './store'
 
-import nikeModel from './nike_air_zoom_pegasus_36-transformed.glb'
+import nikeModel from './nike_air_zoom_pegasus_36-transformed.glb?url'
 
 export default function App() {
   return (

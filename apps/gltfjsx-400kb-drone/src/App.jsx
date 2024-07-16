@@ -4,7 +4,7 @@ import { useGLTF, Stage, Grid, OrbitControls, Environment } from '@react-three/d
 import { EffectComposer, Bloom, ToneMapping } from '@react-three/postprocessing'
 import { easing } from 'maath'
 
-import kamdoModel from './s2wt_kamdo_industrial_divinities-transformed.glb'
+import kamdoModel from './s2wt_kamdo_industrial_divinities-transformed.glb?url'
 
 export default function App() {
   return (

@@ -2,8 +2,8 @@ import { Suspense, useMemo, useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useGLTF, useScroll, ScrollControls, Environment, Merged, Text, MeshReflectorMaterial } from '@react-three/drei'
 
-import cabinModel from './cabin-transformed.glb'
-import seatModel from './seat-transformed.glb'
+import cabinModel from './cabin-transformed.glb?url'
+import seatModel from './seat-transformed.glb?url'
 
 function Train() {
   const ref = useRef()

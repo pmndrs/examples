@@ -2,8 +2,8 @@ import * as THREE from 'three'
 import { useRef, useEffect, useMemo } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
 
-import helloFragmentsModel from './hello-fragments.glb'
-import helloTextModel from './hello-text.glb'
+import helloFragmentsModel from './hello-fragments.glb?url'
+import helloTextModel from './hello-text.glb?url'
 
 const normalMaterial = new THREE.MeshNormalMaterial()
 

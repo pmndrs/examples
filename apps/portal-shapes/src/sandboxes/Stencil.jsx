@@ -1,7 +1,7 @@
 import { Suspense } from 'react'
 import { Mask, useMask, useGLTF, PivotControls, RoundedBox, Float } from '@react-three/drei'
 
-import reactModel from './react-transformed.glb'
+import reactModel from './react-transformed.glb?url'
 
 export default function App(props) {
   return (

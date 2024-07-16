@@ -6,7 +6,7 @@ import { EffectComposer, TiltShift2, HueSaturation, DotScreen } from '@react-thr
 import { useControls } from 'leva'
 import * as CURVES from './curves'
 
-import sonyModel from './sony_cinema_camera-transformed.glb'
+import sonyModel from './sony_cinema_camera-transformed.glb?url'
 import stickerImg from './Sticjer_1024x1024@2x.png'
 import stickerInvertImg from './Sticjer_1024x1024@2x_invert.png'
 

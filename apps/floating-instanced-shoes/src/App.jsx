@@ -4,7 +4,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { Bvh, Instances, Instance, OrbitControls, Environment, useGLTF } from '@react-three/drei'
 import { useControls } from 'leva'
 
-import shoeModel from './shoe.glb'
+import shoeModel from './shoe.glb?url'
 import { data } from './store'
 
 export default function App() {

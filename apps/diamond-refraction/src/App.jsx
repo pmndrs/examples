@@ -15,8 +15,8 @@ import { EffectComposer, Bloom } from '@react-three/postprocessing'
 import { useControls } from 'leva'
 import { RGBELoader } from 'three-stdlib'
 
-import dflatModel from './dflat.glb'
-import aeroHdr from './aerodynamics_workshop_1k.hdr'
+import dflatModel from './dflat.glb?url'
+import aeroHdr from './aerodynamics_workshop_1k.hdr?url'
 
 function Diamond(props) {
   const ref = useRef()

@@ -5,7 +5,7 @@ import { useCompoundBody, useSphere, useCylinder, useDistanceConstraint, usePoin
 import { useDragConstraint } from '../helpers/Drag'
 import { Block } from '../helpers/Block'
 
-import cupModel from './cup.glb'
+import cupModel from './cup.glb?url'
 
 export function Chair(props) {
   const [ref] = useCompoundBody(() => ({

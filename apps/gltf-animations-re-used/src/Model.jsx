@@ -12,7 +12,7 @@ import { a, useSpring } from "@react-spring/three"
 import { SkeletonUtils } from "three-stdlib"
 
 import stacyImg from "./stacy.jpg"
-import stacyModel from "./stacy.glb"
+import stacyModel from "./stacy.glb?url"
 
 export default function Model({ pose, ...props }) {
   // Fetch model and a separate texture

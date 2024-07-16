@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { useGLTF, Sparkles } from '@react-three/drei'
 
-import oneTwoThreeModel from './123-transformed.glb'
+import oneTwoThreeModel from './123-transformed.glb?url'
 
 const glowRed = new THREE.MeshBasicMaterial({ color: new THREE.Color(7, 0, 0.5), toneMapped: false })
 const glowBlue = new THREE.MeshBasicMaterial({ color: new THREE.Color(0, 0.5, 20), toneMapped: false })

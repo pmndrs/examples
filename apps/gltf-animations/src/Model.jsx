@@ -11,7 +11,7 @@ import { useGLTF, useTexture, useAnimations } from "@react-three/drei"
 import { easing } from "maath"
 
 import stacyImg from "./stacy.jpg"
-import stacyModel from "./stacy.glb"
+import stacyModel from "./stacy.glb?url"
 
 export default function Model(props) {
   const halo = useRef()

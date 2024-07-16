@@ -2,8 +2,8 @@ import React, { Suspense, useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
 
-import bustLoModel from './bust-lo-draco.glb'
-import bustHiModel from './bust-hi.glb'
+import bustLoModel from './bust-lo-draco.glb?url'
+import bustHiModel from './bust-hi.glb?url'
 
 // This sandbox shows how to prgressively load an asset through nested suspense blocks
 // 1. A generic fallback

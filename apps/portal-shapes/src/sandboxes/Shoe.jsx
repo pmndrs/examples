@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { useGLTF, PivotControls, Environment } from '@react-three/drei'
 
-import shoeModel from './shoe-draco.glb'
+import shoeModel from './shoe-draco.glb?url'
 
 export default function App(props) {
   return (

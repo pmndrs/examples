@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 import { applyProps } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
 
-import lamboModel from './lambo.glb'
+import lamboModel from './lambo.glb?url'
 
 /*
 Author: Steven Grey (https://sketchfab.com/Steven007)

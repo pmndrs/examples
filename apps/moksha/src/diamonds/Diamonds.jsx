@@ -8,7 +8,7 @@ import RefractionMaterial from "./RefractionMaterial"
 import { useBlock } from "../blocks"
 import state from "../store"
 
-import diamondModel from "./diamond.glb"
+import diamondModel from "./diamond.glb?url"
 
 const dummy = new Object3D()
 export default function Diamonds() {

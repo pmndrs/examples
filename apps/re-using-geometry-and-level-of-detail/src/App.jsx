@@ -2,10 +2,10 @@ import { Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { useGLTF, Detailed, OrbitControls, Environment, BakeShadows } from '@react-three/drei'
 
-import bust1Model from './bust-1-d.glb'
-import bust2Model from './bust-2-d.glb'
-import bust3Model from './bust-3-d.glb'
-import bust4Model from './bust-4-d.glb'
+import bust1Model from './bust-1-d.glb?url'
+import bust2Model from './bust-2-d.glb?url'
+import bust3Model from './bust-3-d.glb?url'
+import bust4Model from './bust-4-d.glb?url'
 
 // Create 800 objects with random position and rotation data
 const positions = [...Array(800)].map(() => ({

@@ -4,7 +4,7 @@ import { applyProps, Canvas } from '@react-three/fiber'
 import { useGLTF, useBoxProjectedEnv, CubeCamera, Environment, OrbitControls, BakeShadows } from '@react-three/drei'
 import { useControls } from 'leva'
 
-import courtModel from './court.glb'
+import courtModel from './court.glb?url'
 
 export default function App() {
   return (

@@ -4,8 +4,8 @@ import { useGLTF, Edges } from '@react-three/drei'
 import { Physics, useCompoundBody, useCylinder } from '@react-three/cannon'
 import { LayerMaterial, Depth, Fresnel } from 'lamina'
 
-import pmndrsModel from './pmndrs.glb'
-import cursorModel from './cursor.glb'
+import pmndrsModel from './pmndrs.glb?url'
+import cursorModel from './cursor.glb?url'
 
 const vec = new THREE.Vector3()
 const white = new THREE.MeshBasicMaterial({ color: '#fefefe', toneMapped: false })

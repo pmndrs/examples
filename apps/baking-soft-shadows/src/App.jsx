@@ -4,7 +4,7 @@ import { Canvas } from '@react-three/fiber'
 import { Center, AccumulativeShadows, RandomizedLight, OrbitControls, Environment, useGLTF } from '@react-three/drei'
 import { FlakesTexture } from 'three-stdlib'
 
-import suziModel from './suzi-model.gltf'
+import suziModel from './suzi-model.gltf?url'
 
 export default function App() {
   return (

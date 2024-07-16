@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { Bounds, useBounds, OrbitControls, ContactShadows, useGLTF } from '@react-three/drei'
 
-import model from './compressed.glb'
+import model from './compressed.glb?url'
 
 export default function App() {
   return (

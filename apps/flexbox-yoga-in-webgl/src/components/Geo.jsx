@@ -5,7 +5,7 @@ import { useGLTF, MeshDistortMaterial, Shadow } from '@react-three/drei'
 import Text from './Text'
 import state from '../state'
 
-import geoModel from './geo.min.glb'
+import geoModel from './geo.min.glb?url'
 
 export default function Model(props) {
   const group = useRef()

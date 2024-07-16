@@ -5,8 +5,8 @@ import { EffectComposer, DepthOfField, N8AO, ToneMapping } from '@react-three/po
 import { Geometry, Base, Addition } from '@react-three/csg'
 import { Physics, RigidBody, CuboidCollider, InstancedRigidBodies } from '@react-three/rapier'
 
-import twentyModel from './blender-threejs-journey-20k-transformed.glb'
-import hatModel from './blender-threejs-journey-20k-hat-transformed.glb'
+import twentyModel from './blender-threejs-journey-20k-transformed.glb?url'
+import hatModel from './blender-threejs-journey-20k-hat-transformed.glb?url'
 
 export const App = () => (
   <Canvas flat shadows gl={{ antialias: false }} camera={{ position: [-30, 35, -15], near: 30, far: 55, fov: 12 }}>

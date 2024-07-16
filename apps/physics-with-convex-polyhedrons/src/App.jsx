@@ -5,7 +5,7 @@ import { Physics, usePlane, useConvexPolyhedron } from "@react-three/cannon";
 import { useGLTF } from "@react-three/drei";
 import { Geometry } from "three-stdlib";
 
-import diamondModel from "./diamond.glb";
+import diamondModel from "./diamond.glb?url";
 
 /**
  * Returns legacy geometry vertices, faces for ConvP

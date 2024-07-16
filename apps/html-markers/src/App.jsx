@@ -4,7 +4,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { useGLTF, Html, OrbitControls, Environment, ContactShadows } from '@react-three/drei'
 import { FaMapMarkerAlt } from 'react-icons/fa'
 
-import earthModel from './earth.gltf'
+import earthModel from './earth.gltf?url'
 
 function Model(props) {
   /*

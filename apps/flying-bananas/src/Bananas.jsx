@@ -7,7 +7,7 @@ import { useGLTF, Detailed, Environment } from '@react-three/drei'
 // https://github.com/vanruesc/postprocessing
 import { EffectComposer, DepthOfField, ToneMapping } from '@react-three/postprocessing'
 
-import bananaModel from './banana-v1-transformed.glb'
+import bananaModel from './banana-v1-transformed.glb?url'
 
 function Banana({ index, z, speed }) {
   const ref = useRef()

@@ -4,7 +4,7 @@ import { Canvas, applyProps, useFrame } from '@react-three/fiber'
 import { PerformanceMonitor, AccumulativeShadows, RandomizedLight, Environment, Lightformer, Float, useGLTF } from '@react-three/drei'
 import { LayerMaterial, Color, Depth } from 'lamina'
 
-import porscheModel from './911-transformed.glb'
+import porscheModel from './911-transformed.glb?url'
 
 export function App() {
   const [degraded, degrade] = useState(false)

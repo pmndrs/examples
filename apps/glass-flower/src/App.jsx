@@ -6,7 +6,7 @@ import { Environment, Lightformer, OrbitControls, MeshTransmissionMaterial, useG
 import { EffectComposer, Bloom, LUT, BrightnessContrast, HueSaturation, ToneMapping } from '@react-three/postprocessing'
 import { LUTCubeLoader, ToneMappingMode } from 'postprocessing'
 
-import flowerModel from './flower-transformed.glb'
+import flowerModel from './flower-transformed.glb?url'
 import lutTex from './F-6800-STD.cube?url'
 
 function Model(props) {

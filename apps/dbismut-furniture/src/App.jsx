@@ -1,9 +1,9 @@
 import React, { useState, useMemo, useRef } from 'react'
 import { Scene } from './Scene'
 
-import stoolModel from './stool.glb'
-import tableModel from './table.glb'
-import benchModel from './bench.glb'
+import stoolModel from './stool.glb?url'
+import tableModel from './table.glb?url'
+import benchModel from './bench.glb?url'
 
 const objects = ['Stool', 'Table', 'Bench']
 const models = [stoolModel, tableModel, benchModel]

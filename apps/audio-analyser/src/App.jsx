@@ -4,8 +4,8 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { useGLTF, useAnimations, Reflector, useTexture } from '@react-three/drei'
 import useStore from './store'
 
-import bustModel from './bust.glb'
-import explosionModel from './explosion.glb'
+import bustModel from './bust.glb?url'
+import explosionModel from './explosion.glb?url'
 
 import groundTex1 from './SurfaceImperfections003_1K_var1.jpg'
 import groundTex2 from './SurfaceImperfections003_1K_Normal.jpg'

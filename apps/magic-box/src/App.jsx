@@ -3,7 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { useGLTF, Edges, MeshPortalMaterial, CameraControls, Environment, PivotControls } from '@react-three/drei'
 import { useControls } from 'leva'
 
-import aoboxModel from './aobox-transformed.glb'
+import aoboxModel from './aobox-transformed.glb?url'
 
 export const App = () => (
   <Canvas shadows camera={{ position: [-3, 0.5, 3] }}>

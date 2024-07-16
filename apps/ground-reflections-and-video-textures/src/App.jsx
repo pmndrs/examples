@@ -3,7 +3,7 @@ import React, { Suspense, useEffect, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Reflector, Text, useTexture, useGLTF } from '@react-three/drei'
 
-import carlaModel from './carla-draco.glb'
+import carlaModel from './carla-draco.glb?url'
 import inter from './Inter-Bold.woff?url'
 import dreiVideo from './drei.mp4'
 import surfaceTex1 from './SurfaceImperfections003_1K_var1.jpg'

@@ -6,7 +6,7 @@ import * as THREE from 'three'
 import React, { useRef } from 'react'
 import { useGLTF, Reflector } from '@react-three/drei'
 
-import pinkdModel from './pink-d.glb'
+import pinkdModel from './pink-d.glb?url'
 
 const material = new THREE.MeshPhysicalMaterial({
   color: new THREE.Color('#bb86a1').convertSRGBToLinear(),

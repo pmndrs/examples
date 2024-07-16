@@ -6,7 +6,7 @@ import { EffectComposer, Bloom } from '@react-three/postprocessing'
 import { RGBELoader } from 'three-stdlib'
 import { HexColorPicker } from 'react-colorful'
 
-import ringModel from './ring-transformed.glb'
+import ringModel from './ring-transformed.glb?url'
 
 function Ring({ map, ...props }) {
   const [color, setColor] = useState('white')

@@ -7,7 +7,7 @@ import React, { useEffect, useRef, useState } from "react"
 import { useGLTF, useAnimations, PerspectiveCamera } from "@react-three/drei"
 import { useFrame } from "@react-three/fiber"
 
-import model from "./model.glb"
+import model from "./model.glb?url"
 
 const color = new THREE.Color()
 
@@ -69,4 +69,4 @@ export default function Model({ scroll, ...props }) {
   )
 }
 
-useGLTF.preload("/model.glb")
+useGLTF.preload(model)

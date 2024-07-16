@@ -6,7 +6,7 @@ import { useSpring } from '@react-spring/core'
 import { a as three } from '@react-spring/three'
 import { a as web } from '@react-spring/web'
 
-import macModel from './mac-draco.glb'
+import macModel from './mac-draco.glb?url'
 
 function Model({ open, hinge, ...props }) {
   const group = useRef()

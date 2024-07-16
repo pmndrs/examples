@@ -3,7 +3,7 @@ import { Canvas, useThree } from '@react-three/fiber'
 import { OrbitControls, TransformControls, ContactShadows, useGLTF, useCursor } from '@react-three/drei'
 import { proxy, useSnapshot } from 'valtio'
 
-import model from './compressed.glb'
+import model from './compressed.glb?url'
 
 // Reactive state model, using Valtio ...
 const modes = ['translate', 'rotate', 'scale']

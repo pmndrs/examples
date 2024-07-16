@@ -4,7 +4,7 @@ import { useGLTF, MeshPortalMaterial, CameraControls, Text, Sky } from '@react-t
 import { geometry } from 'maath'
 import { suspend } from 'suspend-react'
 
-import mccreeModel from './low_poly_mccree-transformed.glb'
+import mccreeModel from './low_poly_mccree-transformed.glb?url'
 
 extend(geometry)
 const GOLDENRATIO = 1.61803398875

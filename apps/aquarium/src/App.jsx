@@ -3,8 +3,8 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { useMask, useGLTF, useAnimations, Float, Instance, Instances, CameraControls } from '@react-three/drei'
 import { Lightformer, Environment, RandomizedLight, AccumulativeShadows, MeshTransmissionMaterial } from '@react-three/drei'
 
-import shapesModel from './shapes-transformed.glb'
-import turtleModel from './model_52a_-_kemps_ridley_sea_turtle_no_id-transformed.glb'
+import shapesModel from './shapes-transformed.glb?url'
+import turtleModel from './model_52a_-_kemps_ridley_sea_turtle_no_id-transformed.glb?url'
 
 console.log('cpoucou')
 export default function App({ spheres }) {

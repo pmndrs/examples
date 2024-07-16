@@ -6,7 +6,7 @@ import { EffectComposer, Bloom, DepthOfField } from "@react-three/postprocessing
 import "./styles.css"
 
 import img1 from "./233.jpg"
-import dflatModel from "./dflat.glb"
+import dflatModel from "./dflat.glb?url"
 
 function Background() {
   const texture = useTexture(img1)
