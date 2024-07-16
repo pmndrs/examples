@@ -6,6 +6,8 @@ import { Fisheye, Environment, ContactShadows, OrbitControls, PerspectiveCamera 
 import Car from './Car'
 import { Perf } from 'r3f-perf'
 
+import depotHdr from './old_depot_2k.hdr?url'
+
 export default function App() {
   const { mapping, exposure } = useControls({
     exposure: { value: 0.85, min: 0, max: 4 },
@@ -14,7 +16,7 @@ export default function App() {
   return (
     <Canvas>
       <Fisheye resolution={768} zoom={0.25}>
-        <Environment files="/old_depot_2k.hdr" ground={{ height: 35, radius: 100, scale: 200 }} />
+        <Environment files={depotHdr} ground={{ height: 35, radius: 100, scale: 200 }} />
         <Car position={[-8, 0, -2]} scale={20} rotation-y={-Math.PI / 4} />
         <ContactShadows renderOrder={2} frames={1} resolution={1024} scale={120} blur={2} opacity={0.6} far={100} />
         <OrbitControls enableZoom={false} enablePan={false} minPolarAngle={0} maxPolarAngle={Math.PI / 2.25} makeDefault />

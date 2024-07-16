@@ -2,8 +2,10 @@ import * as THREE from 'three'
 import React, { forwardRef, useLayoutEffect, useRef, useMemo } from 'react'
 import { useLoader } from '@react-three/fiber'
 
+import boldFont from './bold.blob?url'
+
 const Text = forwardRef(({ children, vAlign = 'center', hAlign = 'center', size = 1, color = '#000000', ...props }, ref) => {
-  const font = useLoader(THREE.FontLoader, '/bold.blob')
+  const font = useLoader(THREE.FontLoader, boldFont)
   const config = useMemo(() => ({ font, size: 40, height: 50 }), [font])
   const mesh = useRef()
   useLayoutEffect(() => {

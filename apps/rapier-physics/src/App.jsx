@@ -5,6 +5,8 @@ import { useGLTF, OrbitControls, Sky, Environment, Clouds, Cloud } from '@react-
 import { Physics, RigidBody } from '@react-three/rapier'
 import { useControls } from 'leva'
 
+import ballTripModel from './ball-trip.optimized.glb?url'
+
 export default function App() {
   const { debug } = useControls({ debug: false })
   return (
@@ -35,7 +37,7 @@ export default function App() {
 }
 
 function Track(props) {
-  const { nodes } = useGLTF('/ball-trip.optimized.glb')
+  const { nodes } = useGLTF(ballTripModel)
   return (
     <RigidBody colliders="trimesh" type="fixed">
       <mesh geometry={nodes.Cylinder.geometry} {...props} dispose={null}>

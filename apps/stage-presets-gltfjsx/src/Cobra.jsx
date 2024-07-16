@@ -5,8 +5,10 @@ Command: npx gltfjsx@6.2.5 cobra.glb --transform
 
 import { useGLTF } from '@react-three/drei'
 
+import cobraModel from './cobra-transformed.glb?url'
+
 export function Model({ color, ...props }) {
-  const { nodes, materials } = useGLTF('/cobra-transformed.glb')
+  const { nodes, materials } = useGLTF(cobraModel)
   return (
     <group scale={0.025} {...props} dispose={null}>
       <mesh castShadow receiveShadow geometry={nodes.Material2.geometry} material={materials.PaletteMaterial001} rotation={[-Math.PI / 2, 0, 0]} />
@@ -29,4 +31,4 @@ export function Model({ color, ...props }) {
   )
 }
 
-useGLTF.preload('/cobra-transformed.glb')
+useGLTF.preload(cobraModel)

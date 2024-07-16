@@ -4,6 +4,20 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Preload, Image as ImageImpl } from '@react-three/drei'
 import { ScrollControls, Scroll, useScroll } from './ScrollControls'
 
+import trip1 from './trip1.jpg'
+import trip2 from './trip2.jpg'
+import trip3 from './trip3.jpg'
+// import trip4 from './trip4.jpg'
+
+import img1 from './img1.jpg'
+import img2 from './img2.jpg'
+import img3 from './img3.jpg'
+import img4 from './img4.jpg'
+import img5 from './img5.jpg'
+import img6 from './img6.jpg'
+// import img7 from './img7.jpg'
+// import img8 from './img8.jpg'
+
 function Image(props) {
   const ref = useRef()
   const group = useRef()
@@ -35,12 +49,12 @@ function Pages() {
   const { width } = useThree((state) => state.viewport)
   return (
     <>
-      <Page position={[-width * 1, 0, 0]} urls={['/trip1.jpg', '/trip2.jpg', '/trip3.jpg']} />
-      <Page position={[width * 0, 0, 0]} urls={['/img1.jpg', '/img2.jpg', '/img3.jpg']} />
-      <Page position={[width * 1, 0, 0]} urls={['/img4.jpg', '/img5.jpg', '/img6.jpg']} />
-      <Page position={[width * 2, 0, 0]} urls={['/trip1.jpg', '/trip2.jpg', '/trip3.jpg']} />
-      <Page position={[width * 3, 0, 0]} urls={['/img1.jpg', '/img2.jpg', '/img3.jpg']} />
-      <Page position={[width * 4, 0, 0]} urls={['/img4.jpg', '/img5.jpg', '/img6.jpg']} />
+      <Page position={[-width * 1, 0, 0]} urls={[trip1, trip2, trip3]} />
+      <Page position={[width * 0, 0, 0]} urls={[img1, img2, img3]} />
+      <Page position={[width * 1, 0, 0]} urls={[img4, img5, img6]} />
+      <Page position={[width * 2, 0, 0]} urls={[trip1, trip2, trip3]} />
+      <Page position={[width * 3, 0, 0]} urls={[img1, img2, img3]} />
+      <Page position={[width * 4, 0, 0]} urls={[img4, img5, img6]} />
     </>
   )
 }

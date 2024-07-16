@@ -14,6 +14,8 @@ import {
   MeshTransmissionMaterial
 } from '@react-three/drei'
 
+import glassModel from './glass-transformed.glb?url'
+
 const innerMaterial = new THREE.MeshStandardMaterial({
   transparent: true,
   opacity: 1,
@@ -64,7 +66,7 @@ Authors:
     https://sketchfab.com/3d-models/ikea-pokal-glass-cups-21837e54a14346aa900e1ae719779b86
 */
 function Scene(props) {
-  const { nodes, materials } = useGLTF('/glass-transformed.glb')
+  const { nodes, materials } = useGLTF(glassModel)
   return (
     <group {...props} dispose={null}>
       <mesh castShadow rotation={[0, -0.5, 0]} geometry={nodes.cake.geometry} material={materials.FruitCakeSlice_u1_v1} />

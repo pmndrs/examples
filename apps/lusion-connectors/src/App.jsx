@@ -9,6 +9,8 @@ import { CuboidCollider, BallCollider, Physics, RigidBody } from '@react-three/r
 import { EffectComposer, N8AO } from '@react-three/postprocessing'
 import { easing } from 'maath'
 
+import cModel from './c-transformed.glb?url'
+
 const accents = ['#4060ff', '#20ffa0', '#ff4060', '#ffcc00']
 const shuffle = (accent = 0) => [
   { color: '#444', roughness: 0.1 },
@@ -102,7 +104,7 @@ function Pointer({ vec = new THREE.Vector3() }) {
 
 function Model({ children, color = 'white', roughness = 0, ...props }) {
   const ref = useRef()
-  const { nodes, materials } = useGLTF('/c-transformed.glb')
+  const { nodes, materials } = useGLTF(cModel)
   useFrame((state, delta) => {
     easing.dampC(ref.current.material.color, color, 0.2, delta)
   })

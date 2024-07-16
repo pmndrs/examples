@@ -5,6 +5,8 @@ import { useCompoundBody, useSphere, useCylinder, useDistanceConstraint, usePoin
 import { useDragConstraint } from '../helpers/Drag'
 import { Block } from '../helpers/Block'
 
+import cupModel from './cup.glb?url'
+
 export function Chair(props) {
   const [ref] = useCompoundBody(() => ({
     mass: 24,
@@ -34,7 +36,7 @@ export function Chair(props) {
 }
 
 export function Mug(props) {
-  const { nodes, materials } = useGLTF('/cup.glb')
+  const { nodes, materials } = useGLTF(cupModel)
   const [cup] = useCylinder(() => ({ mass: 1, args: [0.62, 0.62, 1.2, 16], linearDamping: 0.95, angularDamping: 0.95, ...props }))
   const bind = useDragConstraint(cup)
   return (

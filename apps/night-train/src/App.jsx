@@ -2,10 +2,13 @@ import { Suspense, useMemo, useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useGLTF, useScroll, ScrollControls, Environment, Merged, Text, MeshReflectorMaterial } from '@react-three/drei'
 
+import cabinModel from './cabin-transformed.glb?url'
+import seatModel from './seat-transformed.glb?url'
+
 function Train() {
   const ref = useRef()
   const scroll = useScroll()
-  const [cabin, seat] = useGLTF(['/cabin-transformed.glb', '/seat-transformed.glb'])
+  const [cabin, seat] = useGLTF([cabinModel, seatModel])
   const meshes = useMemo(() => ({ Cabin: cabin.nodes.cabin_1, Seat: seat.nodes.seat }), [cabin, seat])
   useFrame(() => (ref.current.position.z = scroll.offset * 120))
   // Merged creates THREE.InstancedMeshes out of the meshes you feed it

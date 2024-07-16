@@ -8,7 +8,10 @@ title: Thor and the Midgard Serpent
 
 import * as THREE from "three"
 import React, { useRef } from "react"
+import { type GLTF } from "three-stdlib"
 import { useGLTF } from "@react-three/drei"
+
+import thorModel from "./thor_and_the_midgard_serpent-transformed.glb?url"
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -35,8 +38,8 @@ type GLTFResult = GLTF & {
 }
 
 export default function Model(props: JSX.IntrinsicElements["group"]) {
-  const group = useRef()
-  const { nodes, materials } = useGLTF("/thor_and_the_midgard_serpent-transformed.glb") as GLTFResult
+  const group = useRef(null)
+  const { nodes, materials } = useGLTF(thorModel) as GLTFResult
   return (
     <group ref={group} {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]} scale={[0.01, 0.01, 0.01]}>

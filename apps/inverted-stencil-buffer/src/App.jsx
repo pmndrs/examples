@@ -3,6 +3,8 @@ import { Canvas } from '@react-three/fiber'
 import { Mask, useMask, useGLTF, Bounds, PivotControls, Environment, OrbitControls, RoundedBox, Float } from '@react-three/drei'
 import { useControls } from 'leva'
 
+import reactModel from './react-transformed.glb?url'
+
 export function App() {
   const { invert } = useControls({ invert: false })
   return (
@@ -53,7 +55,7 @@ const Frame = (props) => (
 
 function Atom({ invert, ...props }) {
   const stencil = useMask(1, invert)
-  const { nodes } = useGLTF('/react-transformed.glb')
+  const { nodes } = useGLTF(reactModel)
   return (
     <mesh castShadow receiveShadow geometry={nodes.atom.geometry} {...props} dispose={null}>
       <meshPhongMaterial color="#33BBFF" {...stencil} />

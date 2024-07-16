@@ -5,10 +5,12 @@ import { useGLTF, MeshDistortMaterial, Shadow } from '@react-three/drei'
 import Text from './Text'
 import state from '../state'
 
+import geoModel from './geo.min.glb?url'
+
 export default function Model(props) {
   const group = useRef()
   const shadow = useRef()
-  const { nodes } = useGLTF('/geo.min.glb', true)
+  const { nodes } = useGLTF(geoModel, true)
   useFrame(({ clock }) => {
     const t = (1 + Math.sin(clock.getElapsedTime() * 1.5)) / 2
     group.current.position.y = t / 3

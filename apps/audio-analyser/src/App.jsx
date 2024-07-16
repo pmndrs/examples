@@ -4,6 +4,12 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { useGLTF, useAnimations, Reflector, useTexture } from '@react-three/drei'
 import useStore from './store'
 
+import bustModel from './bust.glb?url'
+import explosionModel from './explosion.glb?url'
+
+import groundTex1 from './SurfaceImperfections003_1K_var1.jpg'
+import groundTex2 from './SurfaceImperfections003_1K_Normal.jpg'
+
 const HPI = Math.PI / 2
 const vec = new THREE.Vector3()
 const obj = new THREE.Object3D()
@@ -37,7 +43,7 @@ export default function App(props) {
 function Bust() {
   const ref = useRef()
   const time = useRef(0)
-  const { scene, animations, materials } = useGLTF('/bust.glb')
+  const { scene, animations, materials } = useGLTF(bustModel)
   const { actions, mixer } = useAnimations(animations, ref)
   const { drums } = useStore((state) => state.audio)
   const track = useStore((state) => state.track)
@@ -58,7 +64,7 @@ function Explosion({ beat, ...props }) {
   const instance = useRef()
   const sphere = useRef()
   // The GLTF only contains a point-cloud and baked keyframes for the explosion
-  const { scene: originalScene, animations } = useGLTF('/explosion.glb')
+  const { scene: originalScene, animations } = useGLTF(explosionModel)
   const scene = useMemo(() => originalScene.clone(true), [originalScene])
   const { actions, mixer } = useAnimations(animations, sceneRef)
   const { drums, snare } = useStore((state) => state.audio)
@@ -135,7 +141,7 @@ function DancingDot() {
 }
 
 function Ground() {
-  const [floor, normal] = useTexture(['/SurfaceImperfections003_1K_var1.jpg', '/SurfaceImperfections003_1K_Normal.jpg'])
+  const [floor, normal] = useTexture([groundTex1, groundTex2])
   return (
     <Reflector position={[0, -0.225, 0]} resolution={512} args={[10, 10]} mirror={0.5} mixBlur={7} mixStrength={0.8} rotation={[-HPI, 0, HPI]} blur={[400, 50]}>
       {(Material, props) => <Material color="#858585" metalness={0.5} roughnessMap={floor} normalMap={normal} normalScale={[0.1, 0.1]} {...props} />}

@@ -2,7 +2,7 @@
   "name": "examples",
   "private": true,
   "scripts": {
-    "build": "turbo build",
+    "build": "turbo build2",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
@@ -17,6 +17,7 @@
   },
   "packageManager": "npm@10.2.4",
   "workspaces": [
-    "apps/*"
+    "apps/*",
+    "packages/tools"
   ]
 }

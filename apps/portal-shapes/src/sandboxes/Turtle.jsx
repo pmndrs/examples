@@ -2,6 +2,8 @@ import { useEffect } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { useGLTF, useAnimations, Float, Instance, Instances } from '@react-three/drei'
 
+import turtleModel from './model_52a_-_kemps_ridley_sea_turtle_no_id-transformed.glb?url'
+
 const spheres = [
   [1, 'orange', 0.05, [-4, -1, -1]],
   [0.75, 'hotpink', 0.1, [-4, 2, -2]],
@@ -50,7 +52,7 @@ Source: https://sketchfab.com/3d-models/model-52a-kemps-ridley-sea-turtle-no-id-
 Title: Model 52A - Kemps Ridley Sea Turtle (no ID)
 */
 function Turtle(props) {
-  const { scene, animations } = useGLTF('/model_52a_-_kemps_ridley_sea_turtle_no_id-transformed.glb')
+  const { scene, animations } = useGLTF(turtleModel)
   const { actions, mixer } = useAnimations(animations, scene)
   useEffect(() => {
     mixer.timeScale = 0.5

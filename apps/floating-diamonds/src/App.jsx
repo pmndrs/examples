@@ -5,8 +5,11 @@ import { useGLTF, useTexture, MeshRefractionMaterial, CubeCamera } from "@react-
 import { EffectComposer, Bloom, DepthOfField } from "@react-three/postprocessing"
 import "./styles.css"
 
+import img1 from "./233.jpg"
+import dflatModel from "./dflat.glb?url"
+
 function Background() {
-  const texture = useTexture("/233.jpg")
+  const texture = useTexture(img1)
   texture.wrapS = THREE.RepeatWrapping
   texture.wrapT = THREE.RepeatWrapping
   texture.repeat.set(2, 2)
@@ -21,7 +24,7 @@ function Background() {
 function Diamonds({ count = 40 }) {
   const { viewport, clock } = useThree()
   const model = useRef()
-  const { nodes } = useGLTF("/dflat.glb")
+  const { nodes } = useGLTF(dflatModel)
   // Create random position data
   const dummy = useMemo(() => new THREE.Object3D(), [])
   const diamonds = useMemo(

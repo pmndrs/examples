@@ -4,13 +4,15 @@ import { useFrame } from '@react-three/fiber'
 import { MeshWobbleMaterial, useGLTF } from '@react-three/drei'
 import { useSpring, a } from '@react-spring/three'
 
+import levelReactModel from './level-react-draco.glb?url'
+
 export function Level() {
-  const { nodes } = useGLTF('/level-react-draco.glb')
+  const { nodes } = useGLTF(levelReactModel)
   return <mesh geometry={nodes.Level.geometry} material={nodes.Level.material} position={[-0.38, 0.69, 0.62]} rotation={[Math.PI / 2, -Math.PI / 9, 0]} />
 }
 
 export function Sudo() {
-  const { nodes } = useGLTF('/level-react-draco.glb')
+  const { nodes } = useGLTF(levelReactModel)
   const [spring, api] = useSpring(() => ({ rotation: [Math.PI / 2, 0, 0.29], config: { friction: 40 } }), [])
   useEffect(() => {
     let timeout
@@ -30,7 +32,7 @@ export function Sudo() {
 }
 
 export function Camera() {
-  const { nodes, materials } = useGLTF('/level-react-draco.glb')
+  const { nodes, materials } = useGLTF(levelReactModel)
   const [spring, api] = useSpring(() => ({ 'rotation-z': 0, config: { friction: 40 } }), [])
   useEffect(() => {
     let timeout
@@ -50,7 +52,7 @@ export function Camera() {
 }
 
 export function Cactus() {
-  const { nodes, materials } = useGLTF('/level-react-draco.glb')
+  const { nodes, materials } = useGLTF(levelReactModel)
   return (
     <mesh geometry={nodes.Cactus.geometry} position={[-0.42, 0.51, -0.62]} rotation={[Math.PI / 2, 0, 0]}>
       <MeshWobbleMaterial factor={0.4} map={materials.Cactus.map} />

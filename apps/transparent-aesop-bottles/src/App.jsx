@@ -4,6 +4,8 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { Text, Environment, Loader } from '@react-three/drei'
 import Bottles from './Bottles'
 
+import kiMediumFont from './Ki-Medium.ttf?url'
+
 function Sphere(props) {
   return (
     <mesh castShadow {...props} renderOrder={-2000000}>
@@ -90,7 +92,7 @@ export default function App() {
           <Text
             position={[0, -2.5, -50]}
             letterSpacing={-0.05}
-            font="/Ki-Medium.ttf"
+            font={kiMediumFont}
             fontSize={30}
             color="white"
             material-toneMapped={false}

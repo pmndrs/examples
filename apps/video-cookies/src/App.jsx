@@ -2,6 +2,8 @@ import { Canvas } from '@react-three/fiber'
 import { AccumulativeShadows, RandomizedLight, OrbitControls, Environment, useGLTF, useVideoTexture } from '@react-three/drei'
 import { EffectComposer, Bloom, HueSaturation, BrightnessContrast, TiltShift2, WaterEffect, ToneMapping } from '@react-three/postprocessing'
 
+import causticsVid from './caustics.mp4?url'
+
 export default function App() {
   return (
     <Canvas gl={{ antialias: false }} flat shadows camera={{ position: [0, 0, 8], fov: 35 }}>
@@ -46,7 +48,7 @@ function Postpro() {
 }
 
 function Cookie(props) {
-  const texture = useVideoTexture('/caustics.mp4')
+  const texture = useVideoTexture(causticsVid)
   return <spotLight decay={0} map={texture} castShadow {...props} />
 }
 

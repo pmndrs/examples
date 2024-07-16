@@ -1,6 +1,8 @@
 import { Canvas } from '@react-three/fiber'
 import { useGLTF, PresentationControls, Environment, ContactShadows, Html } from '@react-three/drei'
 
+import watchModel from './watch-v1.glb?url'
+
 export default function App() {
   return (
     <Canvas shadows camera={{ position: [0, 0, 10], fov: 25 }}>
@@ -22,7 +24,7 @@ export default function App() {
 }
 
 function Watch(props) {
-  const { nodes, materials } = useGLTF('/watch-v1.glb')
+  const { nodes, materials } = useGLTF(watchModel)
   return (
     <group {...props} dispose={null}>
       <mesh geometry={nodes.Object005_glass_0.geometry} material={materials.glass}>

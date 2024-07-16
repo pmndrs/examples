@@ -3,8 +3,10 @@ import { Canvas } from '@react-three/fiber'
 import { useGLTF, PivotControls, MeshPortalMaterial, Sky, Environment, OrbitControls, Float, ContactShadows } from '@react-three/drei'
 import { useControls } from 'leva'
 
+import aoShapesModel from './ao_shapes.glb?url'
+
 function Model({ name, floatIntensity = 10, ...props }) {
-  const { nodes } = useGLTF('/ao_shapes.glb')
+  const { nodes } = useGLTF(aoShapesModel)
   const [hovered, hover] = useState(false)
   return (
     <Float {...props} rotationIntensity={2} floatIntensity={floatIntensity} speed={1}>

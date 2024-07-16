@@ -3,9 +3,11 @@ import { Canvas, useFrame } from "@react-three/fiber"
 import { useGLTF, useAnimations, useScroll, ScrollControls, SoftShadows } from "@react-three/drei"
 import { EffectComposer, TiltShift2 } from "@react-three/postprocessing"
 
+import jumpModel from "./jump-transformed.glb?url"
+
 function Model(props) {
   const scroll = useScroll()
-  const { nodes, materials, animations } = useGLTF("/jump-transformed.glb")
+  const { nodes, materials, animations } = useGLTF(jumpModel)
   const { ref, actions } = useAnimations(animations)
   useEffect(() => void (actions.jump.reset().play().paused = true), [])
   useFrame(() => (actions.jump.time = actions.jump.getClip().duration * scroll.offset))
@@ -27,7 +29,7 @@ export const App = () => (
       <Model position={[0, -1, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </ScrollControls>
     <mesh rotation={[-0.5 * Math.PI, 0, 0]} position={[0, -1.01, 0]} receiveShadow>
-      <planeBufferGeometry args={[10, 10, 1, 1]} />
+      <planeGeometry args={[10, 10, 1, 1]} />
       <shadowMaterial transparent opacity={0.75} />
     </mesh>
     <SoftShadows size={40} samples={16} />

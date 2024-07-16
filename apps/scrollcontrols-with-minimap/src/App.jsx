@@ -3,6 +3,14 @@ import { Suspense, useRef, useState } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Preload, ScrollControls, Scroll, useScroll, Image as ImageImpl } from '@react-three/drei'
 
+import img1 from './img1.jpg'
+import img6 from './img6.jpg'
+import trip2 from './trip2.jpg'
+import img8 from './img8.jpg'
+import trip4 from './trip4.jpg'
+import img3 from './img3.jpg'
+import img7 from './img7.jpg'
+
 function Image({ c = new THREE.Color(), ...props }) {
   const ref = useRef()
   const [hovered, hover] = useState(false)
@@ -28,13 +36,13 @@ function Images() {
   })
   return (
     <group ref={group}>
-      <Image position={[-2, 0, 0]} scale={[4, height, 1]} url="/img1.jpg" />
-      <Image position={[2, 0, 1]} scale={3} url="/img6.jpg" />
-      <Image position={[-2.3, -height, 2]} scale={[1, 3, 1]} url="/trip2.jpg" />
-      <Image position={[-0.6, -height, 3]} scale={[1, 2, 1]} url="/img8.jpg" />
-      <Image position={[0.75, -height, 3.5]} scale={1.5} url="/trip4.jpg" />
-      <Image position={[0, -height * 1.5, 2.5]} scale={[1.5, 3, 1]} url="/img3.jpg" />
-      <Image position={[0, -height * 2 - height / 4, 0]} scale={[width, height / 2, 1]} url="/img7.jpg" />
+      <Image position={[-2, 0, 0]} scale={[4, height, 1]} url={img1} />
+      <Image position={[2, 0, 1]} scale={3} url={img6} />
+      <Image position={[-2.3, -height, 2]} scale={[1, 3, 1]} url={trip2} />
+      <Image position={[-0.6, -height, 3]} scale={[1, 2, 1]} url={img8} />
+      <Image position={[0.75, -height, 3.5]} scale={1.5} url={trip4} />
+      <Image position={[0, -height * 1.5, 2.5]} scale={[1.5, 3, 1]} url={img3} />
+      <Image position={[0, -height * 2 - height / 4, 0]} scale={[width, height / 2, 1]} url={img7} />
     </group>
   )
 }

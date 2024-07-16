@@ -6,6 +6,8 @@ import { useLayoutEffect, useRef } from 'react'
 import glsl from 'babel-plugin-glsl/macro'
 import { extend, useFrame, useLoader } from '@react-three/fiber'
 
+import fireImg from './fire.png'
+
 export default function App() {
   return (
     <Canvas camera={{ position: [0, -4, 5], fov: 50 }}>
@@ -103,7 +105,7 @@ extend({ FireMaterial })
 
 function Fire({ color, ...props }) {
   const ref = useRef()
-  const texture = useLoader(THREE.TextureLoader, '/fire.png')
+  const texture = useLoader(THREE.TextureLoader, fireImg)
   useFrame((state) => {
     const invModelMatrix = ref.current.material.uniforms.invModelMatrix.value
     ref.current.updateMatrixWorld()

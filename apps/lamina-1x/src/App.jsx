@@ -5,6 +5,8 @@ import { useGLTF, Bounds, Edges } from '@react-three/drei'
 import { LayerMaterial, Depth, Fresnel } from 'lamina'
 import { useControls } from 'leva'
 
+import cursorModel from './cursor.glb?url'
+
 export const App = () => (
   <Canvas orthographic dpr={[1, 2]} camera={{ position: [0, 0, 10], zoom: 200 }}>
     <group rotation={[Math.PI / 5, -Math.PI / 5, Math.PI / 2]}>
@@ -18,7 +20,7 @@ export const App = () => (
 
 function Cursor(props) {
   const ref = useRef()
-  const { nodes } = useGLTF('/cursor.glb')
+  const { nodes } = useGLTF(cursorModel)
   const { gradient } = useControls({ gradient: { value: 0.7, min: 0, max: 1 } })
 
   // Animate gradient

@@ -3,6 +3,19 @@ import { useRef, useState } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { useIntersect, Image, ScrollControls, Scroll } from '@react-three/drei'
 
+import img1 from './1.jpg'
+import img2 from './2.jpg'
+import img3 from './3.jpg'
+import img4 from './4.jpg'
+import img5 from './5.jpg'
+import img6 from './6.jpg'
+import img7 from './7.jpg'
+import img8 from './8.jpg'
+import img9 from './9.jpg'
+import img10 from './10.jpg'
+import img11 from './11.jpg'
+import img12 from './12.jpg'
+
 function Item({ url, scale, ...props }) {
   const visible = useRef(false)
   const [hovered, hover] = useState(false)
@@ -24,15 +37,15 @@ function Items() {
   const { width: w, height: h } = useThree((state) => state.viewport)
   return (
     <Scroll>
-      <Item url="/1.jpg" scale={[w / 3, w / 3, 1]} position={[-w / 6, 0, 0]} />
-      <Item url="/2.jpg" scale={[2, w / 3, 1]} position={[w / 30, -h, 0]} />
-      <Item url="/3.jpg" scale={[w / 3, w / 5, 1]} position={[-w / 4, -h * 1, 0]} />
-      <Item url="/4.jpg" scale={[w / 5, w / 5, 1]} position={[w / 4, -h * 1.2, 0]} />
-      <Item url="/5.jpg" scale={[w / 5, w / 5, 1]} position={[w / 10, -h * 1.75, 0]} />
-      <Item url="/6.jpg" scale={[w / 3, w / 3, 1]} position={[-w / 4, -h * 2, 0]} />
-      <Item url="/7.jpg" scale={[w / 3, w / 5, 1]} position={[-w / 4, -h * 2.6, 0]} />
-      <Item url="/8.jpg" scale={[w / 2, w / 2, 1]} position={[w / 4, -h * 3.1, 0]} />
-      <Item url="/12.jpg" scale={[w / 2.5, w / 2, 1]} position={[-w / 6, -h * 4.1, 0]} />
+      <Item url={img1} scale={[w / 3, w / 3, 1]} position={[-w / 6, 0, 0]} />
+      <Item url={img2} scale={[2, w / 3, 1]} position={[w / 30, -h, 0]} />
+      <Item url={img3} scale={[w / 3, w / 5, 1]} position={[-w / 4, -h * 1, 0]} />
+      <Item url={img4} scale={[w / 5, w / 5, 1]} position={[w / 4, -h * 1.2, 0]} />
+      <Item url={img5} scale={[w / 5, w / 5, 1]} position={[w / 10, -h * 1.75, 0]} />
+      <Item url={img6} scale={[w / 3, w / 3, 1]} position={[-w / 4, -h * 2, 0]} />
+      <Item url={img7} scale={[w / 3, w / 5, 1]} position={[-w / 4, -h * 2.6, 0]} />
+      <Item url={img8} scale={[w / 2, w / 2, 1]} position={[w / 4, -h * 3.1, 0]} />
+      <Item url={img12} scale={[w / 2.5, w / 2, 1]} position={[-w / 6, -h * 4.1, 0]} />
     </Scroll>
   )
 }

@@ -4,6 +4,8 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { RoundedBox, useCursor } from '@react-three/drei'
 import { Effects } from './Effects'
 
+import dreiVid from './drei_r.mp4?url'
+
 export const App = () => (
   <Canvas shadows gl={{ logarithmicDepthBuffer: true, antialias: false, stencil: false, depth: false }} camera={{ position: [250, 225, 250], fov: 15 }}>
     <color attach="background" args={['#151520']} />
@@ -48,7 +50,7 @@ const Plane = ({ color, ...props }) => (
 )
 
 function Video() {
-  const [video] = useState(() => Object.assign(document.createElement('video'), { src: '/drei_r.mp4', crossOrigin: 'Anonymous', loop: true, muted: true }))
+  const [video] = useState(() => Object.assign(document.createElement('video'), { src: dreiVid, crossOrigin: 'Anonymous', loop: true, muted: true }))
   useEffect(() => void video.play(), [video])
   return (
     <mesh position={[-2, 4, 0]} rotation={[0, Math.PI / 2, 0]} scale={[17, 10, 1]}>

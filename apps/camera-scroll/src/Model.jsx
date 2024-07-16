@@ -7,11 +7,13 @@ import React, { useEffect, useRef, useState } from "react"
 import { useGLTF, useAnimations, PerspectiveCamera } from "@react-three/drei"
 import { useFrame } from "@react-three/fiber"
 
+import model from "./model.glb?url"
+
 const color = new THREE.Color()
 
 export default function Model({ scroll, ...props }) {
   const group = useRef()
-  const { nodes, materials, animations } = useGLTF("/model.glb")
+  const { nodes, materials, animations } = useGLTF(model)
   const { actions } = useAnimations(animations, group)
   const [hovered, set] = useState()
   const extras = { receiveShadow: true, castShadow: true, "material-envMapIntensity": 0.2 }
@@ -67,4 +69,4 @@ export default function Model({ scroll, ...props }) {
   )
 }
 
-useGLTF.preload("/model.glb")
+useGLTF.preload(model)

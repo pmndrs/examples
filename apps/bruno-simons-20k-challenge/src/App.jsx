@@ -5,6 +5,9 @@ import { EffectComposer, DepthOfField, N8AO, ToneMapping } from '@react-three/po
 import { Geometry, Base, Addition } from '@react-three/csg'
 import { Physics, RigidBody, CuboidCollider, InstancedRigidBodies } from '@react-three/rapier'
 
+import twentyModel from './blender-threejs-journey-20k-transformed.glb?url'
+import hatModel from './blender-threejs-journey-20k-hat-transformed.glb?url'
+
 export const App = () => (
   <Canvas flat shadows gl={{ antialias: false }} camera={{ position: [-30, 35, -15], near: 30, far: 55, fov: 12 }}>
     {/* Lighting, environment and colors */}
@@ -42,7 +45,7 @@ export const App = () => (
 )
 
 function Scene(props) {
-  const { nodes, materials } = useGLTF('/blender-threejs-journey-20k-transformed.glb')
+  const { nodes, materials } = useGLTF(twentyModel)
   return (
     <group {...props} dispose={null}>
       <RigidBody type="fixed" colliders="trimesh">
@@ -55,7 +58,7 @@ function Scene(props) {
 }
 
 function Hats({ count = 80, rand = MathUtils.randFloatSpread }) {
-  const { nodes, materials } = useGLTF('/blender-threejs-journey-20k-hat-transformed.glb')
+  const { nodes, materials } = useGLTF(hatModel)
   const instances = Array.from({ length: count }, (_, i) => ({
     key: i,
     position: [rand(2) + 1, 10 + i / 2, rand(2) - 2],

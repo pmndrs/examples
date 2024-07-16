@@ -38,7 +38,7 @@ function Page({ text, tag, images, textScaleFactor, onReflow, left = false }) {
           <Box key={index} {...boxProps}>
             {(width, height) => (
               <mesh>
-                <planeBufferGeometry args={[width, height]} />
+                <planeGeometry args={[width, height]} />
                 <meshBasicMaterial map={texture} toneMapped={false} />
               </mesh>
             )}
@@ -79,7 +79,7 @@ function Layercard({ depth, boxWidth, boxHeight, text, textColor, color, map, te
   return (
     <>
       <mesh position={[boxWidth / 2, -boxHeight / 2, depth]}>
-        <planeBufferGeometry args={[boxWidth, boxHeight]} />
+        <planeGeometry args={[boxWidth, boxHeight]} />
         <meshBasicMaterial ref={ref} color={color} map={map} toneMapped={false} transparent opacity={1} />
       </mesh>
       <Text

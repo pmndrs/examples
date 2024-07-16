@@ -2,11 +2,14 @@ import * as THREE from 'three'
 import { useRef, useEffect, useMemo } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
 
+import helloFragmentsModel from './hello-fragments.glb?url'
+import helloTextModel from './hello-text.glb?url'
+
 const normalMaterial = new THREE.MeshNormalMaterial()
 
 export function Fragments({ visible, ...props }) {
   const group = useRef()
-  const { scene, animations, materials } = useGLTF('/hello-fragments.glb')
+  const { scene, animations, materials } = useGLTF(helloFragmentsModel)
   const { actions } = useAnimations(animations, group)
   // Exchange inner material
   useMemo(() => scene.traverse((o) => o.type === 'Mesh' && o.material === materials.inner && (o.material = normalMaterial)), [])
@@ -23,9 +26,9 @@ export function Fragments({ visible, ...props }) {
 }
 
 export function Model(props) {
-  const { scene } = useGLTF('/hello-text.glb')
+  const { scene } = useGLTF(helloTextModel)
   return <primitive object={scene} {...props} />
 }
 
-useGLTF.preload('/hello-text.glb')
-useGLTF.preload('/hello-fragments.glb')
+useGLTF.preload(helloFragmentsModel)
+useGLTF.preload(helloTextModel)

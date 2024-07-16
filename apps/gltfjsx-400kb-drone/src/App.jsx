@@ -4,6 +4,8 @@ import { useGLTF, Stage, Grid, OrbitControls, Environment } from '@react-three/d
 import { EffectComposer, Bloom, ToneMapping } from '@react-three/postprocessing'
 import { easing } from 'maath'
 
+import kamdoModel from './s2wt_kamdo_industrial_divinities-transformed.glb?url'
+
 export default function App() {
   return (
     <Canvas flat shadows camera={{ position: [-15, 0, 10], fov: 25 }}>
@@ -35,7 +37,7 @@ function Kamdo(props) {
   const head = useRef()
   const stripe = useRef()
   const light = useRef()
-  const { nodes, materials } = useGLTF('/s2wt_kamdo_industrial_divinities-transformed.glb')
+  const { nodes, materials } = useGLTF(kamdoModel)
   useFrame((state, delta) => {
     const t = (1 + Math.sin(state.clock.elapsedTime * 2)) / 2
     stripe.current.color.setRGB(2 + t * 20, 2, 20 + t * 50)
@@ -56,4 +58,4 @@ function Kamdo(props) {
   )
 }
 
-useGLTF.preload('/s2wt_kamdo_industrial_divinities-transformed.glb')
+useGLTF.preload(kamdoModel)

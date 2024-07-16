@@ -4,6 +4,8 @@ import { useGLTF, MeshTransmissionMaterial, ContactShadows, Environment } from '
 import { easing } from 'maath'
 import { useStore } from './store'
 
+import nikeModel from './nike_air_zoom_pegasus_36-transformed.glb?url'
+
 export default function App() {
   return (
     <Canvas eventSource={document.getElementById('root')} eventPrefix="client" camera={{ position: [0, 0, 4], fov: 40 }}>
@@ -55,7 +57,7 @@ Title: Nike Air Zoom Pegasus 36
 
 function Shoe(props) {
   const ref = useRef()
-  const { nodes, materials } = useGLTF('/nike_air_zoom_pegasus_36-transformed.glb')
+  const { nodes, materials } = useGLTF(nikeModel)
   useFrame((state) => {
     const t = state.clock.getElapsedTime()
     ref.current.rotation.set(Math.cos(t / 4) / 8, Math.sin(t / 3) / 4, 0.15 + Math.sin(t / 2) / 8)
@@ -68,4 +70,4 @@ function Shoe(props) {
   )
 }
 
-useGLTF.preload('/nike_air_zoom_pegasus_36-transformed.glb')
+useGLTF.preload(nikeModel)

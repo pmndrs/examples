@@ -1,6 +1,11 @@
 import { Canvas } from '@react-three/fiber'
 import { useGLTF, useTexture, Decal, Environment, OrbitControls, RandomizedLight, AccumulativeShadows } from '@react-three/drei'
 
+import sticker1 from './Sticjer_1024x1024@2x.png'
+import sticker2 from './Twemoji_1f600.svg.png'
+import sticker3 from './D64aIWkXoAAFI08.png'
+import sticker4 from './three.png'
+
 export const App = () => (
   <Canvas shadows camera={{ position: [2, 2, 10], fov: 20 }}>
     <ambientLight intensity={1} />
@@ -21,10 +26,10 @@ function Bun(props) {
   return (
     <mesh castShadow receiveShadow geometry={nodes.bunny.geometry} {...props} dispose={null}>
       <meshStandardMaterial color="black" />
-      <Sticker url="/Sticjer_1024x1024@2x.png" position={[-0.1, 1.3, 0.55]} rotation={Math.PI * 1.2} scale={0.45} />
-      <Sticker url="/Twemoji_1f600.svg.png" position={[0.4, 1, 0.55]} rotation={Math.PI * 0.9} scale={0.3} />
-      <Sticker url="/D64aIWkXoAAFI08.png" position={[0, 0.7, 0.85]} rotation={Math.PI * 1.2} scale={0.35} />
-      <Sticker url="/three.png" position={[-0.54, 1.1, 0.57]} rotation={-1.2} scale={0.2} />
+      <Sticker url={sticker1} position={[-0.1, 1.3, 0.55]} rotation={Math.PI * 1.2} scale={0.45} />
+      <Sticker url={sticker2} position={[0.4, 1, 0.55]} rotation={Math.PI * 0.9} scale={0.3} />
+      <Sticker url={sticker3} position={[0, 0.7, 0.85]} rotation={Math.PI * 1.2} scale={0.35} />
+      <Sticker url={sticker4} position={[-0.54, 1.1, 0.57]} rotation={-1.2} scale={0.2} />
     </mesh>
   )
 }

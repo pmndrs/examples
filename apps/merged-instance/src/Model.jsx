@@ -7,8 +7,10 @@ But here it re-uses re-occuring parts. GLTFJSX does this automatically now.
 import React, { useRef, useMemo } from 'react'
 import { useGLTF, Merged } from '@react-three/drei'
 
+import sceneModel from './scene-draco.glb?url'
+
 export default function InstancedModel(props) {
-  const { nodes } = useGLTF('/scene-draco.glb')
+  const { nodes } = useGLTF(sceneModel)
   const instances = useMemo(
     () => ({
       PPushrod: nodes['196-P-050&051_Pushrod001'],
@@ -154,7 +156,7 @@ export default function InstancedModel(props) {
 
 function Model({ instances, ...props }) {
   const group = useRef()
-  const { nodes } = useGLTF('/scene-draco.glb')
+  const { nodes } = useGLTF(sceneModel)
   return (
     <group ref={group} {...props} dispose={null}>
       <group rotation={[Math.PI / 2, 0, 0]}>
@@ -1131,4 +1133,4 @@ function Model({ instances, ...props }) {
   )
 }
 
-useGLTF.preload('/scene-transformed.glb')
+useGLTF.preload(sceneModel)

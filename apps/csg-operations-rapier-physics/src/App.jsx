@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { ContactShadows, OrbitControls, Environment, Float } from '@react-three/drei'
 import { Geometry, Base, Subtraction } from '@react-three/csg'
-import { Physics, Debug, RigidBody, CuboidCollider } from '@react-three/rapier'
+import { Physics, RigidBody, CuboidCollider } from '@react-three/rapier'
 import { LayerMaterial, Depth } from 'lamina'
 import { useControls } from 'leva'
 import { BoxBlendGeometry, HeartGeometry } from './geometries'
@@ -14,8 +14,7 @@ export function App() {
       <hemisphereLight intensity={0.4} groundColor="white" />
       <directionalLight position={[10, -15, -10]} intensity={0.5} />
       <spotLight position={[5, 10, -15]} intensity={1} angle={0.1} penumbra={1} castShadow shadow-mapSize={[1024, 1024]} shadow-bias={-0.000001} />
-      <Physics colliders={false}>
-        {debug && <Debug />}
+      <Physics colliders={false} debug={debug}>
         <RigidBody type="dynamic" colliders="hull">
           <WhiteShape position={[-1, 15, 2.5]} />
         </RigidBody>

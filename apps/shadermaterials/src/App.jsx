@@ -3,6 +3,10 @@ import { useRef, useState } from "react"
 import { Canvas, extend, useFrame } from "@react-three/fiber"
 import { useTexture, shaderMaterial } from "@react-three/drei"
 
+import img1 from "./img/Img1.jpg"
+import img2 from "./img/Img2.jpg"
+import img3 from "./img/displacement/13.jpg"
+
 export const ImageFadeMaterial = shaderMaterial(
   {
     effectFactor: 1.2,
@@ -41,7 +45,7 @@ extend({ ImageFadeMaterial })
 
 function FadingImage() {
   const ref = useRef()
-  const [texture1, texture2, dispTexture] = useTexture(["/img/Img1.jpg", "/img/Img2.jpg", "/img/displacement/13.jpg"])
+  const [texture1, texture2, dispTexture] = useTexture([img1, img2, img3])
   const [hovered, setHover] = useState(false)
   useFrame(() => {
     ref.current.dispFactor = THREE.MathUtils.lerp(ref.current.dispFactor, hovered ? 1 : 0, 0.075)

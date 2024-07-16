@@ -1,6 +1,10 @@
 import create from 'zustand'
 import { addEffect } from '@react-three/fiber'
 
+import audio1 from './drums.mp3'
+import audio2 from './snare.mp3'
+import audio3 from './synth.mp3'
+
 async function createAudio(url, { threshold, expire } = {}) {
   const res = await fetch(url)
   const buffer = await res.arrayBuffer()
@@ -46,9 +50,9 @@ async function createAudio(url, { threshold, expire } = {}) {
 const mockData = () => ({ signal: false, avg: 0, gain: 1, data: [] })
 
 const useStore = create((set, get) => {
-  const drums = createAudio('/drums.mp3', { threshold: 10, expire: 500 })
-  const snare = createAudio('/snare.mp3', { threshold: 40, expire: 500 })
-  const synth = createAudio('/synth.mp3')
+  const drums = createAudio(audio1, { threshold: 10, expire: 500 })
+  const snare = createAudio(audio2, { threshold: 40, expire: 500 })
+  const synth = createAudio(audio3)
   return {
     loaded: false,
     clicked: false,

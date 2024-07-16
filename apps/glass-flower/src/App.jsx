@@ -6,8 +6,11 @@ import { Environment, Lightformer, OrbitControls, MeshTransmissionMaterial, useG
 import { EffectComposer, Bloom, LUT, BrightnessContrast, HueSaturation, ToneMapping } from '@react-three/postprocessing'
 import { LUTCubeLoader, ToneMappingMode } from 'postprocessing'
 
+import flowerModel from './flower-transformed.glb?url'
+import lutTex from './F-6800-STD.cube?url'
+
 function Model(props) {
-  const { nodes } = useGLTF('/flower-transformed.glb')
+  const { nodes } = useGLTF(flowerModel)
   return (
     <group {...props} dispose={null}>
       <mesh geometry={nodes.petals.geometry}>
@@ -35,7 +38,7 @@ function Model(props) {
 }
 
 export default function App() {
-  const texture = useLoader(LUTCubeLoader, '/F-6800-STD.cube')
+  const texture = useLoader(LUTCubeLoader, lutTex)
   return (
     <Canvas
       gl={{ antialias: false }}

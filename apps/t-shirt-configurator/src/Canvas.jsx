@@ -5,6 +5,8 @@ import { easing } from 'maath'
 import { useSnapshot } from 'valtio'
 import { state } from './store'
 
+import shirtModel from './shirt_baked_collapsed.glb?url'
+
 export const App = ({ position = [0, 0, 2.5], fov = 25 }) => (
   <Canvas shadows camera={{ position, fov }} gl={{ preserveDrawingBuffer: true }} eventSource={document.getElementById('root')} eventPrefix="client">
     <ambientLight intensity={0.5} />
@@ -41,15 +43,15 @@ function CameraRig({ children }) {
 
 function Shirt(props) {
   const snap = useSnapshot(state)
-  const texture = useTexture(`/${snap.decal}.png`)
-  const { nodes, materials } = useGLTF('/shirt_baked_collapsed.glb')
+  const texture = useTexture(snap.decal)
+
+  const { nodes, materials } = useGLTF(shirtModel)
   useFrame((state, delta) => easing.dampC(materials.lambert1.color, snap.color, 0.25, delta))
   return (
     <mesh castShadow geometry={nodes.T_Shirt_male.geometry} material={materials.lambert1} material-roughness={1} {...props} dispose={null}>
-      <Decal position={[0, 0.04, 0.15]} rotation={[0, 0, 0]} scale={0.15} map={texture} map-anisotropy={16} />
+      <Decal position={[0, 0.04, 0.15]} rotation={[0, 0, 0]} scale={0.15} map={texture} />
     </mesh>
   )
 }
 
-useGLTF.preload('/shirt_baked_collapsed.glb')
-;['/react.png', '/three2.png', '/pmndrs.png'].forEach(useTexture.preload)
+useGLTF.preload(shirtModel)

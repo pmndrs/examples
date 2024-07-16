@@ -3,6 +3,8 @@ import { useTexture } from "@react-three/drei"
 import { RigidBody } from "@react-three/rapier"
 import create from "zustand"
 
+import dirtImg from "./dirt.jpg"
+
 // This is a naive implementation and wouldn't allow for more than a few thousand boxes.
 // In order to make this scale this has to be one instanced mesh, then it could easily be
 // hundreds of thousands.
@@ -21,7 +23,7 @@ export function Cube(props) {
   const ref = useRef()
   const [hover, set] = useState(null)
   const addCube = useCubeStore((state) => state.addCube)
-  const texture = useTexture("/dirt.jpg")
+  const texture = useTexture(dirtImg)
   const onMove = useCallback((e) => {
     e.stopPropagation()
     set(Math.floor(e.faceIndex / 2))

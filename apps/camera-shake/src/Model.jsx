@@ -6,6 +6,8 @@ import * as THREE from 'three'
 import React, { useRef } from 'react'
 import { useGLTF, Reflector } from '@react-three/drei'
 
+import pinkdModel from './pink-d.glb?url'
+
 const material = new THREE.MeshPhysicalMaterial({
   color: new THREE.Color('#bb86a1').convertSRGBToLinear(),
   roughness: 0,
@@ -15,7 +17,7 @@ const material = new THREE.MeshPhysicalMaterial({
 
 export default function Model(props) {
   const group = useRef()
-  const { nodes } = useGLTF('/pink-d.glb')
+  const { nodes } = useGLTF(pinkdModel)
   return (
     <group ref={group} {...props} dispose={null}>
       <Reflector
@@ -95,4 +97,4 @@ export default function Model(props) {
   )
 }
 
-useGLTF.preload('/pink-d.glb')
+useGLTF.preload(pinkdModel)

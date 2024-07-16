@@ -2,6 +2,8 @@ import * as THREE from 'three'
 import { useRef, useState } from 'react'
 import { useCursor, useGLTF } from '@react-three/drei'
 
+import model from './draco.glb?url'
+
 const bottleMaterial = new THREE.MeshPhysicalMaterial({
   color: '#efefef',
   transmission: 1,
@@ -14,7 +16,7 @@ const capMaterial = new THREE.MeshStandardMaterial({ color: new THREE.Color('whi
 
 function Bottle({ glas, cap, children, ...props }) {
   const ref = useRef()
-  const { nodes } = useGLTF('/draco.glb')
+  const { nodes } = useGLTF(model)
   const [hovered, set] = useState(false)
   useCursor(hovered)
   return (

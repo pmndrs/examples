@@ -3,6 +3,12 @@ import React, { Suspense, useEffect, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Reflector, Text, useTexture, useGLTF } from '@react-three/drei'
 
+import carlaModel from './carla-draco.glb?url'
+import inter from './Inter-Bold.woff?url'
+import dreiVideo from './drei.mp4'
+import surfaceTex1 from './SurfaceImperfections003_1K_var1.jpg'
+import surfaceTex2 from './SurfaceImperfections003_1K_Normal.jpg'
+
 export default function App() {
   return (
     <Canvas concurrent gl={{ alpha: false }} pixelRatio={[1, 1.5]} camera={{ position: [0, 3, 100], fov: 15 }}>
@@ -24,15 +30,15 @@ export default function App() {
 }
 
 function Carla(props) {
-  const { scene } = useGLTF('/carla-draco.glb')
+  const { scene } = useGLTF(carlaModel)
   return <primitive object={scene} {...props} />
 }
 
 function VideoText(props) {
-  const [video] = useState(() => Object.assign(document.createElement('video'), { src: '/drei.mp4', crossOrigin: 'Anonymous', loop: true, muted: true }))
+  const [video] = useState(() => Object.assign(document.createElement('video'), { src: dreiVideo, crossOrigin: 'Anonymous', loop: true, muted: true }))
   useEffect(() => void video.play(), [video])
   return (
-    <Text font="/Inter-Bold.woff" fontSize={3} letterSpacing={-0.06} {...props}>
+    <Text font={inter} fontSize={3} letterSpacing={-0.06} {...props}>
       drei
       <meshBasicMaterial toneMapped={false}>
         <videoTexture attach="map" args={[video]} encoding={THREE.sRGBEncoding} />
@@ -42,7 +48,7 @@ function VideoText(props) {
 }
 
 function Ground() {
-  const [floor, normal] = useTexture(['/SurfaceImperfections003_1K_var1.jpg', '/SurfaceImperfections003_1K_Normal.jpg'])
+  const [floor, normal] = useTexture([surfaceTex1, surfaceTex2])
   return (
     <Reflector blur={[400, 100]} resolution={512} args={[10, 10]} mirror={0.5} mixBlur={6} mixStrength={1.5} rotation={[-Math.PI / 2, 0, Math.PI / 2]}>
       {(Material, props) => <Material color="#a0a0a0" metalness={0.4} roughnessMap={floor} normalMap={normal} normalScale={[2, 2]} {...props} />}

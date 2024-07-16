@@ -78,8 +78,8 @@ function Customizer() {
       <div className="decals">
         <div className="decals--container">
           {snap.decals.map((decal) => (
-            <div key={decal} className={`decal`} onClick={() => (state.decal = decal)}>
-              <img src={decal + '_thumb.png'} alt="brand" />
+            <div key={decal.full} className={`decal`} onClick={() => (state.decal = decal.full)}>
+              <img src={decal.thumb} alt="brand" />
             </div>
           ))}
         </div>

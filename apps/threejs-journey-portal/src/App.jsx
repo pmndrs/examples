@@ -4,6 +4,9 @@ import { Canvas, extend, useFrame } from '@react-three/fiber'
 import { OrbitControls, Sparkles, shaderMaterial, useGLTF, useTexture } from '@react-three/drei'
 import glsl from 'babel-plugin-glsl/macro'
 
+import portalModel from './portal-2.glb?url'
+import backedImg from './baked-02.jpeg'
+
 export const App = ({ scale = Array.from({ length: 50 }, () => 0.5 + Math.random() * 4) }) => (
   <Canvas camera={{ fov: 45, position: [-4, 2, -4] }}>
     <Sparkles count={scale.length} size={scale} position={[0, 0.9, 0]} scale={[4, 1.5, 4]} speed={0.3} />
@@ -14,8 +17,8 @@ export const App = ({ scale = Array.from({ length: 50 }, () => 0.5 + Math.random
 
 function Model(props) {
   const portalMaterial = useRef()
-  const bakedTexture = useTexture('/baked-02.jpeg')
-  const { nodes } = useGLTF('/portal-2.glb')
+  const bakedTexture = useTexture(backedImg)
+  const { nodes } = useGLTF(portalModel)
   useFrame((state, delta) => (portalMaterial.current.uTime += delta))
   return (
     <group {...props} dispose={null}>

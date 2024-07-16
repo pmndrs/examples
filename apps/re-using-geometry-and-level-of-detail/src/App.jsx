@@ -2,6 +2,11 @@ import { Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { useGLTF, Detailed, OrbitControls, Environment, BakeShadows } from '@react-three/drei'
 
+import bust1Model from './bust-1-d.glb?url'
+import bust2Model from './bust-2-d.glb?url'
+import bust3Model from './bust-3-d.glb?url'
+import bust4Model from './bust-4-d.glb?url'
+
 // Create 800 objects with random position and rotation data
 const positions = [...Array(800)].map(() => ({
   position: [40 - Math.random() * 80, 40 - Math.random() * 80, 40 - Math.random() * 80],
@@ -33,7 +38,7 @@ export default function App() {
 
 function Bust(props) {
   // This will load 4 GLTF in parallel using React Suspense
-  const levels = useGLTF(['/bust-1-d.glb', '/bust-2-d.glb', '/bust-3-d.glb', '/bust-4-d.glb'])
+  const levels = useGLTF([bust1Model, bust2Model, bust3Model, bust4Model])
   // By the time we're here these GLTFs exist, they're loaded
   // There are 800 instances of this component, but the GLTF data is cached and will be re-used ootb
   return (

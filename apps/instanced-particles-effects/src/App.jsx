@@ -6,6 +6,8 @@ import { FilmPass, WaterPass, UnrealBloomPass, LUTPass, LUTCubeLoader } from 'th
 
 extend({ WaterPass, UnrealBloomPass, FilmPass, LUTPass })
 
+import cubicleTex from './cubicle.CUBE?url'
+
 export const App = () => (
   <Canvas linear flat legacy dpr={1} camera={{ fov: 100, position: [0, 0, 30] }}>
     <ambientLight intensity={0.01} />
@@ -75,7 +77,7 @@ function Swarm({ count, dummy = new THREE.Object3D() }) {
 
 function Postpro() {
   const water = useRef()
-  const data = useLoader(LUTCubeLoader, '/cubicle.CUBE')
+  const data = useLoader(LUTCubeLoader, cubicleTex)
   useFrame((state) => (water.current.time = state.clock.elapsedTime * 4))
   return (
     <Effects disableGamma>

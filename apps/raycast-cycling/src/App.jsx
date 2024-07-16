@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { CycleRaycast, BakeShadows, useCursor, softShadows } from '@react-three/drei'
+import { CycleRaycast, BakeShadows, useCursor } from '@react-three/drei'
 
 export default function App() {
   const [{ objects, cycle }, set] = useState({ objects: [], cycle: 0 })
@@ -79,6 +79,3 @@ function Stage() {
     </>
   )
 }
-
-// Percentage closer soft shadows, normally *very* expensive
-softShadows()

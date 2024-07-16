@@ -4,6 +4,9 @@ import { Canvas, useFrame } from "@react-three/fiber"
 import { PerspectiveCamera, RoundedBox, Environment, useTexture, useAspect } from "@react-three/drei"
 import { Physics, useSphere, useBox, usePlane } from "@react-three/cannon"
 
+import crossImg from "./cross.jpg"
+import bgImg from "./bg.jpg"
+
 function BallAndCollisions({ args = [1.2, 32, 32], v = new THREE.Vector3() }) {
   const cam = useRef()
   const [ref, api] = useSphere(() => ({ args: 1.2, mass: 1, material: { restitution: 0.95 } }))
@@ -19,7 +22,7 @@ function BallAndCollisions({ args = [1.2, 32, 32], v = new THREE.Vector3() }) {
       <PerspectiveCamera ref={cam} makeDefault position={[0, 0, 12]} fov={50} />
       <mesh ref={ref}>
         <sphereGeometry args={args} />
-        <meshPhysicalMaterial map={useTexture("/cross.jpg")} transmission={1} roughness={0} thickness={10} envMapIntensity={1} />
+        <meshPhysicalMaterial map={useTexture(crossImg)} transmission={1} roughness={0} thickness={10} envMapIntensity={1} />
       </mesh>
     </>
   )
@@ -54,7 +57,7 @@ function MovingBlock({ offset = 0, position: [x, y, z], ...props }) {
 const Background = (props) => (
   <mesh scale={useAspect(5000, 3800, 3)} {...props}>
     <planeGeometry />
-    <meshBasicMaterial map={useTexture("/bg.jpg")} />
+    <meshBasicMaterial map={useTexture(bgImg)} />
   </mesh>
 )
 

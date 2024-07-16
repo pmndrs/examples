@@ -1,0 +1,8 @@
+{
+  "name": "@repo/tools",
+  "version": "0.0.0",
+  "private": true,
+  "bin": {
+    "vite-build": "./bin/build.sh"
+  }
+}

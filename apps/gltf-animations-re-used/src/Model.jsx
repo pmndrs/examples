@@ -11,10 +11,13 @@ import { useGraph } from "@react-three/fiber"
 import { a, useSpring } from "@react-spring/three"
 import { SkeletonUtils } from "three-stdlib"
 
+import stacyImg from "./stacy.jpg"
+import stacyModel from "./stacy.glb?url"
+
 export default function Model({ pose, ...props }) {
   // Fetch model and a separate texture
-  const { scene, animations } = useGLTF("/stacy.glb")
-  const texture = useTexture("/stacy.jpg")
+  const { scene, animations } = useGLTF(stacyModel)
+  const texture = useTexture(stacyImg)
 
   // Skinned meshes cannot be re-used in threejs without cloning them
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene])
@@ -60,7 +63,7 @@ export default function Model({ pose, ...props }) {
         </skinnedMesh>
       </group>
       <a.mesh receiveShadow position={[0, 1, -1]} scale={scale}>
-        <circleBufferGeometry args={[0.6, 64]} />
+        <circleGeometry args={[0.6, 64]} />
         <a.meshStandardMaterial color={color} />
       </a.mesh>
     </group>

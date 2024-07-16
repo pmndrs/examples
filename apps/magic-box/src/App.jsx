@@ -3,6 +3,8 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { useGLTF, Edges, MeshPortalMaterial, CameraControls, Environment, PivotControls } from '@react-three/drei'
 import { useControls } from 'leva'
 
+import aoboxModel from './aobox-transformed.glb?url'
+
 export const App = () => (
   <Canvas shadows camera={{ position: [-3, 0.5, 3] }}>
     <PivotControls anchor={[-1.1, -1.1, -1.1]} scale={0.75} lineWidth={3.5}>
@@ -36,7 +38,7 @@ export const App = () => (
 function Side({ rotation = [0, 0, 0], bg = '#f0f0f0', children, index }) {
   const mesh = useRef()
   const { worldUnits } = useControls({ worldUnits: false })
-  const { nodes } = useGLTF('/aobox-transformed.glb')
+  const { nodes } = useGLTF(aoboxModel)
   useFrame((state, delta) => {
     mesh.current.rotation.x = mesh.current.rotation.y += delta
   })
