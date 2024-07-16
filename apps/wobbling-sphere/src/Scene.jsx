@@ -73,7 +73,7 @@ export default function Scene({ setBg }) {
             setMode(!mode)
             setBg({ background: !mode ? '#202020' : '#f0f0f0', fill: !mode ? '#f0f0f0' : '#202020' })
           }}>
-          <sphereBufferGeometry args={[1, 64, 64]} />
+          <sphereGeometry args={[1, 64, 64]} />
           <AnimatedMaterial color={color} envMapIntensity={env} clearcoat={coat} clearcoatRoughness={0} metalness={0.1} />
         </a.mesh>
         <Environment preset="warehouse" />
