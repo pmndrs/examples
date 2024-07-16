@@ -63,7 +63,7 @@ export default function Model({ pose, ...props }) {
         </skinnedMesh>
       </group>
       <a.mesh receiveShadow position={[0, 1, -1]} scale={scale}>
-        <circleBufferGeometry args={[0.6, 64]} />
+        <circleGeometry args={[0.6, 64]} />
         <a.meshStandardMaterial color={color} />
       </a.mesh>
     </group>
