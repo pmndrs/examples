@@ -15,3 +15,10 @@ $ npm ci
 ```sh
 $ npm run -w apps/cards-with-border-radius dev
 ```
+
+To use a given [`basic-demo`](apps/basic-demo) as a template for a `new-project`:
+
+```sh
+$ npx degit pmndrs/examples/apps/basic-demo new-project
+$ code new-project
+```
