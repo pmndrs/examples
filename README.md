@@ -23,10 +23,20 @@ $ npx degit pmndrs/examples/apps/basic-demo new-project
 $ code new-project
 ```
 
+# build
+
+```sh
+$ npm run build
+$ npx serve out
+```
+
 # test
 
+Pre-requisites:
+
+- [build](#build)
+
 ```
-$ npm run build
 $ docker run --init --rm -v $(pwd):/app -w /app ghcr.io/pmndrs/playwright:main npm test
 ```
 
