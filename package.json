@@ -2,12 +2,15 @@
   "name": "examples",
   "private": true,
   "scripts": {
-    "build": "turbo build2",
+    "build": "turbo build2 && ./copy.sh",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "pretest": "npm run build",
+    "test": "./test/e2e/e2e.sh"
   },
   "devDependencies": {
+    "@playwright/test": "^1.45.2",
     "prettier": "^3.2.5",
     "turbo": "^2.0.4",
     "typescript": "^5.5.2"

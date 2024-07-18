@@ -1,6 +1,21 @@
-import { useRef, useState } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { useRef, useState, useEffect } from 'react'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
+
+function SayCheese({ timestamp = 0 }) {
+  const { advance, setFrameloop } = useThree()
+
+  useEffect(() => {
+    console.log('Say cheese!')
+
+    setFrameloop('never')
+    advance(timestamp)
+
+    document.dispatchEvent(new Event('playright:r3f'))
+  }, [])
+
+  return null
+}
 
 function Box(props) {
   // This reference gives us direct access to the THREE.Mesh object
@@ -28,6 +43,8 @@ function Box(props) {
 export default function App() {
   return (
     <Canvas>
+      {new URLSearchParams(window.location.search).has('saycheese') && <SayCheese />}
+
       <ambientLight intensity={Math.PI / 2} />
       <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} decay={0} intensity={Math.PI} />
       <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />

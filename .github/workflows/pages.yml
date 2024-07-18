@@ -17,14 +17,14 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/pmndrs/playwright:main
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: npm
-      - id: configurepages
-        uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@v5
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
@@ -32,20 +32,10 @@ jobs:
       - run: npm ci
       - uses: rharkor/caching-for-turbo@v1.5
       - run: npm run build
-      - run: |
-          DST="out"
-          for app in apps/*; do
-            if [ -d "$app/dist" ]; then
-              app_name=$(basename "$app")
-              mkdir -p "$DST/$app_name"
-              cp -r "$app/dist/"* "$DST/$app_name/"
-              
-              echo "Copied $app/dist to $DST/$app_name"
-            fi
-          done
+      - run: npm test
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out
+          path: ./out/examples
 
   # Deployment job
   deploy:
