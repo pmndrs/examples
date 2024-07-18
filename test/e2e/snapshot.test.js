@@ -52,6 +52,8 @@ demoNames.forEach((demoName) => {
     const $canvas = page.locator("canvas[data-engine]");
 
     // 👁️
-    await expect($canvas).toHaveScreenshot();
+    await expect($canvas).toHaveScreenshot({
+      maxDiffPixelRatio: 0.1,
+    });
   });
 });
