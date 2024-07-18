@@ -6,7 +6,6 @@
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "pretest": "npm run build",
     "test": "./test/e2e/e2e.sh"
   },
   "devDependencies": {

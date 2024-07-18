@@ -1,7 +1,9 @@
 const http = require("http");
+const fs = require("fs");
+const path = require("path");
 const { test, expect } = require("@playwright/test");
 
-const host = "http://localhost:5188/examples/basic-demo/?saycheese";
+const host = `http://localhost:5188`;
 
 async function waitForEvent(page, eventName) {
   await page.evaluate(
@@ -27,16 +29,29 @@ function waitForServer() {
   });
 }
 
-test("should match previous one", async ({ page }) => {
-  await waitForServer();
+function getDemoNames() {
+  const appsDir = path.resolve("apps");
 
-  // ⏳ "r3f" event
-  await page.goto(host);
-  await waitForEvent(page, "playright:r3f");
+  return fs.readdirSync(appsDir).filter((file) => {
+    return fs.statSync(path.join(appsDir, file)).isDirectory();
+  });
+}
+// const demoNames = getDemoNames();
+const demoNames = ["aquarium", "basic-demo"];
+console.log("demoNames", demoNames);
 
-  // 📸 <canvas>
-  const $canvas = page.locator("canvas[data-engine]");
+demoNames.forEach((demoName) => {
+  test(`${demoName} should match previous one`, async ({ page }) => {
+    await waitForServer();
 
-  // 👁️
-  await expect($canvas).toHaveScreenshot();
+    // ⏳ "r3f" event
+    await page.goto(`${host}/examples/${demoName}/?saycheese`);
+    await waitForEvent(page, "playright:r3f");
+
+    // 📸 <canvas>
+    const $canvas = page.locator("canvas[data-engine]");
+
+    // 👁️
+    await expect($canvas).toHaveScreenshot();
+  });
 });

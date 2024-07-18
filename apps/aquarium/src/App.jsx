@@ -1,15 +1,32 @@
 import { useLayoutEffect, useEffect, useRef } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { useMask, useGLTF, useAnimations, Float, Instance, Instances, CameraControls } from '@react-three/drei'
 import { Lightformer, Environment, RandomizedLight, AccumulativeShadows, MeshTransmissionMaterial } from '@react-three/drei'
 
 import shapesModel from './shapes-transformed.glb?url'
 import turtleModel from './model_52a_-_kemps_ridley_sea_turtle_no_id-transformed.glb?url'
 
+function SayCheese({ timestamp = 30 }) {
+  const { advance, setFrameloop } = useThree()
+
+  useEffect(() => {
+    console.log('Say cheese!')
+
+    setFrameloop('never')
+    advance(timestamp)
+
+    document.dispatchEvent(new Event('playright:r3f'))
+  }, [])
+
+  return null
+}
+
 console.log('cpoucou')
 export default function App({ spheres }) {
   return (
     <Canvas shadows camera={{ position: [30, 0, -3], fov: 35, near: 1, far: 50 }}>
+      {new URLSearchParams(window.location.search).has('saycheese') && <SayCheese />}
+
       <color attach="background" args={['#c6e5db']} />
       {/** Glass aquarium */}
       <Aquarium position={[0, 0.25, 0]}>

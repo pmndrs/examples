@@ -13,13 +13,19 @@ cleanup() {
 cleanup || true
 trap cleanup EXIT INT TERM HUP
 
-# build+start+playwright
+if [ ! -d "out" ]; then
+  echo "Missing out directory. Run 'npm run build' first."
+  exit 1
+fi
 npx serve out -p $PORT &
+
 npx playwright test snapshot.test.js
-kill_app
+
 
 #
 # Teardown
 #
+
+cleanup || true
 
 echo "✅ e2e ok"
