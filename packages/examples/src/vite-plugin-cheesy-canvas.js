@@ -18,7 +18,7 @@ export default function vitePluginCheesyCanvas() {
       // to replace it with:
       //
       // ```
-      // import { useFrame, OriginalCanvas as Canvas, ... , useThree } from '@react-three/fiber';
+      // import { useFrame, Canvas as OriginalCanvas, ... , useThree } from '@react-three/fiber';
       // import CheesyCanvas from './CheesyCanvas';
       // const Canvas = CheesyCanvas;
       // ```
@@ -56,7 +56,7 @@ export default function vitePluginCheesyCanvas() {
 
               let hasCanvasImport = false;
 
-              // Transform `import { ..., Canvas, ... }` into `import { ..., OriginalCanvas as Canvas, ... }`
+              // Transform `import { ..., Canvas, ... }` into `import { ..., Canvas as OriginalCanvas , ... }`
               node.specifiers = node.specifiers.map((specifier) => {
                 if (
                   t.isImportSpecifier(specifier) &&
@@ -73,7 +73,7 @@ export default function vitePluginCheesyCanvas() {
 
               // If we found a Canvas import just before, we want to add:
               // ```
-              // import CheesyCanvas from './CheesyCanvas'; // (I)
+              // import CheesyCanvas from '@pmndrs/examples/CheesyCanvas'; // (I)
               // const Canvas = CheesyCanvas; // (II)
               // ```
 

@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { useLayoutEffect, useEffect, useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useMask, useGLTF, useAnimations, Float, Instance, Instances, CameraControls } from '@react-three/drei'

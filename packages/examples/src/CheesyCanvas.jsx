@@ -32,7 +32,7 @@ export default function ({ children, ...props }) {
 
   const props2 = {
     ...props,
-    style: { border: "2px solid red", ...props.style },
+    // style: { border: "2px solid red", ...props.style },
   };
 
   const sayCheeseParam = new URLSearchParams(window.location.search).has(

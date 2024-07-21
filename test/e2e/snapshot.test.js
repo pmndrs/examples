@@ -37,7 +37,7 @@ function getDemoNames() {
   });
 }
 // const demoNames = getDemoNames();
-const demoNames = ["baking-soft-shadows", "basic-demo"];
+const demoNames = ["aquarium", "baking-soft-shadows", "basic-demo"];
 console.log("demoNames", demoNames);
 
 demoNames.forEach((demoName) => {
