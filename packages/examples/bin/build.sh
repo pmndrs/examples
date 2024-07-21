@@ -18,4 +18,4 @@ fi
 #   esac
 # done
 
-vite build --base="/examples/$NAME"
+CHEESY_CANVAS=1 vite build --base="/examples/$NAME"

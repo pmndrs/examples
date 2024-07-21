@@ -6,26 +6,9 @@ import { FlakesTexture } from 'three-stdlib'
 
 import suziModel from './suzi-model.gltf?url'
 
-function SayCheese({ timestamp = 30 }) {
-  const { advance, setFrameloop } = useThree()
-
-  useEffect(() => {
-    console.log('Say cheese!')
-
-    setFrameloop('never')
-    advance(timestamp)
-
-    document.dispatchEvent(new Event('playright:r3f'))
-  }, [])
-
-  return null
-}
-
 export default function App() {
   return (
     <Canvas shadows camera={{ position: [4, 2.5, 8], fov: 35 }}>
-      {new URLSearchParams(window.location.search).has('saycheese') && <SayCheese />}
-
       <group position={[0, -0.5, 0]}>
         <Center top>
           <Suzi rotation={[-0.63, 0, 0]} scale={2} />
