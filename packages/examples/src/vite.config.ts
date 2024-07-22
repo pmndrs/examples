@@ -1,8 +1,8 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-import cheesyCanvas from "./vite-plugin-cheesy-canvas";
+import monkeyPatch from "./vite-plugin-monkey";
 
 export default defineConfig({
-  plugins: [react(), cheesyCanvas()],
+  plugins: [react(), monkeyPatch()],
 });

@@ -3,9 +3,9 @@ import * as babelParser from "@babel/parser";
 import traverse from "@babel/traverse";
 import * as t from "@babel/types";
 
-export default function vitePluginCheesyCanvas() {
+export default function vitePluginMonkey() {
   return {
-    name: "vite-plugin-cheesy-canvas",
+    name: "vite-plugin-monkey",
     transform(code, id) {
       //
       // In `src/index.[jt]sx`, add to the top of the file:
