@@ -3,7 +3,8 @@
   "type": "module",
   "version": "0.0.1",
   "exports": {
-    "./CheesyCanvas": "./src/CheesyCanvas.jsx"
+    "./CheesyCanvas": "./src/CheesyCanvas.jsx",
+    "./deterministic-random": "./src/deterministic-random.js"
   },
   "bin": {
     "vite-build": "./bin/build.mjs"
@@ -14,6 +15,7 @@
     "@babel/types": "^7.24.9",
     "ast-types": "^0.16.1",
     "minimist": "^1.2.8",
-    "recast": "^0.23.9"
+    "recast": "^0.23.9",
+    "seedrandom": "^3.0.5"
   }
 }

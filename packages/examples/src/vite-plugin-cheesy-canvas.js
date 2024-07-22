@@ -8,6 +8,46 @@ export default function vitePluginCheesyCanvas() {
     name: "vite-plugin-cheesy-canvas",
     transform(code, id) {
       //
+      // In `src/index.[jt]sx`, add to the top of the file:
+      //
+      // ```
+      // import '@pmndrs/examples/deterministic-random';
+      // ```
+      //
+
+      if (id.endsWith("src/index.jsx") || id.endsWith("src/index.tsx")) {
+        const ast = parse(code, {
+          parser: {
+            parse(source) {
+              return babelParser.parse(source, {
+                sourceType: "module",
+                plugins: ["jsx", "typescript"],
+              });
+            },
+          },
+        });
+
+        traverse.default(ast, {
+          Program(path) {
+            // Insert the import statement at the top of the file
+            const importDeclaration = t.importDeclaration(
+              [],
+              t.stringLiteral("@pmndrs/examples/deterministic-random")
+            );
+
+            path.node.body.unshift(importDeclaration);
+          },
+        });
+
+        console.log("🐵-patched `src/index.[jt]sx`");
+
+        return {
+          code: print(ast).code,
+          map: null,
+        };
+      }
+
+      //
       // In `src/App.[jt]sx`, we search for:
       //
       // ```
@@ -18,8 +58,8 @@ export default function vitePluginCheesyCanvas() {
       // to replace it with:
       //
       // ```
-      // import { useFrame, Canvas as OriginalCanvas, ... , useThree } from '@react-three/fiber';
-      // import CheesyCanvas from './CheesyCanvas';
+      // import { useFrame, ... , useThree } from '@react-three/fiber';
+      // import CheesyCanvas from '@pmndrs/examples/CheesyCanvas';
       // const Canvas = CheesyCanvas;
       // ```
       //
@@ -56,22 +96,19 @@ export default function vitePluginCheesyCanvas() {
 
               let hasCanvasImport = false;
 
-              // Transform `import { ..., Canvas, ... }` into `import { ..., Canvas as OriginalCanvas , ... }`
-              node.specifiers = node.specifiers.map((specifier) => {
+              // Transform `import { ..., Canvas, ... }` into `import { ... }`
+              node.specifiers = node.specifiers.filter((specifier) => {
                 if (
                   t.isImportSpecifier(specifier) &&
                   specifier.imported.name === "Canvas"
                 ) {
                   hasCanvasImport = true;
-                  return t.importSpecifier(
-                    t.identifier("OriginalCanvas"),
-                    t.identifier("Canvas")
-                  );
+                  return false;
                 }
-                return specifier;
+                return true;
               });
 
-              // If we found a Canvas import just before, we want to add:
+              // If we removed a Canvas import just before, we want to add:
               // ```
               // import CheesyCanvas from '@pmndrs/examples/CheesyCanvas'; // (I)
               // const Canvas = CheesyCanvas; // (II)
@@ -104,6 +141,9 @@ export default function vitePluginCheesyCanvas() {
           },
         });
 
+        console.log(
+          "🐵-patched <Canvas> in `src/App.[jt]sx` with CheesyCanvas"
+        );
         // console.log("CODE", print(ast).code);
 
         return {

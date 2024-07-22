@@ -6,7 +6,7 @@ import { Lightformer, Environment, RandomizedLight, AccumulativeShadows, MeshTra
 import shapesModel from './shapes-transformed.glb?url'
 import turtleModel from './model_52a_-_kemps_ridley_sea_turtle_no_id-transformed.glb?url'
 
-console.log('heyyyy2')
+// bump1
 export default function App({ spheres }) {
   return (
     <Canvas shadows camera={{ position: [30, 0, -3], fov: 35, near: 1, far: 50 }}>

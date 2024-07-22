@@ -1,14 +1,12 @@
 import React, { useEffect } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
 
-globalThis.Math.random = () => 0.2;
-
 function SayCheese({ timestamp = 30 }) {
   const { advance, setFrameloop, invalidate, internal } = useThree();
   window.advance = advance;
 
   useEffect(() => {
-    console.log("Say cheese!");
+    console.log(`Now say 😬cheeese (photo in ${timestamp} secs)`);
 
     setTimeout(() => {
       console.log("timeout");
@@ -27,7 +25,7 @@ function SayCheese({ timestamp = 30 }) {
 
 export default function ({ children, ...props }) {
   useEffect(() => {
-    console.log("Custom canvas effect!");
+    console.log("CheesyCanvas: use ?saycheese in the URL");
   }, []);
 
   const props2 = {
