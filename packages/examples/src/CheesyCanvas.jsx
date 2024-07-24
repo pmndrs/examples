@@ -8,10 +8,11 @@ function SayCheese({ pauseAt = 0 }) {
     console.log(`😬 Say cheeese (shooting photo in ${pauseAt}ms)`);
 
     function shoot() {
-      console.log("📸 Shooting", clock.elapsedTime);
+      // const secs = clock.elapsedTime;
+      const secs = 0;
+      console.log("📸 Shooting", secs);
 
       setFrameloop("never");
-      const secs = clock.elapsedTime;
       advance(secs);
       advance(secs); // not exactly sure why, but needed 🤷‍♂️
 
