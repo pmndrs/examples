@@ -53,7 +53,7 @@ demoNames.forEach((demoName) => {
 
     // ⏳ "r3f" event
     await page.goto(`${host}/examples/${demoName}/?saycheese`);
-    await waitForEvent(page, "playright:r3f");
+    await waitForEvent(page, "playwright:snapshot-ready");
 
     // 📸 <canvas>
     const $canvas = page.locator("canvas[data-engine]");

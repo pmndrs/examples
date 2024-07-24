@@ -14,9 +14,9 @@ function SayCheese({ pauseAt = 0 }) {
 
       setFrameloop("never");
       advance(secs);
-      advance(secs); // not exactly sure why, but needed 🤷‍♂️
+      advance(secs); // not exactly sure why a 2nd-time, but needed 🤷‍♂️
 
-      document.dispatchEvent(new Event("playright:r3f")); // will tell Playright to take a screenshot
+      document.dispatchEvent(new Event("playwright:snapshot-ready")); // will tell Playright to take a screenshot
     }
 
     setTimeout(shoot, pauseAt);
