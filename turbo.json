@@ -3,7 +3,7 @@
   "tasks": {
     "build2": {
       "dependsOn": ["^build2"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*", "../../packages/examples/**"],
       "outputs": ["dist/**"]
     },
     "lint": {

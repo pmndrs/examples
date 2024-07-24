@@ -1,45 +1,47 @@
 import React, { useEffect } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
 
-function SayCheese({ timestamp = 30 }) {
-  const { advance, setFrameloop, invalidate, internal } = useThree();
-  window.advance = advance;
+function SayCheese({ pauseAt = 0 }) {
+  const { advance, setFrameloop, clock } = useThree();
 
   useEffect(() => {
-    console.log(`Now say 😬cheeese (photo in ${timestamp} secs)`);
+    console.log(`😬 Say cheeese (shooting photo in ${pauseAt}ms)`);
 
-    setTimeout(() => {
-      console.log("timeout");
-      // internal.active = false
+    function shoot() {
+      console.log("📸 Shooting", clock.elapsedTime);
 
       setFrameloop("never");
-      advance(0);
-      invalidate();
+      const secs = clock.elapsedTime;
+      advance(secs);
+      advance(secs); // not exactly sure why, but needed 🤷‍♂️
 
-      document.dispatchEvent(new Event("playright:r3f"));
-    }, 3000);
+      document.dispatchEvent(new Event("playright:r3f")); // will tell Playright to take a screenshot
+    }
+
+    setTimeout(shoot, pauseAt);
+
+    return () => {
+      clearTimeout(shoot);
+    };
   }, []);
 
   return null;
 }
 
-export default function ({ children, ...props }) {
+export default function CheesyCanvas({ children, ...props }) {
   useEffect(() => {
-    console.log("CheesyCanvas: use ?saycheese in the URL");
+    console.log(
+      "CheesyCanvas: use ?saycheese in the URL to stop the animation"
+    );
   }, []);
-
-  const props2 = {
-    ...props,
-    // style: { border: "2px solid red", ...props.style },
-  };
 
   const sayCheeseParam = new URLSearchParams(window.location.search).has(
     "saycheese"
   );
 
   return (
-    <Canvas {...props2}>
-      {sayCheeseParam && <SayCheese />}
+    <Canvas {...props}>
+      {sayCheeseParam && <SayCheese pauseAt={3000} />}
 
       {children}
     </Canvas>
