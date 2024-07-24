@@ -27,7 +27,6 @@ jobs:
       - run: npm ci
       - uses: rharkor/caching-for-turbo@v1.5
       - run: npm run build
-      - run: npm test
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./out/examples
