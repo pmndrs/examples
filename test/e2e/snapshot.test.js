@@ -41,7 +41,14 @@ const demoNames = ["aquarium", "baking-soft-shadows", "basic-demo"];
 console.log("demoNames", demoNames);
 
 demoNames.forEach((demoName) => {
-  test(`${demoName} should match previous one`, async ({ page }) => {
+  test(`${demoName}`, async ({ page }) => {
+    // Redirect console.log messages to stdout
+    page.on("console", (msg) => {
+      if (msg.type() === "log") {
+        console.log(`Browser console.log: ${msg.text()}`);
+      }
+    });
+
     await waitForServer();
 
     // ⏳ "r3f" event
@@ -53,7 +60,7 @@ demoNames.forEach((demoName) => {
 
     // 👁️
     await expect($canvas).toHaveScreenshot({
-      maxDiffPixelRatio: 0.1,
+      maxDiffPixelRatio: 0.05,
     });
   });
 });
