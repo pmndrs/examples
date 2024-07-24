@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "exports": {
     "./CheesyCanvas": "./src/CheesyCanvas.jsx",
-    "./deterministic-random": "./src/deterministic-random.js"
+    "./deterministic": "./src/deterministic.js"
   },
   "bin": {
     "vite-build": "./bin/build.mjs"

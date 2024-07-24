@@ -11,7 +11,7 @@ export default function vitePluginMonkey() {
       // In `src/index.[jt]sx`, add to the top of the file:
       //
       // ```
-      // import '@pmndrs/examples/deterministic-random';
+      // import '@pmndrs/examples/deterministic';
       // ```
       //
 
@@ -32,7 +32,7 @@ export default function vitePluginMonkey() {
             // Insert the import statement at the top of the file
             const importDeclaration = t.importDeclaration(
               [],
-              t.stringLiteral("@pmndrs/examples/deterministic-random")
+              t.stringLiteral("@pmndrs/examples/deterministic")
             );
 
             path.node.body.unshift(importDeclaration);
