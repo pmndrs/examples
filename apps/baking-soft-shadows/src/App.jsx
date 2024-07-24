@@ -6,7 +6,6 @@ import { FlakesTexture } from 'three-stdlib'
 
 import suziModel from './suzi-model.gltf?url'
 
-// bump1
 export default function App() {
   return (
     <Canvas shadows camera={{ position: [4, 2.5, 8], fov: 35 }}>

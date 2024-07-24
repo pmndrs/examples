@@ -2,7 +2,6 @@ import { useRef, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 
-// bump1
 function Box(props) {
   // This reference gives us direct access to the THREE.Mesh object
   const ref = useRef()
