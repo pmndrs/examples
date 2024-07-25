@@ -38,6 +38,6 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pmndrs/examples/tree/main/apps/camera-shake"
+    "url": "https://github.com/pmndrs/examples/tree/main/demos/camera-shake"
   }
 }

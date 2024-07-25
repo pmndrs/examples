@@ -47,6 +47,6 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pmndrs/examples/tree/main/apps/racing-game"
+    "url": "https://github.com/pmndrs/examples/tree/main/demos/racing-game"
   }
 }

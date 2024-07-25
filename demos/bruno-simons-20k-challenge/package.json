@@ -43,7 +43,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/pmndrs/examples/tree/main/apps/bruno-simons-20k-challenge"
+    "url": "https://github.com/pmndrs/examples/tree/main/demos/bruno-simons-20k-challenge"
   },
   "type": "module"
 }

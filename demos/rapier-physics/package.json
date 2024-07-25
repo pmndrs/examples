@@ -38,6 +38,6 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pmndrs/examples/tree/main/apps/rapier-physics"
+    "url": "https://github.com/pmndrs/examples/tree/main/demos/rapier-physics"
   }
 }

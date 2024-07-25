@@ -40,6 +40,6 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pmndrs/examples/tree/main/apps/infinite-scroll"
+    "url": "https://github.com/pmndrs/examples/tree/main/demos/infinite-scroll"
   }
 }

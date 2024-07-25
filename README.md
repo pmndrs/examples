@@ -4,10 +4,10 @@ https://docs.pmnd.rs/react-three-fiber/getting-started/examples
 
 index: [apps](apps)
 
-To use a given [`basic-demo`](apps/basic-demo) as a template for a `new-project`:
+To use a given [`basic-demo`](demos/basic-demo) as a template for a `new-project`:
 
 ```sh
-$ npx -y degit pmndrs/examples/apps/basic-demo new-project
+$ npx -y degit pmndrs/examples/demos/basic-demo new-project
 $ code new-project
 ```
 
@@ -20,7 +20,7 @@ $ npm ci
 # dev
 
 ```sh
-$ npm run -w apps/cards-with-border-radius dev
+$ npm run -w demos/cards-with-border-radius dev
 ```
 
 # build

@@ -2,7 +2,7 @@
 
 DST="out/examples"
 
-for app in apps/*; do
+for app in demos/*; do
   if [ -d "$app/dist" ]; then
     app_name=$(basename "$app")
     mkdir -p "$DST/$app_name"

@@ -20,7 +20,7 @@
   },
   "packageManager": "npm@10.2.4",
   "workspaces": [
-    "apps/*",
+    "demos/*",
     "packages/examples"
   ]
 }

@@ -40,7 +40,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/pmndrs/examples/tree/main/apps/moksha"
+    "url": "https://github.com/pmndrs/examples/tree/main/demos/moksha"
   },
   "type": "module"
 }

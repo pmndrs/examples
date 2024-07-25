@@ -59,6 +59,6 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pmndrs/examples/tree/main/apps/zustand-site"
+    "url": "https://github.com/pmndrs/examples/tree/main/demos/zustand-site"
   }
 }

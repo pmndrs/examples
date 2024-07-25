@@ -39,6 +39,6 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pmndrs/examples/tree/main/apps/arkanoid-under-60-loc"
+    "url": "https://github.com/pmndrs/examples/tree/main/demos/arkanoid-under-60-loc"
   }
 }

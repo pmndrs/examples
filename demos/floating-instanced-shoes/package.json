@@ -31,6 +31,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/pmndrs/examples/tree/main/apps/floating-instanced-shoes"
+    "url": "https://github.com/pmndrs/examples/tree/main/demos/floating-instanced-shoes"
   }
 }

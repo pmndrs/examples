@@ -37,6 +37,6 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pmndrs/examples/tree/main/apps/shader-hmr"
+    "url": "https://github.com/pmndrs/examples/tree/main/demos/shader-hmr"
   }
 }

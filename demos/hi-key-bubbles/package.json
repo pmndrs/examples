@@ -37,6 +37,6 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pmndrs/examples/tree/main/apps/hi-key-bubbles"
+    "url": "https://github.com/pmndrs/examples/tree/main/demos/hi-key-bubbles"
   }
 }

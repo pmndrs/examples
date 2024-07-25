@@ -41,6 +41,6 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pmndrs/examples/tree/main/apps/shoe-configurator"
+    "url": "https://github.com/pmndrs/examples/tree/main/demos/shoe-configurator"
   }
 }

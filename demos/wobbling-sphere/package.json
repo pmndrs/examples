@@ -39,6 +39,6 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pmndrs/examples/tree/main/apps/wobbling-sphere"
+    "url": "https://github.com/pmndrs/examples/tree/main/demos/wobbling-sphere"
   }
 }

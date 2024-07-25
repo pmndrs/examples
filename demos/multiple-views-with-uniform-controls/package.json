@@ -40,6 +40,6 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pmndrs/examples/tree/main/apps/multiple-views-with-uniform-controls"
+    "url": "https://github.com/pmndrs/examples/tree/main/demos/multiple-views-with-uniform-controls"
   }
 }

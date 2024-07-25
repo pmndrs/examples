@@ -37,6 +37,6 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pmndrs/examples/tree/main/apps/iridescent-decals"
+    "url": "https://github.com/pmndrs/examples/tree/main/demos/iridescent-decals"
   }
 }

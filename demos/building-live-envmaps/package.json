@@ -39,7 +39,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/pmndrs/examples/tree/main/apps/building-live-envmaps"
+    "url": "https://github.com/pmndrs/examples/tree/main/demos/building-live-envmaps"
   },
   "type": "module"
 }

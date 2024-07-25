@@ -36,7 +36,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/pmndrs/examples/tree/main/apps/spline-glass-shapes"
+    "url": "https://github.com/pmndrs/examples/tree/main/demos/spline-glass-shapes"
   },
   "type": "module"
 }

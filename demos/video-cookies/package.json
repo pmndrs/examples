@@ -34,7 +34,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/pmndrs/examples/tree/main/apps/video-cookies"
+    "url": "https://github.com/pmndrs/examples/tree/main/demos/video-cookies"
   },
   "type": "module"
 }

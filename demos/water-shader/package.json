@@ -37,7 +37,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/pmndrs/examples/tree/main/apps/water-shader"
+    "url": "https://github.com/pmndrs/examples/tree/main/demos/water-shader"
   },
   "type": "module"
 }

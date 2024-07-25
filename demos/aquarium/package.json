@@ -5,7 +5,7 @@
   "homepage": "https://codesandbox.io/s/n7jf0f",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pmndrs/examples/tree/main/apps/aquarium"
+    "url": "https://github.com/pmndrs/examples/tree/main/demos/aquarium"
   },
   "keywords": [],
   "dependencies": {
