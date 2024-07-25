@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request: {}
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-job:
+    runs-on: ubuntu-latest
+
+    # Cancel multiple runs when pushing to main
+    concurrency:
+      group: ${{ github.event_name != 'pull_request' && 'group-pushmain' || github.run_id }}
+      cancel-in-progress: ${{ github.event_name != 'pull_request' }}
+
+    container:
+      image: ghcr.io/pmndrs/playwright:main
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      # Build
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm ci
+      - uses: rharkor/caching-for-turbo@v1.5
+      - run: npm run build
+
+      # Tests (only for PRs)
+      - run: npm test
+        if: github.event_name == 'pull_request'
+
+      # Upload artifact (only for pushes on main)
+      - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request'
+        with:
+          path: ./out/examples
+
+  deploy-job:
+    # only for pushes on main
+    if: github.event_name != 'pull_request'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build-job
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
