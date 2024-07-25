@@ -1,4 +1,4 @@
-# Examples
+![ci badge](https://github.com/pmndrs/examples/actions/workflows/ci.yml/badge.svg?branch=main)
 
 https://docs.pmnd.rs/react-three-fiber/getting-started/examples
 
