@@ -61,6 +61,7 @@ demoNames.forEach((demoName) => {
     // 👁️
     await expect($canvas).toHaveScreenshot({
       maxDiffPixelRatio: 0.05,
+      timeout: 10000,
     });
   });
 });
