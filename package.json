@@ -3,11 +3,14 @@
   "private": true,
   "scripts": {
     "build": "turbo build2",
+    "postbuild": "./copy.sh",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "test": "./test/e2e/e2e.sh"
   },
   "devDependencies": {
+    "@playwright/test": "^1.45.2",
     "prettier": "^3.2.5",
     "turbo": "^2.0.4",
     "typescript": "^5.5.2"
@@ -18,6 +21,6 @@
   "packageManager": "npm@10.2.4",
   "workspaces": [
     "apps/*",
-    "packages/tools"
+    "packages/examples"
   ]
 }
