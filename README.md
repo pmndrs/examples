@@ -2,13 +2,13 @@
 
 https://docs.pmnd.rs/react-three-fiber/getting-started/examples
 
-index: [apps](apps)
+index: [demos](demos)
 
-To use a given [`basic-demo`](demos/basic-demo) as a template for a `new-project`:
+To use a given [`basic-demo`](demos/basic-demo) as a template for a new `myproject`:
 
 ```sh
-$ npx -y degit pmndrs/examples/demos/basic-demo new-project
-$ code new-project
+$ npx -y degit pmndrs/examples/demos/basic-demo myproject
+$ code myproject
 ```
 
 # INSTALL
@@ -33,7 +33,7 @@ $ npm run build
 
 This will:
 
-1. execute `^build2` which will `vite build` each app with:
+1. execute `^build2` which will `vite build` each `demos/*` with:
   - a `--base` set to `${BASE_PATH}/${app_name}`
   - a custom vite `--config`, whith a `monkey()` plugin that will:
     - [`deterministic`](packages/examples/src/deterministic.js) script into `src/index.jsx`
@@ -41,6 +41,7 @@ This will:
 2. build the Next.js `apps/website`
 3. copy final result into `out` folder
 
+NB: `BASE_PATH` can be unset/empty.
 
 </details>
 
