@@ -31,26 +31,20 @@ $ npm run build
 
 <details>
 
-This will execute `^build2` which will `vite build` each app with:
+This will:
 
-- a `--base` set to `/examples/${app_name}`
-- a custom vite `--config`, whith a `monkey()` plugin that will:
-  - [`deterministic`](packages/examples/src/deterministic.js) script into `src/index.jsx`
-  - monkeypatch the `<Canvas>` with [`CheesyCanvas`](packages/examples/src/CheesyCanvas.jsx) for setting up the scene for playwright screenshots
+1. execute `^build2` which will `vite build` each app with:
+  - a `--base` set to `${BASE_PATH}/${app_name}`
+  - a custom vite `--config`, whith a `monkey()` plugin that will:
+    - [`deterministic`](packages/examples/src/deterministic.js) script into `src/index.jsx`
+    - monkeypatch the `<Canvas>` with [`CheesyCanvas`](packages/examples/src/CheesyCanvas.jsx) for setting up the scene for playwright screenshots
+2. build the Next.js `apps/website`
+3. copy final result into `out` folder
+
 
 </details>
 
 Then `npx serve out`.
-
-<details>
-
-You can build a specific app thanks to [`--filter`](https://turbo.build/repo/docs/reference/run#--filter-string):
-
-```sh
-$ npm run build -- --filter aquarium
-```
-
-</details>
 
 # test
 

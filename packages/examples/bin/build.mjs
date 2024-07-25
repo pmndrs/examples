@@ -21,7 +21,7 @@ const viteConfigPath = resolve(__dirname, "../src/vite.config.ts");
 
 const cmd = spawn(
   "npx",
-  ["vite", "build", "--config", viteConfigPath, "--base", `/examples/${name}`],
+  ["vite", "build", "--config", viteConfigPath, "--base", `${process.env.BASE_PATH || ''}/${name}`],
   {
     stdio: "inherit",
     env: process.env,

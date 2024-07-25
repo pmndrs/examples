@@ -52,7 +52,7 @@ demoNames.forEach((demoName) => {
     await waitForServer();
 
     // ⏳ "r3f" event
-    await page.goto(`${host}/examples/${demoName}/?saycheese`);
+    await page.goto(`${host}${process.env.BASE_PATH || ''}/${demoName}/?saycheese`);
     await waitForEvent(page, "playwright:snapshot-ready");
 
     // 📸 <canvas>

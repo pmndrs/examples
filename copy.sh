@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DST="out/examples"
+DST="out${BASE_PATH}"
 
 for app in demos/*; do
   if [ -d "$app/dist" ]; then
@@ -11,3 +11,6 @@ for app in demos/*; do
     echo "Copied $app/dist to $DST/$app_name"
   fi
 done
+
+cp -r apps/website/out/* $DST/
+echo "Copied apps/website/out to $DST"

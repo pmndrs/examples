@@ -30,7 +30,8 @@ jobs:
     steps:
       # Build
       - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
+      - id: configurepages
+        uses: actions/configure-pages@v5
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
@@ -38,16 +39,20 @@ jobs:
       - run: npm ci
       - uses: rharkor/caching-for-turbo@v1.5
       - run: npm run build
+        env:
+          BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
 
       # Tests (only for PRs)
       - run: npm test
         if: github.event_name == 'pull_request'
+        env:
+          BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
 
       # Upload artifact (only for pushes on main)
       - uses: actions/upload-pages-artifact@v3
         if: github.event_name != 'pull_request'
         with:
-          path: ./out/examples
+          path: ./out${{ steps.configurepages.outputs.base_path }}
 
   deploy-job:
     # only for pushes on main
