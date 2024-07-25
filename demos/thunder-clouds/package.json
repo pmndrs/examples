@@ -1,0 +1,58 @@
+{
+  "name": "thunder-clouds",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@pmndrs/assets": "^1.6.0",
+    "@react-three/drei": "^9.107.0",
+    "@react-three/fiber": "^8.16.8",
+    "@react-three/postprocessing": "^2.15.1",
+    "@react-three/rapier": "^1.4.0",
+    "leva": "^0.9.35",
+    "maath": "^0.10.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "three": "^0.165.0",
+    "uuid": "^9.0.1"
+  },
+  "scripts": {
+    "dev": "vite --host --open",
+    "build": "tsc && vite build",
+    "build2": "tsc && vite-build $npm_package_name",
+    "preview": "vite preview"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "keywords": [],
+  "description": "Trying out drei's new cloud component.",
+  "homepage": "https://codesandbox.io/s/gwthnh",
+  "type": "module",
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@types/three": "^0.165.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pmndrs/examples/tree/main/demos/thunder-clouds"
+  }
+}

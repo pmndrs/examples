@@ -2,9 +2,17 @@
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
     "build2": {
-      "dependsOn": ["^build2"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*", "../../packages/examples/**"],
-      "outputs": ["dist/**"]
+      "inputs": ["$TURBO_DEFAULT$", "../../packages/examples/**"],
+      "outputs": ["dist/**"],
+      "cache": true,
+      "env": ["BASE_PATH"]
+    },
+    "website#build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", "next.config.mjs"],
+      "outputs": [".next/**", "!.next/cache/**", "out/**"],
+      "cache": true,
+      "env": ["BASE_PATH"]
     },
     "lint": {
       "dependsOn": ["^lint"]

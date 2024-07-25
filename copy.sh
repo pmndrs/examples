@@ -1,8 +1,8 @@
 #!/bin/bash
 
-DST="out/examples"
+DST="out${BASE_PATH}"
 
-for app in apps/*; do
+for app in demos/*; do
   if [ -d "$app/dist" ]; then
     app_name=$(basename "$app")
     mkdir -p "$DST/$app_name"
@@ -11,3 +11,6 @@ for app in apps/*; do
     echo "Copied $app/dist to $DST/$app_name"
   fi
 done
+
+cp -r apps/website/out/* $DST/
+echo "Copied apps/website/out to $DST"

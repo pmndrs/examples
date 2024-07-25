@@ -1,0 +1,46 @@
+{
+  "name": "image-gallery",
+  "version": "1.0.0",
+  "description": "Stage a couple of frames with a reflective, blurred out ground.",
+  "homepage": "https://codesandbox.io/s/lx2h8",
+  "keywords": [
+    "image",
+    "meshreflectormaterial"
+  ],
+  "dependencies": {
+    "@pmndrs/branding": "^0.0.8",
+    "@react-three/drei": "^9.107.0",
+    "@react-three/fiber": "^8.16.8",
+    "maath": "^0.6.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "three": "^0.165.0",
+    "uuid-by-string": "^4.0.0",
+    "wouter": "^2.11.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@types/three": "^0.165.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1"
+  },
+  "scripts": {
+    "dev": "vite --host --open",
+    "build": "tsc && vite build",
+    "build2": "tsc && vite-build $npm_package_name",
+    "preview": "vite preview"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pmndrs/examples/tree/main/demos/image-gallery"
+  }
+}

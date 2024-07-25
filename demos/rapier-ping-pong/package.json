@@ -1,0 +1,48 @@
+{
+  "name": "rapier-ping-pong",
+  "version": "1.0.0",
+  "description": "Mini ping-pong implementation using rapier-physics.",
+  "homepage": "https://codesandbox.io/s/ptdgrn",
+  "keywords": [],
+  "dependencies": {
+    "@pmndrs/branding": "^0.0.8",
+    "@react-three/cannon": "^4.5.0",
+    "@react-three/drei": "^9.107.0",
+    "@react-three/fiber": "^8.16.8",
+    "@react-three/postprocessing": "^2.15.12",
+    "@react-three/rapier": "^1.4.0",
+    "lerp": "^1.0.3",
+    "lodash-es": "^4.17.21",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "three": "^0.165.0",
+    "three-stdlib": "^2.29.4",
+    "valtio": "^1.13.0",
+    "zustand": "^4.5.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@types/three": "^0.165.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1"
+  },
+  "scripts": {
+    "dev": "vite --host --open",
+    "build": "tsc && vite build",
+    "build2": "tsc && vite-build $npm_package_name",
+    "preview": "vite preview"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pmndrs/examples/tree/main/demos/rapier-ping-pong"
+  },
+  "type": "module"
+}
