@@ -2,7 +2,8 @@
   "name": "examples",
   "private": true,
   "scripts": {
-    "build": "turbo build2 && ./copy.sh",
+    "build": "turbo build2",
+    "postbuild": "./copy.sh",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
