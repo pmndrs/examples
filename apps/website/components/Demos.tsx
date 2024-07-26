@@ -13,10 +13,12 @@ export default function Demos({ demos }: { demos: Demo[] }) {
 
   useEffect(() => {
     if (!hash)
-      return setHash(window.location.hash.substring(1) || demos[demoIndex].url);
+      return setHash(
+        window.location.hash.substring(1) || demos[demoIndex].name
+      );
 
-    const currentIndex = demos.findIndex(({ url }) =>
-      hash === `#${url}` ? true : false
+    const currentIndex = demos.findIndex(({ name }) =>
+      hash === `#${name}` ? true : false
     );
     if (currentIndex !== -1) {
       setDemoIndex(currentIndex);
@@ -27,14 +29,14 @@ export default function Demos({ demos }: { demos: Demo[] }) {
     <>
       <nav className="fixed right-0 top-0">
         <ul className="flex flex-col gap-4 m-8">
-          {demos.map(({ thumb, url }, i) => {
+          {demos.map(({ name, thumb, url }, i) => {
             return (
               <li key={thumb}>
                 <a
                   href={url}
                   onClick={(e) => {
                     e.preventDefault();
-                    setHash(url);
+                    setHash(name);
                   }}
                   className={"block border-2"}
                   style={{

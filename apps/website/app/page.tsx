@@ -5,6 +5,7 @@ const BASE_PATH = process.env.BASE_PATH || "";
 const demos = ["aquarium", "baking-soft-shadows", "basic-demo"].map((name) => {
   const url = `${BASE_PATH}/${name}`;
   return {
+    name,
     thumb: `${url}/thumbnail.png`,
     url,
   };
