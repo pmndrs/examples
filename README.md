@@ -1,7 +1,5 @@
 ![ci badge](https://github.com/pmndrs/examples/actions/workflows/ci.yml/badge.svg?branch=main)
 
-https://docs.pmnd.rs/react-three-fiber/getting-started/examples
-
 index: [demos](demos)
 
 To use a given [`basic-demo`](demos/basic-demo) as a template for a new `myproject`:
@@ -66,3 +64,7 @@ $ docker run --init --rm -v $(pwd):/app -w /app ghcr.io/pmndrs/playwright:main n
 
 > [!IMPORTANT]
 > If running on mac m-series, you'll need to add `--platform linux/arm64` to the docker command.
+
+# Colophon
+
+- https://docs.pmnd.rs/react-three-fiber/getting-started/examples
