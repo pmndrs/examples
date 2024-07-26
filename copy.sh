@@ -2,6 +2,8 @@
 
 DST="out${BASE_PATH}"
 
+rm -rf out
+
 for app in demos/*; do
   if [ -d "$app/dist" ]; then
     app_name=$(basename "$app")

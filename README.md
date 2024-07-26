@@ -34,14 +34,21 @@ $ npm run build
 This will:
 
 1. execute `^build2` which will `vite build` each `demos/*` with:
-  - a `--base` set to `${BASE_PATH}/${app_name}`
-  - a custom vite `--config`, whith a `monkey()` plugin that will:
-    - [`deterministic`](packages/examples/src/deterministic.js) script into `src/index.jsx`
-    - monkeypatch the `<Canvas>` with [`CheesyCanvas`](packages/examples/src/CheesyCanvas.jsx) for setting up the scene for playwright screenshots
+
+- a `--base` set to `${BASE_PATH}/${app_name}`
+- a custom vite `--config`, whith a `monkey()` plugin that will:
+  - [`deterministic`](packages/examples/src/deterministic.js) script into `src/index.jsx`
+  - monkeypatch the `<Canvas>` with [`CheesyCanvas`](packages/examples/src/CheesyCanvas.jsx) for setting up the scene for playwright screenshots
+
 2. build the Next.js `apps/website`
 3. copy final result into `out` folder
 
-NB: `BASE_PATH` can be unset/empty.
+> [!TIP]
+> This is totally fine `BASE_PATH` to be unset/empty. But for debug purposes(to be 1:1 with GitHub pages) you can:
+>
+> ```sh
+> $ BASE_PATH=/examples npm run build
+> ```
 
 </details>
 
