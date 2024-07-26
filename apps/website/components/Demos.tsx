@@ -1,25 +1,27 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 import type { Demo } from "../app/page";
 
 export default function Demos({ demos }: { demos: Demo[] }) {
-  console.log("demos", demos);
+  // console.log("demos", demos);
+  const [hash, setHash] = useHash();
 
   const [demoIndex, setDemoIndex] = useState(0);
 
-  const [hash, setHash] = useHash();
-
   useEffect(() => {
+    if (!hash)
+      return setHash(window.location.hash.substring(1) || demos[demoIndex].url);
+
     const currentIndex = demos.findIndex(({ url }) =>
       hash === `#${url}` ? true : false
     );
-    if (currentIndex) {
+    if (currentIndex !== -1) {
       setDemoIndex(currentIndex);
     }
-  }, [demos, hash]);
+  }, [demoIndex, demos, hash, setHash]);
 
   return (
     <>
@@ -39,12 +41,7 @@ export default function Demos({ demos }: { demos: Demo[] }) {
                     borderColor: i === demoIndex ? "black" : "transparent",
                   }}
                 >
-                  <Image
-                    src={thumb}
-                    alt=""
-                    className="object-cover h-32"
-                    onClick={(e) => setDemoIndex(i)}
-                  />
+                  <Image src={thumb} alt="" className="object-cover h-32" />
                 </a>
               </li>
             );
