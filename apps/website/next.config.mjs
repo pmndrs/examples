@@ -1,9 +1,12 @@
-const basePath = process.env.BASE_PATH || undefined
+const basePath = process.env.BASE_PATH || undefined;
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export",
-  basePath
+  basePath,
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;
