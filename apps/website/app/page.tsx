@@ -4,11 +4,15 @@ import { useEffect, useState } from "react";
 import Image from "../components/Image";
 import Link from "next/link";
 
-const demos = [
-  { thumb: "/aquarium/thumbnail.png", url: "/aquarium" },
-  { thumb: "/baking-soft-shadows/thumbnail.png", url: "/baking-soft-shadows" },
-  { thumb: "/basic-demo/thumbnail.png", url: "/basic-demo" },
-];
+const BASE_PATH = process.env.BASE_PATH || "";
+
+const demos = ["aquarium", "baking-soft-shadows", "basic-demo"].map((name) => {
+  const url = `${BASE_PATH}/${name}`;
+  return {
+    thumb: `${url}/thumbnail.png`,
+    url,
+  };
+});
 
 export default function Home() {
   const [demoIndex, setDemoIndex] = useState(0);
