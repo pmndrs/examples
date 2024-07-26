@@ -22,6 +22,8 @@ export default function Demos({ demos }: { demos: Demo[] }) {
     );
     if (currentIndex !== -1) {
       setDemoIndex(currentIndex);
+    } else {
+      setHash(demos[demoIndex].name); // not found hash => fallback to default demo
     }
   }, [demoIndex, demos, hash, setHash]);
 
