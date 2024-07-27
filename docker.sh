@@ -14,4 +14,4 @@ if [ "$1" = "--update" ]; then
   UPDATE_FLAG="-- -- --update-snapshots"
 fi
 
-docker run -it --rm --init -v "$(pwd)":/app -w /app $BASE_PATH_ARG node:20-bookworm /bin/bash -c "npm install && npx -y playwright@1.45.3 install --with-deps chromium && npm run test $UPDATE_FLAG"
+docker run --rm --init -v "$(pwd)":/app -w /app $BASE_PATH_ARG node:20-bookworm /bin/bash -c "npm install && npx -y playwright@1.45.3 install --with-deps chromium && npm run test $UPDATE_FLAG"
