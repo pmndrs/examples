@@ -2,14 +2,16 @@
   "name": "examples",
   "private": true,
   "scripts": {
-    "build": "turbo build2 --filter=./demos/* && turbo website#build && ./copy.sh",
+    "build": "turbo build2 --filter=./demos/{aquarium,baking-soft-shadows} && turbo website#build && ./copy.sh",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "test": "./test/e2e/e2e.sh"
+    "test": "turbo test --filter=./demos/* --continue"
   },
   "devDependencies": {
-    "@playwright/test": "^1.45.2",
+    "@playwright/test": "^1.45.3",
+    "@types/minimist": "^1.2.5",
+    "playwright": "^1.45.3",
     "prettier": "^3.2.5",
     "turbo": "^2.0.4",
     "typescript": "^5.5.2"

@@ -56,14 +56,31 @@ Then `npx serve out`.
 
 Pre-requisites:
 
+- Docker engine
 - [build](#build)
 
 ```sh
-$ docker run --init --rm -v $(pwd):/app -w /app ghcr.io/pmndrs/playwright:main npm test
+$ docker run --init --rm -v $(pwd):/app -w /app ghcr.io/pmndrs/playwright:main \
+    npm test
 ```
 
 > [!IMPORTANT]
 > If running on mac m-series, you'll need to add `--platform linux/arm64` to the docker command.
+
+> [!IMPORTANT]
+> If you built the project with eg. `BASE_PATH=/examples` you'll need to add `-e BASE_PATH=/examples` to the docker command.
+
+To update the snapshots: `npm test -- -- --update-snapshots`
+
+<details>
+
+<summary>eg. for my mac (m1)</summary>
+
+```sh
+$ docker build -t examples --progress=plain . && docker run --init -it --rm --ipc=host -v $(pwd)/packages/examples/snapshot.test.js-snapshots/:/app/packages/examples/snapshot.test.js-snapshots/ examples npm test
+```
+
+</details>
 
 # Colophon
 

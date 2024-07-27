@@ -7,7 +7,8 @@
     "./deterministic": "./src/deterministic.js"
   },
   "bin": {
-    "vite-build": "./bin/build.mjs"
+    "vite-build": "./bin/build.mjs",
+    "vite-test": "./bin/test.mjs"
   },
   "dependencies": {
     "@babel/parser": "^7.24.8",

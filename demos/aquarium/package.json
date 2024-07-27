@@ -28,7 +28,8 @@
     "dev": "vite --host --open",
     "build": "tsc && vite build",
     "build2": "tsc && vite-build $npm_package_name",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vite-test $npm_package_name"
   },
   "browserslist": [
     ">0.2%",

@@ -3,8 +3,21 @@
   "globalEnv": ["BASE_PATH"],
   "tasks": {
     "build2": {
-      "inputs": ["$TURBO_DEFAULT$", "../../packages/examples/**"],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "../../packages/examples/bin/build.mjs",
+        "../../packages/examples/src/{CheesyCanvas.jsx,deterministic.js,vite-plugin-monkey.js,vite.config.ts}"
+      ],
       "outputs": ["dist/**"],
+      "cache": true
+    },
+    "test": {
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "dist/**",
+        "../../packages/examples/bin/test.mjs",
+        "../../packages/examples/{playwright.config.ts,snapshot.test.js}"
+      ],
       "cache": true
     },
     "website#build": {
