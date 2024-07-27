@@ -2,7 +2,7 @@
   "name": "examples",
   "private": true,
   "scripts": {
-    "build": "turbo build2 --filter=./demos/{aquarium,baking-soft-shadows} && turbo website#build && ./copy.sh",
+    "build": "turbo build2 --filter=./demos/{aquarium,baking-soft-shadows} && turbo website#build && ./packages/examples/bin/copy.sh",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",

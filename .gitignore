@@ -18,6 +18,7 @@ test-results
 
 # Turbo
 .turbo
+pruned
 
 # Vercel
 .vercel

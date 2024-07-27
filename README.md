@@ -56,31 +56,31 @@ Then `npx serve out`.
 
 Pre-requisites:
 
-- Docker engine
 - [build](#build)
 
 ```sh
-$ docker run --init --rm -v $(pwd):/app -w /app ghcr.io/pmndrs/playwright:main \
-    npm test
+$ npm test
 ```
 
 > [!IMPORTANT]
-> If running on mac m-series, you'll need to add `--platform linux/arm64` to the docker command.
+> If you built the project with eg. `BASE_PATH=/examples` you'll need to:
+>
+> ```sh
+> $ BASE_PATH=/examples npm test
+> ```
 
-> [!IMPORTANT]
-> If you built the project with eg. `BASE_PATH=/examples` you'll need to add `-e BASE_PATH=/examples` to the docker command.
+## Docker
 
-To update the snapshots: `npm test -- -- --update-snapshots`
-
-<details>
-
-<summary>eg. for my mac (m1)</summary>
+For reproductible snapshots, we use docker to run the tests:
 
 ```sh
-$ docker build -t examples --progress=plain . && docker run --init -it --rm --ipc=host -v $(pwd)/packages/examples/snapshot.test.js-snapshots/:/app/packages/examples/snapshot.test.js-snapshots/ examples npm test
+$ docker build -t pmndrs-examples --progress=plain .
+$ docker run --init -it --rm --ipc=host \
+  -v $(pwd)/packages/examples/snapshot.test.js-snapshots/:/app/packages/examples/snapshot.test.js-snapshots/ \
+  pmndrs-examples sh -c "npm run build && npm test"
 ```
 
-</details>
+To update the snapshots: `npm test -- -- --update-snapshots`
 
 # Colophon
 

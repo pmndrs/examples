@@ -1,4 +1,6 @@
 .git
 .turbo
+dist
 node_modules
 out
+pruned
