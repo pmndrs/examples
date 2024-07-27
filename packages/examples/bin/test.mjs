@@ -22,7 +22,8 @@ const playwrightConfigPath = resolve(__dirname, "../playwright.config.ts");
 
 function startVitePreview(base = "/") {
   return new Promise((resolve) => {
-    // Start the Vite preview server
+    console.log("Starting Vite...");
+
     const viteProcess = spawn(
       "npx",
       ["vite", "preview", "--host", "--base", base],
@@ -59,10 +60,21 @@ const { process: viteProcess, host } = await startVitePreview(
 );
 
 // Ensure the Vite server is killed on process exit
-const cleanup = () => viteProcess.kill();
-process.on("exit", cleanup);
-process.on("SIGINT", cleanup);
-process.on("SIGTERM", cleanup);
+const stopVitePreview = () => {
+  return new Promise((resolve) => {
+    if (viteProcess.killed) {
+      console.log("Vite already stopped.");
+      return resolve();
+    }
+    console.log("Stopping Vite...");
+
+    viteProcess.on("exit", () => {
+      console.log("Vite is now stopped.");
+      resolve();
+    });
+    viteProcess.kill();
+  });
+};
 
 // Run Playwright tests
 const args = ["playwright", "test", "--config", playwrightConfigPath];
@@ -79,7 +91,14 @@ const playwrightProcess = spawn("npx", args, {
   },
 });
 
-playwrightProcess.on("exit", (code) => {
-  cleanup();
+playwrightProcess.on("exit", async (code) => {
+  console.log("Playright finished", 0);
+
+  await stopVitePreview();
+
   process.exit(code);
 });
+
+process.on("exit", stopVitePreview);
+// process.on("SIGINT", cleanup);
+// process.on("SIGTERM", cleanup);

@@ -9,11 +9,10 @@
     "test": "turbo test --filter=./demos/* --continue --concurrency=1 --force"
   },
   "devDependencies": {
-    "@playwright/test": "^1.45.3",
+    "@playwright/test": "1.45.3",
     "@types/minimist": "^1.2.5",
-    "playwright": "^1.45.3",
     "prettier": "^3.2.5",
-    "turbo": "^2.0.4",
+    "turbo": "^2.0.9",
     "typescript": "^5.5.2"
   },
   "engines": {
