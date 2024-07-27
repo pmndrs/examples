@@ -21,12 +21,6 @@ jobs:
       group: ${{ github.event_name != 'pull_request' && 'group-pushmain' || github.run_id }}
       cancel-in-progress: ${{ github.event_name != 'pull_request' }}
 
-    container:
-      image: ghcr.io/pmndrs/playwright:main
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-
     steps:
       # Build
       - uses: actions/checkout@v4
@@ -43,7 +37,7 @@ jobs:
           BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
 
       # Tests (only for PRs)
-      - run: npm test
+      - run: ./docker.sh
         if: github.event_name == 'pull_request'
         env:
           BASE_PATH: ${{ steps.configurepages.outputs.base_path }}

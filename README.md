@@ -62,6 +62,8 @@ Pre-requisites:
 $ npm test
 ```
 
+To update the snapshots: `npm test -- -- --update-snapshots`
+
 > [!IMPORTANT]
 > If you built the project with eg. `BASE_PATH=/examples` you'll need to:
 >
@@ -74,13 +76,17 @@ $ npm test
 For reproductible snapshots, we use docker to run the tests:
 
 ```sh
-$ docker build -t pmndrs-examples --progress=plain .
-$ docker run --init -it --rm --ipc=host \
-  -v $(pwd)/packages/examples/snapshot.test.js-snapshots/:/app/packages/examples/snapshot.test.js-snapshots/ \
-  pmndrs-examples sh -c "npm run build && npm test"
+$ ./docker.sh
 ```
 
-To update the snapshots: `npm test -- -- --update-snapshots`
+To update the snapshots: `./docker.sh --update`
+
+> [!IMPORTANT]
+> If you built the project with eg. `BASE_PATH=/examples` you'll need to:
+>
+> ```sh
+> $ BASE_PATH=/examples ./docker.sh
+> ```
 
 # Colophon
 

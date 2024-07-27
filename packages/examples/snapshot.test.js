@@ -1,8 +1,6 @@
 import http from "http";
 import { test, expect } from "@playwright/test";
 
-console.log("HOST", process.env.HOST);
-console.log("DEMONAME", process.env.DEMONAME);
 // console.log(process.argv);
 
 const host = process.env.HOST;

@@ -2,11 +2,11 @@
   "name": "examples",
   "private": true,
   "scripts": {
-    "build": "turbo build2 --filter=./demos/{aquarium,baking-soft-shadows} && turbo website#build && ./packages/examples/bin/copy.sh",
+    "build": "turbo build2 --filter=./demos/{aquarium,baking-soft-shadows} && turbo website#build && ./copy.sh",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "test": "turbo test --filter=./demos/* --continue"
+    "test": "turbo test --filter=./demos/* --continue --concurrency=1"
   },
   "devDependencies": {
     "@playwright/test": "^1.45.3",
