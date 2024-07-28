@@ -76,16 +76,16 @@ To update the snapshots: `npm test -- -- --update-snapshots`
 For reproductible snapshots, we use docker to run the tests:
 
 ```sh
-$ ./docker.sh
+$ ./test.sh
 ```
 
-To update the snapshots: `./docker.sh --update`
+To update the snapshots: `./test.sh --update`
 
 > [!IMPORTANT]
 > If you built the project with eg. `BASE_PATH=/examples` you'll need to:
 >
 > ```sh
-> $ BASE_PATH=/examples ./docker.sh
+> $ BASE_PATH=/examples ./test.sh
 > ```
 
 # Colophon

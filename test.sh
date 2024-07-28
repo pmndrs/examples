@@ -14,6 +14,7 @@ if [ "$1" = "--update" ]; then
   UPDATE_FLAG="-- -- --update-snapshots"
 fi
 
+# Intermediary `myplaywright` image with Node+Playwright installed
 docker build -t myplaywright -f - . <<EOF
 FROM node:20-bookworm
 RUN npx -y playwright@1.45.3 install --with-deps chromium

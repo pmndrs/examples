@@ -91,8 +91,8 @@ teardown(0);
 function teardown(code = 0) {
   console.log("Tearing down...");
 
-  playwright.kill();
-  vite.kill();
+  playwright?.kill();
+  vite?.kill();
   process.exit(code);
 }
 
