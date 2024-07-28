@@ -19,4 +19,4 @@ FROM node:20-bookworm
 RUN npx -y playwright@1.45.3 install --with-deps chromium
 EOF
 
-docker run -it --rm --init -v "$(pwd)":/app -w /app $BASE_PATH_ARG myplaywright /bin/sh -c "npm install && npm run test $UPDATE_FLAG && echo 'ok' || echo 'failed'"
+docker run --rm -v "$(pwd)":/app -w /app $BASE_PATH_ARG myplaywright /bin/sh -c "npm install && npm test $UPDATE_FLAG && echo 'ok' || echo 'failed'"
