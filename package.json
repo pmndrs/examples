@@ -22,6 +22,6 @@
   "workspaces": [
     "apps/*",
     "demos/*",
-    "packages/examples"
+    "packages/e2e"
   ]
 }

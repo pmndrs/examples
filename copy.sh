@@ -11,7 +11,7 @@ for app in demos/*; do
     cp -r "$app/dist/"* "$DST/$app_name/"
     
     THUMNAIL_FILE=$(ls $app/thumbnail.png 2>/dev/null)
-    SNAPSHOT_FILE=$(ls packages/examples/snapshot.test.js-snapshots/${app_name}-*.png 2>/dev/null)
+    SNAPSHOT_FILE=$(ls packages/e2e/snapshot.test.js-snapshots/${app_name}-*.png 2>/dev/null)
     if [ -n "$SNAPSHOT_FILE" ]; then
       cp "$SNAPSHOT_FILE" "$DST/$app_name/thumbnail.png"
     elif [ -n "$THUMNAIL_FILE" ]; then

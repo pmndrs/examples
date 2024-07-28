@@ -11,7 +11,7 @@ export default function vitePluginMonkey() {
       // In `src/index.[jt]sx`, add to the top of the file:
       //
       // ```
-      // import '@pmndrs/examples/deterministic';
+      // import '@examples/e2e/deterministic';
       // ```
       //
 
@@ -32,7 +32,7 @@ export default function vitePluginMonkey() {
             // Insert the import statement at the top of the file
             const importDeclaration = t.importDeclaration(
               [],
-              t.stringLiteral("@pmndrs/examples/deterministic")
+              t.stringLiteral("@examples/e2e/deterministic")
             );
 
             path.node.body.unshift(importDeclaration);
@@ -59,7 +59,7 @@ export default function vitePluginMonkey() {
       //
       // ```
       // import { useFrame, ... , useThree } from '@react-three/fiber';
-      // import CheesyCanvas from '@pmndrs/examples/CheesyCanvas';
+      // import CheesyCanvas from '@examples/e2e/CheesyCanvas';
       // const Canvas = CheesyCanvas;
       // ```
       //
@@ -110,7 +110,7 @@ export default function vitePluginMonkey() {
 
               // If we removed a Canvas import just before, we want to add:
               // ```
-              // import CheesyCanvas from '@pmndrs/examples/CheesyCanvas'; // (I)
+              // import CheesyCanvas from '@examples/e2e/CheesyCanvas'; // (I)
               // const Canvas = CheesyCanvas; // (II)
               // ```
 
@@ -118,7 +118,7 @@ export default function vitePluginMonkey() {
                 // (I)
                 const customCanvasImport = t.importDeclaration(
                   [t.importDefaultSpecifier(t.identifier("CheesyCanvas"))],
-                  t.stringLiteral("@pmndrs/examples/CheesyCanvas")
+                  t.stringLiteral("@examples/e2e/CheesyCanvas")
                 );
 
                 // (II)

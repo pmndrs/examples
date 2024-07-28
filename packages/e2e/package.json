@@ -1,5 +1,5 @@
 {
-  "name": "@pmndrs/examples",
+  "name": "@examples/e2e",
   "type": "module",
   "version": "0.0.1",
   "exports": {
