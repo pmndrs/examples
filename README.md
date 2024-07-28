@@ -73,11 +73,14 @@ To update the snapshots: `npm test -- -- --update-snapshots`
 
 ## Docker
 
-For reproductible snapshots, we use docker to run the tests:
+For generating reproductible snapshots, we still build static `out/` folder locally, but use dockerised environment to run playwright tests against:
 
 ```sh
 $ ./docker.sh
 ```
+
+> [!NOTE]
+> A `-v "$(pwd)":/app` volume is mounted to the container, so any snapshot will be written to the host machine.
 
 To update the snapshots: `./docker.sh --update`
 
