@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   build-job:
-    runs-on: macos-14
+    runs-on: ubuntu-latest
 
     # Cancel multiple runs when pushing to main
     concurrency:
