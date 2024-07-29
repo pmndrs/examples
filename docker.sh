@@ -2,15 +2,13 @@
 
 set -ex
 
-# Check if BASE_PATH is set and prepare the argument
-BASE_PATH_ARG=""
-if [ -n "$BASE_PATH" ]; then
-  BASE_PATH_ARG="-e BASE_PATH=$BASE_PATH"
-fi
-
 UPDATE_FLAG=""
 if [ "$1" = "--update" ]; then
-  UPDATE_FLAG="--update"
+  UPDATE_FLAG="-- -- --update-snapshots"
 fi
 
-docker run --rm -v "$(pwd)":/app -w /app $BASE_PATH_ARG ghcr.io/pmndrs/playwright:main sh -c "./test.sh $UPDATE_FLAG"
+
+docker run --rm  \
+  -w /app -v "$(pwd)":/app \
+  -e BASE_PATH \
+  ghcr.io/pmndrs/playwright:main sh -c "npm i && npm test $UPDATE_FLAG" && echo "ok" || echo "failed"
