@@ -23,7 +23,12 @@
     "website#build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", "next.config.mjs"],
-      "outputs": [".next/**", "!.next/cache/**", "out/**"],
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**",
+        "out/**",
+        "../../packages/e2e/snapshot.test.js-snapshots/**"
+      ],
       "cache": true
     },
     "lint": {
