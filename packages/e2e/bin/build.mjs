@@ -8,8 +8,8 @@ import { fileURLToPath } from "node:url";
 var argv = minimist(process.argv.slice(2));
 // console.log("argv=", argv);
 
-const name = argv._[0];
-if (!name) {
+const demoname = argv._[0];
+if (!demoname) {
   console.error("Please provide the app name as the first argument.");
   process.exit(1);
 }
@@ -21,7 +21,14 @@ const viteConfigPath = resolve(__dirname, "../src/vite.config.ts");
 
 const cmd = spawn(
   "npx",
-  ["vite", "build", "--config", viteConfigPath, "--base", `${process.env.BASE_PATH || ''}/${name}`],
+  [
+    "vite",
+    "build",
+    "--config",
+    viteConfigPath,
+    "--base",
+    `${process.env.BASE_PATH || ""}/${demoname}`,
+  ],
   {
     stdio: "inherit",
     env: process.env,

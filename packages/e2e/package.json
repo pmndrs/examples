@@ -1,5 +1,5 @@
 {
-  "name": "@pmndrs/examples",
+  "name": "@examples/e2e",
   "type": "module",
   "version": "0.0.1",
   "exports": {
@@ -7,7 +7,8 @@
     "./deterministic": "./src/deterministic.js"
   },
   "bin": {
-    "vite-build": "./bin/build.mjs"
+    "e2e-build": "./bin/build.mjs",
+    "e2e-test": "./bin/test.mjs"
   },
   "dependencies": {
     "@babel/parser": "^7.24.8",

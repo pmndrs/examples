@@ -2,16 +2,17 @@
   "name": "examples",
   "private": true,
   "scripts": {
-    "build": "turbo build2 --filter=./demos/* && turbo website#build && ./copy.sh",
+    "build": "turbo build2 --filter=./demos/* && turbo website#build && ./out.sh",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "test": "./test/e2e/e2e.sh"
+    "test": "turbo test --filter=./demos/* --continue"
   },
   "devDependencies": {
-    "@playwright/test": "^1.45.2",
+    "@playwright/test": "1.45.3",
+    "@types/minimist": "^1.2.5",
     "prettier": "^3.2.5",
-    "turbo": "^2.0.4",
+    "turbo": "^2.0.9",
     "typescript": "^5.5.2"
   },
   "engines": {
@@ -21,6 +22,6 @@
   "workspaces": [
     "apps/*",
     "demos/*",
-    "packages/examples"
+    "packages/e2e"
   ]
 }

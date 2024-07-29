@@ -35,8 +35,8 @@ This will:
 
 - a `--base` set to `${BASE_PATH}/${app_name}`
 - a custom vite `--config`, whith a `monkey()` plugin that will:
-  - [`deterministic`](packages/examples/src/deterministic.js) script into `src/index.jsx`
-  - monkeypatch the `<Canvas>` with [`CheesyCanvas`](packages/examples/src/CheesyCanvas.jsx) for setting up the scene for playwright screenshots
+  - [`deterministic`](packages/e2e/src/deterministic.js) script into `src/index.jsx`
+  - monkeypatch the `<Canvas>` with [`CheesyCanvas`](packages/e2e/src/CheesyCanvas.jsx) for setting up the scene for playwright screenshots
 
 2. build the Next.js `apps/website`
 3. copy final result into `out` folder
@@ -58,12 +58,41 @@ Pre-requisites:
 
 - [build](#build)
 
+> [!WARNING]
+> Do not forget to (re-)[build]() first!
+
 ```sh
-$ docker run --init --rm -v $(pwd):/app -w /app ghcr.io/pmndrs/playwright:main npm test
+$ npm test
 ```
 
+To update the snapshots: `npm test -- -- --update-snapshots`
+
 > [!IMPORTANT]
-> If running on mac m-series, you'll need to add `--platform linux/arm64` to the docker command.
+> If you built the project with eg. `BASE_PATH=/examples` you'll need to:
+>
+> ```sh
+> $ BASE_PATH=/examples npm test
+> ```
+
+## Docker
+
+For generating reproductible snapshots, we still build static `out/` folder locally, but use dockerised environment to run playwright tests against:
+
+```sh
+$ ./test.sh
+```
+
+> [!NOTE]
+> A `-v "$(pwd)":/app` volume is mounted to the container, so any snapshot will be written to the host machine.
+
+To update the snapshots: `./test.sh --update`
+
+> [!IMPORTANT]
+> If you built the project with eg. `BASE_PATH=/examples` you'll need to:
+>
+> ```sh
+> $ BASE_PATH=/examples ./test.sh
+> ```
 
 # Colophon
 
