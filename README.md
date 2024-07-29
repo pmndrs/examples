@@ -59,7 +59,7 @@ Pre-requisites:
 - [build](#build)
 
 > [!WARNING]
-> Do not forget to (re-)[build]() first!
+> Do not forget to (re-)[build](#build) first!
 
 ```sh
 $ npm test
