@@ -43,7 +43,7 @@ jobs:
           BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
 
       # Tests (only for PRs)
-      - run: ./docker.sh
+      - run: ./test.sh
         if: github.event_name == 'pull_request'
         env:
           BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
