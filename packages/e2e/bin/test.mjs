@@ -73,7 +73,11 @@ function startPlaywright(url) {
 
     proc.on("close", (code) => {
       console.log("Playwright finished", code);
-      resolve();
+      if (code !== 0) {
+        throw new Error(`Playwright test has failed`);
+      } else {
+        resolve();
+      }
     });
 
     proc.on("error", reject);
