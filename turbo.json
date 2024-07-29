@@ -12,7 +12,6 @@
       "cache": true
     },
     "test": {
-      "dependsOn": ["build2"],
       "inputs": [
         "$TURBO_DEFAULT$",
         "dist/**",
