@@ -11,17 +11,8 @@
       "outputs": ["dist/**"],
       "cache": true
     },
-    "test": {
-      "inputs": [
-        "$TURBO_DEFAULT$",
-        "dist/**",
-        "../../packages/e2e/bin/test.mjs",
-        "../../packages/e2e/{playwright.config.ts,snapshot.test.js}"
-      ],
-      "cache": true
-    },
-    "website#build": {
-      "dependsOn": ["^build"],
+    "website#build2": {
+      "dependsOn": ["^build2"],
       "inputs": ["$TURBO_DEFAULT$", "next.config.mjs"],
       "outputs": [
         ".next/**",
@@ -31,10 +22,25 @@
       ],
       "cache": true
     },
+    "test": {
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "dist/**",
+        "../../packages/e2e/bin/test.mjs",
+        "../../packages/e2e/{playwright.config.ts,snapshot.test.js}"
+      ],
+      "cache": true
+    },
+
     "lint": {
       "dependsOn": ["^lint"]
     },
-    "dev": {
+    "dev2": {
+      "cache": false,
+      "persistent": true
+    },
+    "website#dev2": {
+      "dependsOn": ["^dev2"],
       "cache": false,
       "persistent": true
     }

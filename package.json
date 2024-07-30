@@ -2,8 +2,8 @@
   "name": "examples",
   "private": true,
   "scripts": {
-    "build": "turbo build2 --filter=./demos/* && turbo website#build && ./out.sh",
-    "dev": "turbo dev",
+    "build": "turbo build2 && ./out.sh",
+    "dev": "turbo dev2",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "test": "turbo test --filter=./demos/* --continue"
