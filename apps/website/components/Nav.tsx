@@ -9,7 +9,7 @@ export default function Nav({ current }: { current?: string }) {
   return (
     <nav className="fixed left-0 top-0">
       <ul className="flex flex-col gap-4 p-8  h-dvh overflow-auto">
-        {demos.map(({ name, thumb, url }, i) => {
+        {demos.map(({ name, thumb }, i) => {
           return (
             <li key={thumb}>
               <Link

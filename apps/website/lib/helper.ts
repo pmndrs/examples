@@ -3,8 +3,6 @@ import fs from "fs";
 import { fileURLToPath } from "url";
 import { generatePort } from "@examples/e2e";
 
-console.log("NODE_ENV=", process.env.NODE_ENV);
-
 const BASE_PATH = process.env.BASE_PATH || "";
 const PUBLIC_URL = process.env.PUBLIC_URL;
 
@@ -26,12 +24,16 @@ export function getDemos() {
     })
     .map((demoname) => {
       const port = generatePort(demoname);
-      const url = `${host(port)}${BASE_PATH}/${demoname}`;
+      const h = host(port);
+
+      const embed_url = `${h}${BASE_PATH}/${demoname}`;
+      const website_url = `${h}${BASE_PATH}/demos/${demoname}`;
 
       return {
         name: demoname,
-        thumb: `${url}/thumbnail.png`,
-        url,
+        thumb: `${embed_url}/thumbnail.png`,
+        embed_url,
+        website_url,
       };
     });
 }

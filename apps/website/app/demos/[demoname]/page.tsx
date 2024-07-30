@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props) {
     openGraph: {
       title,
       description,
-      url: demo.url,
+      url: demo.website_url,
       images: [
         {
           url: demo.thumb,
@@ -47,7 +47,7 @@ export default function Page(props: Props) {
   const demo = demos.find(({ name }) => name === demoname);
   if (!demo) return notFound();
 
-  const { url } = demo;
+  const { embed_url } = demo;
 
-  return <iframe src={url} className="w-full min-h-dvh" />;
+  return <iframe src={embed_url} className="w-full min-h-dvh" />;
 }
