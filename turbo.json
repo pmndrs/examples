@@ -20,7 +20,8 @@
         "out/**",
         "../../packages/e2e/snapshot.test.js-snapshots/**"
       ],
-      "cache": true
+      "cache": true,
+      "env": ["PUBLIC_URL"]
     },
     "test": {
       "inputs": [

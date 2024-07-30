@@ -41,6 +41,7 @@ jobs:
       - run: npm run build
         env:
           BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
+          PUBLIC_URL: ${{ steps.configurepages.outputs.base_url }}
 
       # Tests (only for PRs)
       - run: ./test.sh
