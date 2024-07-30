@@ -2,13 +2,17 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { getDemos } from "@/lib/helper";
+import { ComponentProps } from "react";
 
 export const demos = getDemos();
 
-export default function Nav({ current }: { current?: string }) {
+export default function Nav({
+  current,
+  ...props
+}: ComponentProps<"nav"> & { current?: string }) {
   return (
-    <nav className="fixed left-0 top-0">
-      <ul className="flex flex-col gap-4 p-8  h-dvh overflow-auto">
+    <nav className="inline-block" {...props}>
+      <ul className="flex flex-col gap-4 p-8 relative">
         {demos.map(({ name, thumb }, i) => {
           return (
             <li key={thumb}>
