@@ -4,6 +4,7 @@ import { spawn } from "node:child_process";
 import minimist from "minimist";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { generatePort } from "../lib/port.mjs";
 
 var argv = minimist(process.argv.slice(2));
 // console.log("argv=", argv);
@@ -16,30 +17,24 @@ if (!demoname) {
 
 const __filename = fileURLToPath(import.meta.url); // Converts the URL to a file path
 const __dirname = dirname(__filename); // Gets the directory name
-const viteConfigPath = resolve(__dirname, "../src/vite.config.build.ts");
+const viteConfigPath = resolve(__dirname, "../src/vite.config.dev.ts");
 // console.log("viteConfigPath=", viteConfigPath);
 
 const cmd = spawn(
   "npx",
   [
     "vite",
-    "build",
+    "dev",
     "--config",
     viteConfigPath,
     "--base",
     `${process.env.BASE_PATH || ""}/${demoname}`,
+    "--port",
+    `${generatePort(demoname)}`,
+    "--strictPort",
   ],
   {
     stdio: "inherit",
     env: process.env,
   }
 );
-
-cmd.on("exit", (code) => {
-  if (code !== 0) {
-    console.error("Build failed with error");
-    process.exit(1);
-  }
-
-  console.log("Build completed successfully.");
-});

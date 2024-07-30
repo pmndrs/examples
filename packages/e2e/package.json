@@ -2,13 +2,16 @@
   "name": "@examples/e2e",
   "type": "module",
   "version": "0.0.1",
+  "module": "index.mjs",
   "exports": {
+    ".": "./index.mjs",
     "./CheesyCanvas": "./src/CheesyCanvas.jsx",
     "./deterministic": "./src/deterministic.js"
   },
   "bin": {
     "e2e-build": "./bin/build.mjs",
-    "e2e-test": "./bin/test.mjs"
+    "e2e-test": "./bin/test.mjs",
+    "e2e-dev": "./bin/dev.mjs"
   },
   "dependencies": {
     "@babel/parser": "^7.24.8",
