@@ -42,8 +42,8 @@ export default function App() {
       <color attach="background" args={['#f0f0f0']} />
       <group position={[0, -0.5, 0]} rotation={[0, -0.75, 0]}>
         <Scene />
-        <AccumulativeShadows frames={100} alphaTest={0.85} opacity={0.8} color="red" scale={20} position={[0, -0.005, 0]}>
-          <RandomizedLight amount={8} radius={6} ambient={0.5} intensity={1} position={[-1.5, 2.5, -2.5]} bias={0.001} />
+        <AccumulativeShadows frames={100} alphaTest={0.75} opacity={0.8} color="red" scale={20} position={[0, -0.005, 0]}>
+          <RandomizedLight amount={8} radius={6} ambient={0.5} intensity={Math.PI} position={[-1.5, 2.5, -2.5]} bias={0.001} />
         </AccumulativeShadows>
       </group>
       <Env perfSucks={perfSucks} />
@@ -122,7 +122,7 @@ function Env({ perfSucks }) {
   })
   // Runtime environments can be too slow on some systems, better safe than sorry with PerfMon
   return (
-    <Environment frames={perfSucks ? 1 : Infinity} preset="city" resolution={256} background blur={0.8}>
+    <Environment frames={perfSucks ? 1 : Infinity} preset="city" resolution={256} background backgroundBlurriness={0.8}>
       <Lightformer intensity={4} rotation-x={Math.PI / 2} position={[0, 5, -9]} scale={[10, 10, 1]} />
       <Lightformer intensity={4} rotation-x={Math.PI / 2} position={[0, 5, -9]} scale={[10, 10, 1]} />
       <group rotation={[Math.PI / 2, 1, 0]}>
