@@ -30,6 +30,7 @@ export async function generateMetadata({ params }: Props) {
           alt: `${demo.name} capture of the demo`,
         },
       ],
+      type: "website",
     },
   };
 }
