@@ -13,17 +13,21 @@ export async function generateMetadata({ params }: Props) {
   if (!demo) return;
 
   const title = `${demo.name} - pmndrs`;
+  const description = `Play with "${demo.name}" pmndrs demo.`;
 
   return {
     title,
+    description,
     openGraph: {
       title,
+      description,
       url: demo.url,
       images: [
         {
           url: demo.thumb,
           // width: 800,
           // height: 600,
+          alt: `${demo.name} capture of the demo`,
         },
       ],
     },
