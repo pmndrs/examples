@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { Canvas } from '@react-three/fiber'
-import { useGLTF, AccumulativeShadows, RandomizedLight, OrbitControls, PivotControls, MeshTransmissionMaterial, Center, Environment } from '@react-three/drei'
-import { useRef } from 'react'
+import { useGLTF,Box, AccumulativeShadows, RandomizedLight, OrbitControls, PivotControls, MeshTransmissionMaterial, Center, Environment } from '@react-three/drei'
+import { useEffect, useRef } from 'react'
 import { Geometry, Base, Addition, Subtraction } from '@react-three/csg'
 
 import bunnyModel from './bunny-transformed.glb?url'
@@ -13,14 +13,14 @@ export default function App() {
       <ambientLight intensity={0.5} />
       <directionalLight position={[5, 8, -4]} shadow-mapSize={1024} castShadow />
       <group position={[0.5, -1.25, 0]}>
-        <Center top>
-          <Bunny />
+        <Center top precise={false}> 
+          <Bunny/>
         </Center>
-        <AccumulativeShadows temporal frames={100} alphaTest={0.85} opacity={0.85} scale={12}>
-          <RandomizedLight amount={8} radius={5} ambient={0.5} intensity={1} position={[5, 5, -5]} bias={0.001} />
+        <AccumulativeShadows temporal frames={100} alphaTest={0.75} opacity={0.85} scale={12}>
+          <RandomizedLight amount={8} radius={5} ambient={0.5} intensity={Math.PI} position={[5, 5, -5]} bias={0.001} />
         </AccumulativeShadows>
       </group>
-      <Environment preset="city" background blur={1} />
+      <Environment preset="city" background backgroundBlurriness={1} />
       <OrbitControls makeDefault />
     </Canvas>
   )
@@ -29,6 +29,7 @@ export default function App() {
 function Bunny() {
   const csg = useRef()
   const { nodes } = useGLTF(bunnyModel)
+
   return (
     <mesh receiveShadow castShadow>
       {/** This will yield a regular THREE.BufferGeometry that needs to be paired with a mesh.
