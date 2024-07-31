@@ -1,5 +1,5 @@
 {
-  "name": "volumetric-spotlight",
+  "name": "@demo/volumetric-spotlight",
   "version": "1.0.0",
   "description": "Volumetric soft particle spot lights.",
   "homepage": "https://codesandbox.io/s/tx1pq",

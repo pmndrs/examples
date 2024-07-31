@@ -1,5 +1,5 @@
 {
-  "name": "floating-laptop",
+  "name": "@demo/floating-laptop",
   "version": "1.0.0",
   "description": "Animating GLTFs with react-spring.",
   "homepage": "https://codesandbox.io/s/q23sw",

@@ -1,5 +1,5 @@
 {
-  "name": "infinite-scroll",
+  "name": "@demo/infinite-scroll",
   "version": "1.0.0",
   "description": "Horizontal scrollcontrols that scroll infinitely.",
   "homepage": "https://codesandbox.io/s/x8gvs",

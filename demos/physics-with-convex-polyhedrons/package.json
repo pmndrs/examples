@@ -1,5 +1,5 @@
 {
-  "name": "physics-with-convex-polyhedrons",
+  "name": "@demo/physics-with-convex-polyhedrons",
   "version": "1.0.0",
   "description": "Using cannon collisions with GLTFs converted into convex hulls.",
   "homepage": "https://codesandbox.io/s/08s1u",

@@ -1,5 +1,5 @@
 {
-  "name": "bounds-and-makedefault",
+  "name": "@demo/bounds-and-makedefault",
   "version": "1.0.0",
   "description": "Combining TransformControls, OrbitControls and Valtio.",
   "homepage": "https://codesandbox.io/s/rz2g0",

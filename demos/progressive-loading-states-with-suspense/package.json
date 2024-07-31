@@ -1,5 +1,5 @@
 {
-  "name": "progressive-loading-states-with-suspense",
+  "name": "@demo/progressive-loading-states-with-suspense",
   "version": "1.0.0",
   "description": "Demonstrates how to load a model progressively with fallbacks via React.Suspense.",
   "homepage": "https://codesandbox.io/s/7duy8",

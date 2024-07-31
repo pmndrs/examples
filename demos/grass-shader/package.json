@@ -1,5 +1,5 @@
 {
-  "name": "grass-shader",
+  "name": "@demo/grass-shader",
   "version": "1.0.0",
   "description": "Grass shader using simplex noise.",
   "homepage": "https://codesandbox.io/s/5xho4",

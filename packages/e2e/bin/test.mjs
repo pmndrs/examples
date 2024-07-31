@@ -8,11 +8,12 @@ import { fileURLToPath } from "node:url";
 var argv = minimist(process.argv.slice(2));
 // console.log("argv=", argv);
 
-const demoname = argv._[0];
-if (!demoname) {
-  console.error("Please provide the app name as the first argument.");
+const pkgname = argv._[0];
+if (!pkgname) {
+  console.error("Please provide the package name as the first argument.");
   process.exit(1);
 }
+const demoname = pkgname.split("@demo/")[1];
 
 const updateSnapshots = argv["update-snapshots"];
 
@@ -88,6 +89,7 @@ const { vite: _vite, url } = await startVite(
   `${process.env.BASE_PATH || ""}/${demoname}`
 );
 vite = _vite;
+console.log("Vite started at", url);
 playwright = await startPlaywright(url);
 console.log("All done");
 teardown(0);

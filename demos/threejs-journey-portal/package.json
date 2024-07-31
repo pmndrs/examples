@@ -1,5 +1,5 @@
 {
-  "name": "threejs-journey-portal",
+  "name": "@demo/threejs-journey-portal",
   "version": "1.0.0",
   "description": "The last scene from Bruno Simons Threejs journey in react-three-fiber",
   "homepage": "https://codesandbox.io/s/ni6v4",

@@ -1,5 +1,5 @@
 {
-  "name": "color-grading",
+  "name": "@demo/color-grading",
   "version": "1.0.0",
   "description": "Shows how to use LUTPass to grade colors.",
   "homepage": "https://codesandbox.io/s/wvgxp",

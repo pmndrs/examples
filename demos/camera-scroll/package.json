@@ -1,5 +1,5 @@
 {
-  "name": "camera-scroll",
+  "name": "@demo/camera-scroll",
   "version": "1.0.0",
   "description": "Tying scroll to a GLTF camera path with snapping points.",
   "homepage": "https://codesandbox.io/s/tu24h",

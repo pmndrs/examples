@@ -1,5 +1,5 @@
 {
-  "name": "sky-dome-with-annotations",
+  "name": "@demo/sky-dome-with-annotations",
   "version": "1.0.0",
   "description": "Dome projecting texture and HTML annotations.",
   "homepage": "https://codesandbox.io/s/wbrfs",

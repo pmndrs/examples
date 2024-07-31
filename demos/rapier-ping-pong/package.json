@@ -1,5 +1,5 @@
 {
-  "name": "rapier-ping-pong",
+  "name": "@demo/rapier-ping-pong",
   "version": "1.0.0",
   "description": "Mini ping-pong implementation using rapier-physics.",
   "homepage": "https://codesandbox.io/s/ptdgrn",

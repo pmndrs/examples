@@ -1,6 +1,6 @@
-import path, { dirname, resolve } from "path";
-import fs from "fs";
-import { fileURLToPath } from "url";
+// Importing JSON directly
+import pkg from "@/package.json";
+
 import { generatePort } from "@examples/e2e";
 
 const BASE_PATH = process.env.BASE_PATH || "";
@@ -12,17 +12,10 @@ const host =
     : () => (PUBLIC_URL ? new URL(PUBLIC_URL).origin : "");
 
 export function getDemos() {
-  const __filename = fileURLToPath(import.meta.url); // Converts the URL to a file path
-  const __dirname = dirname(__filename); // Gets the directory name
-
-  const demosDir = resolve(__dirname, "../../../demos");
-
-  return fs
-    .readdirSync(demosDir)
-    .filter((file) => {
-      return fs.statSync(path.join(demosDir, file)).isDirectory();
-    })
-    .map((demoname) => {
+  return Object.keys(pkg.dependencies)
+    .filter((dep) => dep.startsWith("@demo/"))
+    .map((pkgname) => {
+      const demoname = pkgname.split("@demo/")[1];
       const port = generatePort(demoname);
       const h = host(port);
 

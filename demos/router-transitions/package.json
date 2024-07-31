@@ -1,5 +1,5 @@
 {
-  "name": "router-transitions",
+  "name": "@demo/router-transitions",
   "version": "1.0.0",
   "description": "Shows how to implement routes and mount/unmount transition within the canvas using Wouter.",
   "homepage": "https://codesandbox.io/s/4j2q2",
