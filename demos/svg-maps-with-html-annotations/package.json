@@ -1,5 +1,5 @@
 {
-  "name": "svg-maps-with-html-annotations",
+  "name": "@demo/svg-maps-with-html-annotations",
   "version": "1.0.0",
   "description": "Using SVGLoader, converting each path into cell components with annotations and map controls.",
   "homepage": "https://codesandbox.io/s/mkq8e",

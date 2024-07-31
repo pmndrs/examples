@@ -1,5 +1,5 @@
 {
-  "name": "building-live-envmaps",
+  "name": "@demo/building-live-envmaps",
   "version": "1.0.0",
   "description": "Shows how to build declarative environment that are live and animated.",
   "homepage": "https://codesandbox.io/s/lwo219",

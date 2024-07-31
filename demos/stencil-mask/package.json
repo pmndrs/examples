@@ -1,5 +1,5 @@
 {
-  "name": "stencil-mask",
+  "name": "@demo/stencil-mask",
   "version": "1.0.0",
   "description": "Using the stencil mask to cut out areas of the screen.",
   "homepage": "https://codesandbox.io/s/z3f2mw",

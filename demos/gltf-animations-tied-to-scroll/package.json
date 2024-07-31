@@ -1,5 +1,5 @@
 {
-  "name": "gltf-animations-tied-to-scroll",
+  "name": "@demo/gltf-animations-tied-to-scroll",
   "version": "1.0.0",
   "description": "This examples shows how to blend GLTF animation keyframes.",
   "homepage": "https://codesandbox.io/s/hg3ejl",

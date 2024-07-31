@@ -1,5 +1,5 @@
 {
-  "name": "shader-fire",
+  "name": "@demo/shader-fire",
   "version": "1.0.0",
   "description": "A volumetric fire effect.",
   "homepage": "https://codesandbox.io/s/3878x",

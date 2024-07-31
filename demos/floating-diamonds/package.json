@@ -1,5 +1,5 @@
 {
-  "name": "floating-diamonds",
+  "name": "@demo/floating-diamonds",
   "version": "1.0.0",
   "description": "Mixing refraction shaders and animations.",
   "homepage": "https://codesandbox.io/s/prb9t",

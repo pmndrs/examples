@@ -1,5 +1,5 @@
 {
-  "name": "shadermaterials",
+  "name": "@demo/shadermaterials",
   "version": "1.0.0",
   "description": "How to set up shader materials declaratively.",
   "homepage": "https://codesandbox.io/s/1g4qq",

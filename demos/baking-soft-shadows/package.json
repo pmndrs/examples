@@ -1,5 +1,5 @@
 {
-  "name": "baking-soft-shadows",
+  "name": "@demo/baking-soft-shadows",
   "version": "1.0.0",
   "description": "How to use drei/AccumulativeShadows and RandomizedLight",
   "homepage": "https://codesandbox.io/s/hxcc1x",

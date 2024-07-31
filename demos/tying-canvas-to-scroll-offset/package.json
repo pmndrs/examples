@@ -1,5 +1,5 @@
 {
-  "name": "tying-canvas-to-scroll-offset",
+  "name": "@demo/tying-canvas-to-scroll-offset",
   "version": "1.0.0",
   "description": "How to tie canvas objects to scrollTop while events keep working.",
   "homepage": "https://codesandbox.io/s/itfgk",

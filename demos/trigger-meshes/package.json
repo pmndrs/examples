@@ -1,5 +1,5 @@
 {
-  "name": "trigger-meshes",
+  "name": "@demo/trigger-meshes",
   "version": "1.0.0",
   "description": "Shows how to implement trigger meshes that inform the application of collisions.",
   "homepage": "https://codesandbox.io/s/h545c",

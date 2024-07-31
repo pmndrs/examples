@@ -1,5 +1,5 @@
 {
-  "name": "cell-fracture",
+  "name": "@demo/cell-fracture",
   "version": "1.0.0",
   "description": "Exploding GLTFs using Blenders cell-fracture and GLTFJSX.",
   "homepage": "https://codesandbox.io/s/3rjsl",

@@ -1,5 +1,5 @@
 {
-  "name": "react-pp-outlines",
+  "name": "@demo/react-pp-outlines",
   "version": "1.0.0",
   "description": "How to build declarative, nested outlines where higher-ups take precedence.",
   "homepage": "https://codesandbox.io/s/nurp5t",

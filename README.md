@@ -55,45 +55,44 @@ This will:
 
 # test
 
-Pre-requisites:
-
-- [build](#build)
-
-> [!WARNING]
-> Do not forget to (re-)[build](#build) first!
-
 ```sh
 $ npm test
 ```
 
 To update the snapshots: `npm test -- -- --update-snapshots`
 
-> [!IMPORTANT]
-> If you built the project with eg. `BASE_PATH=/examples` you'll need to:
->
-> ```sh
-> $ BASE_PATH=/examples npm test
-> ```
+<details>
+
+You can also:
+
+```sh
+$ BASE_PATH=/examples npm test
+```
+
+</details>
 
 ## Docker
 
-For generating reproductible snapshots, we still build static `out/` folder locally, but use dockerised environment to run playwright tests against:
+For generating reproductible snapshots, we use [`ghcr.io/pmndrs/playwright:main`](https://github.com/pmndrs/playwright/pkgs/container/playwright/249720592?tag=main) Docker image.
 
 ```sh
-$ ./test.sh
+$ docker run -it --rm  \
+  -w /app -v "$(pwd)":/app -v /app/node_modules \
+  ghcr.io/pmndrs/playwright:main /bin/sh
+#
+# echo "Hey, I am acting like the CI"
+#
+# npm ci
+# npm test
 ```
 
-> [!NOTE]
-> A `-v "$(pwd)":/app` volume is mounted to the container, so any snapshot will be written to the host machine.
+or in one command to update snapshots:
 
-To update the snapshots: `./test.sh --update`
-
-> [!IMPORTANT]
-> If you built the project with eg. `BASE_PATH=/examples` you'll need to:
->
-> ```sh
-> $ BASE_PATH=/examples ./test.sh
-> ```
+```sh
+docker run --rm  \
+  -w /app -v "$(pwd)":/app -v /app/node_modules \
+  ghcr.io/pmndrs/playwright:main /bin/sh -c "npm ci && npm test -- -- --update-snapshots"
+```
 
 # Colophon
 

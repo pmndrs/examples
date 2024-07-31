@@ -1,5 +1,5 @@
 {
-  "name": "svg-renderer",
+  "name": "@demo/svg-renderer",
   "version": "1.0.0",
   "description": "Using the render function to inject custom renderers.",
   "homepage": "https://codesandbox.io/s/zcuqh",

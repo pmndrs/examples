@@ -10,7 +10,7 @@
   "keywords": [
     "instances"
   ],
-  "name": "floating-instanced-shoes",
+  "name": "@demo/floating-instanced-shoes",
   "version": "1.0.0",
   "description": "Using drei/instances and events.",
   "homepage": "https://codesandbox.io/s/h8o2d",

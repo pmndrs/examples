@@ -15,20 +15,24 @@ permissions:
 jobs:
   build-job:
     runs-on: ubuntu-latest
+    env:
+      TURBO_TELEMETRY_DISABLED: 1
 
     # Cancel multiple runs when pushing to main
     concurrency:
       group: ${{ github.event_name != 'pull_request' && 'group-pushmain' || github.run_id }}
       cancel-in-progress: ${{ github.event_name != 'pull_request' }}
 
-    # container:
-    #   image: ghcr.io/pmndrs/playwright:main
-    #   credentials:
-    #     username: ${{ github.actor }}
-    #     password: ${{ secrets.GITHUB_TOKEN }}
+    container:
+      image: ghcr.io/pmndrs/playwright:main
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-      # Build
+      #
+      # Setup
+      #
       - uses: actions/checkout@v4
       - id: configurepages
         uses: actions/configure-pages@v5
@@ -38,18 +42,22 @@ jobs:
           cache: "npm"
       - run: npm ci
       - uses: rharkor/caching-for-turbo@v1.5
+
+      #
+      # Test
+      #
+      - run: npm test
+        env:
+          BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
+
+      #
+      # Build (only for pushes on main)
+      #
       - run: npm run build
+        if: github.event_name != 'pull_request'
         env:
           BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
           PUBLIC_URL: ${{ steps.configurepages.outputs.base_url }}
-
-      # Tests (only for PRs)
-      - run: ./test.sh
-        if: github.event_name == 'pull_request'
-        env:
-          BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
-
-      # Upload artifact (only for pushes on main)
       - uses: actions/upload-pages-artifact@v3
         if: github.event_name != 'pull_request'
         with:

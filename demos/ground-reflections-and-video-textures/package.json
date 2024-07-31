@@ -1,5 +1,5 @@
 {
-  "name": "ground-reflections-and-video-textures",
+  "name": "@demo/ground-reflections-and-video-textures",
   "version": "1.0.0",
   "description": "This example shows drei's new Reflector in combination with video textures.",
   "homepage": "https://codesandbox.io/s/bfplr",

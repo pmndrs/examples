@@ -11,7 +11,7 @@
     "re-use",
     "gltf"
   ],
-  "name": "re-using-gltfs",
+  "name": "@demo/re-using-gltfs",
   "version": "1.0.0",
   "description": "When you use GLTFJSX it creates a immutable snapshot of your assets, these can be reused.",
   "homepage": "https://codesandbox.io/s/dix1y",

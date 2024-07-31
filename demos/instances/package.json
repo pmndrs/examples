@@ -1,5 +1,5 @@
 {
-  "name": "instances",
+  "name": "@demo/instances",
   "version": "1.0.0",
   "description": "Creating fixed-position instances with varying vertex colors.",
   "homepage": "https://codesandbox.io/s/h873k",

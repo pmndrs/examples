@@ -1,5 +1,5 @@
 {
-  "name": "thunder-clouds",
+  "name": "@demo/thunder-clouds",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

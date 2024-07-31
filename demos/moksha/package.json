@@ -1,5 +1,5 @@
 {
-  "name": "moksha",
+  "name": "@demo/moksha",
   "version": "1.0.0",
   "description": "Exploration into scroll containers tied to webgl content made for codrops.",
   "homepage": "https://codesandbox.io/s/f1ixt",
