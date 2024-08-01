@@ -41,7 +41,7 @@ function House(props) {
           <Door rotation={[0, Math.PI / 2, 0]} position={[-1.425, -0.45, 0]} scale={[1, 0.9, 1]} />
         </PivotControls>
       </Geometry>
-      <meshStandardMaterial envMapIntensity={0.25} />
+      <meshStandardMaterial />
     </mesh>
   )
 }
