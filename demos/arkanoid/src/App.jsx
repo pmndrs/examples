@@ -10,10 +10,10 @@ import { useStore } from "./store"
 
 function useCollide(onColide) {
   const contact = useStore((state) => state.contact)
-  const [{ impact }, set] = useSpring({ impact: 0 }, [])
+  const [{ impact }, api] = useSpring({ impact: 0 }, [])
   const event = useCallback((e) => {
-    set({ impact: 10, config: { immediate: true } })
-    requestAnimationFrame(() => set({ impact: 0 }))
+    api.start({ impact: 10, config: { immediate: true } })
+    requestAnimationFrame(() => api.start({ impact: 0 }))
     if (onColide) onColide(e)
     contact(e)
   }, [])
@@ -143,9 +143,15 @@ function Status() {
   const [virtualScene] = useState(() => new THREE.Scene())
   const virtualCamera = useRef()
   const points = useStore((state) => state.points)
-  const { viewport } = useThree()
+  const { gl, scene, camera, viewport } = useThree()
   const { width, height } = viewport.getCurrentViewport(virtualCamera.current)
-  useFrame((state) => state.gl.render(virtualScene, virtualCamera.current), 2)
+  useFrame(() => {
+    gl.autoClear = true
+    gl.render(scene, camera)
+    gl.autoClear = false
+    gl.clearDepth()
+    gl.render(virtualScene, virtualCamera.current)
+  }, 2)
   return createPortal(
     <>
       <OrthographicCamera position={[0, 0, 10]} zoom={100} ref={virtualCamera} />
@@ -162,7 +168,7 @@ function Status() {
 
 function Perspective() {
   return useFrame((state) => {
-    state.camera.position.x = THREE.Math.lerp(state.camera.position.x, state.mouse.x * 2, 0.1)
+    state.camera.position.x = THREE.MathUtils.lerp(state.camera.position.x, state.mouse.x * 2, 0.1)
     state.camera.updateProjectionMatrix()
   })
 }
