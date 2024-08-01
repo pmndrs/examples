@@ -8,7 +8,7 @@ export default function App() {
     <Canvas shadows camera={{ position: [0, 0, 4.5], fov: 50 }}>
       <group position={[0, -0.65, 0]}>
         <Sphere />
-        <AccumulativeShadows temporal frames={200} color="purple" colorBlend={0.5} opacity={1} scale={10} alphaTest={0.85}>
+        <AccumulativeShadows temporal frames={200} color="purple" colorBlend={0.5} opacity={1} scale={10} alphaTest={0.75}>
           <RandomizedLight amount={8} radius={5} ambient={0.5} position={[5, 3, 2]} bias={0.001} />
         </AccumulativeShadows>
       </group>
@@ -46,5 +46,5 @@ function Env() {
       onChange: (value) => startTransition(() => setPreset(value))
     }
   })
-  return <Environment preset={preset} background blur={blur} />
+  return <Environment background preset={preset} backgroundBlurriness={blur} />
 }
