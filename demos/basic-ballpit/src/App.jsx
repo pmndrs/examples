@@ -32,7 +32,7 @@ function InstancedSpheres({ count = 200 }) {
     for (let i = 0; i < count; i++) api.at(i).scaleOverride([data[i].scale, data[i].scale, data[i].scale])
   }, [])
   return (
-    <instancedMesh ref={ref} args={[null, null, count]}>
+    <instancedMesh ref={ref} args={[null, null, count]} frustumCulled={false}>
       <sphereGeometry args={[1, 64, 64]}>
         <instancedBufferAttribute attach="attributes-color" args={[colorArray, 3]} />
       </sphereGeometry>
