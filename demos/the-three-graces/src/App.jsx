@@ -5,14 +5,16 @@ import { Canvas, extend, useFrame } from '@react-three/fiber'
 import { useGLTF, SoftShadows, Html, CameraControls } from '@react-three/drei'
 import { easing, geometry } from 'maath'
 
+import gracesModel from "./graces-draco.glb?url"
+
 extend(geometry)
 
 export default function App() {
   return (
     <Canvas shadows="basic" eventSource={document.getElementById('root')} eventPrefix="client" camera={{ position: [0, 1.5, 14], fov: 45 }}>
       <fog attach="fog" args={['black', 0, 20]} />
-      <pointLight position={[10, -10, -20]} intensity={10} />
-      <pointLight position={[-10, -10, -20]} intensity={10} />
+      <pointLight position={[10, -10, -20]} intensity={10} decay={0} />
+      <pointLight position={[-10, -10, -20]} intensity={10} decay={0} />
       <Model position={[0, -5.5, 3]} rotation={[0, -0.2, 0]} />
       <SoftShadows samples={3} />
       <CameraControls minPolarAngle={0} maxPolarAngle={Math.PI / 2} minAzimuthAngle={-Math.PI / 2} maxAzimuthAngle={Math.PI / 2} />
@@ -30,7 +32,7 @@ Title: 3D Printable The Three Graces
 function Model(props) {
   const group = useRef()
   const light = useRef()
-  const { nodes } = useGLTF('/graces-draco.glb')
+  const { nodes } = useGLTF(gracesModel)
   useFrame((state, delta) => {
     easing.dampE(group.current.rotation, [0, -state.pointer.x * (Math.PI / 10), 0], 1.5, delta)
     easing.damp3(group.current.position, [0, -5.5, 1 - Math.abs(state.pointer.x)], 1, delta)
@@ -50,7 +52,7 @@ function Model(props) {
       <Annotation position={[1.5, 8, -3]}>
         <span style={{ fontSize: '1.5em' }}>🌕</span> Aglaia
       </Annotation>
-      <spotLight angle={0.5} penumbra={0.5} ref={light} castShadow intensity={10} shadow-mapSize={1024} shadow-bias={-0.001}>
+      <spotLight decay={0} angle={0.5} penumbra={0.5} ref={light} castShadow intensity={10 * Math.PI} shadow-mapSize={1024} shadow-bias={-0.001}>
         <orthographicCamera attach="shadow-camera" args={[-10, 10, -10, 10, 0.1, 50]} />
       </spotLight>
     </group>
