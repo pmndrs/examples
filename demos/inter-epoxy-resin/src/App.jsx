@@ -14,6 +14,7 @@ import {
 } from '@react-three/drei'
 import { useControls, button } from 'leva'
 import { EffectComposer, HueSaturation, BrightnessContrast } from '@react-three/postprocessing'
+import fontGlyphs from "./Inter_Medium_Regular.json"
 
 export function App() {
   const { autoRotate, text, shadow, ...config } = useControls({
@@ -76,7 +77,7 @@ export function App() {
       </Environment>
       {/** Soft shadows */}
       <AccumulativeShadows frames={100} color={shadow} colorBlend={5} toneMapped={true} alphaTest={0.9} opacity={1} scale={30} position={[0, -1.01, 0]}>
-        <RandomizedLight amount={4} radius={10} ambient={0.5} intensity={1} position={[0, 10, -10]} size={15} mapSize={1024} bias={0.0001} />
+        <RandomizedLight amount={4} radius={10} ambient={0.5} intensity={Math.PI} position={[0, 10, -10]} size={15} mapSize={1024} bias={0.0001} />
       </AccumulativeShadows>
     </Canvas>
   )
@@ -99,7 +100,7 @@ const Grid = ({ number = 23, lineWidth = 0.026, height = 0.5 }) => (
   </Instances>
 )
 
-function Text({ children, config, font = '/Inter_Medium_Regular.json', ...props }) {
+function Text({ children, config, font = fontGlyphs, ...props }) {
   const texture = useLoader(RGBELoader, 'https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/aerodynamics_workshop_1k.hdr')
   return (
     <>
