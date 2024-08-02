@@ -8,9 +8,9 @@ import reactModel from './react-transformed.glb?url'
 export function App() {
   const { invert } = useControls({ invert: false })
   return (
-    <Canvas shadows>
-      <directionalLight position={[1, 2, 1.5]} intensity={0.5} castShadow />
-      <hemisphereLight intensity={1.5} groundColor="red" />
+    <Canvas shadows gl={{ stencil: true }}>
+      <directionalLight position={[1, 2, 1.5]} intensity={0.5 * Math.PI} castShadow />
+      <hemisphereLight intensity={1.5 * Math.PI} groundColor="red" />
       <Suspense fallback={null}>
         <CircularMask />
         <CircularMask position={[2, 0, 0]} />
