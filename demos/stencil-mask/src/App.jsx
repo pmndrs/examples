@@ -33,7 +33,7 @@ function Target(props) {
 export function App() {
   const { invert, colorWrite, depthWrite } = useControls({ invert: false, colorWrite: true, depthWrite: false })
   return (
-    <Canvas camera={{ position: [0, 0, 5] }}>
+    <Canvas camera={{ position: [0, 0, 5] }} gl={{ stencil: true}}>
       <hemisphereLight intensity={1} groundColor="red" />
       <Suspense fallback={null}>
         <Float floatIntensity={5} rotationIntensity={2} speed={10}>
@@ -51,12 +51,8 @@ export function App() {
            *  meshes, you can deform or transition them any way you like
            */}
           <Mask id={1} colorWrite={colorWrite} depthWrite={depthWrite}>
-            {(spread) => (
-              <>
                 <planeGeometry args={[2, 2, 128, 128]} />
-                <MeshDistortMaterial distort={0.5} radius={1} speed={10} {...spread} />
-              </>
-            )}
+                <MeshDistortMaterial distort={0.5} radius={1} speed={10} />
           </Mask>
         </TransformControls>
 
