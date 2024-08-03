@@ -91,7 +91,7 @@ or in one command to update snapshots:
 ```sh
 docker run --rm  \
   -w /app -v "$(pwd)":/app -v /app/node_modules \
-  ghcr.io/pmndrs/playwright:main /bin/sh -c "npm ci && npm test -- -- --update-snapshots"
+  ghcr.io/pmndrs/playwright:main /bin/sh -c "npm ci && npm test"
 ```
 
 # Colophon
