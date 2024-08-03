@@ -1,5 +1,5 @@
 {
-  "name": "threejs-journey-lv-1-fisheye",
+  "name": "@demo/threejs-journey-lv-1-fisheye",
   "version": "1.0.0",
   "description": "A recreation of the first level from https://threejs-journey.com.",
   "homepage": "https://codesandbox.io/s/7qytdw",

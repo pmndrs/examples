@@ -1,5 +1,5 @@
 {
-  "name": "gltfjsx-400kb-drone",
+  "name": "@demo/gltfjsx-400kb-drone",
   "version": "1.0.0",
   "description": "Shows the results of gltfjsx transform compression.",
   "homepage": "https://codesandbox.io/s/pbwi6i",

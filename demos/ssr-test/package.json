@@ -1,5 +1,5 @@
 {
-  "name": "ssr-test",
+  "name": "@demo/ssr-test",
   "version": "1.0.0",
   "description": "Screen space reflections",
   "homepage": "https://codesandbox.io/s/8pbw1f",

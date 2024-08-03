@@ -1,5 +1,5 @@
 {
-  "name": "selective-outlines",
+  "name": "@demo/selective-outlines",
   "version": "1.0.0",
   "description": "Using postprocessing to give seletcive objects outlines.",
   "homepage": "https://codesandbox.io/s/d36mw",

@@ -1,5 +1,5 @@
 {
-  "name": "arkanoid-under-60-loc",
+  "name": "@demo/arkanoid-under-60-loc",
   "version": "1.0.0",
   "description": "Super small Arkanoid barebones implementation.",
   "homepage": "https://codesandbox.io/s/66cd7",

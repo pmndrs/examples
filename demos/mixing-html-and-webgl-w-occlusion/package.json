@@ -1,5 +1,5 @@
 {
-  "name": "mixing-html-and-webgl-w-occlusion",
+  "name": "@demo/mixing-html-and-webgl-w-occlusion",
   "version": "1.0.0",
   "description": "Having HTML and WebGL in the same scene with the addition of occlusion.",
   "homepage": "https://codesandbox.io/s/9keg6",

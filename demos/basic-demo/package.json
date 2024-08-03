@@ -1,5 +1,5 @@
 {
-  "name": "basic-demo",
+  "name": "@demo/basic-demo",
   "version": "1.0.0",
   "description": "Shows how to form self-contained components with their own state and user interaction.",
   "homepage": "https://codesandbox.io/s/rrppl0y8l4",

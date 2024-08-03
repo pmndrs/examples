@@ -1,5 +1,5 @@
 {
-  "name": "horizontal-tiles",
+  "name": "@demo/horizontal-tiles",
   "version": "1.0.0",
   "description": "Horizontal scrollcontrols with expanding tiles.",
   "homepage": "https://codesandbox.io/s/l4klb",

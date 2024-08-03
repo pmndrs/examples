@@ -1,5 +1,5 @@
 {
-  "name": "multiple-views-with-uniform-controls",
+  "name": "@demo/multiple-views-with-uniform-controls",
   "version": "1.0.0",
   "description": "Shows how to form self-contained components with their own state and user interaction.",
   "homepage": "https://codesandbox.io/s/r9w2ob",

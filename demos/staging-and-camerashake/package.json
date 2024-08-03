@@ -31,7 +31,7 @@
     "camera-shake",
     "controls"
   ],
-  "name": "staging-and-camerashake",
+  "name": "@demo/staging-and-camerashake",
   "version": "1.0.0",
   "description": "How to stage and shake models while using controls at the same time.",
   "homepage": "https://codesandbox.io/s/0ycwe",

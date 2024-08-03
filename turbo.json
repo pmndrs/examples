@@ -11,28 +11,27 @@
       "outputs": ["dist/**"],
       "cache": true
     },
-    "website#build2": {
+    "website#build3": {
       "dependsOn": ["^build2"],
-      "inputs": ["$TURBO_DEFAULT$", "next.config.mjs"],
-      "outputs": [
-        ".next/**",
-        "!.next/cache/**",
-        "out/**",
-        "../../packages/e2e/snapshot.test.js-snapshots/**"
-      ],
-      "cache": true,
-      "env": ["PUBLIC_URL"]
-    },
-    "test": {
+      "env": ["BASE_URL"],
       "inputs": [
         "$TURBO_DEFAULT$",
-        "dist/**",
+        "../../packages/e2e/snapshot.test.js-snapshots/**"
+      ],
+      "outputs": [".next/**", "!.next/cache/**", "out/**"],
+      "cache": true
+    },
+    "test": {
+      "env": ["PLAYWRIGHT_BROWSERS_PATH"],
+      "dependsOn": ["build2"],
+      "inputs": [
+        "$TURBO_DEFAULT$",
         "../../packages/e2e/bin/test.mjs",
         "../../packages/e2e/{playwright.config.ts,snapshot.test.js}"
       ],
+      "outputs": ["../../packages/e2e/snapshot.test.js-snapshots/**"],
       "cache": true
     },
-
     "lint": {
       "dependsOn": ["^lint"]
     },

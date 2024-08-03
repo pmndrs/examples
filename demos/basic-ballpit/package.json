@@ -1,5 +1,5 @@
 {
-  "name": "basic-ballpit",
+  "name": "@demo/basic-ballpit",
   "version": "1.0.0",
   "description": "Physics simulation using cannon.",
   "homepage": "https://codesandbox.io/s/0fqow2",

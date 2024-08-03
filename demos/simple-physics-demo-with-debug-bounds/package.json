@@ -1,5 +1,5 @@
 {
-  "name": "simple-physics-demo-with-debug-bounds",
+  "name": "@demo/simple-physics-demo-with-debug-bounds",
   "version": "1.0.0",
   "description": "A box dropping onto a plane using use-cannon / cannon-es.",
   "homepage": "https://codesandbox.io/s/0k27n",

@@ -1,5 +1,5 @@
 {
-  "name": "transparent-aesop-bottles",
+  "name": "@demo/transparent-aesop-bottles",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

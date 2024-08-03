@@ -1,5 +1,5 @@
 {
-  "name": "merged-instance",
+  "name": "@demo/merged-instance",
   "version": "1.0.0",
   "description": "Loading massive assemblies and re-using their parts while keeping the natural  scene graph alive.",
   "homepage": "https://codesandbox.io/s/kud9p",

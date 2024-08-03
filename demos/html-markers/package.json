@@ -32,7 +32,7 @@
     "html",
     "markers"
   ],
-  "name": "html-markers",
+  "name": "@demo/html-markers",
   "version": "1.0.0",
   "description": "Occluding HTML annotations/markers.",
   "homepage": "https://codesandbox.io/s/6oei7",

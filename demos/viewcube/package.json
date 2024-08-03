@@ -1,5 +1,5 @@
 {
-  "name": "viewcube",
+  "name": "@demo/viewcube",
   "version": "1.0.0",
   "description": "Shows how to do heads-up-displays using React.portals.",
   "homepage": "https://codesandbox.io/s/py4db",
