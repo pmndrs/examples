@@ -23,7 +23,7 @@ function Content() {
   useEffect(() => void setInterval(() => set((i) => ({ ...random(i), delay: i * 40 })), 3000), [])
   return data.map((d, index) => (
     <a.mesh key={index} {...springs[index]} castShadow receiveShadow>
-      <boxBufferGeometry args={d.args} />
+      <boxGeometry args={d.args} />
       <a.meshStandardMaterial color={springs[index].color} roughness={0.75} metalness={0.5} />
     </a.mesh>
   ))
@@ -31,9 +31,9 @@ function Content() {
 
 createRoot(document.getElementById('root')).render(
   <Canvas flat shadows camera={{ position: [0, 0, 100], fov: 100 }}>
-    <pointLight intensity={0.5} />
-    <ambientLight intensity={1.85} />
-    <spotLight castShadow intensity={0.2} angle={Math.PI / 7} position={[150, 150, 250]} penumbra={1} shadow-mapSize={2048} />
+    <pointLight decay={0} intensity={0.5 * Math.PI} />
+    <ambientLight intensity={1.85 * Math.PI} />
+    <spotLight castShadow decay={0} intensity={0.2 * Math.PI} angle={Math.PI / 7} position={[150, 150, 250]} penumbra={1} shadow-mapSize={2048} />
     <Content />
   </Canvas>
 )
