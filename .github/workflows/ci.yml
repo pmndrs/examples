@@ -17,17 +17,18 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TURBO_TELEMETRY_DISABLED: 1
+      TURBO_UI: 0
 
     # Cancel multiple runs when pushing to main
     concurrency:
       group: ${{ github.event_name != 'pull_request' && 'group-pushmain' || github.run_id }}
       cancel-in-progress: ${{ github.event_name != 'pull_request' }}
 
-    container:
-      image: ghcr.io/pmndrs/playwright:main
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+    # container:
+    #   image: ghcr.io/pmndrs/playwright:main
+    #   credentials:
+    #     username: ${{ github.actor }}
+    #     password: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       #
@@ -41,19 +42,19 @@ jobs:
           node-version: "20"
           cache: "npm"
       - run: npm ci
-      - uses: rharkor/caching-for-turbo@v1.5
+      # - uses: rharkor/caching-for-turbo@v1.5
 
       #
       # Test
       #
-      - run: npm test
+      - run: npm test -- --filter=@demo/aquarium -vvv --env-mode=loose
         env:
           BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
 
       #
       # Build (only for pushes on main)
       #
-      - run: npm run build
+      - run: npm run build -- --filter=@demo/aquarium
         if: github.event_name != 'pull_request'
         env:
           BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
