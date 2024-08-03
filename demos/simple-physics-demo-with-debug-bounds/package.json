@@ -5,7 +5,7 @@
   "homepage": "https://codesandbox.io/s/0k27n",
   "keywords": [],
   "dependencies": {
-    "@react-three/cannon": "^5.0.0",
+    "@react-three/cannon": "^6.6.0",
     "@react-three/fiber": "^8.16.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
