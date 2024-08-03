@@ -13,7 +13,7 @@
     },
     "website#build3": {
       "dependsOn": ["^build2"],
-      "env": ["PUBLIC_URL"],
+      "env": ["BASE_URL"],
       "inputs": [
         "$TURBO_DEFAULT$",
         "../../packages/e2e/snapshot.test.js-snapshots/**"

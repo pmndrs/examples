@@ -54,7 +54,7 @@ jobs:
         if: github.event_name != 'pull_request'
         env:
           BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
-          PUBLIC_URL: ${{ steps.configurepages.outputs.base_url }}
+          BASE_URL: ${{ steps.configurepages.outputs.base_url }}
       - uses: actions/upload-pages-artifact@v3
         if: github.event_name != 'pull_request'
         with:

@@ -4,12 +4,12 @@ import pkg from "@/package.json";
 import { generatePort } from "@examples/e2e";
 
 const BASE_PATH = process.env.BASE_PATH || "";
-const PUBLIC_URL = process.env.PUBLIC_URL;
+const BASE_URL = process.env.BASE_URL;
 
 const host =
   process.env.NODE_ENV === "development"
     ? (port: number) => `http://localhost:${port}`
-    : () => (PUBLIC_URL ? new URL(PUBLIC_URL).origin : "");
+    : () => (BASE_URL ? new URL(BASE_URL).origin : "");
 
 export function getDemos() {
   return Object.keys(pkg.dependencies)

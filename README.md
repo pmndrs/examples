@@ -44,10 +44,10 @@ This will:
 3. copy final result into `out` folder
 
 > [!TIP]
-> This is totally fine `BASE_PATH`/`PUBLIC_URL` to be unset/empty. But for debug purposes(to be 1:1 with GitHub pages) you can:
+> This is totally fine `BASE_PATH`/`BASE_URL` to be unset/empty. But for debug purposes(to be 1:1 with GitHub pages) you can:
 >
 > ```sh
-> $ BASE_PATH=/examples PUBLIC_URL=http://localhost:4000 npm run build
+> $ BASE_PATH=/examples BASE_URL=http://localhost:4000 npm run build
 > $ npx serve out -p 4000
 > ```
 
