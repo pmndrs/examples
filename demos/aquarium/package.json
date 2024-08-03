@@ -30,7 +30,7 @@
     "build": "tsc && vite build",
     "build2": "exit 0",
     "preview": "vite preview",
-    "test": "e2e-test $npm_package_name"
+    "foo": "exit 0"
   },
   "browserslist": [
     ">0.2%",

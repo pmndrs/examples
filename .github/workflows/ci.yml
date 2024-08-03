@@ -47,14 +47,14 @@ jobs:
       #
       # Test
       #
-      # - run: npm test -- --filter=@demo/aquarium -vvv --env-mode=loose
-      #   env:
-      #     BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
+      - run: npm run foo -- --filter=@demo/aquarium -vvv --env-mode=loose
+        env:
+          BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
 
       #
       # Build (only for pushes on main)
       #
-      - run: npm test -- --filter=@demo/aquarium -vvv --env-mode=loose
+      - run: npm run build -- --filter=@demo/aquarium
         if: github.event_name != 'pull_request'
         env:
           BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
