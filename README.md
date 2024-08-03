@@ -73,12 +73,12 @@ $ BASE_PATH=/examples npm test
 
 ## Docker
 
-For generating reproductible snapshots, we use [`ghcr.io/pmndrs/playwright:main`](https://github.com/pmndrs/playwright/pkgs/container/playwright/249720592?tag=main) Docker image.
+For generating reproductible snapshots, we use [`mcr.microsoft.com/playwright:v1.45.3-jammy`](https://playwright.dev/docs/docker#image-tags) Docker image.
 
 ```sh
 $ docker run -it --rm  \
   -w /app -v "$(pwd)":/app -v /app/node_modules \
-  ghcr.io/pmndrs/playwright:main /bin/sh
+  mcr.microsoft.com/playwright:v1.45.3-jammy /bin/sh
 #
 # echo "Hey, I am acting like the CI"
 #
@@ -91,7 +91,7 @@ or in one command to update snapshots:
 ```sh
 docker run --rm  \
   -w /app -v "$(pwd)":/app -v /app/node_modules \
-  ghcr.io/pmndrs/playwright:main /bin/sh -c "npm ci && npm test"
+  mcr.microsoft.com/playwright:v1.45.3-jammy /bin/sh -c "npm ci && npm test -- -- --update-snapshots"
 ```
 
 # Colophon

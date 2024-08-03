@@ -24,10 +24,7 @@ jobs:
       cancel-in-progress: ${{ github.event_name != 'pull_request' }}
 
     container:
-      image: ghcr.io/pmndrs/playwright:main
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+      image: mcr.microsoft.com/playwright:v1.45.3-jammy
 
     steps:
       #
