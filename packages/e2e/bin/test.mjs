@@ -4,6 +4,7 @@ import { spawn } from "node:child_process";
 import minimist from "minimist";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { preview } from "vite";
 
 var argv = minimist(process.argv.slice(2));
 // console.log("argv=", argv);
@@ -17,38 +18,21 @@ const demoname = pkgname.split("@demo/")[1];
 
 const updateSnapshots = argv["update-snapshots"];
 
-// our 2 processes
-let vite;
-let playwright;
+function startVite(base = "/", timeout = 30000) {
+  return new Promise(async (resolve, reject) => {
+    const timeoutId = setTimeout(() => {
+      reject(new Error("Starting Vite has timed out"));
+    }, timeout);
 
-function startVite(base = "/") {
-  return new Promise((resolve, reject) => {
-    const proc = spawn("npx", ["vite", "preview", "--host", "--base", base]);
-
-    //
-    // Look for the port number in the output, eg:
-    //
-    // Port 5188 is in use, trying another one...
-    //  ➜  Local:   http://localhost:5189/aquarium
-    //  ➜  Network: use --host to expose
-    //  ➜  press h + enter to show help
-    //
-    proc.stdout.on("data", (data) => {
-      const output = data.toString();
-      const urlMatch = output.match(/Local: +(\S+)/);
-      if (urlMatch) {
-        resolve({ vite: proc, url: urlMatch[1] });
-      }
+    const { close, resolvedUrls } = await preview({
+      base,
+      preview: {
+        host: true,
+      },
     });
 
-    proc.on("exit", (code) => {
-      console.log("exiting vite", code);
-    });
-    proc.on("close", (code) => {
-      console.log("closing vite", code);
-    });
-
-    proc.on("error", reject);
+    clearTimeout(timeoutId);
+    resolve({ close, url: resolvedUrls.local[0] });
   });
 }
 
@@ -85,12 +69,11 @@ function startPlaywright(url) {
   });
 }
 
-const { vite: _vite, url } = await startVite(
+const { close: closeVite, url } = await startVite(
   `${process.env.BASE_PATH || ""}/${demoname}`
 );
-vite = _vite;
 console.log("Vite started at", url);
-playwright = await startPlaywright(url);
+const playwright = await startPlaywright(url);
 console.log("All done");
 teardown(0);
 
@@ -98,7 +81,7 @@ function teardown(code = 0) {
   console.log("Tearing down...");
 
   playwright?.kill();
-  vite?.kill();
+  closeVite();
   process.exit(code);
 }
 
