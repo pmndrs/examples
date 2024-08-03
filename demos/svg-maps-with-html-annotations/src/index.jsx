@@ -5,6 +5,7 @@ import { Canvas, useLoader } from '@react-three/fiber'
 import { SVGLoader } from 'three-stdlib'
 import { MapControls } from '@react-three/drei'
 import './styles.css'
+import map from "./map.svg"
 
 const hoveredCursor =
   'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBjbGlwLXBhdGg9InVybCgjY2xpcDApIj48Y2lyY2xlIGN4PSIzMiIgY3k9IjMyIiByPSIyNi41IiBmaWxsPSJibGFjayIgc3Ryb2tlPSJibGFjayIvPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMzIgMzJMMzIgNDVIMzNMMzMgMzJINDVWMzFIMzNWMTlIMzJWMzFIMTlWMzJIMzJaIiBmaWxsPSJ3aGl0ZSIvPjxwYXRoIGQ9Ik0xLjk2MjMxIDEuOTYyMzFMMTMuNzAzMyA1LjEwODI5TDUuMTA4MjkgMTMuNzAzM0wxLjk2MjMxIDEuOTYyMzFaIiBmaWxsPSJibGFjayIvPjwvZz48ZGVmcz48Y2xpcFBhdGggaWQ9ImNsaXAwIj48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IndoaXRlIi8+PC9jbGlwUGF0aD48L2RlZnM+PC9zdmc+'
@@ -19,7 +20,7 @@ function Cell({ color, shape, fillOpacity }) {
   return (
     <mesh onPointerOver={(e) => hover(true)} onPointerOut={() => hover(false)}>
       <meshBasicMaterial color={hovered ? 'hotpink' : color} opacity={fillOpacity} depthWrite={false} transparent />
-      <shapeBufferGeometry args={[shape]} />
+      <shapeGeometry args={[shape]} />
     </mesh>
   )
 }
@@ -50,7 +51,7 @@ function App() {
   return (
     <Canvas frameloop="demand" orthographic camera={{ position: [0, 0, 50], zoom: 2, up: [0, 0, 1], far: 10000 }}>
       <Suspense fallback={null}>
-        <Svg url="/map.svg" />
+        <Svg url={map} />
       </Suspense>
       <MapControls enableRotate={false} />
     </Canvas>
