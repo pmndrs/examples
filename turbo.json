@@ -21,7 +21,7 @@
       "outputs": [".next/**", "!.next/cache/**", "out/**"],
       "cache": true
     },
-    "foo": {
+    "test": {
       "inputs": [
         "$TURBO_DEFAULT$",
         "../../packages/e2e/bin/test.mjs",

@@ -7,7 +7,7 @@
     "dev": "turbo dev2",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "foo": "turbo foo --concurrency=1"
+    "test": "turbo test --concurrency=1"
   },
   "devDependencies": {
     "@playwright/test": "1.45.3",

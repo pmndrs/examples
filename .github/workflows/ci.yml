@@ -47,7 +47,7 @@ jobs:
       #
       # Test
       #
-      - run: npm run foo -- --filter=@demo/aquarium -vvv --env-mode=loose
+      - run: npm run test -- --filter=@demo/aquarium --env-mode=loose -vvv
         env:
           BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
 
