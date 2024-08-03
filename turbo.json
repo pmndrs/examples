@@ -12,7 +12,7 @@
       "cache": true
     },
     "website#build3": {
-      "dependsOn": ["^test"],
+      "dependsOn": ["^build2"],
       "env": ["PUBLIC_URL"],
       "inputs": [
         "$TURBO_DEFAULT$",
