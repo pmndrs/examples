@@ -8,7 +8,7 @@ import turtleModel from './model_52a_-_kemps_ridley_sea_turtle_no_id-transformed
 
 export default function App({ spheres }) {
   return (
-    <Canvas shadows camera={{ position: [30, 0, -3], fov: 35, near: 1, far: 50 }}>
+    <Canvas shadows camera={{ position: [30, 0, -3], fov: 35, near: 1, far: 50 }} gl={{ stencil:true }}>
       <color attach="background" args={['#c6e5db']} />
       {/** Glass aquarium */}
       <Aquarium position={[0, 0.25, 0]}>
@@ -24,8 +24,8 @@ export default function App({ spheres }) {
         </Instances>
       </Aquarium>
       {/** Soft shadows */}
-      <AccumulativeShadows temporal frames={100} color="lightblue" colorBlend={2} opacity={0.7} scale={60} position={[0, -5, 0]}>
-        <RandomizedLight amount={8} radius={15} ambient={0.5} intensity={1} position={[-5, 10, -5]} size={20} />
+      <AccumulativeShadows temporal frames={100} color="lightblue" colorBlend={2} opacity={0.7} alphaTest={0.65} scale={60} position={[0, -5, 0]}>
+        <RandomizedLight amount={8} radius={15} ambient={0.5} intensity={Math.PI} position={[-5, 10, -5]} size={20} />
       </AccumulativeShadows>
       {/** Custom environment map */}
       <Environment resolution={1024}>
