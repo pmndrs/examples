@@ -1,12 +1,8 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* the props */
+@import "open-props/style";
 
-body {
-}
+/* optional imports that use the props */
+@import "open-props/normalize";
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
+@import "open-props/normalize/dark";
+@import "open-props/normalize/light";

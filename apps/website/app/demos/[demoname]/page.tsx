@@ -50,5 +50,14 @@ export default function Page(props: Props) {
 
   const { embed_url } = demo;
 
-  return <iframe src={embed_url} className="w-full min-h-dvh" />;
+  return (
+    <>
+      <style>{`
+        @scope {
+          iframe {width:100%; min-height:100dvh;}
+        }
+      `}</style>
+      <iframe src={embed_url} />;
+    </>
+  );
 }
