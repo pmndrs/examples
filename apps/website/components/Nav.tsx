@@ -33,6 +33,7 @@ export default function Nav({
 
             padding:2rem;
             display:flex; gap:1rem; position:relative;
+            >* {flex:none;}
           }
 
           li {
