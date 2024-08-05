@@ -27,7 +27,7 @@ export default function Nav({
           a {display:block; background:white;}
 
           a img {
-            object-fit:cover; aspect:16/9; width:auto; height:7rem;
+            object-fit:cover; aspect-ratio:16/9; width:auto; height:7rem;
           }
         }
       `}</style>
