@@ -17,8 +17,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`bg-[#eee] ${inter.className}`}>
-        <div className="fixed w-full h-dvh">{children}</div>
+      <body className={inter.className}>
+        <style>{`
+        @scope {
+          :scope {background:#eee;}
+          main {position:fixed; width:100%; height:100dvh;}
+        }
+      `}</style>
+
+        <main>{children}</main>
         <Nav />
       </body>
     </html>
