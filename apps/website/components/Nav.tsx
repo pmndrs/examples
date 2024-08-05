@@ -14,14 +14,30 @@ export default function Nav({
     <>
       <style>{`
         @scope {
-          nav {display:inline-block;}
+          nav {
+            width:100%; overflow:auto; scroll-snap-type: x mandatory;
+            position:fixed;
+            bottom:0;
+
+            @media (min-aspect-ratio:1/1) {
+              display:inline-block;
+              position:static;
+
+              ul {display:inline-flex; flex-direction:column;}
+            }
+          }
 
           ul {
             padding-inline-start:unset;
             list-style:none;
 
             padding:2rem;
-            display:flex; flex-direction:column; gap:1rem; position:relative;
+            display:flex; gap:1rem; position:relative;
+          }
+
+          li {
+            padding-inline-start:unset;
+            scroll-snap-align: center;
           }
 
           a {display:block; background:white;}
