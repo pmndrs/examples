@@ -17,7 +17,7 @@ export default function Nav({
           __html: `
             @scope {
               nav {
-                width:100%; overflow:auto; scroll-snap-type: x mandatory;
+                width:100%; overflow:auto;
                 position:fixed;
                 bottom:0;
 
@@ -40,7 +40,6 @@ export default function Nav({
 
               li {
                 padding-inline-start:unset;
-                scroll-snap-align: center;
               }
 
               a {display:block; background:white;}
