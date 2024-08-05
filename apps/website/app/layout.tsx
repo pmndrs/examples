@@ -18,12 +18,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <style>{`
-        @scope {
-          :scope {background:#eee;}
-          main {position:fixed; width:100%; height:100dvh;}
-        }
-      `}</style>
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+              @scope {
+                :scope {background:#eee;}
+                main {position:fixed; width:100%; height:100dvh;}
+              }
+            `,
+          }}
+        />
 
         <main>{children}</main>
         <Nav />

@@ -52,11 +52,13 @@ export default function Page(props: Props) {
 
   return (
     <>
-      <style>{`
-        @scope {
-          iframe {width:100%; min-height:100dvh;}
-        }
-      `}</style>
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+            iframe {width:100%; min-height:100dvh;}
+          `,
+        }}
+      />
       <iframe src={embed_url} />;
     </>
   );
