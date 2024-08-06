@@ -1,5 +1,3 @@
-![ci badge](https://github.com/pmndrs/examples/actions/workflows/ci.yml/badge.svg?branch=main)
-
 index: [demos](demos)
 
 To use a given [`basic-demo`](demos/basic-demo) as a template for a new `myproject`:
