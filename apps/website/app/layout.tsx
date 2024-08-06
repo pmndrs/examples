@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import { getDemos } from "@/lib/helper";
+import { Style } from "@/components/Style";
 
 const inter = Inter({ subsets: ["latin"] });
 const demos = getDemos();
@@ -20,29 +21,32 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
-              @scope {
-                :scope {background:#eee;}
-                
-                main {
-                  position:fixed; width:100%; height:100dvh;
-                }
-
-                .Nav {
-                  position:fixed; bottom:0;
-                  width:100%; overflow:auto;
-
-                  @media (min-aspect-ratio:1/1) {
-                    display:inline-block;
-                    position:static;
-                  }
-                }
-                  
+        <Style
+          css={`
+            @scope {
+              :scope {
+                background: #eee;
               }
-            `,
-          }}
+
+              main {
+                position: fixed;
+                width: 100%;
+                height: 100dvh;
+              }
+
+              .Nav {
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                overflow: auto;
+
+                @media (min-aspect-ratio: 1/1) {
+                  display: inline-block;
+                  position: static;
+                }
+              }
+            }
+          `}
         />
 
         <main>{children}</main>

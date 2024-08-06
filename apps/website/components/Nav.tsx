@@ -13,6 +13,7 @@ import { useParams } from "next/navigation";
 import clsx from "clsx";
 
 import { getDemos } from "@/lib/helper";
+import { Style } from "./Style";
 
 export default function Nav({
   demos,
@@ -40,41 +41,58 @@ export default function Nav({
 
   return (
     <div className="Nav">
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-            @scope {
-              nav {
-                @media (min-aspect-ratio:1/1) {
-                  ul {display:inline-flex; flex-direction:column;}
+      <Style
+        css={`
+          @scope {
+            nav {
+              @media (min-aspect-ratio: 1/1) {
+                ul {
+                  display: inline-flex;
+                  flex-direction: column;
                 }
               }
-
-              ul {
-                padding-inline-start:unset; list-style:none;
-
-                padding:2rem;
-                display:flex; gap:1rem; position:relative;
-                >li {flex:none;}
-              }
-
-              li {
-                padding-inline-start:unset;
-              }
-
-              a {display:block; background:white;}
-
-              a.active {outline:1px solid black;}
-
-              a img {
-                object-fit:cover; aspect-ratio:16/9; width:auto; height:7rem;
-                color:inherit!important; font-size:.8rem;
-                background:none;
-              }
-              a img:after {content:"";}
             }
-          `,
-        }}
+
+            ul {
+              padding-inline-start: unset;
+              list-style: none;
+
+              padding: 2rem;
+              display: flex;
+              gap: 1rem;
+              position: relative;
+              > li {
+                flex: none;
+              }
+            }
+
+            li {
+              padding-inline-start: unset;
+            }
+
+            a {
+              display: block;
+              background: white;
+            }
+
+            a.active {
+              outline: 1px solid black;
+            }
+
+            a img {
+              object-fit: cover;
+              aspect-ratio: 16/9;
+              width: auto;
+              height: 7rem;
+              color: inherit !important;
+              font-size: 0.8rem;
+              background: none;
+            }
+            a img:after {
+              content: "";
+            }
+          }
+        `}
       />
 
       <nav {...props}>
