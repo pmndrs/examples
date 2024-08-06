@@ -8,8 +8,8 @@ import turtleModel from './model_52a_-_kemps_ridley_sea_turtle_no_id-transformed
 
 export default function App({ spheres }) {
   return (
-    <Canvas shadows camera={{ position: [30, 0, -3], fov: 35, near: 1, far: 50 }} gl={{ stencil:true }}>
-      <color attach="background" args={['#c6e5db']} />
+    <Canvas shadows camera={{ position: [30, 0, -3], fov: 35, near: 1, far: 50 }} gl={{ stencil: true }}>
+      <color attach="background" args={['yellow']} />
       {/** Glass aquarium */}
       <Aquarium position={[0, 0.25, 0]}>
         <Float rotationIntensity={2} floatIntensity={10} speed={2}>

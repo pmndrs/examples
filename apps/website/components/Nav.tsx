@@ -39,27 +39,19 @@ export default function Nav({
   }, [demoname, demos]);
 
   return (
-    <div>
+    <div className="Nav">
       <style
         dangerouslySetInnerHTML={{
           __html: `
             @scope {
               nav {
-                width:100%; overflow:auto;
-                position:fixed;
-                bottom:0;
-
                 @media (min-aspect-ratio:1/1) {
-                  display:inline-block;
-                  position:static;
-
                   ul {display:inline-flex; flex-direction:column;}
                 }
               }
 
               ul {
-                padding-inline-start:unset;
-                list-style:none;
+                padding-inline-start:unset; list-style:none;
 
                 padding:2rem;
                 display:flex; gap:1rem; position:relative;

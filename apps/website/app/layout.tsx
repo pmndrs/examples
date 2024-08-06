@@ -29,6 +29,17 @@ export default function RootLayout({
                 main {
                   position:fixed; width:100%; height:100dvh;
                 }
+
+                .Nav {
+                  position:fixed; bottom:0;
+                  width:100%; overflow:auto;
+
+                  @media (min-aspect-ratio:1/1) {
+                    display:inline-block;
+                    position:static;
+                  }
+                }
+                  
               }
             `,
           }}

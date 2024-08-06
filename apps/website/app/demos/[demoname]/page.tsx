@@ -69,25 +69,12 @@ export default async function Page(props: Props) {
   // console.log("isUp=", isUp);
 
   return (
-    <div>
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-            @scope {
-              :scope {
-                height:100%;
-                display:flex; align-items:center; justify-content:center;
-              }
-              iframe {width:100%; min-height:100dvh;}
-            }
-          `,
-        }}
-      />
+    <>
       {isDev && !isUp ? (
         <Dev demoname={demoname} />
       ) : (
         <iframe src={embed_url} />
       )}
-    </div>
+    </>
   );
 }

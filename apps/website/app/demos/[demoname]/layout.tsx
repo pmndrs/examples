@@ -11,5 +11,25 @@ export default function Layout({
 }>) {
   // const { demoname } = params;
 
-  return <>{children}</>;
+  return (
+    <div>
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+            @scope {
+              :scope {
+                height:100%;
+                display:flex; align-items:center; justify-content:center;
+                >.Dev {max-width:100%;}
+              }
+
+              .Dev {padding-inline:1rem;}
+              iframe {width:100%; min-height:100dvh;}
+            }
+          `,
+        }}
+      />
+      {children}
+    </div>
+  );
 }

@@ -8,13 +8,16 @@ export function Dev({ demoname }: { demoname: string }) {
   const cmd = `npm run -w demos/${demoname} dev3`;
 
   return (
-    <div>
+    <div className="Dev">
       <style
         dangerouslySetInnerHTML={{
           __html: `
             @scope {
               pre {background:rgb(13,13,13); padding:1rem; border-radius:.35rem;}
-              code {color:white;}
+              code {
+                color:white;
+                text-overflow:ellipsis; overflow:hidden; display:block;
+              }
               code:before {content:"$ ";}
 
               pre {
