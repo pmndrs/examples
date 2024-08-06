@@ -25,7 +25,10 @@ export default function RootLayout({
             __html: `
               @scope {
                 :scope {background:#eee;}
-                main {position:fixed; width:100%; height:100dvh;}
+                
+                main {
+                  position:fixed; width:100%; height:100dvh;
+                }
               }
             `,
           }}

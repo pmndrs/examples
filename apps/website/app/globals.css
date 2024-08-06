@@ -6,3 +6,9 @@
 
 @import "open-props/normalize/dark";
 @import "open-props/normalize/light";
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}

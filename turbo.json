@@ -40,7 +40,6 @@
       "persistent": true
     },
     "website#dev2": {
-      "dependsOn": ["^dev2"],
       "cache": false,
       "persistent": true
     }
