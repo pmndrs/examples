@@ -39,7 +39,7 @@ export default function Nav({
   }, [demoname, demos]);
 
   return (
-    <>
+    <div>
       <style
         dangerouslySetInnerHTML={{
           __html: `
@@ -76,7 +76,10 @@ export default function Nav({
 
               a img {
                 object-fit:cover; aspect-ratio:16/9; width:auto; height:7rem;
+                color:inherit!important; font-size:.8rem;
+                background:none;
               }
+              a img:after {content:"";}
             }
           `,
         }}
@@ -91,13 +94,13 @@ export default function Nav({
                   href={`/demos/${name}`}
                   className={clsx({ active: demoname === name })}
                 >
-                  <Image src={thumb} width={16} height={9} alt="" />
+                  <Image src={thumb} width={16} height={9} alt={name} />
                 </Link>
               </li>
             );
           })}
         </ul>
       </nav>
-    </>
+    </div>
   );
 }

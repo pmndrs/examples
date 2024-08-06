@@ -18,7 +18,7 @@ $ npm ci
 # dev
 
 ```sh
-$ npm run -w demos/cards-with-border-radius dev
+$ npm run dev
 ```
 
 # build

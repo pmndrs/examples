@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { getDemos } from "@/lib/helper";
+import { Dev } from "./Dev";
 
 const demos = getDemos();
 
@@ -41,7 +42,18 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function Page(props: Props) {
+async function checkUrlIsUp(url: string) {
+  const response = await fetch(url, {
+    method: "GET",
+    next: { revalidate: 0 },
+  }).catch(() => {});
+
+  return response?.ok || false;
+}
+
+const isDev = process.env.NODE_ENV === "development";
+
+export default async function Page(props: Props) {
   const { params } = props;
 
   const { demoname } = params;
@@ -50,16 +62,32 @@ export default function Page(props: Props) {
 
   const { embed_url } = demo;
 
+  let isUp;
+  if (isDev) {
+    isUp = await checkUrlIsUp(embed_url);
+  }
+  // console.log("isUp=", isUp);
+
   return (
-    <>
+    <div>
       <style
         dangerouslySetInnerHTML={{
           __html: `
-            iframe {width:100%; min-height:100dvh;}
+            @scope {
+              :scope {
+                height:100%;
+                display:flex; align-items:center; justify-content:center;
+              }
+              iframe {width:100%; min-height:100dvh;}
+            }
           `,
         }}
       />
-      <iframe src={embed_url} />;
-    </>
+      {isDev && !isUp ? (
+        <Dev demoname={demoname} />
+      ) : (
+        <iframe src={embed_url} />
+      )}
+    </div>
   );
 }
