@@ -1,15 +1,43 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import {
+  ComponentProps,
+  createRef,
+  ElementRef,
+  useEffect,
+  useRef,
+} from "react";
+import { useParams } from "next/navigation";
+import clsx from "clsx";
 
 import { getDemos } from "@/lib/helper";
-import { ComponentProps } from "react";
-
-export const demos = getDemos();
 
 export default function Nav({
-  current,
+  demos,
   ...props
-}: ComponentProps<"nav"> & { current?: string }) {
+}: { demos: ReturnType<typeof getDemos> } & ComponentProps<"nav">) {
+  const ulRef = useRef<ElementRef<"ul">>(null);
+  const lisRef = useRef(
+    Array.from({ length: demos.length }).map(() => createRef<HTMLLIElement>())
+  );
+
+  const { demoname } = useParams();
+
+  const firstRef = useRef(true);
+  useEffect(() => {
+    const i = demos.findIndex(({ name }) => name === demoname);
+    const li = lisRef.current[i]?.current;
+    if (li)
+      li.scrollIntoView({
+        inline: "center",
+        block: "center",
+        behavior: firstRef.current ? "instant" : "smooth",
+      });
+    firstRef.current = false;
+  }, [demoname, demos]);
+
   return (
     <>
       <style
@@ -44,6 +72,8 @@ export default function Nav({
 
               a {display:block; background:white;}
 
+              a.active {outline:1px solid black;}
+
               a img {
                 object-fit:cover; aspect-ratio:16/9; width:auto; height:7rem;
               }
@@ -51,16 +81,15 @@ export default function Nav({
           `,
         }}
       />
+
       <nav {...props}>
-        <ul>
+        <ul ref={ulRef}>
           {demos.map(({ name, thumb }, i) => {
             return (
-              <li key={thumb}>
+              <li key={thumb} ref={lisRef.current[i]}>
                 <Link
                   href={`/demos/${name}`}
-                  style={{
-                    outline: `2px solid ${name === current ? "black" : "transparent"}`,
-                  }}
+                  className={clsx({ active: demoname === name })}
                 >
                   <Image src={thumb} width={16} height={9} alt="" />
                 </Link>

@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
+import { getDemos } from "@/lib/helper";
 
 const inter = Inter({ subsets: ["latin"] });
+const demos = getDemos();
 
 export const metadata: Metadata = {
   title: "pmndrs examples",
@@ -30,7 +32,7 @@ export default function RootLayout({
         />
 
         <main>{children}</main>
-        <Nav />
+        <Nav demos={demos} />
       </body>
     </html>
   );
