@@ -37,7 +37,7 @@ export const ImageFadeMaterial = shaderMaterial(
       vec4 finalTexture = mix(_texture, _texture2, dispFactor);
       gl_FragColor = finalTexture;
       #include <tonemapping_fragment>
-      #include <encodings_fragment>
+      #include <colorspace_fragment>
     }`
 )
 
