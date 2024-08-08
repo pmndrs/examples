@@ -12,16 +12,16 @@ const useStore = create((set) => {
     const config = { font, size: 15, height: 2, curveSegments: 4, evelEnabled: false }
     set({
       items: [
-        { position: [0.25, 1.8, -6], r: 0.5, geometry: new THREE.SphereBufferGeometry(1, 32, 32) },
-        { position: [-1.5, 0, 2], r: 0.2, geometry: new THREE.TetrahedronBufferGeometry(2) },
-        { position: [1, -0.75, 4], r: 0.3, geometry: new THREE.CylinderBufferGeometry(0.8, 0.8, 2, 32) },
+        { position: [0.25, 1.8, -6], r: 0.5, geometry: new THREE.SphereGeometry(1, 32, 32) },
+        { position: [-1.5, 0, 2], r: 0.2, geometry: new THREE.TetrahedronGeometry(2) },
+        { position: [1, -0.75, 4], r: 0.3, geometry: new THREE.CylinderGeometry(0.8, 0.8, 2, 32) },
         { position: [-0.7, 0.5, 6], r: 0.4, geometry: new THREE.ConeGeometry(1.1, 1.7, 32) },
-        { position: [0.5, -1.2, -6], r: 0.9, geometry: new THREE.SphereBufferGeometry(1.5, 32, 32) },
-        { position: [-0.5, 2.5, -2], r: 0.6, geometry: new THREE.IcosahedronBufferGeometry(2) },
-        { position: [-0.8, -0.75, 3], r: 0.35, geometry: new THREE.TorusBufferGeometry(1.1, 0.35, 16, 32) },
+        { position: [0.5, -1.2, -6], r: 0.9, geometry: new THREE.SphereGeometry(1.5, 32, 32) },
+        { position: [-0.5, 2.5, -2], r: 0.6, geometry: new THREE.IcosahedronGeometry(2) },
+        { position: [-0.8, -0.75, 3], r: 0.35, geometry: new THREE.TorusGeometry(1.1, 0.35, 16, 32) },
         { position: [1.5, 0.5, -2], r: 0.8, geometry: new THREE.OctahedronGeometry(2) },
-        { position: [-1, -0.5, -6], r: 0.5, geometry: new THREE.SphereBufferGeometry(1.5, 32, 32) },
-        { position: [1, 1.9, -1], r: 0.2, geometry: new THREE.BoxBufferGeometry(2.5, 2.5, 2.5) },
+        { position: [-1, -0.5, -6], r: 0.5, geometry: new THREE.SphereGeometry(1.5, 32, 32) },
+        { position: [1, 1.9, -1], r: 0.2, geometry: new THREE.BoxGeometry(2.5, 2.5, 2.5) },
         { position: [-2, -2, -10], r: 0, geometry: new TextGeometry('5', config) }
       ]
     })
