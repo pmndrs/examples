@@ -6,7 +6,7 @@
   "keywords": [],
   "dependencies": {
     "@pmndrs/branding": "^0.0.8",
-    "@react-three/cannon": "^6.5.2",
+    "@react-three/cannon": "^6.6.0",
     "@react-three/drei": "^9.107.0",
     "@react-three/fiber": "^8.16.8",
     "@react-three/rapier": "^1.4.0",
