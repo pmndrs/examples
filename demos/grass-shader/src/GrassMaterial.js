@@ -114,7 +114,7 @@ const GrassMaterial = shaderMaterial(
         gl_FragColor = col;
 
         #include <tonemapping_fragment>
-	      #include <encodings_fragment>
+	      #include <colorspace_fragment>
       }`,
   (self) => {
     self.side = THREE.DoubleSide
