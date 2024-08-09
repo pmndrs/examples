@@ -1,4 +1,4 @@
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { Logo } from '@pmndrs/branding'
 import './styles.css'
 import App from './App'
@@ -17,11 +17,11 @@ function Overlay() {
   )
 }
 
-ReactDOM.render(
+createRoot(
+  document.getElementById('root')).render(
   <>
     <App />
     <Overlay />
     <Logo style={{ position: 'absolute', bottom: 40, left: 40, width: 30 }} />
-  </>,
-  document.getElementById('root')
+  </>
 )
