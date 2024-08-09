@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import * as React from 'react'
-import * as ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { context as fiberContext, useFrame, useThree } from '@react-three/fiber'
 import mergeRefs from 'react-merge-refs'
 
@@ -113,7 +113,9 @@ export function ScrollControls({
 
     const oldTarget = typeof events.connected !== 'boolean' ? events.connected : gl.domElement
     requestAnimationFrame(() => events.connect?.(el))
+    // @ts-ignore
     const oldCompute = raycaster.computeOffsets
+    // @ts-ignore
     raycaster.computeOffsets = ({ clientX, clientY }) => ({
       offsetX: clientX - (target as HTMLElement).offsetLeft,
       offsetY: clientY - (target as HTMLElement).offsetTop
@@ -121,6 +123,7 @@ export function ScrollControls({
 
     return () => {
       target.removeChild(el)
+      // @ts-ignore
       raycaster.computeOffsets = oldCompute
       events.connect?.(oldTarget)
     }
@@ -135,7 +138,7 @@ export function ScrollControls({
     let disableScroll = true
     let firstRun = true
 
-    const onScroll = (e) => {
+    const onScroll = (e : any) => {
       // Prevent first scroll because it is indirectly caused by the one pixel offset
       if (!enabled || firstRun) return
       invalidate()
@@ -161,7 +164,7 @@ export function ScrollControls({
     el.addEventListener('scroll', onScroll, { passive: true })
     requestAnimationFrame(() => (firstRun = false))
 
-    const onWheel = (e) => (el.scrollLeft += e.deltaY / 2)
+    const onWheel = (e : any) => (el.scrollLeft += e.deltaY / 2)
     if (horizontal) el.addEventListener('wheel', onWheel, { passive: true })
 
     return () => {
@@ -179,7 +182,7 @@ export function ScrollControls({
   return <context.Provider value={state}>{children}</context.Provider>
 }
 
-const ScrollCanvas = React.forwardRef(({ children }, ref) => {
+const ScrollCanvas = React.forwardRef(({ children } : { children?: React.ReactNode}, ref) => {
   const group = React.useRef<THREE.Group>(null!)
   const state = useScroll()
   const { width, height } = useThree((state) => state.viewport)
@@ -203,13 +206,12 @@ const ScrollHtml = React.forwardRef(
         }px,0)`
       }
     })
-    ReactDOM.render(
+    createRoot(state.fixed).render(
       <div ref={mergeRefs([ref, group])} style={{ ...style, position: 'absolute', top: 0, left: 0, willChange: 'transform' }} {...props}>
         <context.Provider value={state}>
           <fiberContext.Provider value={fiberState}>{children}</fiberContext.Provider>
         </context.Provider>
-      </div>,
-      state.fixed
+      </div>
     )
     return null
   }
