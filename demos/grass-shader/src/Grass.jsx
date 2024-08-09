@@ -3,7 +3,6 @@ import * as THREE from "three"
 import React, { useRef, useMemo } from "react"
 import SimplexNoise from "simplex-noise"
 import { useFrame, useLoader } from "@react-three/fiber"
-import { Geometry } from "three/examples/jsm/deprecated/Geometry"
 //These have been taken from "Realistic real-time grass rendering" by Eddie Lee, 2010
 import bladeDiffuse from "./resources/blade_diffuse.jpg"
 import bladeAlpha from "./resources/blade_alpha.jpg"
@@ -16,17 +15,17 @@ export default function Grass({ options = { bW: 0.12, bH: 1, joints: 5 }, width 
   const materialRef = useRef()
   const [texture, alphaMap] = useLoader(THREE.TextureLoader, [bladeDiffuse, bladeAlpha])
   const attributeData = useMemo(() => getAttributeData(instances, width), [instances, width])
-  const baseGeom = useMemo(() => new THREE.PlaneBufferGeometry(bW, bH, 1, joints).translate(0, bH / 2, 0), [options])
+  const baseGeom = useMemo(() => new THREE.PlaneGeometry(bW, bH, 1, joints).translate(0, bH / 2, 0), [options])
   const groundGeo = useMemo(() => {
-    const geo = new Geometry().fromBufferGeometry(new THREE.PlaneGeometry(width, width, 32, 32))
-    geo.verticesNeedUpdate = true
+    const geo = new THREE.PlaneGeometry(width, width, 32, 32)
+    geo.attributes.position.needsUpdate = true
     geo.lookAt(new THREE.Vector3(0, 1, 0))
-    for (let i = 0; i < geo.vertices.length; i++) {
-      const v = geo.vertices[i]
-      v.y = getYPosition(v.x, v.z)
+    const positions = geo.attributes.position.array
+    for (let i = 0; i < positions.length; i+=3) {
+      positions[i+1] = getYPosition(positions[i], positions[i+2])
     }
     geo.computeVertexNormals()
-    return geo.toBufferGeometry()
+    return geo
   }, [width])
   useFrame(state => (materialRef.current.uniforms.time.value = state.clock.elapsedTime / 4))
   return (
