@@ -5,7 +5,7 @@ import { easing } from 'maath'
 import { suspend } from 'suspend-react'
 import { Instances, Computers } from './Computers'
 
-const suzi = import('@pmndrs/assets/models/bunny.glb?url')
+const suzi = import('@pmndrs/assets/models/bunny.glb')  
 
 export default function App() {
   return (
