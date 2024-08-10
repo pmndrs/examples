@@ -13,7 +13,7 @@ export default function Enemies() {
 
 const box = new THREE.Box3()
 box.setFromCenterAndSize(new THREE.Vector3(0, 0, 1), new THREE.Vector3(3, 3, 3))
-const glowMaterial = new THREE.MeshBasicMaterial({ color: new THREE.Color('lightblue') })
+const glowMaterial = new THREE.MeshBasicMaterial({ color: new THREE.Color('lightblue'), toneMapped: false })
 const bodyMaterial = new THREE.MeshPhongMaterial({ color: new THREE.Color('black') })
 
 const Drone = React.memo(({ data }) => {

@@ -20,7 +20,7 @@ export default function Planets() {
       <pointLight position={[-5, -5, -5]} distance={1000} decay={0} intensity={6 * Math.PI} />
       <mesh position={[-30, -10, -60]}>
         <sphereGeometry args={[4, 32, 32]} />
-        <meshBasicMaterial color="#FFFF99" fog={false} />
+        <meshBasicMaterial color="#FFFF99" toneMapped={false} fog={false} />
         <pointLight distance={6100} intensity={50 * Math.PI} color="white" decay={0} />
       </mesh>
     </group>

@@ -10,7 +10,7 @@ const geometry = new THREE.BoxGeometry(1, 1, 40)
 const lightgreen = new THREE.Color('lightgreen')
 const hotpink = new THREE.Color('hotpink')
 const laserMaterial = new THREE.MeshBasicMaterial({ color: lightgreen })
-const crossMaterial = new THREE.MeshBasicMaterial({ color: hotpink, fog: false })
+const crossMaterial = new THREE.MeshBasicMaterial({ color: hotpink, fog: false, toneMapped: false })
 const position = new THREE.Vector3()
 const direction = new THREE.Vector3()
 
@@ -110,7 +110,7 @@ export default function Ship() {
       </group>
       <mesh ref={exhaust} scale={[1, 1, 30]} position={[0, 1, 30]}>
         <dodecahedronGeometry args={[1.5, 0]} />
-        <meshBasicMaterial color="lightblue" />
+        <meshBasicMaterial color="lightblue" toneMapped={false}/>
       </mesh>
     </group>
   )

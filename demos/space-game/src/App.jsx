@@ -32,7 +32,7 @@ export default function App() {
           gl.setClearColor(new THREE.Color('#020209'))
         }}>
         <fog attach="fog" args={['#070710', 100, 700]} />
-        <ambientLight intensity={0.25} />
+        <ambientLight intensity={Math.PI} />
         <Stars />
         <Explosions />
         <Track />
@@ -46,6 +46,7 @@ export default function App() {
             <Ship />
           </Rig>
         </Suspense>
+        <Effects />
       </Canvas>
       <Hud />
     </div>
