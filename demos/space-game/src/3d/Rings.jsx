@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import React from 'react'
 import useStore from '../store'
 
-const geometry = new THREE.RingBufferGeometry(1, 1.01, 64)
+const geometry = new THREE.RingGeometry(1, 1.01, 64)
 const material = new THREE.MeshBasicMaterial({ color: new THREE.Color('lightgreen'), side: THREE.DoubleSide })
 
 export default function Rings() {

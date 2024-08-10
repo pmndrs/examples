@@ -6,7 +6,7 @@ import useStore from '../store'
 
 import shipModel from './ship.gltf?url'
 
-const geometry = new THREE.BoxBufferGeometry(1, 1, 40)
+const geometry = new THREE.BoxGeometry(1, 1, 40)
 const lightgreen = new THREE.Color('lightgreen')
 const hotpink = new THREE.Color('hotpink')
 const laserMaterial = new THREE.MeshBasicMaterial({ color: lightgreen })
@@ -39,7 +39,7 @@ export default function Ship() {
       const group = laserGroup.current.children[i]
       group.position.z -= 20
     }
-    laserLight.current.intensity += ((lasers.length && Date.now() - lasers[lasers.length - 1] < 100 ? 20 : 0) - laserLight.current.intensity) * 0.3
+    laserLight.current.intensity += ((lasers.length && Date.now() - lasers[lasers.length - 1] < 100 ? 20 : 0) - laserLight.current.intensity) * 0.3 * Math.PI
 
     // Get ships orientation and save it to the stores ray
     main.current.getWorldPosition(position)
@@ -78,7 +78,7 @@ export default function Ship() {
             <boxGeometry args={[2, 40, 2]} />
           </mesh>
         </group>
-        <pointLight ref={laserLight} position={[0, 0, -20]} distance={100} intensity={0} color="lightgreen" />
+        <pointLight ref={laserLight} position={[0, 0, -20]} distance={100} intensity={0} decay={0} color="lightgreen" />
         <group ref={laserGroup}>
           {lasers.map((t, i) => (
             <group key={i}>
@@ -109,7 +109,7 @@ export default function Ship() {
         </group>
       </group>
       <mesh ref={exhaust} scale={[1, 1, 30]} position={[0, 1, 30]}>
-        <dodecahedronBufferGeometry args={[1.5, 0]} />
+        <dodecahedronGeometry args={[1.5, 0]} />
         <meshBasicMaterial color="lightblue" />
       </mesh>
     </group>

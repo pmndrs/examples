@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { Curves } from 'three/examples/jsm/curves/CurveExtras'
+import * as Curves from 'three/examples/jsm/curves/CurveExtras'
 import { addEffect } from '@react-three/fiber'
 import create from 'zustand'
 import * as audio from './audio'
@@ -8,7 +8,7 @@ let guid = 1
 
 const useStore = create((set, get) => {
   let spline = new Curves.GrannyKnot()
-  let track = new THREE.TubeBufferGeometry(spline, 250, 0.2, 10, true)
+  let track = new THREE.TubeGeometry(spline, 250, 0.2, 10, true)
   let cancelLaserTO = undefined
   let cancelExplosionTO = undefined
   const box = new THREE.Box3()

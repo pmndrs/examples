@@ -19,7 +19,7 @@ export default function Stars({ count = 2000 }) {
   return (
     <points>
       <bufferGeometry>
-        <bufferAttribute attachObject={['attributes', 'position']} count={positions.length / 3} array={positions} itemSize={3} />
+        <bufferAttribute attach="attributes-position" count={positions.length / 3} array={positions} itemSize={3} />
       </bufferGeometry>
       <pointsMaterial size={15} sizeAttenuation color="white" fog={false} />
     </points>
