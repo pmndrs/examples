@@ -47,8 +47,7 @@ function Item({ index, position, scale, c = new THREE.Color(), ...props }) {
   useFrame((state, delta) => {
     const y = scroll.curve(index / urls.length - 1.5 / urls.length, 4 / urls.length)
     easing.damp3(ref.current.scale, [clicked === index ? 4.7 : scale[0], clicked === index ? 5 : 4 + y, 1], 0.15, delta)
-    ref.current.material.scale[0] = ref.current.scale.x
-    ref.current.material.scale[1] = ref.current.scale.y
+    ref.current.material.scale.set(ref.current.scale.x, ref.current.scale.y) 
     if (clicked !== null && index < clicked) easing.damp(ref.current.position, 'x', position[0] - 2, 0.15, delta)
     if (clicked !== null && index > clicked) easing.damp(ref.current.position, 'x', position[0] + 2, 0.15, delta)
     if (clicked === null || clicked === index) easing.damp(ref.current.position, 'x', position[0], 0.15, delta)
