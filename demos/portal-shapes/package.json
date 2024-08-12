@@ -6,23 +6,23 @@
   "keywords": [],
   "dependencies": {
     "@pmndrs/branding": "^0.0.8",
-    "@react-three/cannon": "^6.5.2",
-    "@react-three/drei": "^9.107.0",
-    "@react-three/fiber": "^8.16.8",
+    "@react-three/cannon": "^6.6.0",
+    "@react-three/drei": "^9.109.5",
+    "@react-three/fiber": "^8.17.5",
     "@react-three/rapier": "^1.4.0",
     "r3f-perf": "7.1.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "three": "^0.165.0",
-    "three-stdlib": "^2.23.8"
+    "three-stdlib": "^2.32.2"
   },
   "devDependencies": {
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
     "@types/three": "^0.165.0",
     "@vitejs/plugin-react": "^4.3.1",
-    "typescript": "^5.5.2",
-    "vite": "^5.3.1"
+    "typescript": "^5.5.4",
+    "vite": "^5.4.0"
   },
   "scripts": {
     "dev": "vite --host",
