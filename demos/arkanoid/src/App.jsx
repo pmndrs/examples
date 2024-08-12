@@ -37,7 +37,7 @@ function Paddle() {
 }
 
 function Ball() {
-  const [ref, api] = useSphere(() => ({ mass: 1, args: 0.4, position: [0, 3, 0], velocity: [0, 5, 0] }))
+  const [ref, api] = useSphere(() => ({ mass: 1, args: [0.4], position: [0, 3, 0], velocity: [0, 5, 0] }))
   const restart = useStore((state) => state.restart)
   useEffect(() => {
     if (restart) {
