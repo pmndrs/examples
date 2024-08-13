@@ -28,7 +28,8 @@
     "dev3": "e2e-dev $npm_package_name",
     "build": "tsc && vite build",
     "build2": "tsc && e2e-build $npm_package_name",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "e2e-test $npm_package_name"
   },
   "browserslist": [
     ">1%",

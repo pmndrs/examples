@@ -53,11 +53,11 @@ test(`${demoname}`, async ({ page }) => {
   await page.goto(`${host}/?saycheese`);
   await waitForEvent(page, "playwright:snapshot-ready");
 
-  // 📸 <canvas>
-  const $canvas = page.locator("canvas[data-engine]");
+  // const zone = page.locator("canvas[data-engine]").first(); // only capture the canvas zone
+  const zone = page;
 
   // 👁️
-  await expect($canvas).toHaveScreenshot({
+  await expect(zone).toHaveScreenshot({
     maxDiffPixelRatio: 0.05,
     timeout: 10000,
   });

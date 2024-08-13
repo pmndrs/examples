@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "build": "turbo build3",
+    "start": "serve out",
     "postbuild": "./out.sh",
     "dev": "turbo dev2",
     "lint": "turbo lint",
@@ -13,6 +14,7 @@
     "@playwright/test": "1.45.3",
     "@types/minimist": "^1.2.5",
     "prettier": "^3.3.3",
+    "serve": "^14.2.3",
     "turbo": "^2.0.12",
     "typescript": "^5.5.4"
   },
