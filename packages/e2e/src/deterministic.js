@@ -14,6 +14,10 @@ if (sayCheeseParam) {
 
     opacity: 1!important;
   }
+
+  [id*="leva"],[class*="leva"],
+  div[style*="10000"],
+  [class*="c-"] {display:none!important;}
 `;
   document.head.appendChild(style);
 }

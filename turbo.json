@@ -27,7 +27,8 @@
       "inputs": [
         "$TURBO_DEFAULT$",
         "../../packages/e2e/bin/test.mjs",
-        "../../packages/e2e/{playwright.config.ts,snapshot.test.js}"
+        "../../packages/e2e/{playwright.config.ts,snapshot.test.js}",
+        "../../packages/e2e/src/**"
       ],
       "outputs": ["../../packages/e2e/snapshot.test.js-snapshots/**"],
       "cache": true
