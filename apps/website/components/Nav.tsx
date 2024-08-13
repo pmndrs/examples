@@ -97,14 +97,14 @@ export default function Nav({
 
       <nav {...props}>
         <ul ref={ulRef}>
-          {demos.map(({ name, thumb }, i) => {
+          {demos.map(({ name, snap }, i) => {
             return (
-              <li key={thumb} ref={lisRef.current[i]}>
+              <li key={snap} ref={lisRef.current[i]}>
                 <Link
                   href={`/demos/${name}`}
                   className={clsx({ active: demoname === name })}
                 >
-                  <Image src={thumb} width={16} height={9} alt={name} />
+                  <Image src={snap} width={16} height={9} alt={name} />
                 </Link>
               </li>
             );

@@ -4,6 +4,7 @@ import { getDemos } from "@/lib/helper";
 import { Dev } from "./Dev";
 
 const demos = getDemos();
+// console.log("demos=", demos);
 
 export type Props = {
   params: { demoname: string };

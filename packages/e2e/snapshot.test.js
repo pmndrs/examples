@@ -54,7 +54,7 @@ test(`${demoname}`, async ({ page }) => {
   await waitForEvent(page, "playwright:snapshot-ready");
 
   // 📸 <canvas>
-  const $canvas = page.locator("canvas[data-engine]");
+  const $canvas = page.locator("canvas[data-engine]").first();
 
   // 👁️
   await expect($canvas).toHaveScreenshot({

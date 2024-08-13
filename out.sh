@@ -14,13 +14,14 @@ for demo_path in demos/*; do
     mkdir -p "$out_demo_dir"
     cp -r "$vite_dist_dir"/* "$out_demo_dir"
     
-    thumbnail_file=$(find "$demo_path" -name 'thumbnail.png' -print -quit)  # Lower case for local variable
     snapshot_file=$(find packages/e2e/snapshot.test.js-snapshots -name "${demo_name}-*-linux.png" -print -quit)  # Lower case for local variable
-    
     if [ -n "$snapshot_file" ]; then
-      cp "$snapshot_file" "$out_demo_dir/thumbnail.png"
+      cp "$snapshot_file" "$out_demo_dir/snapshot.png"
       echo "Copied snapshot_file $snapshot_file to $out_demo_dir"
-    elif [ -n "$thumbnail_file" ]; then
+    fi
+
+    thumbnail_file=$(find "$demo_path" -name 'thumbnail.png' -print -quit)  # Lower case for local variable
+    if [ -n "$thumbnail_file" ]; then
       cp "$thumbnail_file" "$out_demo_dir/thumbnail.png"
       echo "Copied thumbnail_file $thumbnail_file to $out_demo_dir"
     fi
