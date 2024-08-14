@@ -26,20 +26,17 @@ export default function Nav({
 
   const { demoname } = useParams();
 
-  // const firstRef = useRef(true);
+  const firstRef = useRef(true);
   useEffect(() => {
     const i = demos.findIndex(({ name }) => name === demoname);
     const li = lisRef.current[i]?.current;
-
-    // const behavior = firstRef.current ? "instant" : "smooth";
-    // console.log("behavior", behavior);
     if (li)
       li.scrollIntoView({
         inline: "center",
         block: "center",
-        behavior: "smooth",
+        behavior: firstRef.current ? "instant" : "smooth",
       });
-    // firstRef.current = false;
+    firstRef.current = false;
   }, [demoname, demos]);
 
   return (

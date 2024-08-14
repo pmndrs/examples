@@ -2,4 +2,4 @@
 [![CodeSandbox](https://img.shields.io/badge/codesandbox-040404?logo=codesandbox&logoColor=DBDBDB)](https://codesandbox.io/s/github/pmndrs/examples/tree/main/demos/bloom-hdr-workflow-gltf)
 [![Stackblitz](https://img.shields.io/badge/stackblitz-fff?logo=Stackblitz&logoColor=1389FD)](https://stackblitz.com/github/pmndrs/examples/tree/main/demos/bloom-hdr-workflow-gltf)
 
-![](thumbnail.webp)
+![](thumbnail.png)
