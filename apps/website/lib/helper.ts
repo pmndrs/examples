@@ -24,7 +24,7 @@ export function getDemos() {
 
       return {
         name: demoname,
-        thumb: `${embed_url}/thumbnail.png`,
+        thumb: `${embed_url}/thumbnail.webp`,
         embed_url,
         website_url,
       };
