@@ -3,7 +3,7 @@ import React, { Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
 import Stars from './3d/Stars'
 import Planets from './3d/Planets'
-import Effects from './3d/Effects'
+import { NewEffects } from './3d/Effects'
 import Particles from './3d/Particles'
 import Enemies from './3d/Enemies'
 import Rocks from './3d/Rocks'
@@ -22,13 +22,12 @@ export default function App() {
     <div onPointerMove={actions.updateMouse} onClick={actions.shoot}>
       <Canvas
         linear
-        mode="concurrent"
         dpr={[1, 1.5]}
         gl={{ antialias: false }}
         camera={{ position: [0, 0, 2000], near: 0.01, far: 10000, fov }}
         onCreated={({ gl, camera }) => {
           actions.init(camera)
-          gl.toneMapping = THREE.ACESFilmicToneMapping
+          gl.toneMapping = THREE.NoToneMapping
           gl.setClearColor(new THREE.Color('#020209'))
         }}>
         <fog attach="fog" args={['#070710', 100, 700]} />
@@ -46,7 +45,7 @@ export default function App() {
             <Ship />
           </Rig>
         </Suspense>
-        <Effects />
+        <NewEffects />
       </Canvas>
       <Hud />
     </div>

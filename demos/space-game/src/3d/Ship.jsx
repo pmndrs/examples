@@ -110,7 +110,7 @@ export default function Ship() {
       </group>
       <mesh ref={exhaust} scale={[1, 1, 30]} position={[0, 1, 30]}>
         <dodecahedronGeometry args={[1.5, 0]} />
-        <meshBasicMaterial color="lightblue" toneMapped={false}/>
+        <meshBasicMaterial color="lightblue" />
       </mesh>
     </group>
   )

@@ -3,7 +3,7 @@ import React from 'react'
 import useStore from '../store'
 
 const geometry = new THREE.RingGeometry(1, 1.01, 64)
-const material = new THREE.MeshBasicMaterial({ color: new THREE.Color('lightgreen'), side: THREE.DoubleSide, toneMapped: false })
+const material = new THREE.MeshBasicMaterial({ color: new THREE.Color('lightgreen'), side: THREE.DoubleSide })
 
 export default function Rings() {
   const { rings } = useStore(state => state.mutation)
