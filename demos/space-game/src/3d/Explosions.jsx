@@ -47,7 +47,7 @@ function Explosion({ position, scale }) {
       {particles.map(({ color, data }, index) => (
         <instancedMesh key={index} args={[null, null, data.length]} frustumCulled={false}>
           <dodecahedronGeometry args={[10, 0]} />
-          <meshBasicMaterial color={color} transparent opacity={1} fog={false} />
+          <meshBasicMaterial color={color} transparent opacity={1} fog={true} />
         </instancedMesh>
       ))}
     </group>
