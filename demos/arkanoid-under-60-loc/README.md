@@ -2,4 +2,4 @@
 [![CodeSandbox](https://img.shields.io/badge/codesandbox-040404?logo=codesandbox&logoColor=DBDBDB)](https://codesandbox.io/s/github/pmndrs/examples/tree/main/demos/arkanoid-under-60-loc)
 [![Stackblitz](https://img.shields.io/badge/stackblitz-fff?logo=Stackblitz&logoColor=1389FD)](https://stackblitz.com/github/pmndrs/examples/tree/main/demos/arkanoid-under-60-loc)
 
-![](thumbnail.png)
+![](thumbnail.webp)

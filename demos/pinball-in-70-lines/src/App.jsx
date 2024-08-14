@@ -9,7 +9,7 @@ import bgImg from "./bg.jpg"
 
 function BallAndCollisions({ args = [1.2, 32, 32], v = new THREE.Vector3() }) {
   const cam = useRef()
-  const [ref, api] = useSphere(() => ({ args: 1.2, mass: 1, material: { restitution: 0.95 } }))
+  const [ref, api] = useSphere(() => ({ args: [1.2], mass: 1, material: { restitution: 0.95 } }))
   usePlane(() => ({ position: [0, -15, 0], rotation: [-Math.PI / 2, 0, 0], onCollide: () => (api.position.set(0, 0, 0), api.velocity.set(0, 0, 0)) }))
   usePlane(() => ({ position: [-15, 0, 0], rotation: [-Math.PI / 2, Math.PI / 2, 0] }))
   usePlane(() => ({ position: [15, 0, 0], rotation: [Math.PI / 2, -Math.PI / 2, 0] }))
