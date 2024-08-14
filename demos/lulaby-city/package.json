@@ -40,7 +40,7 @@
     "@types/three": "^0.165.0",
     "@vitejs/plugin-react": "^4.3.1",
     "husky": "^4.3.8",
-    "lint-staged": "^9.5.0",
+    "lint-staged": "^15.2.9",
     "prettier": "^1.19.1",
     "typescript": "^5.5.4",
     "vite": "^5.4.0"
