@@ -30,7 +30,7 @@ const Drone = React.memo(({ data }) => {
   return (
     <group ref={ref} scale={[5, 5, 5]}>
       <mesh position={[0, 0, 50]} rotation={[Math.PI / 2, 0, 0]} material={glowMaterial}>
-        <cylinderBufferGeometry args={[0.25, 0.25, 100, 4]} />
+        <cylinderGeometry args={[0.25, 0.25, 100, 4]} />
       </mesh>
       <mesh name="Sphere_DroneGlowmat_0" geometry={nodes.Sphere_DroneGlowmat_0.geometry} material={materials.DroneGlowmat} />
       <mesh name="Sphere_Body_0" geometry={nodes.Sphere_Body_0.geometry} material={bodyMaterial} />

@@ -28,7 +28,7 @@ export default function App() {
         camera={{ position: [0, 0, 2000], near: 0.01, far: 10000, fov }}
         onCreated={({ gl, camera }) => {
           actions.init(camera)
-          gl.toneMapping = THREE.Uncharted2ToneMapping
+          gl.toneMapping = THREE.NoToneMapping
           gl.setClearColor(new THREE.Color('#020209'))
         }}>
         <fog attach="fog" args={['#070710', 100, 700]} />
