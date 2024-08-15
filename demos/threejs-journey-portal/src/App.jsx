@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { Color, AdditiveBlending } from 'three'
 import { Canvas, extend, useFrame } from '@react-three/fiber'
 import { OrbitControls, Sparkles, shaderMaterial, useGLTF, useTexture } from '@react-three/drei'
-import glsl from 'babel-plugin-glsl/macro'
+import glsl from 'glslify'
 
 import portalModel from './portal-2.glb?url'
 import backedImg from './baked-02.jpeg'
@@ -61,7 +61,7 @@ const PortalMaterial = shaderMaterial(
     vec3 color = mix(uColorStart, uColorEnd, strength);
     gl_FragColor = vec4(color, 1.0);
     #include <tonemapping_fragment>
-    #include <encodings_fragment>
+    #include <colorspace_fragment>
   }`,
 )
 
