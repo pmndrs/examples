@@ -11,11 +11,10 @@
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",
-    "babel-plugin-glsl": "^1.0.0",
-    "babel-plugin-macros": "^3.1.0",
     "glsl-noise": "^0.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "vite-plugin-glslify": "^2.1.0",
     "three": "^0.165.0"
   },
   "devDependencies": {
@@ -30,7 +29,7 @@
     "dev": "vite --host",
     "dev3": "e2e-dev $npm_package_name",
     "build": "tsc && vite build",
-    "bbuild2": "tsc && e2e-build $npm_package_name",
+    "build2": "tsc && e2e-build $npm_package_name",
     "preview": "vite preview"
   },
   "browserslist": [
