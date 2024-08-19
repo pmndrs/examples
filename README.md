@@ -3,7 +3,7 @@ index: [demos](demos)
 To use a given [`basic-demo`](demos/basic-demo) as a template for a new `myproject`:
 
 ```sh
-$ npx -y degit pmndrs/examples/demos/basic-demo myproject
+$ npx degit pmndrs/examples/demos/basic-demo myproject
 $ code myproject
 ```
 
