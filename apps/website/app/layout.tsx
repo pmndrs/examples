@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Nav from "@/components/Nav";
-import { getDemos } from "@/lib/helper";
+
 import { Style } from "@/components/Style";
 
 const inter = Inter({ subsets: ["latin"] });
-const demos = getDemos();
 
 export const metadata: Metadata = {
   title: "pmndrs examples",
@@ -18,6 +16,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const fsMin = 16;
+  const fsMax = 32;
+  const wMin = 400;
+  const wMax = 2500;
+  const slope = (fsMax - fsMin) / (wMax - wMin);
+  const yAxisIntersection = -wMin * slope + fsMin;
+
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -26,31 +31,18 @@ export default function RootLayout({
             @scope {
               :scope {
                 background: #eee;
-              }
 
-              main {
-                position: fixed;
-                width: 100%;
-                height: 100dvh;
-              }
-
-              .Nav {
-                position: fixed;
-                bottom: 0;
-                width: 100%;
-                overflow: auto;
-
-                @media (min-aspect-ratio: 1/1) {
-                  display: inline-block;
-                  position: static;
-                }
+                --fs: clamp(
+                  ${fsMin}px,
+                  ${yAxisIntersection}px + ${slope * 100}vw,
+                  ${fsMax}px
+                );
               }
             }
           `}
         />
 
-        <main>{children}</main>
-        <Nav demos={demos} />
+        {children}
       </body>
     </html>
   );
