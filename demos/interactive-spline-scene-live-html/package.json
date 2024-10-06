@@ -9,7 +9,7 @@
   ],
   "dependencies": {
     "@headlessui/react": "^1.7.19",
-    "@heroicons/react": "^1.0.6",
+    "@heroicons/react": "^2.1.5",
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",
     "@splinetool/loader": "^0.9.526",
