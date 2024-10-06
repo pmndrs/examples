@@ -6,19 +6,15 @@
   "keywords": [],
   "dependencies": {
     "@pmndrs/branding": "^0.0.8",
-    "@react-three/cannon": "^6.6.0",
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",
     "@react-three/postprocessing": "^2.16.2",
     "@react-three/rapier": "^1.4.0",
-    "lerp": "^1.0.3",
     "lodash-es": "^4.17.21",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "three": "^0.165.0",
-    "three-stdlib": "^2.32.2",
-    "valtio": "^1.13.2",
-    "zustand": "^4.5.0"
+    "valtio": "^1.13.2"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",

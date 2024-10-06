@@ -6,15 +6,12 @@
   "keywords": [],
   "dependencies": {
     "@pmndrs/branding": "^0.0.8",
-    "@react-three/cannon": "^6.6.0",
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",
     "@react-three/rapier": "^1.4.0",
-    "r3f-perf": "^7.2.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "three": "^0.165.0",
-    "three-stdlib": "^2.32.2"
+    "three": "^0.165.0"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
