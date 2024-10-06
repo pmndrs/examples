@@ -9,7 +9,6 @@
     "loading"
   ],
   "dependencies": {
-    "@pmndrs/branding": "^0.0.8",
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",
     "react": "^18.3.1",

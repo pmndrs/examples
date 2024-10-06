@@ -9,7 +9,6 @@
     "confetti"
   ],
   "dependencies": {
-    "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",
     "@react-three/postprocessing": "^2.16.2",
     "leva": "^0.9.35",

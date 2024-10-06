@@ -4,7 +4,6 @@
   "homepage": "https://codesandbox.io/s/7psew",
   "private": true,
   "dependencies": {
-    "@react-spring/web": "^9.7.4",
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",
     "@react-three/flex": "^1.0.1",
