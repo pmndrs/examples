@@ -22,17 +22,9 @@ export default function Layout({
               display: flex;
               align-items: center;
               justify-content: center;
-              > .Dev {
+              > * {
                 max-width: 100%;
               }
-            }
-
-            .Dev {
-              padding-inline: 1rem;
-            }
-            iframe {
-              width: 100%;
-              min-height: 100dvh;
             }
           }
         `}

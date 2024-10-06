@@ -2,6 +2,9 @@ import { notFound } from "next/navigation";
 
 import { getDemos } from "@/lib/helper";
 import { Dev } from "./Dev";
+import { Style } from "@/components/Style";
+
+import { Social } from "./Social";
 
 const demos = getDemos();
 
@@ -70,10 +73,38 @@ export default async function Page(props: Props) {
 
   return (
     <>
+      <Style
+        css={`
+          @scope {
+            .Dev {
+              padding-inline: 1rem;
+            }
+            iframe {
+              width: 100%;
+              min-height: 100dvh;
+            }
+            .Social {
+              position: fixed;
+              right: 0;
+              top: 0;
+              bottom: 0;
+              margin-inline-end: 0.5rem;
+              @media (min-aspect-ratio: 1/1) {
+                margin-inline-end: 1.25rem;
+              }
+            }
+          }
+        `}
+      />
+
       {isDev && !isUp ? (
         <Dev demoname={demoname} />
       ) : (
-        <iframe src={embed_url} />
+        <>
+          <iframe src={embed_url} />
+
+          <Social demoname={demoname} embed_url={embed_url} />
+        </>
       )}
     </>
   );
