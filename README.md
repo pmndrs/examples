@@ -3,25 +3,29 @@ index: [demos](demos)
 To use a given [`basic-demo`](demos/basic-demo) as a template for a new `myproject`:
 
 ```sh
-$ npx degit pmndrs/examples/demos/basic-demo myproject
-$ code myproject
+git clone https://github.com/pmndrs/examples.git
+cd examples
+cd demos/basic-demo
 ```
 
 # INSTALL
 
 ```sh
-$ npm ci
+npm ci
+
 ```
 
 # dev
 
 ```sh
-$ npm run dev
+$ npm ci
+$ npm run build
 ```
 
 # build
 
 ```sh
+$ npm ci
 $ npm run build
 ```
 
