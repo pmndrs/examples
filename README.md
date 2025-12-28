@@ -10,7 +10,7 @@ $ code myproject
 
 # INSTALL
 
-## ☝️ Prerequisites
+Prerequisites:
 
 - Install [nvm](https://github.com/nvm-sh/nvm) - Node Version Manager, then:
 
