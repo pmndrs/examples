@@ -46,6 +46,7 @@ jobs:
       # - run: npm test
       #   env:
       #     BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
+      - run: npm ttest
 
       #
       # Build (only for pushes on main)
