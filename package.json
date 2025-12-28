@@ -21,7 +21,7 @@
     "node": ">=20",
     "npm": ">=10"
   },
-  "packageManager": "npm@10.2.4",
+  "packageManager": "npm@11.7.0",
   "workspaces": [
     "apps/*",
     "demos/*",
