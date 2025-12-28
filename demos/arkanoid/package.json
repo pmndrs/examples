@@ -10,7 +10,7 @@
     "audio"
   ],
   "dependencies": {
-    "@react-spring/three": "^9.6.1",
+    "@react-spring/three": "^10.0.3",
     "@react-three/cannon": "^6.6.0",
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",
