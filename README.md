@@ -48,6 +48,8 @@ $ npm run dev
 $ npm run build
 ```
 
+NB: `npm run build -- --force` to ignore turbo cache
+
 Then `npx serve out`.
 
 <details>
