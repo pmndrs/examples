@@ -38,7 +38,7 @@ jobs:
           node-version-file: ".nvmrc"
       - uses: pnpm/action-setup@v4
         with:
-          version: 9.15.4
+          version: 10
       - run: pnpm install --frozen-lockfile
       - uses: rharkor/caching-for-turbo@v1.5
 
