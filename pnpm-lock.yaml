@@ -1352,6 +1352,9 @@ importers:
       '@react-three/fiber':
         specifier: ^9.4.2
         version: 9.4.2(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(three@0.182.0)
+      maath:
+        specifier: ^0.10.8
+        version: 0.10.8(@types/three@0.182.0)(three@0.182.0)
       random-words:
         specifier: ^2.0.1
         version: 2.0.1
@@ -1361,6 +1364,9 @@ importers:
       react-dom:
         specifier: ^19.2.3
         version: 19.2.3(react@19.2.3)
+      suspend-react:
+        specifier: ^0.0.8
+        version: 0.0.8(react@19.2.3)
       three:
         specifier: ^0.182.0
         version: 0.182.0
@@ -1395,6 +1401,9 @@ importers:
       '@react-three/fiber':
         specifier: ^9.4.2
         version: 9.4.2(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(three@0.182.0)
+      maath:
+        specifier: ^0.10.8
+        version: 0.10.8(@types/three@0.182.0)(three@0.182.0)
       react:
         specifier: ^19.2.3
         version: 19.2.3
@@ -1432,6 +1441,9 @@ importers:
       '@react-three/fiber':
         specifier: ^9.4.2
         version: 9.4.2(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(three@0.182.0)
+      maath:
+        specifier: ^0.10.8
+        version: 0.10.8(@types/three@0.182.0)(three@0.182.0)
       react:
         specifier: ^19.2.3
         version: 19.2.3
@@ -2053,12 +2065,18 @@ importers:
       '@react-three/fiber':
         specifier: ^9.4.2
         version: 9.4.2(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(three@0.182.0)
+      maath:
+        specifier: ^0.10.8
+        version: 0.10.8(@types/three@0.182.0)(three@0.182.0)
       react:
         specifier: ^19.2.3
         version: 19.2.3
       react-dom:
         specifier: ^19.2.3
         version: 19.2.3(react@19.2.3)
+      suspend-react:
+        specifier: ^0.0.8
+        version: 0.0.8(react@19.2.3)
       three:
         specifier: ^0.182.0
         version: 0.182.0
@@ -2431,6 +2449,9 @@ importers:
       framer-motion:
         specifier: ^10.18.0
         version: 10.18.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      maath:
+        specifier: ^0.10.8
+        version: 0.10.8(@types/three@0.182.0)(three@0.182.0)
       react:
         specifier: ^19.2.3
         version: 19.2.3
@@ -2554,6 +2575,9 @@ importers:
       '@react-three/fiber':
         specifier: ^9.4.2
         version: 9.4.2(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(three@0.182.0)
+      maath:
+        specifier: ^0.10.8
+        version: 0.10.8(@types/three@0.182.0)(three@0.182.0)
       react:
         specifier: ^19.2.3
         version: 19.2.3
@@ -3138,6 +3162,9 @@ importers:
       react-dom:
         specifier: ^19.2.3
         version: 19.2.3(react@19.2.3)
+      react-merge-refs:
+        specifier: ^3.0.2
+        version: 3.0.2(react@19.2.3)
       three:
         specifier: ^0.182.0
         version: 0.182.0
@@ -3464,6 +3491,9 @@ importers:
       lamina:
         specifier: ^1.1.23
         version: 1.2.2(@react-three/fiber@9.4.2(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(three@0.182.0))(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(three@0.182.0)
+      leva:
+        specifier: ^0.9.36
+        version: 0.9.36(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       react:
         specifier: ^19.2.3
         version: 19.2.3
@@ -3627,6 +3657,9 @@ importers:
       '@react-three/rapier':
         specifier: ^2.2.0
         version: 2.2.0(@react-three/fiber@9.4.2(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(three@0.182.0))(react@19.2.3)(three@0.182.0)
+      maath:
+        specifier: ^0.10.8
+        version: 0.10.8(@types/three@0.182.0)(three@0.182.0)
       react:
         specifier: ^19.2.3
         version: 19.2.3
@@ -3799,6 +3832,9 @@ importers:
       three:
         specifier: ^0.182.0
         version: 0.182.0
+      zustand:
+        specifier: ^5.0.9
+        version: 5.0.9(@types/react@19.2.7)(react@19.2.3)(use-sync-external-store@1.6.0(react@19.2.3))
     devDependencies:
       '@types/react':
         specifier: ^19.2.7
@@ -3968,6 +4004,9 @@ importers:
       react-dom:
         specifier: ^19.2.3
         version: 19.2.3(react@19.2.3)
+      suspend-react:
+        specifier: ^0.0.8
+        version: 0.0.8(react@19.2.3)
       three:
         specifier: ^0.182.0
         version: 0.182.0
@@ -4060,6 +4099,9 @@ importers:
       three:
         specifier: ^0.182.0
         version: 0.182.0
+      zustand:
+        specifier: ^5.0.9
+        version: 5.0.9(@types/react@19.2.7)(react@19.2.3)(use-sync-external-store@1.6.0(react@19.2.3))
     devDependencies:
       '@types/react':
         specifier: ^19.2.7
@@ -4112,6 +4154,9 @@ importers:
       three:
         specifier: ^0.182.0
         version: 0.182.0
+      zustand:
+        specifier: ^5.0.9
+        version: 5.0.9(@types/react@19.2.7)(react@19.2.3)(use-sync-external-store@1.6.0(react@19.2.3))
     devDependencies:
       '@types/react':
         specifier: ^19.2.7
@@ -4312,12 +4357,18 @@ importers:
       '@react-three/fiber':
         specifier: ^9.4.2
         version: 9.4.2(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(three@0.182.0)
+      maath:
+        specifier: ^0.10.8
+        version: 0.10.8(@types/three@0.182.0)(three@0.182.0)
       react:
         specifier: ^19.2.3
         version: 19.2.3
       react-dom:
         specifier: ^19.2.3
         version: 19.2.3(react@19.2.3)
+      suspend-react:
+        specifier: ^0.0.8
+        version: 0.0.8(react@19.2.3)
       three:
         specifier: ^0.182.0
         version: 0.182.0
@@ -4748,6 +4799,9 @@ importers:
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.22
+      maath:
+        specifier: ^0.10.8
+        version: 0.10.8(@types/three@0.182.0)(three@0.182.0)
       react:
         specifier: ^19.2.3
         version: 19.2.3
@@ -5034,6 +5088,9 @@ importers:
       leva:
         specifier: ^0.9.35
         version: 0.9.36(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      maath:
+        specifier: ^0.10.8
+        version: 0.10.8(@types/three@0.182.0)(three@0.182.0)
       r3f-perf:
         specifier: ^7.2.1
         version: 7.2.3(@react-three/fiber@9.4.2(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(three@0.182.0))(@types/react@19.2.7)(@types/three@0.182.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(three@0.182.0)(use-sync-external-store@1.6.0(react@19.2.3))
@@ -5080,12 +5137,18 @@ importers:
       '@react-three/postprocessing':
         specifier: ^3.0.4
         version: 3.0.4(@react-three/fiber@9.4.2(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(three@0.182.0))(@types/three@0.182.0)(react@19.2.3)(three@0.182.0)
+      maath:
+        specifier: ^0.10.8
+        version: 0.10.8(@types/three@0.182.0)(three@0.182.0)
       react:
         specifier: ^19.2.3
         version: 19.2.3
       react-dom:
         specifier: ^19.2.3
         version: 19.2.3(react@19.2.3)
+      suspend-react:
+        specifier: ^0.0.8
+        version: 0.0.8(react@19.2.3)
       three:
         specifier: ^0.182.0
         version: 0.182.0
@@ -5320,6 +5383,9 @@ importers:
       '@react-three/fiber':
         specifier: ^9.4.2
         version: 9.4.2(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(three@0.182.0)
+      maath:
+        specifier: ^0.10.8
+        version: 0.10.8(@types/three@0.182.0)(three@0.182.0)
       react:
         specifier: ^19.2.3
         version: 19.2.3
@@ -5440,6 +5506,9 @@ importers:
       '@react-three/postprocessing':
         specifier: ^3.0.4
         version: 3.0.4(@react-three/fiber@9.4.2(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(three@0.182.0))(@types/three@0.182.0)(react@19.2.3)(three@0.182.0)
+      maath:
+        specifier: ^0.10.8
+        version: 0.10.8(@types/three@0.182.0)(three@0.182.0)
       react:
         specifier: ^19.2.3
         version: 19.2.3
@@ -6753,6 +6822,9 @@ importers:
       react-dom:
         specifier: ^19.2.3
         version: 19.2.3(react@19.2.3)
+      suspend-react:
+        specifier: ^0.0.8
+        version: 0.0.8(react@19.2.3)
       three:
         specifier: ^0.182.0
         version: 0.182.0
@@ -6824,6 +6896,9 @@ importers:
       '@react-three/postprocessing':
         specifier: ^3.0.4
         version: 3.0.4(@react-three/fiber@9.4.2(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(three@0.182.0))(@types/three@0.182.0)(react@19.2.3)(three@0.182.0)
+      maath:
+        specifier: ^0.10.8
+        version: 0.10.8(@types/three@0.182.0)(three@0.182.0)
       react:
         specifier: ^19.2.3
         version: 19.2.3
@@ -10904,6 +10979,14 @@ packages:
   react-merge-refs@1.1.0:
     resolution: {integrity: sha512-alTKsjEL0dKH/ru1Iyn7vliS2QRcBp9zZPGoWxUOvRGWPUYgjo+V01is7p04It6KhgrzhJGnIj9GgX8W4bZoCQ==}
 
+  react-merge-refs@3.0.2:
+    resolution: {integrity: sha512-MSZAfwFfdbEvwkKWP5EI5chuLYnNUxNS7vyS0i1Jp+wtd8J4Ga2ddzhaE68aMol2Z4vCnRM/oGOo1a3V75UPlw==}
+    peerDependencies:
+      react: '>=16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0'
+    peerDependenciesMeta:
+      react:
+        optional: true
+
   react-reconciler@0.31.0:
     resolution: {integrity: sha512-7Ob7Z+URmesIsIVRjnLoDGwBEG/tVitidU0nMsqX/eeJaLY89RISO/10ERe0MqmzuKUUB1rmY+h1itMbUHg9BQ==}
     engines: {node: '>=0.10.0'}
@@ -14341,7 +14424,7 @@ snapshots:
       eslint: 8.57.1
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0(eslint@8.57.1))(eslint@8.57.1)
-      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@7.2.0(eslint@8.57.1)(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@8.57.1)
+      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@7.2.0(eslint@8.57.1)(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(eslint@8.57.1))(eslint@8.57.1))(eslint@8.57.1)
       eslint-plugin-jsx-a11y: 6.10.2(eslint@8.57.1)
       eslint-plugin-react: 7.37.5(eslint@8.57.1)
       eslint-plugin-react-hooks: 5.0.0-canary-7118f5dd7-20230705(eslint@8.57.1)
@@ -14371,7 +14454,7 @@ snapshots:
       tinyglobby: 0.2.15
       unrs-resolver: 1.11.1
     optionalDependencies:
-      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@7.2.0(eslint@8.57.1)(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@8.57.1)
+      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@7.2.0(eslint@8.57.1)(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(eslint@8.57.1))(eslint@8.57.1))(eslint@8.57.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -14386,7 +14469,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.32.0(@typescript-eslint/parser@7.2.0(eslint@8.57.1)(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@8.57.1):
+  eslint-plugin-import@2.32.0(@typescript-eslint/parser@7.2.0(eslint@8.57.1)(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(eslint@8.57.1))(eslint@8.57.1))(eslint@8.57.1):
     dependencies:
       '@rtsao/scc': 1.1.0
       array-includes: 3.1.9
@@ -16152,6 +16235,10 @@ snapshots:
   react-is@18.3.1: {}
 
   react-merge-refs@1.1.0: {}
+
+  react-merge-refs@3.0.2(react@19.2.3):
+    optionalDependencies:
+      react: 19.2.3
 
   react-reconciler@0.31.0(react@19.2.3):
     dependencies:
