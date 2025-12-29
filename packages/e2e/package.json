@@ -17,9 +17,17 @@
     "@babel/parser": "^7.25.3",
     "@babel/traverse": "^7.25.3",
     "@babel/types": "^7.25.2",
+    "@vitejs/plugin-react": "^5.1.2",
     "ast-types": "^0.16.1",
     "minimist": "^1.2.8",
     "recast": "^0.23.9",
-    "seedrandom": "^3.0.5"
+    "seedrandom": "^3.0.5",
+    "vite": "^7.3.0"
+  },
+  "peerDependencies": {
+    "@react-three/fiber": ">=8",
+    "react": ">=18",
+    "react-dom": ">=18",
+    "three": ">=0.150"
   }
 }

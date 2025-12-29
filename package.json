@@ -8,9 +8,10 @@
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "test": "turbo test",
-    "ttest": "npm run build"
+    "ttest": "pnpm run build"
   },
   "devDependencies": {
+    "@examples/e2e": "workspace:*",
     "@playwright/test": "1.45.3",
     "@types/minimist": "^1.2.5",
     "depcheck": "^1.4.7",
@@ -20,9 +21,9 @@
   },
   "engines": {
     "node": ">=20",
-    "npm": ">=10"
+    "pnpm": ">=9"
   },
-  "packageManager": "npm@11.7.0",
+  "packageManager": "pnpm@9.15.4",
   "workspaces": [
     "apps/*",
     "demos/*",

@@ -29,28 +29,28 @@ Prerequisites:
   ```sh
   $ corepack enable
   $ corepack prepare --activate # it reads "packageManager"
-  $ npm -v # make sure your version satisfies package.json#engines.npm
+  $ pnpm -v # make sure your version satisfies package.json#engines.pnpm
   ```
 
 ```
-$ npm ci
+$ pnpm install
 ```
 
 # dev
 
 ```sh
-$ npm run dev
+$ pnpm run dev
 ```
 
 # build
 
 ```sh
-$ npm run build
+$ pnpm run build
 ```
 
-NB1: `npm run build -- --force` to ignore turbo cache
+NB1: `pnpm run build -- --force` to ignore turbo cache
 
-NB2: `npm run build -- --continue` to continue on error(s)
+NB2: `pnpm run build -- --continue` to continue on error(s)
 
 Then `npx serve out`.
 
@@ -84,17 +84,17 @@ This will:
 # test
 
 ```sh
-$ npm test
+$ pnpm test
 ```
 
-To update the snapshots: `npm test -- -- --update-snapshots`
+To update the snapshots: `pnpm test -- -- --update-snapshots`
 
 <details>
 
 You can also:
 
 ```sh
-$ BASE_PATH=/examples npm test
+$ BASE_PATH=/examples pnpm test
 ```
 
 </details>
@@ -112,8 +112,8 @@ $ docker run -it --rm  \
 #
 # echo "Hey, I am acting like the CI"
 #
-# npm ci
-# npm test
+# corepack enable && pnpm install --frozen-lockfile
+# pnpm test
 ```
 
 or in one command to update snapshots:
@@ -121,7 +121,7 @@ or in one command to update snapshots:
 ```sh
 docker run --rm  \
   -w /app -v "$(pwd)":/app -v /app/node_modules \
-  mcr.microsoft.com/playwright:v1.45.3-jammy /bin/sh -c "npm ci && npm test -- -- --update-snapshots"
+  mcr.microsoft.com/playwright:v1.45.3-jammy /bin/sh -c "corepack enable && pnpm install --frozen-lockfile && pnpm test -- -- --update-snapshots"
 ```
 
 # Colophon
