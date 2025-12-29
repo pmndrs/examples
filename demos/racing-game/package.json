@@ -21,7 +21,8 @@
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "three": "^0.182.0",
-    "use-asset": "^1.0.4"
+    "use-asset": "^1.0.4",
+    "zustand": "^5.0.9"
   },
   "devDependencies": {
     "@types/react": "^19.2.7",

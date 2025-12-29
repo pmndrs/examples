@@ -16,7 +16,9 @@
     "lerp": "^1.0.3",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "three": "^0.182.0"
+    "three": "^0.182.0",
+    "three-stdlib": "^2.36.1",
+    "use-asset": "^1.0.4"
   },
   "devDependencies": {
     "@types/react": "^19.2.7",

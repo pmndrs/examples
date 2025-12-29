@@ -5,6 +5,7 @@
   "homepage": "https://codesandbox.io/s/12nmp",
   "keywords": [],
   "dependencies": {
+    "@pmndrs/branding": "^0.0.8",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.4.2",
     "react": "^19.2.3",
