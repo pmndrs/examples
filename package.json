@@ -23,7 +23,7 @@
     "node": ">=20",
     "pnpm": ">=10"
   },
-  "packageManager": "pnpm@10.0.0",
+  "packageManager": "pnpm@10.26.2",
   "workspaces": [
     "apps/*",
     "demos/*",
