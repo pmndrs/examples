@@ -40,7 +40,9 @@ $ npm ci
 
 This monorepo uses npm's `overrides` field as an equivalent to pnpm's catalog feature for centralizing package versions across workspaces.
 
-## How it works
+For detailed information, see [CATALOG.md](CATALOG.md).
+
+## Quick Overview
 
 The root `package.json` contains two related fields:
 
