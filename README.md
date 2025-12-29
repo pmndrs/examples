@@ -60,8 +60,9 @@ This approach ensures that all workspaces use consistent versions of core depend
 To update a package version across all workspaces:
 
 1. Update the version in both the `catalog` and `overrides` fields in the root `package.json`
-2. Run `npm install` to update the lockfile
-3. Test the changes
+2. Run `npm run catalog:verify` to ensure consistency
+3. Run `npm install` to update the lockfile
+4. Test the changes
 
 Example:
 ```json
@@ -74,6 +75,10 @@ Example:
   }
 }
 ```
+
+Helper commands:
+- `npm run catalog:list` - List all centralized packages
+- `npm run catalog:verify` - Verify catalog and overrides are in sync
 
 # dev
 
