@@ -66,16 +66,47 @@ To update a centralized package across all workspaces:
    }
    ```
 
-2. **Reinstall dependencies**:
+2. **Verify the catalog is in sync** (optional but recommended):
+   ```bash
+   npm run catalog:verify
+   ```
+
+3. **Reinstall dependencies**:
    ```bash
    npm install
    ```
 
-3. **Test your changes**:
+4. **Test your changes**:
    ```bash
    npm run build
    npm test
    ```
+
+## Helper Scripts
+
+This repository includes helper scripts to manage the catalog:
+
+### List All Cataloged Packages
+
+```bash
+npm run catalog:list
+```
+
+This displays all packages currently managed in the catalog with their versions.
+
+### Verify Catalog Consistency
+
+```bash
+npm run catalog:verify
+```
+
+This checks that the `catalog` and `overrides` fields are in sync. It will:
+- Verify both fields exist
+- Check that they contain the same package names
+- Ensure version numbers match between the two fields
+- Report any discrepancies
+
+**Tip**: Run this before committing changes to ensure consistency.
 
 ## Centralized Packages
 
