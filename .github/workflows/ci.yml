@@ -46,7 +46,7 @@ jobs:
       # - run: npm test
       #   env:
       #     BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
-      - run: pnpm run ttest ${{ github.event_name == 'pull_request' && '-- --continue' || '' }}
+      - run: pnpm run ttest ${{ github.event_name == 'pull_request' && '-- -- --continue' || '' }}
 
       #
       # Build (only for pushes on main)
