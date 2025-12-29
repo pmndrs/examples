@@ -10,7 +10,7 @@
   ],
   "dependencies": {
     "@react-three/fiber": "^9.4.2",
-    "@react-three/postprocessing": "^2.16.2",
+    "@react-three/postprocessing": "^3.0.4",
     "leva": "^0.9.35",
     "maath": "^0.10.8",
     "meshline": "^3.3.1",

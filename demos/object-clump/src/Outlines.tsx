@@ -40,7 +40,7 @@ const OutlinesMaterial = shaderMaterial(
    }`,
 )
 
-type OutlinesProps = JSX.IntrinsicElements["group"] & {
+type OutlinesProps = React.JSX.IntrinsicElements["group"] & {
   /** Outline color, default: black */
   color: ReactThreeFiber.Color
   /** Outline opacity, default: 1 */
