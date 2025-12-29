@@ -5,6 +5,7 @@
   "homepage": "https://codesandbox.io/s/r9w2ob",
   "keywords": [],
   "dependencies": {
+    "@emotion/react": "^11.11.1",
     "@mantine/core": "^5.10.5",
     "@mantine/hooks": "^5.10.1",
     "@react-three/drei": "^9.109.5",
