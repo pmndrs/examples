@@ -36,6 +36,43 @@ Prerequisites:
 $ npm ci
 ```
 
+# Centralized Package Version Management
+
+This monorepo uses npm's `overrides` field as an equivalent to pnpm's catalog feature for centralizing package versions across workspaces.
+
+## How it works
+
+The root `package.json` contains two related fields:
+
+- **`catalog`**: A documentation field listing the centralized versions of commonly used packages
+- **`overrides`**: npm's native field that enforces these versions across all workspace packages
+
+This approach ensures that all workspaces use consistent versions of core dependencies like React, Three.js, and related libraries, making it easier to:
+
+- Update versions in one place
+- Avoid version conflicts
+- Keep dependencies synchronized across 150+ demo projects
+
+## Updating a centralized package
+
+To update a package version across all workspaces:
+
+1. Update the version in both the `catalog` and `overrides` fields in the root `package.json`
+2. Run `npm install` to update the lockfile
+3. Test the changes
+
+Example:
+```json
+{
+  "catalog": {
+    "react": "^19.2.3"
+  },
+  "overrides": {
+    "react": "^19.2.3"
+  }
+}
+```
+
 # dev
 
 ```sh
