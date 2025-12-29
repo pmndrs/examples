@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Bvh, OrbitControls, useHelper } from '@react-three/drei'
-import { MeshBVHVisualizer } from 'three-mesh-bvh'
+import { MeshBVHHelper } from 'three-mesh-bvh'
 import { Perf } from 'r3f-perf'
 import { useControls } from 'leva'
 import { Rays } from './Rays'
@@ -9,7 +9,7 @@ import { Rays } from './Rays'
 function Torus(props) {
   const mesh = useRef()
   const sphere = useRef()
-  useHelper(mesh, MeshBVHVisualizer)
+  useHelper(mesh, MeshBVHHelper)
   useFrame((state, delta) => (mesh.current.rotation.x = mesh.current.rotation.y += delta))
   return (
     <mesh
