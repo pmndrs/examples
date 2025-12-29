@@ -8,7 +8,7 @@
     "rapier"
   ],
   "dependencies": {
-    "@react-three/csg": "^2.0.1",
+    "@react-three/csg": "^3.3.0",
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",
     "@react-three/rapier": "^1.4.0",

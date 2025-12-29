@@ -30,6 +30,7 @@
   ],
   "overrides": {
     "three-stdlib": "^2.36.1",
-    "postprocessing": "^6.38.2"
+    "postprocessing": "^6.38.2",
+    "three-mesh-bvh": "^0.9.4"
   }
 }
