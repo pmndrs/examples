@@ -2,13 +2,13 @@
   "name": "examples",
   "private": true,
   "scripts": {
-    "build": "turbo build2",
+    "build": "turbo build3",
     "postbuild": "./out.sh",
     "dev": "turbo dev2",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "test": "turbo test",
-    "ttest": "turbo build2"
+    "ttest": "turbo build3"
   },
   "devDependencies": {
     "@examples/e2e": "workspace:*",
