@@ -12,7 +12,7 @@ $ code myproject
 
 Prerequisites:
 
-- Install [nvm](https://github.com/nvm-sh/nvm) - Node Version Manager, then:
+- [Install nvm](https://github.com/nvm-sh/nvm), then:
 
   ```bash
   $ nvm install
@@ -23,16 +23,13 @@ Prerequisites:
   nb: if you want this node version to be your default nvm's one:
   `nvm alias default node`
 
-- Install [PNPM](https://pnpm.io/installation#using-corepack) - Package Manager,
-  with:
-
-  ```sh
+- ```sh
   $ corepack enable
   $ corepack prepare --activate # it reads "packageManager"
   $ pnpm -v # make sure your version satisfies package.json#engines.pnpm
   ```
 
-```
+```sh
 $ pnpm install
 ```
 
@@ -78,6 +75,8 @@ This will:
 </details>
 
 # test
+
+> [!IMPORTANT] WIP
 
 ```sh
 $ pnpm test
