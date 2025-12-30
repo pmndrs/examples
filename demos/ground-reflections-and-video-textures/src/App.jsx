@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import React, { Suspense, useEffect, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { Reflector, Text, useTexture, useGLTF } from '@react-three/drei'
+import { MeshReflectorMaterial, Text, useTexture, useGLTF } from '@react-three/drei'
 
 import carlaModel from './carla-draco.glb?url'
 import inter from './Inter-Bold.woff?url'
@@ -50,9 +50,21 @@ function VideoText(props) {
 function Ground() {
   const [floor, normal] = useTexture([surfaceTex1, surfaceTex2])
   return (
-    <Reflector blur={[400, 100]} resolution={512} args={[10, 10]} mirror={0.5} mixBlur={6} mixStrength={1.5} rotation={[-Math.PI / 2, 0, Math.PI / 2]}>
-      {(Material, props) => <Material color="#a0a0a0" metalness={0.4} roughnessMap={floor} normalMap={normal} normalScale={[2, 2]} {...props} />}
-    </Reflector>
+    <mesh rotation={[-Math.PI / 2, 0, Math.PI / 2]}>
+      <planeGeometry args={[10, 10]} />
+      <MeshReflectorMaterial
+        blur={[400, 100]}
+        resolution={512}
+        mirror={0.5}
+        mixBlur={6}
+        mixStrength={1.5}
+        color="#a0a0a0"
+        metalness={0.4}
+        roughnessMap={floor}
+        normalMap={normal}
+        normalScale={[2, 2]}
+      />
+    </mesh>
   )
 }
 

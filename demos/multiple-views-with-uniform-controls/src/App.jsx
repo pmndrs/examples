@@ -6,7 +6,7 @@ import { PerspectiveCamera, OrthographicCamera, AccumulativeShadows } from '@rea
 import { Menu, Button } from '@mantine/core'
 import * as ICONS from '@tabler/icons'
 import useRefs from 'react-use-refs'
-import create from 'zustand'
+import { create } from 'zustand'
 
 const matrix = new THREE.Matrix4()
 const positions = { Top: [0, 10, 0], Bottom: [0, -10, 0], Left: [-10, 0, 0], Right: [10, 0, 0], Back: [0, 0, -10], Front: [0, 0, 10] }

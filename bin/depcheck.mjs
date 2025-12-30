@@ -65,7 +65,7 @@ async function checkAllWorkspaces() {
   for (const [workspace, deps] of Object.entries(workspaceUnusedDeps)) {
     if (deps.length > 0) {
       hasUnusedDeps = true;
-      const uninstallCommand = `npm uninstall ${deps.join(" ")} -w demos/${workspace}`;
+      const uninstallCommand = `pnpm --filter "./demos/${workspace}" remove ${deps.join(" ")}`;
       console.log(`\n$ ${uninstallCommand}`);
     }
   }

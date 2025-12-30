@@ -1,5 +1,5 @@
 import { Pass, Effect, RenderPass, Selection, NormalPass } from 'postprocessing';
-import { DataTexture, RGBAFormat, FloatType, ShaderChunk, ShaderLib, UniformsUtils, WebGLMultipleRenderTargets, ShaderMaterial, GLSL3, NoBlending, Uniform, Vector2, Matrix4, Vector3, Clock, Quaternion, LinearFilter, HalfFloatType, FramebufferTexture, TextureLoader, NearestFilter, RepeatWrapping, NoColorSpace, WebGLRenderTarget, ClampToEdgeWrapping, LinearMipMapLinearFilter, EquirectangularReflectionMapping, Color, Matrix3, TangentSpaceNormalMap, RedFormat, Source, Texture, NoToneMapping, PerspectiveCamera, SRGBColorSpace, DepthTexture } from 'three';
+import { DataTexture, RGBAFormat, FloatType, ShaderChunk, ShaderLib, UniformsUtils, ShaderMaterial, GLSL3, NoBlending, Uniform, Vector2, Matrix4, Vector3, Clock, Quaternion, LinearFilter, HalfFloatType, FramebufferTexture, TextureLoader, NearestFilter, RepeatWrapping, NoColorSpace, WebGLRenderTarget, ClampToEdgeWrapping, LinearMipMapLinearFilter, EquirectangularReflectionMapping, Color, Matrix3, TangentSpaceNormalMap, RedFormat, Source, Texture, NoToneMapping, PerspectiveCamera, SRGBColorSpace, DepthTexture } from 'three';
 import _classPrivateFieldLooseBase from '@babel/runtime/helpers/esm/classPrivateFieldLooseBase';
 import _classPrivateFieldLooseKey from '@babel/runtime/helpers/esm/classPrivateFieldLooseKey';
 
@@ -189,7 +189,8 @@ class CopyPass extends Pass {
   constructor(textureCount = 1) {
     super("CopyPass");
     this.needsSwap = false;
-    this.renderTarget = new WebGLMultipleRenderTargets(1, 1, 1, {
+    this.renderTarget = new WebGLRenderTarget(1, 1, {
+      count: 1,
       depthBuffer: false
     });
     this.setTextureCount(textureCount);
@@ -405,7 +406,8 @@ class TemporalReprojectPass extends Pass {
     options = { ...defaultTemporalReprojectPassOptions,
       ...options
     };
-    this.renderTarget = new WebGLMultipleRenderTargets(1, 1, textureCount, {
+    this.renderTarget = new WebGLRenderTarget(1, 1, {
+      count: textureCount,
       minFilter: LinearFilter,
       magFilter: LinearFilter,
       type: HalfFloatType,
@@ -775,8 +777,8 @@ class PoissionDenoisePass extends Pass {
       type: HalfFloatType,
       depthBuffer: false
     };
-    this.renderTargetA = new WebGLMultipleRenderTargets(1, 1, 2, renderTargetOptions);
-    this.renderTargetB = new WebGLMultipleRenderTargets(1, 1, 2, renderTargetOptions);
+    this.renderTargetA = new WebGLRenderTarget(1, 1, { count: 2, ...renderTargetOptions });
+    this.renderTargetB = new WebGLRenderTarget(1, 1, { count: 2, ...renderTargetOptions });
     const {
       uniforms
     } = this.fullscreenMaterial;

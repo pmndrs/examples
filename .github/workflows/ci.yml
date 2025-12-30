@@ -23,8 +23,8 @@ jobs:
       group: ${{ github.event_name != 'pull_request' && 'group-pushmain' || github.run_id }}
       cancel-in-progress: ${{ github.event_name != 'pull_request' }}
 
-    container:
-      image: mcr.microsoft.com/playwright:v1.45.3-jammy
+    # container:
+    #   image: mcr.microsoft.com/playwright:v1.45.3-jammy
 
     steps:
       #
@@ -36,9 +36,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version-file: ".nvmrc"
-          cache: "npm"
-      - run: npm ci
-      - uses: rharkor/caching-for-turbo@v1.5
+      - uses: pnpm/action-setup@v4
+      - run: pnpm install --frozen-lockfile
+      # - uses: rharkor/caching-for-turbo@v1.5
 
       #
       # Test
@@ -46,11 +46,12 @@ jobs:
       # - run: npm test
       #   env:
       #     BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
+      - run: pnpm run lgtm
 
       #
       # Build (only for pushes on main)
       #
-      - run: npm run build
+      - run: pnpm run build
         if: github.event_name != 'pull_request'
         env:
           BASE_PATH: ${{ steps.configurepages.outputs.base_path }}

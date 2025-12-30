@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import * as React from 'react'
 import { createRoot } from 'react-dom/client'
 import { context as fiberContext, useFrame, useThree } from '@react-three/fiber'
-import mergeRefs from 'react-merge-refs'
+import { mergeRefs } from 'react-merge-refs'
 
 export type ScrollControlsProps = {
   eps?: number
@@ -190,7 +190,7 @@ const ScrollCanvas = React.forwardRef(({ children } : { children?: React.ReactNo
     group.current.position.x = state.horizontal ? -width * (state.pages - 1) * state.offset : 0
     group.current.position.y = state.horizontal ? 0 : height * (state.pages - 1) * state.offset
   })
-  return <group ref={mergeRefs([ref, group])}>{children}</group>
+  return <group ref={mergeRefs([ref, group]) as any}>{children}</group>
 })
 
 const ScrollHtml = React.forwardRef(
@@ -207,7 +207,7 @@ const ScrollHtml = React.forwardRef(
       }
     })
     createRoot(state.fixed).render(
-      <div ref={mergeRefs([ref, group])} style={{ ...style, position: 'absolute', top: 0, left: 0, willChange: 'transform' }} {...props}>
+      <div ref={mergeRefs([ref, group]) as any} style={{ ...style, position: 'absolute', top: 0, left: 0, willChange: 'transform' }} {...props}>
         <context.Provider value={state}>
           <fiberContext.Provider value={fiberState}>{children}</fiberContext.Provider>
         </context.Provider>

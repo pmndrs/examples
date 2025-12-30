@@ -12,7 +12,7 @@ $ code myproject
 
 Prerequisites:
 
-- Install [nvm](https://github.com/nvm-sh/nvm) - Node Version Manager, then:
+- [Install nvm](https://github.com/nvm-sh/nvm), then:
 
   ```bash
   $ nvm install
@@ -23,34 +23,29 @@ Prerequisites:
   nb: if you want this node version to be your default nvm's one:
   `nvm alias default node`
 
-- Install [PNPM](https://pnpm.io/installation#using-corepack) - Package Manager,
-  with:
-
-  ```sh
+- ```sh
   $ corepack enable
   $ corepack prepare --activate # it reads "packageManager"
-  $ npm -v # make sure your version satisfies package.json#engines.npm
+  $ pnpm -v # make sure your version satisfies package.json#engines.pnpm
   ```
 
-```
-$ npm ci
+```sh
+$ pnpm install
 ```
 
 # dev
 
 ```sh
-$ npm run dev
+$ pnpm run dev
 ```
 
 # build
 
 ```sh
-$ npm run build
+$ pnpm run build
 ```
 
-NB: `npm run build -- --force` to ignore turbo cache
-
-Then `npx serve out`.
+Then `pnpm run start`.
 
 <details>
 
@@ -81,18 +76,21 @@ This will:
 
 # test
 
+> [!IMPORTANT]
+> Testing is WIP
+
 ```sh
-$ npm test
+$ pnpm test
 ```
 
-To update the snapshots: `npm test -- -- --update-snapshots`
+To update the snapshots: `pnpm test -- -- --update-snapshots`
 
 <details>
 
 You can also:
 
 ```sh
-$ BASE_PATH=/examples npm test
+$ BASE_PATH=/examples pnpm test
 ```
 
 </details>
@@ -110,8 +108,8 @@ $ docker run -it --rm  \
 #
 # echo "Hey, I am acting like the CI"
 #
-# npm ci
-# npm test
+# corepack enable && pnpm install --frozen-lockfile
+# pnpm test
 ```
 
 or in one command to update snapshots:
@@ -119,7 +117,7 @@ or in one command to update snapshots:
 ```sh
 docker run --rm  \
   -w /app -v "$(pwd)":/app -v /app/node_modules \
-  mcr.microsoft.com/playwright:v1.45.3-jammy /bin/sh -c "npm ci && npm test -- -- --update-snapshots"
+  mcr.microsoft.com/playwright:v1.45.3-jammy /bin/sh -c "corepack enable && pnpm install --frozen-lockfile && pnpm test -- -- --update-snapshots"
 ```
 
 # Colophon
