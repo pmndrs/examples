@@ -10,7 +10,7 @@
     "@mantine/hooks": "^5.10.1",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.4.2",
-    "@tabler/icons": "^1.119.0",
+    "@tabler/icons": "^3.36.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "react-use-refs": "^1.0.1",
