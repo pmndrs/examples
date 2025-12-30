@@ -23,8 +23,8 @@ jobs:
       group: ${{ github.event_name != 'pull_request' && 'group-pushmain' || github.run_id }}
       cancel-in-progress: ${{ github.event_name != 'pull_request' }}
 
-    container:
-      image: mcr.microsoft.com/playwright:v1.45.3-jammy
+    # container:
+    #   image: mcr.microsoft.com/playwright:v1.45.3-jammy
 
     steps:
       #
