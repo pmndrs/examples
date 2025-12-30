@@ -1,4 +1,10 @@
 packages:
-  - 'apps/website'
-  - 'demos/*'
-  - 'packages/*'
+  - apps/website
+  - demos/*
+  - packages/*
+
+ignoredBuiltDependencies:
+  - unrs-resolver
+
+onlyBuiltDependencies:
+  - esbuild
