@@ -8,7 +8,7 @@
     "build": "NODE_ENV=production next build",
     "build3": "pnpm run build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint ."
   },
   "dependencies": {
     "@demo/aquarium": "workspace:*",
@@ -169,7 +169,7 @@
     "@demo/wobbling-sphere": "workspace:*",
     "@demo/zustand-site": "workspace:*",
     "clsx": "^2.1.1",
-    "next": "14.2.5",
+    "next": "16.1.1",
     "open-props": "^1.7.5",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
@@ -177,11 +177,12 @@
     "react-use": "^17.5.1"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.2.0",
     "@types/node": "^20",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
-    "eslint": "^8.57.0",
-    "eslint-config-next": "14.2.5",
+    "eslint": "^9.39.2",
+    "eslint-config-next": "16.1.1",
     "postcss": "^8",
     "typescript": "^5.5.4"
   }
