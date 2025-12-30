@@ -2,30 +2,29 @@
   "name": "examples",
   "private": true,
   "scripts": {
-    "build": "turbo build3",
-    "postbuild": "./out.sh",
+    "build": "turbo build3 && ./out.sh",
+    "start": "serve ./out",
     "dev": "turbo dev2",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "test": "turbo test",
-    "ttest": "npm run build"
+    "lgtm": "pnpm run lint && pnpm run build",
+    "mostlyclean": "rm -rf demos/**/dist apps/website/out out",
+    "clean": "pnpm run mostlyclean && find . -name node_modules -type d -prune -exec rm -rf '{}' +"
   },
   "devDependencies": {
+    "@examples/e2e": "workspace:*",
     "@playwright/test": "1.45.3",
     "@types/minimist": "^1.2.5",
     "depcheck": "^1.4.7",
     "prettier": "^3.3.3",
+    "serve": "^14.2.5",
     "turbo": "^2.0.12",
     "typescript": "^5.5.4"
   },
   "engines": {
     "node": ">=20",
-    "npm": ">=10"
+    "pnpm": ">=10"
   },
-  "packageManager": "npm@11.7.0",
-  "workspaces": [
-    "apps/*",
-    "demos/*",
-    "packages/*"
-  ]
+  "packageManager": "pnpm@10.26.2"
 }

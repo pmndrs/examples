@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@dimforge/rapier3d-compat": "^0.19.3",
     "@pmndrs/branding": "^0.0.8",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.4.2",

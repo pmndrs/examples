@@ -1,9 +1,10 @@
-import NextImage, { ImageProps } from 'next/image'
+import NextImage from "next/image";
+import { ComponentProps } from "react";
 
-const basePath = process.env.BASE_PATH
+const basePath = process.env.BASE_PATH;
 
-const Image = ({ src, ...rest }: ImageProps) => (
-  <NextImage src={`${basePath || ''}${src}`} {...rest} />
-)
+const Image = ({ src, ...rest }: ComponentProps<typeof NextImage>) => (
+  <NextImage src={`${basePath || ""}${src}`} {...rest} />
+);
 
-export default Image
+export default Image;

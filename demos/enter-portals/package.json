@@ -12,7 +12,9 @@
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "three": "^0.182.0",
-    "wouter": "^2.12.1"
+    "wouter": "^2.12.1",
+    "suspend-react": "^0.0.8",
+    "maath": "^0.10.8"
   },
   "devDependencies": {
     "@types/react": "^19.2.7",

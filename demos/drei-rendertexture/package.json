@@ -13,6 +13,7 @@
     "@react-three/fiber": "^9.4.2",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
+    "suspend-react": "^0.0.8",
     "three": "^0.182.0"
   },
   "devDependencies": {
