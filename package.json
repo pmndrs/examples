@@ -8,7 +8,8 @@
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "test": "turbo test",
-    "lgtm": "pnpm run lint && pnpm run build"
+    "lgtm": "pnpm run lint && pnpm run build",
+    "clean": "rm -rf demos/**/dist apps/website/out out"
   },
   "devDependencies": {
     "@examples/e2e": "workspace:*",
