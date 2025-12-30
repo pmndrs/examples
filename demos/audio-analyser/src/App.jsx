@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import React, { Suspense, useEffect, useRef, useState, useMemo } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { useGLTF, useAnimations, Reflector, useTexture } from '@react-three/drei'
+import { useGLTF, useAnimations, MeshReflectorMaterial, useTexture } from '@react-three/drei'
 import useStore from './store'
 
 import bustModel from './bust.glb?url'
@@ -143,9 +143,21 @@ function DancingDot() {
 function Ground() {
   const [floor, normal] = useTexture([groundTex1, groundTex2])
   return (
-    <Reflector position={[0, -0.225, 0]} resolution={512} args={[10, 10]} mirror={0.5} mixBlur={7} mixStrength={0.8} rotation={[-HPI, 0, HPI]} blur={[400, 50]}>
-      {(Material, props) => <Material color="#858585" metalness={0.5} roughnessMap={floor} normalMap={normal} normalScale={[0.1, 0.1]} {...props} />}
-    </Reflector>
+    <mesh position={[0, -0.225, 0]} rotation={[-HPI, 0, HPI]}>
+      <planeGeometry args={[10, 10]} />
+      <MeshReflectorMaterial
+        resolution={512}
+        mirror={0.5}
+        mixBlur={7}
+        mixStrength={0.8}
+        blur={[400, 50]}
+        color="#858585"
+        metalness={0.5}
+        roughnessMap={floor}
+        normalMap={normal}
+        normalScale={[0.1, 0.1]}
+      />
+    </mesh>
   )
 }
 

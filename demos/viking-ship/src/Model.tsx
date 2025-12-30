@@ -37,9 +37,9 @@ type GLTFResult = GLTF & {
   }
 }
 
-export default function Model(props: JSX.IntrinsicElements["group"]) {
+export default function Model(props: React.JSX.IntrinsicElements["group"]) {
   const group = useRef(null)
-  const { nodes, materials } = useGLTF(thorModel) as GLTFResult
+  const { nodes, materials } = useGLTF(thorModel) as unknown as GLTFResult
   return (
     <group ref={group} {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]} scale={[0.01, 0.01, 0.01]}>
