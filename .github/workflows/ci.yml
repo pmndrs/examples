@@ -47,6 +47,7 @@ jobs:
       #   env:
       #     BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
       - run: pnpm run lgtm
+        if: github.event_name == 'pull_request'
 
       #
       # Build (only for pushes on main)
