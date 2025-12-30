@@ -5,7 +5,7 @@ import { EffectComposer, N8AO } from '@react-three/postprocessing'
 import { ContactShadows } from '@react-three/drei'
 import { a, useTransition, useSpring } from '@react-spring/three'
 import { FontLoader, TextGeometry } from 'three-stdlib'
-import create from 'zustand'
+import { create } from 'zustand'
 
 const useStore = create((set) => {
   new FontLoader().load('/font.blob', (font) => {
