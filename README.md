@@ -76,7 +76,8 @@ This will:
 
 # test
 
-> [!IMPORTANT] WIP
+> [!IMPORTANT]
+> Testing is WIP
 
 ```sh
 $ pnpm test
