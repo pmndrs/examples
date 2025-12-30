@@ -48,11 +48,7 @@ $ pnpm run dev
 $ pnpm run build
 ```
 
-NB1: `pnpm run build -- --force` to ignore turbo cache
-
-NB2: `pnpm run build -- --continue` to continue on error(s)
-
-Then `npx serve out`.
+Then `pnpm run start`.
 
 <details>
 

@@ -2,13 +2,13 @@
   "name": "examples",
   "private": true,
   "scripts": {
-    "build": "turbo build3",
-    "postbuild": "./out.sh",
+    "build": "turbo build3 && ./out.sh",
+    "start": "serve ./out",
     "dev": "turbo dev2",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "test": "turbo test",
-    "ttest": "turbo build3"
+    "lgtm": "pnpm run lint && pnpm run build"
   },
   "devDependencies": {
     "@examples/e2e": "workspace:*",
@@ -16,6 +16,7 @@
     "@types/minimist": "^1.2.5",
     "depcheck": "^1.4.7",
     "prettier": "^3.3.3",
+    "serve": "^14.2.5",
     "turbo": "^2.0.12",
     "typescript": "^5.5.4"
   },
@@ -23,10 +24,5 @@
     "node": ">=20",
     "pnpm": ">=10"
   },
-  "packageManager": "pnpm@10.26.2",
-  "workspaces": [
-    "apps/*",
-    "demos/*",
-    "packages/*"
-  ]
+  "packageManager": "pnpm@10.26.2"
 }
