@@ -18,24 +18,7 @@
     "typescript": "^5.5.4"
   },
   "engines": {
-    "node": ">=24",
-    "npm": ">=10"
+    "node": ">=24"
   },
-  "packageManager": "npm@11.7.0",
-  "overrides": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "three": "^0.165.0",
-    "@types/three": "^0.165.0",
-    "leva": "^0.9.35",
-    "postprocessing": "^6.36.0",
-    "ecctrl": "1.0.88"
-  },
-  "workspaces": [
-    "apps/*",
-    "demos/*",
-    "packages/*"
-  ]
+  "packageManager": "pnpm@10.8.1"
 }

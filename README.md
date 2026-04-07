@@ -23,32 +23,23 @@ Prerequisites:
   nb: if you want this node version to be your default nvm's one:
   `nvm alias default node`
 
-- Install [PNPM](https://pnpm.io/installation#using-corepack) - Package Manager,
-  with:
-
-  ```sh
-  $ corepack enable
-  $ corepack prepare --activate # it reads "packageManager"
-  $ npm -v # make sure your version satisfies package.json#engines.npm
-  ```
-
 ```
-$ npm ci
+$ pnpm install
 ```
 
 # dev
 
 ```sh
-$ npm run dev
+$ pnpm dev
 ```
 
 # build
 
 ```sh
-$ npm run build
+$ pnpm build
 ```
 
-NB: `npm run build -- --force` to ignore turbo cache
+NB: `pnpm build --force` to ignore turbo cache
 
 Then `npx serve out`.
 
@@ -73,7 +64,7 @@ This will:
 > debug purposes(to be 1:1 with GitHub pages) you can:
 >
 > ```sh
-> $ BASE_PATH=/examples BASE_URL=http://localhost:4000 npm run build
+> $ BASE_PATH=/examples BASE_URL=http://localhost:4000 pnpm build
 > $ npx serve out -p 4000
 > ```
 
@@ -82,17 +73,17 @@ This will:
 # test
 
 ```sh
-$ npm test
+$ pnpm test
 ```
 
-To update the snapshots: `npm test -- -- --update-snapshots`
+To update the snapshots: `pnpm test -- -- --update-snapshots`
 
 <details>
 
 You can also:
 
 ```sh
-$ BASE_PATH=/examples npm test
+$ BASE_PATH=/examples pnpm test
 ```
 
 </details>
@@ -110,8 +101,8 @@ $ docker run -it --rm  \
 #
 # echo "Hey, I am acting like the CI"
 #
-# npm ci
-# npm test
+# pnpm install
+# pnpm test
 ```
 
 or in one command to update snapshots:
@@ -119,7 +110,7 @@ or in one command to update snapshots:
 ```sh
 docker run --rm  \
   -w /app -v "$(pwd)":/app -v /app/node_modules \
-  mcr.microsoft.com/playwright:v1.45.3-jammy /bin/sh -c "npm ci && npm test -- -- --update-snapshots"
+  mcr.microsoft.com/playwright:v1.45.3-jammy /bin/sh -c "pnpm install && pnpm test -- -- --update-snapshots"
 ```
 
 # Colophon

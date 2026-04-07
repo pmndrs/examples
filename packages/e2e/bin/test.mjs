@@ -47,7 +47,7 @@ function startPlaywright(url) {
       args.push("--update-snapshots");
     }
 
-    const proc = spawn("npx", args, {
+    const proc = spawn("pnpm", ["exec", ...args], {
       stdio: "inherit",
       env: {
         ...process.env,

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 export function Dev({ demoname }: { demoname: string }) {
   const { refresh } = useRouter();
 
-  const cmd = `npm run -w demos/${demoname} dev3`;
+  const cmd = `pnpm --filter @demo/${demoname} dev3`;
 
   return (
     <div className="Dev">

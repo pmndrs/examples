@@ -11,25 +11,25 @@
     "physics"
   ],
   "dependencies": {
-    "@pmndrs/branding": "^0.0.8",
-    "@react-three/cannon": "^6.6.0",
-    "@react-three/drei": "^9.109.5",
-    "@react-three/fiber": "^8.17.5",
+    "@pmndrs/branding": "catalog:",
+    "@react-three/cannon": "catalog:",
+    "@react-three/drei": "catalog:",
+    "@react-three/fiber": "catalog:",
     "inter-ui": "^3.19.3",
-    "leva": "^0.9.35",
-    "lodash-es": "^4.17.21",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "three": "^0.165.0",
+    "leva": "catalog:",
+    "lodash-es": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "three": "catalog:",
     "use-asset": "^1.0.4"
   },
   "devDependencies": {
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "@types/three": "^0.165.0",
-    "@vitejs/plugin-react": "^4.3.1",
-    "typescript": "^5.5.4",
-    "vite": "^5.4.0"
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@types/three": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:"
   },
   "scripts": {
     "dev": "vite --host",
