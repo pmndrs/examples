@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 
-import { ScaledDemoFrame } from "@/components/ScaledDemoFrame";
 import { getDemos } from "@/lib/helper";
 import { Dev } from "./Dev";
 import { Style } from "@/components/Style";
@@ -78,17 +77,11 @@ export default async function Page(props: Props) {
         css={`
           @scope {
             .Dev {
-              width: 100%;
-              height: 100%;
-              display: grid;
-              place-items: center;
-              padding: 1rem;
+              padding-inline: 1rem;
             }
-            .Frame {
+            iframe {
               width: 100%;
-              height: 100%;
-              min-width: 0;
-              min-height: 0;
+              min-height: 100dvh;
             }
             .Social {
               position: fixed;
@@ -108,9 +101,7 @@ export default async function Page(props: Props) {
         <Dev demoname={demoname} />
       ) : (
         <>
-          <div className="Frame">
-            <ScaledDemoFrame src={embed_url} title={demoname} />
-          </div>
+          <iframe src={embed_url} />
 
           <Social demoname={demoname} embed_url={embed_url} />
         </>
