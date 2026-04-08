@@ -138,7 +138,7 @@ export function ScrollControls({
     let disableScroll = true
     let firstRun = true
 
-    const onScroll = (e : any) => {
+    const onScroll = (e: any) => {
       // Prevent first scroll because it is indirectly caused by the one pixel offset
       if (!enabled || firstRun) return
       invalidate()
@@ -164,7 +164,7 @@ export function ScrollControls({
     el.addEventListener('scroll', onScroll, { passive: true })
     requestAnimationFrame(() => (firstRun = false))
 
-    const onWheel = (e : any) => (el.scrollLeft += e.deltaY / 2)
+    const onWheel = (e: any) => (el.scrollLeft += e.deltaY / 2)
     if (horizontal) el.addEventListener('wheel', onWheel, { passive: true })
 
     return () => {
@@ -182,7 +182,7 @@ export function ScrollControls({
   return <context.Provider value={state}>{children}</context.Provider>
 }
 
-const ScrollCanvas = React.forwardRef(({ children } : { children?: React.ReactNode}, ref) => {
+const ScrollCanvas = React.forwardRef(({ children }: { children?: React.ReactNode }, ref) => {
   const group = React.useRef<THREE.Group>(null!)
   const state = useScroll()
   const { width, height } = useThree((state) => state.viewport)

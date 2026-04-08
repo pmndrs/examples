@@ -6,9 +6,9 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      'three': resolve(__dirname, 'node_modules/three'),
-      'postprocessing': resolve(__dirname, 'node_modules/postprocessing'),
+      three: resolve(__dirname, 'node_modules/three'),
+      postprocessing: resolve(__dirname, 'node_modules/postprocessing')
     },
-    dedupe: ['three', 'postprocessing'],
+    dedupe: ['three', 'postprocessing']
   }
 })

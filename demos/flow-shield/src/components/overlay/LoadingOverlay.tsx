@@ -1,13 +1,13 @@
-"use client";
+'use client'
 
-import styles from "./LoadingOverlay.module.css";
+import styles from './LoadingOverlay.module.css'
 
 interface LoadingOverlayProps {
-  visible: boolean;
+  visible: boolean
 }
 
 export default function LoadingOverlay({ visible }: LoadingOverlayProps) {
-  if (!visible) return null;
+  if (!visible) return null
 
   return (
     <div className={styles.overlay}>
@@ -16,5 +16,5 @@ export default function LoadingOverlay({ visible }: LoadingOverlayProps) {
         <span className={styles.text}>Loading Model...</span>
       </div>
     </div>
-  );
+  )
 }

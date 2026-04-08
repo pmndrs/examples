@@ -21,7 +21,7 @@ export default function Nav({
 }: { demos: ReturnType<typeof getDemos> } & ComponentProps<"nav">) {
   const ulRef = useRef<ElementRef<"ul">>(null);
   const lisRef = useRef(
-    Array.from({ length: demos.length }).map(() => createRef<HTMLLIElement>())
+    Array.from({ length: demos.length }).map(() => createRef<HTMLLIElement>()),
   );
 
   const { demoname } = useParams();

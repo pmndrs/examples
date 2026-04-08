@@ -14,44 +14,20 @@ const DROIDEKA_URL = `${import.meta.env.BASE_URL.replace(/\/?$/, '/')}droideka.g
 
 export function Droideka() {
   const { nodes, materials } = useGLTF(DROIDEKA_URL)
-  
+
   return (
     <group dispose={null}>
       <group name="Sketchfab_Scene">
         <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
           <group name="root">
             <group name="GLTF_SceneRootNode" rotation={[Math.PI / 2, 0, 0]}>
-              <group
-                name="Cylinder_3"
-                position={[1.708, 5.741, -0.493]}
-                rotation={[0, 0, -Math.PI / 2]}
-                scale={[0.127, 0.05, 0.127]}>
-                <mesh
-                  name="Object_4"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_4.geometry}
-                  material={materials['Material.009']}
-                />
+              <group name="Cylinder_3" position={[1.708, 5.741, -0.493]} rotation={[0, 0, -Math.PI / 2]} scale={[0.127, 0.05, 0.127]}>
+                <mesh name="Object_4" castShadow receiveShadow geometry={nodes.Object_4.geometry} material={materials['Material.009']} />
               </group>
-              <group
-                name="Cube124_4"
-                position={[3.006, 6.976, -0.119]}
-                rotation={[-0.007, -0.014, -0.242]}
-                scale={0.106}>
-                <mesh
-                  name="Object_6"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_6.geometry}
-                  material={materials.Material}
-                />
+              <group name="Cube124_4" position={[3.006, 6.976, -0.119]} rotation={[-0.007, -0.014, -0.242]} scale={0.106}>
+                <mesh name="Object_6" castShadow receiveShadow geometry={nodes.Object_6.geometry} material={materials.Material} />
               </group>
-              <group
-                name="Armature026_15"
-                position={[3.307, 6.413, -0.113]}
-                rotation={[0, 0, -1.848]}
-                scale={3.495}>
+              <group name="Armature026_15" position={[3.307, 6.413, -0.113]} rotation={[0, 0, -1.848]} scale={3.495}>
                 <group name="GLTF_created_0">
                   <primitive object={nodes.GLTF_created_0_rootJoint} />
                   <skinnedMesh
@@ -149,28 +125,17 @@ export function Droideka() {
                   <group name="Plane019_14" />
                 </group>
               </group>
-              <group
-                name="Armature028_42"
-                position={[1.355, 5.301, 2.472]}
-                rotation={[0, 0, -Math.PI]}
-                scale={[-1, 1, 1]}>
+              <group name="Armature028_42" position={[1.355, 5.301, 2.472]} rotation={[0, 0, -Math.PI]} scale={[-1, 1, 1]}>
                 <group name="GLTF_created_5">
                   <primitive object={nodes.GLTF_created_5_rootJoint} />
                 </group>
               </group>
-              <group
-                name="Armature022_68"
-                position={[1.355, 5.301, -2.698]}
-                rotation={[-Math.PI, 0, 0]}>
+              <group name="Armature022_68" position={[1.355, 5.301, -2.698]} rotation={[-Math.PI, 0, 0]}>
                 <group name="GLTF_created_6">
                   <primitive object={nodes.GLTF_created_6_rootJoint} />
                 </group>
               </group>
-              <group
-                name="Armature023_77"
-                position={[2.317, 1.462, 1.508]}
-                rotation={[Math.PI, 0.831, -1.584]}
-                scale={0.755}>
+              <group name="Armature023_77" position={[2.317, 1.462, 1.508]} rotation={[Math.PI, 0.831, -1.584]} scale={0.755}>
                 <group name="GLTF_created_1">
                   <primitive object={nodes.GLTF_created_1_rootJoint} />
                   <skinnedMesh
@@ -203,11 +168,7 @@ export function Droideka() {
                   <group name="hips012_76" />
                 </group>
               </group>
-              <group
-                name="Armature024_86"
-                position={[2.308, 1.462, -1.721]}
-                rotation={[Math.PI, -0.831, -1.584]}
-                scale={0.755}>
+              <group name="Armature024_86" position={[2.308, 1.462, -1.721]} rotation={[Math.PI, -0.831, -1.584]} scale={0.755}>
                 <group name="GLTF_created_2">
                   <primitive object={nodes.GLTF_created_2_rootJoint} />
                   <skinnedMesh
@@ -240,11 +201,7 @@ export function Droideka() {
                   <group name="hips013_85" />
                 </group>
               </group>
-              <group
-                name="Armature027_95"
-                position={[-1.339, 1.462, -0.102]}
-                rotation={[0, 0, 1.558]}
-                scale={0.755}>
+              <group name="Armature027_95" position={[-1.339, 1.462, -0.102]} rotation={[0, 0, 1.558]} scale={0.755}>
                 <group name="GLTF_created_3">
                   <primitive object={nodes.GLTF_created_3_rootJoint} />
                   <skinnedMesh
@@ -278,13 +235,7 @@ export function Droideka() {
                 </group>
               </group>
               <group name="Sphere004_96" position={[1.005, 2.051, -0.104]}>
-                <mesh
-                  name="Object_182"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_182.geometry}
-                  material={materials.Material}
-                />
+                <mesh name="Object_182" castShadow receiveShadow geometry={nodes.Object_182.geometry} material={materials.Material} />
                 <mesh
                   name="Object_183"
                   castShadow
@@ -293,264 +244,67 @@ export function Droideka() {
                   material={materials['Material.001']}
                 />
               </group>
-              <group
-                name="Cylinder171_97"
-                position={[-0.226, 7.058, 0.203]}
-                rotation={[Math.PI / 2, 0, 0]}
-                scale={[0.201, 0.036, 0.201]}>
-                <mesh
-                  name="Object_185"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_185.geometry}
-                  material={materials.Material}
-                />
+              <group name="Cylinder171_97" position={[-0.226, 7.058, 0.203]} rotation={[Math.PI / 2, 0, 0]} scale={[0.201, 0.036, 0.201]}>
+                <mesh name="Object_185" castShadow receiveShadow geometry={nodes.Object_185.geometry} material={materials.Material} />
               </group>
-              <group
-                name="Cylinder172_98"
-                position={[-0.422, 6.238, 0.196]}
-                rotation={[Math.PI / 2, 0, 0]}
-                scale={0.131}>
-                <mesh
-                  name="Object_187"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_187.geometry}
-                  material={materials.Material}
-                />
+              <group name="Cylinder172_98" position={[-0.422, 6.238, 0.196]} rotation={[Math.PI / 2, 0, 0]} scale={0.131}>
+                <mesh name="Object_187" castShadow receiveShadow geometry={nodes.Object_187.geometry} material={materials.Material} />
               </group>
               <group name="Cylinder177_99" position={[0.068, 6.809, -0.123]}>
-                <mesh
-                  name="Object_189"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_189.geometry}
-                  material={materials.Material}
-                />
+                <mesh name="Object_189" castShadow receiveShadow geometry={nodes.Object_189.geometry} material={materials.Material} />
               </group>
-              <group
-                name="Cylinder178_100"
-                position={[0.888, 6.049, -0.12]}
-                rotation={[Math.PI / 2, 0, 0]}
-                scale={[0.035, 0.043, 0.035]}>
-                <mesh
-                  name="Object_191"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_191.geometry}
-                  material={materials.Material}
-                />
+              <group name="Cylinder178_100" position={[0.888, 6.049, -0.12]} rotation={[Math.PI / 2, 0, 0]} scale={[0.035, 0.043, 0.035]}>
+                <mesh name="Object_191" castShadow receiveShadow geometry={nodes.Object_191.geometry} material={materials.Material} />
               </group>
-              <group
-                name="Cylinder179_101"
-                position={[0.6, 5.302, -0.034]}
-                rotation={[Math.PI / 2, 0, 0]}
-                scale={[0.118, 0.252, 0.118]}>
-                <mesh
-                  name="Object_193"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_193.geometry}
-                  material={materials.Material}
-                />
+              <group name="Cylinder179_101" position={[0.6, 5.302, -0.034]} rotation={[Math.PI / 2, 0, 0]} scale={[0.118, 0.252, 0.118]}>
+                <mesh name="Object_193" castShadow receiveShadow geometry={nodes.Object_193.geometry} material={materials.Material} />
               </group>
-              <group
-                name="Cylinder180_102"
-                position={[-0.157, 6.068, -0.121]}
-                rotation={[Math.PI / 2, 0, 0]}
-                scale={0.108}>
-                <mesh
-                  name="Object_195"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_195.geometry}
-                  material={materials.Material}
-                />
+              <group name="Cylinder180_102" position={[-0.157, 6.068, -0.121]} rotation={[Math.PI / 2, 0, 0]} scale={0.108}>
+                <mesh name="Object_195" castShadow receiveShadow geometry={nodes.Object_195.geometry} material={materials.Material} />
               </group>
-              <group
-                name="Cylinder181_103"
-                position={[-0.041, 6.435, -0.12]}
-                rotation={[0, Math.PI / 2, 0]}
-                scale={[0.167, 0.165, 0.165]}>
-                <mesh
-                  name="Object_197"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_197.geometry}
-                  material={materials.Material}
-                />
+              <group name="Cylinder181_103" position={[-0.041, 6.435, -0.12]} rotation={[0, Math.PI / 2, 0]} scale={[0.167, 0.165, 0.165]}>
+                <mesh name="Object_197" castShadow receiveShadow geometry={nodes.Object_197.geometry} material={materials.Material} />
               </group>
-              <group
-                name="Cylinder182_104"
-                position={[-0.345, 5.885, -0.12]}
-                rotation={[Math.PI / 2, 0, 0]}
-                scale={0.261}>
-                <mesh
-                  name="Object_199"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_199.geometry}
-                  material={materials.Material}
-                />
+              <group name="Cylinder182_104" position={[-0.345, 5.885, -0.12]} rotation={[Math.PI / 2, 0, 0]} scale={0.261}>
+                <mesh name="Object_199" castShadow receiveShadow geometry={nodes.Object_199.geometry} material={materials.Material} />
               </group>
-              <group
-                name="Cylinder183_105"
-                position={[0.054, 4.744, -0.12]}
-                rotation={[-Math.PI / 2, Math.PI / 2, 0]}
-                scale={0.198}>
-                <mesh
-                  name="Object_201"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_201.geometry}
-                  material={materials.Material}
-                />
+              <group name="Cylinder183_105" position={[0.054, 4.744, -0.12]} rotation={[-Math.PI / 2, Math.PI / 2, 0]} scale={0.198}>
+                <mesh name="Object_201" castShadow receiveShadow geometry={nodes.Object_201.geometry} material={materials.Material} />
               </group>
-              <group
-                name="Cylinder184_106"
-                position={[0.03, 5.383, -0.12]}
-                rotation={[-Math.PI / 2, Math.PI / 2, 0]}
-                scale={0.198}>
-                <mesh
-                  name="Object_203"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_203.geometry}
-                  material={materials.Material}
-                />
+              <group name="Cylinder184_106" position={[0.03, 5.383, -0.12]} rotation={[-Math.PI / 2, Math.PI / 2, 0]} scale={0.198}>
+                <mesh name="Object_203" castShadow receiveShadow geometry={nodes.Object_203.geometry} material={materials.Material} />
               </group>
-              <group
-                name="Cylinder185_107"
-                position={[0.572, 3.025, -0.102]}
-                rotation={[Math.PI / 2, 0, 0]}
-                scale={0.122}>
-                <mesh
-                  name="Object_205"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_205.geometry}
-                  material={materials.Material}
-                />
+              <group name="Cylinder185_107" position={[0.572, 3.025, -0.102]} rotation={[Math.PI / 2, 0, 0]} scale={0.122}>
+                <mesh name="Object_205" castShadow receiveShadow geometry={nodes.Object_205.geometry} material={materials.Material} />
               </group>
-              <group
-                name="Cylinder186_108"
-                position={[0.022, 2.593, -0.102]}
-                rotation={[0, Math.PI / 4, 0]}
-                scale={[0.101, 0.219, 0.1]}>
-                <mesh
-                  name="Object_207"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_207.geometry}
-                  material={materials.Material}
-                />
+              <group name="Cylinder186_108" position={[0.022, 2.593, -0.102]} rotation={[0, Math.PI / 4, 0]} scale={[0.101, 0.219, 0.1]}>
+                <mesh name="Object_207" castShadow receiveShadow geometry={nodes.Object_207.geometry} material={materials.Material} />
               </group>
-              <group
-                name="Cylinder188_109"
-                position={[0.147, 2.593, -0.102]}
-                scale={[0.086, 0.161, 0.086]}>
-                <mesh
-                  name="Object_209"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_209.geometry}
-                  material={materials.Material}
-                />
+              <group name="Cylinder188_109" position={[0.147, 2.593, -0.102]} scale={[0.086, 0.161, 0.086]}>
+                <mesh name="Object_209" castShadow receiveShadow geometry={nodes.Object_209.geometry} material={materials.Material} />
               </group>
-              <group
-                name="Cylinder189_110"
-                position={[0.809, 2.684, -0.102]}
-                rotation={[Math.PI / 2, -1.389, -Math.PI / 2]}
-                scale={0.598}>
-                <mesh
-                  name="Object_211"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_211.geometry}
-                  material={materials.Material}
-                />
+              <group name="Cylinder189_110" position={[0.809, 2.684, -0.102]} rotation={[Math.PI / 2, -1.389, -Math.PI / 2]} scale={0.598}>
+                <mesh name="Object_211" castShadow receiveShadow geometry={nodes.Object_211.geometry} material={materials.Material} />
               </group>
-              <group
-                name="Cylinder190_111"
-                position={[0.84, 2.316, -0.117]}
-                rotation={[Math.PI / 2, 0, 0]}
-                scale={[0.204, 0.425, 0.211]}>
-                <mesh
-                  name="Object_213"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_213.geometry}
-                  material={materials.Material}
-                />
+              <group name="Cylinder190_111" position={[0.84, 2.316, -0.117]} rotation={[Math.PI / 2, 0, 0]} scale={[0.204, 0.425, 0.211]}>
+                <mesh name="Object_213" castShadow receiveShadow geometry={nodes.Object_213.geometry} material={materials.Material} />
               </group>
-              <group
-                name="Cylinder191_112"
-                position={[0.832, 2.659, -0.102]}
-                rotation={[1.571, -1.545, 1.571]}
-                scale={0.598}>
-                <mesh
-                  name="Object_215"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_215.geometry}
-                  material={materials.Material}
-                />
+              <group name="Cylinder191_112" position={[0.832, 2.659, -0.102]} rotation={[1.571, -1.545, 1.571]} scale={0.598}>
+                <mesh name="Object_215" castShadow receiveShadow geometry={nodes.Object_215.geometry} material={materials.Material} />
               </group>
-              <group
-                name="Cylinder192_113"
-                position={[0.984, 2.7, -0.102]}
-                rotation={[Math.PI / 2, -1.04, Math.PI / 2]}
-                scale={0.598}>
-                <mesh
-                  name="Object_217"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_217.geometry}
-                  material={materials.Material}
-                />
+              <group name="Cylinder192_113" position={[0.984, 2.7, -0.102]} rotation={[Math.PI / 2, -1.04, Math.PI / 2]} scale={0.598}>
+                <mesh name="Object_217" castShadow receiveShadow geometry={nodes.Object_217.geometry} material={materials.Material} />
               </group>
-              <group
-                name="Cylinder193_114"
-                position={[1.144, 2.37, -0.102]}
-                rotation={[0, Math.PI / 2, 0]}
-                scale={0.598}>
-                <mesh
-                  name="Object_219"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_219.geometry}
-                  material={materials.Material}
-                />
+              <group name="Cylinder193_114" position={[1.144, 2.37, -0.102]} rotation={[0, Math.PI / 2, 0]} scale={0.598}>
+                <mesh name="Object_219" castShadow receiveShadow geometry={nodes.Object_219.geometry} material={materials.Material} />
               </group>
-              <group
-                name="Cube109_115"
-                position={[1.139, 4.928, -0.115]}
-                scale={[0.367, 0.505, 0.505]}>
-                <mesh
-                  name="Object_221"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_221.geometry}
-                  material={materials.Material}
-                />
+              <group name="Cube109_115" position={[1.139, 4.928, -0.115]} scale={[0.367, 0.505, 0.505]}>
+                <mesh name="Object_221" castShadow receiveShadow geometry={nodes.Object_221.geometry} material={materials.Material} />
               </group>
-              <group
-                name="Cube110_116"
-                position={[0.308, 6.569, 0.173]}
-                rotation={[0, 0, 0.377]}
-                scale={0.465}>
-                <mesh
-                  name="Object_223"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_223.geometry}
-                  material={materials.Material}
-                />
+              <group name="Cube110_116" position={[0.308, 6.569, 0.173]} rotation={[0, 0, 0.377]} scale={0.465}>
+                <mesh name="Object_223" castShadow receiveShadow geometry={nodes.Object_223.geometry} material={materials.Material} />
               </group>
-              <group
-                name="Cube111_117"
-                position={[1.36, 5.972, -0.122]}
-                scale={[0.197, 0.197, 0.189]}>
+              <group name="Cube111_117" position={[1.36, 5.972, -0.122]} scale={[0.197, 0.197, 0.189]}>
                 <mesh
                   name="Object_225"
                   castShadow
@@ -559,10 +313,7 @@ export function Droideka() {
                   material={materials['Material.004']}
                 />
               </group>
-              <group
-                name="Cube112_118"
-                position={[1.537, 5.318, -0.117]}
-                scale={[0.878, 0.878, 0.567]}>
+              <group name="Cube112_118" position={[1.537, 5.318, -0.117]} scale={[0.878, 0.878, 0.567]}>
                 <mesh
                   name="Object_227"
                   castShadow
@@ -571,100 +322,29 @@ export function Droideka() {
                   material={materials['Material.004']}
                 />
               </group>
-              <group
-                name="Cube113_119"
-                position={[1.059, 4.738, -0.115]}
-                scale={[0.239, 0.282, 0.282]}>
-                <mesh
-                  name="Object_229"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_229.geometry}
-                  material={materials.Material}
-                />
+              <group name="Cube113_119" position={[1.059, 4.738, -0.115]} scale={[0.239, 0.282, 0.282]}>
+                <mesh name="Object_229" castShadow receiveShadow geometry={nodes.Object_229.geometry} material={materials.Material} />
               </group>
-              <group
-                name="Cube114_120"
-                position={[0.487, 5.259, -0.124]}
-                rotation={[0, -0.37, 0]}
-                scale={[0.134, 0.198, 0.134]}>
-                <mesh
-                  name="Object_231"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_231.geometry}
-                  material={materials.Material}
-                />
+              <group name="Cube114_120" position={[0.487, 5.259, -0.124]} rotation={[0, -0.37, 0]} scale={[0.134, 0.198, 0.134]}>
+                <mesh name="Object_231" castShadow receiveShadow geometry={nodes.Object_231.geometry} material={materials.Material} />
               </group>
               <group name="Cube115_121" position={[0.349, 5.239, 0.15]} scale={0.166}>
-                <mesh
-                  name="Object_233"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_233.geometry}
-                  material={materials.Material}
-                />
+                <mesh name="Object_233" castShadow receiveShadow geometry={nodes.Object_233.geometry} material={materials.Material} />
               </group>
               <group name="Cube116_122" position={[-0.462, 5.202, -0.12]}>
-                <mesh
-                  name="Object_235"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_235.geometry}
-                  material={materials.Material}
-                />
+                <mesh name="Object_235" castShadow receiveShadow geometry={nodes.Object_235.geometry} material={materials.Material} />
               </group>
-              <group
-                name="Cube117_123"
-                position={[0.222, 1.861, -0.115]}
-                rotation={[0, 0, -0.151]}
-                scale={0.876}>
-                <mesh
-                  name="Object_237"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_237.geometry}
-                  material={materials.Material}
-                />
+              <group name="Cube117_123" position={[0.222, 1.861, -0.115]} rotation={[0, 0, -0.151]} scale={0.876}>
+                <mesh name="Object_237" castShadow receiveShadow geometry={nodes.Object_237.geometry} material={materials.Material} />
               </group>
-              <group
-                name="Cube118_124"
-                position={[0.377, 2.689, -0.102]}
-                rotation={[0, 0, 0.177]}
-                scale={[0.777, 0.536, 0.536]}>
-                <mesh
-                  name="Object_239"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_239.geometry}
-                  material={materials.Material}
-                />
+              <group name="Cube118_124" position={[0.377, 2.689, -0.102]} rotation={[0, 0, 0.177]} scale={[0.777, 0.536, 0.536]}>
+                <mesh name="Object_239" castShadow receiveShadow geometry={nodes.Object_239.geometry} material={materials.Material} />
               </group>
-              <group
-                name="Cube119_125"
-                position={[0.656, 2.962, -0.102]}
-                rotation={[0, 0, 0.177]}
-                scale={[0.043, 0.196, 0.27]}>
-                <mesh
-                  name="Object_241"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_241.geometry}
-                  material={materials.Material}
-                />
+              <group name="Cube119_125" position={[0.656, 2.962, -0.102]} rotation={[0, 0, 0.177]} scale={[0.043, 0.196, 0.27]}>
+                <mesh name="Object_241" castShadow receiveShadow geometry={nodes.Object_241.geometry} material={materials.Material} />
               </group>
-              <group
-                name="Circle004_126"
-                position={[0.057, 6.391, -0.115]}
-                rotation={[-Math.PI / 2, Math.PI / 2, 0]}
-                scale={1.419}>
-                <mesh
-                  name="Object_243"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_243.geometry}
-                  material={materials.Material}
-                />
+              <group name="Circle004_126" position={[0.057, 6.391, -0.115]} rotation={[-Math.PI / 2, Math.PI / 2, 0]} scale={1.419}>
+                <mesh name="Object_243" castShadow receiveShadow geometry={nodes.Object_243.geometry} material={materials.Material} />
                 <mesh
                   name="Object_244"
                   castShadow
@@ -680,11 +360,7 @@ export function Droideka() {
                   material={materials['Material.002']}
                 />
               </group>
-              <group
-                name="Armature025_135"
-                position={[0.017, 2.597, -0.102]}
-                rotation={[0, 0, -Math.PI / 2]}
-                scale={1.467}>
+              <group name="Armature025_135" position={[0.017, 2.597, -0.102]} rotation={[0, 0, -Math.PI / 2]} scale={1.467}>
                 <group name="GLTF_created_4">
                   <primitive object={nodes.GLTF_created_4_rootJoint} />
                   <skinnedMesh
@@ -716,17 +392,8 @@ export function Droideka() {
                   <group name="Plane018_134" />
                 </group>
               </group>
-              <group
-                name="Cylinder208_136"
-                position={[1.318, 5.433, 0.249]}
-                scale={[0.193, 0.407, 0.193]}>
-                <mesh
-                  name="Object_261"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_261.geometry}
-                  material={materials.Material}
-                />
+              <group name="Cylinder208_136" position={[1.318, 5.433, 0.249]} scale={[0.193, 0.407, 0.193]}>
+                <mesh name="Object_261" castShadow receiveShadow geometry={nodes.Object_261.geometry} material={materials.Material} />
               </group>
             </group>
           </group>

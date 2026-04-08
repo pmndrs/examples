@@ -9,20 +9,20 @@
     "transform-controls"
   ],
   "dependencies": {
-    "@react-three/drei": "catalog:",
-    "@react-three/fiber": "catalog:",
-    "leva": "catalog:",
-    "react": "catalog:",
-    "react-dom": "catalog:",
-    "three": "catalog:"
+    "@react-three/drei": "^9.109.5",
+    "@react-three/fiber": "^8.17.5",
+    "leva": "^0.9.35",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.165.0"
   },
   "devDependencies": {
-    "@types/react": "catalog:",
-    "@types/react-dom": "catalog:",
-    "@types/three": "catalog:",
-    "@vitejs/plugin-react": "catalog:",
-    "typescript": "catalog:",
-    "vite": "catalog:"
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@types/three": "^0.165.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.0"
   },
   "scripts": {
     "dev": "vite --host",

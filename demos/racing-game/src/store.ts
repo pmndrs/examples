@@ -70,9 +70,9 @@ export const wheelInfo: WheelInfo = {
 }
 
 const actionNames = ['onCheckpoint', 'onFinish', 'onStart', 'reset'] as const
-export type ActionNames = typeof actionNames[number]
+export type ActionNames = (typeof actionNames)[number]
 
-type Camera = typeof cameras[number]
+type Camera = (typeof cameras)[number]
 export type Controls = typeof controls
 
 type Getter = GetState<IState>
@@ -81,7 +81,7 @@ export type Setter = SetState<IState>
 export type VehicleConfig = typeof vehicleConfig
 
 const booleans = ['debug', 'editor', 'help', 'leaderboard', 'map', 'ready', 'shadows', 'sound', 'stats'] as const
-type Booleans = typeof booleans[number]
+type Booleans = (typeof booleans)[number]
 
 type BaseState = {
   [K in Booleans]: boolean

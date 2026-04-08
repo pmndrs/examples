@@ -6,6 +6,8 @@
     "postbuild": "./out.sh",
     "dev": "turbo dev2",
     "lint": "turbo lint",
+    "lint:versions": "syncpack lint",
+    "fix:versions": "syncpack fix-mismatches",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "test": "turbo test"
   },
@@ -14,6 +16,7 @@
     "@types/minimist": "^1.2.5",
     "depcheck": "^1.4.7",
     "prettier": "^3.3.3",
+    "syncpack": "^14.3.0",
     "turbo": "^2.0.12",
     "typescript": "^5.5.4"
   },

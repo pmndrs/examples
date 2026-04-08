@@ -1,65 +1,62 @@
-"use client";
+'use client'
 
-import { useState, useCallback, useRef } from "react";
-import { Canvas } from "@react-three/fiber";
-import { Leva, useControls } from "leva";
-import { LEVA_THEME } from "../theme/theme";
-import SceneContent from "./SceneContent";
-import type { SceneMode } from "./SceneContent";
-import UIOverlay from "../overlay/UIOverlay";
-import OverlayButtons, { type Preset } from "../overlay/OverlayButtons";
-import LoadingOverlay from "../overlay/LoadingOverlay";
+import { useState, useCallback, useRef } from 'react'
+import { Canvas } from '@react-three/fiber'
+import { Leva, useControls } from 'leva'
+import { LEVA_THEME } from '../theme/theme'
+import SceneContent from './SceneContent'
+import type { SceneMode } from './SceneContent'
+import UIOverlay from '../overlay/UIOverlay'
+import OverlayButtons, { type Preset } from '../overlay/OverlayButtons'
+import LoadingOverlay from '../overlay/LoadingOverlay'
 
 export default function PlaygroundCanvas() {
-  const [showGrid, setShowGrid] = useState(true);
-  const [hideLeva, setHideLeva] = useState(false);
-  const [glbUrl, setGlbUrl] = useState<string | null>(null);
-  const [preset, setPreset] = useState<Preset>("default");
-  const [isLoadingModel, setIsLoadingModel] = useState(false);
-  const glbUrlRef = useRef<string | null>(null);
+  const [showGrid, setShowGrid] = useState(true)
+  const [hideLeva, setHideLeva] = useState(false)
+  const [glbUrl, setGlbUrl] = useState<string | null>(null)
+  const [preset, setPreset] = useState<Preset>('default')
+  const [isLoadingModel, setIsLoadingModel] = useState(false)
+  const glbUrlRef = useRef<string | null>(null)
 
   const handleLoadGlb = useCallback((file: File) => {
-    if (glbUrlRef.current) URL.revokeObjectURL(glbUrlRef.current);
-    const url = URL.createObjectURL(file);
-    glbUrlRef.current = url;
-    setIsLoadingModel(true);
-    setGlbUrl(url);
-  }, []);
+    if (glbUrlRef.current) URL.revokeObjectURL(glbUrlRef.current)
+    const url = URL.createObjectURL(file)
+    glbUrlRef.current = url
+    setIsLoadingModel(true)
+    setGlbUrl(url)
+  }, [])
 
   const handleModelLoaded = useCallback(() => {
-    setIsLoadingModel(false);
-  }, []);
+    setIsLoadingModel(false)
+  }, [])
 
   const handleClearGlb = useCallback(() => {
-    if (glbUrlRef.current) URL.revokeObjectURL(glbUrlRef.current);
-    glbUrlRef.current = null;
-    setGlbUrl(null);
-  }, []);
+    if (glbUrlRef.current) URL.revokeObjectURL(glbUrlRef.current)
+    glbUrlRef.current = null
+    setGlbUrl(null)
+  }, [])
 
-  const { mode } = useControls("Scene", {
-    mode: {
-      value: "Background" as SceneMode,
-      options: ["Background", "Frame"] as SceneMode[],
-      label: "Mode",
+  const { mode } = useControls(
+    'Scene',
+    {
+      mode: {
+        value: 'Background' as SceneMode,
+        options: ['Background', 'Frame'] as SceneMode[],
+        label: 'Mode'
+      }
     },
-  }, { collapsed: true });
+    { collapsed: true }
+  )
 
   return (
     <>
-      <Leva
-        theme={LEVA_THEME}
-        titleBar={{ title: "CONTROLS" }}
-        collapsed={false}
-        flat={false}
-        oneLineLabels={false}
-        hidden={hideLeva}
-      />
-      <div style={{ position: "fixed", inset: 0 }}>
+      <Leva theme={LEVA_THEME} titleBar={{ title: 'CONTROLS' }} collapsed={false} flat={false} oneLineLabels={false} hidden={hideLeva} />
+      <div style={{ position: 'fixed', inset: 0 }}>
         <Canvas
           shadows
           camera={{ position: [8, 5, 8], fov: 50, near: 0.1, far: 200 }}
           gl={{ antialias: true, alpha: false }}
-          style={{ background: "#0e0d0c" }}
+          style={{ background: '#0e0d0c' }}
           dpr={[1, 1.5]}
         >
           <SceneContent showGrid={showGrid} mode={mode} glbUrl={glbUrl} onModelLoaded={handleModelLoaded} preset={preset} />
@@ -79,5 +76,5 @@ export default function PlaygroundCanvas() {
       />
       <LoadingOverlay visible={isLoadingModel} />
     </>
-  );
+  )
 }

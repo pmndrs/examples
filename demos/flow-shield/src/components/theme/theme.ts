@@ -1,19 +1,19 @@
 export const COLORS = {
-  bg: "#1a1816",
-  bgLight: "#242220",
-  panel: "#1e1c1a",
-  surface: "#2a2826",
-  border: "#3a3836",
-  borderLight: "#5c5854",
-  text: "#d4cfc8",
-  textMuted: "#8a847a",
-  accent: "#c8b89a",
-  accentDim: "#9a8e78",
-  white: "#f0ece6",
-  black: "#0e0d0c",
-  gridCell: "#adadad",
-  gridSection: "#5c5854",
-} as const;
+  bg: '#1a1816',
+  bgLight: '#242220',
+  panel: '#1e1c1a',
+  surface: '#2a2826',
+  border: '#3a3836',
+  borderLight: '#5c5854',
+  text: '#d4cfc8',
+  textMuted: '#8a847a',
+  accent: '#c8b89a',
+  accentDim: '#9a8e78',
+  white: '#f0ece6',
+  black: '#0e0d0c',
+  gridCell: '#adadad',
+  gridSection: '#5c5854'
+} as const
 
 export const LEVA_THEME = {
   colors: {
@@ -30,45 +30,45 @@ export const LEVA_THEME = {
     folderWidgetColor: COLORS.accent,
     folderTextColor: COLORS.text,
     toolTipBackground: COLORS.surface,
-    toolTipText: COLORS.text,
+    toolTipText: COLORS.text
   },
   fonts: {
-    mono: "var(--font-ibm-mono), monospace",
-    sans: "var(--font-barlow), sans-serif",
+    mono: 'var(--font-ibm-mono), monospace',
+    sans: 'var(--font-barlow), sans-serif'
   },
   sizes: {
-    titleBarHeight: "28px",
-    controlWidth: "160px",
-    numberInputMinWidth: "48px",
-    scrubberWidth: "8px",
-    scrubberHeight: "16px",
-    rowHeight: "24px",
-    folderTitleHeight: "24px",
-    checkboxSize: "16px",
-    joystickWidth: "100px",
-    joystickHeight: "100px",
-    colorPickerWidth: "160px",
-    colorPickerHeight: "100px",
-    imagePreviewWidth: "100px",
-    imagePreviewHeight: "100px",
-    monitorHeight: "60px",
+    titleBarHeight: '28px',
+    controlWidth: '160px',
+    numberInputMinWidth: '48px',
+    scrubberWidth: '8px',
+    scrubberHeight: '16px',
+    rowHeight: '24px',
+    folderTitleHeight: '24px',
+    checkboxSize: '16px',
+    joystickWidth: '100px',
+    joystickHeight: '100px',
+    colorPickerWidth: '160px',
+    colorPickerHeight: '100px',
+    imagePreviewWidth: '100px',
+    imagePreviewHeight: '100px',
+    monitorHeight: '60px'
   },
   radii: {
-    xs: "2px",
-    sm: "3px",
-    lg: "6px",
+    xs: '2px',
+    sm: '3px',
+    lg: '6px'
   },
   borderWidths: {
-    root: "0px",
-    input: "1px",
-    focus: "1px",
-    hover: "1px",
-    active: "1px",
-    folder: "1px",
+    root: '0px',
+    input: '1px',
+    focus: '1px',
+    hover: '1px',
+    active: '1px',
+    folder: '1px'
   },
   fontWeights: {
-    label: "normal",
-    folder: "normal",
-    button: "normal",
-  },
-};
+    label: 'normal',
+    folder: 'normal',
+    button: 'normal'
+  }
+}

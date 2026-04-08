@@ -42,6 +42,11 @@ jobs:
       - uses: rharkor/caching-for-turbo@v1.5
 
       #
+      # Lint
+      #
+      - run: pnpm lint:versions
+
+      #
       # Test
       #
       # - run: pnpm test

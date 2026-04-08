@@ -1,0 +1,59 @@
+{
+  "versionGroups": [
+    {
+      "label": "Demos must use identical versions of shared dependencies",
+      "packages": ["@demo/**"],
+      "dependencies": [
+        "react",
+        "react-dom",
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei",
+        "@react-three/postprocessing",
+        "@react-three/rapier",
+        "@react-three/cannon",
+        "@react-three/csg",
+        "@pmndrs/branding",
+        "@pmndrs/assets",
+        "@react-spring/three",
+        "@react-spring/web",
+        "framer-motion",
+        "zustand",
+        "valtio",
+        "leva",
+        "maath",
+        "postprocessing",
+        "r3f-perf",
+        "lamina",
+        "three-stdlib",
+        "meshline",
+        "styled-components",
+        "react-colorful",
+        "react-icons",
+        "antd",
+        "@headlessui/react",
+        "@heroicons/react",
+        "wouter",
+        "@splinetool/loader",
+        "@splinetool/r3f-spline",
+        "nice-color-palettes",
+        "lodash-es",
+        "@babel/runtime",
+        "babel-plugin-glsl",
+        "@types/react",
+        "@types/react-dom",
+        "@types/three",
+        "@vitejs/plugin-react",
+        "typescript",
+        "vite"
+      ],
+      "policy": "sameRange"
+    },
+    {
+      "label": "Workspace deps use workspace protocol",
+      "dependencies": ["@demo/**"],
+      "dependencyTypes": ["prod"],
+      "policy": "sameRange"
+    }
+  ]
+}

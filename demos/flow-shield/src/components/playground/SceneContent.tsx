@@ -1,24 +1,24 @@
-"use client";
+'use client'
 
-import { Suspense } from "react";
-import SceneCamera from "./SceneCamera";
-import SceneLighting from "./SceneLighting";
-import SceneEnvironment from "./SceneEnvironment";
-import GridFloor from "./GridFloor";
-import GlbModel from "./GlbModel";
-import ForceShield from "../ForceShield";
-import PostProcessing from "./PostProcessing";
-import { Droideka } from "./Droideka";
-import type { Preset } from "../overlay/OverlayButtons";
+import { Suspense } from 'react'
+import SceneCamera from './SceneCamera'
+import SceneLighting from './SceneLighting'
+import SceneEnvironment from './SceneEnvironment'
+import GridFloor from './GridFloor'
+import GlbModel from './GlbModel'
+import ForceShield from '../ForceShield'
+import PostProcessing from './PostProcessing'
+import { Droideka } from './Droideka'
+import type { Preset } from '../overlay/OverlayButtons'
 
-export type SceneMode = "Background" | "Frame";
+export type SceneMode = 'Background' | 'Frame'
 
 interface SceneContentProps {
-  showGrid: boolean;
-  mode: SceneMode;
-  glbUrl: string | null;
-  onModelLoaded?: () => void;
-  preset: Preset;
+  showGrid: boolean
+  mode: SceneMode
+  glbUrl: string | null
+  onModelLoaded?: () => void
+  preset: Preset
 }
 
 export default function SceneContent({ showGrid, mode, glbUrl, onModelLoaded, preset }: SceneContentProps) {
@@ -28,7 +28,7 @@ export default function SceneContent({ showGrid, mode, glbUrl, onModelLoaded, pr
       <SceneLighting preset={preset} />
       <SceneEnvironment mode={mode} />
       {showGrid && <GridFloor mode={mode} />}
-      {preset === "droideka" ? (
+      {preset === 'droideka' ? (
         <>
           <Suspense fallback={null}>
             <group scale={0.28} position={[-0.6, 0, 0.2]}>
@@ -46,5 +46,5 @@ export default function SceneContent({ showGrid, mode, glbUrl, onModelLoaded, pr
       )}
       <PostProcessing />
     </>
-  );
+  )
 }

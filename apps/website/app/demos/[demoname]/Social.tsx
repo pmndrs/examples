@@ -17,7 +17,7 @@ export function Social({
 
   const handleClick = async () => {
     await navigator.clipboard.writeText(
-      `cd $(mktemp -d ${demoname}.XXX) && npx -y degit pmndrs/examples/demos/${demoname} . && npm i && npm run dev`
+      `cd $(mktemp -d ${demoname}.XXX) && npx -y degit pmndrs/examples/demos/${demoname} . && npm i && npm run dev`,
     );
     setCopied(true);
   };

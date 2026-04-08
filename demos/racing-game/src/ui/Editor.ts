@@ -15,15 +15,8 @@ const initialValues = {
 export function Editor() {
   const [get, set, debug, dpr, shadows, stats] = useStore((state) => [state.get, state.set, state.debug, state.dpr, state.shadows, state.stats])
   const { back, force, front, height, maxBrake, maxSpeed, steer, width } = vehicleConfig
-  const {
-    customSlidingRotationalSpeed,
-    frictionSlip,
-    radius,
-    sideAcceleration,
-    suspensionStiffness,
-    suspensionRestLength,
-    useCustomSlidingRotationalSpeed,
-  } = wheelInfo
+  const { customSlidingRotationalSpeed, frictionSlip, radius, sideAcceleration, suspensionStiffness, suspensionRestLength, useCustomSlidingRotationalSpeed } =
+    wheelInfo
 
   const [, setVehicleEditor] = useControls(() => ({
     Performance: folder({

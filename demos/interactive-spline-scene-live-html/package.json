@@ -8,23 +8,23 @@
     "stencil"
   ],
   "dependencies": {
-    "@headlessui/react": "catalog:",
-    "@heroicons/react": "catalog:",
-    "@react-three/drei": "catalog:",
-    "@react-three/fiber": "catalog:",
-    "@splinetool/loader": "catalog:",
-    "@splinetool/r3f-spline": "catalog:",
-    "react": "catalog:",
-    "react-dom": "catalog:",
-    "three": "catalog:"
+    "@headlessui/react": "^1.7.19",
+    "@heroicons/react": "^1.0.6",
+    "@react-three/drei": "^9.109.5",
+    "@react-three/fiber": "^8.17.5",
+    "@splinetool/loader": "^0.9.526",
+    "@splinetool/r3f-spline": "^1.0.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.165.0"
   },
   "devDependencies": {
-    "@types/react": "catalog:",
-    "@types/react-dom": "catalog:",
-    "@types/three": "catalog:",
-    "@vitejs/plugin-react": "catalog:",
-    "typescript": "catalog:",
-    "vite": "catalog:"
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@types/three": "^0.165.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.0"
   },
   "scripts": {
     "dev": "vite --host",
