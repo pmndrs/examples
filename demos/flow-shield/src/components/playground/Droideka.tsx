@@ -10,7 +10,7 @@ Title: Droideka
 
 import { useGLTF } from '@react-three/drei'
 
-const DROIDEKA_URL = `${import.meta.env.BASE_URL.replace(/\/?$/, '/')}droideka.glb`
+const DROIDEKA_URL = `${import.meta.env.BASE_URL.replace(/\/?$/, '/')}droideka-5mb.glb`
 
 export function Droideka() {
   const { nodes, materials } = useGLTF(DROIDEKA_URL)
