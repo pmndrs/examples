@@ -239,49 +239,52 @@ export const fragmentShader = /* glsl */ `
   }
 `
 
-// ── Material factory ──────────────────────────────────────────────────────────
-export function createShieldMaterial(): THREE.ShaderMaterial {
-  const hitPositions = Array.from({ length: MAX_HITS }, () => new THREE.Vector3(0, 1.8, 0))
-  const hitTimes = new Array(MAX_HITS).fill(-999)
+// Each material instance gets its own hit ring buffers.
+function createUniforms() {
+  return {
+    uTime: { value: 0 },
+    uColor: { value: new THREE.Color('#26aeff') },
+    uLife: { value: 1.0 },
+    uHexScale: { value: 3.0 },
+    uEdgeWidth: { value: 0.06 },
+    uFresnelPower: { value: 1.8 },
+    uFresnelStrength: { value: 1.75 },
+    uOpacity: { value: 0.76 },
+    uReveal: { value: 1 },
+    uFlashSpeed: { value: 0.6 },
+    uFlashIntensity: { value: 0.11 },
+    uNoiseScale: { value: 1.3 },
+    uNoiseEdgeColor: { value: new THREE.Color('#26aeff') },
+    uNoiseEdgeWidth: { value: 0.02 },
+    uNoiseEdgeIntensity: { value: 10.0 },
+    uNoiseEdgeSmoothness: { value: 0.5 },
+    uHexOpacity: { value: 0.13 },
+    uShowHex: { value: 1.0 },
+    uFlowScale: { value: 2.4 },
+    uFlowSpeed: { value: 1.13 },
+    uFlowIntensity: { value: 4 },
+    uHitPos: { value: Array.from({ length: MAX_HITS }, () => new THREE.Vector3(0, 1.8, 0)) },
+    uHitTime: { value: new Array(MAX_HITS).fill(-999) },
+    uHitRingSpeed: { value: 1.75 },
+    uHitRingWidth: { value: 0.12 },
+    uHitMaxRadius: { value: 0.85 },
+    uHitDuration: { value: 1.8 },
+    uHitIntensity: { value: 4.1 },
+    uHitImpactRadius: { value: 0.3 },
+    uFadeStart: { value: 0.0 }
+  }
+}
 
-  return new THREE.ShaderMaterial({
-    uniforms: {
-      uTime: { value: 0 },
-      uColor: { value: new THREE.Color('#26aeff') },
-      uLife: { value: 1.0 },
-      uHexScale: { value: 3.0 },
-      uEdgeWidth: { value: 0.06 },
-      uFresnelPower: { value: 1.8 },
-      uFresnelStrength: { value: 1.75 },
-      uOpacity: { value: 0.76 },
-      uReveal: { value: 1 },
-      uFlashSpeed: { value: 0.6 },
-      uFlashIntensity: { value: 0.11 },
-      uNoiseScale: { value: 1.3 },
-      uNoiseEdgeColor: { value: new THREE.Color('#26aeff') },
-      uNoiseEdgeWidth: { value: 0.02 },
-      uNoiseEdgeIntensity: { value: 10.0 },
-      uNoiseEdgeSmoothness: { value: 0.5 },
-      uHexOpacity: { value: 0.13 },
-      uShowHex: { value: 1.0 },
-      uFlowScale: { value: 2.4 },
-      uFlowSpeed: { value: 1.13 },
-      uFlowIntensity: { value: 4 },
-      uHitPos: { value: hitPositions },
-      uHitTime: { value: hitTimes },
-      uHitRingSpeed: { value: 1.75 },
-      uHitRingWidth: { value: 0.12 },
-      uHitMaxRadius: { value: 0.85 },
-      uHitDuration: { value: 1.8 },
-      uHitIntensity: { value: 4.1 },
-      uHitImpactRadius: { value: 0.3 },
-      uFadeStart: { value: 0.0 }
-    },
-    vertexShader,
-    fragmentShader,
-    transparent: true,
-    depthWrite: false,
-    side: THREE.FrontSide,
-    blending: THREE.AdditiveBlending
-  })
+export class ShieldMaterial extends THREE.ShaderMaterial {
+  constructor() {
+    super({
+      uniforms: createUniforms(),
+      vertexShader,
+      fragmentShader,
+      transparent: true,
+      depthWrite: false,
+      side: THREE.FrontSide,
+      blending: THREE.AdditiveBlending
+    })
+  }
 }

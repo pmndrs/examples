@@ -1,13 +1,15 @@
 'use client'
 
-import { useRef, useMemo, useEffect, useCallback } from 'react'
-import { useFrame } from '@react-three/fiber'
+import { useRef, useEffect, useCallback } from 'react'
+import { extend, useFrame } from '@react-three/fiber'
 import type { ThreeEvent } from '@react-three/fiber'
 import * as THREE from 'three'
 import type { Preset } from '../overlay/OverlayButtons'
 import { MAX_HITS, SHIELD_PRESETS } from './consts'
 import { useShieldControls } from './useShieldControls'
-import { createShieldMaterial } from './shaderMaterial'
+import { ShieldMaterial } from './shaderMaterial'
+
+extend({ ShieldMaterial })
 
 interface ShieldProps {
   isActive?: boolean
@@ -16,7 +18,7 @@ interface ShieldProps {
 }
 
 function Shield({ isActive = false, posYOverride, preset }: ShieldProps) {
-  const materialRef = useRef<THREE.ShaderMaterial>(null!)
+  const materialRef = useRef<ShieldMaterial>(null!)
   const groupRef = useRef<THREE.Group>(null!)
   const revealRef = useRef(1)
   const timeRef = useRef(0)
@@ -71,13 +73,6 @@ function Shield({ isActive = false, posYOverride, preset }: ShieldProps) {
   useEffect(() => {
     if (preset) setShield(SHIELD_PRESETS[preset])
   }, [preset])
-
-  // ── Shader material ───────────────────────────────────────────────────────
-  const shieldMaterial = useMemo(() => createShieldMaterial(), [])
-
-  if (shieldMaterial && materialRef.current !== shieldMaterial) {
-    materialRef.current = shieldMaterial
-  }
 
   // ── Sync Leva → uniforms ──────────────────────────────────────────────────
   useEffect(() => {
@@ -180,7 +175,7 @@ function Shield({ isActive = false, posYOverride, preset }: ShieldProps) {
     <group ref={groupRef} position={[posX, posYOverride ?? posY, posZ]} scale={[scale, scale, scale]}>
       <mesh onClick={handleClick}>
         <sphereGeometry args={[1.8, 64, 64]} />
-        <primitive object={shieldMaterial} attach="material" />
+        <shieldMaterial ref={materialRef} />
       </mesh>
     </group>
   )
