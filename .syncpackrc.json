@@ -1,11 +1,27 @@
 {
   "versionGroups": [
     {
+      "label": "React is pinned for all demos",
+      "packages": ["@demo/**"],
+      "dependencies": ["react", "react-dom"],
+      "pinVersion": "^18.3.1"
+    },
+    {
+      "label": "React types are pinned for all demos",
+      "packages": ["@demo/**"],
+      "dependencies": ["@types/react"],
+      "pinVersion": "^18.3.3"
+    },
+    {
+      "label": "React DOM types are pinned for all demos",
+      "packages": ["@demo/**"],
+      "dependencies": ["@types/react-dom"],
+      "pinVersion": "^18.3.0"
+    },
+    {
       "label": "Demos must use identical versions of shared dependencies",
       "packages": ["@demo/**"],
       "dependencies": [
-        "react",
-        "react-dom",
         "three",
         "@react-three/fiber",
         "@react-three/drei",
@@ -40,8 +56,6 @@
         "lodash-es",
         "@babel/runtime",
         "babel-plugin-glsl",
-        "@types/react",
-        "@types/react-dom",
         "@types/three",
         "@vitejs/plugin-react",
         "typescript",
