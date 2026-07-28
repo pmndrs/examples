@@ -1,10 +1,11 @@
-managePackageManagerVersions: true
+pmOnFail: download
+shamefullyHoist: true
 
 packages:
   - apps/*
   - demos/*
   - packages/*
 
-onlyBuiltDependencies:
-  - esbuild
-  - unrs-resolver
+allowBuilds:
+  esbuild: true
+  unrs-resolver: true
