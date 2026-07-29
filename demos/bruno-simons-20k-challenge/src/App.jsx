@@ -12,8 +12,8 @@ export const App = () => (
   <Canvas flat shadows gl={{ antialias: false }} camera={{ position: [-30, 35, -15], near: 30, far: 55, fov: 12 }}>
     {/* Lighting, environment and colors */}
     <color attach="background" args={['#f0f0f0']} />
-    <ambientLight intensity={0.5} />
-    <directionalLight position={[-10, 10, 5]} shadow-mapSize={[256, 256]} shadow-bias={-0.0001} castShadow>
+    <ambientLight intensity={0.5 * Math.PI} />
+    <directionalLight position={[-10, 10, 5]} intensity={Math.PI} shadow-mapSize={[256, 256]} shadow-bias={-0.0001} castShadow>
       <orthographicCamera attach="shadow-camera" args={[-10, 10, -10, 10]} />
     </directionalLight>
     <Environment resolution={32}>

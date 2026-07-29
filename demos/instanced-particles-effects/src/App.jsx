@@ -10,9 +10,9 @@ import cubicleTex from './cubicle.CUBE?url'
 
 export const App = () => (
   <Canvas linear flat legacy dpr={1} camera={{ fov: 100, position: [0, 0, 30] }}>
-    <ambientLight intensity={0.01} />
-    <pointLight distance={60} intensity={4} color="lightblue" />
-    <spotLight intensity={1.5} position={[0, 0, 2000]} penumbra={1} color="red" />
+    <ambientLight intensity={0.01 * Math.PI} />
+    <pointLight distance={60} intensity={4 * Math.PI} decay={0} color="lightblue" />
+    <spotLight intensity={1.5 * Math.PI} decay={0} position={[0, 0, 2000]} penumbra={1} color="red" />
     <mesh>
       <planeGeometry args={[1000, 1000]} />
       <meshStandardMaterial color="#00ffff" roughness={0.5} depthTest={false} />
@@ -62,7 +62,7 @@ function Swarm({ count, dummy = new THREE.Object3D() }) {
   })
   return (
     <>
-      <pointLight ref={light} distance={40} intensity={8} color="lightblue">
+      <pointLight ref={light} distance={40} intensity={8 * Math.PI} decay={0} color="lightblue">
         <mesh scale={[1, 1, 6]}>
           <dodecahedronGeometry args={[4, 0]} />
         </mesh>

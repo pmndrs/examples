@@ -68,7 +68,8 @@ export default function App() {
           angle={1}
           castShadow
           position={[10, 60, -5]}
-          intensity={8}
+          intensity={8 * Math.PI}
+          decay={0}
           shadow-mapSize={[512, 512]}
         />
         <Suspense fallback={null}>
@@ -85,8 +86,8 @@ export default function App() {
               <shadowMaterial transparent color="#251005" opacity={0.25} />
             </mesh>
           </group>
-          <hemisphereLight intensity={0.2} />
-          <ambientLight intensity={0.5} />
+          <hemisphereLight intensity={0.2 * Math.PI} />
+          <ambientLight intensity={0.5 * Math.PI} />
           <Environment preset="warehouse" />
           <Zoom />
           <Text

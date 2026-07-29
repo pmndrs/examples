@@ -8,8 +8,8 @@ const inter = import('@pmndrs/assets/fonts/inter_regular.woff')
 export default function App() {
   return (
     <Canvas camera={{ position: [5, 5, 5], fov: 25 }}>
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[10, 10, 5]} />
+      <ambientLight intensity={0.5 * Math.PI} />
+      <directionalLight position={[10, 10, 5]} intensity={Math.PI} />
       <Cube />
       <Dodecahedron position={[0, 1, 0]} scale={0.2} />
       <ContactShadows frames={1} position={[0, -0.5, 0]} blur={1} opacity={0.75} />
@@ -29,8 +29,8 @@ function Cube() {
         <RenderTexture attach="map" anisotropy={16}>
           <PerspectiveCamera makeDefault manual aspect={1 / 1} position={[0, 0, 5]} />
           <color attach="background" args={['orange']} />
-          <ambientLight intensity={0.5} />
-          <directionalLight position={[10, 10, 5]} />
+          <ambientLight intensity={0.5 * Math.PI} />
+          <directionalLight position={[10, 10, 5]} intensity={Math.PI} />
           <Text font={suspend(inter).default} ref={textRef} fontSize={4} color="#555">
             hello
           </Text>

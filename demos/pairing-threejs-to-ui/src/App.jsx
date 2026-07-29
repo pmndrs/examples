@@ -22,8 +22,8 @@ export default function App() {
         <status.Out />
       </header>
       <Canvas camera={{ position: [-10, 10, 40], fov: 50 }}>
-        <hemisphereLight color="white" groundColor="blue" intensity={0.75} />
-        <spotLight position={[50, 50, 10]} angle={0.15} penumbra={1} />
+        <hemisphereLight color="white" groundColor="blue" intensity={0.75 * Math.PI} />
+        <spotLight position={[50, 50, 10]} intensity={Math.PI} decay={0} angle={0.15} penumbra={1} />
         <group position={[0, -10, 0]}>
           <Suspense fallback={<status.In>Loading ...</status.In>}>
             <Model position={[0, 0.25, 0]} url={MODELS[model]} />

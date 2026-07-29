@@ -13,8 +13,8 @@ function Rig() {
 export default function App() {
   return (
     <Canvas shadows camera={{ position: [1, 1.5, 2.5], fov: 50 }}>
-      <ambientLight />
-      <directionalLight position={[-5, 5, 5]} castShadow shadow-mapSize-width={1024} shadow-mapSize-height={1024} />
+      <ambientLight intensity={Math.PI} />
+      <directionalLight position={[-5, 5, 5]} intensity={Math.PI} castShadow shadow-mapSize-width={1024} shadow-mapSize-height={1024} />
       <group position={[0, -1, 0]}>
         <Suspense fallback={null}>
           <Model pose={4} position={[0, 0, 0]} />

@@ -33,9 +33,9 @@ function Content() {
 
 createRoot(document.getElementById("root")).render(
   <Canvas camera={{ position: [0, 0, 7.5] }}>
-    <pointLight color="indianred" />
-    <pointLight position={[10, 10, -10]} color="orange" />
-    <pointLight position={[-10, -10, 10]} color="lightblue" />
+    <pointLight color="indianred" intensity={Math.PI} decay={0} />
+    <pointLight position={[10, 10, -10]} color="orange" intensity={Math.PI} decay={0} />
+    <pointLight position={[-10, -10, 10]} color="lightblue" intensity={Math.PI} decay={0} />
     <Content />
   </Canvas>
 )

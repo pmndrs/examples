@@ -10,8 +10,8 @@ export default function App() {
     <Canvas dpr={[1, 2]} shadows camera={{ position: [-40, 40, 40], fov: 25, near: 1, far: 100 }}>
       <color attach="background" args={['#171720']} />
       <fog attach="fog" args={['#171720', 60, 90]} />
-      <ambientLight intensity={0.2} />
-      <pointLight position={[-20, -5, -20]} color="red" />
+      <ambientLight intensity={0.2 * Math.PI} />
+      <pointLight position={[-20, -5, -20]} color="red" intensity={Math.PI} decay={0} />
       <Physics allowSleep={false} iterations={15} gravity={[0, -200, 0]}>
         <Cursor />
         <Guy rotation={[-Math.PI / 3, 0, 0]} />

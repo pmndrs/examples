@@ -66,8 +66,8 @@ export default function App() {
     <Canvas dpr={[1, 1.5]} shadows camera={{ position: [-15, 15, 18], fov: 35 }} gl={{ alpha: false }}>
       <fog attach="fog" args={['#17171b', 30, 40]} />
       <color attach="background" args={['#17171b']} />
-      <ambientLight intensity={0.25} />
-      <directionalLight castShadow intensity={2} position={[10, 6, 6]} shadow-mapSize={[1024, 1024]}>
+      <ambientLight intensity={0.25 * Math.PI} />
+      <directionalLight castShadow intensity={2 * Math.PI} position={[10, 6, 6]} shadow-mapSize={[1024, 1024]}>
         <orthographicCamera attach="shadow-camera" left={-20} right={20} top={20} bottom={-20} />
       </directionalLight>
       <Suspense fallback={null}>

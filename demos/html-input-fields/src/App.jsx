@@ -13,9 +13,9 @@ export default function App() {
     // offset would reset xy to 0 when hovering the html overlay
     <Canvas eventPrefix="client" shadows camera={{ position: [1, 0.5, 10] }}>
       <color attach="background" args={['#f0f0f']} />
-      <ambientLight intensity={1} />
-      <spotLight position={[10, 10, 10]} angle={0.5} penumbra={1} castShadow />
-      <pointLight position={[-10, 0, -10]} intensity={2} />
+      <ambientLight intensity={Math.PI} />
+      <spotLight position={[10, 10, 10]} intensity={Math.PI} decay={0} angle={0.5} penumbra={1} castShadow />
+      <pointLight position={[-10, 0, -10]} intensity={2 * Math.PI} decay={0} />
       <Input scale={2} position={[0.4, 0.25, -1]} />
       <group position={[0, -1, -2]}>
         <Center top rotation={[0, -Math.PI / 1.5, 0]} position={[0, 0, 3]}>
@@ -29,7 +29,7 @@ export default function App() {
           <meshStandardMaterial color="#aaa" toneMapped={false} />
         </Text>
         <AccumulativeShadows temporal frames={100} alphaTest={0.8} opacity={0.75} scale={12}>
-          <RandomizedLight amount={8} radius={4} ambient={0.5} intensity={1} position={[2.5, 5, -10]} />
+          <RandomizedLight amount={8} radius={4} ambient={0.5} intensity={Math.PI} position={[2.5, 5, -10]} />
         </AccumulativeShadows>
       </group>
       <Environment preset="city" />

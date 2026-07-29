@@ -10,8 +10,8 @@ export function App() {
   const [degraded, degrade] = useState(false)
   return (
     <Canvas shadows camera={{ position: [5, 0, 15], fov: 30 }}>
-      <spotLight position={[0, 15, 0]} angle={0.3} penumbra={1} castShadow intensity={2} shadow-bias={-0.0001} />
-      <ambientLight intensity={0.5} />
+      <spotLight position={[0, 15, 0]} angle={0.3} penumbra={1} castShadow intensity={2 * Math.PI} decay={0} shadow-bias={-0.0001} />
+      <ambientLight intensity={0.5 * Math.PI} />
       <Porsche scale={1.6} position={[-0.5, -0.18, 0]} rotation={[0, Math.PI / 5, 0]} />
       <AccumulativeShadows position={[0, -1.16, 0]} frames={100} alphaTest={0.9} scale={10}>
         <RandomizedLight amount={8} radius={10} ambient={0.5} position={[1, 5, -1]} />

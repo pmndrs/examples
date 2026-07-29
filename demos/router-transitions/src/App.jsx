@@ -14,7 +14,7 @@ export const App = () => (
   <>
     <Canvas eventSource={document.getElementById("root")} eventPrefix="client" shadows camera={{ position: [0, 0, 20], fov: 50 }}>
       <color attach="background" args={["#e0e0e0"]} />
-      <spotLight position={[20, 20, 10]} penumbra={1} castShadow angle={0.2} />
+      <spotLight position={[20, 20, 10]} intensity={Math.PI} decay={0} penumbra={1} castShadow angle={0.2} />
       <Status position={[0, 0, -10]} />
       <Float floatIntensity={2}>
         <Route path="/">

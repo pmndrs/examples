@@ -20,9 +20,9 @@ export default function App() {
           <VideoText position={[0, 1.3, -2]} />
           <Ground />
         </group>
-        <ambientLight intensity={0.5} />
-        <spotLight position={[0, 10, 0]} intensity={0.3} />
-        <directionalLight position={[-50, 0, -40]} intensity={0.7} />
+        <ambientLight intensity={0.5 * Math.PI} />
+        <spotLight position={[0, 10, 0]} intensity={0.3 * Math.PI} decay={0} />
+        <directionalLight position={[-50, 0, -40]} intensity={0.7 * Math.PI} />
         <Intro />
       </Suspense>
     </Canvas>

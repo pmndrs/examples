@@ -68,10 +68,10 @@ export default function App() {
     <Canvas camera={{ position: [0, 0, 15], near: 5, far: 40 }}>
       <color attach="background" args={['white']} />
       <a.fog attach="fog" args={['white', 10, 40]} color={color.to([0, 0.2, 0.4, 0.7, 1], ['white', 'red', 'white', 'red', 'white'])} />
-      <ambientLight intensity={0.8} />
-      <directionalLight castShadow position={[2.5, 12, 12]} intensity={4} />
-      <pointLight position={[20, 20, 20]} />
-      <pointLight position={[-20, -20, -20]} intensity={5} />
+      <ambientLight intensity={0.8 * Math.PI} />
+      <directionalLight castShadow position={[2.5, 12, 12]} intensity={4 * Math.PI} />
+      <pointLight position={[20, 20, 20]} intensity={Math.PI} decay={0} />
+      <pointLight position={[-20, -20, -20]} intensity={5 * Math.PI} decay={0} />
       <Suspense fallback={null}>
         <Geometries />
         <ContactShadows position={[0, -7, 0]} opacity={0.75} scale={40} blur={1} far={9} />

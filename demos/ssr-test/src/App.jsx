@@ -9,8 +9,8 @@ import dreiVid from './drei_r.mp4?url'
 export const App = () => (
   <Canvas shadows gl={{ logarithmicDepthBuffer: true, antialias: false, stencil: false, depth: false }} camera={{ position: [250, 225, 250], fov: 15 }}>
     <color attach="background" args={['#151520']} />
-    <hemisphereLight intensity={0.5} />
-    <directionalLight position={[0, 2, 5]} castShadow intensity={1} />
+    <hemisphereLight intensity={0.5 * Math.PI} />
+    <directionalLight position={[0, 2, 5]} castShadow intensity={Math.PI} />
     <group position={[2, -2, 0]}>
       <group position={[0, -0.9, -3]}>
         <Plane color="black" rotation-x={-Math.PI / 2} position-z={3} scale={[4, 20, 0.2]} />

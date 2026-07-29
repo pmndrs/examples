@@ -179,9 +179,9 @@ export default function App() {
   return (
     <div onClick={start}>
       <Canvas shadows gl={{ antialias: false, alpha: false }} dpr={0.25} camera={{ position: [0, 5, 12], fov: 50 }}>
-        <ambientLight intensity={0.3} />
-        <directionalLight castShadow position={[10, 10, 5]} />
-        <pointLight position={[-10, -10, -10]} />
+        <ambientLight intensity={0.3 * Math.PI} />
+        <directionalLight castShadow position={[10, 10, 5]} intensity={Math.PI} />
+        <pointLight position={[-10, -10, -10]} intensity={Math.PI} decay={0} />
         {!startup && (
           <Physics defaultContactMaterial={{ restitution: 1.07, contactEquationRelaxation: 10 }} gravity={[0, -30, 0]}>
             <Walls />

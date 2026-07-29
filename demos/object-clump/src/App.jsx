@@ -14,9 +14,9 @@ const baubleMaterial = new THREE.MeshStandardMaterial({ color: "white", roughnes
 
 export const App = () => (
   <Canvas shadows gl={{ antialias: false }} dpr={[1, 1.5]} camera={{ position: [0, 0, 20], fov: 35, near: 1, far: 40 }}>
-    <ambientLight intensity={0.5} />
+    <ambientLight intensity={0.5 * Math.PI} />
     <color attach="background" args={["#dfdfdf"]} />
-    <spotLight intensity={1} angle={0.2} penumbra={1} position={[30, 30, 30]} castShadow shadow-mapSize={[512, 512]} />
+    <spotLight intensity={Math.PI} decay={0} angle={0.2} penumbra={1} position={[30, 30, 30]} castShadow shadow-mapSize={[512, 512]} />
     <Physics gravity={[0, 2, 0]} iterations={10}>
       <Pointer />
       <Clump />

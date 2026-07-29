@@ -10,11 +10,11 @@ export default function App() {
   return (
     <Canvas frameloop="demand" dpr={[1, 1.5]} shadows camera={{ near: 0.1, far: 40, fov: 75 }}>
       <fog attach="fog" args={['purple', 0, 130]} />
-      <ambientLight intensity={0.1} />
+      <ambientLight intensity={0.1 * Math.PI} />
       <group position={[0, -1, 0]}>
-        <spotLight castShadow intensity={10} angle={0.1} position={[-200, 220, -100]} shadow-mapSize={[2048, 2048]} shadow-bias={-0.000001} />
-        <spotLight angle={0.1} position={[-250, 120, -200]} intensity={1} castShadow shadow-mapSize={[50, 50]} shadow-bias={-0.000001} />
-        <spotLight angle={0.1} position={[250, 120, 200]} intensity={1} castShadow shadow-mapSize={[50, 50]} shadow-bias={-0.000001} />
+        <spotLight castShadow intensity={10 * Math.PI} decay={0} angle={0.1} position={[-200, 220, -100]} shadow-mapSize={[2048, 2048]} shadow-bias={-0.000001} />
+        <spotLight angle={0.1} position={[-250, 120, -200]} intensity={Math.PI} decay={0} castShadow shadow-mapSize={[50, 50]} shadow-bias={-0.000001} />
+        <spotLight angle={0.1} position={[250, 120, 200]} intensity={Math.PI} decay={0} castShadow shadow-mapSize={[50, 50]} shadow-bias={-0.000001} />
         <Court />
         <Floor />
       </group>

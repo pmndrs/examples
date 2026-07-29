@@ -69,7 +69,7 @@ function Marker({ children, ...props }) {
 export default function Viewer() {
   return (
     <Canvas camera={{ position: [5, 0, 0], fov: 50 }}>
-      <ambientLight intensity={0.5} />
+      <ambientLight intensity={0.5 * Math.PI} />
       <Model position={[0, 0.25, 0]} />
       <Environment preset="city" />
       <ContactShadows frames={1} scale={5} position={[0, -1, 0]} far={1} blur={5} opacity={0.5} color="#204080" />

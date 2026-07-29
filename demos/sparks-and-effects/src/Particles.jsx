@@ -54,7 +54,7 @@ export default function Particles({ count, mouse }) {
   })
   return (
     <>
-      <pointLight ref={light} distance={40} intensity={8} color="lightblue" />
+      <pointLight ref={light} distance={40} intensity={8 * Math.PI} decay={0} color="lightblue" />
       <instancedMesh ref={mesh} args={[null, null, count]}>
         <dodecahedronGeometry args={[0.2, 0]} />
         <meshPhongMaterial color="#050505" />

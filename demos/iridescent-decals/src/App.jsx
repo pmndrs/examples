@@ -8,8 +8,8 @@ import sticker4 from './three.png'
 
 export const App = () => (
   <Canvas shadows camera={{ position: [2, 2, 10], fov: 20 }}>
-    <ambientLight intensity={1} />
-    <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+    <ambientLight intensity={Math.PI} />
+    <spotLight position={[10, 10, 10]} intensity={Math.PI} decay={0} angle={0.15} penumbra={1} />
     <group position={[0.25, -1, 0]}>
       <Bun />
       <AccumulativeShadows temporal frames={100} scale={12} alphaTest={0.85} position={[0, 0.04, 0]}>

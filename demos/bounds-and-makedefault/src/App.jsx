@@ -7,8 +7,8 @@ import model from './compressed.glb?url'
 export default function App() {
   return (
     <Canvas camera={{ position: [0, -10, 80], fov: 50 }} dpr={[1, 2]}>
-      <spotLight position={[-100, -100, -100]} intensity={0.2} angle={0.3} penumbra={1} />
-      <hemisphereLight color="white" groundColor="#ff0f00" position={[-7, 25, 13]} intensity={1} />
+      <spotLight position={[-100, -100, -100]} intensity={0.2 * Math.PI} decay={0} angle={0.3} penumbra={1} />
+      <hemisphereLight color="white" groundColor="#ff0f00" position={[-7, 25, 13]} intensity={Math.PI} />
       <Suspense fallback={null}>
         <Bounds fit clip observe margin={1.2}>
           <SelectToZoom>

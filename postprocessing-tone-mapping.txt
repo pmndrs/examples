@@ -1,0 +1,113 @@
+arkanoid
+  - Legacy EffectComposer passes use attachArray="passes" and are not registered by the current React Three Fiber version.
+  - Rebuild the pass chain with the current API and add OutputPass last.
+  - Render the HUD after the composer without rendering the main scene over the composite.
+  - Compare with the thumbnail before making any exposure adjustment.
+bestservedbold-christmas-baubles
+  - EffectComposer disables renderer tone mapping, but the chain has no ToneMapping effect.
+  - Add explicit ACES filmic tone mapping after N8AO and compare with the thumbnail.
+bloom-hdr-workflow-gltf
+  - Drei Effects uses the legacy disableGamma pipeline and has no current output/tone-mapping pass.
+  - Add an OutputPass after bloom, then retune bloom only if the thumbnail still differs.
+bruno-simons-20k-challenge
+  - The DepthOfField effect is not working correctly, so the intended focus and blur are visually incorrect.
+  - Repair or reconfigure the depth-of-field pass, then compare with the thumbnail.
+building-dynamic-envmaps
+  - EffectComposer disables renderer tone mapping, but the SSR/Bloom/LUT chain has no ToneMapping effect.
+  - The current SSR shader also fails to compile against the installed Three/postprocessing combination (CUBEUV_MAX_MIP becomes NaN).
+  - Repair or replace the SSR pass, add explicit ACES filmic tone mapping last, and compare with the thumbnail.
+color-grading
+  - Drei Effects uses the legacy gamma pass before the LUT, with no current tone-mapping/output pass.
+  - Rebuild the order as scene effects, LUT color grading, then explicit tone mapping and output conversion.
+dbismut-furniture
+  - Models render into offscreen targets, where renderer tone mapping is no longer applied.
+  - The custom cross-fade shader copies those linear targets directly to screen without tone mapping or output-color conversion.
+  - Add the output transform after cross-fading, then compare each furniture state with the thumbnail.
+diamond-ring
+  - EffectComposer disables renderer tone mapping, but the Bloom chain has no explicit ToneMapping effect.
+  - Add ACES filmic tone mapping after Bloom and compare with the thumbnail.
+flexbox-yoga-in-webgl
+  - The legacy manual composer ends with GammaCorrectionShader rather than the current tone-mapping/output pipeline.
+  - Rebuild the pass registration, add tone mapping and OutputPass at the end, and replace the removed PlaneBufferGeometry used by WaterPass.
+floating-diamonds
+  - The DepthOfField effect no longer reproduces the intended focus plane and near/far blur with the current react-postprocessing/postprocessing stack.
+  - Reconfigure the legacy target and focal-length settings for the current depth-of-field API, verify depth handling for the instanced refractive diamonds, and compare with the thumbnail.
+  - Add explicit tone mapping after Bloom and DepthOfField because EffectComposer bypasses the renderer's screen tone mapping.
+flying-bananas
+  - The duller colors are caused by the postprocessing tone-mapping pipeline rather than lighting; the solid background is also affected even though lights cannot change it.
+  - ToneMapping does not specify a mode, so the current AgX default compresses and desaturates the saturated orange and yellow colors.
+  - Select the original tone-mapping mode explicitly, likely ACES filmic, and compare with the thumbnail before adjusting exposure.
+glass-flower
+  - This demo was missed by the old-lighting migration: its ambient, spot, and point lights still use legacy intensity values, and the positional lights now use physical distance decay.
+  - The weaker, differently attenuated lighting changes the transmission and iridescent reflections, then reduces the highlights that feed Bloom, making the whole flower diverge from the thumbnail.
+  - The composer already ends with explicit ACES filmic tone mapping, so restore the legacy lighting response first (pi-scaled intensities and decay={0} on the spot and point lights) before changing the LUT or postprocessing settings.
+gltf-animations-tied-to-scroll
+  - EffectComposer disables renderer tone mapping, but the TiltShift chain has no explicit ToneMapping effect.
+  - Add ACES filmic tone mapping last and compare with the thumbnail.
+hi-key-bubbles
+  - EffectComposer disables renderer tone mapping, but the N8AO/TiltShift chain has no explicit ToneMapping effect.
+  - Add ACES filmic tone mapping last and compare with the thumbnail.
+html-markers
+  - This demo has no postprocessing composer, but Three injects the renderer's ACES filmic tone mapping into its tone-mapped material shaders when rendering directly to screen; the original Fiber 8 renderer selected the same mode.
+  - Three r155 made inline material tone mapping screen-only, but that does not remove it here because this scene still renders directly to the screen.
+  - The globe's reduced saturation is more likely caused by the Three r143-to-r165 color-management and physical-lighting changes, including the recent ambient-light conversion, which alter the linear brightness reaching ACES and can push the colors further into its desaturating highlight shoulder.
+  - The HTML/CSS marker colors bypass WebGL tone mapping. If they still match the thumbnail while only the globe is dull, compare ambient/environment intensity and renderer exposure before changing the tone-mapping mode; if the markers are also dull, the cause is outside the Three.js render pipeline.
+instanced-particles-effects
+  - Drei Effects explicitly disables its legacy gamma pass and ends after the LUT.
+  - Rebuild the manual pass chain with explicit tone mapping and output conversion after the LUT.
+instanced-vertex-colors
+  - This cannot be a spotlight issue: the scene has no lights and the cubes use an unlit meshBasicMaterial with toneMapped={false}.
+  - The brightness mismatch is in the postprocessing/output-color path. The thumbnail likely reflects the legacy pre-r155 behavior where the material output conversion was also applied while rendering into the composer's offscreen buffer, after which the composer encoded the result again and produced a brighter, double-converted look.
+  - The current N8AO/Bloom chain works in linear color and applies the display conversion only at the final output, so it is darker but more colorimetrically correct.
+  - To match the thumbnail, reproduce the legacy brightness deliberately with exposure or a brightness adjustment before final output and retune Bloom; adding a light or an ACES pass would not restore the unlit reference look.
+lusion-connectors
+  - EffectComposer disables renderer tone mapping, but the N8AO chain has no explicit ToneMapping effect.
+  - Add ACES filmic tone mapping last and compare with the thumbnail.
+motionpathcontrols
+  - EffectComposer disables renderer tone mapping, but the color and TiltShift effects have no explicit ToneMapping effect.
+  - Add ACES filmic tone mapping last and compare with the thumbnail.
+mount-transitions
+  - EffectComposer disables renderer tone mapping, but the N8AO chain has no explicit ToneMapping effect.
+  - Add ACES filmic tone mapping last after replacing the demo's removed BufferGeometry aliases.
+nextjs-prism
+  - EffectComposer disables renderer tone mapping, but the Bloom/LUT chain has no explicit ToneMapping effect.
+  - Add ACES filmic tone mapping after the LUT and compare with the thumbnail.
+object-clump
+  - EffectComposer disables renderer tone mapping, but the N8AO/SMAA chain has no explicit ToneMapping effect.
+  - Add ACES filmic tone mapping before the final antialiasing/output stage.
+react-pp-outlines
+  - EffectComposer disables renderer tone mapping, but the SSAO/Outline chain has no explicit ToneMapping effect.
+  - Repair the missing NormalPass configuration, then add ACES filmic tone mapping before the final antialiasing/output stage.
+router-transitions
+  - EffectComposer disables renderer tone mapping, but the N8AO/TiltShift chain has no explicit ToneMapping effect.
+  - Repair the current runtime compatibility error, then add ACES filmic tone mapping last.
+selective-outlines
+  - EffectComposer disables renderer tone mapping, but the Outline chain has no explicit ToneMapping effect.
+  - Add ACES filmic tone mapping before the final output stage.
+shopping
+  - The composer already ends with ToneMapping, but its mode is implicit: postprocessing 6.33 defaulted this effect to ACES filmic, while 6.34 and later default to AgX.
+  - The current 6.39 stack therefore uses AgX, whose stronger highlight and saturation compression makes the bright white kitchen and colored accents look flatter than an older ACES-based thumbnail.
+  - The scene's lighting setup has not changed, so first pin ToneMappingMode.ACES_FILMIC and compare with the thumbnail; only then isolate N8AO and TiltShift2 if the shadows or blur still differ.
+space-game
+  - The renderer is explicitly set to NoToneMapping and the legacy Drei Effects composer disables its gamma pass.
+  - Rebuild the Bloom chain with explicit ACES filmic tone mapping and output conversion.
+sparks-and-effects
+  - The renderer assigns the removed Uncharted2ToneMapping constant and the legacy manual composer has no current output pass.
+  - Replace the obsolete setting, rebuild pass registration, and finish with explicit tone mapping and OutputPass.
+ssgi-spheres-with-rapier-physics
+  - The final ToneMappingEffect leaves its mode implicit: the original postprocessing 6.32.2 stack defaulted it to ACES filmic, while the currently resolved 6.39 stack defaults to AgX.
+  - AgX compresses the saturated accent colors and intense Lightformer reflections differently, which also changes the apparent bloom and produces the global color mismatch with the thumbnail.
+  - Pin ToneMappingMode.ACES_FILMIC first; if a mismatch remains, isolate Bloom and the bundled legacy SSGI implementation, which was authored against Three 0.158 and postprocessing 6.32.2.
+ssr-test
+  - EffectComposer disables renderer tone mapping, but the SSR chain has no explicit ToneMapping effect.
+  - Repair the current media/runtime compatibility failure, add ACES filmic tone mapping last, and compare with the thumbnail.
+starwars
+  - EffectComposer disables renderer tone mapping, but the SSR/Bloom/LUT chain has no explicit ToneMapping effect.
+  - Repair the SSR shader incompatibility, then add ACES filmic tone mapping after the LUT.
+volumetric-light-godray
+  - EffectComposer disables renderer tone mapping, but the GodRays/Bloom chain has no explicit ToneMapping effect.
+  - Repair the current media/runtime compatibility failure, then add ACES filmic tone mapping last.
+zustand-site
+  - The DepthOfField settings use the old normalized API: target={[0, 0, 30]}, focalLength={0.1}, and bokehScale={8} were tuned before postprocessing changed focus distance and range to world units.
+  - In the current 6.39 stack, the target is about 170 world units from the orthographic camera and the deprecated focalLength prop becomes a focusRange of only 0.1 world units, producing an excessively narrow and incorrect blur band.
+  - Reconfigure the layered scene with explicit world-unit focusDistance and focusRange values, then retune bokehScale against the thumbnail.

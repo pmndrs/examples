@@ -22,8 +22,8 @@ export function App() {
   const Curve = CURVES[path]
   return (
     <Canvas camera={{ position: [10, 15, -10], fov: 45 }}>
-      <ambientLight />
-      <pointLight position={[10, 10, 10]} />
+      <ambientLight intensity={Math.PI} />
+      <pointLight position={[10, 10, 10]} intensity={Math.PI} decay={0} />
       {!attachCamera && <OrbitControls />}
       <MotionPathControls object={attachCamera ? null : motionRef} focus={poi} debug={debug} damping={0.2} focusDamping={0.15}>
         <Curve />

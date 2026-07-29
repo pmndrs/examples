@@ -54,11 +54,11 @@ function Stage() {
   return (
     <>
       {/* Fill */}
-      <ambientLight intensity={0.5} />
+      <ambientLight intensity={0.5 * Math.PI} />
       {/* Main */}
       <directionalLight
         position={[1, 10, -2]}
-        intensity={1}
+        intensity={Math.PI}
         shadow-camera-far={70}
         shadow-camera-left={-10}
         shadow-camera-right={10}
@@ -68,7 +68,7 @@ function Stage() {
         castShadow
       />
       {/* Strip */}
-      <directionalLight position={[-10, -10, 2]} intensity={3} />
+      <directionalLight position={[-10, -10, 2]} intensity={3 * Math.PI} />
       {/* Ground */}
       <mesh receiveShadow rotation-x={-Math.PI / 2} position={[0, -0.75, 0]}>
         <planeGeometry args={[20, 20]} />

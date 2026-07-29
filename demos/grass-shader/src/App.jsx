@@ -7,8 +7,8 @@ export default function App() {
   return (
     <Canvas camera={{ position: [15, 15, 10] }}>
       <Sky azimuth={1} inclination={0.6} distance={1000} />
-      <ambientLight />
-      <pointLight position={[10, 10, 10]} />
+      <ambientLight intensity={Math.PI} />
+      <pointLight position={[10, 10, 10]} intensity={Math.PI} decay={0} />
       <Suspense fallback={null}>
         <Grass />
       </Suspense>

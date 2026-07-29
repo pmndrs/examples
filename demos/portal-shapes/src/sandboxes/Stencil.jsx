@@ -6,8 +6,8 @@ import reactModel from './react-transformed.glb?url'
 export default function App(props) {
   return (
     <group {...props}>
-      <directionalLight position={[1, 2, 1.5]} intensity={0.5} castShadow />
-      <hemisphereLight intensity={1.5} groundColor="red" />
+      <directionalLight position={[1, 2, 1.5]} intensity={0.5 * Math.PI} castShadow />
+      <hemisphereLight intensity={1.5 * Math.PI} groundColor="red" />
       <Suspense fallback={null}>
         <PivotControls scale={1.5} rotation={[0, 0, Math.PI]} offset={[0, 0, 1]} activeAxes={[true, true, false]} disableRotations depthTest={false}>
           <Frame position={[0, 0, 1]} />

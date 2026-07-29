@@ -72,8 +72,8 @@ function Boxes({ length = 100000, size = [0.15, 0.15, 0.15], ...props }) {
 export function App() {
   return (
     <Canvas camera={{ position: [0, 0, 0.01] }}>
-      <ambientLight intensity={0.85} />
-      <directionalLight position={[150, 150, 150]} intensity={1} />
+      <ambientLight intensity={0.85 * Math.PI} />
+      <directionalLight position={[150, 150, 150]} intensity={Math.PI} />
       <Boxes />
       <CameraControls />
     </Canvas>

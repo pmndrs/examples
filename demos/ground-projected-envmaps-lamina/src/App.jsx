@@ -5,7 +5,7 @@ import { LayerMaterial, Depth } from 'lamina'
 
 export const App = () => (
   <Canvas camera={{ position: [0, 0, 12], fov: 30 }}>
-    <hemisphereLight intensity={0.5} color="white" groundColor="black" />
+    <hemisphereLight intensity={0.5 * Math.PI} color="white" groundColor="black" />
     <Environment
       files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/2k/evening_road_01_2k.hdr"
       ground={{ height: 5, radius: 40, scale: 20 }}

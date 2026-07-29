@@ -32,9 +32,9 @@ export default function App() {
   return (
     <Canvas camera={{ position: [8, -3, 10], fov: 75 }}>
       <Sky />
-      <ambientLight intensity={0.7} />
-      <spotLight position={[10, 10, 10]} angle={0.5} penumbra={1} />
-      <pointLight position={[-10, -10, -10]} />
+      <ambientLight intensity={0.7 * Math.PI} />
+      <spotLight position={[10, 10, 10]} intensity={Math.PI} decay={0} angle={0.5} penumbra={1} />
+      <pointLight position={[-10, -10, -10]} intensity={Math.PI} decay={0} />
       <group position={[0, -2, 0]}>
         <Model scale={1.5} position={[0, 3, 0]} rotation={[0, Math.PI, 0]} name="VR_Headset" />
         <ContactShadows renderOrder={-100} position={[0, -2, 0]} opacity={0.5} blur={1.5} far={10} scale={50} />
@@ -43,14 +43,14 @@ export default function App() {
             <circleGeometry args={[7, 64]} />
             {/** A portal is just a material */}
             <MeshPortalMaterial worldUnits={worldUnits} transparent blur={portal1}>
-              <ambientLight intensity={0.7} />
+              <ambientLight intensity={0.7 * Math.PI} />
               <Model scale={0.4} position={[0, 0, -2.55]} name="Headphones" floatIntensity={30} />
               <Environment preset="city" background blur={envBlur} />
               <mesh position={[0, 0, -10]}>
                 <circleGeometry args={[5, 64]} />
                 {/** You can have portals inside portals */}
                 <MeshPortalMaterial transparent blur={portal2}>
-                  <ambientLight intensity={0.7} />
+                  <ambientLight intensity={0.7 * Math.PI} />
                   <Model scale={0.15} position={[0, -1, -10]} rotation={[0, 0, 0]} name="Roundcube001" floatIntensity={100} />
                   <Environment preset="dawn" background blur={envBlur} />
                 </MeshPortalMaterial>

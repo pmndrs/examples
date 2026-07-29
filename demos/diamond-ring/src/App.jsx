@@ -30,7 +30,7 @@ export default function App() {
   return (
     <Canvas shadows camera={{ position: [0, 0, 15], fov: 35, near: 1, far: 30 }}>
       <color attach="background" args={['#f0f0f0']} />
-      <ambientLight />
+      <ambientLight intensity={Math.PI} />
       <Environment map={texture} />
       <PresentationControls
         global

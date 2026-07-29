@@ -22,9 +22,9 @@ const spheres = [
 export default function App() {
   return (
     <Instances renderOrder={-1000}>
-      <ambientLight intensity={0.3} onPointerOver={() => null} />
-      <pointLight position={[10, 10, 5]} />
-      <pointLight position={[-10, -10, -5]} />
+      <ambientLight intensity={0.3 * Math.PI} onPointerOver={() => null} />
+      <pointLight position={[10, 10, 5]} intensity={Math.PI} decay={0} />
+      <pointLight position={[-10, -10, -5]} intensity={Math.PI} decay={0} />
       <sphereGeometry args={[1, 64, 64]} />
       <meshBasicMaterial depthTest={false} />
       {spheres.map(([scale, color, speed, position], index) => (

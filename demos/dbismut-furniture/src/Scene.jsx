@@ -24,7 +24,7 @@ function Model({ model, ...props }) {
   })
   return (
     <group ref={ref}>
-      <spotLight intensity={0.7} position={[8, 6, -4]} penumbra={0} />
+      <spotLight intensity={0.7 * Math.PI} decay={0} position={[8, 6, -4]} penumbra={0} />
       <a.primitive {...props} object={model.scene} />
     </group>
   )

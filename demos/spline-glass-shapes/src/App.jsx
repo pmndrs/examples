@@ -8,8 +8,8 @@ export default function App() {
   return (
     <Canvas orthographic camera={{ position: [6, -5, 10], zoom: 60 }}>
       <color attach="background" args={['#fef4ef']} />
-      <ambientLight />
-      <directionalLight castShadow intensity={0.6} position={[0, 0, 10]} />
+      <ambientLight intensity={Math.PI} />
+      <directionalLight castShadow intensity={0.6 * Math.PI} position={[0, 0, 10]} />
       <Scene scale={0.01} />
       <OrbitControls makeDefault />
       <Environment resolution={256}>

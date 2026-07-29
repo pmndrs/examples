@@ -27,8 +27,8 @@ export default function App() {
           <Bust key={i} {...props} />
         ))}
         <OrbitControls zoomSpeed={0.075} />
-        <pointLight position={[0, 0, 0]} intensity={0.5} />
-        <spotLight intensity={2.5} position={[50, 50, 50]} castShadow />
+        <pointLight position={[0, 0, 0]} intensity={0.5 * Math.PI} decay={0} />
+        <spotLight intensity={2.5 * Math.PI} decay={0} position={[50, 50, 50]} castShadow />
         <Environment preset="city" />
         <BakeShadows />
       </Canvas>

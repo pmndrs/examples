@@ -14,10 +14,10 @@ export default function App() {
   return (
     <Suspense fallback={<span>loading...</span>}>
       <Canvas dpr={[1, 2]} camera={{ position: [-2, 2, 4], fov: 25 }}>
-        <directionalLight position={[10, 10, 0]} intensity={1.5} />
-        <directionalLight position={[-10, 10, 5]} intensity={1} />
-        <directionalLight position={[-10, 20, 0]} intensity={1.5} />
-        <directionalLight position={[0, -10, 0]} intensity={0.25} />
+        <directionalLight position={[10, 10, 0]} intensity={1.5 * Math.PI} />
+        <directionalLight position={[-10, 10, 5]} intensity={Math.PI} />
+        <directionalLight position={[-10, 20, 0]} intensity={1.5 * Math.PI} />
+        <directionalLight position={[0, -10, 0]} intensity={0.25 * Math.PI} />
         <Rotate position-y={-0.5} scale={0.2}>
           <Suspense fallback={<Model url={bustLoModel} />}>
             <Model url={bustHiModel} />
