@@ -1,13 +1,6 @@
 {
   "name": "@demo/simple-physics-demo",
   "version": "1.0.0",
-  "description": "A box dropping onto a plane using use-cannon / cannon-es.",
-  "homepage": "https://codesandbox.io/s/z8e6m",
-  "keywords": [
-    "physics",
-    "cannon-es",
-    "use-cannon"
-  ],
   "dependencies": {
     "@react-three/cannon": "^6.6.0",
     "@react-three/fiber": "^8.17.5",

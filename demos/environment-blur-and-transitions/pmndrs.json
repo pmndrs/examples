@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Environment Blur And Transitions",
+  "description": "",
+  "tags": ["environment", "blur"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/pj7zjq",
+  "libraries": ["@pmndrs/branding", "@react-three/drei", "@react-three/fiber", "leva"],
+  "assets": []
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Re Using Geometry And Level Of Detail",
+  "description": "Demonstrates how to load a model progressively with fallbacks via React.Suspense, and using them as a LOD.",
+  "tags": [],
+  "authors": [],
+  "source": "https://codesandbox.io/s/12nmp",
+  "libraries": ["@react-three/drei", "@react-three/fiber"],
+  "assets": []
+}

@@ -1,14 +1,6 @@
 {
   "name": "@demo/camera-scroll",
   "version": "1.0.0",
-  "description": "Tying scroll to a GLTF camera path with snapping points.",
-  "homepage": "https://codesandbox.io/s/tu24h",
-  "keywords": [
-    "snap",
-    "scroll",
-    "gtlf",
-    "html"
-  ],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",

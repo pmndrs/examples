@@ -1,15 +1,6 @@
 {
   "name": "@demo/diamond-ring",
   "version": "1.0.0",
-  "description": "",
-  "homepage": "https://codesandbox.io/s/4gy946",
-  "keywords": [
-    "bloom",
-    "refraction",
-    "diamond",
-    "ring",
-    "html"
-  ],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",

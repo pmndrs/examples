@@ -1,14 +1,6 @@
 {
   "name": "@demo/flow-shield",
   "version": "1.0.0",
-  "description": "Interactive force-shield playground with hit reactions, presets, and model import.",
-  "homepage": "https://codesandbox.io/s/github/pmndrs/examples/tree/main/demos/flow-shield",
-  "keywords": [
-    "shader",
-    "shield",
-    "postprocessing",
-    "leva"
-  ],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",

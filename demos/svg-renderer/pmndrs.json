@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "SVG Renderer",
+  "description": "Using the render function to inject custom renderers.",
+  "tags": ["custom-renderer", "svg-renderer"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/zcuqh",
+  "libraries": ["@react-three/fiber", "three-stdlib"],
+  "assets": []
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Baking Soft Shadows",
+  "description": "How to use drei/AccumulativeShadows and RandomizedLight",
+  "tags": ["baking", "softshadows", "shadows", "lightmap", "progressive"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/hxcc1x",
+  "libraries": ["@react-three/drei", "@react-three/fiber"],
+  "assets": []
+}

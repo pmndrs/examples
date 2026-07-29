@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Canvas Text",
+  "description": "Shows how to form self-contained components with their own state and user interaction.",
+  "tags": [],
+  "authors": [],
+  "source": "https://codesandbox.io/s/p9umgf",
+  "libraries": ["@react-three/fiber"],
+  "assets": []
+}

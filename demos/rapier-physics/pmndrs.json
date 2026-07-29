@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Rapier Physics",
+  "description": "",
+  "tags": ["rapier"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/7e9y1b",
+  "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/rapier", "leva"],
+  "assets": []
+}

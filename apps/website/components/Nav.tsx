@@ -4,17 +4,18 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ComponentProps,
-  createRef,
   ElementRef,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
 import { useParams } from "next/navigation";
 import clsx from "clsx";
 
-import { getDemos } from "@/lib/helper";
+import { getLibraryLabel } from "@/const/libraries";
+import type { Demo } from "@/lib/helper";
 import { Style } from "./Style";
 
 const STORAGE_KEY = "nav-collapsed";
@@ -34,14 +35,28 @@ function syncCollapsedAttr(collapsed: boolean) {
 export default function Nav({
   demos,
   ...props
-}: { demos: ReturnType<typeof getDemos> } & ComponentProps<"nav">) {
+}: { demos: Demo[] } & ComponentProps<"nav">) {
   const ulRef = useRef<ElementRef<"ul">>(null);
-  const lisRef = useRef(
-    Array.from({ length: demos.length }).map(() => createRef<HTMLLIElement>()),
-  );
 
   const [collapsed, setCollapsed] = useState(false);
   const [ready, setReady] = useState(false);
+  const [library, setLibrary] = useState("");
+
+  const libraryOptions = useMemo(
+    () =>
+      Array.from(new Set(demos.flatMap((demo) => demo.libraries))).sort(
+        (a, b) => getLibraryLabel(a).localeCompare(getLibraryLabel(b)),
+      ),
+    [demos],
+  );
+
+  const filteredDemos = useMemo(
+    () =>
+      library
+        ? demos.filter((demo) => demo.libraries.includes(library))
+        : demos,
+    [demos, library],
+  );
 
   const toggle = useCallback(() => {
     setCollapsed((prev) => {
@@ -68,8 +83,9 @@ export default function Nav({
   useEffect(() => {
     const hasDemoSelected = typeof demoname === "string" && demoname.length > 0;
     if (!hasDemoSelected) return;
-    const i = demos.findIndex(({ name }) => name === demoname);
-    const li = lisRef.current[i]?.current;
+    const li = ulRef.current?.querySelector(
+      `[data-demo="${CSS.escape(demoname)}"]`,
+    );
     if (li)
       li.scrollIntoView({
         inline: "center",
@@ -77,7 +93,7 @@ export default function Nav({
         behavior: firstRef.current ? "instant" : "smooth",
       });
     firstRef.current = false;
-  }, [demoname, demos]);
+  }, [demoname, filteredDemos]);
 
   const navRef = useRef<HTMLDivElement>(null);
 
@@ -103,11 +119,7 @@ export default function Nav({
   }, [toggle]);
 
   return (
-    <div
-      ref={navRef}
-      className="Nav"
-      data-collapsed={collapsed || undefined}
-    >
+    <div ref={navRef} className="Nav" data-collapsed={collapsed || undefined}>
       <Style
         css={`
           @scope {
@@ -236,6 +248,45 @@ export default function Nav({
               margin: 0;
             }
 
+            .filters {
+              position: sticky;
+              top: 0;
+              z-index: 2;
+              padding: 1rem 0.75rem 0.25rem 1rem;
+              background: linear-gradient(#eee 75%, transparent);
+            }
+
+            .filters label {
+              display: grid;
+              gap: 0.35rem;
+              color: #555;
+              font-size: 0.65rem;
+              font-weight: 700;
+              letter-spacing: 0.06em;
+              text-transform: uppercase;
+            }
+
+            .filters select {
+              width: 100%;
+              min-height: 2.25rem;
+              padding: 0.45rem 2rem 0.45rem 0.65rem;
+              border: 1px solid #d4d4d4;
+              border-radius: 6px;
+              background: white;
+              color: #222;
+              font: inherit;
+              font-size: 0.75rem;
+              letter-spacing: normal;
+              text-transform: none;
+            }
+
+            .empty {
+              padding: 1rem;
+              color: #666;
+              font-size: 0.75rem;
+              text-align: center;
+            }
+
             li {
               padding-inline-start: unset;
               transform: scale(1);
@@ -253,7 +304,9 @@ export default function Nav({
               overflow: hidden;
               outline: 2px solid transparent;
               outline-offset: 2px;
-              transition: outline-color 0.2s ease, box-shadow 0.2s ease;
+              transition:
+                outline-color 0.2s ease,
+                box-shadow 0.2s ease;
             }
 
             a:hover {
@@ -296,7 +349,6 @@ export default function Nav({
               font-size: 0.7rem;
               background: none;
             }
-
           }
         `}
       />
@@ -308,7 +360,11 @@ export default function Nav({
         aria-pressed={!collapsed}
       >
         <span className="toggleInner">
-          <svg viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg
+            viewBox="0 0 6 10"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <path
               d="M5 1L1 5L5 9"
               stroke="currentColor"
@@ -317,26 +373,47 @@ export default function Nav({
               strokeLinejoin="round"
             />
           </svg>
-          <span className="toggleLabel">{ready ? (collapsed ? "show" : "hide") : ""}</span>
+          <span className="toggleLabel">
+            {ready ? (collapsed ? "show" : "hide") : ""}
+          </span>
         </span>
       </button>
 
       <nav {...props}>
+        <div className="filters">
+          <label>
+            Library
+            <select
+              value={library}
+              onChange={(event) => setLibrary(event.target.value)}
+            >
+              <option value="">All libraries</option>
+              {libraryOptions.map((option) => (
+                <option key={option} value={option}>
+                  {getLibraryLabel(option)}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
         <ul ref={ulRef}>
-          {demos.map(({ name, thumb, isNew }, i) => (
-            <li key={thumb} ref={lisRef.current[i]}>
+          {filteredDemos.map(({ name, title, thumb, isNew }) => (
+            <li key={thumb} data-demo={name}>
               <Link
                 href={`/demos/${name}`}
                 className={clsx({ active: demoname === name })}
               >
                 <div className="thumb">
                   {isNew && <span className="pill">New</span>}
-                  <Image src={thumb} fill sizes="227px" alt={name} />
+                  <Image src={thumb} fill sizes="227px" alt={title} />
                 </div>
               </Link>
             </li>
           ))}
         </ul>
+        {filteredDemos.length === 0 && (
+          <p className="empty">No demos use this library.</p>
+        )}
       </nav>
     </div>
   );

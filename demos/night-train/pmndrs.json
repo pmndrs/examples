@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Night Train",
+  "description": "Stacking a couple of drei helpers",
+  "tags": ["merged", "scroll-controls", "meshreflectormaterial", "instances"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/l900i",
+  "libraries": ["@react-three/drei", "@react-three/fiber"],
+  "assets": []
+}

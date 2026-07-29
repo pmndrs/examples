@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Confetti",
+  "description": "Meshline particles.",
+  "tags": ["particles", "meshline", "confetti"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/vl221",
+  "libraries": ["@react-three/fiber", "@react-three/postprocessing", "leva", "maath", "meshline"],
+  "assets": []
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Cell Fracture",
+  "description": "Exploding GLTFs using Blenders cell-fracture and GLTFJSX.",
+  "tags": ["animation", "clell-fracture", "gltf", "gltfjsx"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/3rjsl",
+  "libraries": ["@react-three/drei", "@react-three/fiber"],
+  "assets": []
+}

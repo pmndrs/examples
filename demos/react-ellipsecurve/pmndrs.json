@@ -1,0 +1,16 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "React EllipseCurve",
+  "description": "",
+  "tags": [
+    "trails"
+  ],
+  "authors": [],
+  "source": "https://codesandbox.io/s/xzi6ps",
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing"
+  ],
+  "assets": []
+}

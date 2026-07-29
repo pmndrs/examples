@@ -1,0 +1,18 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "View Cube",
+  "description": "Shows how to do heads-up-displays using React.portals.",
+  "tags": [
+    "portal",
+    "viewcube",
+    "hud"
+  ],
+  "authors": [],
+  "source": "https://codesandbox.io/s/py4db",
+  "libraries": [
+    "@pmndrs/assets",
+    "@react-three/drei",
+    "@react-three/fiber"
+  ],
+  "assets": []
+}

@@ -1,12 +1,6 @@
 {
   "name": "@demo/ssr-test",
   "version": "1.0.0",
-  "description": "Screen space reflections",
-  "homepage": "https://codesandbox.io/s/8pbw1f",
-  "keywords": [
-    "ssr",
-    "postprocessing"
-  ],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",

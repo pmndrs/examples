@@ -1,13 +1,6 @@
 {
   "name": "@demo/mixing-controls",
   "version": "1.0.0",
-  "description": "Switching off one control while the other is active.",
-  "homepage": "https://codesandbox.io/s/hf1cs",
-  "keywords": [
-    "orbit-controls",
-    "controls",
-    "transform-controls"
-  ],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",

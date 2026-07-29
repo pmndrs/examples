@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Bouncy Watch",
+  "description": "Custom springy controls using use-gesture and react-spring.",
+  "tags": ["use-gesture", "custom-controls", "react-spring", "tag-heuer"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/qyz5r",
+  "libraries": ["@react-three/drei", "@react-three/fiber"],
+  "assets": []
+}

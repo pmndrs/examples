@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Water Shader",
+  "description": "",
+  "tags": ["shader", "water"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/1b40u",
+  "libraries": ["@react-three/drei", "@react-three/fiber", "three-stdlib"],
+  "assets": []
+}

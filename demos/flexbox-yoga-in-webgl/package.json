@@ -1,7 +1,6 @@
 {
   "name": "@demo/flexbox-yoga-in-webgl",
   "version": "0.1.0",
-  "homepage": "https://codesandbox.io/s/7psew",
   "private": true,
   "dependencies": {
     "@react-three/drei": "^9.109.5",
@@ -41,14 +40,6 @@
     "typescript": "^5.5.4",
     "vite": "^5.4.0"
   },
-  "keywords": [
-    "layout",
-    "yoga",
-    "scroll",
-    "flexbox",
-    "text"
-  ],
-  "description": "This example uses yoga to create flex-box layouts.",
   "repository": {
     "type": "git",
     "url": "https://github.com/pmndrs/examples/tree/main/demos/flexbox-yoga-in-webgl"

@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "CSG House",
+  "description": "",
+  "tags": [],
+  "authors": [],
+  "source": "https://codesandbox.io/s/y52tmt",
+  "libraries": ["@react-three/csg", "@react-three/drei", "@react-three/fiber"],
+  "assets": []
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Arkanoid",
+  "description": "Simple arkanoid implementation using cannon physics.",
+  "tags": ["physics", "cannon", "game", "audio"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/2yqpv",
+  "libraries": ["@react-spring/three", "@react-three/cannon", "@react-three/drei", "@react-three/fiber", "zustand"],
+  "assets": []
+}

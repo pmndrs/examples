@@ -1,13 +1,6 @@
 {
   "name": "@demo/sky-dome-with-annotations",
   "version": "1.0.0",
-  "description": "Dome projecting texture and HTML annotations.",
-  "homepage": "https://codesandbox.io/s/wbrfs",
-  "keywords": [
-    "annotations",
-    "html",
-    "dome"
-  ],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",

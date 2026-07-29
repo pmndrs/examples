@@ -1,0 +1,15 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "ScrollControls and Lens Refraction",
+  "description": "Vertical scrollcontrols and minimaps.",
+  "tags": [],
+  "authors": [],
+  "source": "https://codesandbox.io/s/2n98yj",
+  "libraries": [
+    "@pmndrs/branding",
+    "@react-three/drei",
+    "@react-three/fiber",
+    "maath"
+  ],
+  "assets": []
+}

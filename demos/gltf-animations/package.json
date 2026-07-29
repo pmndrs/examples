@@ -1,15 +1,6 @@
 {
   "name": "@demo/gltf-animations",
   "version": "1.0.0",
-  "description": "This examples shows how to blend GLTF animation keyframes.",
-  "homepage": "https://codesandbox.io/s/pecl6",
-  "keywords": [
-    "skinnedmesh",
-    "gltf",
-    "bones",
-    "animations",
-    "useanimations"
-  ],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",

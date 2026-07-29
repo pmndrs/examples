@@ -1,0 +1,15 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Physics With Convex Polyhedrons",
+  "description": "Using cannon collisions with GLTFs converted into convex hulls.",
+  "tags": ["physics", "collisions", "convex-polyhedron", "cannon", "gltf"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/08s1u",
+  "libraries": [
+    "@react-three/cannon",
+    "@react-three/drei",
+    "@react-three/fiber",
+    "three-stdlib"
+  ],
+  "assets": []
+}

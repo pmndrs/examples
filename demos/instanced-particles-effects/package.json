@@ -1,15 +1,6 @@
 {
   "name": "@demo/instanced-particles-effects",
   "version": "1.0.0",
-  "description": "Instancing, swirling particles and effects.",
-  "homepage": "https://codesandbox.io/s/qpfgyp",
-  "keywords": [
-    "effects",
-    "film",
-    "water",
-    "bloom",
-    "particles"
-  ],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",

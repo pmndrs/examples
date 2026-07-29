@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Selective Outlines",
+  "description": "Using postprocessing to give seletcive objects outlines.",
+  "tags": ["postprocessing", "outlines"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/d36mw",
+  "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/postprocessing"],
+  "assets": []
+}

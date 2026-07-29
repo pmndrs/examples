@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Inverted Stencil Buffer",
+  "description": "How to invert a masked stencil.",
+  "tags": ["stencil", "drei", "portal"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/7n2yru",
+  "libraries": ["@react-three/drei", "@react-three/fiber", "leva"],
+  "assets": []
+}

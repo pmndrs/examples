@@ -6,6 +6,7 @@
     "postbuild": "./out.sh",
     "dev": "turbo dev2",
     "lint": "turbo lint",
+    "lint:metadata": "node bin/validate-pmndrs-metadata.mjs",
     "lint:versions": "syncpack lint",
     "fix:versions": "syncpack fix-mismatches",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",

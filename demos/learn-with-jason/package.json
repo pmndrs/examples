@@ -31,12 +31,6 @@
       "last 1 safari version"
     ]
   },
-  "keywords": [
-    "animation",
-    "gltf"
-  ],
-  "description": "Small example made for a Learn-with-Jason episode.",
-  "homepage": "https://codesandbox.io/s/oep9o",
   "type": "module",
   "devDependencies": {
     "@types/react": "^18.3.3",

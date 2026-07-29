@@ -17,8 +17,8 @@ export async function generateMetadata({ params }: Props) {
   const demo = demos.find(({ name }) => name === params.demoname);
   if (!demo) return;
 
-  const title = `${demo.name} - pmndrs`;
-  const description = `Play with "${demo.name}" pmndrs demo.`;
+  const title = `${demo.title} - pmndrs`;
+  const description = demo.description;
 
   return {
     title,
@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Props) {
           url: demo.thumb,
           // width: 800,
           // height: 600,
-          alt: `${demo.name} capture of the demo`,
+          alt: `${demo.title} capture of the demo`,
         },
       ],
       type: "website",
@@ -104,7 +104,7 @@ export default async function Page(props: Props) {
       ) : (
         <>
           <div className="Frame">
-            <ScaledDemoFrame src={embed_url} title={demoname} />
+            <ScaledDemoFrame src={embed_url} title={demo.title} />
           </div>
 
           <Social demoname={demoname} embed_url={embed_url} />

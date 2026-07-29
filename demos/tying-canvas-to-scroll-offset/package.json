@@ -1,14 +1,6 @@
 {
   "name": "@demo/tying-canvas-to-scroll-offset",
   "version": "1.0.0",
-  "description": "How to tie canvas objects to scrollTop while events keep working.",
-  "homepage": "https://codesandbox.io/s/itfgk",
-  "keywords": [
-    "scroll",
-    "lerp",
-    "events",
-    "animation"
-  ],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",

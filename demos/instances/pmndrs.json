@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Instances",
+  "description": "Creating fixed-position instances with varying vertex colors.",
+  "tags": ["instances", "vertex-colors"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/h873k",
+  "libraries": ["@react-three/drei", "@react-three/fiber"],
+  "assets": []
+}

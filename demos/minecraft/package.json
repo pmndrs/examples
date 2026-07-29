@@ -34,13 +34,6 @@
       "last 1 safari version"
     ]
   },
-  "keywords": [
-    "pointerlock-controls",
-    "game",
-    "minecraft"
-  ],
-  "description": "Mini Minecraft implementation.",
-  "homepage": "https://codesandbox.io/s/vkgi6",
   "type": "module",
   "devDependencies": {
     "@types/react": "^18.3.3",

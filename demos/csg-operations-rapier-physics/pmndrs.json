@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "CSG Operations Rapier Physics",
+  "description": "",
+  "tags": ["csg", "rapier"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/mw0dtc",
+  "libraries": ["@react-three/csg", "@react-three/drei", "@react-three/fiber", "@react-three/rapier", "lamina", "leva"],
+  "assets": []
+}

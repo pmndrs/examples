@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Magic Box",
+  "description": "",
+  "tags": [],
+  "authors": [],
+  "source": "https://codesandbox.io/s/drc6qg",
+  "libraries": ["@react-three/drei", "@react-three/fiber", "leva"],
+  "assets": []
+}

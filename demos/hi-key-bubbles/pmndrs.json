@@ -1,0 +1,16 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "High-key Bubbles",
+  "description": "Shows to use drei/instances how far gamma-correction can stretch colors.",
+  "tags": [
+    "instances"
+  ],
+  "authors": [],
+  "source": "https://codesandbox.io/s/i6t0j",
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing"
+  ],
+  "assets": []
+}

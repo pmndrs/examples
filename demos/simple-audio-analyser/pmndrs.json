@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Simple Audio Analyser",
+  "description": "Audio frequency analysis.",
+  "tags": ["analyser", "audio"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/wu51m",
+  "libraries": ["@pmndrs/branding", "@react-three/fiber", "suspend-react"],
+  "assets": []
+}

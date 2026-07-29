@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Bloom HDR Workflow GLTF",
+  "description": "",
+  "tags": ["bloom", "hdr", "glow", "gltf", "selective"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/whnhyr",
+  "libraries": ["@react-three/drei", "@react-three/fiber"],
+  "assets": []
+}

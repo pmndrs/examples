@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Instanced Particles Effects",
+  "description": "Instancing, swirling particles and effects.",
+  "tags": ["effects", "film", "water", "bloom", "particles"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/qpfgyp",
+  "libraries": ["@react-three/drei", "@react-three/fiber"],
+  "assets": []
+}

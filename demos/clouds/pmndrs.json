@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Clouds",
+  "description": "Trying out drei's new cloud component.",
+  "tags": ["clouds", "drei"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/mbfzf",
+  "libraries": ["@react-three/drei", "@react-three/fiber", "leva"],
+  "assets": []
+}

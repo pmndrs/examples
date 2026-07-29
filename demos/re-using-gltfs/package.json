@@ -6,15 +6,8 @@
     "react-dom": "^18.3.1",
     "three": "^0.165.0"
   },
-  "keywords": [
-    "gltfjsx",
-    "re-use",
-    "gltf"
-  ],
   "name": "@demo/re-using-gltfs",
   "version": "1.0.0",
-  "description": "When you use GLTFJSX it creates a immutable snapshot of your assets, these can be reused.",
-  "homepage": "https://codesandbox.io/s/dix1y",
   "type": "module",
   "devDependencies": {
     "@types/react": "^18.3.3",

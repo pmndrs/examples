@@ -1,12 +1,6 @@
 {
   "name": "@demo/environment-blur-and-transitions",
   "version": "1.0.0",
-  "description": "",
-  "homepage": "https://codesandbox.io/s/pj7zjq",
-  "keywords": [
-    "environment",
-    "blur"
-  ],
   "dependencies": {
     "@pmndrs/branding": "^0.0.8",
     "@react-three/drei": "^9.109.5",

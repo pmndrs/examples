@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Flying Bananas",
+  "description": "Shows how to form self-contained components with their own state and user interaction.",
+  "tags": [],
+  "authors": [],
+  "source": "https://codesandbox.io/s/2ycs3",
+  "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/postprocessing"],
+  "assets": []
+}

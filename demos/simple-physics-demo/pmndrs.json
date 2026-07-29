@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Simple Physics Demo",
+  "description": "A box dropping onto a plane using use-cannon / cannon-es.",
+  "tags": ["physics", "cannon-es", "use-cannon"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/z8e6m",
+  "libraries": ["@react-three/cannon", "@react-three/fiber"],
+  "assets": []
+}

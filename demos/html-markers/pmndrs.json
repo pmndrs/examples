@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "HTML Markers",
+  "description": "Occluding HTML annotations/markers.",
+  "tags": ["annotations", "html", "markers"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/6oei7",
+  "libraries": ["@react-three/drei", "@react-three/fiber"],
+  "assets": []
+}

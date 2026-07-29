@@ -1,0 +1,22 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Bruno Simon's 20K Challenge",
+  "description": "https://twitter.com/bruno_simon/status/1557355710089920513",
+  "tags": [
+    "csg",
+    "rapier",
+    "postprocessing",
+    "drei",
+    "physics"
+  ],
+  "authors": [],
+  "source": "https://codesandbox.io/s/2qfxj4",
+  "libraries": [
+    "@react-three/csg",
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing",
+    "@react-three/rapier"
+  ],
+  "assets": []
+}

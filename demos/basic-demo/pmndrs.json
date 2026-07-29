@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Basic Demo",
+  "description": "Shows how to form self-contained components with their own state and user interaction.",
+  "tags": ["interaction", "pointer-events"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/rrppl0y8l4",
+  "libraries": ["@react-three/drei", "@react-three/fiber"],
+  "assets": []
+}

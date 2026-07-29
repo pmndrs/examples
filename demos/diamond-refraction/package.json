@@ -1,14 +1,6 @@
 {
   "name": "@demo/diamond-refraction",
   "version": "1.0.0",
-  "description": "Diamon refraction material",
-  "homepage": "https://codesandbox.io/s/zqrreo",
-  "keywords": [
-    "diamond",
-    "refraction",
-    "raycast",
-    "bvh"
-  ],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",

@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Room With Soft Shadows",
+  "description": "Percentage closer soft shadows.",
+  "tags": [],
+  "authors": [],
+  "source": "https://codesandbox.io/s/ykfpwf",
+  "libraries": ["@react-three/drei", "@react-three/fiber", "leva"],
+  "assets": []
+}

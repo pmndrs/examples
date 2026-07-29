@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Interactive Spline Scene Live HTML",
+  "description": "Scene exported with Spline",
+  "tags": ["spline", "stencil"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/f79ucc",
+  "libraries": ["@react-three/drei", "@react-three/fiber"],
+  "assets": []
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "React Postprocessing Outlines",
+  "description": "How to build declarative, nested outlines where higher-ups take precedence.",
+  "tags": ["outlines"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/nurp5t",
+  "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/postprocessing", "leva"],
+  "assets": []
+}

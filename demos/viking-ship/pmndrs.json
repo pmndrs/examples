@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Viking Ship",
+  "description": "GLTF workflow with GLTFJSX and camera rotations.",
+  "tags": ["gltfjsx", "gltf"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/0buje",
+  "libraries": ["@react-three/drei", "@react-three/fiber"],
+  "assets": []
+}

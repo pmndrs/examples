@@ -1,13 +1,6 @@
 {
   "name": "@demo/edgesgeometry",
   "version": "1.0.0",
-  "description": "How to use EdgesGeometry, which expects its target as a constructor argument.",
-  "homepage": "https://codesandbox.io/s/iup24",
-  "keywords": [
-    "outlines",
-    "gltf",
-    "geometry"
-  ],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",

@@ -1,14 +1,6 @@
 {
   "name": "@demo/arkanoid",
   "version": "1.0.0",
-  "description": "Simple arkanoid implementation using cannon physics.",
-  "homepage": "https://codesandbox.io/s/2yqpv",
-  "keywords": [
-    "physics",
-    "cannon",
-    "game",
-    "audio"
-  ],
   "dependencies": {
     "@react-spring/three": "^9.7.3",
     "@react-three/cannon": "^6.6.0",

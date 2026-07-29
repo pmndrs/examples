@@ -1,0 +1,18 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Lullaby City",
+  "description": "Panning around a city with positional audio.",
+  "tags": [
+    "positional",
+    "gltf",
+    "audio"
+  ],
+  "authors": [],
+  "source": "https://codesandbox.io/s/gkfhr",
+  "libraries": [
+    "@pmndrs/branding",
+    "@react-three/drei",
+    "@react-three/fiber"
+  ],
+  "assets": []
+}

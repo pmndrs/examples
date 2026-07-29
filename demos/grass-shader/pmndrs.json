@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Grass Shader",
+  "description": "Grass shader using simplex noise.",
+  "tags": ["noise", "shader", "simplex", "grass"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/5xho4",
+  "libraries": ["@react-three/drei", "@react-three/fiber"],
+  "assets": []
+}

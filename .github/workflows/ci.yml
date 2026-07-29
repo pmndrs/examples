@@ -44,6 +44,7 @@ jobs:
       #
       # Lint
       #
+      - run: pnpm lint:metadata
       - run: pnpm lint:versions
 
       #

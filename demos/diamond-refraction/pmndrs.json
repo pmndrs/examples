@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Diamond Refraction",
+  "description": "Diamon refraction material",
+  "tags": ["diamond", "refraction", "raycast", "bvh"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/zqrreo",
+  "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/postprocessing", "leva"],
+  "assets": []
+}

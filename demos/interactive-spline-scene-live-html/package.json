@@ -1,12 +1,6 @@
 {
   "name": "@demo/interactive-spline-scene-live-html",
   "version": "1.0.0",
-  "description": "Scene exported with Spline",
-  "homepage": "https://codesandbox.io/s/f79ucc",
-  "keywords": [
-    "spline",
-    "stencil"
-  ],
   "dependencies": {
     "@headlessui/react": "^1.7.19",
     "@heroicons/react": "^2.2.0",

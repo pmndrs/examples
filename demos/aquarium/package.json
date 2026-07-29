@@ -1,13 +1,10 @@
 {
   "name": "@demo/aquarium",
   "version": "1.0.0",
-  "description": "",
-  "homepage": "https://codesandbox.io/s/n7jf0f",
   "repository": {
     "type": "git",
     "url": "https://github.com/pmndrs/examples/tree/main/demos/aquarium"
   },
-  "keywords": [],
   "dependencies": {
     "@pmndrs/branding": "^0.0.8",
     "@react-three/drei": "^9.109.5",

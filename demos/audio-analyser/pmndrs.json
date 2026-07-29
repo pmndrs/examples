@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Audio Analyser",
+  "description": "Combining audio analysis with gltf cell fracture and reflections.",
+  "tags": ["gltf", "audio", "reflections", "cell-fracture"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/dvokj",
+  "libraries": ["@pmndrs/branding", "@react-three/drei", "@react-three/fiber"],
+  "assets": []
+}

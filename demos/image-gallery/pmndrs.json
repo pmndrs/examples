@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Image Gallery",
+  "description": "Stage a couple of frames with a reflective, blurred out ground.",
+  "tags": ["image", "meshreflectormaterial"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/lx2h8",
+  "libraries": ["@react-three/drei", "@react-three/fiber", "maath"],
+  "assets": []
+}

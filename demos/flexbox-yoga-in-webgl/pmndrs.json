@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Flexbox Yoga In WebGL",
+  "description": "This example uses yoga to create flex-box layouts.",
+  "tags": ["layout", "yoga", "scroll", "flexbox", "text"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/7psew",
+  "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/flex"],
+  "assets": []
+}

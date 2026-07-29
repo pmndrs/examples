@@ -1,0 +1,16 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Shader Materials",
+  "description": "How to set up shader materials declaratively.",
+  "tags": [
+    "material",
+    "shader"
+  ],
+  "authors": [],
+  "source": "https://codesandbox.io/s/1g4qq",
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber"
+  ],
+  "assets": []
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Sparks And Effects",
+  "description": "Demonstrating fake-particles, mesh-lines and effect composition.",
+  "tags": ["glow", "mesh-line", "effects", "particles", "text-geometry"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/sbf2i",
+  "libraries": ["@react-three/fiber"],
+  "assets": []
+}

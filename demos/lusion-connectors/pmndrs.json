@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Lusion Connectors",
+  "description": "",
+  "tags": [],
+  "authors": [],
+  "source": "https://codesandbox.io/s/xy8c8z",
+  "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/postprocessing", "@react-three/rapier"],
+  "assets": []
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Pairing Three.js To UI",
+  "description": "",
+  "tags": [],
+  "authors": [],
+  "source": "https://codesandbox.io/s/wlz1o0",
+  "libraries": ["@react-three/drei", "@react-three/fiber", "leva", "tunnel-rat"],
+  "assets": []
+}

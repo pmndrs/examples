@@ -1,13 +1,6 @@
 {
   "name": "@demo/inverted-stencil-buffer",
   "version": "1.0.0",
-  "description": "How to invert a masked stencil.",
-  "homepage": "https://codesandbox.io/s/7n2yru",
-  "keywords": [
-    "stencil",
-    "drei",
-    "portal"
-  ],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",
