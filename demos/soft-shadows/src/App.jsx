@@ -45,12 +45,12 @@ export default function App() {
     <Canvas shadows camera={{ position: [-5, 2, 10], fov: 60 }}>
       {enabled && <SoftShadows {...config} />}
       <fog attach="fog" args={["white", 0, 40]} />
-      <ambientLight intensity={0.5} />
-      <directionalLight castShadow position={[2.5, 8, 5]} intensity={1.5} shadow-mapSize={1024}>
+      <ambientLight intensity={0.5 * Math.PI} />
+      <directionalLight castShadow position={[2.5, 8, 5]} intensity={1.5 * Math.PI} shadow-mapSize={1024}>
         <orthographicCamera attach="shadow-camera" args={[-10, 10, -10, 10, 0.1, 50]} />
       </directionalLight>
-      <pointLight position={[-10, 0, -20]} color="white" intensity={1} />
-      <pointLight position={[0, -10, 0]} intensity={1} />
+      <pointLight position={[-10, 0, -20]} color="white" intensity={Math.PI} decay={0} />
+      <pointLight position={[0, -10, 0]} intensity={Math.PI} decay={0} />
       <group position={[0, -3.5, 0]}>
         <mesh receiveShadow castShadow>
           <boxGeometry args={[4, 1, 1]} />

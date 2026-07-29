@@ -11,7 +11,7 @@ export default function App() {
   return (
     <>
       <Canvas shadows eventSource={document.getElementById("root")} eventPrefix="client">
-        <ambientLight intensity={1} />
+        <ambientLight intensity={Math.PI} />
         <Suspense fallback={null}>
           <Model scroll={scroll} />
           <Environment preset="city" />

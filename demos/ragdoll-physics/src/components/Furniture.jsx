@@ -96,7 +96,8 @@ export function Lamp(props) {
         angle={0.45}
         attenuation={20}
         anglePower={5}
-        intensity={1}
+        intensity={Math.PI}
+        decay={0}
         opacity={0.2}
       />
       <primitive object={target} position={[0, -1, 0]} />

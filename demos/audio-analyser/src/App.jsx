@@ -21,11 +21,11 @@ export default function App(props) {
       <color attach="background" args={['#d0d0d0']} />
       <fog attach="fog" args={['#d0d0d0', 5, 10]} />
       <Suspense fallback={null}>
-        <ambientLight intensity={2} />
-        <directionalLight position={[10, 10, 0]} intensity={1.5} />
-        <directionalLight position={[-10, 10, 5]} intensity={1} />
-        <directionalLight position={[-10, 20, 0]} intensity={1.5} />
-        <directionalLight position={[0, -10, 0]} intensity={0.25} />
+        <ambientLight intensity={2 * Math.PI} />
+        <directionalLight position={[10, 10, 0]} intensity={1.5 * Math.PI} />
+        <directionalLight position={[-10, 10, 5]} intensity={Math.PI} />
+        <directionalLight position={[-10, 20, 0]} intensity={1.5 * Math.PI} />
+        <directionalLight position={[0, -10, 0]} intensity={0.25 * Math.PI} />
         <group position-y={-0.25}>
           <Graph position={[-0.7, -0.2, -1]} />
           <DancingDot />
@@ -81,7 +81,7 @@ function Explosion({ beat, ...props }) {
     if (drums.signal && track.kicks - 1 === beat && drums.gain) play((state.size = 1))
     if (snare.signal) state.size = 0
     sphere.current.scale.lerp(vec.set(state.size * drums.gain, state.size * drums.gain, state.size * drums.gain), 0.2)
-    sphere.current.children[0].intensity = drums.avg * drums.gain * 10
+    sphere.current.children[0].intensity = drums.avg * drums.gain * 10 * Math.PI
     // This code transforms the empty GLTF nodes into a single drawcall via instancing
     sceneRef.current.children.forEach((node, i) => instance.current.setMatrixAt(i, node.matrix))
     instance.current.visible = !!drums.gain
@@ -92,7 +92,7 @@ function Explosion({ beat, ...props }) {
       <mesh ref={sphere}>
         <sphereGeometry args={[0.2, 32, 32]} />
         <meshBasicMaterial toneMapped={false} transparent opacity={0.95} />
-        <pointLight color="red" distance={0.5} />
+        <pointLight color="red" distance={0.5} decay={0} />
       </mesh>
       <group scale={[0.05, 0.05, 0.05]}>
         <primitive ref={sceneRef} object={scene} />

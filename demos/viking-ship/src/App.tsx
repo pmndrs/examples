@@ -27,7 +27,7 @@ export default function App() {
       <Canvas linear camera={{ position: [0, 15, 30], fov: 70 }}>
         <color attach="background" args={[0xfff0ea]} />
         <fog attach="fog" args={[0xfff0ea, 10, 60]} />
-        <ambientLight intensity={4} />
+        <ambientLight intensity={4 * Math.PI} />
         <Suspense fallback={null}>
           <Rig>
             <Model />

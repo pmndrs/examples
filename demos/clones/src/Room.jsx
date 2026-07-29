@@ -70,7 +70,8 @@ function Lights() {
           ref={light}
           castShadow
           color="orange"
-          intensity={1}
+          intensity={Math.PI}
+          decay={0}
           position={[50, 100, 0]}
           angle={0.15}
           penumbra={0.5}
@@ -88,7 +89,7 @@ function Screen() {
   const ref = useRef()
   useFrame((state, delta) => {
     const sin = Math.sin(state.clock.elapsedTime) + Math.cos(state.clock.elapsedTime * 10)
-    ref.current.intensity = (0.5 + Math.abs(sin / 10)) * 40
+    ref.current.intensity = (0.5 + Math.abs(sin / 10)) * 40 * Math.PI
   })
   return (
     <spotLight
@@ -98,6 +99,7 @@ function Screen() {
       angle={1}
       penumbra={1}
       distance={8}
+      decay={0}
       target-position={[10, 5.5, -6.6]}
       onUpdate={(self) => self.target.updateMatrixWorld()}
     />

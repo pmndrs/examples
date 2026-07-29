@@ -10,8 +10,8 @@ export default function App() {
     <Canvas shadows gl={{ antialias: false }}>
       <color attach="background" args={['#202030']} />
       <fog attach="fog" args={['#202030', 10, 25]} />
-      <hemisphereLight intensity={0.2} color="#eaeaea" groundColor="blue" />
-      <directionalLight castShadow intensity={0.2} shadow-mapSize={[1024, 1024]} shadow-bias={-0.0001} position={[10, 10, -10]} />
+      <hemisphereLight intensity={0.2 * Math.PI} color="#eaeaea" groundColor="blue" />
+      <directionalLight castShadow intensity={0.2 * Math.PI} shadow-mapSize={[1024, 1024]} shadow-bias={-0.0001} position={[10, 10, -10]} />
       <Tower position={[0, -3.25, 0]} />
       <Effects disableGamma>
         <unrealBloomPass threshold={1} strength={1.0} radius={0.5} />

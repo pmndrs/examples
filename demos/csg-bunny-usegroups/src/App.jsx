@@ -10,8 +10,8 @@ export default function App() {
   return (
     <Canvas shadows camera={{ position: [4, 0.5, 10], fov: 25 }}>
       <color attach="background" args={['#f0f0f0']} />
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[5, 8, -4]} shadow-mapSize={1024} castShadow />
+      <ambientLight intensity={0.5 * Math.PI} />
+      <directionalLight position={[5, 8, -4]} intensity={Math.PI} shadow-mapSize={1024} castShadow />
       <group position={[0.5, -1.25, 0]}>
         <Center top precise={false}> 
           <Bunny/>

@@ -6,8 +6,8 @@ import watchModel from './watch-v1.glb?url'
 export default function App() {
   return (
     <Canvas shadows camera={{ position: [0, 0, 10], fov: 25 }}>
-      <ambientLight intensity={0.5} />
-      <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} shadow-mapSize={2048} castShadow />
+      <ambientLight intensity={0.5 * Math.PI} />
+      <spotLight position={[10, 10, 10]} intensity={Math.PI} decay={0} angle={0.15} penumbra={1} shadow-mapSize={2048} castShadow />
       <PresentationControls
         global
         config={{ mass: 2, tension: 500 }}

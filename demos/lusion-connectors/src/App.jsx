@@ -46,8 +46,8 @@ function Scene(props) {
   return (
     <Canvas onClick={click} shadows dpr={[1, 1.5]} gl={{ antialias: false }} camera={{ position: [0, 0, 15], fov: 17.5, near: 1, far: 20 }} {...props}>
       <color attach="background" args={['#141622']} />
-      <ambientLight intensity={0.4} />
-      <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
+      <ambientLight intensity={0.4 * Math.PI} />
+      <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={Math.PI} decay={0} castShadow />
       <Physics /*debug*/ gravity={[0, 0, 0]}>
         <Pointer />
         {connectors.map((props, i) => <Connector key={i} {...props} />) /* prettier-ignore */}
@@ -85,7 +85,7 @@ function Connector({ position, children, vec = new THREE.Vector3(), scale, r = T
       <CuboidCollider args={[1.27, 0.38, 0.38]} />
       <CuboidCollider args={[0.38, 0.38, 1.27]} />
       {children ? children : <Model {...props} />}
-      {accent && <pointLight intensity={4} distance={2.5} color={props.color} />}
+      {accent && <pointLight intensity={4 * Math.PI} decay={0} distance={2.5} color={props.color} />}
     </RigidBody>
   )
 }

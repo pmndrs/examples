@@ -8,7 +8,7 @@ export default function App() {
     <Canvas shadows dpr={[1, 2]} camera={{ position: [-2, 2, 6], fov: 50, near: 1, far: 20 }}>
       <color attach="background" args={['#202020']} />
       <fog attach="fog" args={['#202020', 5, 20]} />
-      <ambientLight intensity={0.015} />
+      <ambientLight intensity={0.015 * Math.PI} />
       <Scene />
     </Canvas>
   )
@@ -39,5 +39,5 @@ function MovingSpot({ vec = new Vector3(), ...props }) {
     light.current.target.position.lerp(vec.set((state.mouse.x * viewport.width) / 2, (state.mouse.y * viewport.height) / 2, 0), 0.1)
     light.current.target.updateMatrixWorld()
   })
-  return <SpotLight castShadow ref={light} penumbra={1} distance={6} angle={0.35} attenuation={5} anglePower={4} intensity={2} {...props} />
+  return <SpotLight castShadow ref={light} penumbra={1} distance={6} angle={0.35} attenuation={5} anglePower={4} intensity={2 * Math.PI} decay={0} {...props} />
 }

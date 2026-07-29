@@ -39,7 +39,7 @@ export default function Ship() {
       const group = laserGroup.current.children[i]
       group.position.z -= 20
     }
-    laserLight.current.intensity += ((lasers.length && Date.now() - lasers[lasers.length - 1] < 100 ? 20 : 0) - laserLight.current.intensity) * 0.3
+    laserLight.current.intensity += ((lasers.length && Date.now() - lasers[lasers.length - 1] < 100 ? 20 * Math.PI : 0) - laserLight.current.intensity) * 0.3
 
     // Get ships orientation and save it to the stores ray
     main.current.getWorldPosition(position)

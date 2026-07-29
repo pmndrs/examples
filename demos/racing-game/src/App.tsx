@@ -31,12 +31,12 @@ export function App() {
       <Canvas key={`${dpr}${shadows}`} mode="concurrent" dpr={[1, dpr]} shadows={shadows} camera={{ position: [0, 5, 15], fov: 50 }}>
         <fog attach="fog" args={['white', 0, 500]} />
         <Sky sunPosition={[100, 10, 100]} distance={1000} />
-        <ambientLight layers={layers} intensity={0.1} />
+        <ambientLight layers={layers} intensity={0.1 * Math.PI} />
         <directionalLight
           ref={setLight}
           layers={layers}
           position={[0, 50, 150]}
-          intensity={1}
+          intensity={Math.PI}
           shadow-bias={-0.001}
           shadow-mapSize={[4096, 4096]}
           shadow-camera-left={-150}

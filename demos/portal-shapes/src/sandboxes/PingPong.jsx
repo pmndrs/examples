@@ -10,9 +10,9 @@ const RESTITUTION = 2.2
 export default function App(props) {
   return (
     <group {...props}>
-      <ambientLight intensity={0.3} onPointerOver={() => null} />
-      <pointLight position={[10, 10, 5]} />
-      <pointLight position={[-10, -10, -5]} />
+      <ambientLight intensity={0.3 * Math.PI} onPointerOver={() => null} />
+      <pointLight position={[10, 10, 5]} intensity={Math.PI} decay={0} />
+      <pointLight position={[-10, -10, -5]} intensity={Math.PI} decay={0} />
       <Physics gravity={[0, -30, 0]}>
         <Ball />
         <Paddle />

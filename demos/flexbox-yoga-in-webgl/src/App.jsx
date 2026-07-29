@@ -173,14 +173,15 @@ export default function App() {
         camera={{ position: [0, 0, 10], far: 1000 }}
         gl={{ powerPreference: 'high-performance', alpha: false, antialias: false, stencil: false, depth: false }}
         onCreated={({ gl }) => gl.setClearColor('#f5f5f5')}>
-        <pointLight position={[-10, -10, -10]} intensity={1} />
-        <ambientLight intensity={0.4} />
+        <pointLight position={[-10, -10, -10]} intensity={Math.PI} decay={0} />
+        <ambientLight intensity={0.4 * Math.PI} />
         <spotLight
           castShadow
           angle={0.3}
           penumbra={1}
           position={[0, 10, 20]}
-          intensity={5}
+          intensity={5 * Math.PI}
+          decay={0}
           shadow-mapSize-width={1024}
           shadow-mapSize-height={1024}
         />

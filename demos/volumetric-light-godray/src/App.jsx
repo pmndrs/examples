@@ -11,7 +11,7 @@ export default function App() {
   return (
     <Canvas camera={{ position: [0, 0, 30], fov: 35, near: 1, far: 60 }} gl={{ antialias: false }}>
       <color attach="background" args={['#050505']} />
-      <ambientLight />
+      <ambientLight intensity={Math.PI} />
       {/** The screen uses postpro godrays */}
       <Screen />
       {/** The sphere reflects the screen with a cube-cam */}

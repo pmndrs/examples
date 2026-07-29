@@ -7,8 +7,8 @@ import shoeModel from './shoe-draco.glb?url'
 export default function App(props) {
   return (
     <group {...props}>
-      <ambientLight intensity={0.2} />
-      <spotLight intensity={0.5} angle={0.1} penumbra={1} position={[10, 15, 10]} />
+      <ambientLight intensity={0.2 * Math.PI} />
+      <spotLight intensity={0.5 * Math.PI} decay={0} angle={0.1} penumbra={1} position={[10, 15, 10]} />
       <PivotControls depthTest={false} anchor={[0, 0, 0]}>
         <Shoe />
       </PivotControls>

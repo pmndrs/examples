@@ -10,7 +10,7 @@ import drumsSound from './drums.mp3'
 export default function App(props) {
   return (
     <Canvas shadows dpr={[1, 2]} camera={{ position: [-1, 1.5, 2], fov: 25 }}>
-      <spotLight position={[-4, 4, -4]} angle={0.06} penumbra={1} castShadow shadow-mapSize={[2048, 2048]} />
+      <spotLight position={[-4, 4, -4]} intensity={Math.PI} decay={0} angle={0.06} penumbra={1} castShadow shadow-mapSize={[2048, 2048]} />
       <Suspense fallback={null}>
         <Track position-z={-0.25} url={synthSound} />
         <Track position-z={0} url={snareSound} />

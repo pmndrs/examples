@@ -1,0 +1,76 @@
+arkanoid
+  - Legacy EffectComposer passes use attachArray="passes" and are not registered by the current React Three Fiber version.
+  - Rebuild the pass chain with the current API and add OutputPass last.
+  - Render the HUD after the composer without rendering the main scene over the composite.
+  - Compare with the thumbnail before making any exposure adjustment.
+bestservedbold-christmas-baubles
+  - EffectComposer disables renderer tone mapping, but the chain has no ToneMapping effect.
+  - Add explicit ACES filmic tone mapping after N8AO and compare with the thumbnail.
+bloom-hdr-workflow-gltf
+  - Drei Effects uses the legacy disableGamma pipeline and has no current output/tone-mapping pass.
+  - Add an OutputPass after bloom, then retune bloom only if the thumbnail still differs.
+building-dynamic-envmaps
+  - EffectComposer disables renderer tone mapping, but the SSR/Bloom/LUT chain has no ToneMapping effect.
+  - The current SSR shader also fails to compile against the installed Three/postprocessing combination (CUBEUV_MAX_MIP becomes NaN).
+  - Repair or replace the SSR pass, add explicit ACES filmic tone mapping last, and compare with the thumbnail.
+color-grading
+  - Drei Effects uses the legacy gamma pass before the LUT, with no current tone-mapping/output pass.
+  - Rebuild the order as scene effects, LUT color grading, then explicit tone mapping and output conversion.
+dbismut-furniture
+  - Models render into offscreen targets, where renderer tone mapping is no longer applied.
+  - The custom cross-fade shader copies those linear targets directly to screen without tone mapping or output-color conversion.
+  - Add the output transform after cross-fading, then compare each furniture state with the thumbnail.
+diamond-ring
+  - EffectComposer disables renderer tone mapping, but the Bloom chain has no explicit ToneMapping effect.
+  - Add ACES filmic tone mapping after Bloom and compare with the thumbnail.
+flexbox-yoga-in-webgl
+  - The legacy manual composer ends with GammaCorrectionShader rather than the current tone-mapping/output pipeline.
+  - Rebuild the pass registration, add tone mapping and OutputPass at the end, and replace the removed PlaneBufferGeometry used by WaterPass.
+gltf-animations-tied-to-scroll
+  - EffectComposer disables renderer tone mapping, but the TiltShift chain has no explicit ToneMapping effect.
+  - Add ACES filmic tone mapping last and compare with the thumbnail.
+hi-key-bubbles
+  - EffectComposer disables renderer tone mapping, but the N8AO/TiltShift chain has no explicit ToneMapping effect.
+  - Add ACES filmic tone mapping last and compare with the thumbnail.
+instanced-particles-effects
+  - Drei Effects explicitly disables its legacy gamma pass and ends after the LUT.
+  - Rebuild the manual pass chain with explicit tone mapping and output conversion after the LUT.
+lusion-connectors
+  - EffectComposer disables renderer tone mapping, but the N8AO chain has no explicit ToneMapping effect.
+  - Add ACES filmic tone mapping last and compare with the thumbnail.
+motionpathcontrols
+  - EffectComposer disables renderer tone mapping, but the color and TiltShift effects have no explicit ToneMapping effect.
+  - Add ACES filmic tone mapping last and compare with the thumbnail.
+mount-transitions
+  - EffectComposer disables renderer tone mapping, but the N8AO chain has no explicit ToneMapping effect.
+  - Add ACES filmic tone mapping last after replacing the demo's removed BufferGeometry aliases.
+nextjs-prism
+  - EffectComposer disables renderer tone mapping, but the Bloom/LUT chain has no explicit ToneMapping effect.
+  - Add ACES filmic tone mapping after the LUT and compare with the thumbnail.
+object-clump
+  - EffectComposer disables renderer tone mapping, but the N8AO/SMAA chain has no explicit ToneMapping effect.
+  - Add ACES filmic tone mapping before the final antialiasing/output stage.
+react-pp-outlines
+  - EffectComposer disables renderer tone mapping, but the SSAO/Outline chain has no explicit ToneMapping effect.
+  - Repair the missing NormalPass configuration, then add ACES filmic tone mapping before the final antialiasing/output stage.
+router-transitions
+  - EffectComposer disables renderer tone mapping, but the N8AO/TiltShift chain has no explicit ToneMapping effect.
+  - Repair the current runtime compatibility error, then add ACES filmic tone mapping last.
+selective-outlines
+  - EffectComposer disables renderer tone mapping, but the Outline chain has no explicit ToneMapping effect.
+  - Add ACES filmic tone mapping before the final output stage.
+space-game
+  - The renderer is explicitly set to NoToneMapping and the legacy Drei Effects composer disables its gamma pass.
+  - Rebuild the Bloom chain with explicit ACES filmic tone mapping and output conversion.
+sparks-and-effects
+  - The renderer assigns the removed Uncharted2ToneMapping constant and the legacy manual composer has no current output pass.
+  - Replace the obsolete setting, rebuild pass registration, and finish with explicit tone mapping and OutputPass.
+ssr-test
+  - EffectComposer disables renderer tone mapping, but the SSR chain has no explicit ToneMapping effect.
+  - Repair the current media/runtime compatibility failure, add ACES filmic tone mapping last, and compare with the thumbnail.
+starwars
+  - EffectComposer disables renderer tone mapping, but the SSR/Bloom/LUT chain has no explicit ToneMapping effect.
+  - Repair the SSR shader incompatibility, then add ACES filmic tone mapping after the LUT.
+volumetric-light-godray
+  - EffectComposer disables renderer tone mapping, but the GodRays/Bloom chain has no explicit ToneMapping effect.
+  - Repair the current media/runtime compatibility failure, then add ACES filmic tone mapping last.

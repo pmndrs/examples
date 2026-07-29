@@ -8,7 +8,7 @@ export default function App() {
   return (
     <Canvas orthographic dpr={[1, 2]} camera={{ position: [0, 0, 100], fov: 35, near: 1, far: 20 }}>
       <Suspense fallback={null}>
-        <ambientLight intensity={0.75} />
+        <ambientLight intensity={0.75 * Math.PI} />
 
         <Selection>
           <EffectComposer multisampling={0} autoClear={false}>

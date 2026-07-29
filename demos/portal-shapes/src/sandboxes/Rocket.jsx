@@ -9,9 +9,9 @@ export default function App(props) {
   useFrame((state, delta) => (ref.current.rotation.y += delta / 2))
   return (
     <group ref={ref} {...props}>
-      <ambientLight intensity={0.75} />
-      <pointLight intensity={1} position={[-10, -25, -10]} />
-      <spotLight intensity={2.25} angle={0.2} penumbra={1} position={[-25, 20, -15]} />
+      <ambientLight intensity={0.75 * Math.PI} />
+      <pointLight intensity={Math.PI} decay={0} position={[-10, -25, -10]} />
+      <spotLight intensity={2.25 * Math.PI} decay={0} angle={0.2} penumbra={1} position={[-25, 20, -15]} />
       <Model url={rocketModel} />
     </group>
   )

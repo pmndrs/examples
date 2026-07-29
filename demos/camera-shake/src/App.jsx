@@ -29,12 +29,12 @@ export default function App() {
     <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 160, 160], fov: 20 }}>
       <fog attach="fog" args={['lightpink', 60, 100]} />
       <Suspense fallback={null}>
-        <ambientLight intensity={0.5} />
+        <ambientLight intensity={0.5 * Math.PI} />
         <Model position={[-4.5, -4, 0]} rotation={[0, -2.8, 0]} />
-        <spotLight position={[50, 50, -30]} castShadow />
-        <pointLight position={[-10, -10, -10]} color="red" intensity={3} />
-        <pointLight position={[0, -5, 5]} intensity={0.5} />
-        <directionalLight position={[0, -5, 0]} color="red" intensity={2} />
+        <spotLight position={[50, 50, -30]} intensity={Math.PI} decay={0} castShadow />
+        <pointLight position={[-10, -10, -10]} color="red" intensity={3 * Math.PI} decay={0} />
+        <pointLight position={[0, -5, 5]} intensity={0.5 * Math.PI} decay={0} />
+        <directionalLight position={[0, -5, 0]} color="red" intensity={2 * Math.PI} />
         <Light />
         <Environment preset="warehouse" />
         <Rig />

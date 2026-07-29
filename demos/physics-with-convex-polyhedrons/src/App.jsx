@@ -84,7 +84,8 @@ export default () => (
       position={[15, 15, 15]}
       angle={0.3}
       penumbra={1}
-      intensity={2}
+      intensity={2 * Math.PI}
+      decay={0}
       castShadow
       shadow-mapSize-width={2048}
       shadow-mapSize-height={2048}

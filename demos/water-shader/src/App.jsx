@@ -49,8 +49,8 @@ function Box() {
 export default function App() {
   return (
     <Canvas camera={{ position: [0, 5, 100], fov: 55, near: 1, far: 20000 }}>
-      <pointLight position={[100, 100, 100]} />
-      <pointLight position={[-100, -100, -100]} />
+      <pointLight position={[100, 100, 100]} intensity={Math.PI} decay={0} />
+      <pointLight position={[-100, -100, -100]} intensity={Math.PI} decay={0} />
       <Suspense fallback={null}>
         <Ocean />
         <Box />

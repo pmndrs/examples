@@ -42,7 +42,7 @@ export default function () {
   return (
     <Canvas dpr={[1, 2]} shadows gl={{ alpha: false }} camera={{ position: [-2, 1, 7], fov: 50 }}>
       <color attach="background" args={['#f6d186']} />
-      <hemisphereLight intensity={1} />
+      <hemisphereLight intensity={Math.PI} />
       <spotLight position={[5, 5, 5]} angle={0.75} decay={0} penumbra={1} intensity={Math.PI} castShadow shadow-mapSize-width={1028} shadow-mapSize-height={1028} />
       <Physics iterations={6}>
         <Debug scale={1.1} color="black">

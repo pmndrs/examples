@@ -55,10 +55,10 @@ export const App = () => (
     gl={{ alpha: true, stencil: false, depth: false, antialias: false }}
     camera={{ position: [0, 0, 20], fov: 32.5, near: 1, far: 100 }}
     onCreated={(state) => (state.gl.toneMappingExposure = 1.5)}>
-    <ambientLight intensity={1} />
-    <spotLight position={[20, 20, 25]} penumbra={1} angle={0.2} color="white" castShadow shadow-mapSize={[512, 512]} />
-    <directionalLight position={[0, 5, -4]} intensity={4} />
-    <directionalLight position={[0, -15, -0]} intensity={4} color="red" />
+    <ambientLight intensity={Math.PI} />
+    <spotLight position={[20, 20, 25]} intensity={Math.PI} decay={0} penumbra={1} angle={0.2} color="white" castShadow shadow-mapSize={[512, 512]} />
+    <directionalLight position={[0, 5, -4]} intensity={4 * Math.PI} />
+    <directionalLight position={[0, -15, -0]} intensity={4 * Math.PI} color="red" />
     <Physics gravity={[0, 0, 0]}>
       <Pointer />
       {baubles.map((props, i) => <Bauble key={i} {...props} />) /* prettier-ignore */}

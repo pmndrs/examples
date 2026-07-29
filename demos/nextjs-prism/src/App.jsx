@@ -74,7 +74,7 @@ function Scene() {
     boxreflect.current.setRay([(state.pointer.x * state.viewport.width) / 2, (state.pointer.y * state.viewport.height) / 2, 0], [0, 0, 0])
     // Animate rainbow intensity
     lerp(rainbow.current.material, 'emissiveIntensity', isPrismHit ? 2.5 : 0, 0.1)
-    spot.current.intensity = rainbow.current.material.emissiveIntensity
+    spot.current.intensity = rainbow.current.material.emissiveIntensity * Math.PI
     // Animate ambience
     lerp(ambient.current, 'intensity', 0, 0.025)
   })

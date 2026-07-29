@@ -43,8 +43,8 @@ function App() {
   return (
     <>
       <Canvas eventSource={document.getElementById('root')} eventPrefix="client">
-        <ambientLight />
-        <pointLight position={[10, 0, 10]} />
+        <ambientLight intensity={Math.PI} />
+        <pointLight position={[10, 0, 10]} intensity={Math.PI} decay={0} />
         <ScrollContainer scroll={scroll}>
           <Scene />
         </ScrollContainer>

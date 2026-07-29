@@ -11,12 +11,13 @@ import darthModel from './darth-transformed.glb?url'
 export default function App() {
   return (
     <Canvas gl={{ antialias: false, stencil: false }} camera={{ position: [5, 0, 0], fov: 80 }}>
-      <ambientLight intensity={0.6} />
+      <ambientLight intensity={0.6 * Math.PI} />
       <spotLight
         angle={0.12}
         penumbra={0.1}
         position={[10, 0, -10]}
-        intensity={40}
+        intensity={40 * Math.PI}
+        decay={0}
         onUpdate={(self) => {
           self.target.position.set(-10, 0, 0)
           self.target.updateMatrixWorld()

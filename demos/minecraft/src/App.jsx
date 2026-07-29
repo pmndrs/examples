@@ -21,8 +21,8 @@ export default function App() {
       ]}>
       <Canvas shadows camera={{ fov: 45 }}>
         <Sky sunPosition={[100, 20, 100]} />
-        <ambientLight intensity={0.3} />
-        <pointLight castShadow intensity={0.8} position={[100, 100, 100]} />
+        <ambientLight intensity={0.3 * Math.PI} />
+        <pointLight castShadow intensity={0.8 * Math.PI} decay={0} position={[100, 100, 100]} />
         <Physics gravity={[0, -30, 0]}>
           <Ground />
           <Player />

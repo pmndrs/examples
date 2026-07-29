@@ -23,8 +23,8 @@ export const App = () => (
   <Canvas shadows gl={{ antialias: false }} camera={{ position: [1, 0.5, 2.5], fov: 50 }}>
     <color attach="background" args={["#f0f0f0"]} />
     <fog attach="fog" args={["#f0f0f0", 0, 20]} />
-    <ambientLight intensity={0.5} />
-    <directionalLight intensity={2} position={[-5, 5, 5]} castShadow shadow-mapSize={2048} shadow-bias={-0.0001} />
+    <ambientLight intensity={0.5 * Math.PI} />
+    <directionalLight intensity={2 * Math.PI} position={[-5, 5, 5]} castShadow shadow-mapSize={2048} shadow-bias={-0.0001} />
     <ScrollControls damping={0.2} maxSpeed={0.5} pages={2}>
       <Model position={[0, -1, 0]} rotation={[Math.PI / 2, 0, 0]} scale={0.01} />
     </ScrollControls>

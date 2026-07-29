@@ -29,8 +29,8 @@ function Sphere(props) {
 export default function App() {
   return (
     <Canvas frameloop="demand" camera={{ position: [0, 0, 5], fov: 45 }}>
-      <ambientLight />
-      <spotLight intensity={0.5} angle={0.2} penumbra={1} position={[5, 15, 10]} />
+      <ambientLight intensity={Math.PI} />
+      <spotLight intensity={0.5 * Math.PI} decay={0} angle={0.2} penumbra={1} position={[5, 15, 10]} />
       <Sphere />
       <Grading />
       <Environment preset="dawn" background blur={0.6} />

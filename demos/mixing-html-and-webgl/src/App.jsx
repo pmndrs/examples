@@ -29,9 +29,9 @@ function Box() {
 export default function App() {
   return (
     <Canvas camera={{ position: [2, 1, 5], fov: 25 }}>
-      <ambientLight intensity={0.5} />
-      <pointLight position={[10, 10, 5]} />
-      <pointLight position={[-10, -10, -10]} />
+      <ambientLight intensity={0.5 * Math.PI} />
+      <pointLight position={[10, 10, 5]} intensity={Math.PI} decay={0} />
+      <pointLight position={[-10, -10, -10]} intensity={Math.PI} decay={0} />
       <Box />
       <OrbitControls makeDefault />
     </Canvas>

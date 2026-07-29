@@ -44,8 +44,8 @@ export default () => {
       <OrbitControls />
       <fog attach="fog" args={[bg, 10, 50]} />
       <color attach="background" args={[bg]} />
-      <ambientLight intensity={0.1} />
-      <spotLight position={[10, 10, 10]} angle={0.5} intensity={1} castShadow penumbra={1} />
+      <ambientLight intensity={0.1 * Math.PI} />
+      <spotLight position={[10, 10, 10]} angle={0.5} intensity={Math.PI} decay={0} castShadow penumbra={1} />
       <Physics>
         <BoxTrigger
           onCollide={(e) => {

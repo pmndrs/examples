@@ -34,7 +34,7 @@ export function App() {
   const { invert, colorWrite, depthWrite } = useControls({ invert: false, colorWrite: true, depthWrite: false })
   return (
     <Canvas camera={{ position: [0, 0, 5] }} gl={{ stencil: true}}>
-      <hemisphereLight intensity={1} groundColor="red" />
+      <hemisphereLight intensity={Math.PI} groundColor="red" />
       <Suspense fallback={null}>
         <Float floatIntensity={5} rotationIntensity={2} speed={10}>
           {/* Mask sets the shape of the area that is shown, and cuts everything else out.

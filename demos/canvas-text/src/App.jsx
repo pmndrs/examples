@@ -19,9 +19,9 @@ export default function App() {
         // text content as well as the canvas we do just that.
         eventSource={ref}
         eventPrefix="offset">
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[10, 10, 10]} angle={0.15} penumbra={1} castShadow shadow-mapSize={[2024, 2024]} />
-        <pointLight position={[10, 0, 0]} />
+        <ambientLight intensity={0.5 * Math.PI} />
+        <directionalLight position={[10, 10, 10]} intensity={Math.PI} angle={0.15} penumbra={1} castShadow shadow-mapSize={[2024, 2024]} />
+        <pointLight position={[10, 0, 0]} intensity={Math.PI} decay={0} />
         <Box position={[-1.2, 0, 0]} />
         <Box position={[1.2, 0, 0]} />
         <Shadows position={[0, 0, -0.5]} />

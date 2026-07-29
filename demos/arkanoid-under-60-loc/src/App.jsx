@@ -5,8 +5,8 @@ import { useRef } from "react"
 
 export const App = () => (
   <Canvas camera={{ position: [0, 5, 12], fov: 50 }}>
-    <ambientLight intensity={0.5} />
-    <pointLight position={[10, 10, 5]} />
+    <ambientLight intensity={0.5 * Math.PI} />
+    <pointLight position={[10, 10, 5]} intensity={Math.PI} decay={0} />
     <Physics gravity={[0, -30, 0]}>
       <Ball />
       <Paddle />

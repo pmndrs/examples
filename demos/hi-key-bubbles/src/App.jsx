@@ -17,8 +17,8 @@ export default function App() {
     <Canvas shadows dpr={[1, 2]} gl={{ antialias: false }} camera={{ fov: 50, position: [0, 0, 20] }}>
       <color attach="background" args={['#f0f0f0']} />
       <fog attach="fog" args={['red', 20, -5]} />
-      <ambientLight intensity={1.5} />
-      <pointLight position={[10, 10, 10]} intensity={1} castShadow />
+      <ambientLight intensity={1.5 * Math.PI} />
+      <pointLight position={[10, 10, 10]} intensity={Math.PI} decay={0} castShadow />
       <Bubbles />
       <EffectComposer disableNormalPass>
         <N8AO aoRadius={6} intensity={2} color="red" />
