@@ -4,12 +4,17 @@ import { useGLTF, OrbitControls, ContactShadows } from '@react-three/drei'
 import { useControls } from 'leva'
 import tunnel from 'tunnel-rat'
 
+// From the poimandres market (https://market.pmnd.rs/), vendored locally since the original CDN is offline.
+import beechModel from './assets/tree-beech.gltf?url'
+import limeModel from './assets/tree-lime.gltf?url'
+import spruceModel from './assets/tree-spruce.gltf?url'
+
 const status = tunnel()
 
 const MODELS = {
-  Beech: 'https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/tree-beech/model.gltf',
-  Lime: 'https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/tree-lime/model.gltf',
-  Spruce: 'https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/tree-spruce/model.gltf'
+  Beech: beechModel,
+  Lime: limeModel,
+  Spruce: spruceModel
 }
 
 export default function App() {

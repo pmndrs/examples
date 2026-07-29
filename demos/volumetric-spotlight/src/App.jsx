@@ -3,6 +3,9 @@ import { useRef } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { useGLTF, SpotLight, useDepthBuffer } from '@react-three/drei'
 
+// From the poimandres market (https://market.pmnd.rs/), vendored locally since the original CDN is offline.
+import dragonModel from './assets/dragon.gltf?url'
+
 export default function App() {
   return (
     <Canvas shadows dpr={[1, 2]} camera={{ position: [-2, 2, 6], fov: 50, near: 1, far: 20 }}>
@@ -18,7 +21,7 @@ function Scene() {
   // This is a super cheap depth buffer that only renders once (frames: 1 is optional!), which works well for static scenes
   // Spots can optionally use that for realism, learn about soft particles here: http://john-chapman-graphics.blogspot.com/2013/01/good-enough-volumetrics-for-spotlights.html
   const depthBuffer = useDepthBuffer({ frames: 1 })
-  const { nodes, materials } = useGLTF('https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/dragon/model.gltf')
+  const { nodes, materials } = useGLTF(dragonModel)
   return (
     <>
       <MovingSpot depthBuffer={depthBuffer} color="#0c8cbf" position={[3, 3, 2]} />
