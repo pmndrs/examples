@@ -1159,8 +1159,8 @@ importers:
         specifier: ^8.17.5
         version: 8.18.0(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0)
       lamina:
-        specifier: ^1.1.23
-        version: 1.2.2(@react-three/fiber@8.18.0(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0))(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0)
+        specifier: 1.1.23
+        version: 1.1.23(@react-three/fiber@8.18.0(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0))(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0)
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -1367,6 +1367,9 @@ importers:
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
+      suspend-react:
+        specifier: ^0.1.3
+        version: 0.1.3(react@18.3.1)
       three:
         specifier: ^0.165.0
         version: 0.165.0
@@ -1762,8 +1765,8 @@ importers:
         specifier: ^1.4.0
         version: 1.5.0(@react-three/fiber@8.18.0(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0))(react@18.3.1)(three@0.165.0)
       lamina:
-        specifier: ^1.1.23
-        version: 1.2.2(@react-three/fiber@8.18.0(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0))(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0)
+        specifier: 1.1.23
+        version: 1.1.23(@react-three/fiber@8.18.0(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0))(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0)
       leva:
         specifier: ^0.9.35
         version: 0.9.36(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1939,6 +1942,9 @@ importers:
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
+      suspend-react:
+        specifier: ^0.1.3
+        version: 0.1.3(react@18.3.1)
       three:
         specifier: ^0.165.0
         version: 0.165.0
@@ -2062,6 +2068,9 @@ importers:
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
+      suspend-react:
+        specifier: ^0.1.3
+        version: 0.1.3(react@18.3.1)
       three:
         specifier: ^0.165.0
         version: 0.165.0
@@ -2850,8 +2859,8 @@ importers:
         specifier: ^8.17.5
         version: 8.18.0(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0)
       lamina:
-        specifier: ^1.1.23
-        version: 1.2.2(@react-three/fiber@8.18.0(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0))(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0)
+        specifier: 1.1.23
+        version: 1.1.23(@react-three/fiber@8.18.0(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0))(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0)
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -3508,8 +3517,8 @@ importers:
         specifier: ^8.17.5
         version: 8.18.0(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0)
       lamina:
-        specifier: ^1.1.23
-        version: 1.2.2(@react-three/fiber@8.18.0(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0))(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0)
+        specifier: 1.1.23
+        version: 1.1.23(@react-three/fiber@8.18.0(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0))(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0)
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -4014,6 +4023,9 @@ importers:
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
+      suspend-react:
+        specifier: ^0.1.3
+        version: 0.1.3(react@18.3.1)
       three:
         specifier: ^0.165.0
         version: 0.165.0
@@ -4361,6 +4373,9 @@ importers:
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
+      suspend-react:
+        specifier: ^0.1.3
+        version: 0.1.3(react@18.3.1)
       three:
         specifier: ^0.165.0
         version: 0.165.0
@@ -4482,8 +4497,8 @@ importers:
         specifier: ^8.17.5
         version: 8.18.0(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0)
       lamina:
-        specifier: ^1.1.23
-        version: 1.2.2(@react-three/fiber@8.18.0(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0))(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0)
+        specifier: 1.1.23
+        version: 1.1.23(@react-three/fiber@8.18.0(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0))(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0)
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -5129,6 +5144,9 @@ importers:
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
+      suspend-react:
+        specifier: ^0.1.3
+        version: 0.1.3(react@18.3.1)
       three:
         specifier: ^0.165.0
         version: 0.165.0
@@ -5527,8 +5545,8 @@ importers:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
       suspend-react:
-        specifier: ^0.0.8
-        version: 0.0.8(react@18.3.1)
+        specifier: ^0.1.3
+        version: 0.1.3(react@18.3.1)
       three:
         specifier: ^0.165.0
         version: 0.165.0
@@ -6796,6 +6814,9 @@ importers:
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
+      suspend-react:
+        specifier: ^0.1.3
+        version: 0.1.3(react@18.3.1)
       three:
         specifier: ^0.165.0
         version: 0.165.0
@@ -9939,6 +9960,21 @@ packages:
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
 
+  lamina@1.1.23:
+    resolution: {integrity: sha512-sxcoOyws9fK73tHJFsXgZlIJho++nf+FwWzpbvAheUvayl30DyJmPd0U0Q6v/ECcJuuujb7Txcr4SLOZrdDPJA==}
+    peerDependencies:
+      '@react-three/fiber': '>=8.0'
+      react: '>=18.0'
+      react-dom: '>=18.0'
+      three: '>=0.138'
+    peerDependenciesMeta:
+      '@react-three/fiber':
+        optional: true
+      react:
+        optional: true
+      react-dom:
+        optional: true
+
   lamina@1.2.2:
     resolution: {integrity: sha512-F81fSK0G2TowZuAi8R126t/C519+ZeiCUKr3TMQaGp5uCGhqKD0qO8rBo7677OMC4eY59oFswqqHF5pT9GkbEA==}
     peerDependencies:
@@ -10187,6 +10223,10 @@ packages:
   object-assign@4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
     engines: {node: '>=0.10.0'}
+
+  object-hash@3.0.0:
+    resolution: {integrity: sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw==}
+    engines: {node: '>= 6'}
 
   object-inspect@1.13.4:
     resolution: {integrity: sha512-W67iLl4J2EXEGTbfeHCffrjDfitvLANg0UlX3wFUUSTx92KXRFegMHUVgSqE+wvhAbi4WqjGg9czysTV2Epbew==}
@@ -11086,11 +11126,6 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
-  suspend-react@0.0.8:
-    resolution: {integrity: sha512-ZC3r8Hu1y0dIThzsGw0RLZplnX9yXwfItcvaIzJc2VQVi8TGyGDlu92syMB5ulybfvGLHAI5Ghzlk23UBPF8xg==}
-    peerDependencies:
-      react: '>=17.0'
-
   suspend-react@0.1.3:
     resolution: {integrity: sha512-aqldKgX9aZqpoDp3e8/BZ8Dm7x1pJl+qI3ZKxDN0i/IQTWUwBx/ManmlVJ3wowqbno6c2bmiIfs+Um6LbsjJyQ==}
     peerDependencies:
@@ -11152,6 +11187,18 @@ packages:
     peerDependencies:
       three: '>=0.151.0'
       three-mesh-bvh: '>=0.6.6'
+
+  three-custom-shader-material@4.0.0:
+    resolution: {integrity: sha512-oMlHSANeKJdpXiLnQTQILF0tY6p2q6tgzQiR5UzMtC9oCa+EQgMXh28dvzsnqtWVnnv6FGwXRfNFgqcv+mHW7Q==}
+    peerDependencies:
+      '@react-three/fiber': '>=8.0'
+      react: '>=18.0'
+      three: '>=0.140'
+    peerDependenciesMeta:
+      '@react-three/fiber':
+        optional: true
+      react:
+        optional: true
 
   three-custom-shader-material@6.4.0:
     resolution: {integrity: sha512-dIbkwX1P4DcHMOZrywW+/TDp5qJhlyU6NP/2kmHw91UqC+TrK4JSBtAV3qGc6UnkqSOmR1i0O+Yz5EnTp2aQ1g==}
@@ -14689,6 +14736,24 @@ snapshots:
     dependencies:
       json-buffer: 3.0.1
 
+  lamina@1.1.23(@react-three/fiber@8.18.0(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0))(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0):
+    dependencies:
+      glsl-token-descope: 1.0.2
+      glsl-token-functions: 1.0.1
+      glsl-token-string: 1.0.1
+      glsl-tokenizer: 2.1.5
+      lamina: 1.2.2(@react-three/fiber@8.18.0(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0))(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0)
+      leva: 0.9.36(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      three: 0.165.0
+      three-custom-shader-material: 4.0.0(@react-three/fiber@8.18.0(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0))(react@18.3.1)(three@0.165.0)
+    optionalDependencies:
+      '@react-three/fiber': 8.18.0(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+
   lamina@1.2.2(@react-three/fiber@8.18.0(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0))(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0):
     dependencies:
       glsl-token-descope: 1.0.2
@@ -14970,6 +15035,8 @@ snapshots:
   normalize-url@4.5.1: {}
 
   object-assign@4.1.1: {}
+
+  object-hash@3.0.0: {}
 
   object-inspect@1.13.4: {}
 
@@ -16043,10 +16110,6 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  suspend-react@0.0.8(react@18.3.1):
-    dependencies:
-      react: 18.3.1
-
   suspend-react@0.1.3(react@18.3.1):
     dependencies:
       react: 18.3.1
@@ -16094,6 +16157,17 @@ snapshots:
     dependencies:
       three: 0.165.0
       three-mesh-bvh: 0.6.8(three@0.165.0)
+
+  three-custom-shader-material@4.0.0(@react-three/fiber@8.18.0(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0))(react@18.3.1)(three@0.165.0):
+    dependencies:
+      glsl-token-functions: 1.0.1
+      glsl-token-string: 1.0.1
+      glsl-tokenizer: 2.1.5
+      object-hash: 3.0.0
+      three: 0.165.0
+    optionalDependencies:
+      '@react-three/fiber': 8.18.0(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0)
+      react: 18.3.1
 
   three-custom-shader-material@6.4.0(@react-three/fiber@8.18.0(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0))(react@18.3.1)(three@0.165.0):
     dependencies:
