@@ -4,7 +4,7 @@ import { Canvas } from '@react-three/fiber'
 import { useGLTF, View, Center, Environment, MapControls, OrbitControls, PivotControls, RandomizedLight } from '@react-three/drei'
 import { PerspectiveCamera, OrthographicCamera, AccumulativeShadows } from '@react-three/drei'
 import { Menu, Button } from '@mantine/core'
-import * as ICONS from '@tabler/icons'
+import * as ICONS from '@tabler/icons-react'
 import useRefs from 'react-use-refs'
 import create from 'zustand'
 
@@ -135,7 +135,7 @@ const SidePanel = forwardRef(({ which, children }, fref) => {
           <Button>{value}</Button>
         </Menu.Target>
         <Menu.Dropdown onClick={(e) => setPanelView(which, e.target.innerText)}>
-          <Menu.Item icon={<ICONS.IconArrowBigTop size={14} />}>Top</Menu.Item>
+          <Menu.Item icon={<ICONS.IconArrowBigUp size={14} />}>Top</Menu.Item>
           <Menu.Item icon={<ICONS.IconArrowBigDown size={14} />}>Bottom</Menu.Item>
           <Menu.Item icon={<ICONS.IconArrowBigLeft size={14} />}>Left</Menu.Item>
           <Menu.Item icon={<ICONS.IconArrowBigRight size={14} />}>Right</Menu.Item>
