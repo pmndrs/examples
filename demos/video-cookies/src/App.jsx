@@ -4,6 +4,9 @@ import { EffectComposer, Bloom, HueSaturation, BrightnessContrast, TiltShift2, W
 
 import causticsVid from './caustics.mp4?url'
 
+// From the poimandres market (https://market.pmnd.rs/), vendored locally since the original CDN is offline.
+import suzanneModel from './assets/suzanne-high-poly.gltf?url'
+
 export default function App() {
   return (
     <Canvas gl={{ antialias: false }} flat shadows camera={{ position: [0, 0, 8], fov: 35 }}>
@@ -53,7 +56,7 @@ function Cookie(props) {
 }
 
 function Suzi(props) {
-  const { nodes } = useGLTF('https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/suzanne-high-poly/model.gltf')
+  const { nodes } = useGLTF(suzanneModel)
   return (
     <mesh castShadow receiveShadow geometry={nodes.Suzanne.geometry} {...props} dispose={null}>
       <meshStandardMaterial color="#353535" />

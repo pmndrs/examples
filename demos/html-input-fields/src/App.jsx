@@ -5,7 +5,13 @@ import { useGLTF, AccumulativeShadows, RandomizedLight, Html, Text, Effects, Env
 import { WaterPass } from 'three-stdlib'
 import { ControlledInput } from './ControlledInput'
 
+// From the poimandres market (https://market.pmnd.rs/), vendored locally since the original CDN is offline.
+import bunnyModel from './assets/bunny.gltf?url'
+
 extend({ WaterPass })
+
+// The font lives in this demo's public/ folder; BASE_URL makes the path work under the site's per-demo base path.
+const interFont = import.meta.env.BASE_URL.replace(/\/?$/, '/') + 'Inter-Regular.woff'
 
 export default function App() {
   return (
@@ -24,7 +30,7 @@ export default function App() {
         <Sphere scale={0.25} position={[-3, 0, 2]} />
         <Sphere scale={0.25} position={[-4, 0, -2]} />
         <Sphere scale={0.65} position={[3.5, 0, -2]} />
-        <Text position={[0, 4, -10]} font="/Inter-Regular.woff" fontSize={6}>
+        <Text position={[0, 4, -10]} font={interFont} fontSize={6}>
           login
           <meshStandardMaterial color="#aaa" toneMapped={false} />
         </Text>
@@ -68,7 +74,7 @@ function Sphere(props) {
 }
 
 function Model(props) {
-  const { nodes } = useGLTF('https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/bunny/model.gltf')
+  const { nodes } = useGLTF(bunnyModel)
   return (
     <mesh castShadow receiveShadow geometry={nodes.bunny.geometry} {...props}>
       <MeshTransmissionMaterial backside thickness={0.2} anisotropicBlur={0.1} chromaticAberration={0.1} clearcoat={1} />
@@ -80,7 +86,7 @@ function Input(props) {
   const [text, set] = useState('hello world ...')
   return (
     <group {...props}>
-      <Text position={[-1.2, -0.022, 0]} anchorX="0px" font="/Inter-Regular.woff" fontSize={0.335} letterSpacing={-0.0}>
+      <Text position={[-1.2, -0.022, 0]} anchorX="0px" font={interFont} fontSize={0.335} letterSpacing={-0.0}>
         {text}
         <meshStandardMaterial color="black" />
       </Text>

@@ -6,6 +6,9 @@ import { useControls } from 'leva'
 
 import courtModel from './court.glb?url'
 
+// Noon Grass HDRI from Poly Haven (https://polyhaven.com/a/noon_grass), CC0, vendored locally.
+import noonGrassHdr from './assets/noon_grass_1k.hdr?url'
+
 export default function App() {
   return (
     <Canvas frameloop="demand" dpr={[1, 1.5]} shadows camera={{ near: 0.1, far: 40, fov: 75 }}>
@@ -19,7 +22,7 @@ export default function App() {
         <Floor />
       </group>
       <OrbitControls minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} />
-      <Environment files="https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/hdris/noon-grass/noon_grass_1k.hdr" background />
+      <Environment files={noonGrassHdr} background />
       <BakeShadows />
     </Canvas>
   )

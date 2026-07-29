@@ -3,6 +3,9 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { Mask, useMask, TransformControls, Float, Environment, OrbitControls, MeshDistortMaterial, ContactShadows, useGLTF } from '@react-three/drei'
 import { useControls } from 'leva'
 
+// From the poimandres market (https://market.pmnd.rs/), vendored locally since the original CDN is offline.
+import targetModel from './assets/target-stand.gltf?url'
+
 function MaskedContent({ invert, ...props }) {
   /* The useMask hook has to refer to the mask id defined below, the content
    * will then be stamped out.
@@ -26,7 +29,7 @@ function MaskedContent({ invert, ...props }) {
 }
 
 function Target(props) {
-  const { scene } = useGLTF('https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/target-stand/model.gltf')
+  const { scene } = useGLTF(targetModel)
   return <primitive object={scene} {...props} />
 }
 

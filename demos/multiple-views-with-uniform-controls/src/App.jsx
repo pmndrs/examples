@@ -8,6 +8,9 @@ import * as ICONS from '@tabler/icons-react'
 import useRefs from 'react-use-refs'
 import create from 'zustand'
 
+// From the poimandres market (https://market.pmnd.rs/), vendored locally since the original CDN is offline.
+import bricksModel from './assets/bricks.gltf?url'
+
 const matrix = new THREE.Matrix4()
 const positions = { Top: [0, 10, 0], Bottom: [0, -10, 0], Left: [-10, 0, 0], Right: [10, 0, 0], Back: [0, 0, -10], Front: [0, 0, 10] }
 const useStore = create((set) => ({
@@ -63,7 +66,7 @@ export function App() {
 }
 
 function Scene({ background = 'white', children, ...props }) {
-  const { nodes, materials } = useGLTF('https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/bricks/model.gltf')
+  const { nodes, materials } = useGLTF(bricksModel)
   return (
     <>
       <color attach="background" args={[background]} />

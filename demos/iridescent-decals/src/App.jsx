@@ -6,6 +6,9 @@ import sticker2 from './Twemoji_1f600.svg.png'
 import sticker3 from './D64aIWkXoAAFI08.png'
 import sticker4 from './three.png'
 
+// From the poimandres market (https://market.pmnd.rs/), vendored locally since the original CDN is offline.
+import bunnyModel from './assets/bunny.gltf?url'
+
 export const App = () => (
   <Canvas shadows camera={{ position: [2, 2, 10], fov: 20 }}>
     <ambientLight intensity={Math.PI} />
@@ -22,7 +25,7 @@ export const App = () => (
 )
 
 function Bun(props) {
-  const { nodes } = useGLTF('https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/bunny/model.gltf')
+  const { nodes } = useGLTF(bunnyModel)
   return (
     <mesh castShadow receiveShadow geometry={nodes.bunny.geometry} {...props} dispose={null}>
       <meshStandardMaterial color="black" />
