@@ -2,9 +2,9 @@
 
 import { Style } from "@/components/Style";
 import { Toast } from "@/components/Toast";
-import { useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { GoCommandPalette } from "react-icons/go";
-import { RxOpenInNewWindow } from "react-icons/rx";
+import { RxChevronDown, RxOpenInNewWindow } from "react-icons/rx";
 import { SiCodesandbox, SiGithub, SiStackblitz } from "react-icons/si";
 
 export function Social({
@@ -15,6 +15,8 @@ export function Social({
   embed_url: string;
 }) {
   const [show, setShow] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   const command = `npx -y degit pmndrs/examples/demos/${demoname} ${demoname} && cd ${demoname} && npm i && npm run dev`;
 
@@ -22,6 +24,38 @@ export function Social({
     await navigator.clipboard.writeText(command);
     setShow(true);
   };
+
+  useEffect(() => {
+    const menu = menuRef.current;
+    if (!menu) return;
+
+    const onToggle = (event: ToggleEvent) => {
+      setMoreOpen(event.newState === "open");
+    };
+
+    menu.addEventListener("toggle", onToggle);
+    return () => menu.removeEventListener("toggle", onToggle);
+  }, []);
+
+  const actions: { label: string; icon: ReactNode; href?: string }[] = [
+    { label: "fullpage", icon: <RxOpenInNewWindow />, href: embed_url },
+    {
+      label: "code",
+      icon: <SiGithub />,
+      href: `https://github.com/pmndrs/examples/tree/main/demos/${demoname}`,
+    },
+    {
+      label: "stackblitz",
+      icon: <SiStackblitz />,
+      href: `https://stackblitz.com/github/pmndrs/examples/tree/main/demos/${demoname}`,
+    },
+    {
+      label: "codesandbox",
+      icon: <SiCodesandbox />,
+      href: `https://codesandbox.io/s/github/pmndrs/examples/tree/main/demos/${demoname}`,
+    },
+    { label: "degit", icon: <GoCommandPalette /> },
+  ];
 
   return (
     <>
@@ -39,7 +73,8 @@ export function Social({
                 box-shadow: 0 1px 6px rgb(0 0 0 / 0.1);
               }
 
-              a {
+              :scope > a,
+              .more {
                 position: relative;
                 display: grid;
                 place-items: center;
@@ -52,17 +87,36 @@ export function Social({
                   color 0.15s ease;
               }
 
-              a:hover {
+              .more {
+                display: none;
+                padding: 0;
+                border: 0;
+                background: none;
+                cursor: pointer;
+              }
+
+              :scope > a:hover,
+              .more:hover,
+              .more[aria-expanded="true"] {
                 background: rgb(0 0 0 / 0.06);
                 color: #111;
               }
 
-              a svg {
+              :scope > a svg,
+              .more svg {
                 width: 0.95rem;
                 height: 0.95rem;
               }
 
-              a > span {
+              .more svg {
+                transition: rotate 0.2s ease;
+              }
+
+              .more[aria-expanded="true"] svg {
+                rotate: 180deg;
+              }
+
+              :scope > a > span {
                 position: absolute;
                 top: 100%;
                 left: 50%;
@@ -79,45 +133,152 @@ export function Social({
                 transition: opacity 0.15s ease;
               }
 
-              a:hover > span {
+              :scope > a:hover > span {
                 opacity: 1;
+              }
+
+              .menu {
+                position: fixed;
+                inset: 3.75rem max(0.75rem, env(safe-area-inset-right)) auto
+                  auto;
+                margin: 0;
+                padding: 0.4rem;
+                border: 1px solid #d4d4d4;
+                border-radius: 12px;
+                background: rgb(255 255 255 / 0.92);
+                backdrop-filter: blur(10px);
+                box-shadow: 0 10px 30px rgb(0 0 0 / 0.12);
+                animation: social-menu-in 0.2s ease both;
+              }
+
+              .menu:popover-open {
+                display: grid;
+                gap: 0.1rem;
+              }
+
+              @keyframes social-menu-in {
+                from {
+                  opacity: 0;
+                  translate: 0 -0.35rem;
+                }
+                to {
+                  opacity: 1;
+                  translate: 0 0;
+                }
+              }
+
+              .item {
+                display: flex;
+                align-items: center;
+                gap: 0.6rem;
+                padding: 0.5rem 1rem 0.5rem 0.7rem;
+                border: 0;
+                border-radius: 8px;
+                background: none;
+                color: #333;
+                cursor: pointer;
+                font: inherit;
+                font-size: 0.75rem;
+                font-weight: 600;
+                text-align: left;
+                transition:
+                  background 0.15s ease,
+                  color 0.15s ease;
+              }
+
+              .item:hover {
+                background: rgb(0 0 0 / 0.06);
+                color: #111;
+              }
+
+              .item svg {
+                width: 0.95rem;
+                height: 0.95rem;
+                flex-shrink: 0;
+                color: #555;
+              }
+
+              @media (max-width: 40rem) {
+                :scope > a {
+                  display: none;
+                }
+
+                .more {
+                  display: grid;
+                }
+              }
+
+              @media (prefers-reduced-motion: reduce) {
+                .menu {
+                  animation: none;
+                }
               }
             }
           `}
         />
 
-        <a target="_blank" rel="noopener noreferrer" href={embed_url}>
-          <RxOpenInNewWindow />
-          <span>fullpage</span>
-        </a>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href={`https://github.com/pmndrs/examples/tree/main/demos/${demoname}`}
+        {actions.map(({ label, icon, href }) =>
+          href ? (
+            <a key={label} target="_blank" rel="noopener noreferrer" href={href}>
+              {icon}
+              <span>{label}</span>
+            </a>
+          ) : (
+            <a key={label} href="javascript:void(0);" onClick={handleClick}>
+              {icon}
+              <span>{label}</span>
+            </a>
+          ),
+        )}
+
+        <button
+          {...({
+            popovertarget: "social-more-menu",
+            popovertargetaction: "toggle",
+          } as const)}
+          className="more"
+          aria-expanded={moreOpen}
+          aria-controls="social-more-menu"
+          aria-label={moreOpen ? "Hide demo links" : "Show demo links"}
         >
-          <SiGithub />
-          <span>code</span>
-        </a>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href={`https://stackblitz.com/github/pmndrs/examples/tree/main/demos/${demoname}`}
+          <RxChevronDown />
+        </button>
+
+        <div
+          {...({ popover: "auto" } as const)}
+          ref={menuRef}
+          id="social-more-menu"
+          className="menu"
         >
-          <SiStackblitz />
-          <span>stackblitz</span>
-        </a>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href={`https://codesandbox.io/s/github/pmndrs/examples/tree/main/demos/${demoname}`}
-        >
-          <SiCodesandbox />
-          <span>codesandbox</span>
-        </a>
-        <a href="javascript:void(0);" onClick={handleClick}>
-          <GoCommandPalette />
-          <span>degit</span>
-        </a>
+          {actions.map(({ label, icon, href }) =>
+            href ? (
+              <a
+                key={label}
+                className="item"
+                target="_blank"
+                rel="noopener noreferrer"
+                href={href}
+                onClick={() => menuRef.current?.hidePopover()}
+              >
+                {icon}
+                {label}
+              </a>
+            ) : (
+              <button
+                key={label}
+                className="item"
+                type="button"
+                onClick={() => {
+                  menuRef.current?.hidePopover();
+                  handleClick();
+                }}
+              >
+                {icon}
+                {label}
+              </button>
+            ),
+          )}
+        </div>
       </nav>
 
       <Toast visible={show} onDone={() => setShow(false)}>
