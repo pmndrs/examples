@@ -74,18 +74,18 @@ jobs:
       # Build (only for pushes on main)
       #
       - run: pnpm build
-        if: github.event_name != 'pull_request'
+        if: ${{ github.event_name != 'pull_request' && !inputs.update_snapshots }}
         env:
           BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
           BASE_URL: ${{ steps.configurepages.outputs.base_url }}
       - uses: actions/upload-pages-artifact@v3
-        if: github.event_name != 'pull_request'
+        if: ${{ github.event_name != 'pull_request' && !inputs.update_snapshots }}
         with:
           path: ./out${{ steps.configurepages.outputs.base_path }}
 
   deploy-job:
     # only for pushes on main
-    if: github.event_name != 'pull_request'
+    if: ${{ github.event_name != 'pull_request' && !inputs.update_snapshots && github.ref == 'refs/heads/main' }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
