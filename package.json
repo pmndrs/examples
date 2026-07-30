@@ -19,7 +19,7 @@
     "prettier": "^3.3.3",
     "syncpack": "^14.3.0",
     "turbo": "^2.10.7",
-    "typescript": "^7.0.2"
+    "typescript": "^5.5.4"
   },
   "engines": {
     "node": ">=24"

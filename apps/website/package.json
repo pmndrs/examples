@@ -184,6 +184,6 @@
     "eslint": "^8.57.0",
     "eslint-config-next": "14.2.5",
     "postcss": "^8",
-    "typescript": "^7.0.2"
+    "typescript": "^5.5.4"
   }
 }
