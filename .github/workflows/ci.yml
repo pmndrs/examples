@@ -60,7 +60,9 @@ jobs:
         env:
           BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
       # Baselines regen: gh workflow run CI --ref <branch> -f update_snapshots=true
-      - run: pnpm exec turbo test -- --update-snapshots
+      # --force: a regen must never replay cached test results (their cached
+      # outputs would restore the stale baselines we're regenerating)
+      - run: pnpm exec turbo test --force -- --update-snapshots=all
         if: ${{ inputs.update_snapshots }}
         env:
           BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
