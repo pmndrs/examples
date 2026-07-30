@@ -14,7 +14,7 @@ import {
 import { useParams } from "next/navigation";
 import clsx from "clsx";
 
-import { getLibraryLabel } from "@/const/libraries";
+import { getLibraryLabel, getLibraryPopularity } from "@/const/libraries";
 import type { Demo } from "@/lib/helper";
 import { Style } from "./Style";
 
@@ -43,13 +43,35 @@ export default function Nav({
   const [ready, setReady] = useState(false);
   const [library, setLibrary] = useState("");
 
-  const libraryOptions = useMemo(
-    () =>
-      Array.from(
-        new Set(demos.flatMap((demo) => demo.libraries.map(getLibraryLabel))),
-      ).sort((a, b) => a.localeCompare(b)),
-    [demos],
-  );
+  const libraryOptions = useMemo(() => {
+    const popularityByLabel = new Map<string, number>();
+    const usageByLabel = new Map<string, number>();
+    const libraries = new Set(demos.flatMap((demo) => demo.libraries));
+
+    libraries.forEach((demoLibrary) => {
+      const label = getLibraryLabel(demoLibrary);
+      popularityByLabel.set(
+        label,
+        (popularityByLabel.get(label) ?? 0) + getLibraryPopularity(demoLibrary),
+      );
+    });
+
+    demos.forEach((demo) => {
+      const labels = new Set(demo.libraries.map(getLibraryLabel));
+      labels.forEach((label) => {
+        usageByLabel.set(label, (usageByLabel.get(label) ?? 0) + 1);
+      });
+    });
+
+    return Array.from(popularityByLabel)
+      .sort(
+        ([labelA, popularityA], [labelB, popularityB]) =>
+          (usageByLabel.get(labelB) ?? 0) - (usageByLabel.get(labelA) ?? 0) ||
+          popularityB - popularityA ||
+          labelA.localeCompare(labelB),
+      )
+      .map(([label]) => label);
+  }, [demos]);
 
   const filteredDemos = useMemo(
     () =>
