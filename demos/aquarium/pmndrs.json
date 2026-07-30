@@ -4,6 +4,7 @@
   "description": "",
   "tags": [],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2023-01-29",
   "source": "https://codesandbox.io/s/n7jf0f",
   "libraries": ["@react-three/drei", "@react-three/fiber"],

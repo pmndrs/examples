@@ -4,6 +4,7 @@
   "description": "This example uses yoga to create flex-box layouts.",
   "tags": ["layout", "scroll", "flexbox", "text"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2020-09-07",
   "source": "https://codesandbox.io/s/7psew",
   "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/flex"],

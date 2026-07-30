@@ -4,6 +4,7 @@
   "description": "Trying out drei's new cloud component.",
   "tags": [],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2023-09-25",
   "source": "https://codesandbox.io/s/gwthnh",
   "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/rapier", "maath"],

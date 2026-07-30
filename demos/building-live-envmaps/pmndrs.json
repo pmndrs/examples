@@ -4,6 +4,7 @@
   "description": "Shows how to build declarative environment that are live and animated.",
   "tags": ["lightformer"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2022-03-05",
   "source": "https://codesandbox.io/s/lwo219",
   "libraries": ["@react-three/drei", "@react-three/fiber", "lamina"],

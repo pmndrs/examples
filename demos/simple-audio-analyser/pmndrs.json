@@ -4,6 +4,7 @@
   "description": "Audio frequency analysis.",
   "tags": ["analyser", "audio"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2021-09-02",
   "source": "https://codesandbox.io/s/wu51m",
   "libraries": ["@react-three/fiber"],

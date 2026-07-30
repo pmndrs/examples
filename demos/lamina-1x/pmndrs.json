@@ -4,12 +4,9 @@
   "description": "",
   "tags": ["material", "depth"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2022-03-15",
   "source": "https://codesandbox.io/s/ledhe1",
-  "libraries": [
-    "@react-three/drei",
-    "@react-three/fiber",
-    "lamina"
-  ],
+  "libraries": ["@react-three/drei", "@react-three/fiber", "lamina"],
   "assets": []
 }

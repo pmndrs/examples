@@ -4,6 +4,7 @@
   "description": "Shows how to parallax layers with dept of field and particles.",
   "tags": ["parallax", "animation", "dof", "particles"],
   "authors": ["Gianmarco Simone", "Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2021-03-26",
   "source": "https://codesandbox.io/s/gpioq",
   "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/postprocessing", "meshline"],

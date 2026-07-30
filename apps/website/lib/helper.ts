@@ -31,6 +31,7 @@ export type DemoMetadata = {
   description: string;
   tags: string[];
   authors: string[];
+  maintainers: string[];
   publishedAt?: string;
   source: string;
   libraries: string[];

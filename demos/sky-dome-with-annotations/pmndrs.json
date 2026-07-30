@@ -4,6 +4,7 @@
   "description": "Dome projecting texture and HTML annotations.",
   "tags": ["annotations", "html", "dome"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2020-02-10",
   "source": "https://codesandbox.io/s/wbrfs",
   "libraries": ["@react-three/drei", "@react-three/fiber"],

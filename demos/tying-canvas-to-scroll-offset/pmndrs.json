@@ -4,6 +4,7 @@
   "description": "How to tie canvas objects to scrollTop while events keep working.",
   "tags": ["scroll", "lerp", "events", "animation", "html"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2021-04-17",
   "source": "https://codesandbox.io/s/itfgk",
   "libraries": ["@react-three/drei", "@react-three/fiber"],

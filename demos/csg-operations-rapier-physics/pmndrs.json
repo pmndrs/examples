@@ -4,6 +4,7 @@
   "description": "",
   "tags": ["csg", "physics"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2022-07-22",
   "source": "https://codesandbox.io/s/mw0dtc",
   "libraries": ["@react-three/csg", "@react-three/drei", "@react-three/fiber", "@react-three/rapier", "lamina", "leva"],

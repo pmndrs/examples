@@ -4,6 +4,7 @@
   "description": "Curl noise and depth of field.",
   "tags": ["gpu", "shader", "curl", "dof"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2021-09-05",
   "source": "https://codesandbox.io/s/zgsyn",
   "libraries": ["@react-three/drei", "@react-three/fiber", "leva"],

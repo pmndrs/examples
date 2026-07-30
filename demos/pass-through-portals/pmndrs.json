@@ -4,6 +4,7 @@
   "description": "",
   "tags": ["portal"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2023-06-17",
   "source": "https://codesandbox.io/s/qvk72r",
   "libraries": ["@react-three/drei", "@react-three/fiber"],

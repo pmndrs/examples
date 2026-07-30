@@ -4,6 +4,7 @@
   "description": "A volumetric fire effect.",
   "tags": ["fire", "volumetric", "shader"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2021-05-14",
   "source": "https://codesandbox.io/s/3878x",
   "libraries": ["@react-three/drei", "@react-three/fiber"],

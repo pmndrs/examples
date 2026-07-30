@@ -4,6 +4,7 @@
   "description": "Testing dre's new CameraShake with a couple of primitives.",
   "tags": ["camera-shake", "rectarea-lights", "reflections"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2021-02-09",
   "source": "https://codesandbox.io/s/t4l0f",
   "libraries": ["@react-three/drei", "@react-three/fiber"],

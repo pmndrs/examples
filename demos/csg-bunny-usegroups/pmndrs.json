@@ -4,12 +4,9 @@
   "description": "",
   "tags": [],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2023-01-21",
   "source": "https://codesandbox.io/s/mlgzsc",
-  "libraries": [
-    "@react-three/csg",
-    "@react-three/drei",
-    "@react-three/fiber"
-  ],
+  "libraries": ["@react-three/csg", "@react-three/drei", "@react-three/fiber"],
   "assets": []
 }

@@ -4,6 +4,7 @@
   "description": "Custom springy controls using use-gesture and react-spring.",
   "tags": ["interaction", "custom-controls", "animation", "tag-heuer", "html"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2021-11-26",
   "source": "https://codesandbox.io/s/qyz5r",
   "libraries": ["@react-three/drei", "@react-three/fiber"],

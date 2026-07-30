@@ -4,6 +4,7 @@
   "description": "",
   "tags": ["stars", "text", "gradient", "instances"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2022-02-25",
   "source": "https://codesandbox.io/s/2csbr1",
   "libraries": ["@react-three/drei", "@react-three/fiber", "maath"],

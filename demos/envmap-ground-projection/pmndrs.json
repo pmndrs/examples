@@ -4,6 +4,7 @@
   "description": "",
   "tags": ["cube camera", "reflections"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2022-04-10",
   "source": "https://codesandbox.io/s/q48jgy",
   "libraries": ["@react-three/drei", "@react-three/fiber", "leva"],

@@ -4,6 +4,7 @@
   "description": "Shows how to implement trigger meshes that inform the application of collisions.",
   "tags": [],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2021-06-05",
   "source": "https://codesandbox.io/s/h545c",
   "libraries": ["@react-three/cannon", "@react-three/drei", "@react-three/fiber"],

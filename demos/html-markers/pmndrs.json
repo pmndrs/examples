@@ -4,6 +4,7 @@
   "description": "Occluding HTML annotations/markers.",
   "tags": ["annotations", "html", "markers"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2021-06-23",
   "source": "https://codesandbox.io/s/6oei7",
   "libraries": ["@react-three/drei", "@react-three/fiber"],

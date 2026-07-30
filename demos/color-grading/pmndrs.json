@@ -4,6 +4,7 @@
   "description": "Shows how to use LUTPass to grade colors.",
   "tags": ["grading"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2020-11-09",
   "source": "https://codesandbox.io/s/wvgxp",
   "libraries": ["@react-three/drei", "@react-three/fiber"],

@@ -4,6 +4,7 @@
   "description": "Demonstrates how to load a model progressively with fallbacks via React.Suspense, and using them as a LOD.",
   "tags": [],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2021-07-04",
   "source": "https://codesandbox.io/s/12nmp",
   "libraries": ["@react-three/drei", "@react-three/fiber"],

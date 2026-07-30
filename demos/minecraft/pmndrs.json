@@ -4,6 +4,7 @@
   "description": "Mini Minecraft implementation.",
   "tags": ["pointerlock-controls", "game", "minecraft"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2020-09-09",
   "source": "https://codesandbox.io/s/vkgi6",
   "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/rapier", "zustand"],

@@ -4,6 +4,7 @@
   "description": "A super small configurator that shows you how to make GLTF assets dynamic.",
   "tags": ["state", "gltf", "configurator"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2020-12-11",
   "source": "https://codesandbox.io/s/qxjoj",
   "libraries": ["@react-three/drei", "@react-three/fiber", "valtio"],

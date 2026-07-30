@@ -4,6 +4,7 @@
   "description": "",
   "tags": ["gltf", "stage", "lighting"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2022-12-20",
   "source": "https://codesandbox.io/s/if9crg",
   "libraries": ["@react-three/drei", "@react-three/fiber", "leva"],

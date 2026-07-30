@@ -4,11 +4,9 @@
   "description": "Having HTML and WebGL in the same scene with the addition of occlusion.",
   "tags": ["occlusion", "html"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2021-05-29",
   "source": "https://codesandbox.io/s/9keg6",
-  "libraries": [
-    "@react-three/drei",
-    "@react-three/fiber"
-  ],
+  "libraries": ["@react-three/drei", "@react-three/fiber"],
   "assets": []
 }
