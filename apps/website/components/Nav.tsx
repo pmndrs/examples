@@ -17,6 +17,7 @@ import type { Demo } from "@/lib/helper";
 import { Style } from "./Style";
 
 const STORAGE_KEY = "nav-collapsed";
+const MAX_TAGS = 4;
 
 function getPreferredCollapsed() {
   const nav = new URLSearchParams(window.location.search).get("nav");
@@ -291,6 +292,29 @@ export default function Nav({
               font-size: 0.7rem;
               background: none;
             }
+
+            .tags {
+              position: absolute;
+              inset: auto 0 0 0;
+              z-index: 1;
+              display: flex;
+              flex-wrap: nowrap;
+              gap: 3px;
+              padding: 5px;
+              /* whatever runs past the right edge is simply clipped */
+              overflow: hidden;
+            }
+
+            .tag {
+              flex-shrink: 0;
+              padding: 1px 6px;
+              border-radius: 999px;
+              background: #222;
+              color: white;
+              font-size: 0.5rem;
+              line-height: 1.7;
+              white-space: nowrap;
+            }
           }
         `}
       />
@@ -323,7 +347,7 @@ export default function Nav({
 
       <nav {...props}>
         <ul ref={ulRef}>
-          {demos.map(({ name, title, thumb, isNew }) => (
+          {demos.map(({ name, title, thumb, isNew, tags }) => (
             <li key={thumb} data-demo={name}>
               <Link
                 href={`/demos/${name}`}
@@ -332,6 +356,15 @@ export default function Nav({
                 <div className="thumb">
                   {isNew && <span className="pill">New</span>}
                   <Image src={thumb} fill sizes="227px" alt={title} />
+                  {tags.length > 0 && (
+                    <div className="tags">
+                      {tags.slice(0, MAX_TAGS).map((tag) => (
+                        <span key={tag} className="tag">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </Link>
             </li>
