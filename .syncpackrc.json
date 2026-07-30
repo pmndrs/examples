@@ -2,25 +2,60 @@
   "versionGroups": [
     {
       "label": "React is pinned for all demos",
-      "packages": ["@demo/**"],
-      "dependencies": ["react", "react-dom"],
-      "pinVersion": "^18.3.1"
+      "packages": [
+        "@demo/**"
+      ],
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "pinVersion": "18.3.1"
     },
     {
       "label": "React types are pinned for all demos",
-      "packages": ["@demo/**"],
-      "dependencies": ["@types/react"],
-      "pinVersion": "^18.3.3"
+      "packages": [
+        "@demo/**"
+      ],
+      "dependencies": [
+        "@types/react"
+      ],
+      "pinVersion": "18.3.3"
     },
     {
       "label": "React DOM types are pinned for all demos",
-      "packages": ["@demo/**"],
-      "dependencies": ["@types/react-dom"],
-      "pinVersion": "^18.3.0"
+      "packages": [
+        "@demo/**"
+      ],
+      "dependencies": [
+        "@types/react-dom"
+      ],
+      "pinVersion": "18.3.0"
+    },
+    {
+      "label": "lamina is pinned to the last release compatible with three 0.165 / React 18 (1.2.x requires three >= 0.170 and React 19)",
+      "packages": [
+        "@demo/**"
+      ],
+      "dependencies": [
+        "lamina"
+      ],
+      "pinVersion": "1.1.23"
+    },
+    {
+      "label": "suspend-react is pinned for all demos (the suspend(promise) pattern requires >= 0.1.3)",
+      "packages": [
+        "@demo/**"
+      ],
+      "dependencies": [
+        "suspend-react"
+      ],
+      "pinVersion": "0.1.3"
     },
     {
       "label": "Demos must use identical versions of shared dependencies",
-      "packages": ["@demo/**"],
+      "packages": [
+        "@demo/**"
+      ],
       "dependencies": [
         "three",
         "@react-three/fiber",
@@ -65,8 +100,12 @@
     },
     {
       "label": "Workspace deps use workspace protocol",
-      "dependencies": ["@demo/**"],
-      "dependencyTypes": ["prod"],
+      "dependencies": [
+        "@demo/**"
+      ],
+      "dependencyTypes": [
+        "prod"
+      ],
       "policy": "sameRange"
     }
   ]
