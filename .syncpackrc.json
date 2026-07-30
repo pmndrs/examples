@@ -9,7 +9,7 @@
         "react",
         "react-dom"
       ],
-      "pinVersion": "^18.3.1"
+      "pinVersion": "18.3.1"
     },
     {
       "label": "React types are pinned for all demos",
@@ -19,7 +19,7 @@
       "dependencies": [
         "@types/react"
       ],
-      "pinVersion": "^18.3.3"
+      "pinVersion": "18.3.3"
     },
     {
       "label": "React DOM types are pinned for all demos",
@@ -29,7 +29,7 @@
       "dependencies": [
         "@types/react-dom"
       ],
-      "pinVersion": "^18.3.0"
+      "pinVersion": "18.3.0"
     },
     {
       "label": "lamina is pinned to the last release compatible with three 0.165 / React 18 (1.2.x requires three >= 0.170 and React 19)",
@@ -49,7 +49,7 @@
       "dependencies": [
         "suspend-react"
       ],
-      "pinVersion": "^0.1.3"
+      "pinVersion": "0.1.3"
     },
     {
       "label": "Demos must use identical versions of shared dependencies",
