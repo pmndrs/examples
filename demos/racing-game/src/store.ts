@@ -7,7 +7,6 @@ import type { PublicApi, WheelInfoOptions } from '@react-three/cannon'
 import type { Group } from 'three'
 import type { StoreApi } from 'zustand'
 
-// zustand v4 dropped the GetState/SetState/StateSelector type exports
 type GetState<T> = () => T
 type SetState<T> = StoreApi<T>['setState']
 type StateSelector<T, U> = (state: T) => U
@@ -183,8 +182,6 @@ export const mutation: Mutation = {
 }
 
 // Make the store shallow compare by default
-// zustand v5 removed the equalityFn argument from the hook; useStoreWithEqualityFn
-// is the supported replacement (many selectors here return fresh arrays).
 const useStore = <T>(sel: StateSelector<IState, T>) => useStoreWithEqualityFn(useStoreImpl, sel, shallow)
 Object.assign(useStore, useStoreImpl)
 

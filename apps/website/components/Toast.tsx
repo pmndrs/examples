@@ -17,7 +17,6 @@ export function Toast({
 }) {
   const [mounted, setMounted] = useState(false);
   const [phase, setPhase] = useState<"enter" | "exit">("enter");
-  // @types/react 19 requires an explicit initial value for useRef
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(
     undefined,
   );

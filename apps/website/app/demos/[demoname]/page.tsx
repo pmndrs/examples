@@ -11,7 +11,6 @@ import { Info } from "./Info";
 const demos = getDemos();
 
 export type Props = {
-  // Next 15 made route params async
   params: Promise<{ demoname: string }>;
 };
 
