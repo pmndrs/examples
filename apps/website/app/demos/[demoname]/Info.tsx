@@ -272,6 +272,20 @@ export function Info({ demo }: { demo: Demo }) {
 
           {demo.description && <p className="description">{demo.description}</p>}
 
+          {demo.authors.length > 0 && (
+            <section>
+              <h3>{demo.authors.length > 1 ? "Authors" : "Author"}</h3>
+              <p className="text">{demo.authors.join(", ")}</p>
+            </section>
+          )}
+
+          {demo.publishedAt && (
+            <section>
+              <h3>Published</h3>
+              <p className="text">{formatDate(demo.publishedAt)}</p>
+            </section>
+          )}
+
           {demo.tags.length > 0 && (
             <section>
               <h3>Tags</h3>
@@ -291,31 +305,6 @@ export function Info({ demo }: { demo: Demo }) {
                   <li key={library}>{getLibraryLabel(library)}</li>
                 ))}
               </ul>
-            </section>
-          )}
-
-          {demo.authors.length > 0 && (
-            <section>
-              <h3>{demo.authors.length > 1 ? "Authors" : "Author"}</h3>
-              <p className="text">{demo.authors.join(", ")}</p>
-            </section>
-          )}
-
-          {demo.publishedAt && (
-            <section>
-              <h3>Published</h3>
-              <p className="text">{formatDate(demo.publishedAt)}</p>
-            </section>
-          )}
-
-          {demo.source && (
-            <section>
-              <h3>Source</h3>
-              <p className="text">
-                <a target="_blank" rel="noopener noreferrer" href={demo.source}>
-                  Original demo
-                </a>
-              </p>
             </section>
           )}
 
