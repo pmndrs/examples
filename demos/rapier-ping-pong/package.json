@@ -1,9 +1,6 @@
 {
   "name": "@demo/rapier-ping-pong",
   "version": "1.0.0",
-  "description": "Mini ping-pong implementation using rapier-physics.",
-  "homepage": "https://codesandbox.io/s/ptdgrn",
-  "keywords": [],
   "dependencies": {
     "@pmndrs/branding": "^0.0.8",
     "@react-three/drei": "^9.109.5",

@@ -1,0 +1,19 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "T-Shirt Configurator",
+  "description": "",
+  "tags": [
+    "decals"
+  ],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2022-08-15",
+  "source": "https://codesandbox.io/s/ioxywi",
+  "libraries": [
+    "@pmndrs/branding",
+    "@react-three/drei",
+    "@react-three/fiber",
+    "maath",
+    "valtio"
+  ],
+  "assets": []
+}

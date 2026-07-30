@@ -40,14 +40,6 @@
     "typescript": "^5.5.4",
     "vite": "^5.4.0"
   },
-  "keywords": [
-    "shadows",
-    "lights",
-    "gltf",
-    "html-annotations"
-  ],
-  "description": "Experimentaing with lights and shadows.",
-  "homepage": "https://codesandbox.io/s/0n9it",
   "type": "module",
   "repository": {
     "type": "git",

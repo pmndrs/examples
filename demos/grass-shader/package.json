@@ -1,14 +1,6 @@
 {
   "name": "@demo/grass-shader",
   "version": "1.0.0",
-  "description": "Grass shader using simplex noise.",
-  "homepage": "https://codesandbox.io/s/5xho4",
-  "keywords": [
-    "noise",
-    "shader",
-    "simplex",
-    "grass"
-  ],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",

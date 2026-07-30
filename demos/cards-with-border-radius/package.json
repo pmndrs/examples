@@ -1,9 +1,6 @@
 {
   "name": "@demo/cards-with-border-radius",
   "version": "1.0.0",
-  "description": "",
-  "homepage": "https://codesandbox.io/s/9s2wd9",
-  "keywords": [],
   "dependencies": {
     "@pmndrs/branding": "^0.0.8",
     "@react-three/drei": "^9.109.5",

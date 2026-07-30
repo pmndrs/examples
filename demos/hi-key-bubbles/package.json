@@ -1,11 +1,6 @@
 {
   "name": "@demo/hi-key-bubbles",
   "version": "1.0.0",
-  "description": "Shows to use drei/instances how far gamma-correction can stretch colors.",
-  "homepage": "https://codesandbox.io/s/i6t0j",
-  "keywords": [
-    "instances"
-  ],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",

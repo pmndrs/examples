@@ -1,12 +1,6 @@
 {
   "name": "@demo/simple-audio-analyser",
   "version": "1.0.0",
-  "description": "Audio frequency analysis.",
-  "homepage": "https://codesandbox.io/s/wu51m",
-  "keywords": [
-    "analyser",
-    "audio"
-  ],
   "dependencies": {
     "@pmndrs/branding": "^0.0.8",
     "@react-three/fiber": "^8.17.5",

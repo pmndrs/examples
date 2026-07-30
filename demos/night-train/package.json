@@ -1,14 +1,6 @@
 {
   "name": "@demo/night-train",
   "version": "1.0.0",
-  "description": "Stacking a couple of drei helpers",
-  "homepage": "https://codesandbox.io/s/l900i",
-  "keywords": [
-    "merged",
-    "scroll-controls",
-    "meshreflectormaterial",
-    "instances"
-  ],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",

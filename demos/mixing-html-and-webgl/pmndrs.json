@@ -1,0 +1,11 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Mixing HTML And WebGL",
+  "description": "Adding HTML into the scene.",
+  "tags": ["html", "transforms", "drei"],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2021-03-24",
+  "source": "https://codesandbox.io/s/7ucso",
+  "libraries": ["@react-three/drei", "@react-three/fiber"],
+  "assets": []
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Three.js Journey Portal",
+  "description": "The last scene from Bruno Simons Threejs journey in react-three-fiber",
+  "tags": ["gltf", "particles", "shaders"],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2021-04-19",
+  "source": "https://codesandbox.io/s/ni6v4",
+  "libraries": ["@react-three/drei", "@react-three/fiber"],
+  "assets": []
+}

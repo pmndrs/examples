@@ -1,0 +1,11 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "SVG Maps With HTML Annotations",
+  "description": "Using SVGLoader, converting each path into cell components with annotations and map controls.",
+  "tags": ["html", "svg"],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2019-09-16",
+  "source": "https://codesandbox.io/s/mkq8e",
+  "libraries": ["@react-three/drei", "@react-three/fiber", "three-stdlib"],
+  "assets": []
+}

@@ -27,15 +27,8 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "keywords": [
-    "stage",
-    "camera-shake",
-    "controls"
-  ],
   "name": "@demo/staging-and-camerashake",
   "version": "1.0.0",
-  "description": "How to stage and shake models while using controls at the same time.",
-  "homepage": "https://codesandbox.io/s/0ycwe",
   "type": "module",
   "repository": {
     "type": "git",

@@ -1,0 +1,11 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Backdrop And Cables",
+  "description": "Using a studio backdrop, quadratic bezier line and contact shadows.",
+  "tags": ["quadraticbezierline", "contact-shadows", "backdrop"],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2021-11-28",
+  "source": "https://codesandbox.io/s/2ij9u",
+  "libraries": ["@react-three/drei", "@react-three/fiber"],
+  "assets": []
+}

@@ -1,9 +1,6 @@
 {
   "name": "@demo/csg-bunny-usegroups",
   "version": "1.0.0",
-  "description": "",
-  "homepage": "https://codesandbox.io/s/mlgzsc",
-  "keywords": [],
   "dependencies": {
     "@react-three/csg": "^3.2.0",
     "@react-three/drei": "^9.109.5",

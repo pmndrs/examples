@@ -1,14 +1,6 @@
 {
   "name": "@demo/bouncy-watch",
   "version": "1.0.0",
-  "description": "Custom springy controls using use-gesture and react-spring.",
-  "homepage": "https://codesandbox.io/s/qyz5r",
-  "keywords": [
-    "use-gesture",
-    "custom-controls",
-    "react-spring",
-    "tag-heuer"
-  ],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",

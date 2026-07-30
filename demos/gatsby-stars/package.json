@@ -1,15 +1,6 @@
 {
   "name": "@demo/gatsby-stars",
   "version": "1.0.0",
-  "description": "",
-  "homepage": "https://codesandbox.io/s/2csbr1",
-  "keywords": [
-    "stars",
-    "text",
-    "gradient",
-    "instances",
-    "gatsby"
-  ],
   "dependencies": {
     "@pmndrs/branding": "^0.0.8",
     "@react-three/drei": "^9.109.5",

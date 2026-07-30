@@ -1,15 +1,6 @@
 {
   "name": "@demo/react-spring-animations",
   "version": "1.0.0",
-  "description": "This is react-spring animating both the dom as well as the canvas with a single spring.",
-  "homepage": "https://codesandbox.io/s/6hi1y",
-  "keywords": [
-    "react-spring",
-    "gltf",
-    "physics",
-    "spring",
-    "animation"
-  ],
   "dependencies": {
     "@react-spring/core": "^9.7.4",
     "@react-spring/three": "^9.7.3",

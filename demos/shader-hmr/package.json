@@ -1,9 +1,6 @@
 {
   "name": "@demo/shader-hmr",
   "version": "1.0.0",
-  "description": "Shows how to create HMR shaders",
-  "homepage": "https://codesandbox.io/s/ib0jc",
-  "keywords": [],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",

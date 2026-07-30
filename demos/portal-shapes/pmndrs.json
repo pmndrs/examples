@@ -1,0 +1,11 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Portal Shapes",
+  "description": "",
+  "tags": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2023-01-31",
+  "source": "https://codesandbox.io/s/8j36ok",
+  "libraries": ["@pmndrs/branding", "@react-three/drei", "@react-three/fiber", "@react-three/rapier"],
+  "assets": []
+}

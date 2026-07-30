@@ -1,0 +1,11 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Router Transitions",
+  "description": "Shows how to implement routes and mount/unmount transition within the canvas using Wouter.",
+  "tags": ["wouter", "router", "trnasitions", "html"],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2021-04-19",
+  "source": "https://codesandbox.io/s/4j2q2",
+  "libraries": ["@pmndrs/assets", "@react-three/drei", "@react-three/fiber", "@react-three/postprocessing"],
+  "assets": []
+}

@@ -1,15 +1,6 @@
 {
   "name": "@demo/physics-with-convex-polyhedrons",
   "version": "1.0.0",
-  "description": "Using cannon collisions with GLTFs converted into convex hulls.",
-  "homepage": "https://codesandbox.io/s/08s1u",
-  "keywords": [
-    "physics",
-    "collisions",
-    "convex-polyhedron",
-    "cannon",
-    "gltf"
-  ],
   "dependencies": {
     "@react-three/cannon": "^6.6.0",
     "@react-three/drei": "^9.109.5",

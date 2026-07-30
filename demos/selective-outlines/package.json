@@ -1,12 +1,6 @@
 {
   "name": "@demo/selective-outlines",
   "version": "1.0.0",
-  "description": "Using postprocessing to give seletcive objects outlines.",
-  "homepage": "https://codesandbox.io/s/d36mw",
-  "keywords": [
-    "postprocessing",
-    "outlines"
-  ],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",

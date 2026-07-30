@@ -9,13 +9,6 @@
     "react-dom": "^18.3.1",
     "three": "^0.165.0"
   },
-  "keywords": [
-    "reflections",
-    "transmission",
-    "glas"
-  ],
-  "description": "PBR transmission and thickness to emulate glas.",
-  "homepage": "https://codesandbox.io/s/kv7tv",
   "type": "module",
   "devDependencies": {
     "@types/react": "^18.3.3",

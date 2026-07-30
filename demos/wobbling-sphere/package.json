@@ -1,13 +1,6 @@
 {
   "name": "@demo/wobbling-sphere",
   "version": "1.0.0",
-  "description": "Experimenting with environment maps.",
-  "homepage": "https://codesandbox.io/s/5oufp",
-  "keywords": [
-    "environment",
-    "reflections",
-    "soft-shadows"
-  ],
   "dependencies": {
     "@react-spring/three": "^9.7.3",
     "@react-three/drei": "^9.109.5",

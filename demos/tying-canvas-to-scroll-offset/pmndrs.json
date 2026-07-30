@@ -1,0 +1,11 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Tying Canvas To Scroll Offset",
+  "description": "How to tie canvas objects to scrollTop while events keep working.",
+  "tags": ["scroll", "lerp", "events", "animation", "html"],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2021-04-17",
+  "source": "https://codesandbox.io/s/itfgk",
+  "libraries": ["@react-three/drei", "@react-three/fiber"],
+  "assets": []
+}

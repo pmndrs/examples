@@ -1,9 +1,6 @@
 {
   "name": "@demo/flying-bananas",
   "version": "1.0.0",
-  "description": "Shows how to form self-contained components with their own state and user interaction.",
-  "homepage": "https://codesandbox.io/s/2ycs3",
-  "keywords": [],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",

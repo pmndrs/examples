@@ -1,9 +1,6 @@
 {
   "name": "@demo/canvas-text",
   "version": "1.0.0",
-  "description": "Shows how to form self-contained components with their own state and user interaction.",
-  "homepage": "https://codesandbox.io/s/p9umgf",
-  "keywords": [],
   "dependencies": {
     "@react-three/fiber": "^8.17.5",
     "react": "^18.3.1",

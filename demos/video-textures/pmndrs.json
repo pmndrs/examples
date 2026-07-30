@@ -1,0 +1,11 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Video Textures",
+  "description": "How to load, apply and play video textures, and how to calculate fullscreen, or \"cover\" aspect ratio. ",
+  "tags": ["video", "texture", "aspect-ratio"],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2020-08-20",
+  "source": "https://codesandbox.io/s/39hg8",
+  "libraries": ["@react-three/drei", "@react-three/fiber"],
+  "assets": []
+}

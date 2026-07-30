@@ -1,14 +1,6 @@
 {
   "name": "@demo/audio-analyser",
   "version": "1.0.0",
-  "description": "Combining audio analysis with gltf cell fracture and reflections.",
-  "homepage": "https://codesandbox.io/s/dvokj",
-  "keywords": [
-    "gltf",
-    "audio",
-    "reflections",
-    "cell-fracture"
-  ],
   "dependencies": {
     "@pmndrs/branding": "^0.0.8",
     "@react-three/drei": "^9.109.5",

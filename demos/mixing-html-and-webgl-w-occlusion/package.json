@@ -1,13 +1,6 @@
 {
   "name": "@demo/mixing-html-and-webgl-w-occlusion",
   "version": "1.0.0",
-  "description": "Having HTML and WebGL in the same scene with the addition of occlusion.",
-  "homepage": "https://codesandbox.io/s/9keg6",
-  "keywords": [
-    "occlusion",
-    "drei",
-    "html"
-  ],
   "dependencies": {
     "@headlessui/react": "^1.7.19",
     "@heroicons/react": "^2.2.0",

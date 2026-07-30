@@ -28,15 +28,8 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "keywords": [
-    "annotations",
-    "html",
-    "markers"
-  ],
   "name": "@demo/html-markers",
   "version": "1.0.0",
-  "description": "Occluding HTML annotations/markers.",
-  "homepage": "https://codesandbox.io/s/6oei7",
   "type": "module",
   "repository": {
     "type": "git",

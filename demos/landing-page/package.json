@@ -1,11 +1,6 @@
 {
   "name": "@demo/landing-page",
   "version": "1.0.0",
-  "description": "Transparent backdrop and model staging",
-  "homepage": "https://codesandbox.io/s/n60qg",
-  "keywords": [
-    "contact shadows"
-  ],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",

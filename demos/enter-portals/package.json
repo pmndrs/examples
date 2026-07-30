@@ -1,9 +1,6 @@
 {
   "name": "@demo/enter-portals",
   "version": "1.0.0",
-  "description": "",
-  "homepage": "https://codesandbox.io/s/9m4tpc",
-  "keywords": [],
   "dependencies": {
     "@pmndrs/assets": "^1.6.0",
     "@pmndrs/branding": "^0.0.8",

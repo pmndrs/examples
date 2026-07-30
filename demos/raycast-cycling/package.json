@@ -1,12 +1,6 @@
 {
   "name": "@demo/raycast-cycling",
   "version": "1.0.0",
-  "description": "Bringing multiple objects underneath the cursor up front through raycast cycling",
-  "homepage": "https://codesandbox.io/s/ls503",
-  "keywords": [
-    "raycast",
-    "cycling"
-  ],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",

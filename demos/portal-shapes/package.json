@@ -1,9 +1,6 @@
 {
   "name": "@demo/portal-shapes",
   "version": "1.0.0",
-  "description": "",
-  "homepage": "https://codesandbox.io/s/8j36ok",
-  "keywords": [],
   "dependencies": {
     "@pmndrs/branding": "^0.0.8",
     "@react-three/drei": "^9.109.5",

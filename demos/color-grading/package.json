@@ -1,11 +1,6 @@
 {
   "name": "@demo/color-grading",
   "version": "1.0.0",
-  "description": "Shows how to use LUTPass to grade colors.",
-  "homepage": "https://codesandbox.io/s/wvgxp",
-  "keywords": [
-    "grading"
-  ],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",

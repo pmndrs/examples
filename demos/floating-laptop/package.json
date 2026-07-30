@@ -1,13 +1,6 @@
 {
   "name": "@demo/floating-laptop",
   "version": "1.0.0",
-  "description": "Animating GLTFs with react-spring.",
-  "homepage": "https://codesandbox.io/s/q23sw",
-  "keywords": [
-    "gltf",
-    "animation",
-    "react-spring"
-  ],
   "dependencies": {
     "@react-spring/three": "^9.7.3",
     "@react-spring/web": "^9.7.4",
