@@ -32,14 +32,14 @@
       "pinVersion": "19.2.3"
     },
     {
-      "label": "lamina is pinned to the last release compatible with three 0.165 (1.2.x requires three >= 0.170)",
+      "label": "Update lamina to 1.2.2 for all demos.",
       "packages": [
         "@demo/**"
       ],
       "dependencies": [
         "lamina"
       ],
-      "pinVersion": "1.1.23"
+      "pinVersion": "1.2.2"
     },
     {
       "label": "postprocessing is pinned to the last release compatible with three 0.165 (6.36.7+ requires three >= 0.174, and 6.37+ drifts further). @react-three/postprocessing 3.x declares postprocessing ^6.36.6, so pnpm.overrides pins the transitive copy too",

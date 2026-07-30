@@ -6,7 +6,7 @@
     "@react-three/cannon": "^6.6.0",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.1",
-    "lamina": "1.1.23",
+    "lamina": "1.2.2",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "three": "^0.165.0"
