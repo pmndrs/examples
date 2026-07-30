@@ -18,31 +18,25 @@ function formatDate(date: string) {
 
 export function Info({ demo }: { demo: Demo }) {
   const [open, setOpen] = useState(false);
-  const rootRef = useRef<HTMLDivElement>(null);
+  const popoverRef = useRef<HTMLDivElement>(null);
   const libraryLabels = Array.from(
     new Set(demo.libraries.map(getLibraryLabel)),
   );
 
   useEffect(() => {
-    if (!open) return;
+    const popover = popoverRef.current;
+    if (!popover) return;
 
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
-    };
-    const onPointerDown = (e: PointerEvent) => {
-      if (!rootRef.current?.contains(e.target as Node)) setOpen(false);
+    const onToggle = (event: ToggleEvent) => {
+      setOpen(event.newState === "open");
     };
 
-    window.addEventListener("keydown", onKeyDown);
-    document.addEventListener("pointerdown", onPointerDown);
-    return () => {
-      window.removeEventListener("keydown", onKeyDown);
-      document.removeEventListener("pointerdown", onPointerDown);
-    };
-  }, [open]);
+    popover.addEventListener("toggle", onToggle);
+    return () => popover.removeEventListener("toggle", onToggle);
+  }, []);
 
   return (
-    <div ref={rootRef} className="Info">
+    <div className="Info">
       <Style
         css={`
           @scope {
@@ -109,13 +103,14 @@ export function Info({ demo }: { demo: Demo }) {
             }
 
             .panel {
-              position: absolute;
-              top: calc(100% + 0.6rem);
-              right: 0;
-              width: min(24rem, calc(100vw - 1.5rem));
-              max-height: min(70dvh, 34rem);
+              position: fixed;
+              inset: 3.75rem max(0.75rem, env(safe-area-inset-right)) auto auto;
+              box-sizing: border-box;
+              width: min(24rem, calc(100dvw - 1.5rem));
+              max-height: min(calc(100dvh - 4.5rem), 34rem);
               overflow-y: auto;
               overscroll-behavior: contain;
+              margin: 0;
               padding: 1.1rem 1.2rem 1.2rem;
               border: 1px solid #d4d4d4;
               border-radius: 12px;
@@ -123,6 +118,10 @@ export function Info({ demo }: { demo: Demo }) {
               backdrop-filter: blur(10px);
               box-shadow: 0 10px 30px rgb(0 0 0 / 0.12);
               animation: info-in 0.2s ease both;
+            }
+
+            .panel::backdrop {
+              background: transparent;
             }
 
             @keyframes info-in {
@@ -245,123 +244,158 @@ export function Info({ demo }: { demo: Demo }) {
               color: #666;
               font-size: 0.7rem;
             }
+
+            @media (max-width: 40rem), (max-height: 32rem) {
+              .panel {
+                inset: auto max(0.5rem, env(safe-area-inset-right))
+                  max(0.5rem, env(safe-area-inset-bottom))
+                  max(0.5rem, env(safe-area-inset-left));
+                width: auto;
+                max-width: none;
+                max-height: calc(
+                  100dvh -
+                    1rem - env(safe-area-inset-top) - env(
+                      safe-area-inset-bottom
+                    )
+                );
+                padding: 1rem;
+                border-radius: 16px;
+              }
+
+              .panel::backdrop {
+                background: rgb(0 0 0 / 0.18);
+              }
+
+              .trigger > span {
+                display: none;
+              }
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+              .panel {
+                animation: none;
+              }
+            }
           }
         `}
       />
 
       <button
+        {...({
+          popovertarget: "demo-info-panel",
+          popovertargetaction: "toggle",
+        } as const)}
         className="trigger"
-        onClick={() => setOpen((prev) => !prev)}
         aria-expanded={open}
         aria-controls="demo-info-panel"
+        aria-haspopup="dialog"
         aria-label={open ? "Hide demo info" : "Show demo info"}
       >
         <RxInfoCircled />
         <span>info</span>
       </button>
 
-      {open && (
-        <div id="demo-info-panel" className="panel" role="region">
-          <header>
-            <h2>{demo.title}</h2>
-            <button
-              className="close"
-              onClick={() => setOpen(false)}
-              aria-label="Dismiss demo info"
-            >
-              <RxCross2 />
-            </button>
-          </header>
+      <div
+        {...({ popover: "auto" } as const)}
+        ref={popoverRef}
+        id="demo-info-panel"
+        className="panel"
+        role="dialog"
+        aria-labelledby="demo-info-title"
+      >
+        <header>
+          <h2 id="demo-info-title">{demo.title}</h2>
+          <button
+            className="close"
+            onClick={() => popoverRef.current?.hidePopover()}
+            aria-label="Dismiss demo info"
+          >
+            <RxCross2 />
+          </button>
+        </header>
 
-          {demo.description && (
-            <p className="description">{demo.description}</p>
-          )}
+        {demo.description && <p className="description">{demo.description}</p>}
 
-          {demo.authors.length > 0 && (
-            <section>
-              <h3>{demo.authors.length > 1 ? "Authors" : "Author"}</h3>
-              <p className="text">{demo.authors.join(", ")}</p>
-            </section>
-          )}
+        {demo.authors.length > 0 && (
+          <section>
+            <h3>{demo.authors.length > 1 ? "Authors" : "Author"}</h3>
+            <p className="text">{demo.authors.join(", ")}</p>
+          </section>
+        )}
 
-          {demo.publishedAt && (
-            <section>
-              <h3>Published</h3>
-              <p className="text">{formatDate(demo.publishedAt)}</p>
-            </section>
-          )}
+        {demo.publishedAt && (
+          <section>
+            <h3>Published</h3>
+            <p className="text">{formatDate(demo.publishedAt)}</p>
+          </section>
+        )}
 
-          {demo.tags.length > 0 && (
-            <section>
-              <h3>Tags</h3>
-              <ul className="pills">
-                {demo.tags.map((tag) => (
-                  <li key={tag}>{tag}</li>
-                ))}
-              </ul>
-            </section>
-          )}
+        {demo.tags.length > 0 && (
+          <section>
+            <h3>Tags</h3>
+            <ul className="pills">
+              {demo.tags.map((tag) => (
+                <li key={tag}>{tag}</li>
+              ))}
+            </ul>
+          </section>
+        )}
 
-          {libraryLabels.length > 0 && (
-            <section>
-              <h3>Libraries</h3>
-              <ul className="pills">
-                {libraryLabels.map((library) => (
-                  <li key={library}>{library}</li>
-                ))}
-              </ul>
-            </section>
-          )}
+        {libraryLabels.length > 0 && (
+          <section>
+            <h3>Libraries</h3>
+            <ul className="pills">
+              {libraryLabels.map((library) => (
+                <li key={library}>{library}</li>
+              ))}
+            </ul>
+          </section>
+        )}
 
-          {demo.assets.length > 0 && (
-            <section>
-              <h3>Assets</h3>
-              <ul className="assets">
-                {demo.assets.map((asset) => (
-                  <li key={asset.name}>
-                    {asset.source ? (
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href={asset.source}
-                      >
-                        {asset.name}
-                      </a>
-                    ) : (
-                      asset.name
-                    )}
-                    {asset.creator && (
-                      <span className="meta"> by {asset.creator}</span>
-                    )}
-                    {asset.license && (
-                      <span className="meta">
-                        {" — "}
-                        {asset.licenseUrl ? (
-                          <a
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            href={asset.licenseUrl}
-                          >
-                            {asset.license}
-                          </a>
-                        ) : (
-                          asset.license
-                        )}
-                      </span>
-                    )}
-                    {asset.modified && (
-                      <span className="meta"> (modified)</span>
-                    )}
-                    {asset.notes && (
-                      <span className="notes">{asset.notes}</span>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </section>
-          )}
-        </div>
-      )}
+        {demo.assets.length > 0 && (
+          <section>
+            <h3>Assets</h3>
+            <ul className="assets">
+              {demo.assets.map((asset) => (
+                <li key={asset.name}>
+                  {asset.source ? (
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={asset.source}
+                    >
+                      {asset.name}
+                    </a>
+                  ) : (
+                    asset.name
+                  )}
+                  {asset.creator && (
+                    <span className="meta"> by {asset.creator}</span>
+                  )}
+                  {asset.license && (
+                    <span className="meta">
+                      {" — "}
+                      {asset.licenseUrl ? (
+                        <a
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href={asset.licenseUrl}
+                        >
+                          {asset.license}
+                        </a>
+                      ) : (
+                        asset.license
+                      )}
+                    </span>
+                  )}
+                  {asset.modified && <span className="meta"> (modified)</span>}
+                  {asset.notes && <span className="notes">{asset.notes}</span>}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+      </div>
     </div>
   );
 }
