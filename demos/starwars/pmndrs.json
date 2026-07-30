@@ -7,7 +7,8 @@
     "bloom",
     "hdr"
   ],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2022-07-12",
   "source": "https://codesandbox.io/s/fslt99",
   "libraries": [
     "@react-three/drei",

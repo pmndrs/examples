@@ -3,7 +3,8 @@
   "title": "Selective Outlines",
   "description": "Using postprocessing to give seletcive objects outlines.",
   "tags": ["postprocessing", "outlines"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2021-05-07",
   "source": "https://codesandbox.io/s/d36mw",
   "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/postprocessing"],
   "assets": []

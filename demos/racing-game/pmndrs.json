@@ -3,7 +3,8 @@
   "title": "Racing Game",
   "description": "A semi-complete racing game.",
   "tags": ["game", "vehicle", "raycast-vehicle", "racing", "physics"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2021-07-23",
   "source": "https://codesandbox.io/s/lo6kp",
   "libraries": ["@pmndrs/branding", "@react-three/cannon", "@react-three/drei", "@react-three/fiber", "leva", "use-asset"],
   "assets": []

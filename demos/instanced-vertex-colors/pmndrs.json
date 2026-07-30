@@ -3,7 +3,8 @@
   "title": "Instanced Vertex Colors",
   "description": "Instancing objectes with variable colors and effects.",
   "tags": ["vertex-colors", "ambient-occlusion", "bloom", "instancing"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2020-01-18",
   "source": "https://codesandbox.io/s/8fo01",
   "libraries": ["@react-three/fiber", "@react-three/postprocessing"],
   "assets": []

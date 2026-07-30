@@ -3,7 +3,8 @@
   "title": "ScrollControls and Lens Refraction",
   "description": "Vertical scrollcontrols and minimaps.",
   "tags": [],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2023-01-07",
   "source": "https://codesandbox.io/s/2n98yj",
   "libraries": [
     "@pmndrs/branding",

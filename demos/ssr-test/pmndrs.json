@@ -3,7 +3,8 @@
   "title": "SSR Test",
   "description": "Screen space reflections",
   "tags": ["ssr", "postprocessing"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2022-06-30",
   "source": "https://codesandbox.io/s/8pbw1f",
   "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/postprocessing", "leva"],
   "assets": []

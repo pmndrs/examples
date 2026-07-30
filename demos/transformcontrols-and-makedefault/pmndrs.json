@@ -9,7 +9,8 @@
     "transform",
     "valtio"
   ],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2021-10-08",
   "source": "https://codesandbox.io/s/btsbj",
   "libraries": [
     "@react-three/drei",

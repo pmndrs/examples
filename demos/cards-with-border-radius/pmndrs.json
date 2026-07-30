@@ -3,7 +3,8 @@
   "title": "Cards With Border Radius",
   "description": "",
   "tags": [],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2024-01-18",
   "source": "https://codesandbox.io/s/9s2wd9",
   "libraries": ["@pmndrs/branding", "@react-three/drei", "@react-three/fiber"],
   "assets": []

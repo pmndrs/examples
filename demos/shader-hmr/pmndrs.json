@@ -3,7 +3,8 @@
   "title": "Shader HMR",
   "description": "Shows how to create HMR shaders",
   "tags": [],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2021-07-18",
   "source": "https://codesandbox.io/s/ib0jc",
   "libraries": ["@react-three/drei", "@react-three/fiber"],
   "assets": []

@@ -5,7 +5,8 @@
   "tags": [
     "trails"
   ],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2022-10-20",
   "source": "https://codesandbox.io/s/xzi6ps",
   "libraries": [
     "@react-three/drei",

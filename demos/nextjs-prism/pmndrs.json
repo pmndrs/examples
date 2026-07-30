@@ -3,7 +3,8 @@
   "title": "Next.js Prism",
   "description": "",
   "tags": [],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2022-08-17",
   "source": "https://codesandbox.io/s/j3ycvl",
   "libraries": [
     "@react-three/drei",

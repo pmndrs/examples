@@ -3,7 +3,8 @@
   "title": "Soft Shadows",
   "description": "Percentage closer soft shadows.",
   "tags": ["pcss", "soft-shadows", "drei"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2019-09-28",
   "source": "https://codesandbox.io/s/dh2jc",
   "libraries": ["@react-three/drei", "@react-three/fiber", "leva"],
   "assets": []

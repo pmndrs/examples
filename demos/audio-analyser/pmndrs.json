@@ -3,7 +3,8 @@
   "title": "Audio Analyser",
   "description": "Combining audio analysis with gltf cell fracture and reflections.",
   "tags": ["gltf", "audio", "reflections", "cell-fracture"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2021-02-01",
   "source": "https://codesandbox.io/s/dvokj",
   "libraries": ["@pmndrs/branding", "@react-three/drei", "@react-three/fiber"],
   "assets": []

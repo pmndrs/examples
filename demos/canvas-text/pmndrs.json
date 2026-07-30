@@ -3,7 +3,8 @@
   "title": "Canvas Text",
   "description": "Shows how to form self-contained components with their own state and user interaction.",
   "tags": [],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2022-03-28",
   "source": "https://codesandbox.io/s/p9umgf",
   "libraries": ["@react-three/fiber"],
   "assets": []

@@ -5,7 +5,8 @@
   "tags": [
     "instances"
   ],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2021-09-17",
   "source": "https://codesandbox.io/s/i6t0j",
   "libraries": [
     "@react-three/drei",

@@ -9,7 +9,8 @@
     "drei",
     "physics"
   ],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2022-08-10",
   "source": "https://codesandbox.io/s/2qfxj4",
   "libraries": [
     "@react-three/csg",

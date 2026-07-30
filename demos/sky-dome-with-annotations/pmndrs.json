@@ -3,7 +3,8 @@
   "title": "Sky Dome With Annotations",
   "description": "Dome projecting texture and HTML annotations.",
   "tags": ["annotations", "html", "dome"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2020-02-10",
   "source": "https://codesandbox.io/s/wbrfs",
   "libraries": ["@react-three/drei", "@react-three/fiber"],
   "assets": []

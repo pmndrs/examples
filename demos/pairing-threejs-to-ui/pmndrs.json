@@ -3,7 +3,8 @@
   "title": "Pairing Three.js To UI",
   "description": "",
   "tags": [],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2022-07-04",
   "source": "https://codesandbox.io/s/wlz1o0",
   "libraries": ["@react-three/drei", "@react-three/fiber", "leva", "tunnel-rat"],
   "assets": []

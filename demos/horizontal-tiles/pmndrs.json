@@ -3,7 +3,8 @@
   "title": "Horizontal Tiles",
   "description": "Horizontal scrollcontrols with expanding tiles.",
   "tags": ["expand", "scrollcontrols", "tiles", "horizontal"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2021-10-16",
   "source": "https://codesandbox.io/s/l4klb",
   "libraries": ["@pmndrs/branding", "@react-three/drei", "@react-three/fiber", "valtio"],
   "assets": []

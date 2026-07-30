@@ -6,7 +6,8 @@
     "gltf",
     "scrollcontrols"
   ],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2021-10-22",
   "source": "https://codesandbox.io/s/4jr4p",
   "libraries": [
     "@react-three/drei",

@@ -3,7 +3,8 @@
   "title": "Bloom HDR Workflow GLTF",
   "description": "",
   "tags": ["bloom", "hdr", "glow", "gltf", "selective"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2022-06-23",
   "source": "https://codesandbox.io/s/whnhyr",
   "libraries": ["@react-three/drei", "@react-three/fiber"],
   "assets": []

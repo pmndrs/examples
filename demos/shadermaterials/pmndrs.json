@@ -6,7 +6,8 @@
     "material",
     "shader"
   ],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2019-12-11",
   "source": "https://codesandbox.io/s/1g4qq",
   "libraries": [
     "@react-three/drei",

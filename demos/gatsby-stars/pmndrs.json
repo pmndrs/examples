@@ -3,7 +3,8 @@
   "title": "Gatsby Stars",
   "description": "",
   "tags": ["stars", "text", "gradient", "instances", "gatsby"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2022-02-25",
   "source": "https://codesandbox.io/s/2csbr1",
   "libraries": ["@pmndrs/branding", "@react-three/drei", "@react-three/fiber", "maath"],
   "assets": []

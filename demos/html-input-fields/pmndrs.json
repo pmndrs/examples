@@ -3,7 +3,8 @@
   "title": "HTML Input Fields",
   "description": "",
   "tags": ["text", "html", "input"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2022-12-06",
   "source": "https://codesandbox.io/s/024uom",
   "libraries": ["@pmndrs/branding", "@react-three/drei", "@react-three/fiber"],
   "assets": []

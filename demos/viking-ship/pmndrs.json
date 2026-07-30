@@ -3,7 +3,8 @@
   "title": "Viking Ship",
   "description": "GLTF workflow with GLTFJSX and camera rotations.",
   "tags": ["gltfjsx", "gltf"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2020-05-02",
   "source": "https://codesandbox.io/s/0buje",
   "libraries": ["@react-three/drei", "@react-three/fiber"],
   "assets": []

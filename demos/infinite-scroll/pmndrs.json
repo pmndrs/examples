@@ -3,7 +3,8 @@
   "title": "Infinite Scroll",
   "description": "Horizontal scrollcontrols that scroll infinitely.",
   "tags": ["horizontal", "scrollcontrols", "infinite"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2021-10-16",
   "source": "https://codesandbox.io/s/x8gvs",
   "libraries": ["@pmndrs/branding", "@react-three/drei", "@react-three/fiber"],
   "assets": []

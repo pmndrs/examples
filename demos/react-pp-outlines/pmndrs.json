@@ -3,7 +3,8 @@
   "title": "React Postprocessing Outlines",
   "description": "How to build declarative, nested outlines where higher-ups take precedence.",
   "tags": ["outlines"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2022-03-11",
   "source": "https://codesandbox.io/s/nurp5t",
   "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/postprocessing", "leva"],
   "assets": []

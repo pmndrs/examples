@@ -6,7 +6,8 @@
     "portals",
     "rendertexture"
   ],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2022-05-04",
   "source": "https://codesandbox.io/s/0z8i2c",
   "libraries": [
     "@pmndrs/assets",

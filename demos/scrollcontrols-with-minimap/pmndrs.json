@@ -6,7 +6,8 @@
     "vertical",
     "minimap"
   ],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2021-10-13",
   "source": "https://codesandbox.io/s/yjhzv",
   "libraries": [
     "@pmndrs/branding",

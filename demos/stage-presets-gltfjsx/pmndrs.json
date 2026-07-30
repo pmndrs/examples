@@ -3,7 +3,8 @@
   "title": "Stage Presets GLTFJSX",
   "description": "",
   "tags": ["gltfjsx", "stage", "drei"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2022-12-20",
   "source": "https://codesandbox.io/s/if9crg",
   "libraries": ["@pmndrs/branding", "@react-three/drei", "@react-three/fiber", "leva"],
   "assets": []

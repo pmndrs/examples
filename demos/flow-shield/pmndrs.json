@@ -3,9 +3,9 @@
   "title": "Flow Shield",
   "description": "Interactive force-shield playground with hit reactions, presets, and model import.",
   "tags": ["shader", "shield", "postprocessing", "leva"],
-  "authors": ["Kris Baumgartner"],
+  "authors": ["Christian Ortiz"],
   "publishedAt": "2026-03-24",
-  "source": "https://codesandbox.io/s/github/pmndrs/examples/tree/main/demos/flow-shield",
+  "source": "http://github.com/cortiz2894/flow-shield-effect",
   "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/postprocessing", "leva"],
   "assets": []
 }

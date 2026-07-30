@@ -3,7 +3,8 @@
   "title": "Monitors",
   "description": "",
   "tags": ["bloom"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2022-12-15",
   "source": "https://codesandbox.io/s/bst0cy",
   "libraries": ["@pmndrs/assets", "@pmndrs/branding", "@react-three/drei", "@react-three/fiber", "@react-three/postprocessing", "maath"],
   "assets": []

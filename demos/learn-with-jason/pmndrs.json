@@ -3,7 +3,8 @@
   "title": "Learn With Jason",
   "description": "Small example made for a Learn-with-Jason episode.",
   "tags": ["animation", "gltf"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2021-04-19",
   "source": "https://codesandbox.io/s/oep9o",
   "libraries": ["@react-three/drei", "@react-three/fiber"],
   "assets": []

@@ -3,7 +3,8 @@
   "title": "Landing Page",
   "description": "Transparent backdrop and model staging",
   "tags": ["contact shadows"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2021-09-21",
   "source": "https://codesandbox.io/s/n60qg",
   "libraries": ["@react-three/drei", "@react-three/fiber"],
   "assets": []

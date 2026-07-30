@@ -3,7 +3,8 @@
   "title": "Ragdoll Physics",
   "description": "A mini game using cannon ragdoll physics. Throw the little guy around.",
   "tags": ["game", "ragdoll", "cannon", "physics"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2020-09-25",
   "source": "https://codesandbox.io/s/wdzv4",
   "libraries": ["@react-three/cannon", "@react-three/drei", "@react-three/fiber"],
   "assets": []

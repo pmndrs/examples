@@ -3,7 +3,8 @@
   "title": "Sparks And Effects",
   "description": "Demonstrating fake-particles, mesh-lines and effect composition.",
   "tags": ["glow", "mesh-line", "effects", "particles", "text-geometry"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2020-01-10",
   "source": "https://codesandbox.io/s/sbf2i",
   "libraries": ["@react-three/fiber"],
   "assets": []

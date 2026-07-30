@@ -3,7 +3,8 @@
   "title": "Frosted Glass",
   "description": "Shader mip-map blur to mimic frosted glass. ",
   "tags": ["frosted-glas", "shaders"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2021-03-22",
   "source": "https://codesandbox.io/s/imn42",
   "libraries": ["@pmndrs/branding", "@react-three/drei", "@react-three/fiber", "valtio"],
   "assets": []

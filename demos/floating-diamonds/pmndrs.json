@@ -3,7 +3,8 @@
   "title": "Floating Diamonds",
   "description": "Mixing refraction shaders and animations.",
   "tags": ["gltf", "refraction", "useframe", "useaspect", "drei"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2019-10-29",
   "source": "https://codesandbox.io/s/prb9t",
   "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/postprocessing"],
   "assets": []

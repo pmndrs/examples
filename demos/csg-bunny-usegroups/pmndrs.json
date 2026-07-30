@@ -3,7 +3,8 @@
   "title": "CSG Bunny useGroups",
   "description": "",
   "tags": [],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2023-01-21",
   "source": "https://codesandbox.io/s/mlgzsc",
   "libraries": [
     "@react-three/csg",

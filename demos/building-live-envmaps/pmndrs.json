@@ -3,7 +3,8 @@
   "title": "Building Live Env Maps",
   "description": "Shows how to build declarative environment that are live and animated.",
   "tags": ["lightformer"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2022-03-05",
   "source": "https://codesandbox.io/s/lwo219",
   "libraries": ["@pmndrs/branding", "@react-three/drei", "@react-three/fiber", "lamina"],
   "assets": []

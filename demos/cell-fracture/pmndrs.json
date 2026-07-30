@@ -3,7 +3,8 @@
   "title": "Cell Fracture",
   "description": "Exploding GLTFs using Blenders cell-fracture and GLTFJSX.",
   "tags": ["animation", "clell-fracture", "gltf", "gltfjsx"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2021-01-24",
   "source": "https://codesandbox.io/s/3rjsl",
   "libraries": ["@react-three/drei", "@react-three/fiber"],
   "assets": []

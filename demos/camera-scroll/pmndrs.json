@@ -3,7 +3,8 @@
   "title": "Camera Scroll",
   "description": "Tying scroll to a GLTF camera path with snapping points.",
   "tags": ["snap", "scroll", "gtlf", "html"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2021-04-29",
   "source": "https://codesandbox.io/s/tu24h",
   "libraries": ["@react-three/drei", "@react-three/fiber"],
   "assets": []

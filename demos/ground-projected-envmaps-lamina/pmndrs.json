@@ -3,7 +3,8 @@
   "title": "Ground Projected Env Maps Lamina",
   "description": "",
   "tags": [],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2022-04-08",
   "source": "https://codesandbox.io/s/0c5hv9",
   "libraries": ["@react-three/drei", "@react-three/fiber", "lamina"],
   "assets": []

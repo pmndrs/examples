@@ -3,7 +3,8 @@
   "title": "GLTF Animations Reused",
   "description": "This examples shows how to blend GLTF animation keyframes and to re-use an existing model even it's being keyframed.",
   "tags": [],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2021-04-19",
   "source": "https://codesandbox.io/s/k8phr",
   "libraries": [
     "@react-spring/three",

@@ -3,7 +3,8 @@
   "title": "Rapier Ping Pong",
   "description": "Mini ping-pong implementation using rapier-physics.",
   "tags": [],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2024-01-20",
   "source": "https://codesandbox.io/s/ptdgrn",
   "libraries": ["@pmndrs/branding", "@react-three/drei", "@react-three/fiber", "@react-three/postprocessing", "@react-three/rapier", "valtio"],
   "assets": []

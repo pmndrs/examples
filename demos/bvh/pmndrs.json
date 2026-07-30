@@ -3,7 +3,8 @@
   "title": "BVH",
   "description": "Shows how to form self-contained components with their own state and user interaction.",
   "tags": [],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2023-01-25",
   "source": "https://codesandbox.io/s/txzeq8",
   "libraries": ["@react-three/drei", "@react-three/fiber", "leva"],
   "assets": []

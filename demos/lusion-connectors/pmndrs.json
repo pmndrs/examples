@@ -3,7 +3,8 @@
   "title": "Lusion Connectors",
   "description": "",
   "tags": [],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2023-09-12",
   "source": "https://codesandbox.io/s/xy8c8z",
   "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/postprocessing", "@react-three/rapier"],
   "assets": []

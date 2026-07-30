@@ -3,7 +3,8 @@
   "title": "Confetti",
   "description": "Meshline particles.",
   "tags": ["particles", "meshline", "confetti"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2019-10-19",
   "source": "https://codesandbox.io/s/vl221",
   "libraries": ["@react-three/fiber", "@react-three/postprocessing", "leva", "maath", "meshline"],
   "assets": []

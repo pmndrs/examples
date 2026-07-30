@@ -3,7 +3,8 @@
   "title": "Water Shader",
   "description": "",
   "tags": ["shader", "water"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2021-04-15",
   "source": "https://codesandbox.io/s/1b40u",
   "libraries": ["@react-three/drei", "@react-three/fiber", "three-stdlib"],
   "assets": []

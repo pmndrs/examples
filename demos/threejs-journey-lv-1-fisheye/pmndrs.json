@@ -3,7 +3,8 @@
   "title": "Three.js Journey Level 1 Fisheye",
   "description": "A recreation of the first level from https://threejs-journey.com.",
   "tags": [],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2023-10-07",
   "source": "https://codesandbox.io/s/7qytdw",
   "libraries": [
     "@react-spring/three",

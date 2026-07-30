@@ -7,7 +7,8 @@
     "camera-shake",
     "controls"
   ],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2021-04-13",
   "source": "https://codesandbox.io/s/0ycwe",
   "libraries": [
     "@react-three/drei",

@@ -6,7 +6,8 @@
     "fit-all",
     "bounds"
   ],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2021-10-28",
   "source": "https://codesandbox.io/s/rz2g0",
   "libraries": [
     "@react-three/drei",

@@ -6,7 +6,8 @@
     "lamina",
     "depth"
   ],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2022-03-15",
   "source": "https://codesandbox.io/s/ledhe1",
   "libraries": [
     "@pmndrs/branding",

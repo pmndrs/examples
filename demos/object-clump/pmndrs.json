@@ -3,7 +3,8 @@
   "title": "Object Clump",
   "description": "How to make a clump of objects that move towards the center point.",
   "tags": ["physics", "cannon-es", "use-cannon"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2022-02-22",
   "source": "https://codesandbox.io/s/ssbdsw",
   "libraries": ["@react-three/cannon", "@react-three/drei", "@react-three/fiber", "@react-three/postprocessing", "leva"],
   "assets": []

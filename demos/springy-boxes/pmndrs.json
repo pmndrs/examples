@@ -3,7 +3,8 @@
   "title": "Springy Boxes",
   "description": "Colorfull boxes changing position with spring physics",
   "tags": ["springs", "react-spring", "physics", "animation"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2019-04-02",
   "source": "https://codesandbox.io/s/jz9l97qn89",
   "libraries": ["@react-spring/three", "@react-three/fiber"],
   "assets": []

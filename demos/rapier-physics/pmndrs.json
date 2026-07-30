@@ -3,7 +3,8 @@
   "title": "Rapier Physics",
   "description": "",
   "tags": ["rapier"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2022-07-16",
   "source": "https://codesandbox.io/s/7e9y1b",
   "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/rapier", "leva"],
   "assets": []

@@ -3,7 +3,8 @@
   "title": "Shopping",
   "description": "",
   "tags": [],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2022-09-18",
   "source": "https://codesandbox.io/s/4gy946",
   "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/postprocessing"],
   "assets": []

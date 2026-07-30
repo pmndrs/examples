@@ -3,7 +3,8 @@
   "title": "Magic Box",
   "description": "",
   "tags": [],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2023-06-07",
   "source": "https://codesandbox.io/s/drc6qg",
   "libraries": ["@react-three/drei", "@react-three/fiber", "leva"],
   "assets": []

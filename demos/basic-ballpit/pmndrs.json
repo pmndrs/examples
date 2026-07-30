@@ -3,7 +3,8 @@
   "title": "Basic Ballpit",
   "description": "Physics simulation using cannon.",
   "tags": ["physics", "cannon"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2022-06-29",
   "source": "https://codesandbox.io/s/0fqow2",
   "libraries": ["@react-three/cannon", "@react-three/fiber"],
   "assets": []

@@ -3,7 +3,8 @@
   "title": "Flying Bananas",
   "description": "Shows how to form self-contained components with their own state and user interaction.",
   "tags": [],
-  "authors": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2021-09-29",
   "source": "https://codesandbox.io/s/2ycs3",
   "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/postprocessing"],
   "assets": []
