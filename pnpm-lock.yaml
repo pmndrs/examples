@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 patchedDependencies:
-  '@splinetool/loader@1.12.98': ce915f59f98a2be4f4955d5d53eb7a64a30ecf3c25f4afdd452b91f47b9b82bc
+  '@splinetool/loader@0.9.153': 87d1c8725410c81bfa246825dab2fc7b9f3fc6ab7ef0ab3e28137e5ebbada172
 
 importers:
 
@@ -3394,11 +3394,11 @@ importers:
         specifier: ^8.17.5
         version: 8.18.0(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0)
       '@splinetool/loader':
-        specifier: ^1.12.98
-        version: 1.12.98(patch_hash=ce915f59f98a2be4f4955d5d53eb7a64a30ecf3c25f4afdd452b91f47b9b82bc)(three@0.165.0)
+        specifier: 0.9.153
+        version: 0.9.153(patch_hash=87d1c8725410c81bfa246825dab2fc7b9f3fc6ab7ef0ab3e28137e5ebbada172)(three@0.165.0)
       '@splinetool/r3f-spline':
         specifier: ^1.0.2
-        version: 1.0.2(@react-three/fiber@8.18.0(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0))(@splinetool/loader@1.12.98(patch_hash=ce915f59f98a2be4f4955d5d53eb7a64a30ecf3c25f4afdd452b91f47b9b82bc)(three@0.165.0))
+        version: 1.0.2(@react-three/fiber@8.18.0(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0))(@splinetool/loader@0.9.153(patch_hash=87d1c8725410c81bfa246825dab2fc7b9f3fc6ab7ef0ab3e28137e5ebbada172)(three@0.165.0))
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -5819,11 +5819,11 @@ importers:
         specifier: ^8.17.5
         version: 8.18.0(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0)
       '@splinetool/loader':
-        specifier: ^1.12.98
-        version: 1.12.98(patch_hash=ce915f59f98a2be4f4955d5d53eb7a64a30ecf3c25f4afdd452b91f47b9b82bc)(three@0.165.0)
+        specifier: 0.9.153
+        version: 0.9.153(patch_hash=87d1c8725410c81bfa246825dab2fc7b9f3fc6ab7ef0ab3e28137e5ebbada172)(three@0.165.0)
       '@splinetool/r3f-spline':
         specifier: ^1.0.2
-        version: 1.0.2(@react-three/fiber@8.18.0(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0))(@splinetool/loader@1.12.98(patch_hash=ce915f59f98a2be4f4955d5d53eb7a64a30ecf3c25f4afdd452b91f47b9b82bc)(three@0.165.0))
+        version: 1.0.2(@react-three/fiber@8.18.0(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0))(@splinetool/loader@0.9.153(patch_hash=87d1c8725410c81bfa246825dab2fc7b9f3fc6ab7ef0ab3e28137e5ebbada172)(three@0.165.0))
       leva:
         specifier: ^0.9.35
         version: 0.9.36(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -8350,8 +8350,8 @@ packages:
     resolution: {integrity: sha512-9NET910DNaIPngYnLLPeg+Ogzqsi9uM4mSboU5y6p8S5DzMTVEsJZrawi+BoDNUVBa2DhJqQYUFvMDfgU062LQ==}
     engines: {node: '>=6'}
 
-  '@splinetool/loader@1.12.98':
-    resolution: {integrity: sha512-OJfKhK4o4/LnnpMSAplmBlba3gsefQ29mFPf0Gok38AvWlOYKiSWuyM7eNDJGtuf3/ApAdPw1gW40spgfmFKEA==}
+  '@splinetool/loader@0.9.153':
+    resolution: {integrity: sha512-nx+ZmM84GgFeLlMZFNobSB8rnGuYMSxnPGMVtiGugWtPChKhzCoW0G3vaJeOQdvBnwlLXoApN6vIB7xjKhYIkw==}
     peerDependencies:
       three: '>=0.133.0'
 
@@ -12706,15 +12706,14 @@ snapshots:
 
   '@sindresorhus/is@0.14.0': {}
 
-  '@splinetool/loader@1.12.98(patch_hash=ce915f59f98a2be4f4955d5d53eb7a64a30ecf3c25f4afdd452b91f47b9b82bc)(three@0.165.0)':
+  '@splinetool/loader@0.9.153(patch_hash=87d1c8725410c81bfa246825dab2fc7b9f3fc6ab7ef0ab3e28137e5ebbada172)(three@0.165.0)':
     dependencies:
-      semver-compare: 1.0.0
       three: 0.165.0
 
-  '@splinetool/r3f-spline@1.0.2(@react-three/fiber@8.18.0(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0))(@splinetool/loader@1.12.98(patch_hash=ce915f59f98a2be4f4955d5d53eb7a64a30ecf3c25f4afdd452b91f47b9b82bc)(three@0.165.0))':
+  '@splinetool/r3f-spline@1.0.2(@react-three/fiber@8.18.0(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0))(@splinetool/loader@0.9.153(patch_hash=87d1c8725410c81bfa246825dab2fc7b9f3fc6ab7ef0ab3e28137e5ebbada172)(three@0.165.0))':
     dependencies:
       '@react-three/fiber': 8.18.0(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0)
-      '@splinetool/loader': 1.12.98(patch_hash=ce915f59f98a2be4f4955d5d53eb7a64a30ecf3c25f4afdd452b91f47b9b82bc)(three@0.165.0)
+      '@splinetool/loader': 0.9.153(patch_hash=87d1c8725410c81bfa246825dab2fc7b9f3fc6ab7ef0ab3e28137e5ebbada172)(three@0.165.0)
 
   '@stitches/react@1.2.8(react@18.3.1)':
     dependencies:

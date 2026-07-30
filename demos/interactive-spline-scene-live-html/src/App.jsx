@@ -18,6 +18,8 @@ export function App() {
         shadows
         flat
         linear
+        // three r163 changed the default drawing buffer to stencil-less; the Mask needs one
+        gl={{ stencil: true }}
         // Since the canvas will receive events from the out-most container it must ignore events
         // This will allow the HTML view underneath to receive events, too
         style={{ pointerEvents: 'none' }}

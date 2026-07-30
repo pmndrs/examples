@@ -11,4 +11,4 @@ allowBuilds:
   unrs-resolver: true
 
 patchedDependencies:
-  '@splinetool/loader@1.12.98': patches/@splinetool__loader@1.12.98.patch
+  '@splinetool/loader@0.9.153': patches/@splinetool__loader@0.9.153.patch
