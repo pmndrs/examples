@@ -19,13 +19,7 @@
       "source": "https://polyhaven.com/a/grassy_cobblestone",
       "license": "CC0 1.0",
       "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "modified": true,
-      "notes": "Recompressed to progressive JPEG for the web; the roughness and AO maps are single-channel."
-    },
-    {
-      "name": "Leaf shadow gobo",
-      "files": ["src/textures/leaves.jpg"],
-      "notes": "Grayscale leaf-branch mask used as the spot light's shadow pattern. Carried over from the original sandbox, which did not credit a source."
-    }
+      "modified": true
+    } 
   ]
 }

@@ -1,6 +1,1 @@
-export const NEW_DEMOS = new Set([
-  "flow-shield",
-  "spotlight-shadows",
-  "trails",
-  "wireframes",
-]);
+export const NEW_DEMOS = new Set(["flow-shield"]);

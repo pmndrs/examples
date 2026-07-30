@@ -15,8 +15,7 @@
       "source": "https://sketchfab.com/3d-models/car-acccd15d4e454399a39dbe40f4f6df71",
       "license": "CC BY 4.0",
       "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
-      "modified": true,
-      "notes": "Converted with gltfjsx --transform (draco-compressed)."
+      "modified": true
     }
   ]
 }
