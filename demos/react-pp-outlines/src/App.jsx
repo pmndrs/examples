@@ -11,7 +11,7 @@ export default function App() {
         <ambientLight intensity={0.75 * Math.PI} />
 
         <Selection>
-          <EffectComposer multisampling={0} autoClear={false}>
+          <EffectComposer multisampling={0} autoClear={false} enableNormalPass>
             <SSAO radius={0.05} intensity={150} luminanceInfluence={0.5} color="black" />
             <Outline visibleEdgeColor="white" hiddenEdgeColor="white" blur width={1000} edgeStrength={100} />
             <SMAA />

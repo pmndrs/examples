@@ -2,8 +2,8 @@
 // JamieCrazyFox: https://twitter.com/JamieCrazyFox
 // Onyro_Crypto: https://twitter.com/Onyro_Crypto
 
-import { render } from "react-dom"
+import { createRoot } from "react-dom/client"
 import "./styles.css"
 import { App } from "./App"
 
-render(<App />, document.getElementById("root"))
+createRoot(document.getElementById("root")).render(<App />)
