@@ -68,7 +68,7 @@ function Scene({ ...props }) {
 }
 
 function Shape({ name, float = 300, color, config, ...props }) {
-  const { nodes } = useSpline('/shapes.splinecode')
+  const { nodes } = useSpline(import.meta.env.BASE_URL.replace(/\/?$/, '/') + 'shapes.splinecode')
   return (
     <Float floatIntensity={float} rotationIntensity={0} speed={2}>
       <mesh renderOrder={100} geometry={nodes[name].geometry} {...props}>

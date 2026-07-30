@@ -67,7 +67,7 @@ function Scene({ portal, ...props }) {
   const wheel = useRef(0)
   const hand = useRef()
   const [clicked, click] = useState(false)
-  const { nodes, materials } = useSpline('scroll.splinecode')
+  const { nodes, materials } = useSpline(import.meta.env.BASE_URL.replace(/\/?$/, '/') + 'scroll.splinecode')
   // Take the stencil and drop it over everything but the right hand
   const stencil = useMask(1, true)
   useLayoutEffect(() => {

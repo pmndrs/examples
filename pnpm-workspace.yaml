@@ -9,3 +9,6 @@ packages:
 allowBuilds:
   esbuild: true
   unrs-resolver: true
+
+patchedDependencies:
+  '@splinetool/loader@1.12.98': patches/@splinetool__loader@1.12.98.patch
