@@ -33,15 +33,32 @@ function syncCollapsedAttr(collapsed: boolean) {
   document.documentElement.toggleAttribute("data-nav-collapsed", collapsed);
 }
 
+function hasInteractiveFocus(element: Element | null) {
+  return (
+    element instanceof HTMLElement &&
+    (element.isContentEditable ||
+      Boolean(
+        element.closest(
+          "a, button, input, select, textarea, [role='button'], [role='link']",
+        ),
+      ))
+  );
+}
+
 export default function Nav({
   demos,
   ...props
 }: { demos: Demo[] } & ComponentProps<"nav">) {
   const ulRef = useRef<ElementRef<"ul">>(null);
+  const searchRef = useRef<HTMLInputElement>(null);
 
   const [collapsed, setCollapsed] = useState(false);
   const [ready, setReady] = useState(false);
   const [library, setLibrary] = useState("");
+  const [search, setSearch] = useState("");
+  const [searchOpen, setSearchOpen] = useState(false);
+
+  const searchVisible = searchOpen || search !== "";
 
   const libraryOptions = useMemo(() => {
     const popularityByLabel = new Map<string, number>();
@@ -73,17 +90,115 @@ export default function Nav({
       .map(([label]) => label);
   }, [demos]);
 
-  const filteredDemos = useMemo(
-    () =>
-      library
-        ? demos.filter((demo) =>
-            demo.libraries.some(
-              (demoLibrary) => getLibraryLabel(demoLibrary) === library,
-            ),
-          )
-        : demos,
-    [demos, library],
+  const filteredDemos = useMemo(() => {
+    const terms = search
+      .trim()
+      .toLocaleLowerCase()
+      .split(/\s+/)
+      .filter(Boolean);
+
+    return demos.filter((demo) => {
+      if (
+        library &&
+        !demo.libraries.some(
+          (demoLibrary) => getLibraryLabel(demoLibrary) === library,
+        )
+      ) {
+        return false;
+      }
+
+      if (terms.length === 0) return true;
+
+      const searchableText = [
+        demo.name,
+        demo.title,
+        demo.description,
+        ...demo.tags,
+        ...demo.authors,
+        ...demo.libraries.map(getLibraryLabel),
+      ]
+        .join(" ")
+        .toLocaleLowerCase();
+
+      return terms.every((term) => searchableText.includes(term));
+    });
+  }, [demos, library, search]);
+
+  const focusSearch = useCallback(
+    (select = false) => {
+      if (collapsed) {
+        setCollapsed(false);
+        localStorage.setItem(STORAGE_KEY, "0");
+      }
+
+      setSearchOpen(true);
+
+      requestAnimationFrame(() => {
+        searchRef.current?.focus();
+        if (select) searchRef.current?.select();
+      });
+    },
+    [collapsed],
   );
+
+  const dismissSearch = useCallback(() => {
+    setSearch("");
+    setSearchOpen(false);
+    searchRef.current?.blur();
+  }, []);
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      const activeElement = document.activeElement;
+
+      if (
+        (event.metaKey || event.ctrlKey) &&
+        ["f", "k"].includes(event.key.toLocaleLowerCase())
+      ) {
+        event.preventDefault();
+        focusSearch(true);
+        return;
+      }
+
+      if (searchVisible && event.key === "Escape") {
+        event.preventDefault();
+        dismissSearch();
+        return;
+      }
+
+      if (hasInteractiveFocus(activeElement)) return;
+
+      if (event.key === "/") {
+        event.preventDefault();
+        focusSearch();
+        return;
+      }
+
+      if (event.key === "Backspace" && search) {
+        event.preventDefault();
+        setSearch((value) => value.slice(0, -1));
+        focusSearch();
+        return;
+      }
+
+      if (
+        event.key.length !== 1 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.altKey ||
+        (event.key === " " && search.length === 0)
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+      setSearch((value) => `${value}${event.key}`);
+      focusSearch();
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [dismissSearch, focusSearch, search, searchVisible]);
 
   const toggle = useCallback(() => {
     setCollapsed((prev) => {
@@ -197,6 +312,24 @@ export default function Nav({
               background: linear-gradient(#eee 75%, rgb(238 238 238 / 0));
             }
 
+            .filterRow {
+              display: flex;
+              align-items: center;
+              gap: 0.4rem;
+            }
+
+            .filterRow[data-covered] {
+              visibility: hidden;
+            }
+
+            @keyframes search-in {
+              from {
+                opacity: 0;
+                translate: 0 -0.35rem;
+              }
+            }
+
+            .search,
             .filter {
               position: relative;
               display: flex;
@@ -213,6 +346,7 @@ export default function Nav({
                 box-shadow 0.15s ease;
             }
 
+            .search:focus-within,
             .filter:focus-within {
               border-color: #888;
               box-shadow:
@@ -220,12 +354,30 @@ export default function Nav({
                 0 0 0 2px rgb(0 0 0 / 0.08);
             }
 
+            .search {
+              position: absolute;
+              inset: 0.65rem 0.75rem auto 1rem;
+              z-index: 3;
+              width: auto;
+              border-radius: 8px;
+              background: white;
+              box-shadow: 0 8px 24px rgb(0 0 0 / 0.18);
+              animation: search-in 200ms ease;
+            }
+
+            .filter {
+              flex: 1;
+              width: auto;
+            }
+
+            .searchIcon,
             .filterIcon,
             .filterChevron {
               position: absolute;
               pointer-events: none;
             }
 
+            .searchIcon,
             .filterIcon {
               left: 0.7rem;
               width: 0.75rem;
@@ -238,6 +390,7 @@ export default function Nav({
               height: 0.6rem;
             }
 
+            .search input,
             .filter select {
               width: 100%;
               min-width: 0;
@@ -253,6 +406,116 @@ export default function Nav({
               font-size: 0.7rem;
               font-weight: 600;
               text-overflow: ellipsis;
+            }
+
+            .search input {
+              padding-right: 4.2rem;
+              cursor: text;
+            }
+
+            .search input::placeholder {
+              color: #777;
+              font-weight: 500;
+              opacity: 1;
+            }
+
+            .search input::-webkit-search-cancel-button {
+              display: none;
+            }
+
+            .searchCount {
+              position: absolute;
+              right: 2rem;
+              color: #777;
+              font-size: 0.52rem;
+              font-weight: 600;
+              line-height: 1;
+              pointer-events: none;
+            }
+
+            .searchClose,
+            .searchTrigger {
+              display: grid;
+              place-items: center;
+              padding: 0;
+              border: 1px solid #d4d4d4;
+              background: rgb(255 255 255 / 0.92);
+              color: #666;
+              cursor: pointer;
+              transition:
+                background 0.15s ease,
+                color 0.15s ease,
+                box-shadow 0.15s ease;
+            }
+
+            .searchTrigger {
+              flex: 0 0 2.15rem;
+              width: 2.15rem;
+              height: 2.15rem;
+              border-radius: 50%;
+              box-shadow: 0 1px 6px rgb(0 0 0 / 0.1);
+            }
+
+            .searchClose {
+              position: absolute;
+              right: 0.42rem;
+              width: 1.3rem;
+              height: 1.3rem;
+              border: 0;
+              border-radius: 50%;
+              background: rgb(0 0 0 / 0.06);
+            }
+
+            .searchClose:hover,
+            .searchTrigger:hover {
+              background: rgb(0 0 0 / 0.1);
+              color: #222;
+            }
+
+            .searchClose:focus-visible,
+            .searchTrigger:focus-visible {
+              outline: 2px solid #888;
+              outline-offset: 2px;
+            }
+
+            .searchClose svg {
+              width: 0.55rem;
+              height: 0.55rem;
+            }
+
+            .searchTrigger svg {
+              width: 0.8rem;
+              height: 0.8rem;
+            }
+
+            .empty {
+              display: grid;
+              justify-items: center;
+              gap: 0.6rem;
+              padding: 1.5rem 1rem;
+              color: #666;
+              font-size: 0.72rem;
+              text-align: center;
+            }
+
+            .empty p {
+              margin: 0;
+            }
+
+            .empty button {
+              padding: 0.35rem 0.7rem;
+              border: 1px solid #d4d4d4;
+              border-radius: 999px;
+              background: white;
+              color: #444;
+              cursor: pointer;
+              font: inherit;
+              font-weight: 600;
+            }
+
+            .empty button:hover {
+              background: #f7f7f7;
+              color: #111;
             }
 
             .srOnly {
@@ -470,49 +733,129 @@ export default function Nav({
 
       <nav {...props}>
         <div className="filters">
-          <label className="filter">
-            <span className="srOnly">Filter examples by library</span>
-            <svg
-              className="filterIcon"
-              viewBox="0 0 12 12"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M2 3h8M3.5 6h5M5 9h2"
-                stroke="currentColor"
-                strokeWidth="1.25"
-                strokeLinecap="round"
+          {searchVisible && (
+            <div className="search">
+              <svg
+                className="searchIcon"
+                viewBox="0 0 12 12"
+                fill="none"
+                aria-hidden="true"
+              >
+                <circle
+                  cx="5.25"
+                  cy="5.25"
+                  r="3.25"
+                  stroke="currentColor"
+                  strokeWidth="1.25"
+                />
+                <path
+                  d="m7.75 7.75 2.25 2.25"
+                  stroke="currentColor"
+                  strokeWidth="1.25"
+                  strokeLinecap="round"
+                />
+              </svg>
+              <input
+                ref={searchRef}
+                type="search"
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
+                onFocus={() => setSearchOpen(true)}
+                placeholder="Search examples"
+                aria-label="Search examples"
+                aria-controls="demo-list"
+                aria-describedby="search-results"
               />
-            </svg>
-            <select
-              value={library}
-              onChange={(event) => setLibrary(event.target.value)}
+              <span className="searchCount">{filteredDemos.length}</span>
+              <button
+                className="searchClose"
+                type="button"
+                onClick={dismissSearch}
+                aria-label="Close search"
+              >
+                <svg viewBox="0 0 8 8" fill="none" aria-hidden="true">
+                  <path
+                    d="m1 1 6 6M7 1 1 7"
+                    stroke="currentColor"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </button>
+            </div>
+          )}
+          <div className="filterRow" data-covered={searchVisible || undefined}>
+            <label className="filter">
+              <span className="srOnly">Filter examples by library</span>
+              <svg
+                className="filterIcon"
+                viewBox="0 0 12 12"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M2 3h8M3.5 6h5M5 9h2"
+                  stroke="currentColor"
+                  strokeWidth="1.25"
+                  strokeLinecap="round"
+                />
+              </svg>
+              <select
+                value={library}
+                onChange={(event) => setLibrary(event.target.value)}
+              >
+                <option value="">All libraries</option>
+                {libraryOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+              <svg
+                className="filterChevron"
+                viewBox="0 0 10 6"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="m1 1 4 4 4-4"
+                  stroke="currentColor"
+                  strokeWidth="1.25"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </label>
+            <button
+              className="searchTrigger"
+              type="button"
+              onClick={() => focusSearch()}
+              aria-label="Search examples"
+              aria-keyshortcuts="Meta+F Control+F Meta+K Control+K"
+              title="Search examples (⌘F)"
             >
-              <option value="">All libraries</option>
-              {libraryOptions.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-            <svg
-              className="filterChevron"
-              viewBox="0 0 10 6"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="m1 1 4 4 4-4"
-                stroke="currentColor"
-                strokeWidth="1.25"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </label>
+              <svg viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <circle
+                  cx="5.25"
+                  cy="5.25"
+                  r="3.25"
+                  stroke="currentColor"
+                  strokeWidth="1.25"
+                />
+                <path
+                  d="m7.75 7.75 2.25 2.25"
+                  stroke="currentColor"
+                  strokeWidth="1.25"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </button>
+          </div>
+          <span id="search-results" className="srOnly" aria-live="polite">
+            {filteredDemos.length} examples
+          </span>
         </div>
-        <ul ref={ulRef}>
+        <ul ref={ulRef} id="demo-list">
           {filteredDemos.map(({ name, title, thumb, isNew, tags }) => (
             <li key={thumb} data-demo={name}>
               <Link
@@ -536,6 +879,20 @@ export default function Nav({
             </li>
           ))}
         </ul>
+        {filteredDemos.length === 0 && (
+          <div className="empty">
+            <p>No matching examples.</p>
+            <button
+              type="button"
+              onClick={() => {
+                dismissSearch();
+                setLibrary("");
+              }}
+            >
+              Clear filters
+            </button>
+          </div>
+        )}
       </nav>
     </div>
   );
