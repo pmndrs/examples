@@ -6,6 +6,11 @@ on:
       - main
   pull_request: {}
   workflow_dispatch:
+    inputs:
+      update_snapshots:
+        description: "Regenerate playwright snapshot baselines (retrieve them from the run's `snapshots` artifact)"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -51,8 +56,19 @@ jobs:
       # Test
       #
       - run: pnpm test
+        if: ${{ !inputs.update_snapshots }}
         env:
           BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
+      # Baselines regen: gh workflow run CI --ref <branch> -f update_snapshots=true
+      - run: pnpm exec turbo test -- --update-snapshots
+        if: ${{ inputs.update_snapshots }}
+        env:
+          BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
+      - uses: actions/upload-artifact@v4
+        if: ${{ always() && inputs.update_snapshots }}
+        with:
+          name: snapshots
+          path: packages/e2e/snapshot.test.js-snapshots/
 
       #
       # Build (only for pushes on main)
