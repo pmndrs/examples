@@ -6,6 +6,7 @@ import { Box3, Matrix4, Scene, Vector2, Vector3 } from 'three'
 import type { OrthographicCamera as OrthographicCameraImpl, Sprite, WebGLRenderTarget } from 'three'
 
 import { useStore, levelLayer } from '../store'
+import { assetUrl } from '../assetUrl'
 
 const m = new Matrix4()
 const v = new Vector3()
@@ -60,8 +61,8 @@ export function Minimap({ size = 200 }): JSX.Element {
   const miniMap = useRef<Sprite>(null)
   const miniMapCamera = useRef<OrthographicCameraImpl>(null)
   const [virtualScene] = useState(() => new Scene())
-  const mask = useTexture('textures/mask.svg')
-  const cursor = useTexture('textures/cursor.svg')
+  const mask = useTexture(assetUrl('textures/mask.svg'))
+  const cursor = useTexture(assetUrl('textures/cursor.svg'))
   const buffer = useFBO(size * 2, size * 2)
   const { gl, camera, scene, size: screenSize } = useThree()
   const [, levelCenter, levelDimensions] = useLevelGeometricProperties()

@@ -97,6 +97,7 @@ export interface IState extends BaseState {
   finished: number
   get: Getter
   level: RefObject<Group>
+  loaded: boolean
   session: null
   set: Setter
   start: number
@@ -145,6 +146,7 @@ const useStoreImpl = create<IState>((set: SetState<IState>, get: GetState<IState
     help: false,
     leaderboard: false,
     level: createRef<Group>(),
+    loaded: false,
     map: true,
     ready: false,
     session: null,

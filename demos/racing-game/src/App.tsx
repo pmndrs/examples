@@ -1,8 +1,8 @@
-import { useState } from 'react'
-import { Layers } from 'three'
-import { Canvas } from '@react-three/fiber'
+import { useEffect, useState } from 'react'
+import { AudioLoader, Layers } from 'three'
+import { Canvas, useLoader } from '@react-three/fiber'
 import { Physics, Debug } from '@react-three/cannon'
-import { Sky, Environment, PerspectiveCamera, OrthographicCamera, OrbitControls, Stats } from '@react-three/drei'
+import { Sky, Environment, PerspectiveCamera, OrthographicCamera, OrbitControls, Stats, useGLTF, useTexture, useEnvironment } from '@react-three/drei'
 
 import type { DirectionalLight } from 'three'
 
@@ -11,9 +11,40 @@ import { Ramp, Track, Vehicle, Goal, Train, Heightmap } from './models'
 import { angularVelocity, levelLayer, position, rotation, useStore } from './store'
 import { Speed, Minimap, Intro, Help, Editor } from './ui'
 import { useToggle } from './useToggle'
+import { assetUrl } from './assetUrl'
 
 const layers = new Layers()
 layers.enable(levelLayer)
+
+// Suspends on every asset the game needs, then flips the store's `loaded` flag.
+// The Intro overlay keys off that flag rather than the Canvas suspending its
+// parent Suspense boundary, which does not happen reliably.
+//
+// Each asset is loaded with a single-URL call so the cache keys match the ones
+// the scene components use (array calls get their own, separate cache entry).
+// The sounds mounting warm at the ready-flip also keeps drei's <PositionalAudio>
+// correct: if they suspended there, the re-suspension would revert makeDefault
+// to r3f's off-scene default camera right when the audio listeners attach to it.
+function Loaded() {
+  const set = useStore((s) => s.set)
+  useGLTF(assetUrl('models/track-draco.glb'))
+  useGLTF(assetUrl('models/chassis-draco.glb'))
+  useGLTF(assetUrl('models/wheel-draco.glb'))
+  useTexture(assetUrl('textures/heightmap_1024.png'))
+  useTexture(assetUrl('textures/mask.svg'))
+  useTexture(assetUrl('textures/cursor.svg'))
+  useLoader(AudioLoader, assetUrl('sounds/engine.mp3'))
+  useLoader(AudioLoader, assetUrl('sounds/boost.mp3'))
+  useLoader(AudioLoader, assetUrl('sounds/accelerate.mp3'))
+  useLoader(AudioLoader, assetUrl('sounds/honk.mp3'))
+  useLoader(AudioLoader, assetUrl('sounds/tire-brake.mp3'))
+  useLoader(AudioLoader, assetUrl('sounds/water.mp3'))
+  useLoader(AudioLoader, assetUrl('sounds/train.mp3'))
+  useLoader(AudioLoader, assetUrl('sounds/crash.mp3'))
+  useEnvironment({ files: assetUrl('textures/dikhololo_night_1k.hdr') })
+  useEffect(() => set({ loaded: true }), [])
+  return null
+}
 
 export function App() {
   const [light, setLight] = useState<DirectionalLight | null>(null)
@@ -75,7 +106,8 @@ export function App() {
           </ToggledDebug>
         </Physics>
         <Track />
-        <Environment files="textures/dikhololo_night_1k.hdr" />
+        <Loaded />
+        <Environment files={assetUrl('textures/dikhololo_night_1k.hdr')} />
         <ToggledMap />
         <ToggledOrbitControls />
       </Canvas>
