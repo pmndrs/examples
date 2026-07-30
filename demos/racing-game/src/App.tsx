@@ -16,7 +16,7 @@ const layers = new Layers()
 layers.enable(levelLayer)
 
 export function App() {
-  const [light, setLight] = useState<DirectionalLight>()
+  const [light, setLight] = useState<DirectionalLight | null>(null)
   const [actions, camera, dpr, editor, shadows] = useStore((s) => [s.actions, s.camera, s.dpr, s.editor, s.shadows])
   const { onFinish, onStart } = actions
 
@@ -28,7 +28,7 @@ export function App() {
 
   return (
     <Intro>
-      <Canvas key={`${dpr}${shadows}`} mode="concurrent" dpr={[1, dpr]} shadows={shadows} camera={{ position: [0, 5, 15], fov: 50 }}>
+      <Canvas key={`${dpr}${shadows}`} dpr={[1, dpr]} shadows={shadows} camera={{ position: [0, 5, 15], fov: 50 }}>
         <fog attach="fog" args={['white', 0, 500]} />
         <Sky sunPosition={[100, 10, 100]} distance={1000} />
         <ambientLight layers={layers} intensity={0.1 * Math.PI} />

@@ -4,10 +4,10 @@ import { useCylinder } from '@react-three/cannon'
 
 import { useStore } from '../../store'
 
-import type { MutableRefObject } from 'react'
 import type { CylinderProps } from '@react-three/cannon'
-import type { Mesh, MeshStandardMaterial, Object3D } from 'three'
+import type { Group, Mesh, MeshStandardMaterial } from 'three'
 import type { GLTF } from 'three-stdlib'
+import { assetUrl } from '../../assetUrl'
 
 interface WheelGLTF extends GLTF {
   nodes: {
@@ -26,9 +26,9 @@ interface WheelProps extends CylinderProps {
   leftSide?: boolean
 }
 
-export const Wheel = forwardRef<Object3D, WheelProps>(({ leftSide, ...props }, ref) => {
+export const Wheel = forwardRef<Group, WheelProps>(({ leftSide, ...props }, ref) => {
   const { radius } = useStore((state) => state.wheelInfo)
-  const { nodes, materials } = useGLTF('/models/wheel-draco.glb') as WheelGLTF
+  const { nodes, materials } = useGLTF(assetUrl('models/wheel-draco.glb')) as WheelGLTF
   const scale = radius / 0.34
   useCylinder(
     () => ({
@@ -40,7 +40,7 @@ export const Wheel = forwardRef<Object3D, WheelProps>(({ leftSide, ...props }, r
       args: [radius, radius, 0.5, 16],
       ...props,
     }),
-    ref as MutableRefObject<Object3D>,
+    ref,
     [radius],
   )
   return (

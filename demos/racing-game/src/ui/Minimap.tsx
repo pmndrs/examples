@@ -3,7 +3,7 @@ import { createPortal, useFrame, useThree } from '@react-three/fiber'
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { Box3, Matrix4, Scene, Vector2, Vector3 } from 'three'
 
-import type { Mesh, Sprite, WebGLRenderTarget } from 'three'
+import type { OrthographicCamera as OrthographicCameraImpl, Sprite, WebGLRenderTarget } from 'three'
 
 import { useStore, levelLayer } from '../store'
 
@@ -30,7 +30,7 @@ function useLevelGeometricProperties(): [Box3, Vector3, Vector3] {
 }
 
 function MinimapTexture({ buffer }: { buffer: WebGLRenderTarget }) {
-  const camera = useRef<THREE.OrthographicCamera>(null)
+  const camera = useRef<OrthographicCameraImpl>(null)
   const gl = useThree((state) => state.gl)
   const scene = useThree((state) => state.scene)
   const [levelBox, levelCenter] = useLevelGeometricProperties()
@@ -57,8 +57,8 @@ function MinimapTexture({ buffer }: { buffer: WebGLRenderTarget }) {
 
 export function Minimap({ size = 200 }): JSX.Element {
   const player = useRef<Sprite>(null)
-  const miniMap = useRef<Mesh>(null)
-  const miniMapCamera = useRef<THREE.OrthographicCamera>(null)
+  const miniMap = useRef<Sprite>(null)
+  const miniMapCamera = useRef<OrthographicCameraImpl>(null)
   const [virtualScene] = useState(() => new Scene())
   const mask = useTexture('textures/mask.svg')
   const cursor = useTexture('textures/cursor.svg')

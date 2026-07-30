@@ -4,6 +4,7 @@ import { useAsset } from 'use-asset'
 
 import type { Texture } from 'three'
 import type { HeightfieldArgs, HeightfieldProps } from '@react-three/cannon'
+import { assetUrl } from '../../assetUrl'
 
 const canvas = document.createElement('canvas')
 const context = canvas.getContext('2d')
@@ -47,7 +48,7 @@ function createHeightfieldMatrix(image: HTMLImageElement): number[][] {
 type HeightmapProps = Required<Pick<HeightfieldProps, 'position' | 'rotation'>> & Required<Pick<HeightfieldArgs['1'], 'elementSize'>>
 
 export function Heightmap({ elementSize, position, rotation }: HeightmapProps) {
-  const heightmap = useTexture('/textures/heightmap_1024.png')
+  const heightmap = useTexture(assetUrl('textures/heightmap_1024.png'))
   const heights = useAsset<number[][], Texture[]>(async () => createHeightfieldMatrix(heightmap.image), heightmap)
   useHeightfield(() => ({ args: [heights, { elementSize }], position, rotation }), undefined, [elementSize, position, rotation])
   return null

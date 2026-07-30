@@ -2,6 +2,8 @@ import { useEffect, useRef } from 'react'
 import { addEffect } from '@react-three/fiber'
 import { useStore } from '../store'
 
+const readableTime = (time: number): string => (time / 1000).toFixed(1)
+
 const getTime = (finished: number, start: number) => {
   const time = start && !finished ? Date.now() - start : 0
   return `${readableTime(time)}`
