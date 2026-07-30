@@ -7,7 +7,6 @@
   "publishedAt": "2022-03-15",
   "source": "https://codesandbox.io/s/ledhe1",
   "libraries": [
-    "@pmndrs/branding",
     "@react-three/drei",
     "@react-three/fiber",
     "lamina"

@@ -10,7 +10,6 @@
   "publishedAt": "2021-10-13",
   "source": "https://codesandbox.io/s/yjhzv",
   "libraries": [
-    "@pmndrs/branding",
     "@react-three/drei",
     "@react-three/fiber"
   ],

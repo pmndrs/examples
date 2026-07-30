@@ -11,7 +11,6 @@
   "publishedAt": "2020-02-10",
   "source": "https://codesandbox.io/s/gkfhr",
   "libraries": [
-    "@pmndrs/branding",
     "@react-three/drei",
     "@react-three/fiber"
   ],

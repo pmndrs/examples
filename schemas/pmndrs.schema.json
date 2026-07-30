@@ -53,8 +53,6 @@
       "type": "array",
       "items": {
         "enum": [
-          "@pmndrs/assets",
-          "@pmndrs/branding",
           "@react-spring/core",
           "@react-spring/three",
           "@react-spring/web",

@@ -9,7 +9,6 @@
   "publishedAt": "2022-08-15",
   "source": "https://codesandbox.io/s/ioxywi",
   "libraries": [
-    "@pmndrs/branding",
     "@react-three/drei",
     "@react-three/fiber",
     "maath",

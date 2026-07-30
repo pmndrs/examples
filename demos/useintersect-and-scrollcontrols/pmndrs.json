@@ -12,7 +12,6 @@
   "publishedAt": "2021-10-18",
   "source": "https://codesandbox.io/s/gsm1y",
   "libraries": [
-    "@pmndrs/branding",
     "@react-three/drei",
     "@react-three/fiber"
   ],

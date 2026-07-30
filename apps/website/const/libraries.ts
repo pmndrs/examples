@@ -1,6 +1,4 @@
 export const LIBRARY_LABELS: Record<string, string> = {
-  "@pmndrs/assets": "Assets",
-  "@pmndrs/branding": "Branding",
   "@react-spring/core": "React Spring",
   "@react-spring/three": "React Spring",
   "@react-spring/web": "React Spring",

@@ -6,6 +6,6 @@
   "authors": ["Paul Henschel"],
   "publishedAt": "2022-10-28",
   "source": "https://codesandbox.io/s/pj7zjq",
-  "libraries": ["@pmndrs/branding", "@react-three/drei", "@react-three/fiber", "leva"],
+  "libraries": ["@react-three/drei", "@react-three/fiber", "leva"],
   "assets": []
 }

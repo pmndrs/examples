@@ -6,6 +6,6 @@
   "authors": ["Paul Henschel"],
   "publishedAt": "2020-09-18",
   "source": "https://codesandbox.io/s/1sccp",
-  "libraries": ["@pmndrs/branding", "@react-spring/three", "@react-three/drei", "@react-three/fiber", "@react-three/postprocessing"],
+  "libraries": ["@react-spring/three", "@react-three/drei", "@react-three/fiber", "@react-three/postprocessing"],
   "assets": []
 }
