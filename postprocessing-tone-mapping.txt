@@ -13,9 +13,11 @@ bruno-simons-20k-challenge
   - The DepthOfField effect is not working correctly, so the intended focus and blur are visually incorrect.
   - Repair or reconfigure the depth-of-field pass, then compare with the thumbnail.
 building-dynamic-envmaps
-  - EffectComposer disables renderer tone mapping, but the SSR/Bloom/LUT chain has no ToneMapping effect.
-  - The current SSR shader also fails to compile against the installed Three/postprocessing combination (CUBEUV_MAX_MIP becomes NaN).
-  - Repair or replace the SSR pass, add explicit ACES filmic tone mapping last, and compare with the thumbnail.
+  - BROKEN (July 2026, fix deferred): the demo renders, but the SSR pass logs a THREE.WebGLProgram shader-compile error every frame and the reflections are missing.
+  - Cause: the SSR effect is a vendored copy of the abandoned screen-space-reflections library bundled inside @react-three/postprocessing. Its SSREffect.update() reads scene.environment.image.height to build the CUBEUV_* shader defines, but drei's <Environment> produces a cube render target whose .image is an array of six faces with no height, so Math.log2(undefined) stamps CUBEUV_MAX_MIP as the invalid literal "NaN.0" into the generated GLSL and the ReflectionsMaterial fragment shader never compiles.
+  - No released package version fixes this: newer @react-three/postprocessing removed the SSR effect entirely, and 2.16.2 (the declared range) fails identically against three r165 — the incompatibility is with three, not the package version.
+  - Known fixes when ready: a pnpm patch, verified working, that reads the cube-UV height from the PMREM'd texture's own image.height (what three's WebGLPrograms does) and skips setupEnvMap when unavailable; or migrate the demo to realism-effects, the library's successor.
+  - Separately, EffectComposer disables renderer tone mapping and the SSR/Bloom/LUT chain has no ToneMapping effect; once SSR works, add explicit ACES filmic tone mapping last and compare with the thumbnail.
 color-grading
   - Drei Effects uses the legacy gamma pass before the LUT, with no current tone-mapping/output pass.
   - Rebuild the order as scene effects, LUT color grading, then explicit tone mapping and output conversion.
@@ -102,8 +104,11 @@ ssr-test
   - EffectComposer disables renderer tone mapping, but the SSR chain has no explicit ToneMapping effect.
   - Repair the current media/runtime compatibility failure, add ACES filmic tone mapping last, and compare with the thumbnail.
 starwars
-  - EffectComposer disables renderer tone mapping, but the SSR/Bloom/LUT chain has no explicit ToneMapping effect.
-  - Repair the SSR shader incompatibility, then add ACES filmic tone mapping after the LUT.
+  - BROKEN (July 2026, fix deferred): the demo renders, but the SSR pass's MRTMaterial logs a THREE.WebGLProgram shader-compile error every frame ("vViewPosition: undeclared identifier"), so the reflections are missing.
+  - Cause: three r152 renamed the TANGENTSPACE_NORMALMAP shader define to USE_NORMALMAP_TANGENTSPACE. The vendored screen-space-reflections MRTMaterial (bundled inside @react-three/postprocessing as the SSR effect) declares and assigns the vViewPosition varying only under the old define, while three r165's normal_fragment_begin calls getTangentFrame(-vViewPosition, ...) under the new one. The material also lacks the normalMapTransform uniform that r165's uv chunk uses to compute vNormalMapUv, which degenerates normal-map sampling even once the define is aligned.
+  - No released package version fixes this: newer @react-three/postprocessing removed the SSR effect entirely, and 2.16.2 (the declared range) fails identically against three r165.
+  - Known fixes when ready: a pnpm patch, verified working, that adds the renamed define to the three conditions gating vViewPosition and supplies a Matrix3 normalMapTransform uniform; or migrate the demo to realism-effects.
+  - Separately, EffectComposer disables renderer tone mapping and the SSR/Bloom/LUT chain has no explicit ToneMapping effect; once SSR works, add ACES filmic tone mapping after the LUT.
 volumetric-light-godray
   - EffectComposer disables renderer tone mapping, but the GodRays/Bloom chain has no explicit ToneMapping effect.
   - Repair the current media/runtime compatibility failure, then add ACES filmic tone mapping last.
