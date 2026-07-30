@@ -1,3 +1,4 @@
+import type { JSX } from 'react'
 import { OrthographicCamera, useFBO, useTexture } from '@react-three/drei'
 import { createPortal, useFrame, useThree } from '@react-three/fiber'
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'

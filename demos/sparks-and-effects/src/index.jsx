@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import React, { Suspense, useState, useEffect, useRef, useMemo } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import Text from './Text'
@@ -90,4 +90,4 @@ function App() {
   )
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
+createRoot(document.getElementById('root')).render(<App />)

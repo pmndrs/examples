@@ -1,4 +1,4 @@
-import ReactDOM from "react-dom"
+import { createRoot } from "react-dom/client"
 import React, { Suspense, useEffect, useRef, useMemo } from "react"
 import { Canvas, useLoader, useFrame } from "@react-three/fiber"
 import { Html } from "@react-three/drei"
@@ -109,4 +109,4 @@ function App() {
   )
 }
 
-ReactDOM.render(<App />, document.getElementById("root"))
+createRoot(document.getElementById("root")).render(<App />)

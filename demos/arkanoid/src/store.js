@@ -1,4 +1,4 @@
-import create from "zustand"
+import { create } from "zustand"
 import bgAudio from "./resources/sawsquarenoise_-_01_-_Towel_Defence_Splash_Screen.mp3"
 import pingAudio from "./resources/select_006.ogg"
 import spawnAudio from "./resources/select_007.ogg"

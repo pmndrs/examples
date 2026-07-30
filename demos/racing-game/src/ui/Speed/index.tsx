@@ -1,3 +1,4 @@
+import type { JSX } from 'react'
 import { Boost } from './Boost'
 import { Gauge } from './Gauge'
 import { Text } from './Text'

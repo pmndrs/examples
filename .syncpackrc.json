@@ -1,7 +1,7 @@
 {
   "versionGroups": [
     {
-      "label": "React is pinned for all demos",
+      "label": "React is pinned for all demos (19.x is required by @react-three/fiber 9)",
       "packages": [
         "@demo/**"
       ],
@@ -9,7 +9,7 @@
         "react",
         "react-dom"
       ],
-      "pinVersion": "18.3.1"
+      "pinVersion": "19.2.8"
     },
     {
       "label": "React types are pinned for all demos",
@@ -19,7 +19,7 @@
       "dependencies": [
         "@types/react"
       ],
-      "pinVersion": "18.3.3"
+      "pinVersion": "19.2.17"
     },
     {
       "label": "React DOM types are pinned for all demos",
@@ -29,10 +29,10 @@
       "dependencies": [
         "@types/react-dom"
       ],
-      "pinVersion": "18.3.0"
+      "pinVersion": "19.2.3"
     },
     {
-      "label": "lamina is pinned to the last release compatible with three 0.165 / React 18 (1.2.x requires three >= 0.170 and React 19)",
+      "label": "lamina is pinned to the last release compatible with three 0.165 (1.2.x requires three >= 0.170)",
       "packages": [
         "@demo/**"
       ],
@@ -40,6 +40,16 @@
         "lamina"
       ],
       "pinVersion": "1.1.23"
+    },
+    {
+      "label": "postprocessing is pinned to the last release compatible with three 0.165 (6.36.7+ requires three >= 0.174, and 6.37+ drifts further). @react-three/postprocessing 3.x declares postprocessing ^6.36.6, so pnpm.overrides pins the transitive copy too",
+      "packages": [
+        "@demo/**"
+      ],
+      "dependencies": [
+        "postprocessing"
+      ],
+      "pinVersion": "6.36.6"
     },
     {
       "label": "suspend-react is pinned for all demos (the suspend(promise) pattern requires >= 0.1.3)",

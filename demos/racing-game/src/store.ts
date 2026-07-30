@@ -1,10 +1,16 @@
 import { createRef } from 'react'
-import create from 'zustand'
-import shallow from 'zustand/shallow'
+import { create } from 'zustand'
+import { shallow } from 'zustand/shallow'
+import { useStoreWithEqualityFn } from 'zustand/traditional'
 import type { RefObject } from 'react'
 import type { PublicApi, WheelInfoOptions } from '@react-three/cannon'
 import type { Group } from 'three'
-import type { GetState, SetState, StateSelector } from 'zustand'
+import type { StoreApi } from 'zustand'
+
+// zustand v4 dropped the GetState/SetState/StateSelector type exports
+type GetState<T> = () => T
+type SetState<T> = StoreApi<T>['setState']
+type StateSelector<T, U> = (state: T) => U
 
 export const angularVelocity = [0, 0.5, 0] as const
 export const cameras = ['DEFAULT', 'FIRST_PERSON', 'BIRD_EYE'] as const
@@ -91,19 +97,19 @@ export interface IState extends BaseState {
   api: PublicApi | null
   bestCheckpoint: number
   camera: Camera
-  chassisBody: RefObject<Group>
+  chassisBody: RefObject<Group | null>
   controls: Controls
   dpr: number
   finished: number
   get: Getter
-  level: RefObject<Group>
+  level: RefObject<Group | null>
   loaded: boolean
   session: null
   set: Setter
   start: number
   vehicleConfig: VehicleConfig
   wheelInfo: WheelInfo
-  wheels: [RefObject<Group>, RefObject<Group>, RefObject<Group>, RefObject<Group>]
+  wheels: [RefObject<Group | null>, RefObject<Group | null>, RefObject<Group | null>, RefObject<Group | null>]
 }
 
 const useStoreImpl = create<IState>((set: SetState<IState>, get: GetState<IState>) => {
@@ -177,7 +183,9 @@ export const mutation: Mutation = {
 }
 
 // Make the store shallow compare by default
-const useStore = <T>(sel: StateSelector<IState, T>) => useStoreImpl(sel, shallow)
+// zustand v5 removed the equalityFn argument from the hook; useStoreWithEqualityFn
+// is the supported replacement (many selectors here return fresh arrays).
+const useStore = <T>(sel: StateSelector<IState, T>) => useStoreWithEqualityFn(useStoreImpl, sel, shallow)
 Object.assign(useStore, useStoreImpl)
 
 const { getState, setState } = useStoreImpl

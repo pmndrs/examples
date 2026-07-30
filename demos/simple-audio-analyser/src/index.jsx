@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { Footer } from '@pmndrs/branding'
 import './styles.css'
 import App from './App'
@@ -19,4 +19,4 @@ function Overlay() {
   )
 }
 
-ReactDOM.render(<Overlay />, document.getElementById('root'))
+createRoot(document.getElementById('root')).render(<Overlay />)

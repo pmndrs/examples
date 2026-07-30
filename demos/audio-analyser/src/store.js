@@ -1,4 +1,4 @@
-import create from 'zustand'
+import { create } from 'zustand'
 import { addEffect } from '@react-three/fiber'
 
 import audio1 from './drums.mp3'
