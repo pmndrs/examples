@@ -1,0 +1,40 @@
+{
+  "name": "@demo/wireframes",
+  "version": "1.0.0",
+  "dependencies": {
+    "@pmndrs/branding": "^0.0.8",
+    "@react-three/drei": "^9.109.5",
+    "@react-three/fiber": "^8.17.5",
+    "gl-noise": "^1.6.1",
+    "leva": "^0.9.35",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "three": "^0.165.0"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0",
+    "@types/three": "^0.165.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.0"
+  },
+  "scripts": {
+    "dev": "vite --host",
+    "dev3": "e2e-dev $npm_package_name",
+    "build": "tsc && vite build",
+    "build2": "tsc && e2e-build $npm_package_name",
+    "preview": "vite preview"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pmndrs/examples/tree/main/demos/wireframes"
+  }
+}
