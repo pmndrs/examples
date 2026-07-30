@@ -1,0 +1,11 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Faucets Select Highlight",
+  "description": "",
+  "tags": ["bounds", "highlight", "selection", "metal", "reflections"],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2022-07-15",
+  "source": "https://codesandbox.io/s/8flefh",
+  "libraries": ["@react-three/drei", "@react-three/fiber", "leva"],
+  "assets": []
+}

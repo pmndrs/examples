@@ -1,14 +1,6 @@
 {
   "name": "@demo/inter-epoxy-resin",
   "version": "1.0.0",
-  "description": "",
-  "homepage": "https://codesandbox.io/s/lxvqek",
-  "keywords": [
-    "refraction",
-    "shaders",
-    "glass",
-    "epoxy"
-  ],
   "dependencies": {
     "@pmndrs/branding": "^0.0.8",
     "@react-three/drei": "^9.109.5",

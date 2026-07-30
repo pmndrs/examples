@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pmndrs.github.io/examples/schemas/pmndrs.schema.json",
+  "title": "pmndrs example metadata",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "title",
+    "description",
+    "tags",
+    "authors",
+    "source",
+    "libraries",
+    "assets"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "../../schemas/pmndrs.schema.json"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "authors": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "publishedAt": {
+      "type": "string",
+      "format": "date"
+    },
+    "source": {
+      "type": "string",
+      "format": "uri"
+    },
+    "libraries": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "@pmndrs/assets",
+          "@pmndrs/branding",
+          "@react-spring/core",
+          "@react-spring/three",
+          "@react-spring/web",
+          "@react-three/cannon",
+          "@react-three/csg",
+          "@react-three/drei",
+          "@react-three/fiber",
+          "@react-three/flex",
+          "@react-three/postprocessing",
+          "@react-three/rapier",
+          "@use-gesture/react",
+          "ecctrl",
+          "jotai",
+          "lamina",
+          "leva",
+          "maath",
+          "meshline",
+          "suspend-react",
+          "three-stdlib",
+          "tunnel-rat",
+          "use-asset",
+          "valtio",
+          "zustand"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/asset"
+      }
+    }
+  },
+  "$defs": {
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "creator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "type": "string",
+          "format": "uri"
+        },
+        "license": {
+          "type": "string",
+          "minLength": 1
+        },
+        "licenseUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "modified": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

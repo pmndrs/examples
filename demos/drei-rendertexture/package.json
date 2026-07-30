@@ -1,12 +1,6 @@
 {
   "name": "@demo/drei-rendertexture",
   "version": "1.0.0",
-  "description": "Portal a live scene events and all into a texture.",
-  "homepage": "https://codesandbox.io/s/0z8i2c",
-  "keywords": [
-    "portals",
-    "rendertexture"
-  ],
   "dependencies": {
     "@pmndrs/assets": "^1.6.0",
     "@react-three/drei": "^9.109.5",

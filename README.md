@@ -8,6 +8,32 @@ $ npx degit pmndrs/examples/demos/basic-demo myproject
 $ code myproject
 ```
 
+## Demo metadata
+
+Every demo has a `pmndrs.json` file containing the catalog metadata used by the
+website:
+
+```json
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Basic Demo",
+  "description": "Shows how to form self-contained components with their own state and user interaction.",
+  "tags": ["interaction", "pointer-events"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/rrppl0y8l4",
+  "libraries": ["@react-three/fiber", "@react-three/drei"],
+  "assets": []
+}
+```
+
+Use package names for `libraries`; each entry must also be a dependency of the
+demo. `publishedAt` is optional and uses `YYYY-MM-DD` when the original
+publication date is known. Add externally sourced models, textures, fonts,
+audio, and other assets to `assets` with their creator, source, and license when
+available.
+
+Run `pnpm lint:metadata` to validate every metadata file.
+
 # INSTALL
 
 Prerequisites:

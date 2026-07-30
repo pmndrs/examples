@@ -1,13 +1,6 @@
 {
   "name": "@demo/html-input-fields",
   "version": "1.0.0",
-  "description": "",
-  "homepage": "https://codesandbox.io/s/024uom",
-  "keywords": [
-    "text",
-    "html",
-    "input"
-  ],
   "dependencies": {
     "@pmndrs/branding": "^0.0.8",
     "@react-three/drei": "^9.109.5",

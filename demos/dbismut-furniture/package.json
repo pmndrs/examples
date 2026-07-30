@@ -1,9 +1,6 @@
 {
   "name": "@demo/dbismut-furniture",
   "version": "1.0.0",
-  "description": "",
-  "homepage": "https://codesandbox.io/s/62o18n",
-  "keywords": [],
   "dependencies": {
     "@react-spring/three": "^9.7.3",
     "@react-three/drei": "^9.109.5",

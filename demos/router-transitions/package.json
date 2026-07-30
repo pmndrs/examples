@@ -1,13 +1,6 @@
 {
   "name": "@demo/router-transitions",
   "version": "1.0.0",
-  "description": "Shows how to implement routes and mount/unmount transition within the canvas using Wouter.",
-  "homepage": "https://codesandbox.io/s/4j2q2",
-  "keywords": [
-    "wouter",
-    "router",
-    "trnasitions"
-  ],
   "dependencies": {
     "@pmndrs/assets": "^1.6.0",
     "@react-three/drei": "^9.109.5",

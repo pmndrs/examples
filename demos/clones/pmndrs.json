@@ -1,0 +1,11 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Clones",
+  "description": "Shows how to form self-contained components with their own state and user interaction.",
+  "tags": ["gltf", "drei", "clone"],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2022-03-19",
+  "source": "https://codesandbox.io/s/42glz0",
+  "libraries": ["@pmndrs/branding", "@react-three/drei", "@react-three/fiber"],
+  "assets": []
+}

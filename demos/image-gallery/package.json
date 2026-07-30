@@ -1,12 +1,6 @@
 {
   "name": "@demo/image-gallery",
   "version": "1.0.0",
-  "description": "Stage a couple of frames with a reflective, blurred out ground.",
-  "homepage": "https://codesandbox.io/s/lx2h8",
-  "keywords": [
-    "image",
-    "meshreflectormaterial"
-  ],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",

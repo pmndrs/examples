@@ -1,13 +1,6 @@
 {
   "name": "@demo/merged-instance",
   "version": "1.0.0",
-  "description": "Loading massive assemblies and re-using their parts while keeping the natural  scene graph alive.",
-  "homepage": "https://codesandbox.io/s/kud9p",
-  "keywords": [
-    "batching",
-    "merging",
-    "instancing"
-  ],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",

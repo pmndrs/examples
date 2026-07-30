@@ -1,0 +1,11 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Video Cookies",
+  "description": "How to use drei/AccumulativeShadows and RandomizedLight",
+  "tags": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2022-08-31",
+  "source": "https://codesandbox.io/s/hmbn1l",
+  "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/postprocessing"],
+  "assets": []
+}

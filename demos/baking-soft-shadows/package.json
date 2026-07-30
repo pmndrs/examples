@@ -1,15 +1,6 @@
 {
   "name": "@demo/baking-soft-shadows",
   "version": "1.0.0",
-  "description": "How to use drei/AccumulativeShadows and RandomizedLight",
-  "homepage": "https://codesandbox.io/s/hxcc1x",
-  "keywords": [
-    "baking",
-    "softshadows",
-    "shadows",
-    "lightmap",
-    "progressive"
-  ],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",

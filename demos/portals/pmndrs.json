@@ -1,0 +1,11 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Portals",
+  "description": "",
+  "tags": [],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2023-06-05",
+  "source": "https://codesandbox.io/s/ik11ln",
+  "libraries": ["@react-three/drei", "@react-three/fiber", "leva"],
+  "assets": []
+}

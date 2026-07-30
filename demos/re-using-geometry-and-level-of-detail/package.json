@@ -1,9 +1,6 @@
 {
   "name": "@demo/re-using-geometry-and-level-of-detail",
   "version": "1.0.0",
-  "description": "Demonstrates how to load a model progressively with fallbacks via React.Suspense, and using them as a LOD.",
-  "homepage": "https://codesandbox.io/s/12nmp",
-  "keywords": [],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",

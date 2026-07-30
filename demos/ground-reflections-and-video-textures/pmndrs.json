@@ -1,0 +1,11 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Ground Reflections And Video Textures",
+  "description": "This example shows drei's new Reflector in combination with video textures.",
+  "tags": ["reflections"],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2021-01-26",
+  "source": "https://codesandbox.io/s/bfplr",
+  "libraries": ["@pmndrs/branding", "@react-three/drei", "@react-three/fiber"],
+  "assets": []
+}

@@ -54,13 +54,6 @@
       "last 1 safari version"
     ]
   },
-  "keywords": [
-    "positional",
-    "gltf",
-    "audio"
-  ],
-  "description": "Panning around a city with positional audio.",
-  "homepage": "https://codesandbox.io/s/gkfhr",
   "type": "module",
   "repository": {
     "type": "git",

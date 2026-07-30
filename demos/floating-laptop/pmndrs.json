@@ -1,0 +1,11 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Floating Laptop",
+  "description": "Animating GLTFs with react-spring.",
+  "tags": ["gltf", "animation", "react-spring"],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2020-06-05",
+  "source": "https://codesandbox.io/s/q23sw",
+  "libraries": ["@react-spring/three", "@react-spring/web", "@react-three/drei", "@react-three/fiber"],
+  "assets": []
+}

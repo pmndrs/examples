@@ -1,11 +1,6 @@
 {
   "name": "@demo/pass-through-portals",
   "version": "1.0.0",
-  "description": "",
-  "homepage": "https://codesandbox.io/s/qvk72r",
-  "keywords": [
-    "portal"
-  ],
   "dependencies": {
     "@pmndrs/assets": "^1.6.0",
     "@pmndrs/branding": "^0.0.8",

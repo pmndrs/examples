@@ -1,0 +1,11 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "GLTFJSX 400KB Drone",
+  "description": "Shows the results of gltfjsx transform compression.",
+  "tags": ["bloom", "gltfjsx", "drone"],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2022-12-29",
+  "source": "https://codesandbox.io/s/pbwi6i",
+  "libraries": ["@pmndrs/branding", "@react-three/drei", "@react-three/fiber", "@react-three/postprocessing", "maath"],
+  "assets": []
+}

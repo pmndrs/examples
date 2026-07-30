@@ -1,14 +1,6 @@
 {
   "name": "@demo/horizontal-tiles",
   "version": "1.0.0",
-  "description": "Horizontal scrollcontrols with expanding tiles.",
-  "homepage": "https://codesandbox.io/s/l4klb",
-  "keywords": [
-    "expand",
-    "scrollcontrols",
-    "tiles",
-    "horizontal"
-  ],
   "dependencies": {
     "@pmndrs/branding": "^0.0.8",
     "@react-three/drei": "^9.109.5",

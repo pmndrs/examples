@@ -1,0 +1,11 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Space Game",
+  "description": "A small demo that shows how to manage game entities.",
+  "tags": ["zustand", "physics", "game", "drei"],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2019-10-16",
+  "source": "https://codesandbox.io/s/i2160",
+  "libraries": ["@react-three/drei", "@react-three/fiber", "three-stdlib", "zustand"],
+  "assets": []
+}

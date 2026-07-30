@@ -1,12 +1,6 @@
 {
   "name": "@demo/svg-maps-with-html-annotations",
   "version": "1.0.0",
-  "description": "Using SVGLoader, converting each path into cell components with annotations and map controls.",
-  "homepage": "https://codesandbox.io/s/mkq8e",
-  "keywords": [
-    "html",
-    "svg"
-  ],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",

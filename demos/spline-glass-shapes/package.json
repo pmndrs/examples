@@ -1,9 +1,6 @@
 {
   "name": "@demo/spline-glass-shapes",
   "version": "1.0.0",
-  "description": "Scene exported with Spline",
-  "homepage": "https://codesandbox.io/s/ju368j",
-  "keywords": [],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",

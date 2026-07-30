@@ -1,15 +1,6 @@
 {
   "name": "@demo/moksha",
   "version": "1.0.0",
-  "description": "Exploration into scroll containers tied to webgl content made for codrops.",
-  "homepage": "https://codesandbox.io/s/f1ixt",
-  "keywords": [
-    "codrops",
-    "shaders",
-    "refraction",
-    "scroll",
-    "gltf"
-  ],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",

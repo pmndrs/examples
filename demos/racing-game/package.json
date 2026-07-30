@@ -1,15 +1,6 @@
 {
   "name": "@demo/racing-game",
   "version": "1.0.0",
-  "description": "A semi-complete racing game.",
-  "homepage": "https://codesandbox.io/s/lo6kp",
-  "keywords": [
-    "game",
-    "vehicle",
-    "raycast-vehicle",
-    "racing",
-    "physics"
-  ],
   "dependencies": {
     "@pmndrs/branding": "^0.0.8",
     "@react-three/cannon": "^6.6.0",

@@ -1,13 +1,6 @@
 {
   "name": "@demo/camera-shake",
   "version": "1.0.0",
-  "description": "Testing dre's new CameraShake with a couple of primitives.",
-  "homepage": "https://codesandbox.io/s/t4l0f",
-  "keywords": [
-    "camera-shake",
-    "rectarea-lights",
-    "reflections"
-  ],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",

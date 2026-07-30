@@ -1,13 +1,6 @@
 {
   "name": "@demo/confetti",
   "version": "1.0.0",
-  "description": "Meshline particles.",
-  "homepage": "https://codesandbox.io/s/vl221",
-  "keywords": [
-    "particles",
-    "meshline",
-    "confetti"
-  ],
   "dependencies": {
     "@react-three/fiber": "^8.17.5",
     "@react-three/postprocessing": "^2.16.2",

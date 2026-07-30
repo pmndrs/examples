@@ -1,0 +1,11 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Instanced Particles Effects",
+  "description": "Instancing, swirling particles and effects.",
+  "tags": ["effects", "film", "water", "bloom", "particles"],
+  "authors": ["Paul Henschel"],
+  "publishedAt": "2022-12-07",
+  "source": "https://codesandbox.io/s/qpfgyp",
+  "libraries": ["@react-three/drei", "@react-three/fiber"],
+  "assets": []
+}

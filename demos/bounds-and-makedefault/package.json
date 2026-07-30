@@ -1,12 +1,6 @@
 {
   "name": "@demo/bounds-and-makedefault",
   "version": "1.0.0",
-  "description": "Combining TransformControls, OrbitControls and Valtio.",
-  "homepage": "https://codesandbox.io/s/rz2g0",
-  "keywords": [
-    "fit-all",
-    "bounds"
-  ],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",

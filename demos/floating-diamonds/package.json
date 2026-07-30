@@ -1,15 +1,6 @@
 {
   "name": "@demo/floating-diamonds",
   "version": "1.0.0",
-  "description": "Mixing refraction shaders and animations.",
-  "homepage": "https://codesandbox.io/s/prb9t",
-  "keywords": [
-    "gltf",
-    "refraction",
-    "useframe",
-    "useaspect",
-    "drei"
-  ],
   "dependencies": {
     "@react-three/drei": "^9.109.5",
     "@react-three/fiber": "^8.17.5",

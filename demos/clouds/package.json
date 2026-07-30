@@ -1,7 +1,6 @@
 {
   "name": "@demo/clouds",
   "version": "0.1.0",
-  "homepage": "https://codesandbox.io/s/mbfzf",
   "private": true,
   "dependencies": {
     "@react-three/drei": "^9.109.5",
@@ -36,11 +35,6 @@
       "last 1 safari version"
     ]
   },
-  "keywords": [
-    "clouds",
-    "drei"
-  ],
-  "description": "Trying out drei's new cloud component.",
   "type": "module",
   "devDependencies": {
     "@types/react": "^18.3.3",
