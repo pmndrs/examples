@@ -16,6 +16,7 @@ import { Wheel } from './Wheel'
 
 import type { Controls, WheelInfo } from '../../store'
 import type { ChassisProps } from './Chassis'
+import { assetUrl } from '../../assetUrl'
 
 const { lerp } = MathUtils
 const v = new Vector3()
@@ -54,7 +55,6 @@ export function Vehicle({ angularVelocity, children, position, rotation }: Vehic
     wheelInfos,
   }
 
-  // @ts-expect-error - need to update use-cannon types
   const [, api] = useRaycastVehicle(() => raycast, undefined, [wheelInfo])
 
   useLayoutEffect(() => api.sliding.subscribe((sliding) => (mutation.sliding = sliding)), [api])
@@ -198,11 +198,11 @@ function VehicleAudio() {
 
   return (
     <>
-      <PositionalAudio ref={engineAudio} url="/sounds/engine.mp3" autoplay loop distance={5} />
-      <PositionalAudio ref={boostAudio} url="/sounds/boost.mp3" autoplay loop distance={5} />
-      <PositionalAudio ref={accelerateAudio} url="/sounds/accelerate.mp3" autoplay loop distance={5} />
-      <PositionalAudio ref={honkAudio} url="/sounds/honk.mp3" distance={10} />
-      <PositionalAudio ref={brakeAudio} url="/sounds/tire-brake.mp3" distance={10} />
+      <PositionalAudio ref={engineAudio} url={assetUrl('sounds/engine.mp3')} autoplay loop distance={5} />
+      <PositionalAudio ref={boostAudio} url={assetUrl('sounds/boost.mp3')} autoplay loop distance={5} />
+      <PositionalAudio ref={accelerateAudio} url={assetUrl('sounds/accelerate.mp3')} autoplay loop distance={5} />
+      <PositionalAudio ref={honkAudio} url={assetUrl('sounds/honk.mp3')} distance={10} />
+      <PositionalAudio ref={brakeAudio} url={assetUrl('sounds/tire-brake.mp3')} distance={10} />
     </>
   )
 }

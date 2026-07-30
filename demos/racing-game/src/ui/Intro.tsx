@@ -2,15 +2,10 @@ import { Suspense, useEffect, useState } from 'react'
 import { Footer } from '@pmndrs/branding'
 import { useProgress } from '@react-three/drei'
 
-import type { Dispatch, ReactNode, SetStateAction } from 'react'
+import type { ReactNode } from 'react'
 
 import { useStore } from '../store'
 import { Keys } from './Help'
-
-function Ready({ setReady }: { setReady: Dispatch<SetStateAction<boolean>> }) {
-  useEffect(() => () => void setReady(true), [])
-  return null
-}
 
 function Loader() {
   const { progress } = useProgress()
@@ -22,23 +17,22 @@ interface IntroProps {
 }
 
 export function Intro({ children }: IntroProps): JSX.Element {
-  const [ready, setReady] = useState(false)
   const [clicked, setClicked] = useState(false)
-  const [session, set] = useStore((state) => [state.session, state.set])
+  const [loaded, set] = useStore((state) => [state.loaded, state.set])
 
   useEffect(() => {
-    if (clicked && ready) set({ ready: true })
-  }, [ready, clicked])
+    if (clicked && loaded) set({ ready: true })
+  }, [loaded, clicked])
 
   return (
     <>
-      <Suspense fallback={<Ready setReady={setReady} />}>{children}</Suspense>
-      <div className={`fullscreen bg ${ready ? 'ready' : 'notready'} ${clicked && 'clicked'}`}>
+      <Suspense fallback={null}>{children}</Suspense>
+      <div className={`fullscreen bg ${loaded ? 'ready' : 'notready'} ${clicked && 'clicked'}`}>
         <div className="stack">
           <div className="intro-keys">
             <Keys style={{ paddingBottom: 20 }} />
-            <a className="continue-link" href="#" onClick={() => ready && setClicked(true)}>
-              {!ready ? <Loader /> : 'Click to continue'}
+            <a className="continue-link" href="#" onClick={() => loaded && setClicked(true)}>
+              {!loaded ? <Loader /> : 'Click to continue'}
             </a>
           </div>
         </div>

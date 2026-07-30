@@ -2,9 +2,8 @@ import { createRef } from 'react'
 import create from 'zustand'
 import shallow from 'zustand/shallow'
 import type { RefObject } from 'react'
-// TODO: Export PublicApi
-import type { Api, WheelInfoOptions } from '@react-three/cannon'
-import type { Group, Object3D } from 'three'
+import type { PublicApi, WheelInfoOptions } from '@react-three/cannon'
+import type { Group } from 'three'
 import type { GetState, SetState, StateSelector } from 'zustand'
 
 export const angularVelocity = [0, 0.5, 0] as const
@@ -69,7 +68,7 @@ export const wheelInfo: WheelInfo = {
   useCustomSlidingRotationalSpeed: true,
 }
 
-const actionNames = ['onCheckpoint', 'onFinish', 'onStart', 'reset'] as const
+const actionNames = ['onFinish', 'onStart', 'reset'] as const
 export type ActionNames = (typeof actionNames)[number]
 
 type Camera = (typeof cameras)[number]
@@ -89,20 +88,22 @@ type BaseState = {
 
 export interface IState extends BaseState {
   actions: Record<ActionNames, () => void>
-  // TODO: This should be PublicApi
-  api: Api[1] | null
+  api: PublicApi | null
+  bestCheckpoint: number
   camera: Camera
-  chassisBody: RefObject<Object3D>
+  chassisBody: RefObject<Group>
   controls: Controls
   dpr: number
   finished: number
   get: Getter
   level: RefObject<Group>
+  loaded: boolean
+  session: null
   set: Setter
   start: number
   vehicleConfig: VehicleConfig
   wheelInfo: WheelInfo
-  wheels: [RefObject<Object3D>, RefObject<Object3D>, RefObject<Object3D>, RefObject<Object3D>]
+  wheels: [RefObject<Group>, RefObject<Group>, RefObject<Group>, RefObject<Group>]
 }
 
 const useStoreImpl = create<IState>((set: SetState<IState>, get: GetState<IState>) => {
@@ -135,7 +136,7 @@ const useStoreImpl = create<IState>((set: SetState<IState>, get: GetState<IState
     api: null,
     bestCheckpoint: 0,
     camera: cameras[0],
-    chassisBody: createRef<Object3D>(),
+    chassisBody: createRef<Group>(),
     controls,
     debug,
     dpr,
@@ -145,6 +146,7 @@ const useStoreImpl = create<IState>((set: SetState<IState>, get: GetState<IState
     help: false,
     leaderboard: false,
     level: createRef<Group>(),
+    loaded: false,
     map: true,
     ready: false,
     session: null,
@@ -155,7 +157,7 @@ const useStoreImpl = create<IState>((set: SetState<IState>, get: GetState<IState
     stats,
     vehicleConfig,
     wheelInfo,
-    wheels: [createRef<Object3D>(), createRef<Object3D>(), createRef<Object3D>(), createRef<Object3D>()],
+    wheels: [createRef<Group>(), createRef<Group>(), createRef<Group>(), createRef<Group>()],
   }
 })
 
