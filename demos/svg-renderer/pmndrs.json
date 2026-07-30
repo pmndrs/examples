@@ -6,6 +6,6 @@
   "authors": ["Paul Henschel"],
   "publishedAt": "2021-03-30",
   "source": "https://codesandbox.io/s/zcuqh",
-  "libraries": ["@react-three/fiber", "three-stdlib"],
+  "libraries": ["@react-three/fiber"],
   "assets": []
 }

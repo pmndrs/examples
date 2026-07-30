@@ -19,6 +19,9 @@ function formatDate(date: string) {
 export function Info({ demo }: { demo: Demo }) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+  const libraryLabels = Array.from(
+    new Set(demo.libraries.map(getLibraryLabel)),
+  );
 
   useEffect(() => {
     if (!open) return;
@@ -270,7 +273,9 @@ export function Info({ demo }: { demo: Demo }) {
             </button>
           </header>
 
-          {demo.description && <p className="description">{demo.description}</p>}
+          {demo.description && (
+            <p className="description">{demo.description}</p>
+          )}
 
           {demo.authors.length > 0 && (
             <section>
@@ -297,12 +302,12 @@ export function Info({ demo }: { demo: Demo }) {
             </section>
           )}
 
-          {demo.libraries.length > 0 && (
+          {libraryLabels.length > 0 && (
             <section>
               <h3>Libraries</h3>
               <ul className="pills">
-                {demo.libraries.map((library) => (
-                  <li key={library}>{getLibraryLabel(library)}</li>
+                {libraryLabels.map((library) => (
+                  <li key={library}>{library}</li>
                 ))}
               </ul>
             </section>
@@ -344,8 +349,12 @@ export function Info({ demo }: { demo: Demo }) {
                         )}
                       </span>
                     )}
-                    {asset.modified && <span className="meta"> (modified)</span>}
-                    {asset.notes && <span className="notes">{asset.notes}</span>}
+                    {asset.modified && (
+                      <span className="meta"> (modified)</span>
+                    )}
+                    {asset.notes && (
+                      <span className="notes">{asset.notes}</span>
+                    )}
                   </li>
                 ))}
               </ul>

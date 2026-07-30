@@ -13,8 +13,7 @@
   "libraries": [
     "@pmndrs/assets",
     "@react-three/drei",
-    "@react-three/fiber",
-    "suspend-react"
+    "@react-three/fiber"
   ],
   "assets": []
 }

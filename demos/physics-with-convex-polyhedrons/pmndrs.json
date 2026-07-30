@@ -9,8 +9,7 @@
   "libraries": [
     "@react-three/cannon",
     "@react-three/drei",
-    "@react-three/fiber",
-    "three-stdlib"
+    "@react-three/fiber"
   ],
   "assets": []
 }
