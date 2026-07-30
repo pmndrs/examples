@@ -5,11 +5,11 @@
     "@react-spring/core": "^10.1.2",
     "@react-spring/three": "^10.1.2",
     "@react-spring/web": "^10.1.2",
-    "@react-three/drei": "^10.7.7",
-    "@react-three/fiber": "^9.6.1",
+    "@react-three/drei": "10.7.7",
+    "@react-three/fiber": "9.6.1",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "three": "^0.165.0"
+    "three": "0.165.0"
   },
   "devDependencies": {
     "@types/react": "19.2.17",

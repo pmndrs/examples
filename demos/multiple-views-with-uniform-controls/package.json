@@ -4,13 +4,13 @@
   "dependencies": {
     "@mantine/core": "^5.10.5",
     "@mantine/hooks": "^5.10.1",
-    "@react-three/drei": "^10.7.7",
-    "@react-three/fiber": "^9.6.1",
+    "@react-three/drei": "10.7.7",
+    "@react-three/fiber": "9.6.1",
     "@tabler/icons-react": "^3.36.0",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "react-use-refs": "^1.0.1",
-    "three": "^0.165.0",
+    "three": "0.165.0",
     "zustand": "^5.0.14"
   },
   "devDependencies": {

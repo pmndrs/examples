@@ -4,14 +4,14 @@
   "dependencies": {
     "@pmndrs/branding": "^0.0.8",
     "@react-three/cannon": "^6.6.0",
-    "@react-three/drei": "^10.7.7",
-    "@react-three/fiber": "^9.6.1",
+    "@react-three/drei": "10.7.7",
+    "@react-three/fiber": "9.6.1",
     "inter-ui": "^3.19.3",
     "leva": "^0.10.1",
     "lodash-es": "^4.17.21",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "three": "^0.165.0",
+    "three": "0.165.0",
     "use-asset": "^1.0.4",
     "zustand": "^5.0.14"
   },

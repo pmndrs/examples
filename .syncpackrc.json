@@ -32,6 +32,36 @@
       "pinVersion": "19.2.3"
     },
     {
+      "label": "three is pinned: the @splinetool/loader patch is keyed to r165, and postprocessing 6.36.6 needs < 0.173",
+      "packages": [
+        "@demo/**"
+      ],
+      "dependencies": [
+        "three"
+      ],
+      "pinVersion": "0.165.0"
+    },
+    {
+      "label": "@react-three/fiber is pinned: 9.x is the React 19 line, and a caret could raise the three floor",
+      "packages": [
+        "@demo/**"
+      ],
+      "dependencies": [
+        "@react-three/fiber"
+      ],
+      "pinVersion": "9.6.1"
+    },
+    {
+      "label": "@react-three/drei is pinned: 10.x is the line matching @react-three/fiber 9",
+      "packages": [
+        "@demo/**"
+      ],
+      "dependencies": [
+        "@react-three/drei"
+      ],
+      "pinVersion": "10.7.7"
+    },
+    {
       "label": "Update lamina to 1.2.2 for all demos.",
       "packages": [
         "@demo/**"
@@ -42,7 +72,7 @@
       "pinVersion": "1.2.2"
     },
     {
-      "label": "postprocessing is pinned to the last release compatible with three 0.165 (6.36.7+ requires three >= 0.174, and 6.37+ drifts further). @react-three/postprocessing 3.x declares postprocessing ^6.36.6, so pnpm.overrides pins the transitive copy too",
+      "label": "postprocessing is pinned to the last release accepting three 0.165 (6.36.7+ needs >= 0.174); pnpm.overrides pins the transitive copy too",
       "packages": [
         "@demo/**"
       ],
@@ -77,9 +107,6 @@
         "@demo/**"
       ],
       "dependencies": [
-        "three",
-        "@react-three/fiber",
-        "@react-three/drei",
         "@react-three/postprocessing",
         "@react-three/rapier",
         "@react-three/cannon",
@@ -93,9 +120,7 @@
         "valtio",
         "leva",
         "maath",
-        "postprocessing",
         "r3f-perf",
-        "lamina",
         "three-stdlib",
         "meshline",
         "styled-components",
@@ -105,7 +130,6 @@
         "@headlessui/react",
         "@heroicons/react",
         "wouter",
-        "@splinetool/loader",
         "@splinetool/r3f-spline",
         "nice-color-palettes",
         "lodash-es",
@@ -126,7 +150,7 @@
       "dependencyTypes": [
         "prod"
       ],
-      "policy": "sameRange"
+      "pinVersion": "workspace:*"
     }
   ]
 }

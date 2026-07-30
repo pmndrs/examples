@@ -2,11 +2,11 @@
   "name": "@demo/arkanoid-under-60-loc",
   "version": "1.0.0",
   "dependencies": {
-    "@react-three/fiber": "^9.6.1",
+    "@react-three/fiber": "9.6.1",
     "@react-three/rapier": "^2.2.0",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "three": "^0.165.0"
+    "three": "0.165.0"
   },
   "devDependencies": {
     "@types/react": "19.2.17",

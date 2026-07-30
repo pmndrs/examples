@@ -2,14 +2,14 @@
   "name": "@demo/confetti",
   "version": "1.0.0",
   "dependencies": {
-    "@react-three/fiber": "^9.6.1",
+    "@react-three/fiber": "9.6.1",
     "@react-three/postprocessing": "^3.0.4",
     "leva": "^0.10.1",
     "maath": "^0.10.8",
     "meshline": "^3.3.1",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "three": "^0.165.0"
+    "three": "0.165.0"
   },
   "devDependencies": {
     "@types/react": "19.2.17",
