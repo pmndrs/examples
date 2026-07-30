@@ -7,14 +7,12 @@ import {
   ElementRef,
   useCallback,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from "react";
 import { useParams } from "next/navigation";
 import clsx from "clsx";
 
-import { getLibraryLabel } from "@/const/libraries";
 import type { Demo } from "@/lib/helper";
 import { Style } from "./Style";
 
@@ -40,23 +38,6 @@ export default function Nav({
 
   const [collapsed, setCollapsed] = useState(false);
   const [ready, setReady] = useState(false);
-  const [library, setLibrary] = useState("");
-
-  const libraryOptions = useMemo(
-    () =>
-      Array.from(new Set(demos.flatMap((demo) => demo.libraries))).sort(
-        (a, b) => getLibraryLabel(a).localeCompare(getLibraryLabel(b)),
-      ),
-    [demos],
-  );
-
-  const filteredDemos = useMemo(
-    () =>
-      library
-        ? demos.filter((demo) => demo.libraries.includes(library))
-        : demos,
-    [demos, library],
-  );
 
   const toggle = useCallback(() => {
     setCollapsed((prev) => {
@@ -93,7 +74,7 @@ export default function Nav({
         behavior: firstRef.current ? "instant" : "smooth",
       });
     firstRef.current = false;
-  }, [demoname, filteredDemos]);
+  }, [demoname, demos]);
 
   const navRef = useRef<HTMLDivElement>(null);
 
@@ -248,45 +229,6 @@ export default function Nav({
               margin: 0;
             }
 
-            .filters {
-              position: sticky;
-              top: 0;
-              z-index: 2;
-              padding: 1rem 0.75rem 0.25rem 1rem;
-              background: linear-gradient(#eee 75%, transparent);
-            }
-
-            .filters label {
-              display: grid;
-              gap: 0.35rem;
-              color: #555;
-              font-size: 0.65rem;
-              font-weight: 700;
-              letter-spacing: 0.06em;
-              text-transform: uppercase;
-            }
-
-            .filters select {
-              width: 100%;
-              min-height: 2.25rem;
-              padding: 0.45rem 2rem 0.45rem 0.65rem;
-              border: 1px solid #d4d4d4;
-              border-radius: 6px;
-              background: white;
-              color: #222;
-              font: inherit;
-              font-size: 0.75rem;
-              letter-spacing: normal;
-              text-transform: none;
-            }
-
-            .empty {
-              padding: 1rem;
-              color: #666;
-              font-size: 0.75rem;
-              text-align: center;
-            }
-
             li {
               padding-inline-start: unset;
               transform: scale(1);
@@ -380,24 +322,8 @@ export default function Nav({
       </button>
 
       <nav {...props}>
-        <div className="filters">
-          <label>
-            Library
-            <select
-              value={library}
-              onChange={(event) => setLibrary(event.target.value)}
-            >
-              <option value="">All libraries</option>
-              {libraryOptions.map((option) => (
-                <option key={option} value={option}>
-                  {getLibraryLabel(option)}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
         <ul ref={ulRef}>
-          {filteredDemos.map(({ name, title, thumb, isNew }) => (
+          {demos.map(({ name, title, thumb, isNew }) => (
             <li key={thumb} data-demo={name}>
               <Link
                 href={`/demos/${name}`}
@@ -411,9 +337,6 @@ export default function Nav({
             </li>
           ))}
         </ul>
-        {filteredDemos.length === 0 && (
-          <p className="empty">No demos use this library.</p>
-        )}
       </nav>
     </div>
   );

@@ -6,6 +6,7 @@ import { Dev } from "./Dev";
 import { Style } from "@/components/Style";
 
 import { Social } from "./Social";
+import { Info } from "./Info";
 
 const demos = getDemos();
 
@@ -90,10 +91,14 @@ export default async function Page(props: Props) {
               min-width: 0;
               min-height: 0;
             }
-            .Social {
+            .TopBar {
               position: fixed;
               top: 0.75rem;
               right: 0.75rem;
+              z-index: 3;
+              display: flex;
+              align-items: flex-start;
+              gap: 0.5rem;
             }
           }
         `}
@@ -107,7 +112,10 @@ export default async function Page(props: Props) {
             <ScaledDemoFrame src={embed_url} title={demo.title} />
           </div>
 
-          <Social demoname={demoname} embed_url={embed_url} />
+          <div className="TopBar">
+            <Info key={demoname} demo={demo} />
+            <Social demoname={demoname} embed_url={embed_url} />
+          </div>
         </>
       )}
     </>
