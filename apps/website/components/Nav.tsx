@@ -7,12 +7,14 @@ import {
   ElementRef,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
 import { useParams } from "next/navigation";
 import clsx from "clsx";
 
+import { getLibraryLabel } from "@/const/libraries";
 import type { Demo } from "@/lib/helper";
 import { Style } from "./Style";
 
@@ -39,6 +41,27 @@ export default function Nav({
 
   const [collapsed, setCollapsed] = useState(false);
   const [ready, setReady] = useState(false);
+  const [library, setLibrary] = useState("");
+
+  const libraryOptions = useMemo(
+    () =>
+      Array.from(
+        new Set(demos.flatMap((demo) => demo.libraries.map(getLibraryLabel))),
+      ).sort((a, b) => a.localeCompare(b)),
+    [demos],
+  );
+
+  const filteredDemos = useMemo(
+    () =>
+      library
+        ? demos.filter((demo) =>
+            demo.libraries.some(
+              (demoLibrary) => getLibraryLabel(demoLibrary) === library,
+            ),
+          )
+        : demos,
+    [demos, library],
+  );
 
   const toggle = useCallback(() => {
     setCollapsed((prev) => {
@@ -75,7 +98,7 @@ export default function Nav({
         behavior: firstRef.current ? "instant" : "smooth",
       });
     firstRef.current = false;
-  }, [demoname, demos]);
+  }, [demoname, filteredDemos]);
 
   const navRef = useRef<HTMLDivElement>(null);
 
@@ -142,6 +165,84 @@ export default function Nav({
             html[data-nav-collapsed] .Nav nav {
               opacity: 0;
               pointer-events: none;
+            }
+
+            .filters {
+              position: sticky;
+              top: 0;
+              z-index: 2;
+              padding: 0.65rem 0.75rem 0.35rem 1rem;
+              background: linear-gradient(#eee 75%, rgb(238 238 238 / 0));
+            }
+
+            .filter {
+              position: relative;
+              display: flex;
+              align-items: center;
+              width: 100%;
+              min-width: 0;
+              border: 1px solid #d4d4d4;
+              border-radius: 999px;
+              background: rgb(255 255 255 / 0.92);
+              box-shadow: 0 1px 6px rgb(0 0 0 / 0.1);
+              color: #555;
+              transition:
+                border-color 0.15s ease,
+                box-shadow 0.15s ease;
+            }
+
+            .filter:focus-within {
+              border-color: #888;
+              box-shadow:
+                0 1px 6px rgb(0 0 0 / 0.1),
+                0 0 0 2px rgb(0 0 0 / 0.08);
+            }
+
+            .filterIcon,
+            .filterChevron {
+              position: absolute;
+              pointer-events: none;
+            }
+
+            .filterIcon {
+              left: 0.7rem;
+              width: 0.75rem;
+              height: 0.75rem;
+            }
+
+            .filterChevron {
+              right: 0.7rem;
+              width: 0.6rem;
+              height: 0.6rem;
+            }
+
+            .filter select {
+              width: 100%;
+              min-width: 0;
+              height: 2.15rem;
+              padding: 0 1.75rem 0 1.8rem;
+              border: 0;
+              outline: 0;
+              appearance: none;
+              background: transparent;
+              color: #333;
+              cursor: pointer;
+              font: inherit;
+              font-size: 0.7rem;
+              font-weight: 600;
+              text-overflow: ellipsis;
+            }
+
+            .srOnly {
+              position: absolute;
+              width: 1px;
+              height: 1px;
+              padding: 0;
+              margin: -1px;
+              overflow: hidden;
+              clip: rect(0, 0, 0, 0);
+              white-space: nowrap;
+              border: 0;
             }
 
             .toggle {
@@ -223,7 +324,7 @@ export default function Nav({
             ul {
               padding-inline-start: unset;
               list-style: none;
-              padding: 1rem 0.75rem 1rem 1rem;
+              padding: 0.4rem 0.75rem 1rem 1rem;
               display: flex;
               flex-direction: column;
               gap: 0.75rem;
@@ -346,8 +447,51 @@ export default function Nav({
       </button>
 
       <nav {...props}>
+        <div className="filters">
+          <label className="filter">
+            <span className="srOnly">Filter examples by library</span>
+            <svg
+              className="filterIcon"
+              viewBox="0 0 12 12"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M2 3h8M3.5 6h5M5 9h2"
+                stroke="currentColor"
+                strokeWidth="1.25"
+                strokeLinecap="round"
+              />
+            </svg>
+            <select
+              value={library}
+              onChange={(event) => setLibrary(event.target.value)}
+            >
+              <option value="">All libraries</option>
+              {libraryOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+            <svg
+              className="filterChevron"
+              viewBox="0 0 10 6"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="m1 1 4 4 4-4"
+                stroke="currentColor"
+                strokeWidth="1.25"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </label>
+        </div>
         <ul ref={ulRef}>
-          {demos.map(({ name, title, thumb, isNew, tags }) => (
+          {filteredDemos.map(({ name, title, thumb, isNew, tags }) => (
             <li key={thumb} data-demo={name}>
               <Link
                 href={`/demos/${name}`}
