@@ -4,6 +4,7 @@
   "description": "How to invert a masked stencil.",
   "tags": ["stencil", "portal"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2022-05-20",
   "source": "https://codesandbox.io/s/7n2yru",
   "libraries": ["@react-three/drei", "@react-three/fiber", "leva"],

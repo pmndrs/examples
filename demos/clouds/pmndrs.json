@@ -4,6 +4,7 @@
   "description": "Trying out drei's new cloud component.",
   "tags": ["clouds"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2020-11-16",
   "source": "https://codesandbox.io/s/mbfzf",
   "libraries": ["@react-three/drei", "@react-three/fiber", "leva"],

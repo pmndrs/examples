@@ -4,6 +4,7 @@
   "description": "A small demo that shows how to manage game entities.",
   "tags": ["physics", "game"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2019-10-16",
   "source": "https://codesandbox.io/s/i2160",
   "libraries": ["@react-three/drei", "@react-three/fiber", "zustand"],

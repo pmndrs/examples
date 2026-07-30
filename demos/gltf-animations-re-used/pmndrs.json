@@ -4,12 +4,9 @@
   "description": "This examples shows how to blend GLTF animation keyframes and to re-use an existing model even it's being keyframed.",
   "tags": [],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2021-04-19",
   "source": "https://codesandbox.io/s/k8phr",
-  "libraries": [
-    "@react-spring/three",
-    "@react-three/drei",
-    "@react-three/fiber"
-  ],
+  "libraries": ["@react-spring/three", "@react-three/drei", "@react-three/fiber"],
   "assets": []
 }

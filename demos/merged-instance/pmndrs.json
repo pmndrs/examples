@@ -4,6 +4,7 @@
   "description": "Loading massive assemblies and re-using their parts while keeping the natural  scene graph alive.",
   "tags": ["batching", "merging", "instancing"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2021-09-19",
   "source": "https://codesandbox.io/s/kud9p",
   "libraries": ["@react-three/drei", "@react-three/fiber"],

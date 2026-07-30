@@ -4,6 +4,7 @@
   "description": "Shows how to form self-contained components with their own state and user interaction.",
   "tags": [],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2021-09-29",
   "source": "https://codesandbox.io/s/2ycs3",
   "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/postprocessing"],

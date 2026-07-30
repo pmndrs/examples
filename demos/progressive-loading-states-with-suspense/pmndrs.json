@@ -4,6 +4,7 @@
   "description": "Demonstrates how to load a model progressively with fallbacks via React.Suspense.",
   "tags": ["gltf", "suspense", "loading"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2021-02-08",
   "source": "https://codesandbox.io/s/7duy8",
   "libraries": ["@react-three/drei", "@react-three/fiber"],

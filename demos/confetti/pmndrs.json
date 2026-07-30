@@ -4,6 +4,7 @@
   "description": "Meshline particles.",
   "tags": ["particles", "confetti"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2019-10-19",
   "source": "https://codesandbox.io/s/vl221",
   "libraries": ["@react-three/fiber", "@react-three/postprocessing", "leva", "maath", "meshline"],

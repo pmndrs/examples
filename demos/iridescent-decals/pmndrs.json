@@ -4,6 +4,7 @@
   "description": "",
   "tags": ["decal"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2022-12-30",
   "source": "https://codesandbox.io/s/qvb1vk",
   "libraries": ["@react-three/drei", "@react-three/fiber"],

@@ -4,6 +4,7 @@
   "description": "Volumetric soft particle spot lights.",
   "tags": ["volumetric", "spotlight", "soft-particles", "spot"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2021-05-24",
   "source": "https://codesandbox.io/s/tx1pq",
   "libraries": ["@react-three/drei", "@react-three/fiber"],

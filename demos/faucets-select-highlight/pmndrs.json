@@ -4,6 +4,7 @@
   "description": "",
   "tags": ["bounds", "highlight", "selection", "metal", "reflections"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2022-07-15",
   "source": "https://codesandbox.io/s/8flefh",
   "libraries": ["@react-three/drei", "@react-three/fiber", "leva"],

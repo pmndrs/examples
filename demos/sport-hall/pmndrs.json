@@ -4,6 +4,7 @@
   "description": "Shows how to form self-contained components with their own state and user interaction.",
   "tags": ["box projected", "environment", "ground mapping", "reflections"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2022-02-09",
   "source": "https://codesandbox.io/s/s006f",
   "libraries": ["@react-three/drei", "@react-three/fiber", "leva"],

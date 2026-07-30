@@ -4,6 +4,7 @@
   "description": "Using cannon collisions with GLTFs converted into convex hulls.",
   "tags": ["physics", "collisions", "convex-polyhedron", "gltf"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2021-03-13",
   "source": "https://codesandbox.io/s/08s1u",
   "libraries": [

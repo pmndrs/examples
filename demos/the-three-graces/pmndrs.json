@@ -4,6 +4,7 @@
   "description": "Experimentaing with lights and shadows.",
   "tags": ["shadows", "lights", "gltf", "html-annotations", "html"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2021-04-19",
   "source": "https://codesandbox.io/s/0n9it",
   "libraries": ["@react-three/drei", "@react-three/fiber", "maath"],

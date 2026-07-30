@@ -2,16 +2,11 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Drei RenderTexture",
   "description": "Portal a live scene events and all into a texture.",
-  "tags": [
-    "portals",
-    "rendertexture"
-  ],
+  "tags": ["portals", "rendertexture"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2022-05-04",
   "source": "https://codesandbox.io/s/0z8i2c",
-  "libraries": [
-    "@react-three/drei",
-    "@react-three/fiber"
-  ],
+  "libraries": ["@react-three/drei", "@react-three/fiber"],
   "assets": []
 }

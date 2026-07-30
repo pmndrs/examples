@@ -2,19 +2,11 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Star Wars",
   "description": "",
-  "tags": [
-    "ssr",
-    "bloom",
-    "hdr"
-  ],
+  "tags": ["ssr", "bloom", "hdr"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2022-07-12",
   "source": "https://codesandbox.io/s/fslt99",
-  "libraries": [
-    "@react-three/drei",
-    "@react-three/fiber",
-    "@react-three/postprocessing",
-    "leva"
-  ],
+  "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/postprocessing", "leva"],
   "assets": []
 }

@@ -9,6 +9,9 @@ const demosDirectory = path.join(root, "demos");
 const schemaPath = path.join(root, "schemas", "pmndrs.schema.json");
 const schema = JSON.parse(fs.readFileSync(schemaPath, "utf8"));
 const allowedLibraries = new Set(schema.properties.libraries.items.enum);
+const githubLoginPattern = new RegExp(
+  schema.properties.maintainers.items.pattern,
+);
 const requiredFields = new Set(schema.required);
 const allowedFields = new Set(Object.keys(schema.properties));
 const allowedAssetFields = new Set(Object.keys(schema.$defs.asset.properties));
@@ -91,11 +94,16 @@ for (const demoName of demoNames) {
     addError(demoName, '"description" must be a string');
   }
 
-  for (const field of ["tags", "authors", "libraries"]) {
+  for (const field of ["tags", "authors", "maintainers", "libraries"]) {
     if (!isStringArray(metadata[field])) {
       addError(demoName, `"${field}" must contain non-empty strings`);
     } else if (hasDuplicates(metadata[field])) {
       addError(demoName, `"${field}" contains duplicates`);
+    }
+  }
+  for (const login of metadata.maintainers ?? []) {
+    if (typeof login === "string" && !githubLoginPattern.test(login)) {
+      addError(demoName, `"maintainers" entry "${login}" is not a GitHub login`);
     }
   }
 

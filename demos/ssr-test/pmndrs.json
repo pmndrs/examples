@@ -4,6 +4,7 @@
   "description": "Screen space reflections",
   "tags": ["ssr", "postprocessing"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2022-06-30",
   "source": "https://codesandbox.io/s/8pbw1f",
   "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/postprocessing", "leva"],

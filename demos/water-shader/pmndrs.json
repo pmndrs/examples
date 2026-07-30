@@ -4,6 +4,7 @@
   "description": "",
   "tags": ["shader", "water"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2021-04-15",
   "source": "https://codesandbox.io/s/1b40u",
   "libraries": ["@react-three/drei", "@react-three/fiber"],

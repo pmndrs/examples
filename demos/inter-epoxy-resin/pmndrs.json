@@ -4,6 +4,7 @@
   "description": "",
   "tags": ["refraction", "shaders", "glass", "epoxy"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2022-10-25",
   "source": "https://codesandbox.io/s/lxvqek",
   "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/postprocessing", "leva"],

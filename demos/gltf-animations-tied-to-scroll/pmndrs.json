@@ -4,6 +4,7 @@
   "description": "This examples shows how to blend GLTF animation keyframes.",
   "tags": [],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2023-05-15",
   "source": "https://codesandbox.io/s/hg3ejl",
   "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/postprocessing"],

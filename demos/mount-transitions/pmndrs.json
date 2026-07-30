@@ -4,6 +4,7 @@
   "description": "Shows how to use react-spring mount/unmount transitions, soft-shadows and AO.",
   "tags": ["soft-shadows", "animation", "ambient-occlusion", "transitions"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2020-09-18",
   "source": "https://codesandbox.io/s/1sccp",
   "libraries": ["@react-spring/three", "@react-three/drei", "@react-three/fiber", "@react-three/postprocessing"],

@@ -10,6 +10,7 @@
     "description",
     "tags",
     "authors",
+    "maintainers",
     "source",
     "libraries",
     "assets"
@@ -38,6 +39,15 @@
       "items": {
         "type": "string",
         "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "maintainers": {
+      "description": "GitHub logins (without @) notified when the demo breaks on main",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-zA-Z0-9](-?[a-zA-Z0-9]){0,38}$"
       },
       "uniqueItems": true
     },

@@ -4,6 +4,7 @@
   "description": "Experimenting with environment maps.",
   "tags": ["environment", "reflections", "soft-shadows"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2021-01-07",
   "source": "https://codesandbox.io/s/5oufp",
   "libraries": ["@react-spring/three", "@react-three/drei", "@react-three/fiber"],

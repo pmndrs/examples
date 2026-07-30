@@ -4,6 +4,7 @@
   "description": "Scene exported with Spline",
   "tags": [],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2023-01-07",
   "source": "https://codesandbox.io/s/ju368j",
   "libraries": ["@react-three/drei", "@react-three/fiber", "leva"],

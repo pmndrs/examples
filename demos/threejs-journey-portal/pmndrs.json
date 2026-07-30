@@ -4,6 +4,7 @@
   "description": "The last scene from Bruno Simons Threejs journey in react-three-fiber",
   "tags": ["gltf", "particles", "shaders"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2021-04-19",
   "source": "https://codesandbox.io/s/ni6v4",
   "libraries": ["@react-three/drei", "@react-three/fiber"],

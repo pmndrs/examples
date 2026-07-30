@@ -4,6 +4,7 @@
   "description": "Small example made for a Learn-with-Jason episode.",
   "tags": ["animation", "gltf"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2021-04-19",
   "source": "https://codesandbox.io/s/oep9o",
   "libraries": ["@react-three/drei", "@react-three/fiber"],

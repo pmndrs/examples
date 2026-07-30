@@ -4,6 +4,7 @@
   "description": "Using the render function to inject custom renderers.",
   "tags": ["custom-renderer", "svg-renderer"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2021-03-30",
   "source": "https://codesandbox.io/s/zcuqh",
   "libraries": ["@react-three/fiber"],

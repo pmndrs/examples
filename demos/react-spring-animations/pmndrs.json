@@ -4,6 +4,7 @@
   "description": "This is react-spring animating both the dom as well as the canvas with a single spring.",
   "tags": ["gltf", "physics", "spring", "animation"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2020-05-06",
   "source": "https://codesandbox.io/s/6hi1y",
   "libraries": ["@react-spring/core", "@react-spring/three", "@react-spring/web", "@react-three/drei", "@react-three/fiber"],

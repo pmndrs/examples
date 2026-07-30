@@ -4,6 +4,7 @@
   "description": "",
   "tags": ["environment", "blur"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2022-10-28",
   "source": "https://codesandbox.io/s/pj7zjq",
   "libraries": ["@react-three/drei", "@react-three/fiber", "leva"],

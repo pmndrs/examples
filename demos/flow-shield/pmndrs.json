@@ -4,6 +4,7 @@
   "description": "Interactive force-shield playground with hit reactions, presets, and model import.",
   "tags": ["shader", "shield", "postprocessing"],
   "authors": ["Christian Ortiz"],
+  "maintainers": [],
   "publishedAt": "2026-03-24",
   "source": "http://github.com/cortiz2894/flow-shield-effect",
   "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/postprocessing", "leva"],

@@ -4,6 +4,7 @@
   "description": "Shows how to set up annotations with a distance factor.",
   "tags": ["distance", "html", "annotations"],
   "authors": ["Paul Henschel"],
+  "maintainers": [],
   "publishedAt": "2019-11-27",
   "source": "https://codesandbox.io/s/zu2wo",
   "libraries": ["@react-three/drei", "@react-three/fiber"],
