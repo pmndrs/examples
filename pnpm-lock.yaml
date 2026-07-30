@@ -422,6 +422,9 @@ importers:
       '@demo/sport-hall':
         specifier: workspace:*
         version: link:../../demos/sport-hall
+      '@demo/spotlight-shadows':
+        specifier: workspace:*
+        version: link:../../demos/spotlight-shadows
       '@demo/springy-boxes':
         specifier: workspace:*
         version: link:../../demos/springy-boxes
@@ -464,6 +467,9 @@ importers:
       '@demo/thunder-clouds':
         specifier: workspace:*
         version: link:../../demos/thunder-clouds
+      '@demo/trails':
+        specifier: workspace:*
+        version: link:../../demos/trails
       '@demo/transformcontrols-and-makedefault':
         specifier: workspace:*
         version: link:../../demos/transformcontrols-and-makedefault
@@ -503,6 +509,9 @@ importers:
       '@demo/water-shader':
         specifier: workspace:*
         version: link:../../demos/water-shader
+      '@demo/wireframes':
+        specifier: workspace:*
+        version: link:../../demos/wireframes
       '@demo/wobbling-sphere':
         specifier: workspace:*
         version: link:../../demos/wobbling-sphere
@@ -5896,6 +5905,43 @@ importers:
         specifier: ^5.4.0
         version: 5.4.21(@types/node@20.19.39)
 
+  demos/spotlight-shadows:
+    dependencies:
+      '@react-three/drei':
+        specifier: ^9.109.5
+        version: 9.122.0(@react-three/fiber@8.18.0(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0))(@types/react@18.3.3)(@types/three@0.165.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0)(use-sync-external-store@1.6.0(react@18.3.1))
+      '@react-three/fiber':
+        specifier: ^8.17.5
+        version: 8.18.0(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0)
+      react:
+        specifier: 18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: 18.3.1
+        version: 18.3.1(react@18.3.1)
+      three:
+        specifier: ^0.165.0
+        version: 0.165.0
+    devDependencies:
+      '@types/react':
+        specifier: 18.3.3
+        version: 18.3.3
+      '@types/react-dom':
+        specifier: 18.3.0
+        version: 18.3.0
+      '@types/three':
+        specifier: ^0.165.0
+        version: 0.165.0
+      '@vitejs/plugin-react':
+        specifier: ^4.3.1
+        version: 4.7.0(supports-color@7.2.0)(vite@5.4.21(@types/node@20.19.39))
+      typescript:
+        specifier: ^5.5.4
+        version: 5.9.3
+      vite:
+        specifier: ^5.4.0
+        version: 5.4.21(@types/node@20.19.39)
+
   demos/springy-boxes:
     dependencies:
       '@react-spring/three':
@@ -6483,6 +6529,52 @@ importers:
         specifier: ^5.4.0
         version: 5.4.21(@types/node@20.19.39)
 
+  demos/trails:
+    dependencies:
+      '@pmndrs/branding':
+        specifier: ^0.0.8
+        version: 0.0.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@react-three/cannon':
+        specifier: ^6.6.0
+        version: 6.6.0(@react-three/fiber@8.18.0(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0))(react@18.3.1)(three@0.165.0)(typescript@5.9.3)
+      '@react-three/drei':
+        specifier: ^9.109.5
+        version: 9.122.0(@react-three/fiber@8.18.0(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0))(@types/react@18.3.3)(@types/three@0.165.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0)(use-sync-external-store@1.6.0(react@18.3.1))
+      '@react-three/fiber':
+        specifier: ^8.17.5
+        version: 8.18.0(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0)
+      lamina:
+        specifier: 1.1.23
+        version: 1.1.23(@react-three/fiber@8.18.0(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0))(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0)
+      react:
+        specifier: 18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: 18.3.1
+        version: 18.3.1(react@18.3.1)
+      three:
+        specifier: ^0.165.0
+        version: 0.165.0
+    devDependencies:
+      '@types/react':
+        specifier: 18.3.3
+        version: 18.3.3
+      '@types/react-dom':
+        specifier: 18.3.0
+        version: 18.3.0
+      '@types/three':
+        specifier: ^0.165.0
+        version: 0.165.0
+      '@vitejs/plugin-react':
+        specifier: ^4.3.1
+        version: 4.7.0(supports-color@7.2.0)(vite@5.4.21(@types/node@20.19.39))
+      typescript:
+        specifier: ^5.5.4
+        version: 5.9.3
+      vite:
+        specifier: ^5.4.0
+        version: 5.4.21(@types/node@20.19.39)
+
   demos/transformcontrols-and-makedefault:
     dependencies:
       '@react-three/drei':
@@ -6971,6 +7063,52 @@ importers:
       three-stdlib:
         specifier: ^2.32.2
         version: 2.36.1(three@0.165.0)
+    devDependencies:
+      '@types/react':
+        specifier: 18.3.3
+        version: 18.3.3
+      '@types/react-dom':
+        specifier: 18.3.0
+        version: 18.3.0
+      '@types/three':
+        specifier: ^0.165.0
+        version: 0.165.0
+      '@vitejs/plugin-react':
+        specifier: ^4.3.1
+        version: 4.7.0(supports-color@7.2.0)(vite@5.4.21(@types/node@20.19.39))
+      typescript:
+        specifier: ^5.5.4
+        version: 5.9.3
+      vite:
+        specifier: ^5.4.0
+        version: 5.4.21(@types/node@20.19.39)
+
+  demos/wireframes:
+    dependencies:
+      '@pmndrs/branding':
+        specifier: ^0.0.8
+        version: 0.0.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@react-three/drei':
+        specifier: ^9.109.5
+        version: 9.122.0(@react-three/fiber@8.18.0(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0))(@types/react@18.3.3)(@types/three@0.165.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0)(use-sync-external-store@1.6.0(react@18.3.1))
+      '@react-three/fiber':
+        specifier: ^8.17.5
+        version: 8.18.0(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.165.0)
+      gl-noise:
+        specifier: ^1.6.1
+        version: 1.6.1
+      leva:
+        specifier: ^0.9.35
+        version: 0.9.36(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react:
+        specifier: 18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: 18.3.1
+        version: 18.3.1(react@18.3.1)
+      three:
+        specifier: ^0.165.0
+        version: 0.165.0
     devDependencies:
       '@types/react':
         specifier: 18.3.3
@@ -9496,6 +9634,9 @@ packages:
   get-value@2.0.6:
     resolution: {integrity: sha512-Ln0UQDlxH1BapMu3GPtf7CuYNwRZf2gwCuPqbyG6pB8WfmFpzqcy4xtAaAMUhnNqjMKTiCPZG2oMT3YSx8U2NA==}
     engines: {node: '>=0.10.0'}
+
+  gl-noise@1.6.1:
+    resolution: {integrity: sha512-2rkGehq5bqHCONQ4b8ssvQmbu8VVhzkHa+hR229xz3rdMIzZ1TmR87Gzgrf6bQex3Su8ZLAotp/97JW0hZi1bA==}
 
   glob-parent@5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
@@ -12835,7 +12976,7 @@ snapshots:
 
   '@types/react-reconciler@0.26.7':
     dependencies:
-      '@types/react': 18.3.28
+      '@types/react': 18.3.3
 
   '@types/react-reconciler@0.28.9(@types/react@18.3.3)':
     dependencies:
@@ -14070,6 +14211,8 @@ snapshots:
       resolve-pkg-maps: 1.0.0
 
   get-value@2.0.6: {}
+
+  gl-noise@1.6.1: {}
 
   glob-parent@5.1.2:
     dependencies:
