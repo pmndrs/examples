@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Springy Boxes",
   "description": "Colorfull boxes changing position with spring physics",
-  "tags": ["springs", "react-spring", "physics", "animation"],
+  "tags": ["springs", "physics", "animation"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2019-04-02",
   "source": "https://codesandbox.io/s/jz9l97qn89",

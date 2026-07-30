@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Cell Fracture",
   "description": "Exploding GLTFs using Blenders cell-fracture and GLTFJSX.",
-  "tags": ["animation", "clell-fracture", "gltf", "gltfjsx"],
+  "tags": ["animation", "clell-fracture", "gltf"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2021-01-24",
   "source": "https://codesandbox.io/s/3rjsl",

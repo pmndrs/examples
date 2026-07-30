@@ -2,13 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "TransformControls and makeDefault",
   "description": "Combining TransformControls, OrbitControls and Valtio.",
-  "tags": [
-    "controls",
-    "makedefault",
-    "orbit",
-    "transform",
-    "valtio"
-  ],
+  "tags": ["controls", "state", "orbit", "transform"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2021-10-08",
   "source": "https://codesandbox.io/s/btsbj",

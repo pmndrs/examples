@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Rapier Physics",
   "description": "",
-  "tags": ["rapier"],
+  "tags": ["physics"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2022-07-16",
   "source": "https://codesandbox.io/s/7e9y1b",

@@ -2,10 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Lamina 1.x",
   "description": "",
-  "tags": [
-    "lamina",
-    "depth"
-  ],
+  "tags": ["material", "depth"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2022-03-15",
   "source": "https://codesandbox.io/s/ledhe1",

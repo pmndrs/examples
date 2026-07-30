@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Physics With Convex Polyhedrons",
   "description": "Using cannon collisions with GLTFs converted into convex hulls.",
-  "tags": ["physics", "collisions", "convex-polyhedron", "cannon", "gltf"],
+  "tags": ["physics", "collisions", "convex-polyhedron", "gltf"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2021-03-13",
   "source": "https://codesandbox.io/s/08s1u",

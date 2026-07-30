@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Object Clump",
   "description": "How to make a clump of objects that move towards the center point.",
-  "tags": ["physics", "cannon-es", "use-cannon"],
+  "tags": ["physics"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2022-02-22",
   "source": "https://codesandbox.io/s/ssbdsw",

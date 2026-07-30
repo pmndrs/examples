@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Mount Transitions",
   "description": "Shows how to use react-spring mount/unmount transitions, soft-shadows and AO.",
-  "tags": ["soft-shadows", "animation", "ambient-occlusion", "transitions", "react-spring"],
+  "tags": ["soft-shadows", "animation", "ambient-occlusion", "transitions"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2020-09-18",
   "source": "https://codesandbox.io/s/1sccp",

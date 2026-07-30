@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Basic Ballpit",
   "description": "Physics simulation using cannon.",
-  "tags": ["physics", "cannon"],
+  "tags": ["physics"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2022-06-29",
   "source": "https://codesandbox.io/s/0fqow2",

@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Flow Shield",
   "description": "Interactive force-shield playground with hit reactions, presets, and model import.",
-  "tags": ["shader", "shield", "postprocessing", "leva"],
+  "tags": ["shader", "shield", "postprocessing"],
   "authors": ["Christian Ortiz"],
   "publishedAt": "2026-03-24",
   "source": "http://github.com/cortiz2894/flow-shield-effect",

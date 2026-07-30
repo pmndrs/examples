@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Stage Presets GLTFJSX",
   "description": "",
-  "tags": ["gltfjsx", "stage", "drei"],
+  "tags": ["gltf", "stage", "lighting"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2022-12-20",
   "source": "https://codesandbox.io/s/if9crg",

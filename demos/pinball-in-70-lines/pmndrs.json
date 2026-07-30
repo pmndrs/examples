@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Pinball In 70 Lines",
   "description": "Super small pinball barebones implementation.",
-  "tags": ["cannon-es", "physics", "pinball", "arkanoid", "game"],
+  "tags": ["physics", "pinball", "arkanoid", "game"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2021-08-02",
   "source": "https://codesandbox.io/s/rmfcq",

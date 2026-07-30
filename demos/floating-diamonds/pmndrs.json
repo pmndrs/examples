@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Floating Diamonds",
   "description": "Mixing refraction shaders and animations.",
-  "tags": ["gltf", "refraction", "useframe", "useaspect", "drei"],
+  "tags": ["gltf", "refraction"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2019-10-29",
   "source": "https://codesandbox.io/s/prb9t",

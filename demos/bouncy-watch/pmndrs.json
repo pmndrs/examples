@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Bouncy Watch",
   "description": "Custom springy controls using use-gesture and react-spring.",
-  "tags": ["use-gesture", "custom-controls", "react-spring", "tag-heuer", "html"],
+  "tags": ["interaction", "custom-controls", "animation", "tag-heuer", "html"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2021-11-26",
   "source": "https://codesandbox.io/s/qyz5r",

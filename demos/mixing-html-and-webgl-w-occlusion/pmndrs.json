@@ -2,11 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Mixing HTML and WebGL with Occlusion",
   "description": "Having HTML and WebGL in the same scene with the addition of occlusion.",
-  "tags": [
-    "occlusion",
-    "drei",
-    "html"
-  ],
+  "tags": ["occlusion", "html"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2021-05-29",
   "source": "https://codesandbox.io/s/9keg6",

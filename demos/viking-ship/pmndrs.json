@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Viking Ship",
   "description": "GLTF workflow with GLTFJSX and camera rotations.",
-  "tags": ["gltfjsx", "gltf"],
+  "tags": ["gltf"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2020-05-02",
   "source": "https://codesandbox.io/s/0buje",

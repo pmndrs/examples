@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "pmndrs Vercel",
   "description": "",
-  "tags": ["gradient", "lamina"],
+  "tags": ["gradient", "material"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2022-03-13",
   "source": "https://codesandbox.io/s/go0b4w",

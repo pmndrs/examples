@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Soft Shadows",
   "description": "Percentage closer soft shadows.",
-  "tags": ["pcss", "soft-shadows", "drei"],
+  "tags": ["pcss", "soft-shadows"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2019-09-28",
   "source": "https://codesandbox.io/s/dh2jc",
