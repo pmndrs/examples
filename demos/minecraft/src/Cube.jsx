@@ -1,7 +1,7 @@
 import { useCallback, useRef, useState } from "react"
 import { useTexture } from "@react-three/drei"
 import { RigidBody } from "@react-three/rapier"
-import create from "zustand"
+import { create } from "zustand"
 
 import dirtImg from "./dirt.jpg"
 

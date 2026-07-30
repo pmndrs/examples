@@ -1,3 +1,4 @@
+import type { JSX } from "react"
 import * as THREE from "three"
 import * as React from "react"
 import { shaderMaterial } from "@react-three/drei"

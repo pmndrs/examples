@@ -6,6 +6,7 @@ source: https://sketchfab.com/models/2ef4c45caa35450db1b876a7f94ff79d
 title: Thor and the Midgard Serpent
 */
 
+import type { JSX } from "react"
 import * as THREE from "three"
 import React, { useRef } from "react"
 import { type GLTF } from "three-stdlib"
@@ -39,7 +40,7 @@ type GLTFResult = GLTF & {
 
 export default function Model(props: JSX.IntrinsicElements["group"]) {
   const group = useRef(null)
-  const { nodes, materials } = useGLTF(thorModel) as GLTFResult
+  const { nodes, materials } = useGLTF(thorModel) as unknown as GLTFResult
   return (
     <group ref={group} {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]} scale={[0.01, 0.01, 0.01]}>

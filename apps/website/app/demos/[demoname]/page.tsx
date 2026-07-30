@@ -11,11 +11,12 @@ import { Info } from "./Info";
 const demos = getDemos();
 
 export type Props = {
-  params: { demoname: string };
+  params: Promise<{ demoname: string }>;
 };
 
 export async function generateMetadata({ params }: Props) {
-  const demo = demos.find(({ name }) => name === params.demoname);
+  const { demoname } = await params;
+  const demo = demos.find(({ name }) => name === demoname);
   if (!demo) return;
 
   const title = `${demo.title} - pmndrs`;
@@ -59,9 +60,7 @@ async function checkUrlIsUp(url: string) {
 const isDev = process.env.NODE_ENV === "development";
 
 export default async function Page(props: Props) {
-  const { params } = props;
-
-  const { demoname } = params;
+  const { demoname } = await props.params;
   const demo = demos.find(({ name }) => name === demoname);
   if (!demo) return notFound();
 

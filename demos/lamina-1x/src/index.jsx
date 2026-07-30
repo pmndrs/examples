@@ -1,10 +1,10 @@
-import { render } from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { Suspense } from 'react'
 import { Logo } from '@pmndrs/branding'
 import './styles.css'
 import { App } from './App'
 
-render(
+createRoot(document.getElementById('root')).render(
   <>
     <Suspense fallback={null}>
       <App />
@@ -23,6 +23,5 @@ render(
         <div>15/03/2022</div>
       </div>
     </div>
-  </>,
-  document.getElementById('root')
+  </>
 )

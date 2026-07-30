@@ -1,3 +1,4 @@
+import type { JSX } from 'react'
 import { useLayoutEffect, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { useGLTF, useAnimations, PositionalAudio } from '@react-three/drei'
@@ -46,7 +47,7 @@ title: Train , Locomotive SD40-2
 export function Train({ args = [38, 8, 10], position = [-145.84, 3.42, 54.67], rotation = [0, -0.09, 0] }: BoxProps): JSX.Element {
   const ref = useRef<Group>(null!)
   const [ready, sound] = useStore((state) => [state.ready, state.sound])
-  const { animations, nodes: n, materials: m } = useGLTF(assetUrl('models/track-draco.glb')) as TrainGLTF
+  const { animations, nodes: n, materials: m } = useGLTF(assetUrl('models/track-draco.glb')) as unknown as TrainGLTF
   const [, api] = useBox(() => ({ mass: 10000, type: 'Kinematic', args, position, rotation }), ref, [args, position, rotation])
   const { actions } = useAnimations(animations, ref)
   const config = { receiveShadow: true, castShadow: true, 'material-roughness': 1 }

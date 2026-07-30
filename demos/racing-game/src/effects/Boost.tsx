@@ -1,3 +1,4 @@
+import type { JSX } from 'react'
 import { MathUtils, Object3D, Vector3 } from 'three'
 import { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'

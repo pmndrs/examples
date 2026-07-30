@@ -1,12 +1,11 @@
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import './styles.css'
 import App from './App'
 import Underlay from './Underlay'
 
-ReactDOM.render(
+createRoot(document.getElementById('root')).render(
   <>
     <Underlay />
     <App />
-  </>,
-  document.getElementById('root')
+  </>
 )

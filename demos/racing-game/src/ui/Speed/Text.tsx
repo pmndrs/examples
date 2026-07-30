@@ -1,3 +1,4 @@
+import type { JSX } from 'react'
 import { addEffect } from '@react-three/fiber'
 import { useEffect, useRef } from 'react'
 
