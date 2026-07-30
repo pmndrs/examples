@@ -16,6 +16,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  issues: write # broken-demos rollup issue (bin/notify-broken-demos.mjs)
 
 jobs:
   build-job:
@@ -30,6 +31,9 @@ jobs:
 
     container:
       image: mcr.microsoft.com/playwright:v1.62.0-jammy
+
+    outputs:
+      e2e-outcome: ${{ steps.e2e.outcome }}
 
     steps:
       #
@@ -51,14 +55,32 @@ jobs:
       #
       - run: pnpm lint:metadata
       - run: pnpm lint:versions
+      - run: pnpm test:unit
 
       #
       # Test
       #
+      # PRs: fail fast — a broken demo blocks the PR
       - run: pnpm test
-        if: ${{ !inputs.update_snapshots }}
+        if: ${{ github.event_name == 'pull_request' && !inputs.update_snapshots }}
         env:
           BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
+      # main (prod monitoring): play ALL tests; one broken demo must not hold
+      # the other demos hostage, so the job carries on (build+deploy still run)
+      # and the e2e-status-job turns the run red instead
+      - id: e2e
+        run: pnpm exec turbo test --continue=dependencies-successful --summarize
+        if: ${{ github.event_name != 'pull_request' && !inputs.update_snapshots }}
+        continue-on-error: true
+        env:
+          BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
+      # continue-on-error: a GitHub API hiccup must not block the deploy either
+      - name: Notify maintainers of broken demos
+        run: node bin/notify-broken-demos.mjs
+        if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && !inputs.update_snapshots }}
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # Baselines regen: gh workflow run CI --ref <branch> -f update_snapshots=true
       # --force: a regen must never replay cached test results (their cached
       # outputs would restore the stale baselines we're regenerating)
@@ -84,6 +106,17 @@ jobs:
         if: ${{ github.event_name != 'pull_request' && !inputs.update_snapshots }}
         with:
           path: ./out${{ steps.configurepages.outputs.base_path }}
+
+  # Mirrors the outcome of the (continue-on-error) e2e step: keeps the run red
+  # when a demo is broken on main, without holding back build+deploy
+  e2e-status-job:
+    if: ${{ github.event_name != 'pull_request' && !inputs.update_snapshots }}
+    runs-on: ubuntu-latest
+    needs: build-job
+    steps:
+      - run: |
+          echo "e2e outcome: ${{ needs.build-job.outputs.e2e-outcome }}"
+          [ "${{ needs.build-job.outputs.e2e-outcome }}" != "failure" ]
 
   deploy-job:
     # only for pushes on main
