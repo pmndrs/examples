@@ -81,9 +81,6 @@ importers:
       '@demo/bruno-simons-20k-challenge':
         specifier: workspace:*
         version: link:../../demos/bruno-simons-20k-challenge
-      '@demo/building-dynamic-envmaps':
-        specifier: workspace:*
-        version: link:../../demos/building-dynamic-envmaps
       '@demo/building-live-envmaps':
         specifier: workspace:*
         version: link:../../demos/building-live-envmaps
@@ -435,18 +432,12 @@ importers:
       '@demo/ssgi-spheres-with-rapier-physics':
         specifier: workspace:*
         version: link:../../demos/ssgi-spheres-with-rapier-physics
-      '@demo/ssr-test':
-        specifier: workspace:*
-        version: link:../../demos/ssr-test
       '@demo/stage-presets-gltfjsx':
         specifier: workspace:*
         version: link:../../demos/stage-presets-gltfjsx
       '@demo/staging-and-camerashake':
         specifier: workspace:*
         version: link:../../demos/staging-and-camerashake
-      '@demo/starwars':
-        specifier: workspace:*
-        version: link:../../demos/starwars
       '@demo/stencil-mask':
         specifier: workspace:*
         version: link:../../demos/stencil-mask
