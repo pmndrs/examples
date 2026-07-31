@@ -1,21 +1,6 @@
-import { Style } from "@/components/Style";
-
 export default function Page() {
   return (
-    <div>
-      <Style
-        css={`
-          @scope {
-            :scope {
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              width: 100%;
-              min-height: 100dvh;
-            }
-          }
-        `}
-      />
+    <div className="flex min-h-dvh w-full items-center justify-center">
       Select a demo
     </div>
   );

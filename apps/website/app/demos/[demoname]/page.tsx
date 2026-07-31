@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import { ScaledDemoFrame } from "@/components/ScaledDemoFrame";
 import { getDemos } from "@/lib/helper";
 import { Dev } from "./Dev";
-import { Style } from "@/components/Style";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
 import { Social } from "./Social";
@@ -75,41 +74,11 @@ export default async function Page(props: Props) {
 
   return (
     <>
-      <Style
-        css={`
-          @scope {
-            .Dev {
-              /* Never takes effect: 'Dev' sets its own 'min(100%, 46rem)' from
-                 a scope rooted on the element itself, and in '@scope' the
-                 nearer root wins whatever the specificity. Kept as the
-                 fallback for a 'Dev' that stops sizing itself. */
-              width: 100%;
-              height: 100%;
-              /* ...which is why this is needed: an explicitly sized item
-                 stretches to nothing and is parked at the start of the track,
-                 so past 46rem of room the panel sat against the left edge.
-                 'main' centres its own only grid item, and that one is the
-                 route layout's div, which fills. */
-              justify-self: center;
-              display: grid;
-              place-items: center;
-              padding: 1rem;
-            }
-            .Frame {
-              width: 100%;
-              height: 100%;
-              min-width: 0;
-              min-height: 0;
-            }
-          }
-        `}
-      />
-
       {isDev && !isUp ? (
         <Dev demoname={demoname} />
       ) : (
         <>
-          <div className="Frame">
+          <div className="h-full min-h-0 w-full min-w-0">
             <ScaledDemoFrame src={embed_url} title={demo.title} />
           </div>
 

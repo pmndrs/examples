@@ -28,7 +28,7 @@ Single-context: one `CONTEXT.md` + `docs/adr/` at the repo root (created lazily 
 
 Two things to know before styling:
 
-- **Most of the site's own components are not on Tailwind.** `Dev` and `ScaledDemoFrame` still style themselves with scoped CSS injected through `<Style>` (`@scope { … }`). That's deliberate, not a half-finished migration. Tailwind classes are for `components/ui/*` and new work; leave the `@scope` blocks alone unless you're converting a component wholesale — `Nav` composes `Sidebar`, and `Info`/`Social` compose `ButtonGroup`, none of them with a `<Style>` of their own. Inline `<style>` is unlayered, so those rules outrank Preflight and keep winning.
+- **The whole app is on Tailwind.** There is no `<Style>` component and no `@scope` block left anywhere in `apps/website` — every rule is a utility at its call site, a `components/ui/*` variant, or a token in `app/globals.css`. Don't reintroduce injected `<style>`: it lands unlayered, so it outranks Preflight _and_ every utility, and a rule that always wins is a rule nobody can override from a call site. The two things utilities can't express — the source-of-truth palette, and Preflight itself — already have homes in `globals.css`.
 - **Sources are declared explicitly.** Tailwind's automatic source detection finds nothing in this app, so `app/globals.css` lists `@source` entries. Add one if you put components somewhere new.
 
 `demos/` is deliberately Tailwind-free; don't introduce it there.
