@@ -6,7 +6,7 @@
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "three": "0.165.0",
-    "threejs-meshline": "^2.0.12"
+    "meshline": "^3.3.1"
   },
   "devDependencies": {
     "@types/react": "19.2.17",

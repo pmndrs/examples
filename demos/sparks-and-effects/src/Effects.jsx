@@ -1,26 +1,27 @@
 import * as THREE from 'three'
-import React, { useRef, useMemo, useEffect } from 'react'
-import { extend, useThree, useFrame } from '@react-three/fiber'
+import { useEffect, useMemo } from 'react'
+import { useThree, useFrame } from '@react-three/fiber'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
-import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass'
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass'
-import { FilmPass } from 'three/examples/jsm/postprocessing/FilmPass'
 import { WaterPass } from './post/Waterpass'
 
-extend({ EffectComposer, ShaderPass, RenderPass, WaterPass, UnrealBloomPass, FilmPass })
-
 export default function Effects() {
-  const composer = useRef()
   const { scene, gl, size, camera } = useThree()
-  const aspect = useMemo(() => new THREE.Vector2(512, 512), [])
-  useEffect(() => void composer.current.setSize(size.width, size.height), [size])
-  useFrame(() => composer.current.render(), 1)
-  return (
-    <effectComposer ref={composer} args={[gl]}>
-      <renderPass attachArray="passes" scene={scene} camera={camera} />
-      <waterPass attachArray="passes" factor={1.5} />
-      <unrealBloomPass attachArray="passes" args={[aspect, 2, 1, 0]} />
-    </effectComposer>
-  )
+  // the legacy attachArray="passes" JSX registration is gone from fiber;
+  // build the composer imperatively instead
+  const composer = useMemo(() => {
+    const composer = new EffectComposer(gl)
+    composer.addPass(new RenderPass(scene, camera))
+    const waterPass = new WaterPass()
+    waterPass.factor = 1.5
+    composer.addPass(waterPass)
+    // no OutputPass: the demo's look (matching the thumbnail) relies on the
+    // legacy linear output this chain was tuned against
+    composer.addPass(new UnrealBloomPass(new THREE.Vector2(512, 512), 2, 1, 0))
+    return composer
+  }, [gl, scene, camera])
+  useEffect(() => void composer.setSize(size.width, size.height), [composer, size])
+  useFrame(() => composer.render(), 1)
+  return null
 }

@@ -1,12 +1,16 @@
 import * as THREE from 'three'
 import React, { forwardRef, useLayoutEffect, useRef, useMemo } from 'react'
-import { useLoader } from '@react-three/fiber'
+import { extend, useLoader } from '@react-three/fiber'
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
 
 import boldFont from './bold.blob?url'
 
+extend({ TextGeometry })
+
 const Text = forwardRef(({ children, vAlign = 'center', hAlign = 'center', size = 1, color = '#000000', ...props }, ref) => {
-  const font = useLoader(THREE.FontLoader, boldFont)
-  const config = useMemo(() => ({ font, size: 40, height: 50 }), [font])
+  const font = useLoader(FontLoader, boldFont)
+  const config = useMemo(() => ({ font, size: 40, depth: 50 }), [font])
   const mesh = useRef()
   useLayoutEffect(() => {
     const size = new THREE.Vector3()

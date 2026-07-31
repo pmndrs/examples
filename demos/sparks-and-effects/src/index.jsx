@@ -77,7 +77,7 @@ function App() {
       dpr={[1, 2]}
       camera={{ fov: 100, position: [0, 0, 30] }}
       onCreated={({ gl }) => {
-        gl.toneMapping = THREE.Uncharted2ToneMapping
+        gl.toneMapping = THREE.ACESFilmicToneMapping
         gl.setClearColor(new THREE.Color('#020207'))
       }}>
       <fog attach="fog" args={['white', 50, 190]} />

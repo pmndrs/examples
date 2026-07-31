@@ -65,31 +65,27 @@ var WaterShader = {
     }`
 }
 
-var WaterPass = function (dt_size) {
-  Pass.call(this)
-  if (WaterShader === undefined) console.error('THREE.WaterPass relies on THREE.WaterShader')
-  var shader = WaterShader
-  this.uniforms = UniformsUtils.clone(shader.uniforms)
-  if (dt_size === undefined) dt_size = 64
-  this.uniforms['resolution'].value = new Vector2(dt_size, dt_size)
-  this.material = new ShaderMaterial({
-    uniforms: this.uniforms,
-    vertexShader: shader.vertexShader,
-    fragmentShader: shader.fragmentShader
-  })
-  this.camera = new OrthographicCamera(-1, 1, 1, -1, 0, 1)
-  this.scene = new Scene()
-  this.quad = new Mesh(new PlaneGeometry(2, 2), null)
-  this.quad.frustumCulled = false // Avoid getting clipped
-  this.scene.add(this.quad)
-  this.factor = 0
-  this.time = 0
-}
+class WaterPass extends Pass {
+  constructor(dt_size = 64) {
+    super()
+    var shader = WaterShader
+    this.uniforms = UniformsUtils.clone(shader.uniforms)
+    this.uniforms['resolution'].value = new Vector2(dt_size, dt_size)
+    this.material = new ShaderMaterial({
+      uniforms: this.uniforms,
+      vertexShader: shader.vertexShader,
+      fragmentShader: shader.fragmentShader
+    })
+    this.camera = new OrthographicCamera(-1, 1, 1, -1, 0, 1)
+    this.scene = new Scene()
+    this.quad = new Mesh(new PlaneGeometry(2, 2), null)
+    this.quad.frustumCulled = false // Avoid getting clipped
+    this.scene.add(this.quad)
+    this.factor = 0
+    this.time = 0
+  }
 
-WaterPass.prototype = Object.assign(Object.create(Pass.prototype), {
-  constructor: WaterPass,
-
-  render: function (renderer, writeBuffer, readBuffer, deltaTime, maskActive) {
+  render(renderer, writeBuffer, readBuffer, deltaTime, maskActive) {
     const factor = Math.max(0, this.factor)
     this.uniforms['byp'].value = factor ? 0 : 1
     this.uniforms['tex'].value = readBuffer.texture
@@ -106,6 +102,6 @@ WaterPass.prototype = Object.assign(Object.create(Pass.prototype), {
       renderer.render(this.scene, this.camera)
     }
   }
-})
+}
 
 export { WaterPass }
