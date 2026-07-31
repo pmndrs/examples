@@ -20,22 +20,23 @@ export function Player({ lerp = THREE.MathUtils.lerp }) {
   useFrame((state) => {
     const { forward, backward, left, right, jump } = get()
     const velocity = ref.current.linvel()
+    const speed = Math.hypot(velocity.x, velocity.y, velocity.z)
     // update camera
-    state.camera.position.set(...ref.current.translation())
+    state.camera.position.copy(ref.current.translation())
     // update axe
-    axe.current.children[0].rotation.x = lerp(axe.current.children[0].rotation.x, Math.sin((velocity.length() > 1) * state.clock.elapsedTime * 10) / 6, 0.1)
+    axe.current.children[0].rotation.x = lerp(axe.current.children[0].rotation.x, Math.sin((speed > 1) * state.clock.elapsedTime * 10) / 6, 0.1)
     axe.current.rotation.copy(state.camera.rotation)
     axe.current.position.copy(state.camera.position).add(state.camera.getWorldDirection(rotation).multiplyScalar(1))
     // movement
     frontVector.set(0, 0, backward - forward)
     sideVector.set(left - right, 0, 0)
     direction.subVectors(frontVector, sideVector).normalize().multiplyScalar(SPEED).applyEuler(state.camera.rotation)
-    ref.current.setLinvel({ x: direction.x, y: velocity.y, z: direction.z })
+    ref.current.setLinvel({ x: direction.x, y: velocity.y, z: direction.z }, true)
     // jumping
-    const world = rapier.world.raw()
-    const ray = world.castRay(new RAPIER.Ray(ref.current.translation(), { x: 0, y: -1, z: 0 }))
-    const grounded = ray && ray.collider && Math.abs(ray.toi) <= 1.75
-    if (jump && grounded) ref.current.setLinvel({ x: 0, y: 7.5, z: 0 })
+    const world = rapier.world
+    const ray = world.castRay(new RAPIER.Ray(ref.current.translation(), { x: 0, y: -1, z: 0 }), 10, true, undefined, undefined, undefined, ref.current)
+    const grounded = ray && ray.collider && Math.abs(ray.timeOfImpact) <= 1.75
+    if (jump && grounded) ref.current.setLinvel({ x: 0, y: 7.5, z: 0 }, true)
   })
   return (
     <>
