@@ -12,10 +12,13 @@ import {
   useState,
 } from "react";
 import { useParams } from "next/navigation";
-import clsx from "clsx";
 
 import { getLibraryLabel, getLibraryPopularity } from "@/const/libraries";
 import type { Demo } from "@/lib/helper";
+import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
+import { Item, ItemFooter, ItemMedia } from "@/components/ui/item";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Style } from "./Style";
 
 const STORAGE_KEY = "nav-collapsed";
@@ -626,81 +629,9 @@ export default function Nav({
               transform: scale(0.97);
             }
 
-            a {
-              display: block;
-              background: white;
-              border-radius: 6px;
-              overflow: hidden;
-              outline: 2px solid transparent;
-              outline-offset: 2px;
-              transition:
-                outline-color 0.2s ease,
-                box-shadow 0.2s ease;
-            }
-
-            a:hover {
-              box-shadow: 0 2px 12px rgb(0 0 0 / 0.1);
-            }
-
-            a.active {
-              outline-color: black;
-            }
-
-            .thumb {
-              position: relative;
-              aspect-ratio: 16/9;
-              width: 100%;
-              overflow: hidden;
-            }
-
-            .pill {
-              position: absolute;
-              top: 6px;
-              right: 6px;
-              padding: 2px 7px;
-              font-size: 0.55rem;
-              font-weight: 700;
-              letter-spacing: 0.06em;
-              text-transform: uppercase;
-              line-height: 1.5;
-              color: white;
-              background: #e8756a;
-              border-radius: 999px;
-              z-index: 1;
-            }
-
-            a img {
-              object-fit: cover;
-              width: 100%;
-              height: 100%;
-              display: block;
-              color: inherit !important;
-              font-size: 0.7rem;
-              background: none;
-            }
-
-            .tags {
-              position: absolute;
-              inset: auto 0 0 0;
-              z-index: 1;
-              display: flex;
-              flex-wrap: nowrap;
-              gap: 3px;
-              padding: 5px;
-              /* whatever runs past the right edge is simply clipped */
-              overflow: hidden;
-            }
-
-            .tag {
-              flex-shrink: 0;
-              padding: 1px 6px;
-              border-radius: 999px;
-              background: #222;
-              color: white;
-              font-size: 0.5rem;
-              line-height: 1.7;
-              white-space: nowrap;
-            }
+            /* The demo cards are shadcn <Item>/<Badge>; they style themselves
+               with Tailwind. Nothing scoped here may target them — this block
+               is unlayered and would outrank every utility. */
           }
         `}
       />
@@ -858,24 +789,56 @@ export default function Nav({
         <ul ref={ulRef} id="demo-list">
           {filteredDemos.map(({ name, title, thumb, isNew, tags }) => (
             <li key={thumb} data-demo={name}>
-              <Link
-                href={`/demos/${name}`}
-                className={clsx({ active: demoname === name })}
+              <Item
+                asChild
+                variant="outline"
+                className="relative overflow-hidden p-0"
               >
-                <div className="thumb">
-                  {isNew && <span className="pill">New</span>}
-                  <Image src={thumb} fill sizes="227px" alt={title} />
-                  {tags.length > 0 && (
-                    <div className="tags">
-                      {tags.slice(0, MAX_TAGS).map((tag) => (
-                        <span key={tag} className="tag">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
+                <Link
+                  href={`/demos/${name}`}
+                  aria-current={demoname === name ? "page" : undefined}
+                  className={cn(
+                    "no-underline",
+                    demoname === name && "ring-2 ring-foreground",
                   )}
-                </div>
-              </Link>
+                >
+                  {/* Full-bleed: the media is the only thing in the box, so the
+                      card ends up with the thumbnail's aspect ratio. */}
+                  <ItemMedia
+                    variant="image"
+                    className="relative aspect-video size-auto w-full rounded-none"
+                  >
+                    <Image
+                      src={thumb}
+                      fill
+                      sizes="(min-width: 640px) 260px, 200px"
+                      alt={title}
+                    />
+                  </ItemMedia>
+                  {isNew && (
+                    <Badge
+                      variant="secondary"
+                      className="absolute top-1.5 right-1.5"
+                    >
+                      New
+                    </Badge>
+                  )}
+                  {tags.length > 0 && (
+                    <ItemFooter className="absolute inset-x-0 bottom-0">
+                      <ScrollArea className="w-full">
+                        {/* Padding sits inside the viewport so the scrollable
+                            strip itself runs edge to edge. */}
+                        <div className="flex w-max gap-1 p-1.5">
+                          {tags.slice(0, MAX_TAGS).map((tag) => (
+                            <Badge key={tag}>{tag}</Badge>
+                          ))}
+                        </div>
+                        <ScrollBar orientation="horizontal" />
+                      </ScrollArea>
+                    </ItemFooter>
+                  )}
+                </Link>
+              </Item>
             </li>
           ))}
         </ul>
