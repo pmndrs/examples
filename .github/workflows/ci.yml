@@ -66,7 +66,7 @@ jobs:
         if: ${{ inputs.update_snapshots }}
         env:
           BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: ${{ always() && inputs.update_snapshots }}
         with:
           name: snapshots
