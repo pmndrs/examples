@@ -12,17 +12,38 @@ import {
   useState,
 } from "react";
 import { useParams } from "next/navigation";
+import { ListFilterIcon, SearchIcon, XIcon } from "lucide-react";
 
 import { getLibraryLabel, getLibraryPopularity } from "@/const/libraries";
 import type { Demo } from "@/lib/helper";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+  InputGroupText,
+} from "@/components/ui/input-group";
 import { Item, ItemFooter, ItemMedia } from "@/components/ui/item";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Style } from "./Style";
 
 const STORAGE_KEY = "nav-collapsed";
 const MAX_TAGS = 4;
+/* `library` is "" for no filter, but Radix rejects an empty SelectItem value —
+   it reserves it for clearing the selection. The sentinel is what the option
+   carries; the state stays "". */
+const ALL_LIBRARIES = "__all__";
 
 function getPreferredCollapsed() {
   const nav = new URLSearchParams(window.location.search).get("nav");
@@ -58,6 +79,7 @@ export default function Nav({
   const [collapsed, setCollapsed] = useState(false);
   const [ready, setReady] = useState(false);
   const [library, setLibrary] = useState("");
+  const [libraryOpen, setLibraryOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
 
@@ -154,6 +176,11 @@ export default function Nav({
     const onKeyDown = (event: KeyboardEvent) => {
       const activeElement = document.activeElement;
 
+      /* The open dropdown is portalled out of the nav, so `activeElement` is
+         nowhere near the trigger and the type-to-search fallthrough below
+         would eat the list's own typeahead. It owns the keyboard while open. */
+      if (libraryOpen) return;
+
       if (
         (event.metaKey || event.ctrlKey) &&
         ["f", "k"].includes(event.key.toLocaleLowerCase())
@@ -201,7 +228,7 @@ export default function Nav({
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [dismissSearch, focusSearch, search, searchVisible]);
+  }, [dismissSearch, focusSearch, libraryOpen, search, searchVisible]);
 
   const toggle = useCallback(() => {
     setCollapsed((prev) => {
@@ -334,163 +361,17 @@ export default function Nav({
               }
             }
 
-            .search,
-            .filter {
-              position: relative;
-              display: flex;
-              align-items: center;
-              width: 100%;
-              min-width: 0;
-              border: 1px solid #d4d4d4;
-              border-radius: 999px;
-              background: rgb(255 255 255 / 0.92);
-              box-shadow: 0 1px 6px rgb(0 0 0 / 0.1);
-              color: #555;
-              transition:
-                border-color 0.15s ease,
-                box-shadow 0.15s ease;
-            }
-
-            .search:focus-within,
-            .filter:focus-within {
-              border-color: #888;
-              box-shadow:
-                0 1px 6px rgb(0 0 0 / 0.1),
-                0 0 0 2px rgb(0 0 0 / 0.08);
-            }
-
+            /* The search field is a shadcn <InputGroup>; all this block may
+               hold is the geometry that lifts it over the filter row, plus the
+               width: auto that keeps the component's own w-full from fighting
+               the left/right insets. Anything else here is unlayered and would
+               outrank the component's utilities. */
             .search {
               position: absolute;
               inset: 0.65rem 0.75rem auto 1rem;
               z-index: 3;
               width: auto;
-              border-radius: 8px;
-              background: white;
-              box-shadow: 0 8px 24px rgb(0 0 0 / 0.18);
               animation: search-in 200ms ease;
-            }
-
-            .filter {
-              flex: 1;
-              width: auto;
-            }
-
-            .searchIcon,
-            .filterIcon,
-            .filterChevron {
-              position: absolute;
-              pointer-events: none;
-            }
-
-            .searchIcon,
-            .filterIcon {
-              left: 0.7rem;
-              width: 0.75rem;
-              height: 0.75rem;
-            }
-
-            .filterChevron {
-              right: 0.7rem;
-              width: 0.6rem;
-              height: 0.6rem;
-            }
-
-            .search input,
-            .filter select {
-              width: 100%;
-              min-width: 0;
-              height: 2.15rem;
-              padding: 0 1.75rem 0 1.8rem;
-              border: 0;
-              outline: 0;
-              appearance: none;
-              background: transparent;
-              color: #333;
-              cursor: pointer;
-              font: inherit;
-              font-size: 0.7rem;
-              font-weight: 600;
-              text-overflow: ellipsis;
-            }
-
-            .search input {
-              padding-right: 4.2rem;
-              cursor: text;
-            }
-
-            .search input::placeholder {
-              color: #777;
-              font-weight: 500;
-              opacity: 1;
-            }
-
-            .search input::-webkit-search-cancel-button {
-              display: none;
-            }
-
-            .searchCount {
-              position: absolute;
-              right: 2rem;
-              color: #777;
-              font-size: 0.52rem;
-              font-weight: 600;
-              line-height: 1;
-              pointer-events: none;
-            }
-
-            .searchClose,
-            .searchTrigger {
-              display: grid;
-              place-items: center;
-              padding: 0;
-              border: 1px solid #d4d4d4;
-              background: rgb(255 255 255 / 0.92);
-              color: #666;
-              cursor: pointer;
-              transition:
-                background 0.15s ease,
-                color 0.15s ease,
-                box-shadow 0.15s ease;
-            }
-
-            .searchTrigger {
-              flex: 0 0 2.15rem;
-              width: 2.15rem;
-              height: 2.15rem;
-              border-radius: 50%;
-              box-shadow: 0 1px 6px rgb(0 0 0 / 0.1);
-            }
-
-            .searchClose {
-              position: absolute;
-              right: 0.42rem;
-              width: 1.3rem;
-              height: 1.3rem;
-              border: 0;
-              border-radius: 50%;
-              background: rgb(0 0 0 / 0.06);
-            }
-
-            .searchClose:hover,
-            .searchTrigger:hover {
-              background: rgb(0 0 0 / 0.1);
-              color: #222;
-            }
-
-            .searchClose:focus-visible,
-            .searchTrigger:focus-visible {
-              outline: 2px solid #888;
-              outline-offset: 2px;
-            }
-
-            .searchClose svg {
-              width: 0.55rem;
-              height: 0.55rem;
-            }
-
-            .searchTrigger svg {
-              width: 0.8rem;
-              height: 0.8rem;
             }
 
             .empty {
@@ -667,28 +548,12 @@ export default function Nav({
       <nav {...props}>
         <div className="filters">
           {searchVisible && (
-            <div className="search">
-              <svg
-                className="searchIcon"
-                viewBox="0 0 12 12"
-                fill="none"
-                aria-hidden="true"
-              >
-                <circle
-                  cx="5.25"
-                  cy="5.25"
-                  r="3.25"
-                  stroke="currentColor"
-                  strokeWidth="1.25"
-                />
-                <path
-                  d="m7.75 7.75 2.25 2.25"
-                  stroke="currentColor"
-                  strokeWidth="1.25"
-                  strokeLinecap="round"
-                />
-              </svg>
-              <input
+            /* Opaque: this floats over the filter row, and the sticky
+               `.filters` gradient behind it goes transparent at the bottom. */
+            <InputGroup className="search bg-background">
+              {/* Addons come after the control in the DOM — they focus it on
+                  click and take their visual side from `align`. */}
+              <InputGroupInput
                 ref={searchRef}
                 type="search"
                 value={search}
@@ -698,91 +563,63 @@ export default function Nav({
                 aria-label="Search examples"
                 aria-controls="demo-list"
                 aria-describedby="search-results"
+                className="[&::-webkit-search-cancel-button]:hidden"
               />
-              <span className="searchCount">{filteredDemos.length}</span>
-              <button
-                className="searchClose"
-                type="button"
-                onClick={dismissSearch}
-                aria-label="Close search"
-              >
-                <svg viewBox="0 0 8 8" fill="none" aria-hidden="true">
-                  <path
-                    d="m1 1 6 6M7 1 1 7"
-                    stroke="currentColor"
-                    strokeWidth="1.2"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </button>
-            </div>
+              <InputGroupAddon>
+                <SearchIcon />
+              </InputGroupAddon>
+              <InputGroupAddon align="inline-end">
+                <InputGroupText className="text-xs tabular-nums">
+                  {filteredDemos.length}
+                </InputGroupText>
+                <InputGroupButton
+                  size="icon-xs"
+                  onClick={dismissSearch}
+                  aria-label="Close search"
+                >
+                  <XIcon />
+                </InputGroupButton>
+              </InputGroupAddon>
+            </InputGroup>
           )}
           <div className="filterRow" data-covered={searchVisible || undefined}>
-            <label className="filter">
-              <span className="srOnly">Filter examples by library</span>
-              <svg
-                className="filterIcon"
-                viewBox="0 0 12 12"
-                fill="none"
-                aria-hidden="true"
+            <Select
+              open={libraryOpen}
+              onOpenChange={setLibraryOpen}
+              value={library || ALL_LIBRARIES}
+              onValueChange={(value) =>
+                setLibrary(value === ALL_LIBRARIES ? "" : value)
+              }
+            >
+              <SelectTrigger
+                className="min-w-0 flex-1"
+                aria-label="Filter examples by library"
               >
-                <path
-                  d="M2 3h8M3.5 6h5M5 9h2"
-                  stroke="currentColor"
-                  strokeWidth="1.25"
-                  strokeLinecap="round"
-                />
-              </svg>
-              <select
-                value={library}
-                onChange={(event) => setLibrary(event.target.value)}
-              >
-                <option value="">All libraries</option>
-                {libraryOptions.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-              <svg
-                className="filterChevron"
-                viewBox="0 0 10 6"
-                fill="none"
-                aria-hidden="true"
-              >
-                <path
-                  d="m1 1 4 4 4-4"
-                  stroke="currentColor"
-                  strokeWidth="1.25"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </label>
-            <button
-              className="searchTrigger"
+                <ListFilterIcon className="text-muted-foreground" />
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value={ALL_LIBRARIES}>All libraries</SelectItem>
+                  {libraryOptions.map((option) => (
+                    <SelectItem key={option} value={option}>
+                      {option}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+            <Button
               type="button"
+              variant="outline"
+              size="icon"
               onClick={() => focusSearch()}
               aria-label="Search examples"
               aria-keyshortcuts="Meta+F Control+F Meta+K Control+K"
               title="Search examples (⌘F)"
             >
-              <svg viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                <circle
-                  cx="5.25"
-                  cy="5.25"
-                  r="3.25"
-                  stroke="currentColor"
-                  strokeWidth="1.25"
-                />
-                <path
-                  d="m7.75 7.75 2.25 2.25"
-                  stroke="currentColor"
-                  strokeWidth="1.25"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </button>
+              <SearchIcon />
+            </Button>
           </div>
           <span id="search-results" className="srOnly" aria-live="polite">
             {filteredDemos.length} examples
