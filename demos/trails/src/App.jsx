@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import { Canvas, useThree, useFrame } from '@react-three/fiber'
 import { useGLTF, Edges, Trail } from '@react-three/drei'
@@ -15,8 +15,11 @@ const text = new TextGeometry('9.7.0', { font, size: 0.7, height: 0.35, curveSeg
 text.center()
 
 const vec = new THREE.Vector3()
+const dir = new THREE.Vector3()
 // The swarm gathers slightly behind the hero so it frames it instead of covering it
 const attractor = new THREE.Vector3(0, 0, -1)
+// Live registry of swarm bodies so the cursor can blast them apart on click
+const blocks = new Set()
 const white = new THREE.MeshBasicMaterial({ color: '#fefefe', toneMapped: false })
 const pink = new THREE.MeshBasicMaterial({ color: '#ff0080', toneMapped: false })
 // Accent blocks cycle through the cursor-gradient palette
@@ -63,6 +66,11 @@ function Hero({ scale = 1.2 }) {
 
 function Version({ scale = 1, material = white, ...props }) {
   const [ref, api] = useCompoundBody(() => ({ mass: 4 * scale, ...props, shapes: wordBox(scale) }))
+  useEffect(() => {
+    const entry = { ref, api, scale }
+    blocks.add(entry)
+    return () => blocks.delete(entry)
+  }, [ref, api, scale])
   // Pull every block back towards the gather point behind the hero
   useFrame(() => api.applyForce(vec.setFromMatrixPosition(ref.current.matrix).sub(attractor).normalize().multiplyScalar(-40 * scale).toArray(), [0, 0, 0]))
   return <Block ref={ref} scale={scale} material={material} />
@@ -82,8 +90,24 @@ function Cursor({ speed = 10, gradient = 0.7, ...props }) {
   }))
   useFrame((state) => {
     vec.setFromMatrixPosition(ref.current.matrix)
-    api.velocity.set(((state.mouse.x * viewport.width) / 2 - vec.x) * speed, ((state.mouse.y * viewport.height) / 2 - vec.y) * speed, -vec.z)
+    // Chase the pointer, diving to the swarm's gather depth so it plows through the clump
+    api.velocity.set(((state.mouse.x * viewport.width) / 2 - vec.x) * speed, ((state.mouse.y * viewport.height) / 2 - vec.y) * speed, (attractor.z - vec.z) * 2)
   })
+  useEffect(() => {
+    // Click detonates: every block gets a distance-falloff impulse away from the cursor,
+    // applied slightly off-center so they tumble. The attractor then reels them back in.
+    const explode = () => {
+      vec.setFromMatrixPosition(ref.current.matrix)
+      for (const block of blocks) {
+        dir.setFromMatrixPosition(block.ref.current.matrix).sub(vec)
+        const falloff = Math.max(dir.length(), 1)
+        dir.normalize().multiplyScalar((42 * block.scale) / falloff)
+        block.api.applyImpulse(dir.toArray(), [(Math.random() - 0.5) * 0.4, (Math.random() - 0.5) * 0.4, (Math.random() - 0.5) * 0.4])
+      }
+    }
+    window.addEventListener('pointerdown', explode)
+    return () => window.removeEventListener('pointerdown', explode)
+  }, [])
   return (
     <>
       <Trail color="red" target={trail} length={4} width={0.5} attenuation={(w) => w * 2} />
