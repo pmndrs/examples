@@ -312,7 +312,9 @@ export default function Nav({
               top: 0;
               z-index: 2;
               padding: 0.65rem 0.75rem 0.35rem 1rem;
-              background: linear-gradient(#eee 75%, rgb(238 238 238 / 0));
+              /* This is the page background, fading out under the scrolling
+                 list — it has to follow --background. */
+              background: linear-gradient(var(--background) 75%, transparent);
             }
 
             .filterRow {
@@ -792,15 +794,19 @@ export default function Nav({
               <Item
                 asChild
                 variant="outline"
-                className="relative overflow-hidden p-0"
+                className={cn(
+                  "relative overflow-hidden bg-muted p-0",
+                  /* `accent` is the same value as `muted` under the neutral
+                     base colour, so the selected card reads through the
+                     paired `accent-foreground` ring. */
+                  demoname === name &&
+                    "bg-accent ring-2 ring-accent-foreground",
+                )}
               >
                 <Link
                   href={`/demos/${name}`}
                   aria-current={demoname === name ? "page" : undefined}
-                  className={cn(
-                    "no-underline",
-                    demoname === name && "ring-2 ring-foreground",
-                  )}
+                  className="no-underline"
                 >
                   {/* Full-bleed: the media is the only thing in the box, so the
                       card ends up with the thumbnail's aspect ratio. */}
