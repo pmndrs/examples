@@ -4,6 +4,7 @@ import { ScaledDemoFrame } from "@/components/ScaledDemoFrame";
 import { getDemos } from "@/lib/helper";
 import { Dev } from "./Dev";
 import { Style } from "@/components/Style";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 import { Social } from "./Social";
 import { Info } from "./Info";
@@ -90,15 +91,6 @@ export default async function Page(props: Props) {
               min-width: 0;
               min-height: 0;
             }
-            .TopBar {
-              position: fixed;
-              top: 0.75rem;
-              right: 0.75rem;
-              z-index: 3;
-              display: flex;
-              align-items: flex-start;
-              gap: 0.5rem;
-            }
           }
         `}
       />
@@ -111,10 +103,15 @@ export default async function Page(props: Props) {
             <ScaledDemoFrame src={embed_url} title={demo.title} />
           </div>
 
-          <div className="TopBar">
-            <Info key={demoname} demo={demo} />
-            <Social demoname={demoname} embed_url={embed_url} />
-          </div>
+          {/* Both pills label themselves through `Tooltip`, which needs a
+              provider above it. The one the sidebar brings is scoped to the
+              nav, and this bar is nowhere near it. */}
+          <TooltipProvider>
+            <div className="fixed top-3 right-3 z-3 flex items-start gap-2">
+              <Info key={demoname} demo={demo} />
+              <Social demoname={demoname} embed_url={embed_url} />
+            </div>
+          </TooltipProvider>
         </>
       )}
     </>
