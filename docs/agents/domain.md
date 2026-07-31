@@ -2,7 +2,7 @@
 
 How the engineering skills should consume this repo's domain documentation when exploring the codebase.
 
-This repo is **single-context**: one `CONTEXT.md` and one `docs/adr/` at the repo root cover the whole codebase (website + demos).
+This repo is **single-context**: one `CONTEXT.md` and one `docs/adr/` at the repo root cover the whole codebase (website + examples).
 
 ## Before exploring, read these
 
@@ -20,7 +20,7 @@ If any of these files don't exist, **proceed silently**. Don't flag their absenc
 │   ├── 0001-....md
 │   └── 0002-....md
 ├── apps/website/
-└── demos/
+└── examples/
 ```
 
 ## Use the glossary's vocabulary

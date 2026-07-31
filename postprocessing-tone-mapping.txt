@@ -13,10 +13,10 @@ bruno-simons-20k-challenge
   - The DepthOfField effect is not working correctly, so the intended focus and blur are visually incorrect.
   - Repair or reconfigure the depth-of-field pass, then compare with the thumbnail.
 building-dynamic-envmaps
-  - BROKEN (July 2026, fix deferred): the demo renders, but the SSR pass logs a THREE.WebGLProgram shader-compile error every frame and the reflections are missing.
+  - BROKEN (July 2026, fix deferred): the example renders, but the SSR pass logs a THREE.WebGLProgram shader-compile error every frame and the reflections are missing.
   - Cause: the SSR effect is a vendored copy of the abandoned screen-space-reflections library bundled inside @react-three/postprocessing. Its SSREffect.update() reads scene.environment.image.height to build the CUBEUV_* shader defines, but drei's <Environment> produces a cube render target whose .image is an array of six faces with no height, so Math.log2(undefined) stamps CUBEUV_MAX_MIP as the invalid literal "NaN.0" into the generated GLSL and the ReflectionsMaterial fragment shader never compiles.
   - No released package version fixes this: newer @react-three/postprocessing removed the SSR effect entirely, and 2.16.2 (the declared range) fails identically against three r165 — the incompatibility is with three, not the package version.
-  - Known fixes when ready: a pnpm patch, verified working, that reads the cube-UV height from the PMREM'd texture's own image.height (what three's WebGLPrograms does) and skips setupEnvMap when unavailable; or migrate the demo to realism-effects, the library's successor.
+  - Known fixes when ready: a pnpm patch, verified working, that reads the cube-UV height from the PMREM'd texture's own image.height (what three's WebGLPrograms does) and skips setupEnvMap when unavailable; or migrate the example to realism-effects, the library's successor.
   - Separately, EffectComposer disables renderer tone mapping and the SSR/Bloom/LUT chain has no ToneMapping effect; once SSR works, add explicit ACES filmic tone mapping last and compare with the thumbnail.
 color-grading
   - Drei Effects uses the legacy gamma pass before the LUT, with no current tone-mapping/output pass.
@@ -29,7 +29,7 @@ diamond-ring
   - EffectComposer disables renderer tone mapping, but the Bloom chain has no explicit ToneMapping effect.
   - Add ACES filmic tone mapping after Bloom and compare with the thumbnail.
 flexbox-yoga-in-webgl
-  - DONE (July 2026): pass registration rebuilt imperatively and the removed PlaneBufferGeometry replaced; the demo runs clean again.
+  - DONE (July 2026): pass registration rebuilt imperatively and the removed PlaneBufferGeometry replaced; the example runs clean again.
   - Kept GammaCorrectionShader as the final pass: the rendered pages match the intended white-magazine look, so swapping to ToneMapping+OutputPass is optional polish -- compare with the thumbnail before changing it.
 floating-diamonds
   - The DepthOfField effect no longer reproduces the intended focus plane and near/far blur with the current react-postprocessing/postprocessing stack.
@@ -40,7 +40,7 @@ flying-bananas
   - ToneMapping does not specify a mode, so the current AgX default compresses and desaturates the saturated orange and yellow colors.
   - Select the original tone-mapping mode explicitly, likely ACES filmic, and compare with the thumbnail before adjusting exposure.
 glass-flower
-  - This demo was missed by the old-lighting migration: its ambient, spot, and point lights still use legacy intensity values, and the positional lights now use physical distance decay.
+  - This example was missed by the old-lighting migration: its ambient, spot, and point lights still use legacy intensity values, and the positional lights now use physical distance decay.
   - The weaker, differently attenuated lighting changes the transmission and iridescent reflections, then reduces the highlights that feed Bloom, making the whole flower diverge from the thumbnail.
   - The composer already ends with explicit ACES filmic tone mapping, so restore the legacy lighting response first (pi-scaled intensities and decay={0} on the spot and point lights) before changing the LUT or postprocessing settings.
 gltf-animations-tied-to-scroll
@@ -50,7 +50,7 @@ hi-key-bubbles
   - EffectComposer disables renderer tone mapping, but the N8AO/TiltShift chain has no explicit ToneMapping effect.
   - Add ACES filmic tone mapping last and compare with the thumbnail.
 html-markers
-  - This demo has no postprocessing composer, but Three injects the renderer's ACES filmic tone mapping into its tone-mapped material shaders when rendering directly to screen; the original Fiber 8 renderer selected the same mode.
+  - This example has no postprocessing composer, but Three injects the renderer's ACES filmic tone mapping into its tone-mapped material shaders when rendering directly to screen; the original Fiber 8 renderer selected the same mode.
   - Three r155 made inline material tone mapping screen-only, but that does not remove it here because this scene still renders directly to the screen.
   - The globe's reduced saturation is more likely caused by the Three r143-to-r165 color-management and physical-lighting changes, including the recent ambient-light conversion, which alter the linear brightness reaching ACES and can push the colors further into its desaturating highlight shoulder.
   - The HTML/CSS marker colors bypass WebGL tone mapping. If they still match the thumbnail while only the globe is dull, compare ambient/environment intensity and renderer exposure before changing the tone-mapping mode; if the markers are also dull, the cause is outside the Three.js render pipeline.
@@ -70,7 +70,7 @@ motionpathcontrols
   - Add ACES filmic tone mapping last and compare with the thumbnail.
 mount-transitions
   - EffectComposer disables renderer tone mapping, but the N8AO chain has no explicit ToneMapping effect.
-  - Add ACES filmic tone mapping last after replacing the demo's removed BufferGeometry aliases.
+  - Add ACES filmic tone mapping last after replacing the example's removed BufferGeometry aliases.
 nextjs-prism
   - EffectComposer disables renderer tone mapping, but the Bloom/LUT chain has no explicit ToneMapping effect.
   - Add ACES filmic tone mapping after the LUT and compare with the thumbnail.
@@ -94,7 +94,7 @@ space-game
   - The renderer is explicitly set to NoToneMapping and the legacy Drei Effects composer disables its gamma pass.
   - Rebuild the Bloom chain with explicit ACES filmic tone mapping and output conversion.
 sparks-and-effects
-  - DONE (July 2026): Uncharted2ToneMapping replaced with ACESFilmicToneMapping, pass registration rebuilt imperatively, and the broken threejs-meshline/FontLoader/prototype-Pass code modernized; the demo runs clean and matches the thumbnail.
+  - DONE (July 2026): Uncharted2ToneMapping replaced with ACESFilmicToneMapping, pass registration rebuilt imperatively, and the broken threejs-meshline/FontLoader/prototype-Pass code modernized; the example runs clean and matches the thumbnail.
   - Deliberately no OutputPass: the render->water->bloom chain was tuned for legacy linear output, and adding output conversion washes the scene out (verified against the thumbnail).
 ssgi-spheres-with-rapier-physics
   - The final ToneMappingEffect leaves its mode implicit: the original postprocessing 6.32.2 stack defaulted it to ACES filmic, while the currently resolved 6.39 stack defaults to AgX.
@@ -104,10 +104,10 @@ ssr-test
   - EffectComposer disables renderer tone mapping, but the SSR chain has no explicit ToneMapping effect.
   - Repair the current media/runtime compatibility failure, add ACES filmic tone mapping last, and compare with the thumbnail.
 starwars
-  - BROKEN (July 2026, fix deferred): the demo renders, but the SSR pass's MRTMaterial logs a THREE.WebGLProgram shader-compile error every frame ("vViewPosition: undeclared identifier"), so the reflections are missing.
+  - BROKEN (July 2026, fix deferred): the example renders, but the SSR pass's MRTMaterial logs a THREE.WebGLProgram shader-compile error every frame ("vViewPosition: undeclared identifier"), so the reflections are missing.
   - Cause: three r152 renamed the TANGENTSPACE_NORMALMAP shader define to USE_NORMALMAP_TANGENTSPACE. The vendored screen-space-reflections MRTMaterial (bundled inside @react-three/postprocessing as the SSR effect) declares and assigns the vViewPosition varying only under the old define, while three r165's normal_fragment_begin calls getTangentFrame(-vViewPosition, ...) under the new one. The material also lacks the normalMapTransform uniform that r165's uv chunk uses to compute vNormalMapUv, which degenerates normal-map sampling even once the define is aligned.
   - No released package version fixes this: newer @react-three/postprocessing removed the SSR effect entirely, and 2.16.2 (the declared range) fails identically against three r165.
-  - Known fixes when ready: a pnpm patch, verified working, that adds the renamed define to the three conditions gating vViewPosition and supplies a Matrix3 normalMapTransform uniform; or migrate the demo to realism-effects.
+  - Known fixes when ready: a pnpm patch, verified working, that adds the renamed define to the three conditions gating vViewPosition and supplies a Matrix3 normalMapTransform uniform; or migrate the example to realism-effects.
   - Separately, EffectComposer disables renderer tone mapping and the SSR/Bloom/LUT chain has no explicit ToneMapping effect; once SSR works, add ACES filmic tone mapping after the LUT.
 volumetric-light-godray
   - EffectComposer disables renderer tone mapping, but the GodRays/Bloom chain has no explicit ToneMapping effect.

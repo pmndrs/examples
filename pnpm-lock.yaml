@@ -41,480 +41,480 @@ importers:
 
   apps/website:
     dependencies:
-      '@demo/aquarium':
+      '@example/aquarium':
         specifier: workspace:*
-        version: link:../../demos/aquarium
-      '@demo/arkanoid':
+        version: link:../../examples/aquarium
+      '@example/arkanoid':
         specifier: workspace:*
-        version: link:../../demos/arkanoid
-      '@demo/arkanoid-under-60-loc':
+        version: link:../../examples/arkanoid
+      '@example/arkanoid-under-60-loc':
         specifier: workspace:*
-        version: link:../../demos/arkanoid-under-60-loc
-      '@demo/audio-analyser':
+        version: link:../../examples/arkanoid-under-60-loc
+      '@example/audio-analyser':
         specifier: workspace:*
-        version: link:../../demos/audio-analyser
-      '@demo/backdrop-and-cables':
+        version: link:../../examples/audio-analyser
+      '@example/backdrop-and-cables':
         specifier: workspace:*
-        version: link:../../demos/backdrop-and-cables
-      '@demo/baking-soft-shadows':
+        version: link:../../examples/backdrop-and-cables
+      '@example/baking-soft-shadows':
         specifier: workspace:*
-        version: link:../../demos/baking-soft-shadows
-      '@demo/basic-ballpit':
+        version: link:../../examples/baking-soft-shadows
+      '@example/basic-ballpit':
         specifier: workspace:*
-        version: link:../../demos/basic-ballpit
-      '@demo/basic-demo':
+        version: link:../../examples/basic-ballpit
+      '@example/basic-example':
         specifier: workspace:*
-        version: link:../../demos/basic-demo
-      '@demo/bestservedbold-christmas-baubles':
+        version: link:../../examples/basic-example
+      '@example/bestservedbold-christmas-baubles':
         specifier: workspace:*
-        version: link:../../demos/bestservedbold-christmas-baubles
-      '@demo/bezier-curves-and-nodes':
+        version: link:../../examples/bestservedbold-christmas-baubles
+      '@example/bezier-curves-and-nodes':
         specifier: workspace:*
-        version: link:../../demos/bezier-curves-and-nodes
-      '@demo/bloom-hdr-workflow-gltf':
+        version: link:../../examples/bezier-curves-and-nodes
+      '@example/bloom-hdr-workflow-gltf':
         specifier: workspace:*
-        version: link:../../demos/bloom-hdr-workflow-gltf
-      '@demo/bouncy-watch':
+        version: link:../../examples/bloom-hdr-workflow-gltf
+      '@example/bouncy-watch':
         specifier: workspace:*
-        version: link:../../demos/bouncy-watch
-      '@demo/bounds-and-makedefault':
+        version: link:../../examples/bouncy-watch
+      '@example/bounds-and-makedefault':
         specifier: workspace:*
-        version: link:../../demos/bounds-and-makedefault
-      '@demo/bruno-simons-20k-challenge':
+        version: link:../../examples/bounds-and-makedefault
+      '@example/bruno-simons-20k-challenge':
         specifier: workspace:*
-        version: link:../../demos/bruno-simons-20k-challenge
-      '@demo/building-live-envmaps':
+        version: link:../../examples/bruno-simons-20k-challenge
+      '@example/building-live-envmaps':
         specifier: workspace:*
-        version: link:../../demos/building-live-envmaps
-      '@demo/bvh':
+        version: link:../../examples/building-live-envmaps
+      '@example/bvh':
         specifier: workspace:*
-        version: link:../../demos/bvh
-      '@demo/camera-scroll':
+        version: link:../../examples/bvh
+      '@example/camera-scroll':
         specifier: workspace:*
-        version: link:../../demos/camera-scroll
-      '@demo/camera-shake':
+        version: link:../../examples/camera-scroll
+      '@example/camera-shake':
         specifier: workspace:*
-        version: link:../../demos/camera-shake
-      '@demo/canvas-text':
+        version: link:../../examples/camera-shake
+      '@example/canvas-text':
         specifier: workspace:*
-        version: link:../../demos/canvas-text
-      '@demo/cards':
+        version: link:../../examples/canvas-text
+      '@example/cards':
         specifier: workspace:*
-        version: link:../../demos/cards
-      '@demo/cards-with-border-radius':
+        version: link:../../examples/cards
+      '@example/cards-with-border-radius':
         specifier: workspace:*
-        version: link:../../demos/cards-with-border-radius
-      '@demo/caustics':
+        version: link:../../examples/cards-with-border-radius
+      '@example/caustics':
         specifier: workspace:*
-        version: link:../../demos/caustics
-      '@demo/cell-fracture':
+        version: link:../../examples/caustics
+      '@example/cell-fracture':
         specifier: workspace:*
-        version: link:../../demos/cell-fracture
-      '@demo/clones':
+        version: link:../../examples/cell-fracture
+      '@example/clones':
         specifier: workspace:*
-        version: link:../../demos/clones
-      '@demo/clouds':
+        version: link:../../examples/clones
+      '@example/clouds':
         specifier: workspace:*
-        version: link:../../demos/clouds
-      '@demo/color-grading':
+        version: link:../../examples/clouds
+      '@example/color-grading':
         specifier: workspace:*
-        version: link:../../demos/color-grading
-      '@demo/confetti':
+        version: link:../../examples/color-grading
+      '@example/confetti':
         specifier: workspace:*
-        version: link:../../demos/confetti
-      '@demo/csg-bunny-usegroups':
+        version: link:../../examples/confetti
+      '@example/csg-bunny-usegroups':
         specifier: workspace:*
-        version: link:../../demos/csg-bunny-usegroups
-      '@demo/csg-house':
+        version: link:../../examples/csg-bunny-usegroups
+      '@example/csg-house':
         specifier: workspace:*
-        version: link:../../demos/csg-house
-      '@demo/csg-operations-rapier-physics':
+        version: link:../../examples/csg-house
+      '@example/csg-operations-rapier-physics':
         specifier: workspace:*
-        version: link:../../demos/csg-operations-rapier-physics
-      '@demo/dbismut-furniture':
+        version: link:../../examples/csg-operations-rapier-physics
+      '@example/dbismut-furniture':
         specifier: workspace:*
-        version: link:../../demos/dbismut-furniture
-      '@demo/diamond-refraction':
+        version: link:../../examples/dbismut-furniture
+      '@example/diamond-refraction':
         specifier: workspace:*
-        version: link:../../demos/diamond-refraction
-      '@demo/diamond-ring':
+        version: link:../../examples/diamond-refraction
+      '@example/diamond-ring':
         specifier: workspace:*
-        version: link:../../demos/diamond-ring
-      '@demo/drei-rendertexture':
+        version: link:../../examples/diamond-ring
+      '@example/drei-rendertexture':
         specifier: workspace:*
-        version: link:../../demos/drei-rendertexture
-      '@demo/ecctrl-fisheye':
+        version: link:../../examples/drei-rendertexture
+      '@example/ecctrl-fisheye':
         specifier: workspace:*
-        version: link:../../demos/ecctrl-fisheye
-      '@demo/edgesgeometry':
+        version: link:../../examples/ecctrl-fisheye
+      '@example/edgesgeometry':
         specifier: workspace:*
-        version: link:../../demos/edgesgeometry
-      '@demo/enter-portals':
+        version: link:../../examples/edgesgeometry
+      '@example/enter-portals':
         specifier: workspace:*
-        version: link:../../demos/enter-portals
-      '@demo/environment-blur-and-transitions':
+        version: link:../../examples/enter-portals
+      '@example/environment-blur-and-transitions':
         specifier: workspace:*
-        version: link:../../demos/environment-blur-and-transitions
-      '@demo/envmap-ground-projection':
+        version: link:../../examples/environment-blur-and-transitions
+      '@example/envmap-ground-projection':
         specifier: workspace:*
-        version: link:../../demos/envmap-ground-projection
-      '@demo/faucets-select-highlight':
+        version: link:../../examples/envmap-ground-projection
+      '@example/faucets-select-highlight':
         specifier: workspace:*
-        version: link:../../demos/faucets-select-highlight
-      '@demo/flexbox-yoga-in-webgl':
+        version: link:../../examples/faucets-select-highlight
+      '@example/flexbox-yoga-in-webgl':
         specifier: workspace:*
-        version: link:../../demos/flexbox-yoga-in-webgl
-      '@demo/floating-diamonds':
+        version: link:../../examples/flexbox-yoga-in-webgl
+      '@example/floating-diamonds':
         specifier: workspace:*
-        version: link:../../demos/floating-diamonds
-      '@demo/floating-instanced-shoes':
+        version: link:../../examples/floating-diamonds
+      '@example/floating-instanced-shoes':
         specifier: workspace:*
-        version: link:../../demos/floating-instanced-shoes
-      '@demo/floating-laptop':
+        version: link:../../examples/floating-instanced-shoes
+      '@example/floating-laptop':
         specifier: workspace:*
-        version: link:../../demos/floating-laptop
-      '@demo/flow-shield':
+        version: link:../../examples/floating-laptop
+      '@example/flow-shield':
         specifier: workspace:*
-        version: link:../../demos/flow-shield
-      '@demo/flying-bananas':
+        version: link:../../examples/flow-shield
+      '@example/flying-bananas':
         specifier: workspace:*
-        version: link:../../demos/flying-bananas
-      '@demo/frosted-glass':
+        version: link:../../examples/flying-bananas
+      '@example/frosted-glass':
         specifier: workspace:*
-        version: link:../../demos/frosted-glass
-      '@demo/gatsby-stars':
+        version: link:../../examples/frosted-glass
+      '@example/gatsby-stars':
         specifier: workspace:*
-        version: link:../../demos/gatsby-stars
-      '@demo/glass-flower':
+        version: link:../../examples/gatsby-stars
+      '@example/glass-flower':
         specifier: workspace:*
-        version: link:../../demos/glass-flower
-      '@demo/gltf-animations':
+        version: link:../../examples/glass-flower
+      '@example/gltf-animations':
         specifier: workspace:*
-        version: link:../../demos/gltf-animations
-      '@demo/gltf-animations-re-used':
+        version: link:../../examples/gltf-animations
+      '@example/gltf-animations-re-used':
         specifier: workspace:*
-        version: link:../../demos/gltf-animations-re-used
-      '@demo/gltf-animations-tied-to-scroll':
+        version: link:../../examples/gltf-animations-re-used
+      '@example/gltf-animations-tied-to-scroll':
         specifier: workspace:*
-        version: link:../../demos/gltf-animations-tied-to-scroll
-      '@demo/gltfjsx-400kb-drone':
+        version: link:../../examples/gltf-animations-tied-to-scroll
+      '@example/gltfjsx-400kb-drone':
         specifier: workspace:*
-        version: link:../../demos/gltfjsx-400kb-drone
-      '@demo/gpgpu-curl-noise-dof':
+        version: link:../../examples/gltfjsx-400kb-drone
+      '@example/gpgpu-curl-noise-dof':
         specifier: workspace:*
-        version: link:../../demos/gpgpu-curl-noise-dof
-      '@demo/grass-shader':
+        version: link:../../examples/gpgpu-curl-noise-dof
+      '@example/grass-shader':
         specifier: workspace:*
-        version: link:../../demos/grass-shader
-      '@demo/ground-projected-envmaps-lamina':
+        version: link:../../examples/grass-shader
+      '@example/ground-projected-envmaps-lamina':
         specifier: workspace:*
-        version: link:../../demos/ground-projected-envmaps-lamina
-      '@demo/ground-reflections-and-video-textures':
+        version: link:../../examples/ground-projected-envmaps-lamina
+      '@example/ground-reflections-and-video-textures':
         specifier: workspace:*
-        version: link:../../demos/ground-reflections-and-video-textures
-      '@demo/hi-key-bubbles':
+        version: link:../../examples/ground-reflections-and-video-textures
+      '@example/hi-key-bubbles':
         specifier: workspace:*
-        version: link:../../demos/hi-key-bubbles
-      '@demo/horizontal-tiles':
+        version: link:../../examples/hi-key-bubbles
+      '@example/horizontal-tiles':
         specifier: workspace:*
-        version: link:../../demos/horizontal-tiles
-      '@demo/html-annotations':
+        version: link:../../examples/horizontal-tiles
+      '@example/html-annotations':
         specifier: workspace:*
-        version: link:../../demos/html-annotations
-      '@demo/html-input-fields':
+        version: link:../../examples/html-annotations
+      '@example/html-input-fields':
         specifier: workspace:*
-        version: link:../../demos/html-input-fields
-      '@demo/html-markers':
+        version: link:../../examples/html-input-fields
+      '@example/html-markers':
         specifier: workspace:*
-        version: link:../../demos/html-markers
-      '@demo/image-gallery':
+        version: link:../../examples/html-markers
+      '@example/image-gallery':
         specifier: workspace:*
-        version: link:../../demos/image-gallery
-      '@demo/infinite-scroll':
+        version: link:../../examples/image-gallery
+      '@example/infinite-scroll':
         specifier: workspace:*
-        version: link:../../demos/infinite-scroll
-      '@demo/instanced-particles-effects':
+        version: link:../../examples/infinite-scroll
+      '@example/instanced-particles-effects':
         specifier: workspace:*
-        version: link:../../demos/instanced-particles-effects
-      '@demo/instanced-vertex-colors':
+        version: link:../../examples/instanced-particles-effects
+      '@example/instanced-vertex-colors':
         specifier: workspace:*
-        version: link:../../demos/instanced-vertex-colors
-      '@demo/instances':
+        version: link:../../examples/instanced-vertex-colors
+      '@example/instances':
         specifier: workspace:*
-        version: link:../../demos/instances
-      '@demo/inter-epoxy-resin':
+        version: link:../../examples/instances
+      '@example/inter-epoxy-resin':
         specifier: workspace:*
-        version: link:../../demos/inter-epoxy-resin
-      '@demo/interactive-spline-scene-live-html':
+        version: link:../../examples/inter-epoxy-resin
+      '@example/interactive-spline-scene-live-html':
         specifier: workspace:*
-        version: link:../../demos/interactive-spline-scene-live-html
-      '@demo/inverted-stencil-buffer':
+        version: link:../../examples/interactive-spline-scene-live-html
+      '@example/inverted-stencil-buffer':
         specifier: workspace:*
-        version: link:../../demos/inverted-stencil-buffer
-      '@demo/iridescent-decals':
+        version: link:../../examples/inverted-stencil-buffer
+      '@example/iridescent-decals':
         specifier: workspace:*
-        version: link:../../demos/iridescent-decals
-      '@demo/lamina-1x':
+        version: link:../../examples/iridescent-decals
+      '@example/lamina-1x':
         specifier: workspace:*
-        version: link:../../demos/lamina-1x
-      '@demo/landing-page':
+        version: link:../../examples/lamina-1x
+      '@example/landing-page':
         specifier: workspace:*
-        version: link:../../demos/landing-page
-      '@demo/learn-with-jason':
+        version: link:../../examples/landing-page
+      '@example/learn-with-jason':
         specifier: workspace:*
-        version: link:../../demos/learn-with-jason
-      '@demo/lulaby-city':
+        version: link:../../examples/learn-with-jason
+      '@example/lulaby-city':
         specifier: workspace:*
-        version: link:../../demos/lulaby-city
-      '@demo/lusion-connectors':
+        version: link:../../examples/lulaby-city
+      '@example/lusion-connectors':
         specifier: workspace:*
-        version: link:../../demos/lusion-connectors
-      '@demo/magic-box':
+        version: link:../../examples/lusion-connectors
+      '@example/magic-box':
         specifier: workspace:*
-        version: link:../../demos/magic-box
-      '@demo/merged-instance':
+        version: link:../../examples/magic-box
+      '@example/merged-instance':
         specifier: workspace:*
-        version: link:../../demos/merged-instance
-      '@demo/minecraft':
+        version: link:../../examples/merged-instance
+      '@example/minecraft':
         specifier: workspace:*
-        version: link:../../demos/minecraft
-      '@demo/mixing-controls':
+        version: link:../../examples/minecraft
+      '@example/mixing-controls':
         specifier: workspace:*
-        version: link:../../demos/mixing-controls
-      '@demo/mixing-html-and-webgl':
+        version: link:../../examples/mixing-controls
+      '@example/mixing-html-and-webgl':
         specifier: workspace:*
-        version: link:../../demos/mixing-html-and-webgl
-      '@demo/mixing-html-and-webgl-w-occlusion':
+        version: link:../../examples/mixing-html-and-webgl
+      '@example/mixing-html-and-webgl-w-occlusion':
         specifier: workspace:*
-        version: link:../../demos/mixing-html-and-webgl-w-occlusion
-      '@demo/moksha':
+        version: link:../../examples/mixing-html-and-webgl-w-occlusion
+      '@example/moksha':
         specifier: workspace:*
-        version: link:../../demos/moksha
-      '@demo/monitors':
+        version: link:../../examples/moksha
+      '@example/monitors':
         specifier: workspace:*
-        version: link:../../demos/monitors
-      '@demo/motionpathcontrols':
+        version: link:../../examples/monitors
+      '@example/motionpathcontrols':
         specifier: workspace:*
-        version: link:../../demos/motionpathcontrols
-      '@demo/mount-transitions':
+        version: link:../../examples/motionpathcontrols
+      '@example/mount-transitions':
         specifier: workspace:*
-        version: link:../../demos/mount-transitions
-      '@demo/multiple-views-with-uniform-controls':
+        version: link:../../examples/mount-transitions
+      '@example/multiple-views-with-uniform-controls':
         specifier: workspace:*
-        version: link:../../demos/multiple-views-with-uniform-controls
-      '@demo/nextjs-prism':
+        version: link:../../examples/multiple-views-with-uniform-controls
+      '@example/nextjs-prism':
         specifier: workspace:*
-        version: link:../../demos/nextjs-prism
-      '@demo/night-train':
+        version: link:../../examples/nextjs-prism
+      '@example/night-train':
         specifier: workspace:*
-        version: link:../../demos/night-train
-      '@demo/object-clump':
+        version: link:../../examples/night-train
+      '@example/object-clump':
         specifier: workspace:*
-        version: link:../../demos/object-clump
-      '@demo/pairing-threejs-to-ui':
+        version: link:../../examples/object-clump
+      '@example/pairing-threejs-to-ui':
         specifier: workspace:*
-        version: link:../../demos/pairing-threejs-to-ui
-      '@demo/pass-through-portals':
+        version: link:../../examples/pairing-threejs-to-ui
+      '@example/pass-through-portals':
         specifier: workspace:*
-        version: link:../../demos/pass-through-portals
-      '@demo/physics-with-convex-polyhedrons':
+        version: link:../../examples/pass-through-portals
+      '@example/physics-with-convex-polyhedrons':
         specifier: workspace:*
-        version: link:../../demos/physics-with-convex-polyhedrons
-      '@demo/pinball-in-70-lines':
+        version: link:../../examples/physics-with-convex-polyhedrons
+      '@example/pinball-in-70-lines':
         specifier: workspace:*
-        version: link:../../demos/pinball-in-70-lines
-      '@demo/pmndrs-vercel':
+        version: link:../../examples/pinball-in-70-lines
+      '@example/pmndrs-vercel':
         specifier: workspace:*
-        version: link:../../demos/pmndrs-vercel
-      '@demo/portal-shapes':
+        version: link:../../examples/pmndrs-vercel
+      '@example/portal-shapes':
         specifier: workspace:*
-        version: link:../../demos/portal-shapes
-      '@demo/portals':
+        version: link:../../examples/portal-shapes
+      '@example/portals':
         specifier: workspace:*
-        version: link:../../demos/portals
-      '@demo/progressive-loading-states-with-suspense':
+        version: link:../../examples/portals
+      '@example/progressive-loading-states-with-suspense':
         specifier: workspace:*
-        version: link:../../demos/progressive-loading-states-with-suspense
-      '@demo/racing-game':
+        version: link:../../examples/progressive-loading-states-with-suspense
+      '@example/racing-game':
         specifier: workspace:*
-        version: link:../../demos/racing-game
-      '@demo/ragdoll-physics':
+        version: link:../../examples/racing-game
+      '@example/ragdoll-physics':
         specifier: workspace:*
-        version: link:../../demos/ragdoll-physics
-      '@demo/rapier-physics':
+        version: link:../../examples/ragdoll-physics
+      '@example/rapier-physics':
         specifier: workspace:*
-        version: link:../../demos/rapier-physics
-      '@demo/rapier-ping-pong':
+        version: link:../../examples/rapier-physics
+      '@example/rapier-ping-pong':
         specifier: workspace:*
-        version: link:../../demos/rapier-ping-pong
-      '@demo/raycast-cycling':
+        version: link:../../examples/rapier-ping-pong
+      '@example/raycast-cycling':
         specifier: workspace:*
-        version: link:../../demos/raycast-cycling
-      '@demo/re-using-geometry-and-level-of-detail':
+        version: link:../../examples/raycast-cycling
+      '@example/re-using-geometry-and-level-of-detail':
         specifier: workspace:*
-        version: link:../../demos/re-using-geometry-and-level-of-detail
-      '@demo/re-using-gltfs':
+        version: link:../../examples/re-using-geometry-and-level-of-detail
+      '@example/re-using-gltfs':
         specifier: workspace:*
-        version: link:../../demos/re-using-gltfs
-      '@demo/react-ellipsecurve':
+        version: link:../../examples/re-using-gltfs
+      '@example/react-ellipsecurve':
         specifier: workspace:*
-        version: link:../../demos/react-ellipsecurve
-      '@demo/react-pp-outlines':
+        version: link:../../examples/react-ellipsecurve
+      '@example/react-pp-outlines':
         specifier: workspace:*
-        version: link:../../demos/react-pp-outlines
-      '@demo/react-spring-animations':
+        version: link:../../examples/react-pp-outlines
+      '@example/react-spring-animations':
         specifier: workspace:*
-        version: link:../../demos/react-spring-animations
-      '@demo/room-with-soft-shadows':
+        version: link:../../examples/react-spring-animations
+      '@example/room-with-soft-shadows':
         specifier: workspace:*
-        version: link:../../demos/room-with-soft-shadows
-      '@demo/router-transitions':
+        version: link:../../examples/room-with-soft-shadows
+      '@example/router-transitions':
         specifier: workspace:*
-        version: link:../../demos/router-transitions
-      '@demo/scrollcontrols-and-lens-refraction':
+        version: link:../../examples/router-transitions
+      '@example/scrollcontrols-and-lens-refraction':
         specifier: workspace:*
-        version: link:../../demos/scrollcontrols-and-lens-refraction
-      '@demo/scrollcontrols-gltf':
+        version: link:../../examples/scrollcontrols-and-lens-refraction
+      '@example/scrollcontrols-gltf':
         specifier: workspace:*
-        version: link:../../demos/scrollcontrols-gltf
-      '@demo/scrollcontrols-with-minimap':
+        version: link:../../examples/scrollcontrols-gltf
+      '@example/scrollcontrols-with-minimap':
         specifier: workspace:*
-        version: link:../../demos/scrollcontrols-with-minimap
-      '@demo/selective-outlines':
+        version: link:../../examples/scrollcontrols-with-minimap
+      '@example/selective-outlines':
         specifier: workspace:*
-        version: link:../../demos/selective-outlines
-      '@demo/shader-fire':
+        version: link:../../examples/selective-outlines
+      '@example/shader-fire':
         specifier: workspace:*
-        version: link:../../demos/shader-fire
-      '@demo/shader-hmr':
+        version: link:../../examples/shader-fire
+      '@example/shader-hmr':
         specifier: workspace:*
-        version: link:../../demos/shader-hmr
-      '@demo/shadermaterials':
+        version: link:../../examples/shader-hmr
+      '@example/shadermaterials':
         specifier: workspace:*
-        version: link:../../demos/shadermaterials
-      '@demo/shoe-configurator':
+        version: link:../../examples/shadermaterials
+      '@example/shoe-configurator':
         specifier: workspace:*
-        version: link:../../demos/shoe-configurator
-      '@demo/shopping':
+        version: link:../../examples/shoe-configurator
+      '@example/shopping':
         specifier: workspace:*
-        version: link:../../demos/shopping
-      '@demo/simple-audio-analyser':
+        version: link:../../examples/shopping
+      '@example/simple-audio-analyser':
         specifier: workspace:*
-        version: link:../../demos/simple-audio-analyser
-      '@demo/simple-physics-demo':
+        version: link:../../examples/simple-audio-analyser
+      '@example/simple-physics-example':
         specifier: workspace:*
-        version: link:../../demos/simple-physics-demo
-      '@demo/simple-physics-demo-with-debug-bounds':
+        version: link:../../examples/simple-physics-example
+      '@example/simple-physics-example-with-debug-bounds':
         specifier: workspace:*
-        version: link:../../demos/simple-physics-demo-with-debug-bounds
-      '@demo/sky-dome-with-annotations':
+        version: link:../../examples/simple-physics-example-with-debug-bounds
+      '@example/sky-dome-with-annotations':
         specifier: workspace:*
-        version: link:../../demos/sky-dome-with-annotations
-      '@demo/soft-shadows':
+        version: link:../../examples/sky-dome-with-annotations
+      '@example/soft-shadows':
         specifier: workspace:*
-        version: link:../../demos/soft-shadows
-      '@demo/space-game':
+        version: link:../../examples/soft-shadows
+      '@example/space-game':
         specifier: workspace:*
-        version: link:../../demos/space-game
-      '@demo/sparks-and-effects':
+        version: link:../../examples/space-game
+      '@example/sparks-and-effects':
         specifier: workspace:*
-        version: link:../../demos/sparks-and-effects
-      '@demo/spline-glass-shapes':
+        version: link:../../examples/sparks-and-effects
+      '@example/spline-glass-shapes':
         specifier: workspace:*
-        version: link:../../demos/spline-glass-shapes
-      '@demo/sport-hall':
+        version: link:../../examples/spline-glass-shapes
+      '@example/sport-hall':
         specifier: workspace:*
-        version: link:../../demos/sport-hall
-      '@demo/spotlight-shadows':
+        version: link:../../examples/sport-hall
+      '@example/spotlight-shadows':
         specifier: workspace:*
-        version: link:../../demos/spotlight-shadows
-      '@demo/springy-boxes':
+        version: link:../../examples/spotlight-shadows
+      '@example/springy-boxes':
         specifier: workspace:*
-        version: link:../../demos/springy-boxes
-      '@demo/ssgi-spheres-with-rapier-physics':
+        version: link:../../examples/springy-boxes
+      '@example/ssgi-spheres-with-rapier-physics':
         specifier: workspace:*
-        version: link:../../demos/ssgi-spheres-with-rapier-physics
-      '@demo/stage-presets-gltfjsx':
+        version: link:../../examples/ssgi-spheres-with-rapier-physics
+      '@example/stage-presets-gltfjsx':
         specifier: workspace:*
-        version: link:../../demos/stage-presets-gltfjsx
-      '@demo/staging-and-camerashake':
+        version: link:../../examples/stage-presets-gltfjsx
+      '@example/staging-and-camerashake':
         specifier: workspace:*
-        version: link:../../demos/staging-and-camerashake
-      '@demo/stencil-mask':
+        version: link:../../examples/staging-and-camerashake
+      '@example/stencil-mask':
         specifier: workspace:*
-        version: link:../../demos/stencil-mask
-      '@demo/svg-maps-with-html-annotations':
+        version: link:../../examples/stencil-mask
+      '@example/svg-maps-with-html-annotations':
         specifier: workspace:*
-        version: link:../../demos/svg-maps-with-html-annotations
-      '@demo/svg-renderer':
+        version: link:../../examples/svg-maps-with-html-annotations
+      '@example/svg-renderer':
         specifier: workspace:*
-        version: link:../../demos/svg-renderer
-      '@demo/t-shirt-configurator':
+        version: link:../../examples/svg-renderer
+      '@example/t-shirt-configurator':
         specifier: workspace:*
-        version: link:../../demos/t-shirt-configurator
-      '@demo/the-three-graces':
+        version: link:../../examples/t-shirt-configurator
+      '@example/the-three-graces':
         specifier: workspace:*
-        version: link:../../demos/the-three-graces
-      '@demo/threejs-journey-lv-1-fisheye':
+        version: link:../../examples/the-three-graces
+      '@example/threejs-journey-lv-1-fisheye':
         specifier: workspace:*
-        version: link:../../demos/threejs-journey-lv-1-fisheye
-      '@demo/threejs-journey-portal':
+        version: link:../../examples/threejs-journey-lv-1-fisheye
+      '@example/threejs-journey-portal':
         specifier: workspace:*
-        version: link:../../demos/threejs-journey-portal
-      '@demo/thunder-clouds':
+        version: link:../../examples/threejs-journey-portal
+      '@example/thunder-clouds':
         specifier: workspace:*
-        version: link:../../demos/thunder-clouds
-      '@demo/trails':
+        version: link:../../examples/thunder-clouds
+      '@example/trails':
         specifier: workspace:*
-        version: link:../../demos/trails
-      '@demo/transformcontrols-and-makedefault':
+        version: link:../../examples/trails
+      '@example/transformcontrols-and-makedefault':
         specifier: workspace:*
-        version: link:../../demos/transformcontrols-and-makedefault
-      '@demo/transparent-aesop-bottles':
+        version: link:../../examples/transformcontrols-and-makedefault
+      '@example/transparent-aesop-bottles':
         specifier: workspace:*
-        version: link:../../demos/transparent-aesop-bottles
-      '@demo/trigger-meshes':
+        version: link:../../examples/transparent-aesop-bottles
+      '@example/trigger-meshes':
         specifier: workspace:*
-        version: link:../../demos/trigger-meshes
-      '@demo/tying-canvas-to-scroll-offset':
+        version: link:../../examples/trigger-meshes
+      '@example/tying-canvas-to-scroll-offset':
         specifier: workspace:*
-        version: link:../../demos/tying-canvas-to-scroll-offset
-      '@demo/useintersect-and-scrollcontrols':
+        version: link:../../examples/tying-canvas-to-scroll-offset
+      '@example/useintersect-and-scrollcontrols':
         specifier: workspace:*
-        version: link:../../demos/useintersect-and-scrollcontrols
-      '@demo/video-cookies':
+        version: link:../../examples/useintersect-and-scrollcontrols
+      '@example/video-cookies':
         specifier: workspace:*
-        version: link:../../demos/video-cookies
-      '@demo/video-textures':
+        version: link:../../examples/video-cookies
+      '@example/video-textures':
         specifier: workspace:*
-        version: link:../../demos/video-textures
-      '@demo/view-tracking':
+        version: link:../../examples/video-textures
+      '@example/view-tracking':
         specifier: workspace:*
-        version: link:../../demos/view-tracking
-      '@demo/viewcube':
+        version: link:../../examples/view-tracking
+      '@example/viewcube':
         specifier: workspace:*
-        version: link:../../demos/viewcube
-      '@demo/viking-ship':
+        version: link:../../examples/viewcube
+      '@example/viking-ship':
         specifier: workspace:*
-        version: link:../../demos/viking-ship
-      '@demo/volumetric-light-godray':
+        version: link:../../examples/viking-ship
+      '@example/volumetric-light-godray':
         specifier: workspace:*
-        version: link:../../demos/volumetric-light-godray
-      '@demo/volumetric-spotlight':
+        version: link:../../examples/volumetric-light-godray
+      '@example/volumetric-spotlight':
         specifier: workspace:*
-        version: link:../../demos/volumetric-spotlight
-      '@demo/water-shader':
+        version: link:../../examples/volumetric-spotlight
+      '@example/water-shader':
         specifier: workspace:*
-        version: link:../../demos/water-shader
-      '@demo/wireframes':
+        version: link:../../examples/water-shader
+      '@example/wireframes':
         specifier: workspace:*
-        version: link:../../demos/wireframes
-      '@demo/wobbling-sphere':
+        version: link:../../examples/wireframes
+      '@example/wobbling-sphere':
         specifier: workspace:*
-        version: link:../../demos/wobbling-sphere
-      '@demo/zustand-site':
+        version: link:../../examples/wobbling-sphere
+      '@example/zustand-site':
         specifier: workspace:*
-        version: link:../../demos/zustand-site
+        version: link:../../examples/zustand-site
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -589,7 +589,7 @@ importers:
         specifier: ^5.5.4
         version: 5.9.3
 
-  demos/aquarium:
+  examples/aquarium:
     dependencies:
       '@pmndrs/branding':
         specifier: ^0.0.8
@@ -629,7 +629,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/arkanoid:
+  examples/arkanoid:
     dependencies:
       '@react-spring/three':
         specifier: ^10.1.2
@@ -675,7 +675,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/arkanoid-under-60-loc:
+  examples/arkanoid-under-60-loc:
     dependencies:
       '@react-three/fiber':
         specifier: 9.6.1
@@ -712,7 +712,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/audio-analyser:
+  examples/audio-analyser:
     dependencies:
       '@pmndrs/branding':
         specifier: ^0.0.8
@@ -755,7 +755,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/backdrop-and-cables:
+  examples/backdrop-and-cables:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -792,7 +792,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/baking-soft-shadows:
+  examples/baking-soft-shadows:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -829,7 +829,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/basic-ballpit:
+  examples/basic-ballpit:
     dependencies:
       '@react-three/cannon':
         specifier: ^6.6.0
@@ -869,7 +869,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/basic-demo:
+  examples/basic-example:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -906,7 +906,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/bestservedbold-christmas-baubles:
+  examples/bestservedbold-christmas-baubles:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -949,7 +949,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/bezier-curves-and-nodes:
+  examples/bezier-curves-and-nodes:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -989,7 +989,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/bloom-hdr-workflow-gltf:
+  examples/bloom-hdr-workflow-gltf:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -1026,7 +1026,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/bouncy-watch:
+  examples/bouncy-watch:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -1063,7 +1063,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/bounds-and-makedefault:
+  examples/bounds-and-makedefault:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -1100,7 +1100,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/bruno-simons-20k-challenge:
+  examples/bruno-simons-20k-challenge:
     dependencies:
       '@react-three/csg':
         specifier: ^4.0.0
@@ -1146,7 +1146,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/building-dynamic-envmaps:
+  examples/building-dynamic-envmaps:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -1189,7 +1189,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/building-live-envmaps:
+  examples/building-live-envmaps:
     dependencies:
       '@pmndrs/branding':
         specifier: ^0.0.8
@@ -1232,7 +1232,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/bvh:
+  examples/bvh:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -1278,7 +1278,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/camera-scroll:
+  examples/camera-scroll:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -1315,7 +1315,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/camera-shake:
+  examples/camera-shake:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -1352,7 +1352,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/canvas-text:
+  examples/canvas-text:
     dependencies:
       '@react-three/fiber':
         specifier: 9.6.1
@@ -1386,7 +1386,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/cards:
+  examples/cards:
     dependencies:
       '@pmndrs/assets':
         specifier: ^1.6.0
@@ -1435,7 +1435,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/cards-with-border-radius:
+  examples/cards-with-border-radius:
     dependencies:
       '@pmndrs/branding':
         specifier: ^0.0.8
@@ -1475,7 +1475,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/caustics:
+  examples/caustics:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -1512,7 +1512,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/cell-fracture:
+  examples/cell-fracture:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -1549,7 +1549,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/clones:
+  examples/clones:
     dependencies:
       '@pmndrs/branding':
         specifier: ^0.0.8
@@ -1589,7 +1589,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/clouds:
+  examples/clouds:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -1629,7 +1629,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/color-grading:
+  examples/color-grading:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -1666,7 +1666,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/confetti:
+  examples/confetti:
     dependencies:
       '@react-three/fiber':
         specifier: 9.6.1
@@ -1712,7 +1712,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/csg-bunny-usegroups:
+  examples/csg-bunny-usegroups:
     dependencies:
       '@react-three/csg':
         specifier: ^4.0.0
@@ -1752,7 +1752,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/csg-house:
+  examples/csg-house:
     dependencies:
       '@react-three/csg':
         specifier: ^4.0.0
@@ -1792,7 +1792,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/csg-operations-rapier-physics:
+  examples/csg-operations-rapier-physics:
     dependencies:
       '@react-three/csg':
         specifier: ^4.0.0
@@ -1841,7 +1841,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/dbismut-furniture:
+  examples/dbismut-furniture:
     dependencies:
       '@react-spring/three':
         specifier: ^10.1.2
@@ -1881,7 +1881,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/diamond-refraction:
+  examples/diamond-refraction:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -1924,7 +1924,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/diamond-ring:
+  examples/diamond-ring:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -1967,7 +1967,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/drei-rendertexture:
+  examples/drei-rendertexture:
     dependencies:
       '@pmndrs/assets':
         specifier: ^1.6.0
@@ -2010,7 +2010,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/ecctrl-fisheye:
+  examples/ecctrl-fisheye:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -2053,7 +2053,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/edgesgeometry:
+  examples/edgesgeometry:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -2090,7 +2090,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/enter-portals:
+  examples/enter-portals:
     dependencies:
       '@pmndrs/assets':
         specifier: ^1.6.0
@@ -2139,7 +2139,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/environment-blur-and-transitions:
+  examples/environment-blur-and-transitions:
     dependencies:
       '@pmndrs/branding':
         specifier: ^0.0.8
@@ -2182,7 +2182,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/envmap-ground-projection:
+  examples/envmap-ground-projection:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -2225,7 +2225,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/faucets-select-highlight:
+  examples/faucets-select-highlight:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -2265,7 +2265,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/flexbox-yoga-in-webgl:
+  examples/flexbox-yoga-in-webgl:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -2311,7 +2311,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/floating-diamonds:
+  examples/floating-diamonds:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -2351,7 +2351,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/floating-instanced-shoes:
+  examples/floating-instanced-shoes:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -2391,7 +2391,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/floating-laptop:
+  examples/floating-laptop:
     dependencies:
       '@react-spring/three':
         specifier: ^10.1.2
@@ -2434,7 +2434,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/flow-shield:
+  examples/flow-shield:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -2480,7 +2480,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/flying-bananas:
+  examples/flying-bananas:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -2523,7 +2523,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/frosted-glass:
+  examples/frosted-glass:
     dependencies:
       '@pmndrs/branding':
         specifier: ^0.0.8
@@ -2569,7 +2569,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/gatsby-stars:
+  examples/gatsby-stars:
     dependencies:
       '@pmndrs/branding':
         specifier: ^0.0.8
@@ -2612,7 +2612,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/glass-flower:
+  examples/glass-flower:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -2652,7 +2652,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/gltf-animations:
+  examples/gltf-animations:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -2689,7 +2689,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/gltf-animations-re-used:
+  examples/gltf-animations-re-used:
     dependencies:
       '@react-spring/three':
         specifier: ^10.1.2
@@ -2729,7 +2729,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/gltf-animations-tied-to-scroll:
+  examples/gltf-animations-tied-to-scroll:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -2769,7 +2769,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/gltfjsx-400kb-drone:
+  examples/gltfjsx-400kb-drone:
     dependencies:
       '@pmndrs/branding':
         specifier: ^0.0.8
@@ -2815,7 +2815,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/gpgpu-curl-noise-dof:
+  examples/gpgpu-curl-noise-dof:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -2855,7 +2855,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/grass-shader:
+  examples/grass-shader:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -2895,7 +2895,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/ground-projected-envmaps-lamina:
+  examples/ground-projected-envmaps-lamina:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -2935,7 +2935,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/ground-reflections-and-video-textures:
+  examples/ground-reflections-and-video-textures:
     dependencies:
       '@pmndrs/branding':
         specifier: ^0.0.8
@@ -2975,7 +2975,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/hi-key-bubbles:
+  examples/hi-key-bubbles:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -3015,7 +3015,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/horizontal-tiles:
+  examples/horizontal-tiles:
     dependencies:
       '@pmndrs/branding':
         specifier: ^0.0.8
@@ -3058,7 +3058,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/html-annotations:
+  examples/html-annotations:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -3095,7 +3095,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/html-input-fields:
+  examples/html-input-fields:
     dependencies:
       '@pmndrs/branding':
         specifier: ^0.0.8
@@ -3135,7 +3135,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/html-markers:
+  examples/html-markers:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -3175,7 +3175,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/image-gallery:
+  examples/image-gallery:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -3221,7 +3221,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/infinite-scroll:
+  examples/infinite-scroll:
     dependencies:
       '@pmndrs/branding':
         specifier: ^0.0.8
@@ -3261,7 +3261,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/instanced-particles-effects:
+  examples/instanced-particles-effects:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -3298,7 +3298,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/instanced-vertex-colors:
+  examples/instanced-vertex-colors:
     dependencies:
       '@react-three/fiber':
         specifier: 9.6.1
@@ -3338,7 +3338,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/instances:
+  examples/instances:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -3378,7 +3378,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/inter-epoxy-resin:
+  examples/inter-epoxy-resin:
     dependencies:
       '@pmndrs/branding':
         specifier: ^0.0.8
@@ -3424,7 +3424,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/interactive-spline-scene-live-html:
+  examples/interactive-spline-scene-live-html:
     dependencies:
       '@headlessui/react':
         specifier: ^1.7.19
@@ -3473,7 +3473,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/inverted-stencil-buffer:
+  examples/inverted-stencil-buffer:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -3513,7 +3513,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/iridescent-decals:
+  examples/iridescent-decals:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -3550,7 +3550,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/lamina-1x:
+  examples/lamina-1x:
     dependencies:
       '@pmndrs/branding':
         specifier: ^0.0.8
@@ -3593,7 +3593,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/landing-page:
+  examples/landing-page:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -3633,7 +3633,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/learn-with-jason:
+  examples/learn-with-jason:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -3670,7 +3670,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/lulaby-city:
+  examples/lulaby-city:
     dependencies:
       '@pmndrs/branding':
         specifier: ^0.0.8
@@ -3713,7 +3713,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/lusion-connectors:
+  examples/lusion-connectors:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -3756,7 +3756,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/magic-box:
+  examples/magic-box:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -3796,7 +3796,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/merged-instance:
+  examples/merged-instance:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -3833,7 +3833,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/minecraft:
+  examples/minecraft:
     dependencies:
       '@pmndrs/branding':
         specifier: ^0.0.8
@@ -3879,7 +3879,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/mixing-controls:
+  examples/mixing-controls:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -3922,7 +3922,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/mixing-html-and-webgl:
+  examples/mixing-html-and-webgl:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -3962,7 +3962,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/mixing-html-and-webgl-w-occlusion:
+  examples/mixing-html-and-webgl-w-occlusion:
     dependencies:
       '@headlessui/react':
         specifier: ^1.7.19
@@ -4005,7 +4005,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/moksha:
+  examples/moksha:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -4045,7 +4045,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/monitors:
+  examples/monitors:
     dependencies:
       '@pmndrs/assets':
         specifier: ^1.6.0
@@ -4097,7 +4097,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/motionpathcontrols:
+  examples/motionpathcontrols:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -4140,7 +4140,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/mount-transitions:
+  examples/mount-transitions:
     dependencies:
       '@pmndrs/branding':
         specifier: ^0.0.8
@@ -4189,7 +4189,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/multiple-views-with-uniform-controls:
+  examples/multiple-views-with-uniform-controls:
     dependencies:
       '@mantine/core':
         specifier: ^5.10.5
@@ -4241,7 +4241,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/nextjs-prism:
+  examples/nextjs-prism:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -4281,7 +4281,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/night-train:
+  examples/night-train:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -4318,7 +4318,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/object-clump:
+  examples/object-clump:
     dependencies:
       '@react-three/cannon':
         specifier: ^6.6.0
@@ -4364,7 +4364,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/pairing-threejs-to-ui:
+  examples/pairing-threejs-to-ui:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -4407,7 +4407,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/pass-through-portals:
+  examples/pass-through-portals:
     dependencies:
       '@pmndrs/assets':
         specifier: ^1.6.0
@@ -4453,7 +4453,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/physics-with-convex-polyhedrons:
+  examples/physics-with-convex-polyhedrons:
     dependencies:
       '@react-three/cannon':
         specifier: ^6.6.0
@@ -4496,7 +4496,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/pinball-in-70-lines:
+  examples/pinball-in-70-lines:
     dependencies:
       '@react-three/cannon':
         specifier: ^6.6.0
@@ -4536,7 +4536,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/pmndrs-vercel:
+  examples/pmndrs-vercel:
     dependencies:
       '@pmndrs/branding':
         specifier: ^0.0.8
@@ -4582,7 +4582,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/portal-shapes:
+  examples/portal-shapes:
     dependencies:
       '@pmndrs/branding':
         specifier: ^0.0.8
@@ -4625,7 +4625,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/portals:
+  examples/portals:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -4665,7 +4665,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/progressive-loading-states-with-suspense:
+  examples/progressive-loading-states-with-suspense:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -4702,7 +4702,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/racing-game:
+  examples/racing-game:
     dependencies:
       '@pmndrs/branding':
         specifier: ^0.0.8
@@ -4763,7 +4763,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/ragdoll-physics:
+  examples/ragdoll-physics:
     dependencies:
       '@react-three/cannon':
         specifier: ^6.6.0
@@ -4803,7 +4803,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/rapier-physics:
+  examples/rapier-physics:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -4846,7 +4846,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/rapier-ping-pong:
+  examples/rapier-ping-pong:
     dependencies:
       '@pmndrs/branding':
         specifier: ^0.0.8
@@ -4898,7 +4898,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/raycast-cycling:
+  examples/raycast-cycling:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -4938,7 +4938,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/re-using-geometry-and-level-of-detail:
+  examples/re-using-geometry-and-level-of-detail:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -4975,7 +4975,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/re-using-gltfs:
+  examples/re-using-gltfs:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -5012,7 +5012,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/react-ellipsecurve:
+  examples/react-ellipsecurve:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -5052,7 +5052,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/react-pp-outlines:
+  examples/react-pp-outlines:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -5095,7 +5095,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/react-spring-animations:
+  examples/react-spring-animations:
     dependencies:
       '@react-spring/core':
         specifier: ^10.1.2
@@ -5141,7 +5141,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/room-with-soft-shadows:
+  examples/room-with-soft-shadows:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -5184,7 +5184,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/router-transitions:
+  examples/router-transitions:
     dependencies:
       '@pmndrs/assets':
         specifier: ^1.6.0
@@ -5233,7 +5233,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/scrollcontrols-and-lens-refraction:
+  examples/scrollcontrols-and-lens-refraction:
     dependencies:
       '@pmndrs/branding':
         specifier: ^0.0.8
@@ -5276,7 +5276,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/scrollcontrols-gltf:
+  examples/scrollcontrols-gltf:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -5313,7 +5313,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/scrollcontrols-with-minimap:
+  examples/scrollcontrols-with-minimap:
     dependencies:
       '@pmndrs/branding':
         specifier: ^0.0.8
@@ -5353,7 +5353,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/selective-outlines:
+  examples/selective-outlines:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -5393,7 +5393,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/shader-fire:
+  examples/shader-fire:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -5430,7 +5430,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/shader-hmr:
+  examples/shader-hmr:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -5467,7 +5467,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/shadermaterials:
+  examples/shadermaterials:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -5504,7 +5504,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/shoe-configurator:
+  examples/shoe-configurator:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -5547,7 +5547,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/shopping:
+  examples/shopping:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -5587,7 +5587,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/simple-audio-analyser:
+  examples/simple-audio-analyser:
     dependencies:
       '@pmndrs/branding':
         specifier: ^0.0.8
@@ -5627,7 +5627,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/simple-physics-demo:
+  examples/simple-physics-example:
     dependencies:
       '@react-three/cannon':
         specifier: ^6.6.0
@@ -5664,7 +5664,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/simple-physics-demo-with-debug-bounds:
+  examples/simple-physics-example-with-debug-bounds:
     dependencies:
       '@react-three/cannon':
         specifier: ^6.6.0
@@ -5701,7 +5701,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/sky-dome-with-annotations:
+  examples/sky-dome-with-annotations:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -5741,7 +5741,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/soft-shadows:
+  examples/soft-shadows:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -5784,7 +5784,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/space-game:
+  examples/space-game:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -5830,7 +5830,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/sparks-and-effects:
+  examples/sparks-and-effects:
     dependencies:
       '@react-three/fiber':
         specifier: 9.6.1
@@ -5873,7 +5873,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/spline-glass-shapes:
+  examples/spline-glass-shapes:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -5919,7 +5919,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/sport-hall:
+  examples/sport-hall:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -5959,7 +5959,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/spotlight-shadows:
+  examples/spotlight-shadows:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -5996,7 +5996,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/springy-boxes:
+  examples/springy-boxes:
     dependencies:
       '@react-spring/three':
         specifier: ^10.1.2
@@ -6033,7 +6033,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/ssgi-spheres-with-rapier-physics:
+  examples/ssgi-spheres-with-rapier-physics:
     dependencies:
       '@babel/runtime':
         specifier: ^7.25.0
@@ -6082,7 +6082,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/ssr-test:
+  examples/ssr-test:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -6125,7 +6125,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/stage-presets-gltfjsx:
+  examples/stage-presets-gltfjsx:
     dependencies:
       '@babel/runtime':
         specifier: ^7.25.0
@@ -6174,7 +6174,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/staging-and-camerashake:
+  examples/staging-and-camerashake:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -6211,7 +6211,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/starwars:
+  examples/starwars:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -6254,7 +6254,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/stencil-mask:
+  examples/stencil-mask:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -6294,7 +6294,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/svg-maps-with-html-annotations:
+  examples/svg-maps-with-html-annotations:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -6334,7 +6334,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/svg-renderer:
+  examples/svg-renderer:
     dependencies:
       '@react-three/fiber':
         specifier: 9.6.1
@@ -6371,7 +6371,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/t-shirt-configurator:
+  examples/t-shirt-configurator:
     dependencies:
       '@pmndrs/branding':
         specifier: ^0.0.8
@@ -6423,7 +6423,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/the-three-graces:
+  examples/the-three-graces:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -6463,7 +6463,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/threejs-journey-lv-1-fisheye:
+  examples/threejs-journey-lv-1-fisheye:
     dependencies:
       '@react-spring/three':
         specifier: ^10.1.2
@@ -6503,7 +6503,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/threejs-journey-portal:
+  examples/threejs-journey-portal:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -6540,7 +6540,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/thunder-clouds:
+  examples/thunder-clouds:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -6583,7 +6583,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/trails:
+  examples/trails:
     dependencies:
       '@pmndrs/branding':
         specifier: ^0.0.8
@@ -6629,7 +6629,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/transformcontrols-and-makedefault:
+  examples/transformcontrols-and-makedefault:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -6669,7 +6669,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/transparent-aesop-bottles:
+  examples/transparent-aesop-bottles:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -6706,7 +6706,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/trigger-meshes:
+  examples/trigger-meshes:
     dependencies:
       '@react-three/cannon':
         specifier: ^6.6.0
@@ -6746,7 +6746,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/tying-canvas-to-scroll-offset:
+  examples/tying-canvas-to-scroll-offset:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -6783,7 +6783,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/useintersect-and-scrollcontrols:
+  examples/useintersect-and-scrollcontrols:
     dependencies:
       '@pmndrs/branding':
         specifier: ^0.0.8
@@ -6823,7 +6823,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/video-cookies:
+  examples/video-cookies:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -6863,7 +6863,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/video-textures:
+  examples/video-textures:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -6900,7 +6900,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/view-tracking:
+  examples/view-tracking:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -6940,7 +6940,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/viewcube:
+  examples/viewcube:
     dependencies:
       '@pmndrs/assets':
         specifier: ^1.6.0
@@ -6983,7 +6983,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/viking-ship:
+  examples/viking-ship:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -7020,7 +7020,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/volumetric-light-godray:
+  examples/volumetric-light-godray:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -7060,7 +7060,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/volumetric-spotlight:
+  examples/volumetric-spotlight:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -7097,7 +7097,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/water-shader:
+  examples/water-shader:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7
@@ -7137,7 +7137,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/wireframes:
+  examples/wireframes:
     dependencies:
       '@pmndrs/branding':
         specifier: ^0.0.8
@@ -7183,7 +7183,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/wobbling-sphere:
+  examples/wobbling-sphere:
     dependencies:
       '@react-spring/three':
         specifier: ^10.1.2
@@ -7223,7 +7223,7 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(@types/node@20.19.39)(jiti@2.7.0)(yaml@2.9.0)
 
-  demos/zustand-site:
+  examples/zustand-site:
     dependencies:
       '@react-three/drei':
         specifier: 10.7.7

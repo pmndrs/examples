@@ -1,14 +1,14 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import { NEW_DEMOS } from "@/const/new";
+import { NEW_EXAMPLES } from "@/const/new";
 import pkg from "@/package.json";
 
 import { generatePort } from "@examples/e2e";
 
 const BASE_PATH = process.env.BASE_PATH || "";
 const BASE_URL = process.env.BASE_URL;
-const DEMOS_DIRECTORY = path.resolve(process.cwd(), "../../demos");
+const EXAMPLES_DIRECTORY = path.resolve(process.cwd(), "../../examples");
 
 const host =
   process.env.NODE_ENV === "development"
@@ -26,7 +26,7 @@ export type AssetAttribution = {
   notes?: string;
 };
 
-export type DemoMetadata = {
+export type ExampleMetadata = {
   title: string;
   description: string;
   tags: string[];
@@ -37,7 +37,7 @@ export type DemoMetadata = {
   assets: AssetAttribution[];
 };
 
-export type Demo = DemoMetadata & {
+export type Example = ExampleMetadata & {
   name: string;
   thumb: string;
   embed_url: string;
@@ -45,34 +45,38 @@ export type Demo = DemoMetadata & {
   isNew: boolean;
 };
 
-function getMetadata(demoname: string): DemoMetadata {
-  const metadataPath = path.join(DEMOS_DIRECTORY, demoname, "pmndrs.json");
+function getMetadata(examplename: string): ExampleMetadata {
+  const metadataPath = path.join(
+    EXAMPLES_DIRECTORY,
+    examplename,
+    "pmndrs.json",
+  );
   const metadata = JSON.parse(
     fs.readFileSync(metadataPath, "utf8"),
-  ) as DemoMetadata & { $schema: string };
-  const { $schema: _, ...demo } = metadata;
-  return demo;
+  ) as ExampleMetadata & { $schema: string };
+  const { $schema: _, ...example } = metadata;
+  return example;
 }
 
-export function getDemos(): Demo[] {
+export function getExamples(): Example[] {
   return Object.keys(pkg.dependencies)
-    .filter((dep) => dep.startsWith("@demo/"))
+    .filter((dep) => dep.startsWith("@example/"))
     .map((pkgname) => {
-      const demoname = pkgname.split("@demo/")[1];
-      const metadata = getMetadata(demoname);
-      const port = generatePort(demoname);
+      const examplename = pkgname.split("@example/")[1];
+      const metadata = getMetadata(examplename);
+      const port = generatePort(examplename);
       const h = host(port);
 
-      const embed_url = `${h}${BASE_PATH}/${demoname}`;
-      const website_url = `${h}${BASE_PATH}/demos/${demoname}`;
+      const embed_url = `${h}${BASE_PATH}/${examplename}`;
+      const website_url = `${h}${BASE_PATH}/examples/${examplename}`;
 
       return {
         ...metadata,
-        name: demoname,
+        name: examplename,
         thumb: `${embed_url}/thumbnail.webp`,
         embed_url,
         website_url,
-        isNew: NEW_DEMOS.has(demoname),
+        isNew: NEW_EXAMPLES.has(examplename),
       };
     });
 }

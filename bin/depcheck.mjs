@@ -12,7 +12,7 @@ import depcheck from "depcheck";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const workspacesDir = path.join(__dirname, "..", "demos");
+const workspacesDir = path.join(__dirname, "..", "examples");
 
 const options = {
   ignorePatterns: ["dist", "build"],
@@ -65,7 +65,7 @@ async function checkAllWorkspaces() {
   for (const [workspace, deps] of Object.entries(workspaceUnusedDeps)) {
     if (deps.length > 0) {
       hasUnusedDeps = true;
-      const uninstallCommand = `pnpm remove ${deps.join(" ")} --filter @demo/${workspace}`;
+      const uninstallCommand = `pnpm remove ${deps.join(" ")} --filter @example/${workspace}`;
       console.log(`\n$ ${uninstallCommand}`);
     }
   }

@@ -1,22 +1,22 @@
-index: [demos](demos)
+index: [examples](examples)
 
-To use a given [`basic-demo`](demos/basic-demo) as a template for a new
+To use a given [`basic-example`](examples/basic-example) as a template for a new
 `myproject`:
 
 ```sh
-$ npx degit pmndrs/examples/demos/basic-demo myproject
+$ npx degit pmndrs/examples/examples/basic-example myproject
 $ code myproject
 ```
 
-## Demo metadata
+## Example metadata
 
-Every demo has a `pmndrs.json` file containing the catalog metadata used by the
+Every example has a `pmndrs.json` file containing the catalog metadata used by the
 website:
 
 ```json
 {
   "$schema": "../../schemas/pmndrs.schema.json",
-  "title": "Basic Demo",
+  "title": "Basic Example",
   "description": "Shows how to form self-contained components with their own state and user interaction.",
   "tags": ["interaction", "pointer-events"],
   "authors": [],
@@ -27,7 +27,7 @@ website:
 ```
 
 Use package names for `libraries`; each entry must also be a dependency of the
-demo. `publishedAt` is optional and uses `YYYY-MM-DD` when the original
+example. `publishedAt` is optional and uses `YYYY-MM-DD` when the original
 publication date is known. Add externally sourced models, textures, fonts,
 audio, and other assets to `assets` with their creator, source, and license when
 available.
@@ -73,7 +73,7 @@ Then `npx serve out`.
 
 This will:
 
-1. execute `^build2` which will `vite build` each `demos/*` with:
+1. execute `^build2` which will `vite build` each `examples/*` with:
 
 - a `--base` set to `${BASE_PATH}/${app_name}`
 - a custom vite `--config`, whith a `monkey()` plugin that will:

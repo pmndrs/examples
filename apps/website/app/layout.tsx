@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
-import { getDemos } from "@/lib/helper";
+import { getExamples } from "@/lib/helper";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 import { builder } from "material-theme-builder";
 
 const inter = Inter({ subsets: ["latin"] });
-const demos = getDemos();
+const examples = getExamples();
 
 /**
  * The one hex the whole palette hangs off -- poimandres' signature mint.
@@ -58,7 +58,7 @@ export default function RootLayout({
           as `--sidebar-width`, which the component writes inline, so a media
           query can only reach it through a variable like this one; `--main-p`
           is `main`'s padding below, and so the whole of the clear space
-          between the rail and the demo, which the Show/Hide toggle straddles. */}
+          between the rail and the example, which the Show/Hide toggle straddles. */}
       <body
         className={cn(
           inter.className,
@@ -86,11 +86,11 @@ export default function RootLayout({
               (() => {
                 const storageKey = "nav-collapsed";
                 const parts = window.location.pathname.split("/").filter(Boolean);
-                const demosIndex = parts.indexOf("demos");
-                const hasDemoSelected = demosIndex !== -1 && !!parts[demosIndex + 1];
+                const examplesIndex = parts.indexOf("examples");
+                const hasExampleSelected = examplesIndex !== -1 && !!parts[examplesIndex + 1];
                 const nav = new URLSearchParams(window.location.search).get("nav");
                 const collapsed =
-                  !hasDemoSelected ? false : nav === "closed" ? true : nav === "open" ? false : localStorage.getItem(storageKey) === "1";
+                  !hasExampleSelected ? false : nav === "closed" ? true : nav === "open" ? false : localStorage.getItem(storageKey) === "1";
                 document.documentElement.toggleAttribute("data-nav-collapsed", collapsed);
               })();
             `,
@@ -103,7 +103,7 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          <Nav demos={demos} />
+          <Nav examples={examples} />
           <main className="grid h-dvh min-w-0 flex-1 place-items-center overflow-hidden p-(--main-p)">
             {children}
           </main>

@@ -17,11 +17,11 @@ const ITEMS = "a[href], button:not([disabled])";
  *
  * Every item but one carries `tabindex="-1"`, so the whole group is a single
  * stop in the page's tab sequence; the arrow keys move focus within it and
- * take the `0` along. Without it the demo list is ~160 consecutive tab stops
- * between the filter row and everything after it, and the demo bar is five.
+ * take the `0` along. Without it the example list is ~160 consecutive tab stops
+ * between the filter row and everything after it, and the example bar is five.
  *
- * The entry point is whichever item is `aria-current="page"` — for the demo
- * list, the demo you are looking at — and otherwise the first.
+ * The entry point is whichever item is `aria-current="page"` — for the example
+ * list, the example you are looking at — and otherwise the first.
  *
  * Reads the DOM rather than taking the items as an argument: at both call
  * sites the item is rendered by something else (`Item asChild` around a
@@ -46,7 +46,7 @@ export function useRovingTabIndex<T extends HTMLElement>(
   /* Deliberately no dependency array. The item set is whatever the last
      render left in the DOM, so the tabbable one has to be re-picked just as
      often — which is also what keeps this right when the list is filtered
-     down to nothing and back, or when the current demo changes. Reading the
+     down to nothing and back, or when the current example changes. Reading the
      `0` back out of the DOM rather than remembering it in a ref is what makes
      that idempotent: a re-render on its own moves nothing. */
   useEffect(() => {
@@ -83,7 +83,7 @@ export function useRovingTabIndex<T extends HTMLElement>(
 
     /* Clamped rather than wrapped, and the key is swallowed either way: at the
        ends these are the arrows the scroller would otherwise act on, and 160
-       demos is far enough that ArrowUp on the first landing on the last would
+       examples is far enough that ArrowUp on the first landing on the last would
        read as a glitch rather than as a shortcut. */
     event.preventDefault();
     to = Math.min(Math.max(to, 0), list.length - 1);
