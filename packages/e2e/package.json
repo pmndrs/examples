@@ -19,7 +19,7 @@
     "@babel/types": "^7.25.2",
     "ast-types": "^0.16.1",
     "minimist": "^1.2.8",
-    "recast": "^0.23.9",
+    "recast": "^0.23.12",
     "seedrandom": "^3.0.5"
   }
 }
