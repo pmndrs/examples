@@ -1,11 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-/* The m3 palette -- `--md-sys-color-*` and `--md-ref-palette-*`, light in
-   `:root` and dark in `.dark`. Written by `bin/gen-mcu-css.mjs`, which both
-   `dev` and `build` run first, so it is compiled into the stylesheet and
-   reaches the prerendered HTML. */
-@import "./mcu.generated.css";
 
 /* Automatic source detection doesn't reach this app (pnpm workspace, and the
    route folder is bracketed), so the sources are declared explicitly. */
@@ -138,10 +133,11 @@
 }
 
 /* Every shadcn token, on the matching Material Design 3 role -- the mapping
-   from https://github.com/abernier/material-theme-builder#shadcn. Same
-   specificity as the two blocks above, so it only wins by coming after them:
-   keep it last. Those blocks are shadcn's stock neutral, kept as the record of
-   what each token was before m3 took it over. */
+   from https://github.com/abernier/material-theme-builder#shadcn. The
+   `--md-sys-color-*` half is emitted by `app/layout.tsx`. Same specificity as
+   the two blocks above, so it only wins by coming after them: keep it last.
+   Those blocks are shadcn's stock neutral, kept as the record of what each
+   token was before m3 took it over. */
 :root,
 .dark {
   --background: var(--md-sys-color-surface);

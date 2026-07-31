@@ -3,10 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "gen:mcu": "node bin/gen-mcu-css.mjs",
-    "dev": "pnpm run gen:mcu && next dev",
+    "dev": "next dev",
     "dev2": "pnpm run dev",
-    "build": "pnpm run gen:mcu && NODE_ENV=production next build",
+    "build": "NODE_ENV=production next build",
     "build3": "pnpm run build",
     "start": "next start",
     "lint": "next lint"
@@ -173,6 +172,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.28.0",
+    "material-theme-builder": "^2.2.0",
     "next": "15.5.22",
     "next-themes": "^0.4.6",
     "radix-ui": "^1.6.7",
@@ -192,7 +192,6 @@
     "@types/react-dom": "19.2.3",
     "eslint": "^8.57.0",
     "eslint-config-next": "15.5.22",
-    "material-theme-builder": "^2.1.2",
     "postcss": "^8",
     "tailwindcss": "^4.3.3",
     "typescript": "^5.5.4"

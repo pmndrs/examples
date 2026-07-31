@@ -6,9 +6,36 @@ import { getDemos } from "@/lib/helper";
 import { Style } from "@/components/Style";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "@/components/ui/sonner";
+import { builder } from "material-theme-builder";
 
 const inter = Inter({ subsets: ["latin"] });
 const demos = getDemos();
+
+/**
+ * The one hex the whole palette hangs off -- poimandres' signature mint.
+ * Material Color Utilities derives every `--md-sys-color-*` role from it, and
+ * `globals.css` hands those on to shadcn's tokens. `scheme`, `contrast`, core
+ * colour overrides and `customColors` all go in the second argument.
+ */
+const MCU_SOURCE = "#5de4c7";
+
+/**
+ * `:root { <light roles> } .dark { <dark roles> }` -- the shape next-themes'
+ * `attribute="class"` already switches on, so the two need nothing wiring them
+ * together.
+ *
+ * Built here rather than through the package's `<Mcu>`: this file is a server
+ * component, so the palette is computed once at build time and ships inside
+ * the prerendered HTML, with nothing left to do on hydration.
+ *
+ * The import still costs the client ~32 kB gzip, which it shouldn't: the
+ * package's main entry re-exports its `"use client"` module, and Next
+ * registers every export of one it sees, so `Mcu` and the colour utilities end
+ * up in the browser bundle even though nothing renders them. A React-free
+ * subpath is queued upstream (abernier/material-theme-builder#160); switch to
+ * `material-theme-builder/builder` once it ships and the 32 kB go away.
+ */
+const mcuCss = builder(MCU_SOURCE, { scheme: "tonalSpot" }).toCss();
 
 export const metadata: Metadata = {
   title: "pmndrs examples",
@@ -23,6 +50,14 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
+        {/* `href` + `precedence` is what gets React to hoist this into <head>.
+            Safe here because the palette is a build-time constant: React
+            treats a hoisted sheet as immutable and keyed by `href`. */}
+        <style
+          href="mcu"
+          precedence="high"
+          dangerouslySetInnerHTML={{ __html: mcuCss }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `
