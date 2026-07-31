@@ -467,6 +467,9 @@ importers:
       '@demo/trails':
         specifier: workspace:*
         version: link:../../demos/trails
+      '@demo/trails-r3f-9.7.0':
+        specifier: workspace:*
+        version: link:../../demos/trails-r3f-9.7.0
       '@demo/transformcontrols-and-makedefault':
         specifier: workspace:*
         version: link:../../demos/transformcontrols-and-makedefault
