@@ -57,7 +57,7 @@ function Svg({ url }) {
 
 function App() {
   return (
-    <Canvas frameloop="demand" orthographic camera={{ position: [0, 0, 50], zoom: 2, up: [0, 0, 1], far: 10000 }}>
+    <Canvas legacy frameloop="demand" orthographic camera={{ position: [0, 0, 50], zoom: 2, up: [0, 0, 1], far: 10000 }}>
       <Suspense fallback={null}>
         <Svg url={map} />
       </Suspense>
