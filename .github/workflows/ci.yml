@@ -80,7 +80,7 @@ jobs:
         env:
           BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
           BASE_URL: ${{ steps.configurepages.outputs.base_url }}
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         if: ${{ github.event_name != 'pull_request' && !inputs.update_snapshots }}
         with:
           path: ./out${{ steps.configurepages.outputs.base_path }}
