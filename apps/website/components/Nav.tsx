@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ComponentProps,
+  CSSProperties,
   ElementRef,
   useCallback,
   useEffect,
@@ -12,13 +13,19 @@ import {
   useState,
 } from "react";
 import { useParams } from "next/navigation";
-import { ListFilterIcon, SearchIcon, XIcon } from "lucide-react";
+import {
+  ChevronLeftIcon,
+  ListFilterIcon,
+  SearchIcon,
+  XIcon,
+} from "lucide-react";
 
 import { getLibraryLabel, getLibraryPopularity } from "@/const/libraries";
 import type { Demo } from "@/lib/helper";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { ButtonGroup } from "@/components/ui/button-group";
 import {
   Empty,
   EmptyContent,
@@ -42,7 +49,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Style } from "./Style";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarHeader,
+  SidebarProvider,
+  useSidebar,
+} from "@/components/ui/sidebar";
 
 const STORAGE_KEY = "nav-collapsed";
 const MAX_TAGS = 4;
@@ -50,18 +63,6 @@ const MAX_TAGS = 4;
    it reserves it for clearing the selection. The sentinel is what the option
    carries; the state stays "". */
 const ALL_LIBRARIES = "__all__";
-
-function getPreferredCollapsed() {
-  const nav = new URLSearchParams(window.location.search).get("nav");
-  if (nav === "closed") return true;
-  if (nav === "open") return false;
-
-  return localStorage.getItem(STORAGE_KEY) === "1";
-}
-
-function syncCollapsedAttr(collapsed: boolean) {
-  document.documentElement.toggleAttribute("data-nav-collapsed", collapsed);
-}
 
 function hasInteractiveFocus(element: Element | null) {
   return (
@@ -75,14 +76,96 @@ function hasInteractiveFocus(element: Element | null) {
   );
 }
 
+/**
+ * The rail's own handle, deliberately a sibling of `<Sidebar>` rather than a
+ * child: once the panel is off-canvas the only thing left on screen is this
+ * pill, so it has to live in the `<SidebarProvider>` wrapper and straddle the
+ * panel's edge from there.
+ */
+function NavToggle() {
+  const { open, openMobile, isMobile, toggleSidebar } = useSidebar();
+
+  /* Under `md` the panel is a sheet with its own open state, and `open` still
+     holds whatever the rail was left at. `toggleSidebar` already picks the
+     right one; the label has to agree with it. */
+  const shown = isMobile ? openMobile : open;
+
+  const [ready, setReady] = useState(false);
+  const [near, setNear] = useState(false);
+
+  useEffect(() => setReady(true), []);
+
+  /* Collapsed, the pill mostly tucks itself into the page edge; bringing the
+     pointer over there nudges it back out. */
+  useEffect(() => {
+    if (shown) {
+      setNear(false);
+      return;
+    }
+
+    const onMove = (event: MouseEvent) => setNear(event.clientX < 120);
+    window.addEventListener("mousemove", onMove);
+    return () => window.removeEventListener("mousemove", onMove);
+  }, [shown]);
+
+  return (
+    <ButtonGroup
+      orientation="vertical"
+      className={cn(
+        /* The group is what the page positions now, and it carries the pill's
+           box: `inset-y-0` + `my-auto` centres it without a `-translate-y-1/2`
+           that would fight the button's own `active:translate-y-px`. Above the
+           panel's `z-10`, since the pill overlaps its edge. */
+        "absolute inset-y-0 right-0 z-20 my-auto h-22 w-11 transition-transform",
+        shown
+          ? /* Right edge halfway across the gutter between the rail and the
+               demo — which is `main`'s padding, since the two are flush. Half
+               its own width would put the edge at 22px, past the gutter's
+               midpoint and nearly onto the demo. The collapsed offsets below
+               are a different measure: there the wrapper has no width, so they
+               are just how much sliver is left against the page edge. */
+            "translate-x-[calc(var(--main-p)/2)]"
+          : near
+            ? "translate-x-3/4"
+            : "translate-x-1/4",
+      )}
+    >
+      <Button
+        variant="secondary"
+        size="xs"
+        onClick={toggleSidebar}
+        aria-label={shown ? "Hide demos" : "Show demos"}
+        aria-pressed={shown}
+        /* No `rounded-full` here: the group forces `rounded-b-4xl` on its last
+           child, and a browser scales *every* corner by the same factor once
+           one side overflows — 9999px on top against 26px below would collapse
+           the bottom pair to nothing. At 44px wide the stock 4xl is already
+           past the 22px cap, so it draws the very same pill. */
+        className="size-full flex-col gap-1.5 px-0 shadow-lg"
+      >
+        <ChevronLeftIcon
+          className={cn("transition-transform", !shown && "rotate-180")}
+        />
+        <span className="tracking-wider uppercase [writing-mode:vertical-rl]">
+          {/* Blank until mounted: the collapsed state comes out of
+              `localStorage`, so before then the word would be a coin flip. */}
+          {ready ? (shown ? "hide" : "show") : ""}
+        </span>
+      </Button>
+    </ButtonGroup>
+  );
+}
+
 export default function Nav({
   demos,
+  className,
+  style,
   ...props
-}: { demos: Demo[] } & ComponentProps<"nav">) {
+}: { demos: Demo[] } & ComponentProps<"div">) {
   const ulRef = useRef<ElementRef<"ul">>(null);
   const searchRef = useRef<HTMLInputElement>(null);
 
-  const [collapsed, setCollapsed] = useState(false);
+  const [open, setOpenState] = useState(true);
   const [ready, setReady] = useState(false);
   const [library, setLibrary] = useState("");
   const [libraryOpen, setLibraryOpen] = useState(false);
@@ -90,6 +173,11 @@ export default function Nav({
   const [searchOpen, setSearchOpen] = useState(false);
 
   const searchVisible = searchOpen || search !== "";
+
+  const setOpen = useCallback((next: boolean) => {
+    setOpenState(next);
+    localStorage.setItem(STORAGE_KEY, next ? "0" : "1");
+  }, []);
 
   const libraryOptions = useMemo(() => {
     const popularityByLabel = new Map<string, number>();
@@ -157,11 +245,7 @@ export default function Nav({
 
   const focusSearch = useCallback(
     (select = false) => {
-      if (collapsed) {
-        setCollapsed(false);
-        localStorage.setItem(STORAGE_KEY, "0");
-      }
-
+      setOpen(true);
       setSearchOpen(true);
 
       requestAnimationFrame(() => {
@@ -169,7 +253,7 @@ export default function Nav({
         if (select) searchRef.current?.select();
       });
     },
-    [collapsed],
+    [setOpen],
   );
 
   const dismissSearch = useCallback(() => {
@@ -236,26 +320,23 @@ export default function Nav({
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [dismissSearch, focusSearch, libraryOpen, search, searchVisible]);
 
-  const toggle = useCallback(() => {
-    setCollapsed((prev) => {
-      const next = !prev;
-      localStorage.setItem(STORAGE_KEY, next ? "1" : "0");
-      return next;
-    });
-  }, []);
-
   const { demoname } = useParams();
 
+  /* `data-nav-collapsed` is put on <html> before first paint by the inline
+     script in `app/layout.tsx` — the only way a statically exported page can
+     know about `localStorage` that early. React picks the state up here. */
   useEffect(() => {
-    const next = document.documentElement.hasAttribute("data-nav-collapsed");
-    setCollapsed(next);
+    setOpenState(!document.documentElement.hasAttribute("data-nav-collapsed"));
     setReady(true);
   }, []);
 
+  /* …and hands the attribute back once that state has rendered: from here on
+     the panel is React's, and a stale attribute would fight it (see the
+     pre-paint rule in `app/globals.css`). */
   useEffect(() => {
     if (!ready) return;
-    syncCollapsedAttr(collapsed);
-  }, [collapsed, ready]);
+    document.documentElement.removeAttribute("data-nav-collapsed");
+  }, [ready]);
 
   const firstRef = useRef(true);
   useEffect(() => {
@@ -273,260 +354,32 @@ export default function Nav({
     firstRef.current = false;
   }, [demoname, filteredDemos]);
 
-  const navRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!collapsed) {
-      navRef.current?.removeAttribute("data-near");
-      return;
-    }
-    const onMove = (e: MouseEvent) => {
-      if (e.clientX < 120) navRef.current?.setAttribute("data-near", "");
-      else navRef.current?.removeAttribute("data-near");
-    };
-    window.addEventListener("mousemove", onMove);
-    return () => window.removeEventListener("mousemove", onMove);
-  }, [collapsed]);
-
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === "[" && e.metaKey) toggle();
-    };
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
-  }, [toggle]);
-
   return (
-    <div ref={navRef} className="Nav" data-collapsed={collapsed || undefined}>
-      <Style
-        css={`
-          @scope {
-            :scope {
-              position: relative;
-              width: var(--sidebar-w);
-              flex-shrink: 0;
-              height: 100dvh;
-              overflow: visible;
-              z-index: 2;
-              margin-inline-start: 0;
-              transition: margin-inline-start 1078ms var(--motion-curve);
-              will-change: margin-inline-start;
-            }
-
-            :scope[data-collapsed] {
-              margin-inline-start: calc(-1 * var(--sidebar-w));
-            }
-
-            html[data-nav-collapsed] .Nav {
-              margin-inline-start: calc(-1 * var(--sidebar-w));
-            }
-
-            nav {
-              height: 100%;
-              overflow-y: auto;
-              overscroll-behavior: contain;
-              scrollbar-gutter: stable;
-              opacity: 1;
-              transition: opacity 0.15s linear;
-            }
-
-            :scope[data-collapsed] nav {
-              opacity: 0;
-              pointer-events: none;
-            }
-
-            html[data-nav-collapsed] .Nav nav {
-              opacity: 0;
-              pointer-events: none;
-            }
-
-            .filters {
-              position: sticky;
-              top: 0;
-              z-index: 2;
-              padding: 0.65rem 0.75rem 0.35rem 1rem;
-              /* This is the page background, fading out under the scrolling
-                 list — it has to follow --background. */
-              background: linear-gradient(var(--background) 75%, transparent);
-            }
-
-            .filterRow {
-              display: flex;
-              align-items: center;
-              gap: 0.4rem;
-            }
-
-            .filterRow[data-covered] {
-              visibility: hidden;
-            }
-
-            @keyframes search-in {
-              from {
-                opacity: 0;
-                translate: 0 -0.35rem;
-              }
-            }
-
-            /* The search field is a shadcn <InputGroup>; all this block may
-               hold is the geometry that lifts it over the filter row, plus the
-               width: auto that keeps the component's own w-full from fighting
-               the left/right insets. Anything else here is unlayered and would
-               outrank the component's utilities. */
-            .search {
-              position: absolute;
-              inset: 0.65rem 0.75rem auto 1rem;
-              z-index: 3;
-              width: auto;
-              animation: search-in 200ms ease;
-            }
-
-            .srOnly {
-              position: absolute;
-              width: 1px;
-              height: 1px;
-              padding: 0;
-              margin: -1px;
-              overflow: hidden;
-              clip: rect(0, 0, 0, 0);
-              white-space: nowrap;
-              border: 0;
-            }
-
-            .toggle {
-              position: absolute;
-              top: 50%;
-              right: 0;
-              translate: 50% -50%;
-              z-index: 10;
-
-              width: 2.75rem;
-              height: 5.5rem;
-              border-radius: 999px;
-              background: rgb(255 255 255 / 0.92);
-              border: 1px solid #d4d4d4;
-              cursor: pointer;
-              display: grid;
-              place-items: center;
-              color: #666;
-              transition:
-                background 0.15s ease,
-                color 0.15s ease,
-                box-shadow 0.15s ease,
-                translate 0.25s ease;
-              box-shadow: 0 10px 30px rgb(0 0 0 / 0.12);
-
-              &:hover {
-                background: #f5f5f5;
-                color: #222;
-                box-shadow: 0 14px 36px rgb(0 0 0 / 0.16);
-              }
-            }
-
-            .toggleInner {
-              display: grid;
-              gap: 0.35rem;
-              justify-items: center;
-            }
-
-            .toggleLabel {
-              font-size: 0.6rem;
-              line-height: 1;
-              letter-spacing: 0.08em;
-              text-transform: uppercase;
-              writing-mode: vertical-rl;
-              text-orientation: mixed;
-            }
-
-            .toggle svg {
-              width: 0.7rem;
-              height: 0.7rem;
-              transform: rotate(0deg);
-              transition: transform 1078ms var(--motion-curve);
-            }
-
-            :scope[data-collapsed] .toggle {
-              translate: 25% -50%;
-            }
-
-            html[data-nav-collapsed] .Nav .toggle {
-              translate: 25% -50%;
-            }
-
-            :scope[data-collapsed][data-near] .toggle {
-              translate: 75% -50%;
-            }
-
-            html[data-nav-collapsed] .Nav[data-near] .toggle {
-              translate: 75% -50%;
-            }
-
-            :scope[data-collapsed] .toggle svg {
-              transform: rotate(180deg);
-            }
-
-            html[data-nav-collapsed] .Nav .toggle svg {
-              transform: rotate(180deg);
-            }
-
-            ul {
-              padding-inline-start: unset;
-              list-style: none;
-              padding: 0.4rem 0.75rem 1rem 1rem;
-              display: flex;
-              flex-direction: column;
-              gap: 0.75rem;
-              margin: 0;
-            }
-
-            li {
-              padding-inline-start: unset;
-              transform: scale(1);
-              transition: transform 1078ms var(--motion-curve);
-            }
-
-            li:active {
-              transform: scale(0.97);
-            }
-
-            /* The demo cards are shadcn <Item>/<Badge>; they style themselves
-               with Tailwind. Nothing scoped here may target them — this block
-               is unlayered and would outrank every utility. */
-          }
-        `}
-      />
-
-      <button
-        className="toggle"
-        onClick={toggle}
-        aria-label={collapsed ? "Show demos" : "Hide demos"}
-        aria-pressed={!collapsed}
-      >
-        <span className="toggleInner">
-          <svg
-            viewBox="0 0 6 10"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M5 1L1 5L5 9"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <span className="toggleLabel">
-            {ready ? (collapsed ? "show" : "hide") : ""}
-          </span>
-        </span>
-      </button>
-
-      <nav {...props}>
-        <div className="filters">
-          {searchVisible && (
-            /* Opaque: this floats over the filter row, and the sticky
-               `.filters` gradient behind it goes transparent at the bottom. */
-            <InputGroup className="search bg-background">
+    <SidebarProvider
+      open={open}
+      onOpenChange={setOpen}
+      /* The provider writes `--sidebar-width` inline, so the site's own
+         responsive rail width has to arrive the same way — a class would lose
+         to the inline style. `w-auto` undoes the provider's `w-full`, which
+         assumes it wraps the page; here it only wraps the rail and its
+         handle. */
+      style={
+        { "--sidebar-width": "var(--sidebar-w)", ...style } as CSSProperties
+      }
+      className={cn("relative w-auto shrink-0", className)}
+      {...props}
+    >
+      {/* The rail paints the same colour as the page, so the component's own
+          divider is the only thing left drawing a seam down the middle of a
+          flush surface. Same variant as the rule it cancels, so `cn`'s merge
+          drops that one outright rather than out-specifying it. */}
+      <Sidebar className="group-data-[side=left]:border-r-0">
+        {/* 16px down both edges, in place of the components' stock 8px. It has
+            to be set on the two children: `className` here lands on the fixed
+            container, and the panel's background is painted a level deeper. */}
+        <SidebarHeader className="px-4">
+          {searchVisible ? (
+            <InputGroup className="animate-in duration-200 fade-in slide-in-from-top-1">
               {/* Addons come after the control in the DOM — they focus it on
                   click and take their visual side from `align`. */}
               <InputGroupInput
@@ -557,133 +410,188 @@ export default function Nav({
                 </InputGroupButton>
               </InputGroupAddon>
             </InputGroup>
-          )}
-          <div className="filterRow" data-covered={searchVisible || undefined}>
-            <Select
-              open={libraryOpen}
-              onOpenChange={setLibraryOpen}
-              value={library || ALL_LIBRARIES}
-              onValueChange={(value) =>
-                setLibrary(value === ALL_LIBRARIES ? "" : value)
-              }
-            >
-              <SelectTrigger
-                className="min-w-0 flex-1"
-                aria-label="Filter examples by library"
+          ) : (
+            <div className="flex items-center gap-2">
+              <Select
+                open={libraryOpen}
+                onOpenChange={setLibraryOpen}
+                value={library || ALL_LIBRARIES}
+                onValueChange={(value) =>
+                  setLibrary(value === ALL_LIBRARIES ? "" : value)
+                }
               >
-                <ListFilterIcon className="text-muted-foreground" />
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectItem value={ALL_LIBRARIES}>All libraries</SelectItem>
-                  {libraryOptions.map((option) => (
-                    <SelectItem key={option} value={option}>
-                      {option}
-                    </SelectItem>
-                  ))}
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-            <Button
-              type="button"
-              variant="outline"
-              size="icon"
-              onClick={() => focusSearch()}
-              aria-label="Search examples"
-              aria-keyshortcuts="Meta+F Control+F Meta+K Control+K"
-              title="Search examples (⌘F)"
-            >
-              <SearchIcon />
-            </Button>
-          </div>
-          <span id="search-results" className="srOnly" aria-live="polite">
-            {filteredDemos.length} examples
-          </span>
-        </div>
-        <ul ref={ulRef} id="demo-list">
-          {filteredDemos.map(({ name, title, thumb, isNew, tags }) => (
-            <li key={thumb} data-demo={name}>
-              <Item
-                asChild
-                variant="outline"
-                className={cn(
-                  "relative overflow-hidden bg-muted p-0",
-                  /* `accent` is the same value as `muted` under the neutral
-                     base colour, so the selected card reads through the
-                     paired `accent-foreground` ring. */
-                  demoname === name &&
-                    "bg-accent ring-2 ring-accent-foreground",
-                )}
-              >
-                <Link
-                  href={`/demos/${name}`}
-                  aria-current={demoname === name ? "page" : undefined}
-                  className="no-underline"
+                <SelectTrigger
+                  className="min-w-0 flex-1"
+                  aria-label="Filter examples by library"
                 >
-                  {/* Full-bleed: the media is the only thing in the box, so the
-                      card ends up with the thumbnail's aspect ratio. */}
-                  <ItemMedia
-                    variant="image"
-                    className="relative aspect-video size-auto w-full rounded-none"
-                  >
-                    <Image
-                      src={thumb}
-                      fill
-                      sizes="(min-width: 640px) 260px, 200px"
-                      alt={title}
-                    />
-                  </ItemMedia>
-                  {isNew && (
-                    <Badge
-                      variant="secondary"
-                      className="absolute top-1.5 right-1.5"
-                    >
-                      New
-                    </Badge>
-                  )}
-                  {tags.length > 0 && (
-                    <ItemFooter className="absolute inset-x-0 bottom-0">
-                      <ScrollArea className="w-full">
-                        {/* Padding sits inside the viewport so the scrollable
-                            strip itself runs edge to edge. */}
-                        <div className="flex w-max gap-1 p-1.5">
-                          {tags.slice(0, MAX_TAGS).map((tag) => (
-                            <Badge key={tag}>{tag}</Badge>
-                          ))}
-                        </div>
-                        <ScrollBar orientation="horizontal" />
-                      </ScrollArea>
-                    </ItemFooter>
-                  )}
-                </Link>
-              </Item>
-            </li>
-          ))}
-        </ul>
-        {filteredDemos.length === 0 && (
-          /* Stock padding is p-12, which leaves nothing to read in a rail this
-             narrow. */
-          <Empty className="p-6">
-            <EmptyHeader>
-              <EmptyTitle>No matching examples</EmptyTitle>
-            </EmptyHeader>
-            <EmptyContent>
+                  <ListFilterIcon className="text-muted-foreground" />
+                  <SelectValue />
+                </SelectTrigger>
+                {/* `item-aligned` — this registry's default, where Radix lays
+                    the menu over the trigger with the selected option on top
+                    of it — cannot do that for a trigger sitting 26px from the
+                    top of the window. It clamps the menu and makes up the
+                    difference by scrolling the viewport, here by the 4px of
+                    `SelectGroup` padding above the first option. That is a
+                    non-zero `scrollTop`, which is the whole of what mounts
+                    `SelectScrollUpButton`: an arrow offering to scroll back to
+                    an option already in view. `popper` anchors the menu below
+                    the trigger instead and never pre-scrolls, so the arrows
+                    are left to mean what they say. It also gives
+                    `--radix-select-content-available-height` a value, which
+                    the component's own `max-h-` reads and item-aligned never
+                    sets. */}
+                <SelectContent position="popper">
+                  <SelectGroup>
+                    <SelectItem value={ALL_LIBRARIES}>All libraries</SelectItem>
+                    {libraryOptions.map((option) => (
+                      <SelectItem key={option} value={option}>
+                        {option}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
               <Button
                 type="button"
                 variant="outline"
-                size="sm"
-                onClick={() => {
-                  dismissSearch();
-                  setLibrary("");
-                }}
+                size="icon"
+                onClick={() => focusSearch()}
+                aria-label="Search examples"
+                aria-keyshortcuts="Meta+F Control+F Meta+K Control+K"
+                title="Search examples (⌘F)"
               >
-                Clear filters
+                <SearchIcon />
               </Button>
-            </EmptyContent>
-          </Empty>
-        )}
-      </nav>
-    </div>
+            </div>
+          )}
+          <span id="search-results" className="sr-only" aria-live="polite">
+            {filteredDemos.length} examples
+          </span>
+        </SidebarHeader>
+
+        {/* `scroll-fade` goes on the scroller, not on the header it softens:
+            the utility masks the element it sits on and reads that element's
+            own scroll position. It reveals each edge over the first 96px of
+            travel, so a list sitting at the top is not faded into its own
+            first card. Without scroll-driven-animation support the two fades
+            are simply always on. */}
+        <SidebarContent className="scroll-fade px-4">
+          <nav aria-label="Examples">
+            <ul
+              ref={ulRef}
+              id="demo-list"
+              /* The block padding is not decoration: the selected card's ring
+                 sits outside its border box, and the scroller would clip it on
+                 the first and last item without it. The inline half of it moved
+                 up to `SidebarContent`, so the header lines up with the list. */
+              className="flex flex-col gap-3 py-2"
+            >
+              {filteredDemos.map(({ name, title, thumb, isNew, tags }) => (
+                <li
+                  key={thumb}
+                  data-demo={name}
+                  className="transition-transform active:scale-97"
+                >
+                  <Item
+                    asChild
+                    variant="outline"
+                    className={cn(
+                      "relative overflow-hidden bg-muted p-0",
+                      /* `accent` is the same value as `muted` under the neutral
+                         base colour, so the selected card reads through the
+                         paired `accent-foreground` ring. */
+                      demoname === name &&
+                        "bg-accent ring-2 ring-accent-foreground",
+                    )}
+                  >
+                    <Link
+                      href={`/demos/${name}`}
+                      aria-current={demoname === name ? "page" : undefined}
+                      className="no-underline"
+                    >
+                      {/* Full-bleed: the media is the only thing in the box, so
+                          the card ends up with the thumbnail's aspect ratio. */}
+                      <ItemMedia
+                        variant="image"
+                        className="relative aspect-video size-auto w-full rounded-none"
+                      >
+                        {/* Thumbnails are served by each demo, not by this
+                            site, so in dev every card but the running one
+                            404s — and a built site can still meet a demo
+                            whose thumbnail was never generated. A broken
+                            `img` stops being a replaced element, which is
+                            exactly when its pseudo-elements start rendering:
+                            `after` covers the browser's glyph with the card's
+                            own colour and puts the alt text back as text. On
+                            an image that loads, nothing of this exists. */}
+                        <Image
+                          src={thumb}
+                          fill
+                          sizes="(min-width: 640px) 260px, 200px"
+                          alt={title}
+                          className="after:absolute after:inset-0 after:grid after:place-items-center after:bg-muted after:px-3 after:text-center after:text-xs after:text-muted-foreground after:content-[attr(alt)]"
+                        />
+                      </ItemMedia>
+                      {isNew && (
+                        <Badge
+                          variant="secondary"
+                          className="absolute top-1.5 right-1.5"
+                        >
+                          New
+                        </Badge>
+                      )}
+                      {tags.length > 0 && (
+                        <ItemFooter className="absolute inset-x-0 bottom-0">
+                          {/* Same fade as the demo list, on the other axis.
+                              It has to be aimed at the viewport: `ScrollArea`
+                              puts its `className` on the root, and the root is
+                              not what scrolls. */}
+                          <ScrollArea className="w-full [&>[data-slot=scroll-area-viewport]]:scroll-fade-x">
+                            {/* Padding sits inside the viewport so the
+                                scrollable strip itself runs edge to edge. */}
+                            <div className="flex w-max gap-1 p-1.5">
+                              {tags.slice(0, MAX_TAGS).map((tag) => (
+                                <Badge key={tag}>{tag}</Badge>
+                              ))}
+                            </div>
+                            <ScrollBar orientation="horizontal" />
+                          </ScrollArea>
+                        </ItemFooter>
+                      )}
+                    </Link>
+                  </Item>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          {filteredDemos.length === 0 && (
+            /* Stock padding is p-12, which leaves nothing to read in a rail
+               this narrow — and the inline half now comes from the scroller. */
+            <Empty className="py-6">
+              <EmptyHeader>
+                <EmptyTitle>No matching examples</EmptyTitle>
+              </EmptyHeader>
+              <EmptyContent>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    dismissSearch();
+                    setLibrary("");
+                  }}
+                >
+                  Clear filters
+                </Button>
+              </EmptyContent>
+            </Empty>
+          )}
+        </SidebarContent>
+      </Sidebar>
+
+      <NavToggle />
+    </SidebarProvider>
   );
 }
