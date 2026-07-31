@@ -281,10 +281,8 @@ export function Info({ demo }: { demo: Demo }) {
       />
 
       <button
-        {...({
-          popovertarget: "demo-info-panel",
-          popovertargetaction: "toggle",
-        } as const)}
+        popoverTarget="demo-info-panel"
+        popoverTargetAction="toggle"
         className="trigger"
         aria-expanded={open}
         aria-controls="demo-info-panel"
@@ -296,7 +294,7 @@ export function Info({ demo }: { demo: Demo }) {
       </button>
 
       <div
-        {...({ popover: "auto" } as const)}
+        popover="auto"
         ref={popoverRef}
         id="demo-info-panel"
         className="panel"
