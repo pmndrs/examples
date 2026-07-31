@@ -524,9 +524,6 @@ importers:
       lucide-react:
         specifier: ^1.28.0
         version: 1.28.0(react@19.2.8)
-      material-theme-builder:
-        specifier: ^2.1.2
-        version: 2.1.2(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       next:
         specifier: 15.5.22
         version: 15.5.22(@babel/core@7.29.0(supports-color@7.2.0))(@playwright/test@1.62.0)(babel-plugin-macros@3.1.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -579,6 +576,9 @@ importers:
       eslint-config-next:
         specifier: 15.5.22
         version: 15.5.22(eslint@8.57.1(supports-color@7.2.0))(supports-color@7.2.0)(typescript@5.9.3)
+      material-theme-builder:
+        specifier: ^2.1.2
+        version: 2.1.2(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       postcss:
         specifier: ^8
         version: 8.5.8

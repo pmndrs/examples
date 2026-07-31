@@ -1,6 +1,11 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+/* The m3 palette -- `--md-sys-color-*` and `--md-ref-palette-*`, light in
+   `:root` and dark in `.dark`. Written by `bin/gen-mcu-css.mjs`, which both
+   `dev` and `build` run first, so it is compiled into the stylesheet and
+   reaches the prerendered HTML. */
+@import "./mcu.generated.css";
 
 /* Automatic source detection doesn't reach this app (pnpm workspace, and the
    route folder is bracketed), so the sources are declared explicitly. */
@@ -63,104 +68,113 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* Every shadcn token is a Material Design 3 colour role, per
-   https://github.com/abernier/material-theme-builder#shadcn. The
-   `--md-sys-color-*` side is injected at runtime by `<Mcu>` (app/layout.tsx),
-   so each one keeps shadcn's stock neutral as its `var()` fallback: that is
-   what paints before hydration, and it is the whole theme if `<Mcu>` ever
-   goes away. */
-
 :root {
-  --background: var(--md-sys-color-surface, oklch(1 0 0));
-  --foreground: var(--md-sys-color-on-surface, oklch(0.145 0 0));
-  --card: var(--md-sys-color-surface-container-low, oklch(1 0 0));
-  --card-foreground: var(--md-sys-color-on-surface, oklch(0.145 0 0));
-  --popover: var(--md-sys-color-surface-container-high, oklch(1 0 0));
-  --popover-foreground: var(--md-sys-color-on-surface, oklch(0.145 0 0));
-  --primary: var(--md-sys-color-primary, oklch(0.205 0 0));
-  --primary-foreground: var(--md-sys-color-on-primary, oklch(0.985 0 0));
-  --secondary: var(--md-sys-color-secondary-container, oklch(0.97 0 0));
-  --secondary-foreground: var(
-    --md-sys-color-on-secondary-container,
-    oklch(0.205 0 0)
-  );
-  --muted: var(--md-sys-color-surface-container-highest, oklch(0.97 0 0));
-  --muted-foreground: var(--md-sys-color-on-surface-variant, oklch(0.556 0 0));
-  --accent: var(--md-sys-color-secondary-container, oklch(0.97 0 0));
-  --accent-foreground: var(
-    --md-sys-color-on-secondary-container,
-    oklch(0.205 0 0)
-  );
-  --destructive: var(--md-sys-color-error, oklch(0.577 0.245 27.325));
-  --border: var(--md-sys-color-outline-variant, oklch(0.922 0 0));
-  --input: var(--md-sys-color-outline, oklch(0.922 0 0));
-  --ring: var(--md-sys-color-primary, oklch(0.708 0 0));
-  --chart-1: var(--md-sys-color-primary-fixed, oklch(0.87 0 0));
-  --chart-2: var(--md-sys-color-secondary-fixed, oklch(0.556 0 0));
-  --chart-3: var(--md-sys-color-tertiary-fixed, oklch(0.439 0 0));
-  --chart-4: var(--md-sys-color-primary-fixed-dim, oklch(0.371 0 0));
-  --chart-5: var(--md-sys-color-secondary-fixed-dim, oklch(0.269 0 0));
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
   --radius: 0.625rem;
-  --sidebar: var(--md-sys-color-surface-container-low, oklch(0.985 0 0));
-  --sidebar-foreground: var(--md-sys-color-on-surface, oklch(0.145 0 0));
-  --sidebar-primary: var(--md-sys-color-primary, oklch(0.205 0 0));
-  --sidebar-primary-foreground: var(
-    --md-sys-color-on-primary,
-    oklch(0.985 0 0)
-  );
-  --sidebar-accent: var(--md-sys-color-secondary-container, oklch(0.97 0 0));
-  --sidebar-accent-foreground: var(
-    --md-sys-color-on-secondary-container,
-    oklch(0.205 0 0)
-  );
-  --sidebar-border: var(--md-sys-color-outline-variant, oklch(0.922 0 0));
-  --sidebar-ring: var(--md-sys-color-primary, oklch(0.708 0 0));
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
 }
 
 .dark {
-  --background: var(--md-sys-color-surface, oklch(0.145 0 0));
-  --foreground: var(--md-sys-color-on-surface, oklch(0.985 0 0));
-  --card: var(--md-sys-color-surface-container-low, oklch(0.205 0 0));
-  --card-foreground: var(--md-sys-color-on-surface, oklch(0.985 0 0));
-  --popover: var(--md-sys-color-surface-container-high, oklch(0.205 0 0));
-  --popover-foreground: var(--md-sys-color-on-surface, oklch(0.985 0 0));
-  --primary: var(--md-sys-color-primary, oklch(0.922 0 0));
-  --primary-foreground: var(--md-sys-color-on-primary, oklch(0.205 0 0));
-  --secondary: var(--md-sys-color-secondary-container, oklch(0.269 0 0));
-  --secondary-foreground: var(
-    --md-sys-color-on-secondary-container,
-    oklch(0.985 0 0)
-  );
-  --muted: var(--md-sys-color-surface-container-highest, oklch(0.269 0 0));
-  --muted-foreground: var(--md-sys-color-on-surface-variant, oklch(0.708 0 0));
-  --accent: var(--md-sys-color-secondary-container, oklch(0.269 0 0));
-  --accent-foreground: var(
-    --md-sys-color-on-secondary-container,
-    oklch(0.985 0 0)
-  );
-  --destructive: var(--md-sys-color-error, oklch(0.704 0.191 22.216));
-  --border: var(--md-sys-color-outline-variant, oklch(1 0 0 / 10%));
-  --input: var(--md-sys-color-outline, oklch(1 0 0 / 15%));
-  --ring: var(--md-sys-color-primary, oklch(0.556 0 0));
-  --chart-1: var(--md-sys-color-primary-fixed, oklch(0.87 0 0));
-  --chart-2: var(--md-sys-color-secondary-fixed, oklch(0.556 0 0));
-  --chart-3: var(--md-sys-color-tertiary-fixed, oklch(0.439 0 0));
-  --chart-4: var(--md-sys-color-primary-fixed-dim, oklch(0.371 0 0));
-  --chart-5: var(--md-sys-color-secondary-fixed-dim, oklch(0.269 0 0));
-  --sidebar: var(--md-sys-color-surface-container-low, oklch(0.205 0 0));
-  --sidebar-foreground: var(--md-sys-color-on-surface, oklch(0.985 0 0));
-  --sidebar-primary: var(--md-sys-color-primary, oklch(0.488 0.243 264.376));
-  --sidebar-primary-foreground: var(
-    --md-sys-color-on-primary,
-    oklch(0.985 0 0)
-  );
-  --sidebar-accent: var(--md-sys-color-secondary-container, oklch(0.269 0 0));
-  --sidebar-accent-foreground: var(
-    --md-sys-color-on-secondary-container,
-    oklch(0.985 0 0)
-  );
-  --sidebar-border: var(--md-sys-color-outline-variant, oklch(1 0 0 / 10%));
-  --sidebar-ring: var(--md-sys-color-primary, oklch(0.556 0 0));
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+/* Every shadcn token, on the matching Material Design 3 role -- the mapping
+   from https://github.com/abernier/material-theme-builder#shadcn. Same
+   specificity as the two blocks above, so it only wins by coming after them:
+   keep it last. Those blocks are shadcn's stock neutral, kept as the record of
+   what each token was before m3 took it over. */
+:root,
+.dark {
+  --background: var(--md-sys-color-surface);
+  --foreground: var(--md-sys-color-on-surface);
+  --card: var(--md-sys-color-surface-container-low);
+  --card-foreground: var(--md-sys-color-on-surface);
+  --popover: var(--md-sys-color-surface-container-high);
+  --popover-foreground: var(--md-sys-color-on-surface);
+  --primary: var(--md-sys-color-primary);
+  --primary-foreground: var(--md-sys-color-on-primary);
+  --secondary: var(--md-sys-color-secondary-container);
+  --secondary-foreground: var(--md-sys-color-on-secondary-container);
+  --muted: var(--md-sys-color-surface-container-highest);
+  --muted-foreground: var(--md-sys-color-on-surface-variant);
+  --accent: var(--md-sys-color-secondary-container);
+  --accent-foreground: var(--md-sys-color-on-secondary-container);
+  --destructive: var(--md-sys-color-error);
+  --border: var(--md-sys-color-outline-variant);
+  --input: var(--md-sys-color-outline);
+  --ring: var(--md-sys-color-primary);
+  --chart-1: var(--md-sys-color-primary-fixed);
+  --chart-2: var(--md-sys-color-secondary-fixed);
+  --chart-3: var(--md-sys-color-tertiary-fixed);
+  --chart-4: var(--md-sys-color-primary-fixed-dim);
+  --chart-5: var(--md-sys-color-secondary-fixed-dim);
+  --sidebar: var(--md-sys-color-surface-container-low);
+  --sidebar-foreground: var(--md-sys-color-on-surface);
+  --sidebar-primary: var(--md-sys-color-primary);
+  --sidebar-primary-foreground: var(--md-sys-color-on-primary);
+  --sidebar-accent: var(--md-sys-color-secondary-container);
+  --sidebar-accent-foreground: var(--md-sys-color-on-secondary-container);
+  --sidebar-border: var(--md-sys-color-outline-variant);
+  --sidebar-ring: var(--md-sys-color-primary);
 }
 
 @layer base {
