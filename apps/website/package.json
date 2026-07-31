@@ -153,6 +153,7 @@
     "@demo/threejs-journey-portal": "workspace:*",
     "@demo/thunder-clouds": "workspace:*",
     "@demo/trails": "workspace:*",
+    "@demo/trails-r3f-9.7.0": "workspace:*",
     "@demo/transformcontrols-and-makedefault": "workspace:*",
     "@demo/transparent-aesop-bottles": "workspace:*",
     "@demo/trigger-meshes": "workspace:*",
