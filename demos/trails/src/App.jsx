@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { Canvas, useThree, useFrame } from '@react-three/fiber'
 import { useGLTF, Edges, Trail } from '@react-three/drei'
@@ -7,6 +7,7 @@ import { LayerMaterial, Depth, Fresnel } from 'lamina'
 import { FontLoader, TextGeometry } from 'three-stdlib'
 
 import boldFont from 'three/examples/fonts/helvetiker_bold.typeface.json'
+import pmndrsModel from './pmndrs.glb?url'
 import cursorModel from './cursor.glb?url'
 
 // One centered, extruded "9.7.0" shared by every block in the scene
@@ -20,6 +21,8 @@ const dir = new THREE.Vector3()
 const attractor = new THREE.Vector3(0, 0, -1)
 // Live registry of swarm bodies so the cursor can blast them apart on click
 const blocks = new Set()
+// Set by <Bursts>; the cursor calls it on click to spawn logo shrapnel at its position
+let burst = () => {}
 const white = new THREE.MeshBasicMaterial({ color: '#fefefe', toneMapped: false })
 const pink = new THREE.MeshBasicMaterial({ color: '#ff0080', toneMapped: false })
 // Accent blocks cycle through the cursor-gradient palette
@@ -42,8 +45,71 @@ export const App = ({ amount = 11 }) => (
       ))}
       <Cursor mass={15} angularDamping={0.5} linearDamping={0.5} position={[0, 0, 10]} />
     </Physics>
+    <Bursts />
   </Canvas>
 )
+
+function Bursts() {
+  const { nodes } = useGLTF(pmndrsModel)
+  // The glb logo pivot is off-center; recenter a clone so shrapnel spins around itself
+  const logo = useMemo(() => {
+    const geometry = nodes.logo.geometry.clone()
+    geometry.center()
+    return geometry
+  }, [nodes])
+  const [bursts, setBursts] = useState([])
+  const id = useRef(0)
+  useEffect(() => {
+    burst = (origin) => setBursts((all) => [...all, { id: ++id.current, origin }])
+    return () => (burst = () => {})
+  }, [])
+  return bursts.map(({ id, origin }) => (
+    <Burst key={id} geometry={logo} origin={origin} onDone={() => setBursts((all) => all.filter((b) => b.id !== id))} />
+  ))
+}
+
+// Purely visual logo shrapnel: flies outward, tumbles, shrinks away — no physics cost
+function Burst({ geometry, origin, onDone, count = 16, life = 1.5 }) {
+  const group = useRef()
+  const age = useRef(0)
+  const particles = useMemo(
+    () =>
+      Array.from({ length: count }, (_, i) => ({
+        // random sphere, biased towards the camera so debris whooshes past the viewer
+        dir: new THREE.Vector3().randomDirection().add(vec.set(0, 0, 0.5)).normalize(),
+        speed: 5 + Math.random() * 7,
+        rotation: [Math.random() * Math.PI * 2, Math.random() * Math.PI * 2, Math.random() * Math.PI * 2],
+        spin: [(Math.random() - 0.5) * 12, (Math.random() - 0.5) * 12, (Math.random() - 0.5) * 12],
+        size: 0.4 + Math.random() * 0.8,
+        material: Math.random() < 0.45 ? accents[i % accents.length] : white
+      })),
+    [count]
+  )
+  useFrame((_, delta) => {
+    age.current += delta
+    const k = age.current / life
+    if (k >= 1) return onDone()
+    // pop in fast, decelerate, shrink to nothing
+    const envelope = Math.min(k * 10, 1) * (1 - k)
+    group.current.children.forEach((child, i) => {
+      const p = particles[i]
+      child.position.addScaledVector(p.dir, p.speed * (1 - 0.7 * k) * delta)
+      child.rotation.x += p.spin[0] * delta
+      child.rotation.y += p.spin[1] * delta
+      child.rotation.z += p.spin[2] * delta
+      child.scale.set(0.188, 0.188, 0.97).multiplyScalar(p.size * envelope)
+    })
+  })
+  return (
+    <group ref={group} position={origin}>
+      {particles.map((p, i) => (
+        <mesh key={i} geometry={geometry} material={p.material} rotation={p.rotation} scale={0.001}>
+          <Edges threshold={20} color="black" lineWidth={1} />
+        </mesh>
+      ))}
+    </group>
+  )
+}
 
 function Block({ scale = 1, material = white, edge = 'black', ...props }) {
   return (
@@ -98,6 +164,7 @@ function Cursor({ speed = 10, gradient = 0.7, ...props }) {
     // applied slightly off-center so they tumble. The attractor then reels them back in.
     const explode = () => {
       vec.setFromMatrixPosition(ref.current.matrix)
+      burst(vec.toArray())
       for (const block of blocks) {
         dir.setFromMatrixPosition(block.ref.current.matrix).sub(vec)
         const falloff = Math.max(dir.length(), 1)
