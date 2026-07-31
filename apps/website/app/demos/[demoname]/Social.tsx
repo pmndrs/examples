@@ -232,10 +232,8 @@ export function Social({
         )}
 
         <button
-          {...({
-            popovertarget: "social-more-menu",
-            popovertargetaction: "toggle",
-          } as const)}
+          popoverTarget="social-more-menu"
+          popoverTargetAction="toggle"
           className="more"
           aria-expanded={moreOpen}
           aria-controls="social-more-menu"
@@ -245,7 +243,7 @@ export function Social({
         </button>
 
         <div
-          {...({ popover: "auto" } as const)}
+          popover="auto"
           ref={menuRef}
           id="social-more-menu"
           className="menu"
