@@ -38,3 +38,7 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
+
+# Playwright MCP scratch
+.playwright-mcp/
+.claude/launch.json

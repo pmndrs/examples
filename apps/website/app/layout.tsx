@@ -4,6 +4,8 @@ import "./globals.css";
 import Nav from "@/components/Nav";
 import { getDemos } from "@/lib/helper";
 import { Style } from "@/components/Style";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 const demos = getDemos();
@@ -19,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <script
           dangerouslySetInnerHTML={{
@@ -84,8 +86,16 @@ export default function RootLayout({
           `}
         />
 
-        <Nav demos={demos} />
-        <main>{children}</main>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Nav demos={demos} />
+          <main>{children}</main>
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );

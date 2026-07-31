@@ -17,6 +17,7 @@
     "@types/minimist": "^1.2.5",
     "depcheck": "^1.4.7",
     "prettier": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.8.1",
     "syncpack": "^14.3.0",
     "turbo": "^2.10.7",
     "typescript": "^5.5.4"
