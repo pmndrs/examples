@@ -6,9 +6,17 @@ import { getDemos } from "@/lib/helper";
 import { Style } from "@/components/Style";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "@/components/ui/sonner";
+import { Mcu } from "material-theme-builder";
 
 const inter = Inter({ subsets: ["latin"] });
 const demos = getDemos();
+
+/**
+ * The one hex the whole palette hangs off -- poimandres' signature mint.
+ * Material Color Utilities derives every `--md-sys-color-*` role from it, and
+ * `globals.css` hands those on to shadcn's tokens.
+ */
+const MCU_SOURCE = "#5de4c7";
 
 export const metadata: Metadata = {
   title: "pmndrs examples",
@@ -88,16 +96,21 @@ export default function RootLayout({
           `}
         />
 
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Nav demos={demos} />
-          <main>{children}</main>
-          <Toaster />
-        </ThemeProvider>
+        {/* Injects `:root { <light roles> } .dark { <dark roles> }` -- the
+            shape next-themes' `attribute="class"` already switches on, so the
+            two need nothing wiring them together. */}
+        <Mcu source={MCU_SOURCE}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Nav demos={demos} />
+            <main>{children}</main>
+            <Toaster />
+          </ThemeProvider>
+        </Mcu>
       </body>
     </html>
   );
