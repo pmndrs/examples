@@ -4,44 +4,68 @@ import { Canvas, useThree, useFrame } from '@react-three/fiber'
 import { useGLTF, Edges, Trail } from '@react-three/drei'
 import { Physics, useCompoundBody } from '@react-three/cannon'
 import { LayerMaterial, Depth, Fresnel } from 'lamina'
+import { FontLoader, TextGeometry } from 'three-stdlib'
 
-import pmndrsModel from './pmndrs.glb?url'
+import boldFont from 'three/examples/fonts/helvetiker_bold.typeface.json'
 import cursorModel from './cursor.glb?url'
 
-const vec = new THREE.Vector3()
-const white = new THREE.MeshBasicMaterial({ color: '#fefefe', toneMapped: false })
-const black = new THREE.MeshBasicMaterial({ color: 'black', toneMapped: false })
+// One centered, extruded "9.7.0" shared by every block in the scene
+const font = new FontLoader().parse(boldFont)
+const text = new TextGeometry('9.7.0', { font, size: 0.7, height: 0.35, curveSegments: 16, letterSpacing: 0.02 })
+text.center()
 
-export const App = ({ amount = 12 }) => (
+const vec = new THREE.Vector3()
+// The swarm gathers slightly behind the hero so it frames it instead of covering it
+const attractor = new THREE.Vector3(0, 0, -1)
+const white = new THREE.MeshBasicMaterial({ color: '#fefefe', toneMapped: false })
+const pink = new THREE.MeshBasicMaterial({ color: '#ff0080', toneMapped: false })
+// Accent blocks cycle through the cursor-gradient palette
+const accents = ['#ff0080', '#f7b955', '#5786f5'].map((color) => new THREE.MeshBasicMaterial({ color, toneMapped: false }))
+
+export const App = ({ amount = 11 }) => (
   <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 5], fov: 50 }}>
     <Physics gravity={[0, 1, 0]}>
+      <Hero />
       {Array.from({ length: amount }, (_, i) => (
-        <Pmndrs key={i} mass={4} angularDamping={0.4} linearDamping={0.8} position={[Math.random(), Math.random(), Math.random()]} />
+        <Version
+          key={i}
+          material={i % 4 === 1 ? accents[Math.floor(i / 4) % accents.length] : white}
+          scale={0.5 + (i % 3) * 0.25}
+          angularDamping={0.4}
+          linearDamping={0.8}
+          position={[(Math.random() - 0.5) * 4, (Math.random() - 0.5) * 4, (Math.random() - 0.5) * 2 - 1]}
+          rotation={[Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI]}
+        />
       ))}
       <Cursor mass={15} angularDamping={0.5} linearDamping={0.5} position={[0, 0, 10]} />
     </Physics>
   </Canvas>
 )
 
-function Pmndrs(props) {
-  const { nodes } = useGLTF(pmndrsModel)
-  const [ref, api] = useCompoundBody(() => ({
-    ...props,
-    shapes: [
-      { type: 'Box', args: [0.65, 0.65, 0.5], position: [0.18, 0.18, 0] },
-      { type: 'Box', args: [0.3, 0.3, 0.5], position: [-0.35, 0, 0] },
-      { type: 'Box', args: [0.3, 0.3, 0.5], position: [0, -0.35, 0] }
-    ]
-  }))
-  // Pull every logo back towards the center of the scene
-  useFrame(() => api.applyForce(vec.setFromMatrixPosition(ref.current.matrix).normalize().multiplyScalar(-40).toArray(), [0, 0, 0]))
+function Block({ scale = 1, material = white, edge = 'black', ...props }) {
   return (
-    <group ref={ref}>
-      <mesh scale={[0.188, 0.188, 0.97]} position={[-0.02, -0.5, 0.022]} geometry={nodes.logo.geometry} material={white}>
-        <Edges scale={1.005} material={black} />
+    <group {...props}>
+      <mesh scale={scale} geometry={text} material={material}>
+        <Edges scale={1.002} threshold={20} color={edge} lineWidth={1.5} />
       </mesh>
     </group>
   )
+}
+
+// One box approximating the extruded "9.7.0" word, baked to the visual scale
+const wordBox = (scale) => [{ type: 'Box', args: [2.2 * scale, 0.55 * scale, 0.35 * scale], position: [0, 0, 0] }]
+
+// Immovable billboard version number the swarm and cursor bounce off
+function Hero({ scale = 1.2 }) {
+  const [ref] = useCompoundBody(() => ({ mass: 0, position: [0, 0, 1.5], shapes: wordBox(scale) }))
+  return <Block ref={ref} scale={scale} material={pink} />
+}
+
+function Version({ scale = 1, material = white, ...props }) {
+  const [ref, api] = useCompoundBody(() => ({ mass: 4 * scale, ...props, shapes: wordBox(scale) }))
+  // Pull every block back towards the gather point behind the hero
+  useFrame(() => api.applyForce(vec.setFromMatrixPosition(ref.current.matrix).sub(attractor).normalize().multiplyScalar(-40 * scale).toArray(), [0, 0, 0]))
+  return <Block ref={ref} scale={scale} material={material} />
 }
 
 function Cursor({ speed = 10, gradient = 0.7, ...props }) {
