@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import ReactDOM from "react-dom"
+import { createRoot } from "react-dom/client"
 // All hooks are cross platform now
 import { useSpring } from "@react-spring/core"
 // Platform knowledge is in here ...
@@ -22,4 +22,4 @@ function App() {
   )
 }
 
-ReactDOM.render(<App />, document.getElementById("root"))
+createRoot(document.getElementById("root")).render(<App />)

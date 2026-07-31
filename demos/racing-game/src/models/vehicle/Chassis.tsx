@@ -79,7 +79,7 @@ export const Chassis = forwardRef<Group, ChassisProps>(({ args = [2, 1.1, 4.7], 
   const needle = useRef<MaterialMesh>(null!)
   const crashAudio = useRef<PositionalAudioImpl>(null!)
   const [camera, ready, set, vehicleConfig] = useStore((s) => [s.camera, s.ready, s.set, s.vehicleConfig])
-  const { nodes: n, materials: m } = useGLTF(assetUrl('models/chassis-draco.glb')) as ChassisGLTF
+  const { nodes: n, materials: m } = useGLTF(assetUrl('models/chassis-draco.glb')) as unknown as ChassisGLTF
   const onCollide = useCallback(
     debounce<(e: CollideEvent) => void>((e) => {
       if (e.body.userData.trigger || !getState().sound) return

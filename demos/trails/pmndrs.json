@@ -1,0 +1,11 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Trails",
+  "description": "A cursor chasing the mouse through a cloud of physics-driven logos, leaving a meshline ribbon behind it.",
+  "tags": ["trail", "meshline", "physics", "gradient"],
+  "authors": ["Faraz Shaikh"],
+  "publishedAt": "2022-03-18",
+  "source": "https://codesandbox.io/s/pmndrs-vercel-forked-slvex6",
+  "libraries": ["@react-three/cannon", "@react-three/drei", "@react-three/fiber", "lamina"],
+  "assets": []
+}

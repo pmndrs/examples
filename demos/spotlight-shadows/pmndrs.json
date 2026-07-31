@@ -1,0 +1,25 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Spotlight Shadows",
+  "description": "Casting a patterned gobo shadow from a spot light, with a custom shader that repeats the leaf texture and fakes wind.",
+  "tags": ["spotlight", "shadow", "gobo", "shader", "texture"],
+  "authors": ["Faraz Shaikh"],
+  "source": "https://codesandbox.io/s/yyk6gv",
+  "libraries": ["@react-three/drei", "@react-three/fiber"],
+  "assets": [
+    {
+      "name": "Grassy Cobblestone",
+      "files": [
+        "src/textures/grassy_cobblestone_diff_2k.jpg",
+        "src/textures/grassy_cobblestone_nor_gl_2k.jpg",
+        "src/textures/grassy_cobblestone_rough_2k.jpg",
+        "src/textures/grassy_cobblestone_ao_2k.jpg"
+      ],
+      "creator": "Charlotte Baglioni, Dario Barresi",
+      "source": "https://polyhaven.com/a/grassy_cobblestone",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "modified": true
+    } 
+  ]
+}

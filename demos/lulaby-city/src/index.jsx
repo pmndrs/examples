@@ -1,11 +1,10 @@
-import { render } from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import './styles.css'
 import App from './App'
 import Intro from './Intro'
 
-render(
+createRoot(document.getElementById('root')).render(
   <Intro>
     <App />
-  </Intro>,
-  document.getElementById('root')
+  </Intro>
 )

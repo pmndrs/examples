@@ -1,0 +1,21 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Wireframes",
+  "description": "Shader-based antialiased wireframes via barycentric coordinates, on a skinned glTF model, a primitive and a custom shader material.",
+  "tags": ["wireframe", "barycentric", "shader", "gltf", "configurator"],
+  "authors": ["Faraz Shaikh"],
+  "publishedAt": "2023-04-04",
+  "source": "https://codesandbox.io/s/2572o5",
+  "libraries": ["@react-three/drei", "@react-three/fiber", "leva"],
+  "assets": [
+    {
+      "name": "Car",
+      "files": ["src/car.glb"],
+      "creator": "cuadot",
+      "source": "https://sketchfab.com/3d-models/car-acccd15d4e454399a39dbe40f4f6df71",
+      "license": "CC BY 4.0",
+      "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
+      "modified": true
+    }
+  ]
+}

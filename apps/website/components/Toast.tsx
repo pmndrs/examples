@@ -17,7 +17,9 @@ export function Toast({
 }) {
   const [mounted, setMounted] = useState(false);
   const [phase, setPhase] = useState<"enter" | "exit">("enter");
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(
+    undefined,
+  );
 
   useEffect(() => {
     if (visible) {

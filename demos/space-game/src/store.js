@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import * as Curves from 'three/examples/jsm/curves/CurveExtras'
 import { addEffect } from '@react-three/fiber'
-import create from 'zustand'
+import { create } from 'zustand'
 import * as audio from './audio'
 
 let guid = 1

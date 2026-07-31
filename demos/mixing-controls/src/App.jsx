@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, TransformControls, useCursor } from '@react-three/drei'
 import { useControls } from 'leva'
-import create from 'zustand'
+import { create } from 'zustand'
 
 const useStore = create((set) => ({ target: null, setTarget: (target) => set({ target }) }))
 

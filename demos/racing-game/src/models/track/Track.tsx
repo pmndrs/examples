@@ -1,3 +1,4 @@
+import type { JSX } from 'react'
 import { DoubleSide } from 'three'
 import { useLayoutEffect, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
@@ -5,7 +6,7 @@ import { MeshDistortMaterial, PositionalAudio, useGLTF } from '@react-three/drei
 
 import { useStore, levelLayer } from '../../store'
 
-import type { GroupProps } from '@react-three/fiber'
+import type { ThreeElements } from '@react-three/fiber'
 import type { GLTF } from 'three-stdlib'
 import type { Group, Mesh, MeshStandardMaterial } from 'three'
 import { assetUrl } from '../../assetUrl'
@@ -59,9 +60,9 @@ interface TrackGLTF extends GLTF {
   }
 }
 
-export function Track(props: GroupProps): JSX.Element {
+export function Track(props: ThreeElements['group']): JSX.Element {
   const [ready, level, sound] = useStore((state) => [state.ready, state.level, state.sound])
-  const { nodes: n, materials: m } = useGLTF(assetUrl('models/track-draco.glb')) as TrackGLTF
+  const { nodes: n, materials: m } = useGLTF(assetUrl('models/track-draco.glb')) as unknown as TrackGLTF
   const config = { receiveShadow: true, castShadow: true, 'material-roughness': 1 }
   const birds = useRef<Group>(null!)
   const clouds = useRef<Group>(null!)

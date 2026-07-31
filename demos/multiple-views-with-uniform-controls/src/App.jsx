@@ -6,7 +6,7 @@ import { PerspectiveCamera, OrthographicCamera, AccumulativeShadows } from '@rea
 import { Menu, Button } from '@mantine/core'
 import * as ICONS from '@tabler/icons-react'
 import useRefs from 'react-use-refs'
-import create from 'zustand'
+import { create } from 'zustand'
 
 // From the poimandres market (https://market.pmnd.rs/), vendored locally since the original CDN is offline.
 import bricksModel from './assets/bricks.gltf?url'
