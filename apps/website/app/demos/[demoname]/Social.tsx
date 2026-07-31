@@ -1,8 +1,8 @@
 "use client";
 
 import { Style } from "@/components/Style";
-import { Toast } from "@/components/Toast";
 import { ReactNode, useEffect, useRef, useState } from "react";
+import { toast } from "sonner";
 import { GoCommandPalette } from "react-icons/go";
 import { RxChevronDown, RxOpenInNewWindow } from "react-icons/rx";
 import { SiCodesandbox, SiGithub, SiStackblitz } from "react-icons/si";
@@ -14,7 +14,6 @@ export function Social({
   demoname: string;
   embed_url: string;
 }) {
-  const [show, setShow] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -22,7 +21,21 @@ export function Social({
 
   const handleClick = async () => {
     await navigator.clipboard.writeText(command);
-    setShow(true);
+
+    toast.success("Degit command copied", {
+      description: (
+        <div className="flex min-w-0 flex-col gap-2">
+          <span>
+            Paste in your terminal to install <strong>{demoname}</strong>{" "}
+            locally.
+          </span>
+          <code className="rounded-sm bg-muted px-2 py-1 font-mono text-[0.7rem] leading-relaxed break-all whitespace-pre-wrap">
+            <span className="select-none">$ </span>
+            {command}
+          </code>
+        </div>
+      ),
+    });
   };
 
   useEffect(() => {
@@ -219,7 +232,12 @@ export function Social({
 
         {actions.map(({ label, icon, href }) =>
           href ? (
-            <a key={label} target="_blank" rel="noopener noreferrer" href={href}>
+            <a
+              key={label}
+              target="_blank"
+              rel="noopener noreferrer"
+              href={href}
+            >
               {icon}
               <span>{label}</span>
             </a>
@@ -278,13 +296,6 @@ export function Social({
           )}
         </div>
       </nav>
-
-      <Toast visible={show} onDone={() => setShow(false)}>
-        <p>
-          Degit command copied. Paste in your terminal to install{" "}
-          <strong>{demoname}</strong> locally.
-        </p>
-      </Toast>
     </>
   );
 }
