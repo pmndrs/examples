@@ -132,6 +132,47 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* Every shadcn token, on the matching Material Design 3 role -- the mapping
+   from https://github.com/abernier/material-theme-builder#shadcn. The
+   `--md-sys-color-*` half is emitted by `app/layout.tsx`. Same specificity as
+   the two blocks above, so it only wins by coming after them: keep it last.
+   Those blocks are shadcn's stock neutral, kept as the record of what each
+   token was before m3 took it over. */
+:root,
+.dark {
+  --background: var(--md-sys-color-surface);
+  --foreground: var(--md-sys-color-on-surface);
+  --card: var(--md-sys-color-surface-container-low);
+  --card-foreground: var(--md-sys-color-on-surface);
+  --popover: var(--md-sys-color-surface-container-high);
+  --popover-foreground: var(--md-sys-color-on-surface);
+  --primary: var(--md-sys-color-primary);
+  --primary-foreground: var(--md-sys-color-on-primary);
+  --secondary: var(--md-sys-color-secondary-container);
+  --secondary-foreground: var(--md-sys-color-on-secondary-container);
+  --muted: var(--md-sys-color-surface-container-highest);
+  --muted-foreground: var(--md-sys-color-on-surface-variant);
+  --accent: var(--md-sys-color-secondary-container);
+  --accent-foreground: var(--md-sys-color-on-secondary-container);
+  --destructive: var(--md-sys-color-error);
+  --border: var(--md-sys-color-outline-variant);
+  --input: var(--md-sys-color-outline);
+  --ring: var(--md-sys-color-primary);
+  --chart-1: var(--md-sys-color-primary-fixed);
+  --chart-2: var(--md-sys-color-secondary-fixed);
+  --chart-3: var(--md-sys-color-tertiary-fixed);
+  --chart-4: var(--md-sys-color-primary-fixed-dim);
+  --chart-5: var(--md-sys-color-secondary-fixed-dim);
+  --sidebar: var(--md-sys-color-surface-container-low);
+  --sidebar-foreground: var(--md-sys-color-on-surface);
+  --sidebar-primary: var(--md-sys-color-primary);
+  --sidebar-primary-foreground: var(--md-sys-color-on-primary);
+  --sidebar-accent: var(--md-sys-color-secondary-container);
+  --sidebar-accent-foreground: var(--md-sys-color-on-secondary-container);
+  --sidebar-border: var(--md-sys-color-outline-variant);
+  --sidebar-ring: var(--md-sys-color-primary);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
