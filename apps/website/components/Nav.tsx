@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 
 import { getLibraryLabel, getLibraryPopularity } from "@/const/libraries";
+import { useRovingTabIndex } from "@/hooks/use-roving-tabindex";
 import type { Demo } from "@/lib/helper";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
@@ -132,7 +133,10 @@ function NavToggle() {
     >
       <Button
         variant="secondary"
-        size="xs"
+        /* `size-full` below overrides the height and padding, so what `lg`
+           actually brings the rail handle is its type scale: `text-sm` for the
+           vertical label and a 4px-larger chevron. */
+        size="lg"
         onClick={toggleSidebar}
         aria-label={shown ? "Hide demos" : "Show demos"}
         aria-pressed={shown}
@@ -163,6 +167,7 @@ export default function Nav({
   ...props
 }: { demos: Demo[] } & ComponentProps<"div">) {
   const ulRef = useRef<ElementRef<"ul">>(null);
+  const roving = useRovingTabIndex(ulRef);
   const searchRef = useRef<HTMLInputElement>(null);
 
   const [open, setOpenState] = useState(true);
@@ -480,6 +485,10 @@ export default function Nav({
           <nav aria-label="Examples">
             <ul
               ref={ulRef}
+              /* One tab stop for the whole list, arrows to move inside it —
+                 otherwise the ~160 cards sit between the filter row and
+                 everything after the rail. */
+              {...roving}
               id="demo-list"
               /* The block padding is not decoration: the selected card's ring
                  sits outside its border box, and the scroller would clip it on

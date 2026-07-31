@@ -2,8 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { Style } from "./Style";
-
 type FrameState = {
   width: number;
   height: number;
@@ -55,32 +53,16 @@ export function ScaledDemoFrame({
   }, []);
 
   return (
-    <div className="ScaledDemoFrame" ref={containerRef}>
-      <Style
-        css={`
-          @scope {
-            :scope {
-              position: relative;
-              width: 100%;
-              height: 100%;
-              min-width: 0;
-              min-height: 0;
-            }
+    <div className="relative h-full min-h-0 w-full min-w-0" ref={containerRef}>
+      {/* `top-1/2 left-1/2` is the whole of the old `inset: 50% auto auto 50%`
+          — `right`/`bottom` are already `auto`. The other half of the centring
+          is the `translate(-50%, -50%)` in the inline transform below, which
+          has to stay there: it carries the measured `scale` with it.
 
-            iframe {
-              position: absolute;
-              inset: 50% auto auto 50%;
-              border: none;
-              display: block;
-              background: white;
-              border-radius: 16px;
-              box-shadow: 0 24px 60px rgb(0 0 0 / 0.16);
-              transition: box-shadow 0.2s ease;
-            }
-          }
-        `}
-      />
+          White, not a theme colour: it is the demo's own page showing through
+          before it paints, and the demos are not themed. */}
       <iframe
+        className="absolute top-1/2 left-1/2 rounded-2xl bg-white shadow-[0_24px_60px_rgb(0_0_0/0.16)] transition-shadow duration-200"
         src={src}
         title={title}
         style={{

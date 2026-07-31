@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, useRef } from "react";
 import { toast } from "sonner";
 import { GoCommandPalette } from "react-icons/go";
 import { RxOpenInNewWindow } from "react-icons/rx";
@@ -13,6 +13,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useRovingTabIndex } from "@/hooks/use-roving-tabindex";
 
 export function Social({
   demoname,
@@ -21,6 +22,11 @@ export function Social({
   demoname: string;
   embed_url: string;
 }) {
+  const groupRef = useRef<HTMLDivElement>(null);
+  /* The bar reads as one object, so it answers to Tab as one: five icon
+     buttons would otherwise be five stops for what is visibly a single pill. */
+  const roving = useRovingTabIndex(groupRef, { orientation: "horizontal" });
+
   const command = `npx -y degit pmndrs/examples/demos/${demoname} ${demoname} && cd ${demoname} && npm i && npm run dev`;
 
   const handleClick = async () => {
@@ -79,12 +85,19 @@ export function Social({
           too on everything but the last button closes it — the outer edge is
           left alone, where the same 1px is what keeps the shadow off the
           background colour. */}
-      <ButtonGroup className="rounded-4xl shadow-lg [&>*:not(:last-child)]:border-r-0">
+      <ButtonGroup
+        ref={groupRef}
+        {...roving}
+        className="rounded-4xl shadow-lg [&>*:not(:last-child)]:border-r-0"
+      >
         {actions.map(({ label, icon, href }) => (
           <Tooltip key={label}>
             <TooltipTrigger asChild>
               {href ? (
-                <Button asChild variant="secondary" size="icon">
+                /* `icon-lg`, not `lg`: on the icon scale that is the size —
+                   plain `lg` would add the text sizes' horizontal padding and
+                   stretch each square into a lozenge. */
+                <Button asChild variant="secondary" size="icon-lg">
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
@@ -101,7 +114,7 @@ export function Social({
                 <Button
                   type="button"
                   variant="secondary"
-                  size="icon"
+                  size="icon-lg"
                   onClick={handleClick}
                   aria-label={label}
                 >
