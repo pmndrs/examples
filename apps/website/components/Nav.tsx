@@ -20,6 +20,12 @@ import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
+  Empty,
+  EmptyContent,
+  EmptyHeader,
+  EmptyTitle,
+} from "@/components/ui/empty";
+import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
@@ -374,36 +380,6 @@ export default function Nav({
               animation: search-in 200ms ease;
             }
 
-            .empty {
-              display: grid;
-              justify-items: center;
-              gap: 0.6rem;
-              padding: 1.5rem 1rem;
-              color: #666;
-              font-size: 0.72rem;
-              text-align: center;
-            }
-
-            .empty p {
-              margin: 0;
-            }
-
-            .empty button {
-              padding: 0.35rem 0.7rem;
-              border: 1px solid #d4d4d4;
-              border-radius: 999px;
-              background: white;
-              color: #444;
-              cursor: pointer;
-              font: inherit;
-              font-weight: 600;
-            }
-
-            .empty button:hover {
-              background: #f7f7f7;
-              color: #111;
-            }
-
             .srOnly {
               position: absolute;
               width: 1px;
@@ -686,18 +662,26 @@ export default function Nav({
           ))}
         </ul>
         {filteredDemos.length === 0 && (
-          <div className="empty">
-            <p>No matching examples.</p>
-            <button
-              type="button"
-              onClick={() => {
-                dismissSearch();
-                setLibrary("");
-              }}
-            >
-              Clear filters
-            </button>
-          </div>
+          /* Stock padding is p-12, which leaves nothing to read in a rail this
+             narrow. */
+          <Empty className="p-6">
+            <EmptyHeader>
+              <EmptyTitle>No matching examples</EmptyTitle>
+            </EmptyHeader>
+            <EmptyContent>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  dismissSearch();
+                  setLibrary("");
+                }}
+              >
+                Clear filters
+              </Button>
+            </EmptyContent>
+          </Empty>
         )}
       </nav>
     </div>
