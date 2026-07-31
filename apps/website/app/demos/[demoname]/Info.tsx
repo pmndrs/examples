@@ -64,7 +64,10 @@ export function Info({ demo }: { demo: Demo }) {
             <PopoverTrigger asChild>
               <Button
                 variant="secondary"
-                size="icon"
+                /* `icon-lg`, not `lg`: on the icon scale that is the size —
+                   plain `lg` would add the text sizes' horizontal padding and
+                   stretch the disc into a lozenge. */
+                size="icon-lg"
                 aria-label="Show demo info"
                 /* `secondary` reads the same open or shut; the panel is
                    anchored to this button, so it should look pressed while the

@@ -133,7 +133,10 @@ function NavToggle() {
     >
       <Button
         variant="secondary"
-        size="xs"
+        /* `size-full` below overrides the height and padding, so what `lg`
+           actually brings the rail handle is its type scale: `text-sm` for the
+           vertical label and a 4px-larger chevron. */
+        size="lg"
         onClick={toggleSidebar}
         aria-label={shown ? "Hide demos" : "Show demos"}
         aria-pressed={shown}

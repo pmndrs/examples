@@ -94,7 +94,10 @@ export function Social({
           <Tooltip key={label}>
             <TooltipTrigger asChild>
               {href ? (
-                <Button asChild variant="secondary" size="icon">
+                /* `icon-lg`, not `lg`: on the icon scale that is the size —
+                   plain `lg` would add the text sizes' horizontal padding and
+                   stretch each square into a lozenge. */
+                <Button asChild variant="secondary" size="icon-lg">
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
@@ -111,7 +114,7 @@ export function Social({
                 <Button
                   type="button"
                   variant="secondary"
-                  size="icon"
+                  size="icon-lg"
                   onClick={handleClick}
                   aria-label={label}
                 >
