@@ -30,5 +30,6 @@ Two things to know before styling:
 
 - **The whole app is on Tailwind.** There is no `<Style>` component and no `@scope` block left anywhere in `apps/website` — every rule is a utility at its call site, a `components/ui/*` variant, or a token in `app/globals.css`. Don't reintroduce injected `<style>`: it lands unlayered, so it outranks Preflight _and_ every utility, and a rule that always wins is a rule nobody can override from a call site. The two things utilities can't express — the source-of-truth palette, and Preflight itself — already have homes in `globals.css`.
 - **Sources are declared explicitly.** Tailwind's automatic source detection finds nothing in this app, so `app/globals.css` lists `@source` entries. Add one if you put components somewhere new.
+- **A repeated group of controls is one tab stop, not N.** `hooks/use-roving-tabindex.ts` gives the demo list and the demo bar a roving tabindex — arrows move within the group, Tab moves past it. The whole site is six tab stops; if you add a control, check it is not a seventh hiding inside one of those groups. Hand the hook the container's ref and spread what it returns.
 
 `demos/` is deliberately Tailwind-free; don't introduce it there.
