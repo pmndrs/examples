@@ -54,6 +54,143 @@
   --color-card: var(--card);
   --color-foreground: var(--foreground);
   --color-background: var(--background);
+  --color-new: var(--new);
+  --color-new-foreground: var(--new-foreground);
+  --ease-expressive: linear(
+    0,
+    0.0078,
+    0.034,
+    0.0738,
+    0.116,
+    0.16,
+    0.203,
+    0.244,
+    0.284,
+    0.322,
+    0.357,
+    0.391,
+    0.422,
+    0.453,
+    0.483,
+    0.51,
+    0.536,
+    0.561,
+    0.583,
+    0.606,
+    0.627,
+    0.646,
+    0.665,
+    0.683,
+    0.7,
+    0.716,
+    0.731,
+    0.745,
+    0.759,
+    0.771,
+    0.784,
+    0.795,
+    0.806,
+    0.816,
+    0.826,
+    0.835,
+    0.844,
+    0.852,
+    0.859,
+    0.867,
+    0.874,
+    0.881,
+    0.887,
+    0.893,
+    0.899,
+    0.904,
+    0.909,
+    0.914,
+    0.919,
+    0.923,
+    0.927,
+    0.931,
+    0.935,
+    0.938,
+    0.941,
+    0.944,
+    0.947,
+    0.95,
+    0.953,
+    0.955,
+    0.958,
+    0.96,
+    0.962,
+    0.964,
+    0.966,
+    0.968,
+    0.969,
+    0.971,
+    0.973,
+    0.974,
+    0.975,
+    0.977,
+    0.978,
+    0.979,
+    0.98,
+    0.981,
+    0.982,
+    0.983,
+    0.984,
+    0.985,
+    0.986,
+    0.987,
+    0.987,
+    0.988,
+    0.989,
+    0.989,
+    0.99,
+    0.99,
+    0.991,
+    0.991,
+    0.992,
+    0.992,
+    0.993,
+    0.993,
+    0.993,
+    0.994,
+    0.994,
+    0.994,
+    0.995,
+    0.995,
+    0.995,
+    0.995,
+    0.996,
+    0.996,
+    0.996,
+    0.996,
+    0.997,
+    0.997,
+    0.997,
+    0.997,
+    0.997,
+    0.997,
+    0.998,
+    0.998,
+    0.998,
+    0.998,
+    0.998,
+    0.998,
+    0.998,
+    0.998,
+    0.998,
+    0.998,
+    0.999,
+    0.999,
+    0.999,
+    0.999,
+    0.999,
+    0.999,
+    0.999,
+    0.999,
+    1
+  );
+  --shadow-lg: 0 1px 6px rgb(0 0 0 / 0.1);
+  --shadow-2xl: 0 10px 30px rgb(0 0 0 / 0.12);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -132,52 +269,59 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
-/* Every shadcn token, on the matching Material Design 3 role -- the mapping
-   from https://github.com/abernier/material-theme-builder#shadcn. The
+/* Every shadcn token stays on a Material Design 3 role, but the surface
+   hierarchy is tuned to the original examples site: a #eee canvas, white
+   cards and controls, and darker hover/selected layers. The
    `--md-sys-color-*` half is emitted by `app/layout.tsx`. Same specificity as
-   the two blocks above, so it only wins by coming after them: keep it last.
-   Those blocks are shadcn's stock neutral, kept as the record of what each
-   token was before m3 took it over. */
+   the two blocks above, so it only wins by coming after them: keep it last. */
 :root,
 .dark {
-  --background: var(--md-sys-color-surface);
+  --background: var(--md-sys-color-surface-container);
   --foreground: var(--md-sys-color-on-surface);
-  --card: var(--md-sys-color-surface-container-low);
+  --card: var(--md-sys-color-surface-container-lowest);
   --card-foreground: var(--md-sys-color-on-surface);
-  --popover: var(--md-sys-color-surface-container-high);
+  --popover: color-mix(
+    in oklab,
+    var(--md-sys-color-surface-container-lowest) 92%,
+    transparent
+  );
   --popover-foreground: var(--md-sys-color-on-surface);
   --primary: var(--md-sys-color-primary);
   --primary-foreground: var(--md-sys-color-on-primary);
-  --secondary: var(--md-sys-color-secondary-container);
-  --secondary-foreground: var(--md-sys-color-on-secondary-container);
-  --muted: var(--md-sys-color-surface-container-highest);
+  --secondary: var(--md-sys-color-surface-container-lowest);
+  --secondary-foreground: var(--md-sys-color-on-surface-variant);
+  --muted: var(--md-sys-color-surface-container-low);
   --muted-foreground: var(--md-sys-color-on-surface-variant);
-  --accent: var(--md-sys-color-secondary-container);
-  --accent-foreground: var(--md-sys-color-on-secondary-container);
+  --accent: var(--md-sys-color-surface-container-high);
+  --accent-foreground: var(--md-sys-color-on-surface);
   --destructive: var(--md-sys-color-error);
-  --border: var(--md-sys-color-outline-variant);
-  --input: var(--md-sys-color-outline);
+  --border: color-mix(
+    in oklab,
+    var(--md-sys-color-outline-variant) 75%,
+    var(--md-sys-color-surface-container-lowest)
+  );
+  --input: color-mix(
+    in oklab,
+    var(--md-sys-color-surface-container-lowest) 92%,
+    transparent
+  );
   --ring: var(--md-sys-color-primary);
+  /* Monochrome intentionally neutralizes extended roles; retain the legacy accent. */
+  --new: #e8756a;
+  --new-foreground: var(--md-sys-color-on-new);
   --chart-1: var(--md-sys-color-primary-fixed);
   --chart-2: var(--md-sys-color-secondary-fixed);
   --chart-3: var(--md-sys-color-tertiary-fixed);
   --chart-4: var(--md-sys-color-primary-fixed-dim);
   --chart-5: var(--md-sys-color-secondary-fixed-dim);
-  /* `surface`, not `surface-container-low`: the rail is meant to read as part
-     of the page rather than as a panel laid on it, and this is the token that
-     paints it -- `bg-sidebar` sits on the vendored component, where a
-     `className` override has no business going. Same value as `--background`,
-     so the rail is flush with the page, and `Nav` drops the component's
-     `border-r` so nothing draws a seam across it either. Keeping a role rather
-     than `transparent` also keeps the mobile sheet opaque, since it paints
-     from this token too. */
-  --sidebar: var(--md-sys-color-surface);
+  /* The rail remains flush with the page while its cards step up to white. */
+  --sidebar: var(--md-sys-color-surface-container);
   --sidebar-foreground: var(--md-sys-color-on-surface);
   --sidebar-primary: var(--md-sys-color-primary);
   --sidebar-primary-foreground: var(--md-sys-color-on-primary);
-  --sidebar-accent: var(--md-sys-color-secondary-container);
-  --sidebar-accent-foreground: var(--md-sys-color-on-secondary-container);
-  --sidebar-border: var(--md-sys-color-outline-variant);
+  --sidebar-accent: var(--md-sys-color-surface-container-high);
+  --sidebar-accent-foreground: var(--md-sys-color-on-surface);
+  --sidebar-border: var(--border);
   --sidebar-ring: var(--md-sys-color-primary);
 }
 
@@ -196,13 +340,13 @@
 /* The nav's collapsed state lives in `localStorage`, and this site is a static
    export -- so the only thing that knows it before first paint is the inline
    script in `app/layout.tsx`, which marks <html>. React learns it an effect
-   later; without these two rules the rail would paint open and then swing shut
+   later; without this rule the rail would paint open and then swing shut
    on every load. Unlayered on purpose: it has to outrank the sidebar's own
-   utilities, and all it does is restate what they already say when collapsed.
-   `Nav` drops the attribute as soon as it has rendered the real state. */
-html[data-nav-collapsed] [data-slot="sidebar-gap"] {
-  width: 0;
-}
-html[data-nav-collapsed] [data-slot="sidebar-container"][data-side="left"] {
-  left: calc(var(--sidebar-width) * -1);
+   utility, and all it does is restate the wrapper offset used by React.
+   `Nav` drops the attribute as soon as it has rendered the real state. The
+   mobile sidebar is a Sheet, so it must not inherit the desktop rail offset. */
+@media (min-width: 48rem) {
+  html[data-nav-collapsed] [data-slot="sidebar-wrapper"] {
+    margin-inline-start: calc(var(--sidebar-width) * -1);
+  }
 }

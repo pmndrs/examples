@@ -88,7 +88,7 @@ export function Social({
       <ButtonGroup
         ref={groupRef}
         {...roving}
-        className="rounded-4xl shadow-lg [&>*:not(:last-child)]:border-r-0"
+        className="rounded-4xl shadow-lg backdrop-blur-sm [&>*:not(:last-child)]:border-r-0"
       >
         {actions.map(({ label, icon, href }) => (
           <Tooltip key={label}>

@@ -26,7 +26,6 @@ import type { Demo } from "@/lib/helper";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ButtonGroup } from "@/components/ui/button-group";
 import {
   Empty,
   EmptyContent,
@@ -60,10 +59,71 @@ import {
 
 const STORAGE_KEY = "nav-collapsed";
 const MAX_TAGS = 4;
+const INITIAL_THUMBNAILS = 6;
 /* `library` is "" for no filter, but Radix rejects an empty SelectItem value —
    it reserves it for clearing the selection. The sentinel is what the option
    carries; the state stays "". */
 const ALL_LIBRARIES = "__all__";
+
+/**
+ * Keep the list itself complete for links, roving focus and stable scroll
+ * geometry, but only mount expensive thumbnail/tag subtrees near the visible
+ * part of the SidebarContent scroller. One observer handles the whole list;
+ * importantly, the hook reruns when Radix mounts the mobile Sheet's list.
+ */
+function useNearbyDemos(list: HTMLUListElement | null) {
+  const [nearby, setNearby] = useState<ReadonlySet<string>>(() => new Set());
+
+  useEffect(() => {
+    if (!list) {
+      setNearby((current) => (current.size === 0 ? current : new Set()));
+      return;
+    }
+
+    const items = Array.from(list.querySelectorAll<HTMLElement>("[data-demo]"));
+
+    if (!("IntersectionObserver" in window)) {
+      setNearby(
+        new Set(
+          items.flatMap((item) =>
+            item.dataset.demo ? [item.dataset.demo] : [],
+          ),
+        ),
+      );
+      return;
+    }
+
+    const root = list.closest<HTMLElement>("[data-slot='sidebar-content']");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        setNearby((current) => {
+          const next = new Set(current);
+          let changed = false;
+
+          for (const entry of entries) {
+            const name = (entry.target as HTMLElement).dataset.demo;
+            if (!name) continue;
+
+            if (entry.isIntersecting && !next.has(name)) {
+              next.add(name);
+              changed = true;
+            } else if (!entry.isIntersecting && next.delete(name)) {
+              changed = true;
+            }
+          }
+
+          return changed ? next : current;
+        });
+      },
+      { root, rootMargin: "50% 0px" },
+    );
+
+    items.forEach((item) => observer.observe(item));
+    return () => observer.disconnect();
+  }, [list]);
+
+  return nearby;
+}
 
 function hasInteractiveFocus(element: Element | null) {
   return (
@@ -110,14 +170,17 @@ function NavToggle() {
   }, [shown]);
 
   return (
-    <ButtonGroup
-      orientation="vertical"
+    <Button
+      variant="secondary"
+      size="lg"
+      onClick={toggleSidebar}
+      aria-label={shown ? "Hide demos" : "Show demos"}
+      aria-pressed={shown}
       className={cn(
-        /* The group is what the page positions now, and it carries the pill's
-           box: `inset-y-0` + `my-auto` centres it without a `-translate-y-1/2`
-           that would fight the button's own `active:translate-y-px`. Above the
-           panel's `z-10`, since the pill overlaps its edge. */
-        "absolute inset-y-0 right-0 z-20 my-auto h-22 w-11 transition-transform",
+        /* `inset-y-0` + `my-auto` centres the capsule without a Y transform.
+           Cancel Button's pressed translate so pointer-up cannot introduce a
+           one-pixel hop while the rail is already moving horizontally. */
+        "absolute inset-y-0 right-0 z-20 my-auto h-22 w-11 flex-col gap-1.5 rounded-full px-0 text-[0.6rem] leading-none shadow-2xl transition-transform duration-[250ms] ease-out [--secondary:var(--card)] active:not-aria-[haspopup]:translate-y-0 [&_svg]:size-3",
         shown
           ? /* Right edge halfway across the gutter between the rail and the
                demo — which is `main`'s padding, since the two are flush. Half
@@ -131,32 +194,18 @@ function NavToggle() {
             : "translate-x-1/4",
       )}
     >
-      <Button
-        variant="secondary"
-        /* `size-full` below overrides the height and padding, so what `lg`
-           actually brings the rail handle is its type scale: `text-sm` for the
-           vertical label and a 4px-larger chevron. */
-        size="lg"
-        onClick={toggleSidebar}
-        aria-label={shown ? "Hide demos" : "Show demos"}
-        aria-pressed={shown}
-        /* No `rounded-full` here: the group forces `rounded-b-4xl` on its last
-           child, and a browser scales *every* corner by the same factor once
-           one side overflows — 9999px on top against 26px below would collapse
-           the bottom pair to nothing. At 44px wide the stock 4xl is already
-           past the 22px cap, so it draws the very same pill. */
-        className="size-full flex-col gap-1.5 px-0 shadow-lg"
-      >
-        <ChevronLeftIcon
-          className={cn("transition-transform", !shown && "rotate-180")}
-        />
-        <span className="tracking-wider uppercase [writing-mode:vertical-rl]">
-          {/* Blank until mounted: the collapsed state comes out of
+      <ChevronLeftIcon
+        className={cn(
+          "transition-transform duration-[1078ms] ease-expressive",
+          !shown && "rotate-180",
+        )}
+      />
+      <span className="tracking-wider uppercase [writing-mode:vertical-rl]">
+        {/* Blank until mounted: the collapsed state comes out of
               `localStorage`, so before then the word would be a coin flip. */}
-          {ready ? (shown ? "hide" : "show") : ""}
-        </span>
-      </Button>
-    </ButtonGroup>
+        {ready ? (shown ? "hide" : "show") : ""}
+      </span>
+    </Button>
   );
 }
 
@@ -167,8 +216,15 @@ export default function Nav({
   ...props
 }: { demos: Demo[] } & ComponentProps<"div">) {
   const ulRef = useRef<ElementRef<"ul">>(null);
+  const [listElement, setListElement] = useState<HTMLUListElement | null>(null);
   const roving = useRovingTabIndex(ulRef);
   const searchRef = useRef<HTMLInputElement>(null);
+  const nearbyDemos = useNearbyDemos(listElement);
+
+  const setListRef = useCallback((node: HTMLUListElement | null) => {
+    ulRef.current = node;
+    setListElement(node);
+  }, []);
 
   const [open, setOpenState] = useState(true);
   const [ready, setReady] = useState(false);
@@ -221,31 +277,33 @@ export default function Nav({
       .split(/\s+/)
       .filter(Boolean);
 
-    return demos.filter((demo) => {
-      if (
-        library &&
-        !demo.libraries.some(
-          (demoLibrary) => getLibraryLabel(demoLibrary) === library,
-        )
-      ) {
-        return false;
-      }
+    return demos
+      .filter((demo) => {
+        if (
+          library &&
+          !demo.libraries.some(
+            (demoLibrary) => getLibraryLabel(demoLibrary) === library,
+          )
+        ) {
+          return false;
+        }
 
-      if (terms.length === 0) return true;
+        if (terms.length === 0) return true;
 
-      const searchableText = [
-        demo.name,
-        demo.title,
-        demo.description,
-        ...demo.tags,
-        ...demo.authors,
-        ...demo.libraries.map(getLibraryLabel),
-      ]
-        .join(" ")
-        .toLocaleLowerCase();
+        const searchableText = [
+          demo.name,
+          demo.title,
+          demo.description,
+          ...demo.tags,
+          ...demo.authors,
+          ...demo.libraries.map(getLibraryLabel),
+        ]
+          .join(" ")
+          .toLocaleLowerCase();
 
-      return terms.every((term) => searchableText.includes(term));
-    });
+        return terms.every((term) => searchableText.includes(term));
+      })
+      .sort((demoA, demoB) => Number(demoB.isNew) - Number(demoA.isNew));
   }, [demos, library, search]);
 
   const focusSearch = useCallback(
@@ -363,15 +421,26 @@ export default function Nav({
     <SidebarProvider
       open={open}
       onOpenChange={setOpen}
-      /* The provider writes `--sidebar-width` inline, so the site's own
-         responsive rail width has to arrive the same way — a class would lose
-         to the inline style. `w-auto` undoes the provider's `w-full`, which
-         assumes it wraps the page; here it only wraps the rail and its
-         handle. */
+      /* The provider writes `--sidebar-width` inline, so the site's responsive
+         rail width has to arrive the same way. On desktop this wrapper owns
+         the entire collapse motion, matching the old implementation: its
+         width stays fixed and a negative inline margin gives that space back
+         to the demo. The stock Sidebar gap and panel remain static inside it,
+         avoiding simultaneous width + left animations. Mobile still uses the
+         component's Sheet branch and ignores the desktop-only margin. */
       style={
-        { "--sidebar-width": "var(--sidebar-w)", ...style } as CSSProperties
+        {
+          "--sidebar-width": "var(--sidebar-w)",
+          "--nav-offset": open ? "0px" : "calc(var(--sidebar-width) * -1)",
+          ...style,
+        } as CSSProperties
       }
-      className={cn("relative w-auto shrink-0", className)}
+      className={cn(
+        "relative w-0 shrink-0 md:[margin-inline-start:var(--nav-offset)] md:w-(--sidebar-width) md:transition-[margin-inline-start] md:duration-[1078ms] md:ease-expressive md:will-change-[margin-inline-start]",
+        "[&_[data-slot=sidebar-gap]]:w-(--sidebar-width)! [&_[data-slot=sidebar-gap]]:transition-none!",
+        "[&_[data-slot=sidebar-container]]:absolute! [&_[data-slot=sidebar-container]]:left-0! [&_[data-slot=sidebar-container]]:transition-none!",
+        className,
+      )}
       {...props}
     >
       {/* The rail paints the same colour as the page, so the component's own
@@ -384,7 +453,7 @@ export default function Nav({
             container, and the panel's background is painted a level deeper. */}
         <SidebarHeader className="px-4">
           {searchVisible ? (
-            <InputGroup className="animate-in duration-200 fade-in slide-in-from-top-1">
+            <InputGroup className="animate-in border-border bg-input shadow-lg duration-200 fade-in slide-in-from-top-1">
               {/* Addons come after the control in the DOM — they focus it on
                   click and take their visual side from `align`. */}
               <InputGroupInput
@@ -426,7 +495,7 @@ export default function Nav({
                 }
               >
                 <SelectTrigger
-                  className="min-w-0 flex-1"
+                  className="min-w-0 flex-1 border-border bg-input shadow-lg"
                   aria-label="Filter examples by library"
                 >
                   <ListFilterIcon className="text-muted-foreground" />
@@ -446,7 +515,7 @@ export default function Nav({
                     `--radix-select-content-available-height` a value, which
                     the component's own `max-h-` reads and item-aligned never
                     sets. */}
-                <SelectContent position="popper">
+                <SelectContent position="popper" className="backdrop-blur-sm">
                   <SelectGroup>
                     <SelectItem value={ALL_LIBRARIES}>All libraries</SelectItem>
                     {libraryOptions.map((option) => (
@@ -465,6 +534,7 @@ export default function Nav({
                 aria-label="Search examples"
                 aria-keyshortcuts="Meta+F Control+F Meta+K Control+K"
                 title="Search examples (⌘F)"
+                className="bg-input shadow-lg"
               >
                 <SearchIcon />
               </Button>
@@ -484,7 +554,7 @@ export default function Nav({
         <SidebarContent className="scroll-fade px-4">
           <nav aria-label="Examples">
             <ul
-              ref={ulRef}
+              ref={setListRef}
               /* One tab stop for the whole list, arrows to move inside it —
                  otherwise the ~160 cards sit between the filter row and
                  everything after the rail. */
@@ -496,82 +566,88 @@ export default function Nav({
                  up to `SidebarContent`, so the header lines up with the list. */
               className="flex flex-col gap-3 py-2"
             >
-              {filteredDemos.map(({ name, title, thumb, isNew, tags }) => (
-                <li
-                  key={thumb}
-                  data-demo={name}
-                  className="transition-transform active:scale-97"
-                >
-                  <Item
-                    asChild
-                    variant="outline"
-                    className={cn(
-                      "relative overflow-hidden bg-muted p-0",
-                      /* `accent` is the same value as `muted` under the neutral
-                         base colour, so the selected card reads through the
-                         paired `accent-foreground` ring. */
-                      demoname === name &&
-                        "bg-accent ring-2 ring-accent-foreground",
-                    )}
-                  >
-                    <Link
-                      href={`/demos/${name}`}
-                      aria-current={demoname === name ? "page" : undefined}
-                      className="no-underline"
+              {filteredDemos.map(
+                ({ name, title, thumb, isNew, tags }, index) => {
+                  const renderDetails =
+                    index < INITIAL_THUMBNAILS ||
+                    nearbyDemos.has(name) ||
+                    demoname === name;
+
+                  return (
+                    <li
+                      key={thumb}
+                      data-demo={name}
+                      className="transition-transform duration-[1078ms] ease-expressive active:scale-97"
                     >
-                      {/* Full-bleed: the media is the only thing in the box, so
-                          the card ends up with the thumbnail's aspect ratio. */}
-                      <ItemMedia
-                        variant="image"
-                        className="relative aspect-video size-auto w-full rounded-none"
+                      <Item
+                        asChild
+                        variant="default"
+                        className={cn(
+                          "relative overflow-hidden rounded-md bg-card p-0 transition-[color,box-shadow] duration-200 hover:shadow-lg",
+                          demoname === name && "ring-2 ring-foreground",
+                        )}
                       >
-                        {/* Thumbnails are served by each demo, not by this
-                            site, so in dev every card but the running one
-                            404s — and a built site can still meet a demo
-                            whose thumbnail was never generated. A broken
-                            `img` stops being a replaced element, which is
-                            exactly when its pseudo-elements start rendering:
-                            `after` covers the browser's glyph with the card's
-                            own colour and puts the alt text back as text. On
-                            an image that loads, nothing of this exists. */}
-                        <Image
-                          src={thumb}
-                          fill
-                          sizes="(min-width: 640px) 260px, 200px"
-                          alt={title}
-                          className="after:absolute after:inset-0 after:grid after:place-items-center after:bg-muted after:px-3 after:text-center after:text-xs after:text-muted-foreground after:content-[attr(alt)]"
-                        />
-                      </ItemMedia>
-                      {isNew && (
-                        <Badge
-                          variant="secondary"
-                          className="absolute top-1.5 right-1.5"
+                        <Link
+                          href={`/demos/${name}`}
+                          aria-label={title}
+                          aria-current={demoname === name ? "page" : undefined}
+                          className="no-underline"
                         >
-                          New
-                        </Badge>
-                      )}
-                      {tags.length > 0 && (
-                        <ItemFooter className="absolute inset-x-0 bottom-0">
-                          {/* Same fade as the demo list, on the other axis.
-                              It has to be aimed at the viewport: `ScrollArea`
-                              puts its `className` on the root, and the root is
-                              not what scrolls. */}
-                          <ScrollArea className="w-full [&>[data-slot=scroll-area-viewport]]:scroll-fade-x">
-                            {/* Padding sits inside the viewport so the
-                                scrollable strip itself runs edge to edge. */}
-                            <div className="flex w-max gap-1 p-1.5">
-                              {tags.slice(0, MAX_TAGS).map((tag) => (
-                                <Badge key={tag}>{tag}</Badge>
-                              ))}
-                            </div>
-                            <ScrollBar orientation="horizontal" />
-                          </ScrollArea>
-                        </ItemFooter>
-                      )}
-                    </Link>
-                  </Item>
-                </li>
-              ))}
+                          {/* Every card keeps its aspect-ratio box mounted, so
+                              observing and arrow-key focus never change scroll
+                              geometry. Only the costly contents are windowed. */}
+                          <ItemMedia
+                            variant="image"
+                            className="relative aspect-video size-auto w-full rounded-none"
+                          >
+                            {renderDetails && (
+                              /* Thumbnails are served by each demo, not by
+                                 this site, so in dev every card but the running
+                                 one 404s. A broken img stops being a replaced
+                                 element, which is when its pseudo-elements
+                                 render: `after` covers the browser glyph and
+                                 restores the alt text. */
+                              <Image
+                                src={thumb}
+                                fill
+                                sizes="(min-width: 640px) 260px, 200px"
+                                alt={title}
+                                className="after:absolute after:inset-0 after:grid after:place-items-center after:bg-card after:px-3 after:text-center after:text-xs after:text-muted-foreground after:content-[attr(alt)]"
+                              />
+                            )}
+                          </ItemMedia>
+                          {isNew && (
+                            <Badge
+                              variant="secondary"
+                              className="absolute top-1.5 right-1.5 bg-new text-new-foreground"
+                            >
+                              New
+                            </Badge>
+                          )}
+                          {renderDetails && tags.length > 0 && (
+                            <ItemFooter className="absolute inset-x-0 bottom-0">
+                              {/* Same fade as the demo list, on the other axis.
+                                  It has to be aimed at the viewport: `ScrollArea`
+                                  puts its `className` on the root, and the root is
+                                  not what scrolls. */}
+                              <ScrollArea className="w-full [&>[data-slot=scroll-area-viewport]]:scroll-fade-x">
+                                {/* Padding sits inside the viewport so the
+                                    scrollable strip itself runs edge to edge. */}
+                                <div className="flex w-max gap-1 p-1.5">
+                                  {tags.slice(0, MAX_TAGS).map((tag) => (
+                                    <Badge key={tag}>{tag}</Badge>
+                                  ))}
+                                </div>
+                                <ScrollBar orientation="horizontal" />
+                              </ScrollArea>
+                            </ItemFooter>
+                          )}
+                        </Link>
+                      </Item>
+                    </li>
+                  );
+                },
+              )}
             </ul>
           </nav>
 

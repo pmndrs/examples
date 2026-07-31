@@ -58,7 +58,7 @@ export function Info({ demo }: { demo: Demo }) {
       {/* One button, so the group's `rounded-4xl` ends meet and it draws a
           disc. It is a group of one on purpose: a second control can land
           beside it without the pill having to be rebuilt. */}
-      <ButtonGroup className="rounded-4xl shadow-lg">
+      <ButtonGroup className="rounded-4xl shadow-lg backdrop-blur-sm">
         <Tooltip>
           <TooltipTrigger asChild>
             <PopoverTrigger asChild>
@@ -93,7 +93,7 @@ export function Info({ demo }: { demo: Demo }) {
            `--radix-popover-content-available-height`, which is what the old
            `max-height: min(100dvh - 4.5rem, 34rem)` was approximating by
            hand. */
-        className="max-h-(--radix-popover-content-available-height) w-[min(24rem,calc(100dvw-1.5rem))] overflow-y-auto overscroll-contain"
+        className="max-h-(--radix-popover-content-available-height) w-[min(24rem,calc(100dvw-1.5rem))] overflow-y-auto overscroll-contain rounded-xl border border-border backdrop-blur-sm duration-200"
       >
         <PopoverHeader>
           <PopoverTitle>{demo.title}</PopoverTitle>
