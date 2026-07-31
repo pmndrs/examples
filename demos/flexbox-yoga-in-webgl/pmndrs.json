@@ -6,6 +6,6 @@
   "authors": ["Paul Henschel"],
   "publishedAt": "2020-09-07",
   "source": "https://codesandbox.io/s/7psew",
-  "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/flex"],
+  "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/flex", "@react-three/postprocessing"],
   "assets": []
 }

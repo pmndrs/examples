@@ -6,6 +6,6 @@
   "authors": ["Paul Henschel"],
   "publishedAt": "2020-01-10",
   "source": "https://codesandbox.io/s/sbf2i",
-  "libraries": ["@react-three/fiber"],
+  "libraries": ["@react-three/fiber", "@react-three/postprocessing", "meshline"],
   "assets": []
 }

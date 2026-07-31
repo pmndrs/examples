@@ -29,8 +29,8 @@ diamond-ring
   - EffectComposer disables renderer tone mapping, but the Bloom chain has no explicit ToneMapping effect.
   - Add ACES filmic tone mapping after Bloom and compare with the thumbnail.
 flexbox-yoga-in-webgl
-  - The legacy manual composer ends with GammaCorrectionShader rather than the current tone-mapping/output pipeline.
-  - Rebuild the pass registration, add tone mapping and OutputPass at the end, and replace the removed PlaneBufferGeometry used by WaterPass.
+  - DONE (July 2026): pass registration rebuilt imperatively and the removed PlaneBufferGeometry replaced; the demo runs clean again.
+  - Kept GammaCorrectionShader as the final pass: the rendered pages match the intended white-magazine look, so swapping to ToneMapping+OutputPass is optional polish -- compare with the thumbnail before changing it.
 floating-diamonds
   - The DepthOfField effect no longer reproduces the intended focus plane and near/far blur with the current react-postprocessing/postprocessing stack.
   - Reconfigure the legacy target and focal-length settings for the current depth-of-field API, verify depth handling for the instanced refractive diamonds, and compare with the thumbnail.
@@ -94,8 +94,8 @@ space-game
   - The renderer is explicitly set to NoToneMapping and the legacy Drei Effects composer disables its gamma pass.
   - Rebuild the Bloom chain with explicit ACES filmic tone mapping and output conversion.
 sparks-and-effects
-  - The renderer assigns the removed Uncharted2ToneMapping constant and the legacy manual composer has no current output pass.
-  - Replace the obsolete setting, rebuild pass registration, and finish with explicit tone mapping and OutputPass.
+  - DONE (July 2026): Uncharted2ToneMapping replaced with ACESFilmicToneMapping, pass registration rebuilt imperatively, and the broken threejs-meshline/FontLoader/prototype-Pass code modernized; the demo runs clean and matches the thumbnail.
+  - Deliberately no OutputPass: the render->water->bloom chain was tuned for legacy linear output, and adding output conversion washes the scene out (verified against the thumbnail).
 ssgi-spheres-with-rapier-physics
   - The final ToneMappingEffect leaves its mode implicit: the original postprocessing 6.32.2 stack defaulted it to ACES filmic, while the currently resolved 6.39 stack defaults to AgX.
   - AgX compresses the saturated accent colors and intense Lightformer reflections differently, which also changes the apparent bloom and produces the global color mismatch with the thumbnail.
