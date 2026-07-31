@@ -7,7 +7,6 @@ export default function App() {
     <Canvas
       camera={{ position: [0, 0, 35] }}
       gl={({ canvas }) => {
-        // fiber 9 passes default renderer props ({ canvas, ... }), not the canvas itself
         const gl = new SVGRenderer()
         const parent = canvas.parentNode
         parent.removeChild(canvas)
