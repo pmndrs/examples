@@ -16,6 +16,10 @@ const demos = getDemos();
  * Material Color Utilities derives every `--md-sys-color-*` role from it, and
  * `globals.css` hands those on to shadcn's tokens. `scheme`, `contrast`, core
  * colour overrides and `customColors` all go in the second argument.
+ *
+ * Kept even though `monochrome` throws the hue away: it is what the source
+ * *is*, and it is the one line to change to see the site in colour again --
+ * every other scheme reads it.
  */
 const MCU_SOURCE = "#5de4c7";
 
@@ -31,7 +35,7 @@ const MCU_SOURCE = "#5de4c7";
  * bundle either. `<Mcu>` and `useMcu` live behind `material-theme-builder/react`
  * if a runtime theme picker ever lands.
  */
-const mcuCss = builder(MCU_SOURCE, { scheme: "tonalSpot" }).toCss();
+const mcuCss = builder(MCU_SOURCE, { scheme: "monochrome" }).toCss();
 
 export const metadata: Metadata = {
   title: "pmndrs examples",
