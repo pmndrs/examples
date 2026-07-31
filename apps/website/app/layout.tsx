@@ -67,7 +67,9 @@ export default function RootLayout({
                   0.999, 0.999, 1.00
                 );
 
-                background: #eee;
+                /* No background here on purpose: this block is unlayered, so
+                   any value would outrank the bg-background/text-foreground
+                   that globals.css puts on body in @layer base. */
                 display: flex;
                 height: 100dvh;
                 overflow: hidden;
