@@ -7,6 +7,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
 import {
+  Item,
+  ItemContent,
+  ItemDescription,
+  ItemGroup,
+  ItemTitle,
+} from "@/components/ui/item";
+import {
   Popover,
   PopoverContent,
   PopoverDescription,
@@ -130,53 +137,61 @@ export function Info({ demo }: { demo: Demo }) {
 
         {demo.assets.length > 0 && (
           <Section title="Assets">
-            <ul className="flex flex-col gap-2.5 text-xs">
+            {/* The one part of the panel that is a list of *things* rather than
+                a value: each asset has a name, someone it is by, and terms it
+                comes under. `ItemGroup` carries the `role="list"` the `<ul>`
+                used to. `muted` rather than `outline` — the panel is already a
+                surface, and a border inside it would read as a second one. */}
+            <ItemGroup>
               {demo.assets.map((asset) => (
-                <li key={asset.name}>
-                  {asset.source ? (
-                    <a
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href={asset.source}
-                    >
-                      {asset.name}
-                    </a>
-                  ) : (
-                    asset.name
-                  )}
-                  {asset.creator && (
-                    <span className="text-muted-foreground">
-                      {" "}
-                      by {asset.creator}
-                    </span>
-                  )}
-                  {asset.license && (
-                    <span className="text-muted-foreground">
-                      {" — "}
-                      {asset.licenseUrl ? (
+                <Item key={asset.name} variant="muted" size="xs">
+                  <ItemContent>
+                    <ItemTitle>
+                      {asset.source ? (
                         <a
                           target="_blank"
                           rel="noopener noreferrer"
-                          href={asset.licenseUrl}
+                          href={asset.source}
                         >
-                          {asset.license}
+                          {asset.name}
                         </a>
                       ) : (
-                        asset.license
+                        asset.name
                       )}
-                    </span>
-                  )}
-                  {asset.modified && (
-                    <span className="text-muted-foreground"> (modified)</span>
-                  )}
-                  {asset.notes && (
-                    <span className="block text-muted-foreground">
-                      {asset.notes}
-                    </span>
-                  )}
-                </li>
+                      {asset.modified && (
+                        <Badge variant="outline">edited</Badge>
+                      )}
+                    </ItemTitle>
+                    {(asset.creator || asset.license) && (
+                      <ItemDescription>
+                        {asset.creator && <>by {asset.creator}</>}
+                        {asset.creator && asset.license && " — "}
+                        {asset.license &&
+                          (asset.licenseUrl ? (
+                            <a
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              href={asset.licenseUrl}
+                            >
+                              {asset.license}
+                            </a>
+                          ) : (
+                            asset.license
+                          ))}
+                      </ItemDescription>
+                    )}
+                    {/* Notes are the only free text here, and the stock
+                        two-line clamp is measured for a row in a list, not for
+                        a panel the reader opened to read. */}
+                    {asset.notes && (
+                      <ItemDescription className="line-clamp-none text-xs">
+                        {asset.notes}
+                      </ItemDescription>
+                    )}
+                  </ItemContent>
+                </Item>
               ))}
-            </ul>
+            </ItemGroup>
           </Section>
         )}
       </PopoverContent>
