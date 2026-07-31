@@ -26,14 +26,10 @@ const MCU_SOURCE = "#5de4c7";
  *
  * Built here rather than through the package's `<Mcu>`: this file is a server
  * component, so the palette is computed once at build time and ships inside
- * the prerendered HTML, with nothing left to do on hydration.
- *
- * The import still costs the client ~32 kB gzip, which it shouldn't: the
- * package's main entry re-exports its `"use client"` module, and Next
- * registers every export of one it sees, so `Mcu` and the colour utilities end
- * up in the browser bundle even though nothing renders them. A React-free
- * subpath is queued upstream (abernier/material-theme-builder#160); switch to
- * `material-theme-builder/builder` once it ships and the 32 kB go away.
+ * the prerendered HTML, with nothing left to do on hydration -- and, since
+ * the package root is React-free as of 3.0.0, nothing reaching the browser
+ * bundle either. `<Mcu>` and `useMcu` live behind `material-theme-builder/react`
+ * if a runtime theme picker ever lands.
  */
 const mcuCss = builder(MCU_SOURCE, { scheme: "tonalSpot" }).toCss();
 

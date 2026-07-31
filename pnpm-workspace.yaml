@@ -22,4 +22,4 @@ patchedDependencies:
   '@splinetool/loader@0.9.153': patches/@splinetool__loader@0.9.153.patch
 
 minimumReleaseAgeExclude:
-  - material-theme-builder@2.2.0
+  - material-theme-builder@3.0.0
