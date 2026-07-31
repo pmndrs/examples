@@ -1,11 +1,11 @@
 {
-  "name": "@demo/trails",
+  "name": "@demo/trails-r3f-9.7.0",
   "version": "1.0.0",
   "dependencies": {
     "@pmndrs/branding": "^0.0.8",
     "@react-three/cannon": "^6.6.0",
     "@react-three/drei": "10.7.7",
-    "@react-three/fiber": "9.6.1",
+    "@react-three/fiber": "9.7.0",
     "lamina": "1.2.2",
     "react": "19.2.8",
     "react-dom": "19.2.8",
@@ -35,6 +35,6 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pmndrs/examples/tree/main/demos/trails"
+    "url": "https://github.com/pmndrs/examples/tree/main/demos/trails-r3f-9.7.0"
   }
 }

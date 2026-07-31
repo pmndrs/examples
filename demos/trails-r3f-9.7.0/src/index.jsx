@@ -6,7 +6,7 @@ import { App } from './App'
 
 createRoot(document.getElementById('root')).render(
   <>
-    <div style={{ position: 'absolute', top: 40, left: 40 }}>trails —</div>
+    <div style={{ position: 'absolute', top: 40, left: 40 }}>@react-three/fiber v9.7.0 —</div>
     <div
       style={{
         pointerEvents: 'none',
@@ -35,7 +35,7 @@ createRoot(document.getElementById('root')).render(
         pmnd.rs
         <br />
         dev collective
-        <div>18/03/2022</div>
+        <div>31/07/2026</div>
       </div>
     </div>
     <Suspense fallback={null}>

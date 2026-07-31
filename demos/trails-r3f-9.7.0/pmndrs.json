@@ -1,0 +1,11 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Trails with React Three Fiber 9.7.0",
+  "description": "A v9.7.0 release riff on the trails demo: a swarm of physics-driven extruded version numbers orbits an immovable 9.7.0, and clicking detonates them in a burst of pmndrs logos.",
+  "tags": ["trail", "meshline", "physics", "gradient", "text3d", "release"],
+  "authors": ["Faraz Shaikh", "Kris Baumgartner"],
+  "publishedAt": "2026-07-31",
+  "source": "https://github.com/pmndrs/examples/tree/main/demos/trails",
+  "libraries": ["@react-three/cannon", "@react-three/drei", "@react-three/fiber", "lamina"],
+  "assets": []
+}
