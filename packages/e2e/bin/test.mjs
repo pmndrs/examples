@@ -14,7 +14,7 @@ if (!pkgname) {
   console.error("Please provide the package name as the first argument.");
   process.exit(1);
 }
-const demoname = pkgname.split("@demo/")[1];
+const examplename = pkgname.split("@example/")[1];
 
 const updateSnapshots = argv["update-snapshots"];
 
@@ -48,7 +48,7 @@ function startPlaywright(url) {
       args.push(
         typeof updateSnapshots === "string"
           ? `--update-snapshots=${updateSnapshots}`
-          : "--update-snapshots"
+          : "--update-snapshots",
       );
     }
 
@@ -56,7 +56,7 @@ function startPlaywright(url) {
       stdio: "inherit",
       env: {
         ...process.env,
-        DEMONAME: demoname,
+        EXAMPLENAME: examplename,
         HOST: url,
       },
     });
@@ -75,7 +75,7 @@ function startPlaywright(url) {
 }
 
 const { close: closeVite, url } = await startVite(
-  `${process.env.BASE_PATH || ""}/${demoname}`
+  `${process.env.BASE_PATH || ""}/${examplename}`,
 );
 console.log("Vite started at", url);
 const playwright = await startPlaywright(url);

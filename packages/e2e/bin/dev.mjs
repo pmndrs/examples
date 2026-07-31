@@ -14,19 +14,19 @@ if (!pkgname) {
   console.error("Please provide the package name as the first argument.");
   process.exit(1);
 }
-const demoname = pkgname.split("@demo/")[1];
+const examplename = pkgname.split("@example/")[1];
 
 const __filename = fileURLToPath(import.meta.url); // Converts the URL to a file path
 const __dirname = dirname(__filename); // Gets the directory name
 const configFile = resolve(__dirname, "../src/vite.config.dev.ts");
 
-const base = `${process.env.BASE_PATH || ""}/${demoname}`;
+const base = `${process.env.BASE_PATH || ""}/${examplename}`;
 
 const server = await createServer({
   base,
   configFile,
   server: {
-    port: generatePort(demoname),
+    port: generatePort(examplename),
     strictPort: true,
   },
 });

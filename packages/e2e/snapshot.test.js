@@ -9,9 +9,9 @@ if (!host) {
   process.exit(1);
 }
 
-const demoname = process.env.DEMONAME;
-if (!demoname) {
-  console.error("Please provide DEMONAME.");
+const examplename = process.env.EXAMPLENAME;
+if (!examplename) {
+  console.error("Please provide EXAMPLENAME.");
   process.exit(1);
 }
 
@@ -19,9 +19,9 @@ async function waitForEvent(page, eventName) {
   await page.evaluate(
     (eventName) =>
       new Promise((resolve) =>
-        document.addEventListener(eventName, resolve, { once: true })
+        document.addEventListener(eventName, resolve, { once: true }),
       ),
-    eventName
+    eventName,
   );
 }
 
@@ -39,7 +39,7 @@ function waitForServer() {
   });
 }
 
-test(`${demoname}`, async ({ page }) => {
+test(`${examplename}`, async ({ page }) => {
   // Redirect console.log messages to stdout
   page.on("console", (msg) => {
     if (msg.type() === "log") {

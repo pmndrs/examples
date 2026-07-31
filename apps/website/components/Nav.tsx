@@ -22,7 +22,7 @@ import {
 
 import { getLibraryLabel, getLibraryPopularity } from "@/const/libraries";
 import { useRovingTabIndex } from "@/hooks/use-roving-tabindex";
-import type { Demo } from "@/lib/helper";
+import type { Example } from "@/lib/helper";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -71,7 +71,7 @@ const ALL_LIBRARIES = "__all__";
  * part of the SidebarContent scroller. One observer handles the whole list;
  * importantly, the hook reruns when Radix mounts the mobile Sheet's list.
  */
-function useNearbyDemos(list: HTMLUListElement | null) {
+function useNearbyExamples(list: HTMLUListElement | null) {
   const [nearby, setNearby] = useState<ReadonlySet<string>>(() => new Set());
 
   useEffect(() => {
@@ -80,13 +80,15 @@ function useNearbyDemos(list: HTMLUListElement | null) {
       return;
     }
 
-    const items = Array.from(list.querySelectorAll<HTMLElement>("[data-demo]"));
+    const items = Array.from(
+      list.querySelectorAll<HTMLElement>("[data-example]"),
+    );
 
     if (!("IntersectionObserver" in window)) {
       setNearby(
         new Set(
           items.flatMap((item) =>
-            item.dataset.demo ? [item.dataset.demo] : [],
+            item.dataset.example ? [item.dataset.example] : [],
           ),
         ),
       );
@@ -101,7 +103,7 @@ function useNearbyDemos(list: HTMLUListElement | null) {
           let changed = false;
 
           for (const entry of entries) {
-            const name = (entry.target as HTMLElement).dataset.demo;
+            const name = (entry.target as HTMLElement).dataset.example;
             if (!name) continue;
 
             if (entry.isIntersecting && !next.has(name)) {
@@ -174,7 +176,7 @@ function NavToggle() {
       variant="secondary"
       size="lg"
       onClick={toggleSidebar}
-      aria-label={shown ? "Hide demos" : "Show demos"}
+      aria-label={shown ? "Hide examples" : "Show examples"}
       aria-pressed={shown}
       className={cn(
         /* `inset-y-0` + `my-auto` centres the capsule without a Y transform.
@@ -183,9 +185,9 @@ function NavToggle() {
         "absolute inset-y-0 right-0 z-20 my-auto h-22 w-11 flex-col gap-1.5 rounded-full px-0 text-[0.6rem] leading-none shadow-2xl transition-transform duration-[250ms] ease-out [--secondary:var(--card)] active:not-aria-[haspopup]:translate-y-0 [&_svg]:size-3",
         shown
           ? /* Right edge halfway across the gutter between the rail and the
-               demo — which is `main`'s padding, since the two are flush. Half
+               example — which is `main`'s padding, since the two are flush. Half
                its own width would put the edge at 22px, past the gutter's
-               midpoint and nearly onto the demo. The collapsed offsets below
+               midpoint and nearly onto the example. The collapsed offsets below
                are a different measure: there the wrapper has no width, so they
                are just how much sliver is left against the page edge. */
             "translate-x-[calc(var(--main-p)/2)]"
@@ -210,16 +212,16 @@ function NavToggle() {
 }
 
 export default function Nav({
-  demos,
+  examples,
   className,
   style,
   ...props
-}: { demos: Demo[] } & ComponentProps<"div">) {
+}: { examples: Example[] } & ComponentProps<"div">) {
   const ulRef = useRef<ElementRef<"ul">>(null);
   const [listElement, setListElement] = useState<HTMLUListElement | null>(null);
   const roving = useRovingTabIndex(ulRef);
   const searchRef = useRef<HTMLInputElement>(null);
-  const nearbyDemos = useNearbyDemos(listElement);
+  const nearbyExamples = useNearbyExamples(listElement);
 
   const setListRef = useCallback((node: HTMLUListElement | null) => {
     ulRef.current = node;
@@ -243,18 +245,19 @@ export default function Nav({
   const libraryOptions = useMemo(() => {
     const popularityByLabel = new Map<string, number>();
     const usageByLabel = new Map<string, number>();
-    const libraries = new Set(demos.flatMap((demo) => demo.libraries));
+    const libraries = new Set(examples.flatMap((example) => example.libraries));
 
-    libraries.forEach((demoLibrary) => {
-      const label = getLibraryLabel(demoLibrary);
+    libraries.forEach((exampleLibrary) => {
+      const label = getLibraryLabel(exampleLibrary);
       popularityByLabel.set(
         label,
-        (popularityByLabel.get(label) ?? 0) + getLibraryPopularity(demoLibrary),
+        (popularityByLabel.get(label) ?? 0) +
+          getLibraryPopularity(exampleLibrary),
       );
     });
 
-    demos.forEach((demo) => {
-      const labels = new Set(demo.libraries.map(getLibraryLabel));
+    examples.forEach((example) => {
+      const labels = new Set(example.libraries.map(getLibraryLabel));
       labels.forEach((label) => {
         usageByLabel.set(label, (usageByLabel.get(label) ?? 0) + 1);
       });
@@ -268,21 +271,21 @@ export default function Nav({
           labelA.localeCompare(labelB),
       )
       .map(([label]) => label);
-  }, [demos]);
+  }, [examples]);
 
-  const filteredDemos = useMemo(() => {
+  const filteredExamples = useMemo(() => {
     const terms = search
       .trim()
       .toLocaleLowerCase()
       .split(/\s+/)
       .filter(Boolean);
 
-    return demos
-      .filter((demo) => {
+    return examples
+      .filter((example) => {
         if (
           library &&
-          !demo.libraries.some(
-            (demoLibrary) => getLibraryLabel(demoLibrary) === library,
+          !example.libraries.some(
+            (exampleLibrary) => getLibraryLabel(exampleLibrary) === library,
           )
         ) {
           return false;
@@ -291,20 +294,22 @@ export default function Nav({
         if (terms.length === 0) return true;
 
         const searchableText = [
-          demo.name,
-          demo.title,
-          demo.description,
-          ...demo.tags,
-          ...demo.authors,
-          ...demo.libraries.map(getLibraryLabel),
+          example.name,
+          example.title,
+          example.description,
+          ...example.tags,
+          ...example.authors,
+          ...example.libraries.map(getLibraryLabel),
         ]
           .join(" ")
           .toLocaleLowerCase();
 
         return terms.every((term) => searchableText.includes(term));
       })
-      .sort((demoA, demoB) => Number(demoB.isNew) - Number(demoA.isNew));
-  }, [demos, library, search]);
+      .sort(
+        (exampleA, exampleB) => Number(exampleB.isNew) - Number(exampleA.isNew),
+      );
+  }, [examples, library, search]);
 
   const focusSearch = useCallback(
     (select = false) => {
@@ -383,7 +388,7 @@ export default function Nav({
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [dismissSearch, focusSearch, libraryOpen, search, searchVisible]);
 
-  const { demoname } = useParams();
+  const { examplename } = useParams();
 
   /* `data-nav-collapsed` is put on <html> before first paint by the inline
      script in `app/layout.tsx` — the only way a statically exported page can
@@ -403,10 +408,11 @@ export default function Nav({
 
   const firstRef = useRef(true);
   useEffect(() => {
-    const hasDemoSelected = typeof demoname === "string" && demoname.length > 0;
-    if (!hasDemoSelected) return;
+    const hasExampleSelected =
+      typeof examplename === "string" && examplename.length > 0;
+    if (!hasExampleSelected) return;
     const li = ulRef.current?.querySelector(
-      `[data-demo="${CSS.escape(demoname)}"]`,
+      `[data-example="${CSS.escape(examplename)}"]`,
     );
     if (li)
       li.scrollIntoView({
@@ -415,7 +421,7 @@ export default function Nav({
         behavior: firstRef.current ? "instant" : "smooth",
       });
     firstRef.current = false;
-  }, [demoname, filteredDemos]);
+  }, [examplename, filteredExamples]);
 
   return (
     <SidebarProvider
@@ -425,7 +431,7 @@ export default function Nav({
          rail width has to arrive the same way. On desktop this wrapper owns
          the entire collapse motion, matching the old implementation: its
          width stays fixed and a negative inline margin gives that space back
-         to the demo. The stock Sidebar gap and panel remain static inside it,
+         to the example. The stock Sidebar gap and panel remain static inside it,
          avoiding simultaneous width + left animations. Mobile still uses the
          component's Sheet branch and ignores the desktop-only margin. */
       style={
@@ -464,7 +470,7 @@ export default function Nav({
                 onFocus={() => setSearchOpen(true)}
                 placeholder="Search examples"
                 aria-label="Search examples"
-                aria-controls="demo-list"
+                aria-controls="example-list"
                 aria-describedby="search-results"
                 className="[&::-webkit-search-cancel-button]:hidden"
               />
@@ -473,7 +479,7 @@ export default function Nav({
               </InputGroupAddon>
               <InputGroupAddon align="inline-end">
                 <InputGroupText className="text-xs tabular-nums">
-                  {filteredDemos.length}
+                  {filteredExamples.length}
                 </InputGroupText>
                 <InputGroupButton
                   size="icon-xs"
@@ -541,7 +547,7 @@ export default function Nav({
             </div>
           )}
           <span id="search-results" className="sr-only" aria-live="polite">
-            {filteredDemos.length} examples
+            {filteredExamples.length} examples
           </span>
         </SidebarHeader>
 
@@ -559,24 +565,24 @@ export default function Nav({
                  otherwise the ~160 cards sit between the filter row and
                  everything after the rail. */
               {...roving}
-              id="demo-list"
+              id="example-list"
               /* The block padding is not decoration: the selected card's ring
                  sits outside its border box, and the scroller would clip it on
                  the first and last item without it. The inline half of it moved
                  up to `SidebarContent`, so the header lines up with the list. */
               className="flex flex-col gap-3 py-2"
             >
-              {filteredDemos.map(
+              {filteredExamples.map(
                 ({ name, title, thumb, isNew, tags }, index) => {
                   const renderDetails =
                     index < INITIAL_THUMBNAILS ||
-                    nearbyDemos.has(name) ||
-                    demoname === name;
+                    nearbyExamples.has(name) ||
+                    examplename === name;
 
                   return (
                     <li
                       key={thumb}
-                      data-demo={name}
+                      data-example={name}
                       className="transition-transform duration-[1078ms] ease-expressive active:scale-97"
                     >
                       <Item
@@ -584,13 +590,15 @@ export default function Nav({
                         variant="default"
                         className={cn(
                           "relative overflow-hidden rounded-md bg-card p-0 transition-[color,box-shadow] duration-200 hover:shadow-lg",
-                          demoname === name && "ring-2 ring-foreground",
+                          examplename === name && "ring-2 ring-foreground",
                         )}
                       >
                         <Link
-                          href={`/demos/${name}`}
+                          href={`/examples/${name}`}
                           aria-label={title}
-                          aria-current={demoname === name ? "page" : undefined}
+                          aria-current={
+                            examplename === name ? "page" : undefined
+                          }
                           className="no-underline"
                         >
                           {/* Every card keeps its aspect-ratio box mounted, so
@@ -601,7 +609,7 @@ export default function Nav({
                             className="relative aspect-video size-auto w-full rounded-none"
                           >
                             {renderDetails && (
-                              /* Thumbnails are served by each demo, not by
+                              /* Thumbnails are served by each example, not by
                                  this site, so in dev every card but the running
                                  one 404s. A broken img stops being a replaced
                                  element, which is when its pseudo-elements
@@ -626,7 +634,7 @@ export default function Nav({
                           )}
                           {renderDetails && tags.length > 0 && (
                             <ItemFooter className="absolute inset-x-0 bottom-0">
-                              {/* Same fade as the demo list, on the other axis.
+                              {/* Same fade as the example list, on the other axis.
                                   It has to be aimed at the viewport: `ScrollArea`
                                   puts its `className` on the root, and the root is
                                   not what scrolls. */}
@@ -651,7 +659,7 @@ export default function Nav({
             </ul>
           </nav>
 
-          {filteredDemos.length === 0 && (
+          {filteredExamples.length === 0 && (
             /* Stock padding is p-12, which leaves nothing to read in a rail
                this narrow — and the inline half now comes from the scroller. */
             <Empty className="py-6">

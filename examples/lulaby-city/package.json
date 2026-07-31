@@ -1,0 +1,62 @@
+{
+  "name": "@example/lulaby-city",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@pmndrs/branding": "^0.0.8",
+    "@react-three/drei": "10.7.7",
+    "@react-three/fiber": "9.6.1",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "three": "0.165.0"
+  },
+  "scripts": {
+    "dev": "vite --host",
+    "dev3": "e2e-dev $npm_package_name",
+    "build": "tsc && vite build",
+    "build2": "tsc && e2e-build $npm_package_name",
+    "preview": "vite preview"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "prettier": {
+    "semi": false,
+    "trailingComma": "es5",
+    "singleQuote": true,
+    "jsxBracketSameLine": true,
+    "tabWidth": 2,
+    "printWidth": 120
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --write"
+    ]
+  },
+  "devDependencies": {
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "@types/three": "^0.165.0",
+    "@vitejs/plugin-react": "^6.0.4",
+    "lint-staged": "^16.2.7",
+    "typescript": "^7.0.2",
+    "vite": "^8.1.5"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pmndrs/examples/tree/main/examples/lulaby-city"
+  }
+}
