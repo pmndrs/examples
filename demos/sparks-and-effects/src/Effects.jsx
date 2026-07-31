@@ -1,27 +1,30 @@
-import * as THREE from 'three'
-import { useEffect, useMemo } from 'react'
-import { useThree, useFrame } from '@react-three/fiber'
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
-import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass'
-import { WaterPass } from './post/Waterpass'
+import { useCallback, useRef } from 'react'
+import { useFrame } from '@react-three/fiber'
+import { Bloom, EffectComposer } from '@react-three/postprocessing'
+import { WaterEffect } from './WaterEffect'
+
+function AnimatedWaterEffect() {
+  const effect = useRef()
+  const waterTime = useRef(0)
+  const setEffect = useCallback((value) => {
+    effect.current = value
+  }, [])
+
+  useFrame(() => {
+    const time = effect.current?.uniforms.get('waterTime')
+    if (time) time.value = waterTime.current
+    waterTime.current += 0.05
+  })
+
+  return <WaterEffect ref={setEffect} factor={1.5} />
+}
 
 export default function Effects() {
-  const { scene, gl, size, camera } = useThree()
-  // the legacy attachArray="passes" JSX registration is gone from fiber;
-  // build the composer imperatively instead
-  const composer = useMemo(() => {
-    const composer = new EffectComposer(gl)
-    composer.addPass(new RenderPass(scene, camera))
-    const waterPass = new WaterPass()
-    waterPass.factor = 1.5
-    composer.addPass(waterPass)
-    // no OutputPass: the demo's look (matching the thumbnail) relies on the
-    // legacy linear output this chain was tuned against
-    composer.addPass(new UnrealBloomPass(new THREE.Vector2(512, 512), 2, 1, 0))
-    return composer
-  }, [gl, scene, camera])
-  useEffect(() => void composer.setSize(size.width, size.height), [composer, size])
-  useFrame(() => composer.render(), 1)
-  return null
+  return (
+    <EffectComposer multisampling={0}>
+      <AnimatedWaterEffect />
+      <Bloom mipmapBlur intensity={7} luminanceThreshold={0} luminanceSmoothing={0.01} radius={0.95} levels={6} />
+      <Bloom mipmapBlur intensity={4} luminanceThreshold={0} luminanceSmoothing={0.01} radius={0.95} levels={9} />
+    </EffectComposer>
+  )
 }
