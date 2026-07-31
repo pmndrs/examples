@@ -4,6 +4,7 @@ import { ScaledDemoFrame } from "@/components/ScaledDemoFrame";
 import { getDemos } from "@/lib/helper";
 import { Dev } from "./Dev";
 import { Style } from "@/components/Style";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 import { Social } from "./Social";
 import { Info } from "./Info";
@@ -78,8 +79,18 @@ export default async function Page(props: Props) {
         css={`
           @scope {
             .Dev {
+              /* Never takes effect: 'Dev' sets its own 'min(100%, 46rem)' from
+                 a scope rooted on the element itself, and in '@scope' the
+                 nearer root wins whatever the specificity. Kept as the
+                 fallback for a 'Dev' that stops sizing itself. */
               width: 100%;
               height: 100%;
+              /* ...which is why this is needed: an explicitly sized item
+                 stretches to nothing and is parked at the start of the track,
+                 so past 46rem of room the panel sat against the left edge.
+                 'main' centres its own only grid item, and that one is the
+                 route layout's div, which fills. */
+              justify-self: center;
               display: grid;
               place-items: center;
               padding: 1rem;
@@ -89,15 +100,6 @@ export default async function Page(props: Props) {
               height: 100%;
               min-width: 0;
               min-height: 0;
-            }
-            .TopBar {
-              position: fixed;
-              top: 0.75rem;
-              right: 0.75rem;
-              z-index: 3;
-              display: flex;
-              align-items: flex-start;
-              gap: 0.5rem;
             }
           }
         `}
@@ -111,10 +113,15 @@ export default async function Page(props: Props) {
             <ScaledDemoFrame src={embed_url} title={demo.title} />
           </div>
 
-          <div className="TopBar">
-            <Info key={demoname} demo={demo} />
-            <Social demoname={demoname} embed_url={embed_url} />
-          </div>
+          {/* Both pills label themselves through `Tooltip`, which needs a
+              provider above it. The one the sidebar brings is scoped to the
+              nav, and this bar is nowhere near it. */}
+          <TooltipProvider>
+            <div className="fixed top-3 right-3 z-3 flex items-start gap-2">
+              <Info key={demoname} demo={demo} />
+              <Social demoname={demoname} embed_url={embed_url} />
+            </div>
+          </TooltipProvider>
         </>
       )}
     </>

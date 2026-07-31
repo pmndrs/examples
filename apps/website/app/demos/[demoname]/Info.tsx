@@ -1,11 +1,31 @@
-"use client";
+import { ReactNode } from "react";
+import { RxInfoCircled } from "react-icons/rx";
 
-import { useEffect, useRef, useState } from "react";
-import { RxCross2, RxInfoCircled } from "react-icons/rx";
-
-import { Style } from "@/components/Style";
 import { getLibraryLabel } from "@/const/libraries";
 import type { Demo } from "@/lib/helper";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { ButtonGroup } from "@/components/ui/button-group";
+import {
+  Item,
+  ItemContent,
+  ItemDescription,
+  ItemGroup,
+  ItemTitle,
+} from "@/components/ui/item";
+import {
+  Popover,
+  PopoverContent,
+  PopoverDescription,
+  PopoverHeader,
+  PopoverTitle,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 function formatDate(date: string) {
   return new Date(`${date}T00:00:00Z`).toLocaleDateString("en-US", {
@@ -16,384 +36,165 @@ function formatDate(date: string) {
   });
 }
 
+/** The panel is a stack of these — a small caps label over its content. */
+function Section({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <section className="flex flex-col gap-1.5">
+      <h3 className="text-xs font-bold tracking-wider text-muted-foreground uppercase">
+        {title}
+      </h3>
+      {children}
+    </section>
+  );
+}
+
 export function Info({ demo }: { demo: Demo }) {
-  const [open, setOpen] = useState(false);
-  const popoverRef = useRef<HTMLDivElement>(null);
   const libraryLabels = Array.from(
     new Set(demo.libraries.map(getLibraryLabel)),
   );
 
-  useEffect(() => {
-    const popover = popoverRef.current;
-    if (!popover) return;
-
-    const onToggle = (event: ToggleEvent) => {
-      setOpen(event.newState === "open");
-    };
-
-    popover.addEventListener("toggle", onToggle);
-    return () => popover.removeEventListener("toggle", onToggle);
-  }, []);
-
   return (
-    <div className="Info">
-      <Style
-        css={`
-          @scope {
-            :scope {
-              position: relative;
-            }
+    <Popover>
+      {/* One button, so the group's `rounded-4xl` ends meet and it draws a
+          disc. It is a group of one on purpose: a second control can land
+          beside it without the pill having to be rebuilt. */}
+      <ButtonGroup className="rounded-4xl shadow-lg">
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <PopoverTrigger asChild>
+              <Button
+                variant="secondary"
+                size="icon"
+                aria-label="Show demo info"
+                /* `secondary` reads the same open or shut; the panel is
+                   anchored to this button, so it should look pressed while the
+                   panel is up. */
+                className="aria-expanded:bg-primary aria-expanded:text-primary-foreground"
+              >
+                <RxInfoCircled />
+              </Button>
+            </PopoverTrigger>
+          </TooltipTrigger>
+          <TooltipContent side="bottom">info</TooltipContent>
+        </Tooltip>
+      </ButtonGroup>
 
-            .trigger {
-              position: relative;
-              display: grid;
-              place-items: center;
-              width: 2.4rem;
-              height: 2.4rem;
-              padding: 0;
-              border: none;
-              border-radius: 999px;
-              background: rgb(255 255 255 / 0.82);
-              backdrop-filter: blur(10px);
-              box-shadow: 0 1px 6px rgb(0 0 0 / 0.1);
-              color: #555;
-              cursor: pointer;
-              transition:
-                background 0.15s ease,
-                color 0.15s ease;
-            }
-
-            .trigger:hover {
-              color: #111;
-            }
-
-            .trigger[aria-expanded="true"] {
-              background: #222;
-              color: white;
-            }
-
-            .trigger svg {
-              width: 1.05rem;
-              height: 1.05rem;
-            }
-
-            .trigger > span {
-              position: absolute;
-              top: 100%;
-              left: 50%;
-              translate: -50% 0;
-              margin-top: 0.45rem;
-              padding: 0.25em 0.5em;
-              border-radius: 4px;
-              background: #222;
-              color: white;
-              font-size: 0.65rem;
-              white-space: nowrap;
-              pointer-events: none;
-              opacity: 0;
-              transition: opacity 0.15s ease;
-            }
-
-            .trigger:hover > span {
-              opacity: 1;
-            }
-
-            .trigger[aria-expanded="true"] > span {
-              opacity: 0;
-            }
-
-            .panel {
-              position: fixed;
-              inset: 3.75rem max(0.75rem, env(safe-area-inset-right)) auto auto;
-              box-sizing: border-box;
-              width: min(24rem, calc(100dvw - 1.5rem));
-              max-height: min(calc(100dvh - 4.5rem), 34rem);
-              overflow-y: auto;
-              overscroll-behavior: contain;
-              margin: 0;
-              padding: 1.1rem 1.2rem 1.2rem;
-              border: 1px solid #d4d4d4;
-              border-radius: 12px;
-              background: rgb(255 255 255 / 0.92);
-              backdrop-filter: blur(10px);
-              box-shadow: 0 10px 30px rgb(0 0 0 / 0.12);
-              animation: info-in 0.2s ease both;
-            }
-
-            .panel::backdrop {
-              background: transparent;
-            }
-
-            @keyframes info-in {
-              from {
-                opacity: 0;
-                translate: 0 -0.35rem;
-              }
-              to {
-                opacity: 1;
-                translate: 0 0;
-              }
-            }
-
-            header {
-              display: flex;
-              align-items: baseline;
-              justify-content: space-between;
-              gap: 0.75rem;
-            }
-
-            h2 {
-              margin: 0;
-              font-size: 1rem;
-              font-weight: 700;
-              color: #111;
-            }
-
-            .close {
-              flex-shrink: 0;
-              display: grid;
-              place-items: center;
-              width: 1.6rem;
-              height: 1.6rem;
-              padding: 0;
-              border: none;
-              border-radius: 50%;
-              background: none;
-              color: #555;
-              cursor: pointer;
-              transition:
-                background 0.15s ease,
-                color 0.15s ease;
-            }
-
-            .close:hover {
-              background: rgb(0 0 0 / 0.06);
-              color: #111;
-            }
-
-            .close svg {
-              width: 0.85rem;
-              height: 0.85rem;
-            }
-
-            .description {
-              margin: 0.5rem 0 0;
-              font-size: 0.8rem;
-              line-height: 1.5;
-              color: #333;
-            }
-
-            section {
-              margin-top: 0.9rem;
-            }
-
-            h3 {
-              margin: 0 0 0.4rem;
-              color: #555;
-              font-size: 0.65rem;
-              font-weight: 700;
-              letter-spacing: 0.06em;
-              text-transform: uppercase;
-            }
-
-            .pills {
-              display: flex;
-              flex-wrap: wrap;
-              gap: 0.3rem;
-              margin: 0;
-              padding: 0;
-              list-style: none;
-            }
-
-            .pills li {
-              padding: 2px 8px;
-              border-radius: 999px;
-              background: rgb(0 0 0 / 0.06);
-              color: #333;
-              font-size: 0.65rem;
-              line-height: 1.5;
-            }
-
-            .text {
-              margin: 0;
-              font-size: 0.8rem;
-              line-height: 1.5;
-              color: #333;
-            }
-
-            .assets {
-              display: grid;
-              gap: 0.6rem;
-              margin: 0;
-              padding: 0;
-              list-style: none;
-            }
-
-            .assets li {
-              font-size: 0.75rem;
-              line-height: 1.45;
-              color: #333;
-            }
-
-            .assets .meta {
-              color: #666;
-            }
-
-            .assets .notes {
-              display: block;
-              color: #666;
-              font-size: 0.7rem;
-            }
-
-            @media (max-width: 40rem), (max-height: 32rem) {
-              .panel {
-                inset: auto max(0.5rem, env(safe-area-inset-right))
-                  max(0.5rem, env(safe-area-inset-bottom))
-                  max(0.5rem, env(safe-area-inset-left));
-                width: auto;
-                max-width: none;
-                max-height: calc(
-                  100dvh -
-                    1rem - env(safe-area-inset-top) - env(
-                      safe-area-inset-bottom
-                    )
-                );
-                padding: 1rem;
-                border-radius: 16px;
-              }
-
-              .panel::backdrop {
-                background: rgb(0 0 0 / 0.18);
-              }
-
-              .trigger > span {
-                display: none;
-              }
-            }
-
-            @media (prefers-reduced-motion: reduce) {
-              .panel {
-                animation: none;
-              }
-            }
-          }
-        `}
-      />
-
-      <button
-        popoverTarget="demo-info-panel"
-        popoverTargetAction="toggle"
-        className="trigger"
-        aria-expanded={open}
-        aria-controls="demo-info-panel"
-        aria-haspopup="dialog"
-        aria-label={open ? "Hide demo info" : "Show demo info"}
+      <PopoverContent
+        align="end"
+        sideOffset={8}
+        /* 12px of clearance, the same margin the bar itself keeps — the panel
+           is as wide as the viewport allows on a phone, so without it Radix
+           would park it flush against the edge. */
+        collisionPadding={12}
+        /* Radix measures the room left under the trigger and publishes it as
+           `--radix-popover-content-available-height`, which is what the old
+           `max-height: min(100dvh - 4.5rem, 34rem)` was approximating by
+           hand. */
+        className="max-h-(--radix-popover-content-available-height) w-[min(24rem,calc(100dvw-1.5rem))] overflow-y-auto overscroll-contain"
       >
-        <RxInfoCircled />
-        <span>info</span>
-      </button>
-
-      <div
-        popover="auto"
-        ref={popoverRef}
-        id="demo-info-panel"
-        className="panel"
-        role="dialog"
-        aria-labelledby="demo-info-title"
-      >
-        <header>
-          <h2 id="demo-info-title">{demo.title}</h2>
-          <button
-            className="close"
-            onClick={() => popoverRef.current?.hidePopover()}
-            aria-label="Dismiss demo info"
-          >
-            <RxCross2 />
-          </button>
-        </header>
-
-        {demo.description && <p className="description">{demo.description}</p>}
+        <PopoverHeader>
+          <PopoverTitle>{demo.title}</PopoverTitle>
+          {demo.description && (
+            <PopoverDescription>{demo.description}</PopoverDescription>
+          )}
+        </PopoverHeader>
 
         {demo.authors.length > 0 && (
-          <section>
-            <h3>{demo.authors.length > 1 ? "Authors" : "Author"}</h3>
-            <p className="text">{demo.authors.join(", ")}</p>
-          </section>
+          <Section title={demo.authors.length > 1 ? "Authors" : "Author"}>
+            <p>{demo.authors.join(", ")}</p>
+          </Section>
         )}
 
         {demo.publishedAt && (
-          <section>
-            <h3>Published</h3>
-            <p className="text">{formatDate(demo.publishedAt)}</p>
-          </section>
+          <Section title="Published">
+            <p>{formatDate(demo.publishedAt)}</p>
+          </Section>
         )}
 
         {demo.tags.length > 0 && (
-          <section>
-            <h3>Tags</h3>
-            <ul className="pills">
+          <Section title="Tags">
+            <ul className="flex flex-wrap gap-1">
               {demo.tags.map((tag) => (
-                <li key={tag}>{tag}</li>
+                <Badge key={tag} variant="secondary" asChild>
+                  <li>{tag}</li>
+                </Badge>
               ))}
             </ul>
-          </section>
+          </Section>
         )}
 
         {libraryLabels.length > 0 && (
-          <section>
-            <h3>Libraries</h3>
-            <ul className="pills">
+          <Section title="Libraries">
+            <ul className="flex flex-wrap gap-1">
               {libraryLabels.map((library) => (
-                <li key={library}>{library}</li>
+                <Badge key={library} variant="secondary" asChild>
+                  <li>{library}</li>
+                </Badge>
               ))}
             </ul>
-          </section>
+          </Section>
         )}
 
         {demo.assets.length > 0 && (
-          <section>
-            <h3>Assets</h3>
-            <ul className="assets">
+          <Section title="Assets">
+            {/* The one part of the panel that is a list of *things* rather than
+                a value: each asset has a name, someone it is by, and terms it
+                comes under. `ItemGroup` carries the `role="list"` the `<ul>`
+                used to. `muted` rather than `outline` — the panel is already a
+                surface, and a border inside it would read as a second one. */}
+            <ItemGroup>
               {demo.assets.map((asset) => (
-                <li key={asset.name}>
-                  {asset.source ? (
-                    <a
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href={asset.source}
-                    >
-                      {asset.name}
-                    </a>
-                  ) : (
-                    asset.name
-                  )}
-                  {asset.creator && (
-                    <span className="meta"> by {asset.creator}</span>
-                  )}
-                  {asset.license && (
-                    <span className="meta">
-                      {" — "}
-                      {asset.licenseUrl ? (
+                <Item key={asset.name} variant="muted" size="xs">
+                  <ItemContent>
+                    <ItemTitle>
+                      {asset.source ? (
                         <a
                           target="_blank"
                           rel="noopener noreferrer"
-                          href={asset.licenseUrl}
+                          href={asset.source}
                         >
-                          {asset.license}
+                          {asset.name}
                         </a>
                       ) : (
-                        asset.license
+                        asset.name
                       )}
-                    </span>
-                  )}
-                  {asset.modified && <span className="meta"> (modified)</span>}
-                  {asset.notes && <span className="notes">{asset.notes}</span>}
-                </li>
+                      {asset.modified && (
+                        <Badge variant="outline">edited</Badge>
+                      )}
+                    </ItemTitle>
+                    {(asset.creator || asset.license) && (
+                      <ItemDescription>
+                        {asset.creator && <>by {asset.creator}</>}
+                        {asset.creator && asset.license && " — "}
+                        {asset.license &&
+                          (asset.licenseUrl ? (
+                            <a
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              href={asset.licenseUrl}
+                            >
+                              {asset.license}
+                            </a>
+                          ) : (
+                            asset.license
+                          ))}
+                      </ItemDescription>
+                    )}
+                    {/* Notes are the only free text here, and the stock
+                        two-line clamp is measured for a row in a list, not for
+                        a panel the reader opened to read. */}
+                    {asset.notes && (
+                      <ItemDescription className="line-clamp-none text-xs">
+                        {asset.notes}
+                      </ItemDescription>
+                    )}
+                  </ItemContent>
+                </Item>
               ))}
-            </ul>
-          </section>
+            </ItemGroup>
+          </Section>
         )}
-      </div>
-    </div>
+      </PopoverContent>
+    </Popover>
   );
 }

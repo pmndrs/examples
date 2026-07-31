@@ -1,11 +1,18 @@
 "use client";
 
-import { Style } from "@/components/Style";
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { ReactNode } from "react";
 import { toast } from "sonner";
 import { GoCommandPalette } from "react-icons/go";
-import { RxChevronDown, RxOpenInNewWindow } from "react-icons/rx";
+import { RxOpenInNewWindow } from "react-icons/rx";
 import { SiCodesandbox, SiGithub, SiStackblitz } from "react-icons/si";
+
+import { Button } from "@/components/ui/button";
+import { ButtonGroup } from "@/components/ui/button-group";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export function Social({
   demoname,
@@ -14,9 +21,6 @@ export function Social({
   demoname: string;
   embed_url: string;
 }) {
-  const [moreOpen, setMoreOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
-
   const command = `npx -y degit pmndrs/examples/demos/${demoname} ${demoname} && cd ${demoname} && npm i && npm run dev`;
 
   const handleClick = async () => {
@@ -38,18 +42,8 @@ export function Social({
     });
   };
 
-  useEffect(() => {
-    const menu = menuRef.current;
-    if (!menu) return;
-
-    const onToggle = (event: ToggleEvent) => {
-      setMoreOpen(event.newState === "open");
-    };
-
-    menu.addEventListener("toggle", onToggle);
-    return () => menu.removeEventListener("toggle", onToggle);
-  }, []);
-
+  /* `degit` is the odd one out: it copies rather than navigates, so it is the
+     entry with no `href` and the only real `<button>` in the group. */
   const actions: { label: string; icon: ReactNode; href?: string }[] = [
     { label: "fullpage", icon: <RxOpenInNewWindow />, href: embed_url },
     {
@@ -71,231 +65,54 @@ export function Social({
   ];
 
   return (
-    <>
-      <nav className="Social">
-        <Style
-          css={`
-            @scope {
-              & {
-                display: flex;
-                gap: 0.1rem;
-                padding: 0.3rem;
-                border-radius: 999px;
-                background: rgb(255 255 255 / 0.82);
-                backdrop-filter: blur(10px);
-                box-shadow: 0 1px 6px rgb(0 0 0 / 0.1);
-              }
+    /* `ButtonGroup` is a div, so the landmark has to come from somewhere: four
+       of the five entries leave the page. */
+    <nav aria-label="Demo links">
+      {/* The group draws no box of its own — the buttons, sitting flush, are
+          the pill. It only needs the matching radius so the shadow traces that
+          pill rather than the rectangle around it.
 
-              :scope > a,
-              .more {
-                position: relative;
-                display: grid;
-                place-items: center;
-                width: 1.8rem;
-                height: 1.8rem;
-                border-radius: 50%;
-                color: #555;
-                transition:
-                  background 0.15s ease,
-                  color 0.15s ease;
-              }
-
-              .more {
-                display: none;
-                padding: 0;
-                border: 0;
-                background: none;
-                cursor: pointer;
-              }
-
-              :scope > a:hover,
-              .more:hover,
-              .more[aria-expanded="true"] {
-                background: rgb(0 0 0 / 0.06);
-                color: #111;
-              }
-
-              :scope > a svg,
-              .more svg {
-                width: 0.95rem;
-                height: 0.95rem;
-              }
-
-              .more svg {
-                transition: rotate 0.2s ease;
-              }
-
-              .more[aria-expanded="true"] svg {
-                rotate: 180deg;
-              }
-
-              :scope > a > span {
-                position: absolute;
-                top: 100%;
-                left: 50%;
-                translate: -50% 0;
-                margin-top: 0.45rem;
-                padding: 0.25em 0.5em;
-                border-radius: 4px;
-                background: #222;
-                color: white;
-                font-size: 0.65rem;
-                white-space: nowrap;
-                pointer-events: none;
-                opacity: 0;
-                transition: opacity 0.15s ease;
-              }
-
-              :scope > a:hover > span {
-                opacity: 1;
-              }
-
-              .menu {
-                position: fixed;
-                inset: 3.75rem max(0.75rem, env(safe-area-inset-right)) auto
-                  auto;
-                margin: 0;
-                padding: 0.4rem;
-                border: 1px solid #d4d4d4;
-                border-radius: 12px;
-                background: rgb(255 255 255 / 0.92);
-                backdrop-filter: blur(10px);
-                box-shadow: 0 10px 30px rgb(0 0 0 / 0.12);
-                animation: social-menu-in 0.2s ease both;
-              }
-
-              .menu:popover-open {
-                display: grid;
-                gap: 0.1rem;
-              }
-
-              @keyframes social-menu-in {
-                from {
-                  opacity: 0;
-                  translate: 0 -0.35rem;
-                }
-                to {
-                  opacity: 1;
-                  translate: 0 0;
-                }
-              }
-
-              .item {
-                display: flex;
-                align-items: center;
-                gap: 0.6rem;
-                padding: 0.5rem 1rem 0.5rem 0.7rem;
-                border: 0;
-                border-radius: 8px;
-                background: none;
-                color: #333;
-                cursor: pointer;
-                font: inherit;
-                font-size: 0.75rem;
-                font-weight: 600;
-                text-align: left;
-                transition:
-                  background 0.15s ease,
-                  color 0.15s ease;
-              }
-
-              .item:hover {
-                background: rgb(0 0 0 / 0.06);
-                color: #111;
-              }
-
-              .item svg {
-                width: 0.95rem;
-                height: 0.95rem;
-                flex-shrink: 0;
-                color: #555;
-              }
-
-              @media (max-width: 40rem) {
-                :scope > a {
-                  display: none;
-                }
-
-                .more {
-                  display: grid;
-                }
-              }
-
-              @media (prefers-reduced-motion: reduce) {
-                .menu {
-                  animation: none;
-                }
-              }
-            }
-          `}
-        />
-
-        {actions.map(({ label, icon, href }) =>
-          href ? (
-            <a
-              key={label}
-              target="_blank"
-              rel="noopener noreferrer"
-              href={href}
-            >
-              {icon}
-              <span>{label}</span>
-            </a>
-          ) : (
-            <a key={label} href="javascript:void(0);" onClick={handleClick}>
-              {icon}
-              <span>{label}</span>
-            </a>
-          ),
-        )}
-
-        <button
-          popoverTarget="social-more-menu"
-          popoverTargetAction="toggle"
-          className="more"
-          aria-expanded={moreOpen}
-          aria-controls="social-more-menu"
-          aria-label={moreOpen ? "Hide demo links" : "Show demo links"}
-        >
-          <RxChevronDown />
-        </button>
-
-        <div
-          popover="auto"
-          ref={menuRef}
-          id="social-more-menu"
-          className="menu"
-        >
-          {actions.map(({ label, icon, href }) =>
-            href ? (
-              <a
-                key={label}
-                className="item"
-                target="_blank"
-                rel="noopener noreferrer"
-                href={href}
-                onClick={() => menuRef.current?.hidePopover()}
-              >
-                {icon}
-                {label}
-              </a>
-            ) : (
-              <button
-                key={label}
-                className="item"
-                type="button"
-                onClick={() => {
-                  menuRef.current?.hidePopover();
-                  handleClick();
-                }}
-              >
-                {icon}
-                {label}
-              </button>
-            ),
-          )}
-        </div>
-      </nav>
-    </>
+          No divider between the buttons, and that takes saying so: the group
+          drops each button's *left* border, but every button keeps a 1px
+          transparent one on its right and paints `bg-clip-padding`, so the
+          page shows through the join as a hairline. Dropping the right border
+          too on everything but the last button closes it — the outer edge is
+          left alone, where the same 1px is what keeps the shadow off the
+          background colour. */}
+      <ButtonGroup className="rounded-4xl shadow-lg [&>*:not(:last-child)]:border-r-0">
+        {actions.map(({ label, icon, href }) => (
+          <Tooltip key={label}>
+            <TooltipTrigger asChild>
+              {href ? (
+                <Button asChild variant="secondary" size="icon">
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={href}
+                    aria-label={label}
+                    /* Prose links are underlined site-wide from `@layer base`;
+                       an icon-only button is not prose. */
+                    className="no-underline"
+                  >
+                    {icon}
+                  </a>
+                </Button>
+              ) : (
+                <Button
+                  type="button"
+                  variant="secondary"
+                  size="icon"
+                  onClick={handleClick}
+                  aria-label={label}
+                >
+                  {icon}
+                </Button>
+              )}
+            </TooltipTrigger>
+            <TooltipContent side="bottom">{label}</TooltipContent>
+          </Tooltip>
+        ))}
+      </ButtonGroup>
+    </nav>
   );
 }
