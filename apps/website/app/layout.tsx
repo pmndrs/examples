@@ -35,7 +35,10 @@ const MCU_SOURCE = "#5de4c7";
  * bundle either. `<Mcu>` and `useMcu` live behind `material-theme-builder/react`
  * if a runtime theme picker ever lands.
  */
-const mcuCss = builder(MCU_SOURCE, { scheme: "monochrome" }).toCss();
+const mcuCss = builder(MCU_SOURCE, {
+  scheme: "monochrome",
+  customColors: [{ name: "new", hex: "#e8756a", blend: false }],
+}).toCss();
 
 export const metadata: Metadata = {
   title: "pmndrs examples",
@@ -61,6 +64,12 @@ export default function RootLayout({
           inter.className,
           "flex h-dvh overflow-hidden",
           "[--main-p:1.5rem] [--sidebar-w:200px] sm:[--sidebar-w:260px]",
+          /* Radix portals the mobile sidebar's overlay under <body>, outside
+             `Nav`, so this is the nearest call site that can reach it. Keep
+             the dim layer, but remove backdrop filtering: re-blurring a live
+             WebGL canvas throughout the sheet animation is prohibitively
+             expensive on mobile GPUs. */
+          "[&_[data-slot=sheet-overlay]]:backdrop-filter-none",
         )}
       >
         {/* `href` + `precedence` is what gets React to hoist this into <head>.
@@ -89,8 +98,9 @@ export default function RootLayout({
         />
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="light"
+          forcedTheme="light"
+          enableSystem={false}
           disableTransitionOnChange
         >
           <Nav demos={demos} />
