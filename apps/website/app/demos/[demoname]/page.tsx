@@ -79,8 +79,18 @@ export default async function Page(props: Props) {
         css={`
           @scope {
             .Dev {
+              /* Never takes effect: 'Dev' sets its own 'min(100%, 46rem)' from
+                 a scope rooted on the element itself, and in '@scope' the
+                 nearer root wins whatever the specificity. Kept as the
+                 fallback for a 'Dev' that stops sizing itself. */
               width: 100%;
               height: 100%;
+              /* ...which is why this is needed: an explicitly sized item
+                 stretches to nothing and is parked at the start of the track,
+                 so past 46rem of room the panel sat against the left edge.
+                 'main' centres its own only grid item, and that one is the
+                 route layout's div, which fills. */
+              justify-self: center;
               display: grid;
               place-items: center;
               padding: 1rem;
