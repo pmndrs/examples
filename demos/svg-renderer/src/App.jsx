@@ -6,7 +6,7 @@ export default function App() {
   return (
     <Canvas
       camera={{ position: [0, 0, 35] }}
-      gl={(canvas) => {
+      gl={({ canvas }) => {
         const gl = new SVGRenderer()
         const parent = canvas.parentNode
         parent.removeChild(canvas)
