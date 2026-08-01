@@ -10,6 +10,26 @@ for example_path in examples/*; do
   vite_dist_dir="$example_path/dist"
   out_example_dir="$DST/$example_name"
 
+  # Redirect stub: pre-#152 example pages lived at /demos/<name>. A 0s meta
+  # refresh is treated as a permanent redirect by search engines; the script
+  # additionally preserves query string and hash.
+  redirect_path="${BASE_PATH}/examples/${example_name}/"
+  mkdir -p "$DST/demos/$example_name"
+  cat > "$DST/demos/$example_name/index.html" <<EOF
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="0; url=${redirect_path}">
+    <link rel="canonical" href="${BASE_URL}/examples/${example_name}/">
+    <script>location.replace("${redirect_path}" + location.search + location.hash)</script>
+    <title>Redirecting to ${example_name}</title>
+  </head>
+  <body></body>
+</html>
+EOF
+  echo "Wrote redirect stub $DST/demos/$example_name/index.html"
+
   if [ -d "$vite_dist_dir" ]; then
     mkdir -p "$out_example_dir"
     cp -r "$vite_dist_dir"/* "$out_example_dir"
@@ -28,6 +48,23 @@ for example_path in examples/*; do
     echo "Copied $vite_dist_dir to $out_example_dir"
   fi
 done
+
+# Bare /demos never served a page pre-#152 (the grid was the home page), but
+# it's a natural URL to trim to -- send it home.
+cat > "$DST/demos/index.html" <<EOF
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="0; url=${BASE_PATH}/">
+    <link rel="canonical" href="${BASE_URL}/">
+    <script>location.replace("${BASE_PATH}/" + location.search + location.hash)</script>
+    <title>Redirecting to pmndrs examples</title>
+  </head>
+  <body></body>
+</html>
+EOF
+echo "Wrote redirect stub $DST/demos/index.html"
 
 cp -r apps/website/out/* "$DST/"
 echo "Copied apps/website/out to $DST"
