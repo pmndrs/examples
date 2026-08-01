@@ -12,8 +12,10 @@ for example_path in examples/*; do
 
   # Redirect stub: pre-#152 example pages lived at /demos/<name>. A 0s meta
   # refresh is treated as a permanent redirect by search engines; the script
-  # additionally preserves query string and hash.
-  redirect_path="${BASE_PATH}/examples/${example_name}/"
+  # additionally preserves query string and hash. No trailing slash on the
+  # target: Next exports flat <name>.html files, so the slash form 404s on
+  # GitHub Pages.
+  redirect_path="${BASE_PATH}/examples/${example_name}"
   mkdir -p "$DST/demos/$example_name"
   cat > "$DST/demos/$example_name/index.html" <<EOF
 <!doctype html>
@@ -21,7 +23,7 @@ for example_path in examples/*; do
   <head>
     <meta charset="utf-8">
     <meta http-equiv="refresh" content="0; url=${redirect_path}">
-    <link rel="canonical" href="${BASE_URL}/examples/${example_name}/">
+    <link rel="canonical" href="${BASE_URL}/examples/${example_name}">
     <script>location.replace("${redirect_path}" + location.search + location.hash)</script>
     <title>Redirecting to ${example_name}</title>
   </head>
