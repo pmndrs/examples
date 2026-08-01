@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Infinite Scroll",
   "description": "Horizontal scrollcontrols that scroll infinitely.",
-  "tags": ["horizontal", "scrollcontrols", "infinite"],
+  "tags": ["horizontal", "scrollcontrols", "infinite", "scroll"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2021-10-16",
   "source": "https://codesandbox.io/s/x8gvs",

@@ -2,14 +2,10 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "ScrollControls and Lens Refraction",
   "description": "Vertical scrollcontrols and minimaps.",
-  "tags": [],
+  "tags": ["scroll"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2023-01-07",
   "source": "https://codesandbox.io/s/2n98yj",
-  "libraries": [
-    "@react-three/drei",
-    "@react-three/fiber",
-    "maath"
-  ],
+  "libraries": ["@react-three/drei", "@react-three/fiber", "maath"],
   "assets": []
 }
