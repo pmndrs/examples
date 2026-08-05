@@ -12,7 +12,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import {
   ChevronLeftIcon,
   ListFilterIcon,
@@ -405,6 +405,53 @@ export default function Nav({
     if (!ready) return;
     document.documentElement.removeAttribute("data-nav-collapsed");
   }, [ready]);
+
+  /* Filters are shareable: `?q=` carries the search text, `?library=` the
+     library filter. Read once on mount — declared after the collapse
+     restore above so a shared link can win over a collapsed rail. Written
+     with `history.replaceState` rather than the router: per-keystroke
+     navigations are pointless work, and Safari rate-limits the History API
+     anyway, hence the debounce. */
+  const pathname = usePathname();
+  const urlReadRef = useRef(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get("q");
+    const lib = params.get("library");
+
+    if (q) {
+      setSearch(q);
+      setSearchOpen(true);
+      /* Plain state, not `setOpen`: following someone's filter link should
+         not overwrite this visitor's stored collapse preference. */
+      setOpenState(true);
+    }
+    if (lib) setLibrary(lib);
+
+    urlReadRef.current = true;
+  }, []);
+
+  /* `pathname` is a dependency so the params survive client navigation:
+     clicking a card pushes a bare `/examples/<name>`, and this puts the
+     active filter back into the address bar. */
+  useEffect(() => {
+    if (!urlReadRef.current) return;
+
+    const id = setTimeout(() => {
+      const url = new URL(window.location.href);
+
+      if (search) url.searchParams.set("q", search);
+      else url.searchParams.delete("q");
+      if (library) url.searchParams.set("library", library);
+      else url.searchParams.delete("library");
+
+      if (url.href !== window.location.href)
+        history.replaceState(history.state, "", url);
+    }, 150);
+
+    return () => clearTimeout(id);
+  }, [search, library, pathname]);
 
   const firstRef = useRef(true);
   useEffect(() => {
