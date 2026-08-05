@@ -114,6 +114,12 @@ export function Info({ example }: { example: Example }) {
           </Section>
         )}
 
+        {example.notes && (
+          <Section title="Notes">
+            <p>{example.notes}</p>
+          </Section>
+        )}
+
         {example.tags.length > 0 && (
           <Section title="Tags">
             <ul className="flex flex-wrap gap-1">

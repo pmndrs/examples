@@ -45,6 +45,10 @@
       "type": "string",
       "format": "date"
     },
+    "notes": {
+      "type": "string",
+      "minLength": 1
+    },
     "source": {
       "type": "string",
       "format": "uri"

@@ -32,6 +32,7 @@ export type ExampleMetadata = {
   tags: string[];
   authors: string[];
   publishedAt?: string;
+  notes?: string;
   source: string;
   libraries: string[];
   assets: AssetAttribution[];
