@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Caustics",
   "description": "",
-  "tags": [],
+  "tags": ["transmission"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2023-01-09",
   "source": "https://codesandbox.io/s/szj6p7",

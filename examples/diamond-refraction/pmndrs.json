@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Diamond Refraction",
   "description": "Diamon refraction material",
-  "tags": ["diamond", "refraction", "raycast", "bvh"],
+  "tags": ["diamond", "refraction", "raycast", "bvh", "transmission"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2022-09-13",
   "source": "https://codesandbox.io/s/zqrreo",

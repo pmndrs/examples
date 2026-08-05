@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "CSG Bunny useGroups",
   "description": "",
-  "tags": [],
+  "tags": ["transmission"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2023-01-21",
   "source": "https://codesandbox.io/s/mlgzsc",

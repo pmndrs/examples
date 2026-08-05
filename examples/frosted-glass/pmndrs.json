@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Frosted Glass",
   "description": "Shader mip-map blur to mimic frosted glass. ",
-  "tags": ["frosted-glas", "shaders"],
+  "tags": ["frosted-glas", "shaders", "transmission"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2021-03-22",
   "source": "https://codesandbox.io/s/imn42",

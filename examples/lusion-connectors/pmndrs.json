@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Lusion Connectors",
   "description": "",
-  "tags": [],
+  "tags": ["transmission"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2023-09-12",
   "source": "https://codesandbox.io/s/xy8c8z",

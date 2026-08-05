@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Glass Flower",
   "description": "",
-  "tags": [],
+  "tags": ["transmission"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2023-04-13",
   "source": "https://codesandbox.io/s/dq6wwe",

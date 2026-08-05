@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Inter Epoxy Resin",
   "description": "",
-  "tags": ["refraction", "shaders", "glass", "epoxy"],
+  "tags": ["refraction", "shaders", "glass", "epoxy", "transmission"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2022-10-25",
   "source": "https://codesandbox.io/s/lxvqek",

@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Next.js Prism",
   "description": "",
-  "tags": [],
+  "tags": ["transmission"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2022-08-17",
   "source": "https://codesandbox.io/s/j3ycvl",

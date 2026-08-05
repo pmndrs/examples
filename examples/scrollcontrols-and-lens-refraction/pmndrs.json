@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "ScrollControls and Lens Refraction",
   "description": "Vertical scrollcontrols and minimaps.",
-  "tags": ["scroll"],
+  "tags": ["scroll", "transmission"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2023-01-07",
   "source": "https://codesandbox.io/s/2n98yj",

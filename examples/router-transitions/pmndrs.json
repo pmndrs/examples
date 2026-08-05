@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Router Transitions",
   "description": "Shows how to implement routes and mount/unmount transition within the canvas using Wouter.",
-  "tags": ["router", "transitions", "html"],
+  "tags": ["router", "transitions", "html", "transmission"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2021-04-19",
   "source": "https://codesandbox.io/s/4j2q2",
