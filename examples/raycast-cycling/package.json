@@ -2,7 +2,7 @@
   "name": "@example/raycast-cycling",
   "version": "1.0.0",
   "dependencies": {
-    "@react-three/drei": "10.7.7",
+    "@react-three/drei": "10.7.8",
     "@react-three/fiber": "9.6.1",
     "react": "19.2.8",
     "react-dom": "19.2.8",

@@ -8,7 +8,7 @@
     "lint": "turbo lint",
     "lint:metadata": "node bin/validate-pmndrs-metadata.mjs",
     "lint:versions": "syncpack lint",
-    "fix:versions": "syncpack fix-mismatches",
+    "fix:versions": "syncpack fix",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "test": "turbo test"
   },

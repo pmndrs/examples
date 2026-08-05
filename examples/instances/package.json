@@ -2,7 +2,7 @@
   "name": "@example/instances",
   "version": "1.0.0",
   "dependencies": {
-    "@react-three/drei": "10.7.7",
+    "@react-three/drei": "10.7.8",
     "@react-three/fiber": "9.6.1",
     "nice-color-palettes": "^3.0.0",
     "react": "19.2.8",

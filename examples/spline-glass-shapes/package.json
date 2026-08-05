@@ -2,7 +2,7 @@
   "name": "@example/spline-glass-shapes",
   "version": "1.0.0",
   "dependencies": {
-    "@react-three/drei": "10.7.7",
+    "@react-three/drei": "10.7.8",
     "@react-three/fiber": "9.6.1",
     "@splinetool/loader": "0.9.153",
     "@splinetool/r3f-spline": "^1.0.2",
