@@ -146,7 +146,14 @@ function hasInteractiveFocus(element: Element | null) {
  * panel's edge from there.
  */
 function NavToggle() {
-  const { open, openMobile, isMobile, toggleSidebar } = useSidebar();
+  const {
+    open,
+    openMobile,
+    isMobile,
+    setOpenMobile,
+    toggleSidebar,
+  } = useSidebar();
+  const { examplename } = useParams();
 
   /* Under `md` the panel is a sheet with its own open state, and `open` still
      holds whatever the rail was left at. `toggleSidebar` already picks the
@@ -157,6 +164,10 @@ function NavToggle() {
   const [near, setNear] = useState(false);
 
   useEffect(() => setReady(true), []);
+
+  useEffect(() => {
+    if (isMobile) setOpenMobile(!examplename);
+  }, [examplename, isMobile, setOpenMobile]);
 
   /* Collapsed, the pill mostly tucks itself into the page edge; bringing the
      pointer over there nudges it back out. */

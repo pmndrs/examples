@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Transparent Aesop Bottles",
   "description": "PBR transmission and thickness to emulate glas.",
-  "tags": ["reflections", "transmission", "glas"],
+  "tags": ["reflections", "transmission"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2021-10-08",
   "source": "https://codesandbox.io/s/kv7tv",
