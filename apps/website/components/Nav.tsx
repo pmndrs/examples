@@ -8,6 +8,7 @@ import {
   ElementRef,
   useCallback,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -69,12 +70,16 @@ const ALL_LIBRARIES = "__all__";
  * Keep the list itself complete for links, roving focus and stable scroll
  * geometry, but only mount expensive thumbnail/tag subtrees near the visible
  * part of the SidebarContent scroller. One observer handles the whole list;
- * importantly, the hook reruns when Radix mounts the mobile Sheet's list.
+ * the hook reruns when filtering changes its children or Radix mounts the
+ * mobile Sheet's list.
  */
-function useNearbyExamples(list: HTMLUListElement | null) {
+function useNearbyExamples(
+  list: HTMLUListElement | null,
+  visibleExamples: readonly Example[],
+) {
   const [nearby, setNearby] = useState<ReadonlySet<string>>(() => new Set());
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!list) {
       setNearby((current) => (current.size === 0 ? current : new Set()));
       return;
@@ -96,13 +101,40 @@ function useNearbyExamples(list: HTMLUListElement | null) {
     }
 
     const root = list.closest<HTMLElement>("[data-slot='sidebar-content']");
+    const rootRect = root?.getBoundingClientRect();
+    const nearTop = rootRect ? rootRect.top - rootRect.height / 2 : -Infinity;
+    const nearBottom = rootRect
+      ? rootRect.bottom + rootRect.height / 2
+      : Infinity;
+
+    /* IntersectionObserver reports after layout, which leaves a blank frame
+       when filtering moves an unmounted thumbnail into view. Seed the same
+       50% margin synchronously so the next render is ready before paint. */
+    setNearby(
+      new Set(
+        items.flatMap((item) => {
+          const rect = item.getBoundingClientRect();
+          return item.dataset.example &&
+            rect.bottom > nearTop &&
+            rect.top < nearBottom
+            ? [item.dataset.example]
+            : [];
+        }),
+      ),
+    );
+
+    let active = true;
     const observer = new IntersectionObserver(
       (entries) => {
+        if (!active) return;
+
         setNearby((current) => {
           const next = new Set(current);
           let changed = false;
 
           for (const entry of entries) {
+            if (!list.contains(entry.target)) continue;
+
             const name = (entry.target as HTMLElement).dataset.example;
             if (!name) continue;
 
@@ -121,8 +153,11 @@ function useNearbyExamples(list: HTMLUListElement | null) {
     );
 
     items.forEach((item) => observer.observe(item));
-    return () => observer.disconnect();
-  }, [list]);
+    return () => {
+      active = false;
+      observer.disconnect();
+    };
+  }, [list, visibleExamples]);
 
   return nearby;
 }
@@ -146,13 +181,8 @@ function hasInteractiveFocus(element: Element | null) {
  * panel's edge from there.
  */
 function NavToggle() {
-  const {
-    open,
-    openMobile,
-    isMobile,
-    setOpenMobile,
-    toggleSidebar,
-  } = useSidebar();
+  const { open, openMobile, isMobile, setOpenMobile, toggleSidebar } =
+    useSidebar();
   const { examplename } = useParams();
 
   /* Under `md` the panel is a sheet with its own open state, and `open` still
@@ -232,7 +262,6 @@ export default function Nav({
   const [listElement, setListElement] = useState<HTMLUListElement | null>(null);
   const roving = useRovingTabIndex(ulRef);
   const searchRef = useRef<HTMLInputElement>(null);
-  const nearbyExamples = useNearbyExamples(listElement);
 
   const setListRef = useCallback((node: HTMLUListElement | null) => {
     ulRef.current = node;
@@ -321,6 +350,7 @@ export default function Nav({
         (exampleA, exampleB) => Number(exampleB.isNew) - Number(exampleA.isNew),
       );
   }, [examples, library, search]);
+  const nearbyExamples = useNearbyExamples(listElement, filteredExamples);
 
   const focusSearch = useCallback(
     (select = false) => {
