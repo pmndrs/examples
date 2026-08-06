@@ -8,11 +8,12 @@ import {
   ElementRef,
   useCallback,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
 } from "react";
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import {
   ChevronLeftIcon,
   ListFilterIcon,
@@ -69,12 +70,16 @@ const ALL_LIBRARIES = "__all__";
  * Keep the list itself complete for links, roving focus and stable scroll
  * geometry, but only mount expensive thumbnail/tag subtrees near the visible
  * part of the SidebarContent scroller. One observer handles the whole list;
- * importantly, the hook reruns when Radix mounts the mobile Sheet's list.
+ * the hook reruns when filtering changes its children or Radix mounts the
+ * mobile Sheet's list.
  */
-function useNearbyExamples(list: HTMLUListElement | null) {
+function useNearbyExamples(
+  list: HTMLUListElement | null,
+  visibleExamples: readonly Example[],
+) {
   const [nearby, setNearby] = useState<ReadonlySet<string>>(() => new Set());
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!list) {
       setNearby((current) => (current.size === 0 ? current : new Set()));
       return;
@@ -96,13 +101,40 @@ function useNearbyExamples(list: HTMLUListElement | null) {
     }
 
     const root = list.closest<HTMLElement>("[data-slot='sidebar-content']");
+    const rootRect = root?.getBoundingClientRect();
+    const nearTop = rootRect ? rootRect.top - rootRect.height / 2 : -Infinity;
+    const nearBottom = rootRect
+      ? rootRect.bottom + rootRect.height / 2
+      : Infinity;
+
+    /* IntersectionObserver reports after layout, which leaves a blank frame
+       when filtering moves an unmounted thumbnail into view. Seed the same
+       50% margin synchronously so the next render is ready before paint. */
+    setNearby(
+      new Set(
+        items.flatMap((item) => {
+          const rect = item.getBoundingClientRect();
+          return item.dataset.example &&
+            rect.bottom > nearTop &&
+            rect.top < nearBottom
+            ? [item.dataset.example]
+            : [];
+        }),
+      ),
+    );
+
+    let active = true;
     const observer = new IntersectionObserver(
       (entries) => {
+        if (!active) return;
+
         setNearby((current) => {
           const next = new Set(current);
           let changed = false;
 
           for (const entry of entries) {
+            if (!list.contains(entry.target)) continue;
+
             const name = (entry.target as HTMLElement).dataset.example;
             if (!name) continue;
 
@@ -121,8 +153,11 @@ function useNearbyExamples(list: HTMLUListElement | null) {
     );
 
     items.forEach((item) => observer.observe(item));
-    return () => observer.disconnect();
-  }, [list]);
+    return () => {
+      active = false;
+      observer.disconnect();
+    };
+  }, [list, visibleExamples]);
 
   return nearby;
 }
@@ -146,7 +181,9 @@ function hasInteractiveFocus(element: Element | null) {
  * panel's edge from there.
  */
 function NavToggle() {
-  const { open, openMobile, isMobile, toggleSidebar } = useSidebar();
+  const { open, openMobile, isMobile, setOpenMobile, toggleSidebar } =
+    useSidebar();
+  const { examplename } = useParams();
 
   /* Under `md` the panel is a sheet with its own open state, and `open` still
      holds whatever the rail was left at. `toggleSidebar` already picks the
@@ -157,6 +194,10 @@ function NavToggle() {
   const [near, setNear] = useState(false);
 
   useEffect(() => setReady(true), []);
+
+  useEffect(() => {
+    if (isMobile) setOpenMobile(!examplename);
+  }, [examplename, isMobile, setOpenMobile]);
 
   /* Collapsed, the pill mostly tucks itself into the page edge; bringing the
      pointer over there nudges it back out. */
@@ -221,7 +262,6 @@ export default function Nav({
   const [listElement, setListElement] = useState<HTMLUListElement | null>(null);
   const roving = useRovingTabIndex(ulRef);
   const searchRef = useRef<HTMLInputElement>(null);
-  const nearbyExamples = useNearbyExamples(listElement);
 
   const setListRef = useCallback((node: HTMLUListElement | null) => {
     ulRef.current = node;
@@ -310,6 +350,7 @@ export default function Nav({
         (exampleA, exampleB) => Number(exampleB.isNew) - Number(exampleA.isNew),
       );
   }, [examples, library, search]);
+  const nearbyExamples = useNearbyExamples(listElement, filteredExamples);
 
   const focusSearch = useCallback(
     (select = false) => {
@@ -405,6 +446,53 @@ export default function Nav({
     if (!ready) return;
     document.documentElement.removeAttribute("data-nav-collapsed");
   }, [ready]);
+
+  /* Filters are shareable: `?q=` carries the search text, `?library=` the
+     library filter. Read once on mount — declared after the collapse
+     restore above so a shared link can win over a collapsed rail. Written
+     with `history.replaceState` rather than the router: per-keystroke
+     navigations are pointless work, and Safari rate-limits the History API
+     anyway, hence the debounce. */
+  const pathname = usePathname();
+  const urlReadRef = useRef(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get("q");
+    const lib = params.get("library");
+
+    if (q) {
+      setSearch(q);
+      setSearchOpen(true);
+      /* Plain state, not `setOpen`: following someone's filter link should
+         not overwrite this visitor's stored collapse preference. */
+      setOpenState(true);
+    }
+    if (lib) setLibrary(lib);
+
+    urlReadRef.current = true;
+  }, []);
+
+  /* `pathname` is a dependency so the params survive client navigation:
+     clicking a card pushes a bare `/examples/<name>`, and this puts the
+     active filter back into the address bar. */
+  useEffect(() => {
+    if (!urlReadRef.current) return;
+
+    const id = setTimeout(() => {
+      const url = new URL(window.location.href);
+
+      if (search) url.searchParams.set("q", search);
+      else url.searchParams.delete("q");
+      if (library) url.searchParams.set("library", library);
+      else url.searchParams.delete("library");
+
+      if (url.href !== window.location.href)
+        history.replaceState(history.state, "", url);
+    }, 150);
+
+    return () => clearTimeout(id);
+  }, [search, library, pathname]);
 
   const firstRef = useRef(true);
   useEffect(() => {
