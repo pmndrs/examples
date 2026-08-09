@@ -1,0 +1,8 @@
+# What CI gates on, run once per push instead of once per commit: `check`
+# reads the whole repo (`format:check` alone is ~10s), which is affordable
+# here and is not in the pre-commit hook -- there, lint-staged fixes the
+# staged files instead, and every commit would invalidate this.
+#
+# Nothing new since the last push is FULL TURBO, so the cost is only paid for
+# what actually moved.
+pnpm check
