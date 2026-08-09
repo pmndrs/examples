@@ -14,18 +14,24 @@ export default {
       .map((file) => path.relative(root, file))
       .filter((file) => !file.startsWith("examples/"));
 
-    if (staged.length === 0) return [];
+    return [
+      // `--ignore-unknown` so the glob can stay `*`: prettier skips what it
+      // has no parser for (assets, patches) instead of failing the commit.
+      ...(staged.length
+        ? [
+            `prettier --write --ignore-unknown ${staged.map((file) => JSON.stringify(file)).join(" ")}`,
+          ]
+        : []),
 
-    // `--ignore-unknown` so the glob can stay `*`: prettier skips what it has
-    // no parser for (assets, patches) instead of failing the commit.
-    return `prettier --write --ignore-unknown ${staged.map((file) => JSON.stringify(file)).join(" ")}`;
+      // Lint through turbo rather than by calling eslint ourselves, and on
+      // every commit rather than under a glob of our own: which workspaces
+      // have a `lint` task (only `apps/website` today) is the task graph's
+      // business, and the cache turns a commit that moved nothing
+      // lint-relevant into ~0.4s instead of ~3.5s. Sequenced after prettier
+      // -- same array -- because it reads the files prettier just rewrote.
+      "pnpm lint",
+    ];
   },
-
-  // Whole-workspace lint, through turbo rather than a direct `eslint` call:
-  // which workspaces have a linter (only `apps/website` today) stays a
-  // property of the task graph, and the cache makes a re-run that touches
-  // nothing lint-relevant ~0.4s instead of ~3.5s.
-  "{apps,packages}/*/**": () => "pnpm lint",
 
   // Repo-wide invariants, so they run whole rather than over the staged files:
   // both are ~1s and mirror what CI checks.
