@@ -6,6 +6,11 @@
   "authors": ["Paul Henschel"],
   "publishedAt": "2023-11-12",
   "source": "https://codesandbox.io/s/5w35n6",
-  "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/rapier", "maath"],
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/rapier",
+    "maath"
+  ],
   "assets": []
 }

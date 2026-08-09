@@ -1,9 +1,9 @@
-import React, { Suspense, useRef } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { useGLTF } from '@react-three/drei'
+import React, { Suspense, useRef } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { useGLTF } from "@react-three/drei";
 
-import bustLoModel from './bust-lo-draco.glb?url'
-import bustHiModel from './bust-hi.glb?url'
+import bustLoModel from "./bust-lo-draco.glb?url";
+import bustHiModel from "./bust-hi.glb?url";
 
 // This sandbox shows how to prgressively load an asset through nested suspense blocks
 // 1. A generic fallback
@@ -25,18 +25,18 @@ export default function App() {
         </Rotate>
       </Canvas>
     </Suspense>
-  )
+  );
 }
 
 function Model({ url, ...props }) {
   // useGLTF suspends the component, it literally stops processing
-  const { scene } = useGLTF(url)
+  const { scene } = useGLTF(url);
   // By the time we're here the model is gueranteed to be available
-  return <primitive object={scene} {...props} />
+  return <primitive object={scene} {...props} />;
 }
 
 function Rotate(props) {
-  const ref = useRef()
-  useFrame((state) => (ref.current.rotation.y = state.clock.elapsedTime))
-  return <group ref={ref} {...props} />
+  const ref = useRef();
+  useFrame((state) => (ref.current.rotation.y = state.clock.elapsedTime));
+  return <group ref={ref} {...props} />;
 }

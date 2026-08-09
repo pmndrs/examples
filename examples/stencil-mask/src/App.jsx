@@ -1,40 +1,61 @@
-import { Suspense, useRef, useState } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { Mask, useMask, TransformControls, Float, Environment, OrbitControls, MeshDistortMaterial, ContactShadows, useGLTF } from '@react-three/drei'
-import { useControls } from 'leva'
+import { Suspense, useRef, useState } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import {
+  Mask,
+  useMask,
+  TransformControls,
+  Float,
+  Environment,
+  OrbitControls,
+  MeshDistortMaterial,
+  ContactShadows,
+  useGLTF,
+} from "@react-three/drei";
+import { useControls } from "leva";
 
 // From the poimandres market (https://market.pmnd.rs/), vendored locally since the original CDN is offline.
-import targetModel from './assets/target-stand.gltf?url'
+import targetModel from "./assets/target-stand.gltf?url";
 
 function MaskedContent({ invert, ...props }) {
   /* The useMask hook has to refer to the mask id defined below, the content
    * will then be stamped out.
    */
-  const stencil = useMask(1, invert)
-  const group = useRef()
-  const [hovered, hover] = useState(false)
-  useFrame((state) => (group.current.rotation.y = state.clock.elapsedTime / 2))
+  const stencil = useMask(1, invert);
+  const group = useRef();
+  const [hovered, hover] = useState(false);
+  useFrame((state) => (group.current.rotation.y = state.clock.elapsedTime / 2));
   return (
     <group {...props}>
       <mesh position={[-0.75, 0, 0]} scale={1} ref={group}>
         <torusKnotGeometry args={[0.6, 0.2, 128, 64]} />
         <meshNormalMaterial {...stencil} />
       </mesh>
-      <mesh position={[0.75, 0, 0]} onPointerOver={() => hover(true)} onPointerOut={() => hover(false)}>
+      <mesh
+        position={[0.75, 0, 0]}
+        onPointerOver={() => hover(true)}
+        onPointerOut={() => hover(false)}
+      >
         <sphereGeometry args={[0.8, 64, 64]} />
-        <meshStandardMaterial {...stencil} color={hovered ? 'orange' : 'white'} />
+        <meshStandardMaterial
+          {...stencil}
+          color={hovered ? "orange" : "white"}
+        />
       </mesh>
     </group>
-  )
+  );
 }
 
 function Target(props) {
-  const { scene } = useGLTF(targetModel)
-  return <primitive object={scene} {...props} />
+  const { scene } = useGLTF(targetModel);
+  return <primitive object={scene} {...props} />;
 }
 
 export function App() {
-  const { invert, colorWrite, depthWrite } = useControls({ invert: false, colorWrite: true, depthWrite: false })
+  const { invert, colorWrite, depthWrite } = useControls({
+    invert: false,
+    colorWrite: true,
+    depthWrite: false,
+  });
   return (
     <Canvas camera={{ position: [0, 0, 5] }} gl={{ stencil: true }}>
       <hemisphereLight intensity={Math.PI} groundColor="red" />
@@ -44,7 +65,12 @@ export function App() {
            * This is valid only for meshes that use useMask with the same id, everything else
            * is not affected.
            */}
-          <Mask id={1} colorWrite={colorWrite} depthWrite={depthWrite} position={[-1.1, 0, 0]}>
+          <Mask
+            id={1}
+            colorWrite={colorWrite}
+            depthWrite={depthWrite}
+            position={[-1.1, 0, 0]}
+          >
             <ringGeometry args={[0.5, 1, 64]} />
           </Mask>
         </Float>
@@ -61,10 +87,16 @@ export function App() {
 
         <MaskedContent invert={invert} />
         <Target position={[0, -1, -3]} scale={1.5} />
-        <ContactShadows frames={1} scale={10} position={[0, -1, 0]} blur={8} opacity={0.55} />
+        <ContactShadows
+          frames={1}
+          scale={10}
+          position={[0, -1, 0]}
+          blur={8}
+          opacity={0.55}
+        />
         <Environment preset="city" />
         <OrbitControls makeDefault />
       </Suspense>
     </Canvas>
-  )
+  );
 }

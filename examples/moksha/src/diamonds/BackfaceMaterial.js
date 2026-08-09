@@ -1,4 +1,4 @@
-import { ShaderMaterial, BackSide } from 'three'
+import { ShaderMaterial, BackSide } from "three";
 
 export default class BackfaceMaterial extends ShaderMaterial {
   constructor() {
@@ -18,7 +18,7 @@ export default class BackfaceMaterial extends ShaderMaterial {
       void main() {
         gl_FragColor = vec4(worldNormal, 1.0);
       }`,
-      side: BackSide
-    })
+      side: BackSide,
+    });
   }
 }

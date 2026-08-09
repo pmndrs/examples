@@ -1,5 +1,5 @@
-@import url('https://rsms.me/inter/inter.css');
-@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap');
+@import url("https://rsms.me/inter/inter.css");
+@import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap");
 
 * {
   box-sizing: border-box;
@@ -15,7 +15,7 @@ body,
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   background: #d0d0d0;
 }
 
@@ -92,7 +92,7 @@ li {
 
 .price {
   display: inline-block;
-  font-family: 'Major Mono Display', monospace;
+  font-family: "Major Mono Display", monospace;
   background: black;
   color: white;
   padding: 5px 10px;
@@ -100,7 +100,7 @@ li {
 }
 
 .info h1 {
-  font-family: 'Major Mono Display', monospace;
+  font-family: "Major Mono Display", monospace;
   font-size: 2em;
   margin-bottom: 0.5em;
 }

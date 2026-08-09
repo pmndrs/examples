@@ -6,6 +6,12 @@
   "authors": ["Paul Henschel"],
   "publishedAt": "2024-01-20",
   "source": "https://codesandbox.io/s/ptdgrn",
-  "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/postprocessing", "@react-three/rapier", "valtio"],
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing",
+    "@react-three/rapier",
+    "valtio"
+  ],
   "assets": []
 }

@@ -1,27 +1,29 @@
-import { create } from 'zustand'
-import { addEffect } from '@react-three/fiber'
+import { create } from "zustand";
+import { addEffect } from "@react-three/fiber";
 
-import audio1 from './drums.mp3'
-import audio2 from './snare.mp3'
-import audio3 from './synth.mp3'
+import audio1 from "./drums.mp3";
+import audio2 from "./snare.mp3";
+import audio3 from "./synth.mp3";
 
 async function createAudio(url, { threshold, expire } = {}) {
-  const res = await fetch(url)
-  const buffer = await res.arrayBuffer()
-  const context = new (window.AudioContext || window.webkitAudioContext)()
-  const analyser = context.createAnalyser()
-  analyser.fftSize = 2048
-  const data = new Uint8Array(analyser.frequencyBinCount)
-  const source = context.createBufferSource()
-  source.buffer = await new Promise((res) => context.decodeAudioData(buffer, res))
-  source.loop = true
-  const gainNode = context.createGain()
-  gainNode.gain.value = 1
-  gainNode.connect(context.destination)
-  source.connect(analyser)
-  analyser.connect(gainNode)
+  const res = await fetch(url);
+  const buffer = await res.arrayBuffer();
+  const context = new (window.AudioContext || window.webkitAudioContext)();
+  const analyser = context.createAnalyser();
+  analyser.fftSize = 2048;
+  const data = new Uint8Array(analyser.frequencyBinCount);
+  const source = context.createBufferSource();
+  source.buffer = await new Promise((res) =>
+    context.decodeAudioData(buffer, res),
+  );
+  source.loop = true;
+  const gainNode = context.createGain();
+  gainNode.gain.value = 1;
+  gainNode.connect(context.destination);
+  source.connect(analyser);
+  analyser.connect(gainNode);
 
-  let time = Date.now()
+  let time = Date.now();
   let state = {
     source,
     data,
@@ -29,30 +31,30 @@ async function createAudio(url, { threshold, expire } = {}) {
     signal: false,
     avg: 0,
     update: () => {
-      let now = Date.now()
-      let value = 0
-      analyser.getByteFrequencyData(data)
-      for (let i = 0; i < data.length; i++) value += data[i]
-      const avg = (state.avg = value / data.length)
+      let now = Date.now();
+      let value = 0;
+      analyser.getByteFrequencyData(data);
+      for (let i = 0; i < data.length; i++) value += data[i];
+      const avg = (state.avg = value / data.length);
       if (threshold && avg > threshold && now - time > expire) {
-        time = Date.now()
-        state.signal = true
-      } else state.signal = false
+        time = Date.now();
+        state.signal = true;
+      } else state.signal = false;
     },
     setGain(level) {
-      gainNode.gain.setValueAtTime((state.gain = level), context.currentTime)
-    }
-  }
+      gainNode.gain.setValueAtTime((state.gain = level), context.currentTime);
+    },
+  };
 
-  return state
+  return state;
 }
 
-const mockData = () => ({ signal: false, avg: 0, gain: 1, data: [] })
+const mockData = () => ({ signal: false, avg: 0, gain: 1, data: [] });
 
 const useStore = create((set, get) => {
-  const drums = createAudio(audio1, { threshold: 10, expire: 500 })
-  const snare = createAudio(audio2, { threshold: 40, expire: 500 })
-  const synth = createAudio(audio3)
+  const drums = createAudio(audio1, { threshold: 10, expire: 500 });
+  const snare = createAudio(audio2, { threshold: 40, expire: 500 });
+  const synth = createAudio(audio3);
   return {
     loaded: false,
     clicked: false,
@@ -65,32 +67,32 @@ const useStore = create((set, get) => {
           audio: {
             drums: await drums,
             snare: await snare,
-            synth: await synth
-          }
-        })
+            synth: await synth,
+          },
+        });
       },
       start() {
-        const audio = get().audio
-        const files = Object.values(audio)
-        const track = get().track
-        files.forEach(({ source }) => source.start(0))
-        set({ clicked: true })
+        const audio = get().audio;
+        const files = Object.values(audio);
+        const track = get().track;
+        files.forEach(({ source }) => source.start(0));
+        set({ clicked: true });
         addEffect(() => {
-          files.forEach(({ update }) => update())
-          if (audio.drums.signal) track.kicks++
+          files.forEach(({ update }) => update());
+          if (audio.drums.signal) track.kicks++;
           if (audio.snare.signal) {
             if (track.loops++ > 6) {
-              track.synthonly = !track.synthonly
-              audio.drums.setGain(track.synthonly ? 0 : 1)
-              audio.snare.setGain(track.synthonly ? 0 : 1)
-              track.loops = 0
+              track.synthonly = !track.synthonly;
+              audio.drums.setGain(track.synthonly ? 0 : 1);
+              audio.snare.setGain(track.synthonly ? 0 : 1);
+              track.loops = 0;
             }
-            track.kicks = 0
+            track.kicks = 0;
           }
-        })
-      }
-    }
-  }
-})
+        });
+      },
+    },
+  };
+});
 
-export default useStore
+export default useStore;

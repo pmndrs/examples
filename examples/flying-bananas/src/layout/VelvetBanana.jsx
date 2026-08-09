@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const Image = styled.svg`
   position: absolute;
@@ -10,12 +10,16 @@ export const Image = styled.svg`
   & g.skin {
     cursor: pointer;
   }
-`
+`;
 
 export function VelvetBanana() {
   return (
     <a href="0xca0a.gumroad.com/l/B4N4N4S">
-      <Image viewBox="0 0 1138 1191" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <Image
+        viewBox="0 0 1138 1191"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <g className="skin">
           <path
             d="M269 994L262 984L256 981L251 976L248 971L234.5 966L230.5 959L234.5 955.5L236.5 946.5L245 944.5L285.5 916.5L290.5 907L316 872L355 835.5L431 784.5L549 699.5L594.5 655.5L642 595.5L676.5 535L713.5 459.5L738.5 406.5L751.5 370.5L764.5 347L766 339L758.5 318.5L734.5 267L712.5 238.5L710 232.5L705.5 229.5L696.5 215.5L696.5 204.5L703.5 195.5L711 206L719 204.5L726.5 207.5L734.5 206L739.5 210.5L744 215.5L746.5 219.5L754 222.5L771.5 228L799 282L801.5 291L822.5 313.5L859 341.5L867 347L875.5 358L887.5 383L891.5 398L893.5 404.5L900 420.5L904 438L905.5 467L904 495L897.5 525L890.5 551L869 603.5L843.5 656.5L799 722.5L739.5 787L647.5 865.5L578 910.5L478.5 962L433 977.5L423 979L410 984L386 989L352 992L316 992L284.5 995L276 994L269 994Z"
@@ -349,5 +353,5 @@ export function VelvetBanana() {
         </g>
       </Image>
     </a>
-  )
+  );
 }

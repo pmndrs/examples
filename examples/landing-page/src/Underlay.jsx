@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const Grid = styled.div`
   position: absolute;
@@ -9,7 +9,7 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: start;
-  font-family: 'ThunderBlack';
+  font-family: "ThunderBlack";
   font-size: 4em;
   line-height: 0.74em;
   color: #f7f4af;
@@ -17,7 +17,7 @@ const Grid = styled.div`
   @media (max-width: 425px) {
     grid-template-columns: 1fr;
   }
-`
+`;
 
 const Left = styled.div`
   position: relative;
@@ -27,12 +27,12 @@ const Left = styled.div`
   height: 100%;
   padding: 100px;
   white-space: nowrap;
-  font-family: 'ThunderThin';
+  font-family: "ThunderThin";
   line-height: 1em;
   @media (max-width: 768px) {
     padding: 50px;
   }
-`
+`;
 
 const Right = styled.div`
   position: relative;
@@ -41,27 +41,27 @@ const Right = styled.div`
   height: 100%;
   background: #f7f4af;
   color: #252525;
-`
+`;
 
 const Sub = styled.div`
   align-self: end;
   width: 200px;
   height: 2px;
   background: #f7f4af;
-`
+`;
 
 const Jumbo = styled.div`
   align-self: center;
   padding: 100px;
   font-size: 3.5em;
   color: #252525;
-`
+`;
 
 const Label = styled.div`
   position: absolute;
   bottom: 0;
   right: 0;
-  font-family: 'ThunderThin';
+  font-family: "ThunderThin";
   font-size: 0.2em;
   line-height: 1em;
   color: #252525;
@@ -74,7 +74,7 @@ const Label = styled.div`
   @media (max-width: 425px) {
     padding: 20px;
   }
-`
+`;
 
 export default function Underlay() {
   return (
@@ -97,5 +97,5 @@ export default function Underlay() {
         <Jumbo>M1</Jumbo>
       </Right>
     </Grid>
-  )
+  );
 }

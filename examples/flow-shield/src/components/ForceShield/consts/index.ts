@@ -1,10 +1,10 @@
-import { Preset } from '../../overlay/OverlayButtons'
+import { Preset } from "../../overlay/OverlayButtons";
 
-export const MAX_HITS = 6
+export const MAX_HITS = 6;
 
 export const SHIELD_PRESETS: Record<Preset, Record<string, unknown>> = {
   default: {
-    color: '#26aeff',
+    color: "#26aeff",
     opacity: 0.76,
     showHex: true,
     hexScale: 3.0,
@@ -15,7 +15,7 @@ export const SHIELD_PRESETS: Record<Preset, Record<string, unknown>> = {
     flashSpeed: 0.6,
     flashIntensity: 0.11,
     noiseScale: 1.3,
-    noiseEdgeColor: '#26aeff',
+    noiseEdgeColor: "#26aeff",
     noiseEdgeWidth: 0.02,
     noiseEdgeIntensity: 10.0,
     noiseEdgeSmoothness: 0.5,
@@ -25,7 +25,7 @@ export const SHIELD_PRESETS: Record<Preset, Record<string, unknown>> = {
     hitRingSpeed: 1.75,
     hitRingWidth: 0.12,
     hitMaxRadius: 0.85,
-    fadeStart: -1
+    fadeStart: -1,
   },
   droideka: {
     hexScale: 3,
@@ -36,8 +36,8 @@ export const SHIELD_PRESETS: Record<Preset, Record<string, unknown>> = {
     fadeStart: 1,
     fresnelStrength: 1.75,
     flashSpeed: 0.6,
-    color: '#5992f7',
-    noiseEdgeColor: '#7faaf5',
+    color: "#5992f7",
+    noiseEdgeColor: "#7faaf5",
     noiseEdgeWidth: 0.1,
     noiseEdgeIntensity: 0.6,
     noiseEdgeSmoothness: 0.5,
@@ -49,6 +49,6 @@ export const SHIELD_PRESETS: Record<Preset, Record<string, unknown>> = {
     flowIntensity: 4,
     hitRingSpeed: 0.8,
     hitRingWidth: 0.12,
-    hitMaxRadius: 2.1
-  }
-}
+    hitMaxRadius: 2.1,
+  },
+};

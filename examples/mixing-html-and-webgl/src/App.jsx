@@ -1,11 +1,11 @@
-import { useState } from 'react'
-import { Canvas, useThree } from '@react-three/fiber'
-import { Html, OrbitControls } from '@react-three/drei'
-import { Slider } from 'antd'
+import { useState } from "react";
+import { Canvas, useThree } from "@react-three/fiber";
+import { Html, OrbitControls } from "@react-three/drei";
+import { Slider } from "antd";
 
 function Box() {
-  const [size, set] = useState(0.5)
-  const controls = useThree((state) => state.controls)
+  const [size, set] = useState(0.5);
+  const controls = useThree((state) => state.controls);
   return (
     <mesh scale={size * 2}>
       <boxGeometry />
@@ -23,7 +23,7 @@ function Box() {
         />
       </Html>
     </mesh>
-  )
+  );
 }
 
 export default function App() {
@@ -35,5 +35,5 @@ export default function App() {
       <Box />
       <OrbitControls makeDefault />
     </Canvas>
-  )
+  );
 }

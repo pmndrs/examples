@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap");
 
 * {
   box-sizing: border-box;
@@ -53,8 +53,9 @@ h1 {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate3d(-50%, -50%, 0) rotate3d(1, 0, 0, 55deg) rotate3d(0, 0, 1, 45deg);
-  font-family: 'Roboto', sans-serif;
+  transform: translate3d(-50%, -50%, 0) rotate3d(1, 0, 0, 55deg)
+    rotate3d(0, 0, 1, 45deg);
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 800;
   margin: 0;

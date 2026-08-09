@@ -1,10 +1,15 @@
-import * as THREE from 'three'
-import { useRef } from 'react'
-import { extend, useThree, useFrame } from '@react-three/fiber'
-import { shaderMaterial } from '@react-three/drei'
+import * as THREE from "three";
+import { useRef } from "react";
+import { extend, useThree, useFrame } from "@react-three/fiber";
+import { shaderMaterial } from "@react-three/drei";
 
 const XFadeMaterial = shaderMaterial(
-  { texture1: null, texture2: null, shownTxt: -1, resolution: new THREE.Vector2() },
+  {
+    texture1: null,
+    texture2: null,
+    shownTxt: -1,
+    resolution: new THREE.Vector2(),
+  },
   `void main() {
     gl_Position = vec4(position,1.0);
   }`,
@@ -32,17 +37,28 @@ const XFadeMaterial = shaderMaterial(
     vec4 finalTexture = mix(_texture1, _texture2, _shownTxt);
     finalTexture =  vec4(finalTexture.rgb, opacity * finalTexture.a);
     gl_FragColor = finalTexture;
-  }`
-)
+  }`,
+);
 
-extend({ XFadeMaterial })
+extend({ XFadeMaterial });
 
 export function CrossFadeMaterial({ shownTxt = -1, ...props }) {
-  const ref = useRef(null)
-  const { size, gl } = useThree()
-  const dpr = gl.getPixelRatio()
+  const ref = useRef(null);
+  const { size, gl } = useThree();
+  const dpr = gl.getPixelRatio();
   useFrame(() => {
-    ref.current.shownTxt = THREE.MathUtils.lerp(ref.current.shownTxt, shownTxt, 0.2)
-  })
-  return <xFadeMaterial ref={ref} {...props} resolution={[size.width * dpr, size.height * dpr]} defines={{ FXAA: !gl.capabilities.isWebGL2 }} />
+    ref.current.shownTxt = THREE.MathUtils.lerp(
+      ref.current.shownTxt,
+      shownTxt,
+      0.2,
+    );
+  });
+  return (
+    <xFadeMaterial
+      ref={ref}
+      {...props}
+      resolution={[size.width * dpr, size.height * dpr]}
+      defines={{ FXAA: !gl.capabilities.isWebGL2 }}
+    />
+  );
 }

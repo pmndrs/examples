@@ -1,12 +1,12 @@
-import type { JSX } from 'react'
-import * as THREE from 'three'
-import * as React from 'react'
-import { shaderMaterial } from '@react-three/drei'
-import { extend, applyProps, ReactThreeFiber } from '@react-three/fiber'
-import { toCreasedNormals } from 'three-stdlib'
+import type { JSX } from "react";
+import * as THREE from "three";
+import * as React from "react";
+import { shaderMaterial } from "@react-three/drei";
+import { extend, applyProps, ReactThreeFiber } from "@react-three/fiber";
+import { toCreasedNormals } from "three-stdlib";
 
 const OutlinesMaterial = shaderMaterial(
-  { color: new THREE.Color('black'), opacity: 1, thickness: 0.05 },
+  { color: new THREE.Color("black"), opacity: 1, thickness: 0.05 },
   `#include <common>
    #include <morphtarget_pars_vertex>
    #include <skinning_pars_vertex>
@@ -37,62 +37,83 @@ const OutlinesMaterial = shaderMaterial(
    void main(){
      gl_FragColor = vec4(color, opacity);
      #include <tonemapping_fragment>
-     #include <${parseInt(THREE.REVISION.replace(/\D+/g, '')) >= 154 ? 'colorspace_fragment' : 'encodings_fragment'}>
-   }`
-)
+     #include <${parseInt(THREE.REVISION.replace(/\D+/g, "")) >= 154 ? "colorspace_fragment" : "encodings_fragment"}>
+   }`,
+);
 
-type OutlinesProps = JSX.IntrinsicElements['group'] & {
+type OutlinesProps = JSX.IntrinsicElements["group"] & {
   /** Outline color, default: black */
-  color: ReactThreeFiber.Color
+  color: ReactThreeFiber.Color;
   /** Outline opacity, default: 1 */
-  opacity: number
+  opacity: number;
   /** Outline transparency, default: false */
-  transparent: boolean
+  transparent: boolean;
   /** Outline thickness, default 0.05 */
-  thickness: number
+  thickness: number;
   /** Geometry crease angle (0 === no crease), default: Math.PI */
-  angle: number
-}
+  angle: number;
+};
 
-export function Outlines({ color = 'black', opacity = 1, transparent = false, thickness = 0.05, angle = Math.PI, ...props }: OutlinesProps) {
-  const ref = React.useRef<THREE.Group>(null!)
-  const [material] = React.useState(() => new OutlinesMaterial({ side: THREE.BackSide }))
-  React.useMemo(() => extend({ OutlinesMaterial }), [])
+export function Outlines({
+  color = "black",
+  opacity = 1,
+  transparent = false,
+  thickness = 0.05,
+  angle = Math.PI,
+  ...props
+}: OutlinesProps) {
+  const ref = React.useRef<THREE.Group>(null!);
+  const [material] = React.useState(
+    () => new OutlinesMaterial({ side: THREE.BackSide }),
+  );
+  React.useMemo(() => extend({ OutlinesMaterial }), []);
   React.useLayoutEffect(() => {
-    const group = ref.current
-    const parent = group.parent as THREE.Mesh & THREE.SkinnedMesh & THREE.InstancedMesh
+    const group = ref.current;
+    const parent = group.parent as THREE.Mesh &
+      THREE.SkinnedMesh &
+      THREE.InstancedMesh;
     if (parent && parent.geometry) {
-      let mesh
+      let mesh;
       if (parent.skeleton) {
-        mesh = new THREE.SkinnedMesh()
-        mesh.material = material
-        mesh.bind(parent.skeleton, parent.bindMatrix)
-        group.add(mesh)
+        mesh = new THREE.SkinnedMesh();
+        mesh.material = material;
+        mesh.bind(parent.skeleton, parent.bindMatrix);
+        group.add(mesh);
       } else if (parent.isInstancedMesh) {
-        mesh = new THREE.InstancedMesh(parent.geometry, material, parent.count)
-        mesh.instanceMatrix = parent.instanceMatrix
-        group.add(mesh)
+        mesh = new THREE.InstancedMesh(parent.geometry, material, parent.count);
+        mesh.instanceMatrix = parent.instanceMatrix;
+        group.add(mesh);
       } else {
-        mesh = new THREE.Mesh()
-        mesh.material = material
-        group.add(mesh)
+        mesh = new THREE.Mesh();
+        mesh.material = material;
+        group.add(mesh);
       }
-      mesh.geometry = angle ? toCreasedNormals(parent.geometry, angle) : parent.geometry
+      mesh.geometry = angle
+        ? toCreasedNormals(parent.geometry, angle)
+        : parent.geometry;
       return () => {
-        if (angle) mesh.geometry.dispose()
-        group.remove(mesh)
-      }
+        if (angle) mesh.geometry.dispose();
+        group.remove(mesh);
+      };
     }
-  }, [angle, ref.current?.parent])
+  }, [angle, ref.current?.parent]);
 
   React.useLayoutEffect(() => {
-    const group = ref.current
-    console.log(group.children.length)
-    const mesh = group.children[0] as THREE.Mesh<THREE.BufferGeometry, THREE.Material>
+    const group = ref.current;
+    console.log(group.children.length);
+    const mesh = group.children[0] as THREE.Mesh<
+      THREE.BufferGeometry,
+      THREE.Material
+    >;
     if (mesh) {
-      applyProps(mesh.material as any, { transparent, thickness, color, opacity })
+      applyProps(mesh.material as any, {
+        transparent,
+        thickness,
+        color,
+        opacity,
+      });
     }
-  }, [angle, transparent, thickness, color, opacity])
+  }, [angle, transparent, thickness, color, opacity]);
 
-  return <group ref={ref} {...props} />
+  return <group ref={ref} {...props} />;
 }

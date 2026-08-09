@@ -1,12 +1,12 @@
-import { useLoader } from '@react-three/fiber'
-import { EffectComposer, SSR, Bloom, LUT } from '@react-three/postprocessing'
-import { useControls } from 'leva'
-import { LUTCubeLoader } from 'postprocessing'
+import { useLoader } from "@react-three/fiber";
+import { EffectComposer, SSR, Bloom, LUT } from "@react-three/postprocessing";
+import { useControls } from "leva";
+import { LUTCubeLoader } from "postprocessing";
 
-import lutTex from './F-6800-STD.cube?url'
+import lutTex from "./F-6800-STD.cube?url";
 
 export function Effects() {
-  const texture = useLoader(LUTCubeLoader, lutTex)
+  const texture = useLoader(LUTCubeLoader, lutTex);
   const { enabled, ...props } = useControls({
     enabled: true,
     temporalResolve: true,
@@ -37,15 +37,20 @@ export function Effects() {
     maxDepthDifference: { value: 5, min: 0, max: 10 },
     maxDepth: { value: 1, min: 0, max: 1 },
     thickness: { value: 3, min: 0, max: 10 },
-    ior: { value: 1.45, min: 0, max: 2 }
-  })
+    ior: { value: 1.45, min: 0, max: 2 },
+  });
   return (
     enabled && (
       <EffectComposer disableNormalPass>
         <SSR {...props} />
-        <Bloom luminanceThreshold={0.2} mipmapBlur luminanceSmoothing={0} intensity={1.75} />
+        <Bloom
+          luminanceThreshold={0.2}
+          mipmapBlur
+          luminanceSmoothing={0}
+          intensity={1.75}
+        />
         <LUT lut={texture} />
       </EffectComposer>
     )
-  )
+  );
 }

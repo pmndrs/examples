@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Sulphur+Point&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Sulphur+Point&display=swap");
 
 html,
 body,
@@ -40,10 +40,11 @@ body {
   padding: 0;
   background: #0c0f13;
   overflow: hidden;
-  font-family: 'Sulphur Point', sans-serif;
+  font-family: "Sulphur Point", sans-serif;
   color: white;
   font-size: 0.9rem;
   cursor:
-    url('https://raw.githubusercontent.com/chenglou/react-motion/master/demos/demo8-draggable-list/cursor.png') 39 39,
+    url("https://raw.githubusercontent.com/chenglou/react-motion/master/demos/demo8-draggable-list/cursor.png")
+      39 39,
     auto;
 }

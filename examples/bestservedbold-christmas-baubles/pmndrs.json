@@ -6,6 +6,11 @@
   "authors": ["Paul Henschel"],
   "publishedAt": "2020-08-03",
   "source": "https://codesandbox.io/s/zxpv7",
-  "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/postprocessing", "@react-three/rapier"],
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing",
+    "@react-three/rapier"
+  ],
   "assets": []
 }

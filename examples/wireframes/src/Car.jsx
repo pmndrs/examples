@@ -7,28 +7,32 @@ Source: https://sketchfab.com/3d-models/car-acccd15d4e454399a39dbe40f4f6df71
 Title: Car
 */
 
-import { useEffect, useRef } from 'react'
-import { useGLTF, useAnimations, Wireframe } from '@react-three/drei'
+import { useEffect, useRef } from "react";
+import { useGLTF, useAnimations, Wireframe } from "@react-three/drei";
 
-import carModel from './car.glb?url'
+import carModel from "./car.glb?url";
 
 export function Model(opts) {
-  const group = useRef()
-  const { nodes, materials, animations } = useGLTF(carModel)
-  const { actions } = useAnimations(animations, group)
+  const group = useRef();
+  const { nodes, materials, animations } = useGLTF(carModel);
+  const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
-    actions['Idle.1'].reset().play()
-  }, [actions])
+    actions["Idle.1"].reset().play();
+  }, [actions]);
 
   return (
     <group ref={group} position-y={-1.25}>
       <primitive rotation={[-Math.PI / 2, 0, 0]} object={nodes._rootJoint} />
-      <skinnedMesh geometry={nodes.Object_78.geometry} material={materials.Mat_Robot} skeleton={nodes.Object_78.skeleton}>
+      <skinnedMesh
+        geometry={nodes.Object_78.geometry}
+        material={materials.Mat_Robot}
+        skeleton={nodes.Object_78.skeleton}
+      >
         <Wireframe {...opts} />
       </skinnedMesh>
     </group>
-  )
+  );
 }
 
-useGLTF.preload(carModel)
+useGLTF.preload(carModel);

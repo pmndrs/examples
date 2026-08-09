@@ -1,7 +1,7 @@
-@import url('https://rsms.me/inter/inter.css');
+@import url("https://rsms.me/inter/inter.css");
 
 html {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 * {
@@ -51,7 +51,7 @@ a {
 }
 
 .label::after {
-  content: 'POIMANDRES';
+  content: "POIMANDRES";
 }
 
 .caption {
@@ -61,7 +61,7 @@ a {
 }
 
 .caption::after {
-  content: 'Open source developer collective for the creative space';
+  content: "Open source developer collective for the creative space";
 }
 
 .button {
@@ -101,10 +101,10 @@ a {
 
 @media (max-width: 800px) {
   .caption::after {
-    content: 'OSS dev collective  for the creative space';
+    content: "OSS dev collective  for the creative space";
   }
   .label::after {
-    content: 'PMNDRS';
+    content: "PMNDRS";
   }
   .container {
     padding: 2em 3em 2em 3em;
@@ -129,7 +129,7 @@ a {
     gap: 0.5em;
   }
   .caption::after {
-    content: 'OSS dev collective';
+    content: "OSS dev collective";
   }
   .container {
     padding: 2em 2em 2em 2em;

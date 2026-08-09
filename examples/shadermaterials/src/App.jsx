@@ -1,11 +1,11 @@
-import * as THREE from 'three'
-import { useRef, useState } from 'react'
-import { Canvas, extend, useFrame } from '@react-three/fiber'
-import { useTexture, shaderMaterial } from '@react-three/drei'
+import * as THREE from "three";
+import { useRef, useState } from "react";
+import { Canvas, extend, useFrame } from "@react-three/fiber";
+import { useTexture, shaderMaterial } from "@react-three/drei";
 
-import img1 from './img/Img1.jpg'
-import img2 from './img/Img2.jpg'
-import img3 from './img/displacement/13.jpg'
+import img1 from "./img/Img1.jpg";
+import img2 from "./img/Img2.jpg";
+import img3 from "./img/displacement/13.jpg";
 
 export const ImageFadeMaterial = shaderMaterial(
   {
@@ -13,7 +13,7 @@ export const ImageFadeMaterial = shaderMaterial(
     dispFactor: 0,
     tex: undefined,
     tex2: undefined,
-    disp: undefined
+    disp: undefined,
   },
   ` varying vec2 vUv;
     void main() {
@@ -38,24 +38,37 @@ export const ImageFadeMaterial = shaderMaterial(
       gl_FragColor = finalTexture;
       #include <tonemapping_fragment>
       #include <colorspace_fragment>
-    }`
-)
+    }`,
+);
 
-extend({ ImageFadeMaterial })
+extend({ ImageFadeMaterial });
 
 function FadingImage() {
-  const ref = useRef()
-  const [texture1, texture2, dispTexture] = useTexture([img1, img2, img3])
-  const [hovered, setHover] = useState(false)
+  const ref = useRef();
+  const [texture1, texture2, dispTexture] = useTexture([img1, img2, img3]);
+  const [hovered, setHover] = useState(false);
   useFrame(() => {
-    ref.current.dispFactor = THREE.MathUtils.lerp(ref.current.dispFactor, hovered ? 1 : 0, 0.075)
-  })
+    ref.current.dispFactor = THREE.MathUtils.lerp(
+      ref.current.dispFactor,
+      hovered ? 1 : 0,
+      0.075,
+    );
+  });
   return (
-    <mesh onPointerOver={(e) => setHover(true)} onPointerOut={(e) => setHover(false)}>
+    <mesh
+      onPointerOver={(e) => setHover(true)}
+      onPointerOut={(e) => setHover(false)}
+    >
       <planeGeometry />
-      <imageFadeMaterial ref={ref} tex={texture1} tex2={texture2} disp={dispTexture} toneMapped={false} />
+      <imageFadeMaterial
+        ref={ref}
+        tex={texture1}
+        tex2={texture2}
+        disp={dispTexture}
+        toneMapped={false}
+      />
     </mesh>
-  )
+  );
 }
 
 export default function App() {
@@ -63,5 +76,5 @@ export default function App() {
     <Canvas camera={{ position: [0, 0, 2], fov: 50 }}>
       <FadingImage />
     </Canvas>
-  )
+  );
 }

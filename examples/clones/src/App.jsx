@@ -1,13 +1,22 @@
-import { Canvas } from '@react-three/fiber'
-import { OrbitControls, Bounds, BakeShadows } from '@react-three/drei'
-import { Room } from './Room'
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, Bounds, BakeShadows } from "@react-three/drei";
+import { Room } from "./Room";
 
 export default function App() {
   return (
-    <Canvas orthographic shadows dpr={[1, 2]} camera={{ position: [10, 10, 10], zoom: 10 }}>
-      <color attach="background" args={['#252530']} />
+    <Canvas
+      orthographic
+      shadows
+      dpr={[1, 2]}
+      camera={{ position: [10, 10, 10], zoom: 10 }}
+    >
+      <color attach="background" args={["#252530"]} />
       <ambientLight intensity={0.01 * Math.PI} />
-      <hemisphereLight intensity={0.125 * Math.PI} color="#8040df" groundColor="red" />
+      <hemisphereLight
+        intensity={0.125 * Math.PI}
+        color="#8040df"
+        groundColor="red"
+      />
       <spotLight
         castShadow
         color="orange"
@@ -35,11 +44,19 @@ export default function App() {
         enablePan={true}
         zoomSpeed={0.3}
       />
-      <gridHelper args={[1000, 200, '#151515', '#020202']} position={[0, -4, 0]} />
-      <mesh scale={200} rotation={[-Math.PI / 2, 0, 0]} position={[0, -4, 0]} receiveShadow>
+      <gridHelper
+        args={[1000, 200, "#151515", "#020202"]}
+        position={[0, -4, 0]}
+      />
+      <mesh
+        scale={200}
+        rotation={[-Math.PI / 2, 0, 0]}
+        position={[0, -4, 0]}
+        receiveShadow
+      >
         <planeGeometry />
         <shadowMaterial transparent opacity={0.3} />
       </mesh>
     </Canvas>
-  )
+  );
 }

@@ -1,5 +1,11 @@
-import { Container, TopLeft, BottomLeft, BottomRight, Hamburger } from './styles'
-import { VelvetBanana } from './VelvetBanana'
+import {
+  Container,
+  TopLeft,
+  BottomLeft,
+  BottomRight,
+  Hamburger,
+} from "./styles";
+import { VelvetBanana } from "./VelvetBanana";
 
 export default function Overlay() {
   return (
@@ -13,7 +19,8 @@ export default function Overlay() {
         <p>In React & Threejs —</p>
       </TopLeft>
       <BottomLeft>
-        A runtime deconstruction of <a href="https://playful.software">playful.software</a>
+        A runtime deconstruction of{" "}
+        <a href="https://playful.software">playful.software</a>
       </BottomLeft>
       <BottomRight>
         Inspiration and ideas
@@ -40,5 +47,5 @@ export default function Overlay() {
       </Hamburger>
       <VelvetBanana />
     </Container>
-  )
+  );
 }

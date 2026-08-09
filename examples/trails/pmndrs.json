@@ -6,6 +6,11 @@
   "authors": ["Faraz Shaikh"],
   "publishedAt": "2022-03-18",
   "source": "https://codesandbox.io/s/pmndrs-vercel-forked-slvex6",
-  "libraries": ["@react-three/cannon", "@react-three/drei", "@react-three/fiber", "lamina"],
+  "libraries": [
+    "@react-three/cannon",
+    "@react-three/drei",
+    "@react-three/fiber",
+    "lamina"
+  ],
   "assets": []
 }

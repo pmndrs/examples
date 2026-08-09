@@ -1,4 +1,4 @@
-@import url('https://rsms.me/inter/inter.css');
+@import url("https://rsms.me/inter/inter.css");
 
 * {
   box-sizing: border-box;
@@ -28,12 +28,17 @@ body {
   position: fixed;
   overflow: hidden;
   overscroll-behavior-y: none;
-  font-family: 'Amiri', serif;
+  font-family: "Amiri", serif;
   color: white;
   background: black;
-  background: radial-gradient(circle at bottom center, rgba(60, 60, 60, 1) 0%, rgba(0, 0, 0, 1) 58%);
+  background: radial-gradient(
+    circle at bottom center,
+    rgba(60, 60, 60, 1) 0%,
+    rgba(0, 0, 0, 1) 58%
+  );
   cursor:
-    url('https://github.com/chenglou/react-motion/raw/master/demos/demo8-draggable-list/cursor.png') 39 39,
+    url("https://github.com/chenglou/react-motion/raw/master/demos/demo8-draggable-list/cursor.png")
+      39 39,
     auto;
   font-family: inter;
 }
@@ -78,7 +83,7 @@ canvas {
 }
 
 .loader {
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: "Josefin Sans", sans-serif;
   font-weight: 900;
 }
 
@@ -88,7 +93,7 @@ canvas {
   top: 6em;
   left: 0;
   color: white;
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: "Josefin Sans", sans-serif;
   font-weight: 900;
   font-size: 0.8em;
   width: 100%;
@@ -102,7 +107,7 @@ canvas {
 }
 
 .header > span.active::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -10px;
   left: calc(50% - 4px);
@@ -130,7 +135,7 @@ canvas {
 }
 
 .middle > h1::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 10px;
   left: calc(50% - 25px);

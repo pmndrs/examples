@@ -1,22 +1,36 @@
-import * as THREE from 'three'
-import React, { Suspense, useEffect, useState } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { MeshReflectorMaterial, Text, useTexture, useGLTF } from '@react-three/drei'
+import * as THREE from "three";
+import React, { Suspense, useEffect, useState } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import {
+  MeshReflectorMaterial,
+  Text,
+  useTexture,
+  useGLTF,
+} from "@react-three/drei";
 
-import carlaModel from './carla-draco.glb?url'
-import inter from './Inter-Bold.woff?url'
-import dreiVideo from './drei.mp4'
-import surfaceTex1 from './SurfaceImperfections003_1K_var1.jpg'
-import surfaceTex2 from './SurfaceImperfections003_1K_Normal.jpg'
+import carlaModel from "./carla-draco.glb?url";
+import inter from "./Inter-Bold.woff?url";
+import dreiVideo from "./drei.mp4";
+import surfaceTex1 from "./SurfaceImperfections003_1K_var1.jpg";
+import surfaceTex2 from "./SurfaceImperfections003_1K_Normal.jpg";
 
 export default function App() {
   return (
-    <Canvas concurrent gl={{ alpha: false }} pixelRatio={[1, 1.5]} camera={{ position: [0, 3, 100], fov: 15 }}>
-      <color attach="background" args={['black']} />
-      <fog attach="fog" args={['black', 15, 20]} />
+    <Canvas
+      concurrent
+      gl={{ alpha: false }}
+      pixelRatio={[1, 1.5]}
+      camera={{ position: [0, 3, 100], fov: 15 }}
+    >
+      <color attach="background" args={["black"]} />
+      <fog attach="fog" args={["black", 15, 20]} />
       <Suspense fallback={null}>
         <group position={[0, -1, 0]}>
-          <Carla rotation={[0, Math.PI - 0.4, 0]} position={[-1.2, 0, 0.6]} scale={[0.26, 0.26, 0.26]} />
+          <Carla
+            rotation={[0, Math.PI - 0.4, 0]}
+            position={[-1.2, 0, 0.6]}
+            scale={[0.26, 0.26, 0.26]}
+          />
           <VideoText position={[0, 1.3, -2]} />
           <Ground />
         </group>
@@ -26,29 +40,40 @@ export default function App() {
         <Intro />
       </Suspense>
     </Canvas>
-  )
+  );
 }
 
 function Carla(props) {
-  const { scene } = useGLTF(carlaModel)
-  return <primitive object={scene} {...props} />
+  const { scene } = useGLTF(carlaModel);
+  return <primitive object={scene} {...props} />;
 }
 
 function VideoText(props) {
-  const [video] = useState(() => Object.assign(document.createElement('video'), { src: dreiVideo, crossOrigin: 'Anonymous', loop: true, muted: true }))
-  useEffect(() => void video.play(), [video])
+  const [video] = useState(() =>
+    Object.assign(document.createElement("video"), {
+      src: dreiVideo,
+      crossOrigin: "Anonymous",
+      loop: true,
+      muted: true,
+    }),
+  );
+  useEffect(() => void video.play(), [video]);
   return (
     <Text font={inter} fontSize={3} letterSpacing={-0.06} {...props}>
       drei
       <meshBasicMaterial toneMapped={false}>
-        <videoTexture attach="map" args={[video]} encoding={THREE.sRGBEncoding} />
+        <videoTexture
+          attach="map"
+          args={[video]}
+          encoding={THREE.sRGBEncoding}
+        />
       </meshBasicMaterial>
     </Text>
-  )
+  );
 }
 
 function Ground() {
-  const [floor, normal] = useTexture([surfaceTex1, surfaceTex2])
+  const [floor, normal] = useTexture([surfaceTex1, surfaceTex2]);
   return (
     <mesh rotation={[-Math.PI / 2, 0, Math.PI / 2]}>
       <planeGeometry args={[10, 10]} />
@@ -65,13 +90,16 @@ function Ground() {
         normalScale={[2, 2]}
       />
     </mesh>
-  )
+  );
 }
 
 function Intro() {
-  const [vec] = useState(() => new THREE.Vector3())
+  const [vec] = useState(() => new THREE.Vector3());
   return useFrame((state) => {
-    state.camera.position.lerp(vec.set(state.mouse.x * 5, 3 + state.mouse.y * 2, 14), 0.05)
-    state.camera.lookAt(0, 0, 0)
-  })
+    state.camera.position.lerp(
+      vec.set(state.mouse.x * 5, 3 + state.mouse.y * 2, 14),
+      0.05,
+    );
+    state.camera.lookAt(0, 0, 0);
+  });
 }

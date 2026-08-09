@@ -1,32 +1,47 @@
-import * as THREE from 'three'
-import { useRef, useState } from 'react'
-import { useCursor, useGLTF } from '@react-three/drei'
+import * as THREE from "three";
+import { useRef, useState } from "react";
+import { useCursor, useGLTF } from "@react-three/drei";
 
-import model from './draco.glb?url'
+import model from "./draco.glb?url";
 
 const bottleMaterial = new THREE.MeshPhysicalMaterial({
-  color: '#efefef',
+  color: "#efefef",
   transmission: 1,
   roughness: 0.35,
   thickness: 500,
-  envMapIntensity: 4
-})
+  envMapIntensity: 4,
+});
 
-const capMaterial = new THREE.MeshStandardMaterial({ color: new THREE.Color('white') })
+const capMaterial = new THREE.MeshStandardMaterial({
+  color: new THREE.Color("white"),
+});
 
 function Bottle({ glas, cap, children, ...props }) {
-  const ref = useRef()
-  const { nodes } = useGLTF(model)
-  const [hovered, set] = useState(false)
-  useCursor(hovered)
+  const ref = useRef();
+  const { nodes } = useGLTF(model);
+  const [hovered, set] = useState(false);
+  useCursor(hovered);
   return (
-    <group rotation={[Math.PI / 2, 0, 3]} {...props} onPointerOver={(e) => set(true)} onPointerOut={() => set(false)}>
+    <group
+      rotation={[Math.PI / 2, 0, 3]}
+      {...props}
+      onPointerOver={(e) => set(true)}
+      onPointerOut={() => set(false)}
+    >
       <group ref={ref}>
-        <mesh castShadow geometry={nodes[glas].geometry} material={bottleMaterial} />
-        <mesh castShadow geometry={nodes[cap].geometry} material={capMaterial} />
+        <mesh
+          castShadow
+          geometry={nodes[glas].geometry}
+          material={bottleMaterial}
+        />
+        <mesh
+          castShadow
+          geometry={nodes[cap].geometry}
+          material={capMaterial}
+        />
       </group>
     </group>
-  )
+  );
 }
 
 export default function Bottles(props) {
@@ -39,5 +54,5 @@ export default function Bottles(props) {
       <Bottle position={[-140, 0, 0]} glas="Untitled072" cap="Untitled072_1" />
       <Bottle position={[-180, 0, 0]} glas="Untitled007" cap="Untitled007_1" />
     </group>
-  )
+  );
 }

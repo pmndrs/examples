@@ -1,28 +1,28 @@
-import type { ThreeElements } from '@react-three/fiber'
+import type { ThreeElements } from "@react-three/fiber";
 
 declare global {
   namespace JSX {
     interface IntrinsicElements extends ThreeElements {}
     interface IntrinsicElements {
-      shieldMaterial: ThreeElements['shaderMaterial']
+      shieldMaterial: ThreeElements["shaderMaterial"];
     }
   }
 }
 
-declare module 'react' {
+declare module "react" {
   namespace JSX {
     interface IntrinsicElements extends ThreeElements {}
     interface IntrinsicElements {
-      shieldMaterial: ThreeElements['shaderMaterial']
+      shieldMaterial: ThreeElements["shaderMaterial"];
     }
   }
 }
 
-declare module 'react/jsx-runtime' {
+declare module "react/jsx-runtime" {
   namespace JSX {
     interface IntrinsicElements extends ThreeElements {}
     interface IntrinsicElements {
-      shieldMaterial: ThreeElements['shaderMaterial']
+      shieldMaterial: ThreeElements["shaderMaterial"];
     }
   }
 }

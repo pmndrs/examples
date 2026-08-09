@@ -1,10 +1,17 @@
-import * as THREE from 'three'
-import { useLayoutEffect } from 'react'
-import { Canvas } from '@react-three/fiber'
-import { Center, AccumulativeShadows, RandomizedLight, OrbitControls, Environment, useGLTF } from '@react-three/drei'
-import { FlakesTexture } from 'three-stdlib'
+import * as THREE from "three";
+import { useLayoutEffect } from "react";
+import { Canvas } from "@react-three/fiber";
+import {
+  Center,
+  AccumulativeShadows,
+  RandomizedLight,
+  OrbitControls,
+  Environment,
+  useGLTF,
+} from "@react-three/drei";
+import { FlakesTexture } from "three-stdlib";
 
-import suziModel from './suzi-model.gltf?url'
+import suziModel from "./suzi-model.gltf?url";
 
 export default function App() {
   return (
@@ -25,25 +32,48 @@ export default function App() {
             <meshStandardMaterial color="indianred" />
           </mesh>
         </Center>
-        <AccumulativeShadows temporal frames={100} color="orange" colorBlend={2} toneMapped={true} alphaTest={0.75} opacity={2} scale={12}>
-          <RandomizedLight intensity={Math.PI} amount={8} radius={4} ambient={0.5} position={[5, 5, -10]} bias={0.001} />
+        <AccumulativeShadows
+          temporal
+          frames={100}
+          color="orange"
+          colorBlend={2}
+          toneMapped={true}
+          alphaTest={0.75}
+          opacity={2}
+          scale={12}
+        >
+          <RandomizedLight
+            intensity={Math.PI}
+            amount={8}
+            radius={4}
+            ambient={0.5}
+            position={[5, 5, -10]}
+            bias={0.001}
+          />
         </AccumulativeShadows>
       </group>
       <OrbitControls minPolarAngle={0} maxPolarAngle={Math.PI / 2} />
       <Environment preset="city" />
     </Canvas>
-  )
+  );
 }
 
 function Suzi(props) {
-  const { scene, materials } = useGLTF(suziModel)
+  const { scene, materials } = useGLTF(suziModel);
   useLayoutEffect(() => {
-    scene.traverse((obj) => obj.isMesh && (obj.receiveShadow = obj.castShadow = true))
-    materials.default.color.set('orange')
-    materials.default.roughness = 0
-    materials.default.normalMap = new THREE.CanvasTexture(new FlakesTexture(), THREE.UVMapping, THREE.RepeatWrapping, THREE.RepeatWrapping)
-    materials.default.normalMap.repeat.set(40, 40)
-    materials.default.normalScale.set(0.1, 0.1)
-  })
-  return <primitive object={scene} {...props} />
+    scene.traverse(
+      (obj) => obj.isMesh && (obj.receiveShadow = obj.castShadow = true),
+    );
+    materials.default.color.set("orange");
+    materials.default.roughness = 0;
+    materials.default.normalMap = new THREE.CanvasTexture(
+      new FlakesTexture(),
+      THREE.UVMapping,
+      THREE.RepeatWrapping,
+      THREE.RepeatWrapping,
+    );
+    materials.default.normalMap.repeat.set(40, 40);
+    materials.default.normalScale.set(0.1, 0.1);
+  });
+  return <primitive object={scene} {...props} />;
 }

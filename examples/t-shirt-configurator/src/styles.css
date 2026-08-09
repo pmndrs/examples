@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,600;1,900&display=swap');
-@import url('https://rsms.me/inter/inter.css');
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,600;1,900&display=swap");
+@import url("https://rsms.me/inter/inter.css");
 html {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 @supports (font-variation-settings: normal) {
   html {
-    font-family: 'Inter var', sans-serif;
+    font-family: "Inter var", sans-serif;
   }
 }
 
@@ -27,7 +27,7 @@ body,
 
 body {
   background: #f0f0f0;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 @keyframes fade-in {
@@ -94,7 +94,7 @@ section {
   font-style: italic;
   width: 30%;
   line-height: 10rem;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: "Nunito Sans", sans-serif;
 }
 
 .support--content {
@@ -227,7 +227,7 @@ button:hover {
 }
 
 .decals p {
-  font-family: 'Inter var';
+  font-family: "Inter var";
   font-size: 0.7rem;
   padding-bottom: 15px;
 }

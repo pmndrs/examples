@@ -1,29 +1,48 @@
-import type { JSX } from 'react'
-import { forwardRef, useEffect, useRef } from 'react'
-import { addEffect } from '@react-three/fiber'
+import type { JSX } from "react";
+import { forwardRef, useEffect, useRef } from "react";
+import { addEffect } from "@react-three/fiber";
 
-import type { SVGProps } from 'react'
+import type { SVGProps } from "react";
 
-import { useStore, mutation } from '../../store'
+import { useStore, mutation } from "../../store";
 
-type BackgroundProps = Pick<SVGProps<SVGStopElement>, 'offset'>
+type BackgroundProps = Pick<SVGProps<SVGStopElement>, "offset">;
 
 const Background = forwardRef<SVGStopElement, BackgroundProps>(
   ({ offset }, ref): JSX.Element => (
-    <svg className="speed-background" width={289} height={55} viewBox="0 0 289 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      className="speed-background"
+      width={289}
+      height={55}
+      viewBox="0 0 289 55"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <defs>
         <linearGradient id="progress" x1="1" y1="0" x2="0" y2="0">
           <stop id="stop1" offset={offset} ref={ref} stopColor="#1B3049" />
           <stop id="stop2" stopColor="#3EB4C8" />
         </linearGradient>
       </defs>
-      <path fillRule="evenodd" clipRule="evenodd" d="M0 40c175.256-2.308 227.867-13.823 289-40v55H0V40z" fill="url(#progress)" />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M0 40c175.256-2.308 227.867-13.823 289-40v55H0V40z"
+        fill="url(#progress)"
+      />
     </svg>
-  )
-)
+  ),
+);
 
 const Foreground = (): JSX.Element => (
-  <svg className="speed-foreground" width={289} height={55} viewBox="0 0 289 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    className="speed-foreground"
+    width={289}
+    height={55}
+    viewBox="0 0 289 55"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       fillRule="evenodd"
       clipRule="evenodd"
@@ -31,32 +50,33 @@ const Foreground = (): JSX.Element => (
       fill="#132237"
     />
   </svg>
-)
+);
 
-const getOffsetFactory = (maxSpeed: number) => () => `${Math.max(1 - mutation.speed / maxSpeed, 0).toFixed(2)}`
+const getOffsetFactory = (maxSpeed: number) => () =>
+  `${Math.max(1 - mutation.speed / maxSpeed, 0).toFixed(2)}`;
 
 export const Gauge = () => {
-  const ref = useRef<SVGStopElement>(null)
-  const maxSpeed = useStore((state) => state.vehicleConfig.maxSpeed)
+  const ref = useRef<SVGStopElement>(null);
+  const maxSpeed = useStore((state) => state.vehicleConfig.maxSpeed);
 
-  const getOffset = getOffsetFactory(maxSpeed)
+  const getOffset = getOffsetFactory(maxSpeed);
 
-  let offset = getOffset()
+  let offset = getOffset();
 
   useEffect(() =>
     addEffect(() => {
-      if (!ref.current) return
-      offset = getOffset()
-      if (ref.current.getAttribute('offset') !== offset) {
-        ref.current.setAttribute('offset', offset)
+      if (!ref.current) return;
+      offset = getOffset();
+      if (ref.current.getAttribute("offset") !== offset) {
+        ref.current.setAttribute("offset", offset);
       }
-    })
-  )
+    }),
+  );
 
   return (
     <div className="speed-gauge">
       <Background offset={offset} ref={ref} />
       <Foreground />
     </div>
-  )
-}
+  );
+};

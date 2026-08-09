@@ -1,4 +1,4 @@
-@import url('@pmndrs/branding/styles.css');
+@import url("@pmndrs/branding/styles.css");
 
 * {
   box-sizing: border-box;
@@ -15,11 +15,11 @@ body,
 }
 
 body {
-  font-family: 'Inter var', sans-serif;
+  font-family: "Inter var", sans-serif;
   color: white;
   user-select: none;
   cursor:
-    url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxNiIgY3k9IjE2IiByPSIxMCIgZmlsbD0id2hpdGUiLz48L3N2Zz4='),
+    url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxNiIgY3k9IjE2IiByPSIxMCIgZmlsbD0id2hpdGUiLz48L3N2Zz4="),
     auto;
 }
 

@@ -1,15 +1,15 @@
-import { useMemo } from 'react'
-import * as THREE from 'three'
-import { Float, Box, Wireframe } from '@react-three/drei'
-import { useFrame } from '@react-three/fiber'
-import { patchShaders } from 'gl-noise/build/glNoise.m'
+import { useMemo } from "react";
+import * as THREE from "three";
+import { Float, Box, Wireframe } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import { patchShaders } from "gl-noise/build/glNoise.m";
 
 export function Shader(opts) {
-  const uniforms = useMemo(() => ({ uTime: { value: 0 } }), [])
+  const uniforms = useMemo(() => ({ uTime: { value: 0 } }), []);
 
   useFrame((_, dt) => {
-    uniforms.uTime.value += dt
-  })
+    uniforms.uTime.value += dt;
+  });
 
   return (
     <Float floatIntensity={4} rotationIntensity={4}>
@@ -55,5 +55,5 @@ export function Shader(opts) {
         />
       </Box>
     </Float>
-  )
+  );
 }

@@ -1,20 +1,39 @@
-import * as THREE from 'three'
-import { Suspense, useRef } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { useGLTF, OrbitControls, Sky, Environment, Clouds, Cloud } from '@react-three/drei'
-import { Physics, RigidBody } from '@react-three/rapier'
-import { useControls } from 'leva'
+import * as THREE from "three";
+import { Suspense, useRef } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import {
+  useGLTF,
+  OrbitControls,
+  Sky,
+  Environment,
+  Clouds,
+  Cloud,
+} from "@react-three/drei";
+import { Physics, RigidBody } from "@react-three/rapier";
+import { useControls } from "leva";
 
-import ballTripModel from './ball-trip.optimized.glb?url'
+import ballTripModel from "./ball-trip.optimized.glb?url";
 
 export default function App() {
-  const { debug } = useControls({ debug: false })
+  const { debug } = useControls({ debug: false });
   return (
     <Canvas shadows camera={{ position: [-50, -25, 150], fov: 15 }}>
       <Suspense fallback={null}>
         <hemisphereLight intensity={0.45 * Math.PI} />
-        <spotLight decay={0} angle={0.4} penumbra={1} position={[20, 30, 2.5]} castShadow shadow-bias={-0.00001} />
-        <directionalLight decay={0} color="red" position={[-10, -10, 0]} intensity={1.5} />
+        <spotLight
+          decay={0}
+          angle={0.4}
+          penumbra={1}
+          position={[20, 30, 2.5]}
+          castShadow
+          shadow-bias={-0.00001}
+        />
+        <directionalLight
+          decay={0}
+          color="red"
+          position={[-10, -10, 0]}
+          intensity={1.5}
+        />
         <Clouds material={THREE.MeshBasicMaterial}>
           <Cloud seed={10} bounds={50} volume={80} position={[40, 0, -80]} />
           <Cloud seed={10} bounds={50} volume={80} position={[-40, 10, -80]} />
@@ -33,15 +52,20 @@ export default function App() {
         <OrbitControls />
       </Suspense>
     </Canvas>
-  )
+  );
 }
 
 function Track(props) {
-  const { nodes } = useGLTF(ballTripModel)
+  const { nodes } = useGLTF(ballTripModel);
   return (
     <RigidBody colliders="trimesh" type="fixed">
       <mesh geometry={nodes.Cylinder.geometry} {...props} dispose={null}>
-        <meshPhysicalMaterial color="lightblue" transmission={1} thickness={1} roughness={0} />
+        <meshPhysicalMaterial
+          color="lightblue"
+          transmission={1}
+          thickness={1}
+          roughness={0}
+        />
       </mesh>
       <Cylinder position={[-0.85, 4, 0]} rotation={[Math.PI / 2, 0, 0]} />
       <Cylinder position={[1.5, 1.75, 0]} rotation={[Math.PI / 2, 0, 0]} />
@@ -54,15 +78,19 @@ function Track(props) {
       <Box position={[-3, 11, 0]} rotation={[0, 0, -0.5]} />
       <Box position={[-8.6, 12.3, 0]} length={8} rotation={[0, 0, -0.1]} />
     </RigidBody>
-  )
+  );
 }
 
 function Pacman() {
-  const ref = useRef()
+  const ref = useRef();
   useFrame((state) => {
-    const t = state.clock.getElapsedTime()
-    ref.current?.setNextKinematicTranslation({ x: -5, y: -8 + Math.sin(t * 10) / 2, z: 0 })
-  })
+    const t = state.clock.getElapsedTime();
+    ref.current?.setNextKinematicTranslation({
+      x: -5,
+      y: -8 + Math.sin(t * 10) / 2,
+      z: 0,
+    });
+  });
   return (
     <group>
       <RigidBody ref={ref} type="kinematicPosition" colliders="trimesh">
@@ -76,7 +104,7 @@ function Pacman() {
         </mesh>
       </RigidBody>
     </group>
-  )
+  );
 }
 
 const Box = ({ length = 4, ...props }) => (
@@ -84,7 +112,7 @@ const Box = ({ length = 4, ...props }) => (
     <boxGeometry args={[length, 0.4, 4]} />
     <meshStandardMaterial color="white" />
   </mesh>
-)
+);
 
 const Sphere = (props) => (
   <RigidBody colliders="ball" restitution={0.7}>
@@ -93,11 +121,11 @@ const Sphere = (props) => (
       <meshStandardMaterial color="white" />
     </mesh>
   </RigidBody>
-)
+);
 
 const Cylinder = (props) => (
   <mesh castShadow receiveShadow {...props}>
     <cylinderGeometry args={[0.25, 0.25, 4]} />
     <meshStandardMaterial />
   </mesh>
-)
+);

@@ -1,7 +1,7 @@
-@import url('https://rsms.me/inter/inter.css');
+@import url("https://rsms.me/inter/inter.css");
 @supports (font-variation-settings: normal) {
   html {
-    font-family: 'Inter var', sans-serif;
+    font-family: "Inter var", sans-serif;
   }
 }
 
@@ -22,8 +22,8 @@ body {
   overscroll-behavior: none;
   background: #f0f0f0;
   color: black;
-  font-family: 'Inter var', sans-serif;
-  font-feature-settings: 'cv06' 1;
+  font-family: "Inter var", sans-serif;
+  font-feature-settings: "cv06" 1;
 }
 
 h1 {

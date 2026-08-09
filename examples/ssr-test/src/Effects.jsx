@@ -1,5 +1,5 @@
-import { EffectComposer, SSR } from '@react-three/postprocessing'
-import { useControls } from 'leva'
+import { EffectComposer, SSR } from "@react-three/postprocessing";
+import { useControls } from "leva";
 
 export function Effects() {
   const props = useControls({
@@ -30,11 +30,11 @@ export function Effects() {
     maxDepthDifference: { value: 3, min: 0, max: 10 },
     maxDepth: { value: 1, min: 0, max: 1 },
     thickness: { value: 10, min: 0, max: 10 },
-    ior: { value: 1.45, min: 0, max: 2 }
-  })
+    ior: { value: 1.45, min: 0, max: 2 },
+  });
   return (
     <EffectComposer disableNormalPass>
       <SSR {...props} />
     </EffectComposer>
-  )
+  );
 }

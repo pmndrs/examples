@@ -1,40 +1,81 @@
-import { useRef } from 'react'
-import { Color, AdditiveBlending } from 'three'
-import { Canvas, extend, useFrame } from '@react-three/fiber'
-import { OrbitControls, Sparkles, shaderMaterial, useGLTF, useTexture } from '@react-three/drei'
+import { useRef } from "react";
+import { Color, AdditiveBlending } from "three";
+import { Canvas, extend, useFrame } from "@react-three/fiber";
+import {
+  OrbitControls,
+  Sparkles,
+  shaderMaterial,
+  useGLTF,
+  useTexture,
+} from "@react-three/drei";
 
-import portalModel from './portal-2.glb?url'
-import backedImg from './baked-02.jpeg'
+import portalModel from "./portal-2.glb?url";
+import backedImg from "./baked-02.jpeg";
 
-export const App = ({ scale = Array.from({ length: 50 }, () => 0.5 + Math.random() * 4) }) => (
+export const App = ({
+  scale = Array.from({ length: 50 }, () => 0.5 + Math.random() * 4),
+}) => (
   <Canvas camera={{ fov: 45, position: [-4, 2, -4] }}>
-    <Sparkles count={scale.length} size={scale} position={[0, 0.9, 0]} scale={[4, 1.5, 4]} speed={0.3} />
+    <Sparkles
+      count={scale.length}
+      size={scale}
+      position={[0, 0.9, 0]}
+      scale={[4, 1.5, 4]}
+      speed={0.3}
+    />
     <Model />
     <OrbitControls />
   </Canvas>
-)
+);
 
 function Model(props) {
-  const portalMaterial = useRef()
-  const bakedTexture = useTexture(backedImg)
-  const { nodes } = useGLTF(portalModel)
-  useFrame((state, delta) => (portalMaterial.current.uTime += delta))
+  const portalMaterial = useRef();
+  const bakedTexture = useTexture(backedImg);
+  const { nodes } = useGLTF(portalModel);
+  useFrame((state, delta) => (portalMaterial.current.uTime += delta));
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.portalCircle.geometry} position={[0, 0.78, 1.6]} rotation={[-Math.PI / 2, 0, 0]}>
-        <portalMaterial ref={portalMaterial} blending={AdditiveBlending} uColorStart="hotpink" uColorEnd="white" />
+      <mesh
+        geometry={nodes.portalCircle.geometry}
+        position={[0, 0.78, 1.6]}
+        rotation={[-Math.PI / 2, 0, 0]}
+      >
+        <portalMaterial
+          ref={portalMaterial}
+          blending={AdditiveBlending}
+          uColorStart="hotpink"
+          uColorEnd="white"
+        />
       </mesh>
-      <mesh geometry={nodes.lampLightL.geometry} material-color="#f0bf94" position={[0.89, 1.07, -0.14]} scale={[0.07, 0.11, 0.07]} />
-      <mesh geometry={nodes.lampLightR.geometry} material-color="#f0bf94" position={[-0.98, 1.07, -0.14]} scale={[-0.07, 0.11, 0.07]} />
-      <mesh geometry={nodes.baked.geometry} position={[0.9, 0.34, -1.47]} rotation={[0, 0.14, 0]}>
+      <mesh
+        geometry={nodes.lampLightL.geometry}
+        material-color="#f0bf94"
+        position={[0.89, 1.07, -0.14]}
+        scale={[0.07, 0.11, 0.07]}
+      />
+      <mesh
+        geometry={nodes.lampLightR.geometry}
+        material-color="#f0bf94"
+        position={[-0.98, 1.07, -0.14]}
+        scale={[-0.07, 0.11, 0.07]}
+      />
+      <mesh
+        geometry={nodes.baked.geometry}
+        position={[0.9, 0.34, -1.47]}
+        rotation={[0, 0.14, 0]}
+      >
         <meshBasicMaterial map={bakedTexture} map-flipY={false} />
       </mesh>
     </group>
-  )
+  );
 }
 
 const PortalMaterial = shaderMaterial(
-  { uTime: 0, uColorStart: new Color('hotpink'), uColorEnd: new Color('white') },
+  {
+    uTime: 0,
+    uColorStart: new Color("hotpink"),
+    uColorEnd: new Color("white"),
+  },
   /* glsl */ `
   varying vec2 vUv;
   void main() {
@@ -168,9 +209,9 @@ const PortalMaterial = shaderMaterial(
     gl_FragColor = vec4(color, 1.0);
     #include <tonemapping_fragment>
     #include <colorspace_fragment>
-  }`
-)
+  }`,
+);
 
 // shaderMaterial creates a THREE.ShaderMaterial, and auto-creates uniform setter/getters
 // extend makes it available in JSX, in this case <portalMaterial />
-extend({ PortalMaterial })
+extend({ PortalMaterial });

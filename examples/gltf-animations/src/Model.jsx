@@ -5,41 +5,49 @@ all actions and sets up a THREE.AnimationMixer for it so that you don't have to.
 All of the assets actions, action-names and clips are available in its output. 
 */
 
-import { useEffect, useState, useRef } from 'react'
-import { useFrame } from '@react-three/fiber'
-import { useGLTF, useTexture, useAnimations } from '@react-three/drei'
-import { easing } from 'maath'
+import { useEffect, useState, useRef } from "react";
+import { useFrame } from "@react-three/fiber";
+import { useGLTF, useTexture, useAnimations } from "@react-three/drei";
+import { easing } from "maath";
 
-import stacyImg from './stacy.jpg'
-import stacyModel from './stacy.glb?url'
+import stacyImg from "./stacy.jpg";
+import stacyModel from "./stacy.glb?url";
 
 export default function Model(props) {
-  const halo = useRef()
+  const halo = useRef();
   // Fetch model and a separate texture
-  const texture = useTexture(stacyImg)
-  const { nodes, animations } = useGLTF(stacyModel)
+  const texture = useTexture(stacyImg);
+  const { nodes, animations } = useGLTF(stacyModel);
   // Extract animation actions
-  const { ref, actions, names } = useAnimations(animations)
+  const { ref, actions, names } = useAnimations(animations);
   // Hover and animation-index states
-  const [hovered, setHovered] = useState(false)
-  const [index, setIndex] = useState(4)
+  const [hovered, setHovered] = useState(false);
+  const [index, setIndex] = useState(4);
 
   // Change cursor on hover-state
-  useEffect(() => void (document.body.style.cursor = hovered ? 'pointer' : 'auto'), [hovered])
+  useEffect(
+    () => void (document.body.style.cursor = hovered ? "pointer" : "auto"),
+    [hovered],
+  );
 
   // Change animation when the index changes
   useEffect(() => {
     // Reset and fade in animation after an index has been changed
-    actions[names[index]].reset().fadeIn(0.5).play()
+    actions[names[index]].reset().fadeIn(0.5).play();
     // In the clean-up phase, fade it out
-    return () => actions[names[index]].fadeOut(0.5)
-  }, [index, actions, names])
+    return () => actions[names[index]].fadeOut(0.5);
+  }, [index, actions, names]);
 
   useFrame((state, delta) => {
     // Animate the selection halo
-    easing.damp3(halo.current.scale, hovered ? 1.15 : 1, 0.2, delta)
-    easing.dampC(halo.current.material.color, hovered ? 'hotpink' : 'aquamarine', 0.2, delta)
-  })
+    easing.damp3(halo.current.scale, hovered ? 1.15 : 1, 0.2, delta);
+    easing.dampC(
+      halo.current.material.color,
+      hovered ? "hotpink" : "aquamarine",
+      0.2,
+      delta,
+    );
+  });
 
   return (
     <group ref={ref} {...props} dispose={null}>
@@ -54,7 +62,8 @@ export default function Model(props) {
           geometry={nodes.stacy.geometry}
           skeleton={nodes.stacy.skeleton}
           rotation={[-Math.PI / 2, 0, 0]}
-          scale={100}>
+          scale={100}
+        >
           <meshStandardMaterial map={texture} map-flipY={false} skinning />
         </skinnedMesh>
       </group>
@@ -63,5 +72,5 @@ export default function Model(props) {
         <meshStandardMaterial />
       </mesh>
     </group>
-  )
+  );
 }
