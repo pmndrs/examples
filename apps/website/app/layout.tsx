@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { NuqsAdapter } from "nuqs/adapters/react";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import { getExamples } from "@/lib/helper";
@@ -103,7 +104,20 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          <Nav examples={examples} />
+          {/* `Nav` is the only nuqs consumer, so the adapter wraps it alone.
+
+              The plain-React adapter, not `nuqs/adapters/next/app`: this site
+              is `output: "export"`, so there is no server for the Next adapter
+              to talk to — and its provider calls `useSearchParams`, which on a
+              prerendered route drops everything up to the nearest `<Suspense>`
+              out of the static HTML. That is the whole rail, all ~160 example
+              links included. This adapter reads `location.search` through
+              `useSyncExternalStore` with an empty server snapshot, so the rail
+              still ships prerendered and picks the params up on hydration —
+              which is exactly what the hand-rolled version did. */}
+          <NuqsAdapter>
+            <Nav examples={examples} />
+          </NuqsAdapter>
           <main className="grid h-dvh min-w-0 flex-1 place-items-center overflow-hidden p-(--main-p)">
             {children}
           </main>
