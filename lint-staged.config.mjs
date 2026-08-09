@@ -10,11 +10,11 @@ export default {
     return [
       // Every staged file, `examples/*` included -- formatting is the hook's
       // to guarantee, not something to leave to a `pnpm format` nobody runs.
-      // Each example keeps its own `.prettierrc`, so a sandbox is formatted
-      // to the style it was written in. `--ignore-unknown` skips what has no
-      // parser (`.glb`, fonts, images) instead of failing the commit; what
-      // prettier *does* have a parser for but must not touch is named in
-      // `.prettierignore`.
+      // There is one config for the whole repo (`prettier.config.mjs`), so an
+      // example is formatted like anything else. `--ignore-unknown` skips
+      // what has no parser (`.glb`, fonts, images) instead of failing the
+      // commit; what prettier *does* have a parser for but must not touch is
+      // named in `.prettierignore`.
       `prettier --write --ignore-unknown ${staged.map((file) => JSON.stringify(file)).join(" ")}`,
 
       // Every linter the repo has (eslint per workspace, the `pmndrs.json`
