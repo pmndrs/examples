@@ -1,9 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600&family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600&family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 :root {
-  --font-barlow: "Barlow";
-  --font-bebas: "Bebas Neue";
-  --font-ibm-mono: "IBM Plex Mono";
+  --font-barlow: 'Barlow';
+  --font-bebas: 'Bebas Neue';
+  --font-ibm-mono: 'IBM Plex Mono';
 
   --color-bg: #1a1816;
   --color-bg-light: #242220;

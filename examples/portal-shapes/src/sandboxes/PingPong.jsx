@@ -43,7 +43,8 @@ function Ball({ args = [0.75, 32, 32] }) {
         onCollisionEnter={() => {
           ref.current.setTranslation({ x: 0, y: 0, z: 0 })
           ref.current.setLinvel({ x: 0, y: 10, z: 0 })
-        }}>
+        }}
+      >
         <CuboidCollider args={[100, 2, 100]} />
       </RigidBody>
     </>

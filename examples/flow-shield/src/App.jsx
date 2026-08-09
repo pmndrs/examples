@@ -14,7 +14,9 @@ export default function App() {
   const [hideLeva, setHideLeva] = useState(isMobile)
 
   // auto-hide Leva when crossing down to mobile
-  useEffect(() => { if (isMobile) setHideLeva(true) }, [isMobile])
+  useEffect(() => {
+    if (isMobile) setHideLeva(true)
+  }, [isMobile])
   const [glbUrl, setGlbUrl] = useState(null)
   const [preset, setPreset] = useState('default')
   const [isLoadingModel, setIsLoadingModel] = useState(false)

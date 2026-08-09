@@ -45,7 +45,8 @@ export default function Example() {
               </a>
               <a
                 href="#"
-                className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700">
+                className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700"
+              >
                 Start free trial
               </a>
             </div>
@@ -59,7 +60,8 @@ export default function Example() {
           enterTo="opacity-100 scale-100"
           leave="duration-100 ease-in"
           leaveFrom="opacity-100 scale-100"
-          leaveTo="opacity-0 scale-95">
+          leaveTo="opacity-0 scale-95"
+        >
           <Popover.Panel focus className="absolute z-10 top-0 inset-x-0 p-4 transition transform origin-top">
             <div className="rounded-3xl shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
               <div className="px-5 pt-4 flex items-center justify-between">
@@ -137,7 +139,8 @@ export default function Example() {
                         <div className="mt-0 ml-3">
                           <button
                             type="submit"
-                            className="block w-full py-3 px-4 rounded-md shadow bg-indigo-500 text-white font-medium hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 focus:ring-offset-gray-900">
+                            className="block w-full py-3 px-4 rounded-md shadow bg-indigo-500 text-white font-medium hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 focus:ring-offset-gray-900"
+                          >
                             Start free trial
                           </button>
                         </div>
@@ -189,12 +192,14 @@ export default function Example() {
                         <div className="space-y-0 space-y-0 mx-auto inline-grid grid-cols-2 gap-5">
                           <a
                             href="#"
-                            className="flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-indigo-700 bg-white hover:bg-indigo-50 px-8">
+                            className="flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-indigo-700 bg-white hover:bg-indigo-50 px-8"
+                          >
                             Get started
                           </a>
                           <a
                             href="#"
-                            className="flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-500 bg-opacity-60 hover:bg-opacity-70 px-8">
+                            className="flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-500 bg-opacity-60 hover:bg-opacity-70 px-8"
+                          >
                             Live example
                           </a>
                         </div>

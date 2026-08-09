@@ -53,7 +53,8 @@ function Dodecahedron(props) {
         scale={clicked ? 1.5 : 1}
         onClick={() => click(!clicked)}
         onPointerOver={() => hover(true)}
-        onPointerOut={() => hover(false)}>
+        onPointerOut={() => hover(false)}
+      >
         <dodecahedronGeometry args={[0.75]} />
         <meshStandardMaterial color={hovered ? 'hotpink' : '#5de4c7'} />
       </mesh>

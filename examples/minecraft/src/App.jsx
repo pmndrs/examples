@@ -18,7 +18,8 @@ export default function App() {
         { name: "left", keys: ["ArrowLeft", "a", "A"] },
         { name: "right", keys: ["ArrowRight", "d", "D"] },
         { name: "jump", keys: ["Space"] },
-      ]}>
+      ]}
+    >
       <Canvas shadows camera={{ fov: 45 }}>
         <Sky sunPosition={[100, 20, 100]} />
         <ambientLight intensity={0.3 * Math.PI} />

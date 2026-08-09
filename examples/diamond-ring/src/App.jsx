@@ -39,7 +39,8 @@ export default function App() {
         zoom={1.25}
         rotation={[0.5, 0.5, 0]}
         polar={[-Math.PI / 5, Math.PI / 4]}
-        azimuth={[-Math.PI / 1.75, Math.PI / 4]}>
+        azimuth={[-Math.PI / 1.75, Math.PI / 4]}
+      >
         <group position={[0, -3, 0]}>
           <Center top>
             <Ring map={texture} rotation={[-Math.PI / 2.05, 0, 0]} scale={3} />

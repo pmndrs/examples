@@ -10,7 +10,17 @@ export default function App() {
     <Canvas shadows camera={{ position: [0, 0, 10] }}>
       <ambientLight intensity={0.03 * Math.PI} />
       <fog attach="fog" args={['#ff5020', 5, 18]} />
-      <spotLight angle={0.14} color="#ffd0d0" intensity={Math.PI} decay={0} penumbra={1} position={[25, 50, -20]} shadow-mapSize={[2048, 2048]} shadow-bias={-0.0001} castShadow />
+      <spotLight
+        angle={0.14}
+        color="#ffd0d0"
+        intensity={Math.PI}
+        decay={0}
+        penumbra={1}
+        position={[25, 50, -20]}
+        shadow-mapSize={[2048, 2048]}
+        shadow-bias={-0.0001}
+        castShadow
+      />
       <Sky scale={1000} sunPosition={[2, 0.4, 10]} />
       <Suspense fallback={null}>
         {/* Wrap contents you want to scroll into <ScrollControls> */}

@@ -45,7 +45,8 @@ export default function App() {
       camera={{ position: [0, 2.5, 5], fov: 35 }}
       onCreated={(state) => {
         state.gl.toneMapping = THREE.NoToneMapping
-      }}>
+      }}
+    >
       <color attach="background" args={['#151520']} />
       <ambientLight intensity={0.5} />
       <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />

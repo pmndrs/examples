@@ -3,6 +3,4 @@ import React from 'react'
 import App from './App'
 import './styles.css'
 
-createRoot(document.querySelector('#root')).render(
-  <App />
-)
+createRoot(document.querySelector('#root')).render(<App />)

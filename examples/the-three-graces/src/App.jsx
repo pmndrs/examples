@@ -5,7 +5,7 @@ import { Canvas, extend, useFrame } from '@react-three/fiber'
 import { useGLTF, SoftShadows, Html, CameraControls } from '@react-three/drei'
 import { easing, geometry } from 'maath'
 
-import gracesModel from "./graces-draco.glb?url"
+import gracesModel from './graces-draco.glb?url'
 
 extend(geometry)
 
@@ -70,7 +70,8 @@ function Annotation({ children, ...props }) {
          *  By default it would be a plane. We need round edges here ...
          */
         <roundedPlaneGeometry args={[1.66, 0.47, 0.24]} />
-      }>
+      }
+    >
       <div className="annotation" onClick={() => console.log('.')}>
         {children}
       </div>

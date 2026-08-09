@@ -2,16 +2,10 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Shader Materials",
   "description": "How to set up shader materials declaratively.",
-  "tags": [
-    "material",
-    "shader"
-  ],
+  "tags": ["material", "shader"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2019-12-11",
   "source": "https://codesandbox.io/s/1g4qq",
-  "libraries": [
-    "@react-three/drei",
-    "@react-three/fiber"
-  ],
+  "libraries": ["@react-three/drei", "@react-three/fiber"],
   "assets": []
 }

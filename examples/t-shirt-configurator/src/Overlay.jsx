@@ -28,7 +28,8 @@ export function Overlay() {
                 key="title"
                 initial={{ x: 100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
-                transition={{ type: 'spring', damping: 5, stiffness: 40, restDelta: 0.001, duration: 0.3 }}>
+                transition={{ type: 'spring', damping: 5, stiffness: 40, restDelta: 0.001, duration: 0.3 }}
+              >
                 <h1>LET'S DO IT.</h1>
               </motion.div>
               <div className="support--content">
@@ -44,7 +45,8 @@ export function Overlay() {
                     duration: 0.6,
                     delay: 0.2,
                     delayChildren: 0.2
-                  }}>
+                  }}
+                >
                   <p>
                     Create your unique and exclusive shirt with our brand-new 3D customization tool. <strong>Unleash your imagination</strong> and define your
                     own style.
@@ -92,7 +94,8 @@ function Customizer() {
           link.setAttribute('download', 'canvas.png')
           link.setAttribute('href', document.querySelector('canvas').toDataURL('image/png').replace('image/png', 'image/octet-stream'))
           link.click()
-        }}>
+        }}
+      >
         DOWNLOAD
         <AiFillCamera size="1.3em" />
       </button>

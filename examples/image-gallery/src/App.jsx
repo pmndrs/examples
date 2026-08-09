@@ -58,7 +58,8 @@ function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() })
     <group
       ref={ref}
       onClick={(e) => (e.stopPropagation(), setLocation(clicked.current === e.object ? '/' : '/item/' + e.object.name))}
-      onPointerMissed={() => setLocation('/')}>
+      onPointerMissed={() => setLocation('/')}
+    >
       {images.map((props) => <Frame key={props.url} {...props} /> /* prettier-ignore */)}
     </group>
   )
@@ -85,7 +86,8 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
         onPointerOver={(e) => (e.stopPropagation(), hover(true))}
         onPointerOut={() => hover(false)}
         scale={[1, GOLDENRATIO, 0.05]}
-        position={[0, GOLDENRATIO / 2, 0]}>
+        position={[0, GOLDENRATIO / 2, 0]}
+      >
         <boxGeometry />
         <meshStandardMaterial color="#151515" metalness={0.5} roughness={0.5} envMapIntensity={2} />
         <mesh ref={frame} raycast={() => null} scale={[0.9, 0.93, 0.9]} position={[0, 0, 0.2]}>

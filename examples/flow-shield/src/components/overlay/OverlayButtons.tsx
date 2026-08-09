@@ -61,9 +61,7 @@ export default function OverlayButtons({
     '--overlay-accent': COLORS.accent
   } as React.CSSProperties
 
-  const fileInput = (
-    <input ref={fileInputRef} type="file" accept=".glb,.gltf" className={styles.fileInput} onChange={handleFileChange} />
-  )
+  const fileInput = <input ref={fileInputRef} type="file" accept=".glb,.gltf" className={styles.fileInput} onChange={handleFileChange} />
 
   const controls = (
     <>
@@ -86,10 +84,7 @@ export default function OverlayButtons({
       <div className={styles.separator} />
 
       {/* Load GLB */}
-      <button
-        onClick={() => fileInputRef.current?.click()}
-        className={`${styles.importBtn} ${hasGlb ? styles.active : ''}`}
-      >
+      <button onClick={() => fileInputRef.current?.click()} className={`${styles.importBtn} ${hasGlb ? styles.active : ''}`}>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.2">
           <path d="M8 2v8M5 7l3 3 3-3" />
           <path d="M2 11v2a1 1 0 001 1h10a1 1 0 001-1v-2" />
@@ -108,10 +103,7 @@ export default function OverlayButtons({
       )}
 
       {/* Toggle Grid */}
-      <button
-        onClick={onToggleGrid}
-        className={`${styles.btn} ${showGrid ? styles.active : styles.inactive}`}
-      >
+      <button onClick={onToggleGrid} className={`${styles.btn} ${showGrid ? styles.active : styles.inactive}`}>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.2">
           <rect x="1" y="1" width="6" height="6" />
           <rect x="9" y="1" width="6" height="6" />
@@ -121,10 +113,7 @@ export default function OverlayButtons({
       </button>
 
       {/* Toggle Leva Controls */}
-      <button
-        onClick={onToggleLeva}
-        className={`${styles.btn} ${!hideLeva ? styles.active : styles.inactive}`}
-      >
+      <button onClick={onToggleLeva} className={`${styles.btn} ${!hideLeva ? styles.active : styles.inactive}`}>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.2">
           <line x1="2" y1="4" x2="14" y2="4" />
           <circle cx="10" cy="4" r="1.5" fill="currentColor" />
@@ -153,9 +142,7 @@ export default function OverlayButtons({
       {fileInput}
 
       {/* Popover panel */}
-      <div className={`${styles.popover} ${open ? styles.popoverOpen : ''}`}>
-        {controls}
-      </div>
+      <div className={`${styles.popover} ${open ? styles.popoverOpen : ''}`}>{controls}</div>
 
       {/* FAB trigger */}
       <button className={styles.fab} onClick={() => setOpen((v) => !v)} aria-label="Options">

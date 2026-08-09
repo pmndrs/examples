@@ -8,7 +8,17 @@ export default function App() {
       <color attach="background" args={['#252530']} />
       <ambientLight intensity={0.01 * Math.PI} />
       <hemisphereLight intensity={0.125 * Math.PI} color="#8040df" groundColor="red" />
-      <spotLight castShadow color="orange" intensity={2 * Math.PI} decay={0} position={[-50, 50, 40]} angle={0.25} penumbra={1} shadow-mapSize={[128, 128]} shadow-bias={0.00005} />
+      <spotLight
+        castShadow
+        color="orange"
+        intensity={2 * Math.PI}
+        decay={0}
+        position={[-50, 50, 40]}
+        angle={0.25}
+        penumbra={1}
+        shadow-mapSize={[128, 128]}
+        shadow-bias={0.00005}
+      />
 
       <Bounds fit clip observe margin={1}>
         <Room scale={0.1} />

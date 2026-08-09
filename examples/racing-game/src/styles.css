@@ -41,11 +41,11 @@ body {
 }
 
 .checkpoint .green {
-  color: green
+  color: green;
 }
 
 .checkpoint .red {
-  color: red
+  color: red;
 }
 
 /* --------------- AUTH --------------- */

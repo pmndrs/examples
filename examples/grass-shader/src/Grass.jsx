@@ -21,8 +21,8 @@ export default function Grass({ options = { bW: 0.12, bH: 1, joints: 5 }, width 
     geo.attributes.position.needsUpdate = true
     geo.lookAt(new THREE.Vector3(0, 1, 0))
     const positions = geo.attributes.position.array
-    for (let i = 0; i < positions.length; i+=3) {
-      positions[i+1] = getYPosition(positions[i], positions[i+2])
+    for (let i = 0; i < positions.length; i += 3) {
+      positions[i + 1] = getYPosition(positions[i], positions[i + 2])
     }
     geo.computeVertexNormals()
     return geo
@@ -40,7 +40,8 @@ export default function Grass({ options = { bW: 0.12, bH: 1, joints: 5 }, width 
           index={baseGeom.index}
           attributes-position={baseGeom.attributes.position}
           attributes-uv={baseGeom.attributes.uv}
-          boundingSphere={boundingSphere}>
+          boundingSphere={boundingSphere}
+        >
           <instancedBufferAttribute attach="attributes-offset" args={[new Float32Array(attributeData.offsets), 3]} />
           <instancedBufferAttribute attach="attributes-orientation" args={[new Float32Array(attributeData.orientations), 4]} />
           <instancedBufferAttribute attach="attributes-stretch" args={[new Float32Array(attributeData.stretches), 1]} />

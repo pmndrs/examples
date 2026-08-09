@@ -81,7 +81,8 @@ export default function App() {
               position={[0, 0.01, 0]}
               scale={[200, 200, 200]}
               receiveShadow
-              renderOrder={100000}>
+              renderOrder={100000}
+            >
               <planeGeometry />
               <shadowMaterial transparent color="#251005" opacity={0.25} />
             </mesh>
@@ -99,7 +100,8 @@ export default function App() {
             material-toneMapped={false}
             material-fog={false}
             anchorX="center"
-            anchorY="middle">
+            anchorY="middle"
+          >
             {`Poimandres`}
           </Text>
         </Suspense>

@@ -39,7 +39,7 @@ const LayerMaterial = shaderMaterial(
       gl_FragColor = vec4(color.rgb, .1);
       #include <tonemapping_fragment>
       #include <colorspace_fragment>
-    }`,
+    }`
 )
 
 extend({ LayerMaterial })

@@ -54,7 +54,8 @@ export default function Model(props) {
           geometry={nodes.stacy.geometry}
           skeleton={nodes.stacy.skeleton}
           rotation={[-Math.PI / 2, 0, 0]}
-          scale={100}>
+          scale={100}
+        >
           <meshStandardMaterial map={texture} map-flipY={false} skinning />
         </skinnedMesh>
       </group>

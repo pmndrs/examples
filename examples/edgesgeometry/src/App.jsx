@@ -23,7 +23,8 @@ function Model(props) {
       onPointerOver={() => hover(true)}
       onPointerOut={() => hover(false)}
       geometry={nodes.defaultMaterial.geometry}
-      {...props}>
+      {...props}
+    >
       <meshStandardMaterial roughness={0.15} metalness={0.5} />
       <Edges linewidth={2} threshold={15} color={hovered ? "#c02040" : "black"} />
       <Outlines thickness={0.01} color={hovered ? "#c02040" : "black"} />

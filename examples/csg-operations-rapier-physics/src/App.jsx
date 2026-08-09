@@ -13,7 +13,16 @@ export function App() {
     <Canvas shadows orthographic camera={{ position: [0, 1.5, 10], zoom: 180 }}>
       <hemisphereLight intensity={0.4 * Math.PI} groundColor="white" />
       <directionalLight position={[10, -15, -10]} intensity={0.5 * Math.PI} />
-      <spotLight position={[5, 10, -15]} intensity={Math.PI} decay={0} angle={0.1} penumbra={1} castShadow shadow-mapSize={[1024, 1024]} shadow-bias={-0.000001} />
+      <spotLight
+        position={[5, 10, -15]}
+        intensity={Math.PI}
+        decay={0}
+        angle={0.1}
+        penumbra={1}
+        castShadow
+        shadow-mapSize={[1024, 1024]}
+        shadow-bias={-0.000001}
+      />
       <Physics colliders={false} debug={debug}>
         <RigidBody type="dynamic" colliders="hull">
           <WhiteShape position={[-1, 15, 2.5]} />

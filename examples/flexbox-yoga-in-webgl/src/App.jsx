@@ -60,7 +60,8 @@ function Page({ text, tag, images, textScaleFactor, onReflow, left = false }) {
           lineHeight={1}
           letterSpacing={-0.05}
           color="black"
-          maxWidth={(viewport.width / 4) * 3}>
+          maxWidth={(viewport.width / 4) * 3}
+        >
           {text}
         </Text>
       </Box>
@@ -91,7 +92,8 @@ function Layercard({ depth, boxWidth, boxHeight, text, textColor, color, map, te
         fontSize={0.6 * textScaleFactor}
         lineHeight={1}
         letterSpacing={-0.05}
-        color={textColor}>
+        color={textColor}
+      >
         {text}
       </Text>
     </>
@@ -143,7 +145,8 @@ function Content({ onReflow }) {
               lineHeight={1}
               letterSpacing={-0.05}
               color="black"
-              maxWidth={(viewport.width / 4) * 3}>
+              maxWidth={(viewport.width / 4) * 3}
+            >
               {state.depthbox[0].text}
             </Text>
           </Box>
@@ -172,7 +175,8 @@ export default function App() {
         dpr={[1, 2]}
         camera={{ position: [0, 0, 10], far: 1000 }}
         gl={{ powerPreference: 'high-performance', alpha: false, antialias: false, stencil: false, depth: false }}
-        onCreated={({ gl }) => gl.setClearColor('#f5f5f5')}>
+        onCreated={({ gl }) => gl.setClearColor('#f5f5f5')}
+      >
         <pointLight position={[-10, -10, -10]} intensity={Math.PI} decay={0} />
         <ambientLight intensity={0.4 * Math.PI} />
         <spotLight
@@ -194,7 +198,8 @@ export default function App() {
         className="scrollArea"
         ref={scrollArea}
         onScroll={onScroll}
-        onPointerMove={(e) => (state.mouse = [(e.clientX / window.innerWidth) * 2 - 1, (e.clientY / window.innerHeight) * 2 - 1])}>
+        onPointerMove={(e) => (state.mouse = [(e.clientX / window.innerWidth) * 2 - 1, (e.clientY / window.innerHeight) * 2 - 1])}
+      >
         <div style={{ height: `${pages * 100}vh` }} />
       </div>
       <Loader />

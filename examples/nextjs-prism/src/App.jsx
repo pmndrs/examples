@@ -83,8 +83,8 @@ function Scene() {
     <>
       {/* Lights */}
       <ambientLight ref={ambient} intensity={0} />
-      <pointLight position={[10, -10, 0]} intensity={0.05 * Math.PI} decay={0}/>
-      <pointLight position={[0, 10, 0]} intensity={0.05 * Math.PI} decay={0}/>
+      <pointLight position={[10, -10, 0]} intensity={0.05 * Math.PI} decay={0} />
+      <pointLight position={[0, 10, 0]} intensity={0.05 * Math.PI} decay={0} />
       <pointLight position={[-10, 0, 0]} intensity={0.05 * Math.PI} decay={0} />
       <spotLight ref={spot} intensity={Math.PI} decay={0} distance={7} angle={1} penumbra={1} position={[0, 0, 1]} />
       {/* Caption */}

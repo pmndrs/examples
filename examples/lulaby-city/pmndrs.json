@@ -2,17 +2,10 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Lullaby City",
   "description": "Panning around a city with positional audio.",
-  "tags": [
-    "positional",
-    "gltf",
-    "audio"
-  ],
+  "tags": ["positional", "gltf", "audio"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2020-02-10",
   "source": "https://codesandbox.io/s/gkfhr",
-  "libraries": [
-    "@react-three/drei",
-    "@react-three/fiber"
-  ],
+  "libraries": ["@react-three/drei", "@react-three/fiber"],
   "assets": []
 }

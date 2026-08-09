@@ -7,7 +7,8 @@ const Overlay = forwardRef(({ caption, scroll }, ref) => (
       scroll.current = e.target.scrollTop / (e.target.scrollHeight - window.innerHeight)
       caption.current.innerText = scroll.current.toFixed(2)
     }}
-    class="scroll">
+    class="scroll"
+  >
     <div style={{ height: "400vh" }}>
       <div class="dot">
         <h1>headset</h1>

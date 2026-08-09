@@ -59,7 +59,8 @@ function Marker({ children, ...props }) {
         onOcclude={setOccluded}
         // We just interpolate the visible state into css opacity and transforms
         style={{ transition: 'all 0.2s', opacity: isVisible ? 1 : 0, transform: `scale(${isVisible ? 1 : 0.25})` }}
-        {...props}>
+        {...props}
+      >
         {children}
       </Html>
     </group>

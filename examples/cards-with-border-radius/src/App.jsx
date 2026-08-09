@@ -61,7 +61,8 @@ function Card({ url, ...props }) {
       side={THREE.DoubleSide}
       onPointerOver={pointerOver}
       onPointerOut={pointerOut}
-      {...props}>
+      {...props}
+    >
       <bentPlaneGeometry args={[0.1, 1, 1, 20, 20]} />
     </Image>
   )

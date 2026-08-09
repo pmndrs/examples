@@ -32,7 +32,7 @@ export default function vitePluginMonkey() {
             // Insert the import statement at the top of the file
             const importDeclaration = t.importDeclaration(
               [],
-              t.stringLiteral("@examples/e2e/deterministic")
+              t.stringLiteral("@examples/e2e/deterministic"),
             );
 
             path.node.body.unshift(importDeclaration);
@@ -118,7 +118,7 @@ export default function vitePluginMonkey() {
                 // (I)
                 const customCanvasImport = t.importDeclaration(
                   [t.importDefaultSpecifier(t.identifier("CheesyCanvas"))],
-                  t.stringLiteral("@examples/e2e/CheesyCanvas")
+                  t.stringLiteral("@examples/e2e/CheesyCanvas"),
                 );
 
                 // (II)
@@ -127,9 +127,9 @@ export default function vitePluginMonkey() {
                   [
                     t.variableDeclarator(
                       t.identifier("Canvas"), // Variable name
-                      t.identifier("CheesyCanvas") // Assigned value
+                      t.identifier("CheesyCanvas"), // Assigned value
                     ),
-                  ]
+                  ],
                 );
 
                 // Insert the new import declaration after the current import declaration
@@ -142,7 +142,7 @@ export default function vitePluginMonkey() {
         });
 
         console.log(
-          "🐵-patched <Canvas> in `src/App.[jt]sx` with CheesyCanvas"
+          "🐵-patched <Canvas> in `src/App.[jt]sx` with CheesyCanvas",
         );
         // console.log("CODE", print(ast).code);
 

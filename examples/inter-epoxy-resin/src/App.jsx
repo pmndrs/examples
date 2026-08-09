@@ -14,7 +14,7 @@ import {
 } from '@react-three/drei'
 import { useControls, button } from 'leva'
 import { EffectComposer, HueSaturation, BrightnessContrast } from '@react-three/postprocessing'
-import fontGlyphs from "./Inter_Medium_Regular.json"
+import fontGlyphs from './Inter_Medium_Regular.json'
 
 export function App() {
   const { autoRotate, text, shadow, ...config } = useControls({
@@ -116,7 +116,8 @@ function Text({ children, config, font = fontGlyphs, ...props }) {
             bevelSize={0.01}
             bevelSegments={10}
             curveSegments={128}
-            bevelThickness={0.01}>
+            bevelThickness={0.01}
+          >
             {children}
             <MeshTransmissionMaterial {...config} background={texture} />
           </Text3D>

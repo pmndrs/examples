@@ -89,7 +89,8 @@ function Letter({ char, children, stencilBuffer = false, ...props }) {
           bevelThickness={10}
           bevelSize={2}
           bevelOffset={0}
-          bevelSegments={5}>
+          bevelSegments={5}
+        >
           {char}
           <MeshTransmissionMaterial clearcoat={1} samples={3} thickness={40} chromaticAberration={0.25} anisotropy={0.4}>
             {/** Render a portalled scene into the "buffer" attribute of transmission material, which is a texture.

@@ -1,7 +1,7 @@
 import seedrandom from "seedrandom";
 
 const sayCheeseParam = new URLSearchParams(window.location.search).has(
-  "saycheese"
+  "saycheese",
 );
 if (sayCheeseParam) {
   seedrandom("hello.", { global: true });

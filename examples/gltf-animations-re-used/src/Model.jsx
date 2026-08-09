@@ -50,7 +50,8 @@ export default function Model({ pose, ...props }) {
         onPointerOut={() => setHovered(false)}
         onClick={() => setIndex((index + 1) % names.length)}
         rotation={[Math.PI / 2, 0, 0]}
-        scale={[0.01, 0.01, 0.01]}>
+        scale={[0.01, 0.01, 0.01]}
+      >
         <primitive object={nodes.mixamorigHips} />
         <skinnedMesh
           castShadow
@@ -58,7 +59,8 @@ export default function Model({ pose, ...props }) {
           geometry={nodes.stacy.geometry}
           skeleton={nodes.stacy.skeleton}
           rotation={[-Math.PI / 2, 0, 0]}
-          scale={[100, 100, 100]}>
+          scale={[100, 100, 100]}
+        >
           <meshStandardMaterial map={texture} map-flipY={false} skinning />
         </skinnedMesh>
       </group>

@@ -6,7 +6,7 @@ const geometry = new THREE.RingGeometry(1, 1.01, 64)
 const material = new THREE.MeshBasicMaterial({ color: new THREE.Color('lightgreen'), side: THREE.DoubleSide })
 
 export default function Rings() {
-  const { rings } = useStore(state => state.mutation)
+  const { rings } = useStore((state) => state.mutation)
   return rings.map(([pos, matrix], i) => {
     const f = (Math.sin(i / 10) * Math.PI) / 2
     return (
@@ -14,7 +14,7 @@ export default function Rings() {
         key={i}
         position={pos}
         scale={[30 + i * 5 * f, 30 + i * 5 * f, 30 + i * 5 * f]}
-        onUpdate={self => self.quaternion.setFromRotationMatrix(matrix)}
+        onUpdate={(self) => self.quaternion.setFromRotationMatrix(matrix)}
         geometry={geometry}
         material={material}
       />

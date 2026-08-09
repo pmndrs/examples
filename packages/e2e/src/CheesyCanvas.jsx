@@ -32,12 +32,12 @@ function SayCheese({ pauseAt = 0 }) {
 export default function CheesyCanvas({ children, ...props }) {
   useEffect(() => {
     console.log(
-      "CheesyCanvas: use ?saycheese in the URL to stop the animation"
+      "CheesyCanvas: use ?saycheese in the URL to stop the animation",
     );
   }, []);
 
   const sayCheeseParam = new URLSearchParams(window.location.search).has(
-    "saycheese"
+    "saycheese",
   );
 
   return (

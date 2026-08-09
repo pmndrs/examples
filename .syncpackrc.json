@@ -2,110 +2,67 @@
   "versionGroups": [
     {
       "label": "React is pinned for all examples (19.x is required by @react-three/fiber 9)",
-      "packages": [
-        "@example/**"
-      ],
-      "dependencies": [
-        "react",
-        "react-dom"
-      ],
+      "packages": ["@example/**"],
+      "dependencies": ["react", "react-dom"],
       "pinVersion": "19.2.8"
     },
     {
       "label": "React types are pinned for all examples",
-      "packages": [
-        "@example/**"
-      ],
-      "dependencies": [
-        "@types/react"
-      ],
+      "packages": ["@example/**"],
+      "dependencies": ["@types/react"],
       "pinVersion": "19.2.17"
     },
     {
       "label": "React DOM types are pinned for all examples",
-      "packages": [
-        "@example/**"
-      ],
-      "dependencies": [
-        "@types/react-dom"
-      ],
+      "packages": ["@example/**"],
+      "dependencies": ["@types/react-dom"],
       "pinVersion": "19.2.3"
     },
     {
       "label": "three is pinned: the @splinetool/loader patch is keyed to r165, and postprocessing 6.36.6 needs < 0.173",
-      "packages": [
-        "@example/**"
-      ],
-      "dependencies": [
-        "three"
-      ],
+      "packages": ["@example/**"],
+      "dependencies": ["three"],
       "pinVersion": "0.165.0"
     },
     {
       "label": "@react-three/fiber is pinned: 9.x is the React 19 line, and a caret could raise the three floor",
-      "packages": [
-        "@example/**"
-      ],
-      "dependencies": [
-        "@react-three/fiber"
-      ],
+      "packages": ["@example/**"],
+      "dependencies": ["@react-three/fiber"],
       "pinVersion": "9.6.1"
     },
     {
       "label": "@react-three/drei is pinned: 10.x is the line matching @react-three/fiber 9",
-      "packages": [
-        "@example/**"
-      ],
-      "dependencies": [
-        "@react-three/drei"
-      ],
+      "packages": ["@example/**"],
+      "dependencies": ["@react-three/drei"],
       "pinVersion": "10.7.8"
     },
     {
       "label": "Update lamina to 1.2.2 for all examples.",
-      "packages": [
-        "@example/**"
-      ],
-      "dependencies": [
-        "lamina"
-      ],
+      "packages": ["@example/**"],
+      "dependencies": ["lamina"],
       "pinVersion": "1.2.2"
     },
     {
       "label": "postprocessing is pinned to the last release accepting three 0.165 (6.36.7+ needs >= 0.174); pnpm.overrides pins the transitive copy too",
-      "packages": [
-        "@example/**"
-      ],
-      "dependencies": [
-        "postprocessing"
-      ],
+      "packages": ["@example/**"],
+      "dependencies": ["postprocessing"],
       "pinVersion": "6.36.6"
     },
     {
       "label": "suspend-react is pinned for all examples (the suspend(promise) pattern requires >= 0.1.3)",
-      "packages": [
-        "@example/**"
-      ],
-      "dependencies": [
-        "suspend-react"
-      ],
+      "packages": ["@example/**"],
+      "dependencies": ["suspend-react"],
       "pinVersion": "0.1.3"
     },
     {
       "label": "@splinetool/loader is pinned to the last release that parses the repo's 2022-era .splinecode scenes (0.9.156+ silently fall back to a default gray material or crash; the three-r165 pnpm patch is keyed to this exact version)",
-      "packages": [
-        "@example/**"
-      ],
-      "dependencies": [
-        "@splinetool/loader"
-      ],
+      "packages": ["@example/**"],
+      "dependencies": ["@splinetool/loader"],
       "pinVersion": "0.9.153"
     },
     {
       "label": "Examples must use identical versions of shared dependencies",
-      "packages": [
-        "@example/**"
-      ],
+      "packages": ["@example/**"],
       "dependencies": [
         "@react-three/postprocessing",
         "@react-three/rapier",
@@ -144,12 +101,8 @@
     },
     {
       "label": "Workspace deps use workspace protocol",
-      "dependencies": [
-        "@example/**"
-      ],
-      "dependencyTypes": [
-        "prod"
-      ],
+      "dependencies": ["@example/**"],
+      "dependencyTypes": ["prod"],
       "pinVersion": "workspace:*"
     }
   ]

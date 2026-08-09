@@ -52,7 +52,18 @@ function Ground() {
   return (
     <mesh rotation={[-Math.PI / 2, 0, Math.PI / 2]}>
       <planeGeometry args={[10, 10]} />
-      <MeshReflectorMaterial blur={[400, 100]} resolution={512} mirror={0.5} mixBlur={6} mixStrength={1.5} color="#a0a0a0" metalness={0.4} roughnessMap={floor} normalMap={normal} normalScale={[2, 2]} />
+      <MeshReflectorMaterial
+        blur={[400, 100]}
+        resolution={512}
+        mirror={0.5}
+        mixBlur={6}
+        mixStrength={1.5}
+        color="#a0a0a0"
+        metalness={0.4}
+        roughnessMap={floor}
+        normalMap={normal}
+        normalScale={[2, 2]}
+      />
     </mesh>
   )
 }

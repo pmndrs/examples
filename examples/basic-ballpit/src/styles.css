@@ -16,5 +16,7 @@ body,
 body {
   position: fixed;
   overscroll-behavior-y: none;
-  cursor: url("https://github.com/chenglou/react-motion/raw/master/demos/demo8-draggable-list/cursor.png") 39 39, auto;
+  cursor:
+    url("https://github.com/chenglou/react-motion/raw/master/demos/demo8-draggable-list/cursor.png") 39 39,
+    auto;
 }

@@ -40,7 +40,8 @@ export default function Model({ scroll, ...props }) {
         onPointerOver={(e) => (e.stopPropagation(), set(e.object.name))}
         onPointerOut={(e) => (e.stopPropagation(), set(null))}
         position={[0.06, 4.04, 0.35]}
-        scale={[0.25, 0.25, 0.25]}>
+        scale={[0.25, 0.25, 0.25]}
+      >
         <mesh name="Headphones" geometry={nodes.Headphones.geometry} material={materials.M_Headphone} {...extras} />
         <mesh name="Notebook" geometry={nodes.Notebook.geometry} material={materials.M_Notebook} {...extras} />
         <mesh name="Rocket003" geometry={nodes.Rocket003.geometry} material={materials.M_Rocket} {...extras} />

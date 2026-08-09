@@ -108,7 +108,8 @@ export default function Example() {
                           className={classNames(
                             open ? 'text-gray-900' : 'text-gray-500',
                             'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-                          )}>
+                          )}
+                        >
                           <span>Solutions</span>
                           <ChevronDownIcon
                             className={classNames(open ? 'text-gray-600' : 'text-gray-400', 'ml-2 h-5 w-5 group-hover:text-gray-500')}
@@ -124,7 +125,8 @@ export default function Example() {
                           enterTo="opacity-100 translate-y-0"
                           leave="transition ease-in duration-150"
                           leaveFrom="opacity-100 translate-y-0"
-                          leaveTo="opacity-0 translate-y-1">
+                          leaveTo="opacity-0 translate-y-1"
+                        >
                           <Popover.Panel static className="absolute -ml-4 mt-3 transform z-10 px-2 w-screen max-w-md px-0">
                             <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                               <div className="relative grid gap-6 bg-white px-5 py-6 gap-8 p-8">
@@ -143,7 +145,8 @@ export default function Example() {
                                   <div key={item.name} className="flow-root">
                                     <a
                                       href={item.href}
-                                      className="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-100">
+                                      className="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-100"
+                                    >
                                       <item.icon className="flex-shrink-0 h-6 w-6 text-gray-400" aria-hidden="true" />
                                       <span className="ml-3">{item.name}</span>
                                     </a>
@@ -171,7 +174,8 @@ export default function Example() {
                           className={classNames(
                             open ? 'text-gray-900' : 'text-gray-500',
                             'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-                          )}>
+                          )}
+                        >
                           <span>More</span>
                           <ChevronDownIcon
                             className={classNames(open ? 'text-gray-600' : 'text-gray-400', 'ml-2 h-5 w-5 group-hover:text-gray-500')}
@@ -187,10 +191,12 @@ export default function Example() {
                           enterTo="opacity-100 translate-y-0"
                           leave="transition ease-in duration-150"
                           leaveFrom="opacity-100 translate-y-0"
-                          leaveTo="opacity-0 translate-y-1">
+                          leaveTo="opacity-0 translate-y-1"
+                        >
                           <Popover.Panel
                             static
-                            className="absolute left-1/2 z-10 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-md px-0">
+                            className="absolute left-1/2 z-10 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-md px-0"
+                          >
                             <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                               <div className="relative grid gap-6 bg-white px-5 py-6 gap-8 p-8">
                                 {resources.map((item) => (
@@ -236,7 +242,8 @@ export default function Example() {
                   </a>
                   <a
                     href="#"
-                    className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+                    className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                  >
                     Sign up
                   </a>
                 </div>
@@ -251,7 +258,8 @@ export default function Example() {
               enterTo="opacity-100 scale-100"
               leave="duration-100 ease-in"
               leaveFrom="opacity-100 scale-100"
-              leaveTo="opacity-0 scale-95">
+              leaveTo="opacity-0 scale-95"
+            >
               <Popover.Panel focus static className="absolute top-0 inset-x-0 z-10 p-2 transition transform origin-top-right">
                 <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
                   <div className="pt-5 pb-6 px-5">
@@ -295,7 +303,8 @@ export default function Example() {
                     <div>
                       <a
                         href="#"
-                        className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+                        className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                      >
                         Sign up
                       </a>
                       <p className="mt-6 text-center text-base font-medium text-gray-500">
@@ -327,14 +336,16 @@ export default function Example() {
               <div className="mt-3 rounded-md shadow mt-0 ml-3">
                 <a
                   href="#"
-                  className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+                  className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
+                >
                   Get started
                 </a>
               </div>
               <div className="mt-3 rounded-md shadow mt-0 ml-3">
                 <a
                   href="#"
-                  className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-gray-50">
+                  className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-gray-50"
+                >
                   Live example
                 </a>
               </div>

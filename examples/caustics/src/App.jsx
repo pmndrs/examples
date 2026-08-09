@@ -36,7 +36,8 @@ export default function App() {
       dpr={[1, perfSucks ? 1.5 : 2]}
       eventSource={document.getElementById('root')}
       eventPrefix="client"
-      camera={{ position: [20, 0.9, 20], fov: 26 }}>
+      camera={{ position: [20, 0.9, 20], fov: 26 }}
+    >
       {/** PerfMon will detect performance issues */}
       <PerformanceMonitor onDecline={() => degrade(true)} />
       <color attach="background" args={['#f0f0f0']} />
@@ -88,7 +89,8 @@ function Scene(props) {
         intensity={0.003}
         worldRadius={0.26 / 10}
         ior={0.9}
-        backfaceIor={1.26}>
+        backfaceIor={1.26}
+      >
         <mesh castShadow receiveShadow geometry={nodes.glass.geometry}>
           <MeshTransmissionMaterial
             backside

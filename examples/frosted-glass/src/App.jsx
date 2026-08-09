@@ -39,7 +39,8 @@ function Selector({ children }) {
         onPointerOver={() => (store.open = true)}
         onPointerOut={() => (store.open = false)}
         onPointerDown={() => (store.open = true)}
-        onPointerUp={() => (store.open = false)}>
+        onPointerUp={() => (store.open = false)}
+      >
         {children}
       </group>
     </>

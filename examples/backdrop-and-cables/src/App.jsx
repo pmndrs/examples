@@ -23,7 +23,8 @@ const Spaceman = forwardRef(({ children, ...props }, ref) => {
       geometry={nodes.Astronaut_mesh.geometry}
       material={materials.Astronaut_mat}
       material-envMapIntensity={0}
-      dispose={null}>
+      dispose={null}
+    >
       {children}
     </mesh>
   )

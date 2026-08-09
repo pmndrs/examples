@@ -17,8 +17,7 @@ function Overlay() {
   )
 }
 
-createRoot(
-  document.getElementById('root')).render(
+createRoot(document.getElementById('root')).render(
   <>
     <App />
     <Overlay />

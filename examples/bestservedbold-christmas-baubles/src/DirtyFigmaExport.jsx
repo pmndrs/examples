@@ -13,7 +13,8 @@ export function Underlay() {
         alignItems: "flex-start",
         justifyContent: "flex-start",
         pointerEvents: "none",
-      }}>
+      }}
+    >
       <div style={{ width: "100%", padding: 0, display: "inline-flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
         <p
           style={{
@@ -25,7 +26,8 @@ export function Underlay() {
             lineHeight: "30px",
             color: "black",
             letterSpacing: -2,
-          }}>
+          }}
+        >
           POIMANDRES
         </p>
         <div style={{ flex: "1 1 0%", display: "flex", gap: "2em" }}></div>
@@ -51,7 +53,8 @@ export function Underlay() {
             textAlign: "right",
             color: "black",
             whiteSpace: "nowrap",
-          }}>
+          }}
+        >
           DRAG POINTER &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ●
         </p>
       </div>
@@ -67,7 +70,8 @@ export function Underlay() {
           flexDirection: "row",
           alignItems: "flex-end",
           justifyContent: "center",
-        }}>
+        }}
+      >
         <p style={{ flex: "1 1 0%", fontSize: 250, lineHeight: "1em", color: "black", margin: 0, letterSpacing: -10 }}>X</p>
         <div style={{ width: 10 }} />
         <p style={{ flex: "1 1 0%", fontSize: 250, lineHeight: "100%", textAlign: "right", color: "black", margin: 0, letterSpacing: -10 }}>_01</p>
@@ -83,7 +87,8 @@ export function Underlay() {
           flexDirection: "row",
           alignItems: "flex-end",
           justifyContent: "center",
-        }}>
+        }}
+      >
         <p className="full" style={{ whiteSpace: "nowrap", flex: "1 1 0%", fontSize: 12, lineHeight: "1.5em", color: "black" }}>
           <b>Wonders of Antiquity</b>
           <br />
@@ -102,7 +107,8 @@ export function Underlay() {
             color: "black",
             letterSpacing: -0.5,
             whiteSpace: "nowrap",
-          }}>
+          }}
+        >
           THE SUMMIT OF THE MANY
         </p>
         <div style={{ width: 10 }} />

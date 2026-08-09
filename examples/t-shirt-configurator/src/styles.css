@@ -181,7 +181,9 @@ button:hover {
   border-radius: 5px;
   font-weight: 600;
   cursor: pointer;
-  transition: border, color 1s ease;
+  transition:
+    border,
+    color 1s ease;
 }
 
 .zoom:hover {

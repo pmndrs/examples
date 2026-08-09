@@ -19,7 +19,7 @@ export const App = () => (
     <Canvas eventSource={document.getElementById("root")!} eventPrefix="client" shadows camera={{ position: [0, 0, 20], fov: 50 }}>
       <color attach="background" args={["#e0e0e0"]} />
       <spotLight position={[20, 20, 10]} intensity={Math.PI} decay={0} penumbra={1} castShadow angle={0.2} />
-      
+
       <Status position={[0, 0, -10]} />
 
       <Float floatIntensity={2}>
@@ -35,7 +35,7 @@ export const App = () => (
       </Float>
 
       <ContactShadows scale={100} position={[0, -7.5, 0]} blur={1} far={100} opacity={0.85} />
-      
+
       <Environment preset="city">
         <Lightformer intensity={8} position={[10, 5, 0]} scale={[10, 50, 1]} onUpdate={(self) => self.lookAt(0, 0, 0)} />
       </Environment>
@@ -96,7 +96,7 @@ function Bomb(props: ThreeElements["mesh"]) {
 function Status(props: Omit<ComponentProps<typeof Text>, "font" | "children">) {
   const [loc] = useLocation()
   const text = loc === "/" ? "/knot" : loc
-  
+
   return (
     <Text fontSize={14} letterSpacing={-0.025} font={(suspend(inter) as { default: string }).default} color="black" {...props}>
       {text}

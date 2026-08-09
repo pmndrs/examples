@@ -43,7 +43,14 @@ function Scene({ dof }) {
       <Fireflies count={20} radius={80} colors={['orange']} />
       {layers.map(({ scale, texture, ref, factor = 0, scaleFactor = 1, wiggle = 0, z }, i) => (
         <Plane scale={scale} args={[1, 1, wiggle ? 10 : 1, wiggle ? 10 : 1]} position-z={z} key={i} ref={ref}>
-          <layerMaterial movement={movement} textr={texture} factor={factor} ref={(el) => (layersRef.current[i] = el)} wiggle={wiggle} scale={scaleFactor} />
+          <layerMaterial
+            movement={movement}
+            textr={texture}
+            factor={factor}
+            ref={(el) => (layersRef.current[i] = el)}
+            wiggle={wiggle}
+            scale={scaleFactor}
+          />
         </Plane>
       ))}
     </group>

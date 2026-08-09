@@ -2,17 +2,10 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Staging and CameraShake",
   "description": "How to stage and shake models while using controls at the same time.",
-  "tags": [
-    "stage",
-    "camera-shake",
-    "controls"
-  ],
+  "tags": ["stage", "camera-shake", "controls"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2021-04-13",
   "source": "https://codesandbox.io/s/0ycwe",
-  "libraries": [
-    "@react-three/drei",
-    "@react-three/fiber"
-  ],
+  "libraries": ["@react-three/drei", "@react-three/fiber"],
   "assets": []
 }

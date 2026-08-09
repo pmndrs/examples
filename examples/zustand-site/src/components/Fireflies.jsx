@@ -33,7 +33,7 @@ export default function Fireflies({ count, colors, radius = 10 }) {
           curve,
         }
       }),
-    [count, radius, colors],
+    [count, radius, colors]
   )
   return (
     <group position={[-radius * 2, -radius, 0]}>

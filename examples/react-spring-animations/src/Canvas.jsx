@@ -45,7 +45,17 @@ export function Scene({ x, set }) {
       <directionalLight position={[-20, 20, 20]} intensity={Math.PI} />
       <a.directionalLight position={[-20, -20, -20]} intensity={0.5 * Math.PI} color={color} />
       <a.pointLight position={[0, 0, 5]} distance={5} intensity={5 * Math.PI} decay={0} color={color} />
-      <a.spotLight color={color} position={[10, 20, 20]} angle={0.1} intensity={2 * Math.PI} decay={0} shadow-mapSize-width={2048} shadow-mapSize-height={2048} shadow-bias={-0.00001} castShadow />
+      <a.spotLight
+        color={color}
+        position={[10, 20, 20]}
+        angle={0.1}
+        intensity={2 * Math.PI}
+        decay={0}
+        shadow-mapSize-width={2048}
+        shadow-mapSize-height={2048}
+        shadow-bias={-0.00001}
+        castShadow
+      />
       <Suspense fallback={null}>
         <Switch x={x} set={set} />
       </Suspense>

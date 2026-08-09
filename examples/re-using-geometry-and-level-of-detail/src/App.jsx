@@ -21,7 +21,8 @@ export default function App() {
         shadows
         // Only render on changes and movement
         frameloop="demand"
-        camera={{ position: [0, 0, 40] }}>
+        camera={{ position: [0, 0, 40] }}
+      >
         {/* Let's render 800 Bust components with the data above */}
         {positions.map((props, i) => (
           <Bust key={i} {...props} />

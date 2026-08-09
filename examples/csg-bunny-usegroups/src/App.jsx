@@ -1,6 +1,16 @@
 import * as THREE from 'three'
 import { Canvas } from '@react-three/fiber'
-import { useGLTF,Box, AccumulativeShadows, RandomizedLight, OrbitControls, PivotControls, MeshTransmissionMaterial, Center, Environment } from '@react-three/drei'
+import {
+  useGLTF,
+  Box,
+  AccumulativeShadows,
+  RandomizedLight,
+  OrbitControls,
+  PivotControls,
+  MeshTransmissionMaterial,
+  Center,
+  Environment
+} from '@react-three/drei'
 import { useEffect, useRef } from 'react'
 import { Geometry, Base, Addition, Subtraction } from '@react-three/csg'
 
@@ -13,8 +23,8 @@ export default function App() {
       <ambientLight intensity={0.5 * Math.PI} />
       <directionalLight position={[5, 8, -4]} intensity={Math.PI} shadow-mapSize={1024} castShadow />
       <group position={[0.5, -1.25, 0]}>
-        <Center top precise={false}> 
-          <Bunny/>
+        <Center top precise={false}>
+          <Bunny />
         </Center>
         <AccumulativeShadows temporal frames={100} alphaTest={0.75} opacity={0.85} scale={12}>
           <RandomizedLight amount={8} radius={5} ambient={0.5} intensity={Math.PI} position={[5, 5, -5]} bias={0.001} />
