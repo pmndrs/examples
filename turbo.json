@@ -35,9 +35,6 @@
     "lint": {
       "dependsOn": ["^lint"]
     },
-    // Root scripts, so `//#`. Both walk the whole repo rather than one
-    // workspace, hence the explicit `inputs`: without them turbo would hash
-    // the root package and re-run on any commit.
     "//#lint:metadata": {
       "inputs": [
         "bin/validate-pmndrs-metadata.mjs",
