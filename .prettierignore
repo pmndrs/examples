@@ -1,7 +1,9 @@
+# Generated, and `.patch` files prettier has no parser for -- `format:check`
+# runs without `--ignore-unknown`, so it would error on them rather than skip
+# them. Build outputs and `.turbo/` need no entry: they are gitignored, and
+# prettier reads `.gitignore` too.
 pnpm-lock.yaml
 patches/
-out/
-.turbo/
 
 # Local agent checkouts, plus a vendored skill that has to stay byte-identical
 # to what its registry emits.
