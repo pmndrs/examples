@@ -2,17 +2,24 @@ import path from "node:path";
 
 const root = import.meta.dirname;
 
+// Inside `examples/*`, only what `pnpm format` (`**/*.{ts,tsx,md}`) already
+// keeps in shape. The rest -- the `.jsx`, `.js`, `.css` of every sandbox --
+// is vendored source still on its upstream style, each example carrying its
+// own `.prettierrc` it isn't formatted to; reformatting one on commit would
+// bury a two-line change under a whole-file diff. This can't live in
+// `.prettierignore`: that would take those files away from `pnpm format`
+// too, which is a repo-wide policy change rather than a hook decision.
+const FORMATTED_IN_EXAMPLES = /\.(tsx?|md)$/;
+
 /** @type {import("lint-staged").Configuration} */
 export default {
-  // `examples/*` are vendored sandboxes: each one carries its own prettier
-  // config (a `.prettierrc`, or a `prettier` key in its `package.json`) and
-  // most of them are not formatted to it. Reformatting one on commit would
-  // bury a two-line change under a whole-file diff, so the hook leaves them
-  // to their upstream style -- `pnpm format` is still there to opt in.
   "*": (files) => {
     const staged = files
       .map((file) => path.relative(root, file))
-      .filter((file) => !file.startsWith("examples/"));
+      .filter(
+        (file) =>
+          !file.startsWith("examples/") || FORMATTED_IN_EXAMPLES.test(file),
+      );
 
     return [
       // `--ignore-unknown` so the glob can stay `*`: prettier skips what it
