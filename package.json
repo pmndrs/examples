@@ -13,6 +13,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "turbo test",
+    "test:turbo": "vitest run",
     "prepare": "husky"
   },
   "devDependencies": {
@@ -25,7 +26,8 @@
     "prettier-plugin-tailwindcss": "^0.8.1",
     "syncpack": "^14.3.0",
     "turbo": "^2.10.7",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "vitest": "^4.1.10"
   },
   "engines": {
     "node": ">=24"

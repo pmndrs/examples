@@ -53,6 +53,9 @@ jobs:
       # pre-commit hook cannot afford (every commit would invalidate it), and
       # so covers a `git commit -n` or anything that wrote outside a commit.
       - run: pnpm check
+      # Asserts the `inputs` above stay honest: which file makes which task
+      # re-run. Runs turbo with `--dry`, so it costs hashes, not builds.
+      - run: pnpm test:turbo
 
       #
       # Test
