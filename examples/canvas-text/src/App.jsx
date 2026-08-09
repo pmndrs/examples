@@ -18,8 +18,7 @@ export default function App() {
         // the same source. By re-connecting the canvas to a parent that contains the
         // text content as well as the canvas we do just that.
         eventSource={ref}
-        eventPrefix="offset"
-      >
+        eventPrefix="offset">
         <ambientLight intensity={0.5 * Math.PI} />
         <directionalLight position={[10, 10, 10]} intensity={Math.PI} angle={0.15} penumbra={1} castShadow shadow-mapSize={[2024, 2024]} />
         <pointLight position={[10, 0, 0]} intensity={Math.PI} decay={0} />

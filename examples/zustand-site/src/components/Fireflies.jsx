@@ -30,7 +30,7 @@ export default function Fireflies({ count, colors, radius = 10 }) {
         const curve = new THREE.CatmullRomCurve3(points).getPoints(100)
         return {
           color: colors[parseInt(colors.length * Math.random())],
-          curve,
+          curve
         }
       }),
     [count, radius, colors]

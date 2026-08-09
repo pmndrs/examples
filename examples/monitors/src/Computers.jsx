@@ -59,7 +59,15 @@ export function Computers(props) {
       <instances.Object position={[4.6, 3.46, 1.19]} rotation={[-1.24, -0.72, 0.48]} scale={0.5} />
       <instances.Object1 position={[0.63, 0, -3]} rotation={[0, 0.17, 0]} scale={1.52} />
       <instances.Object1 position={[-2.36, 0.32, -2.02]} rotation={[0, 0.53, -Math.PI / 2]} scale={1.52} />
-      <mesh castShadow receiveShadow geometry={n.Object_24.geometry} material={m.Texture} position={[-2.42, 0.94, -2.25]} rotation={[0, 0.14, Math.PI / 2]} scale={-1.52} />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={n.Object_24.geometry}
+        material={m.Texture}
+        position={[-2.42, 0.94, -2.25]}
+        rotation={[0, 0.14, Math.PI / 2]}
+        scale={-1.52}
+      />
       <instances.Object1 position={[-3.53, 0, 0.59]} rotation={[Math.PI, -1.09, Math.PI]} scale={1.52} />
       <instances.Object1 position={[-3.53, 1.53, 0.59]} rotation={[0, 0.91, 0]} scale={1.52} />
       <instances.Object1 position={[3.42, 0, 0]} rotation={[-Math.PI, 1.13, -Math.PI]} scale={1.52} />
@@ -90,10 +98,42 @@ export function Computers(props) {
       <instances.Object1 position={[-4.18, 3.98, -3.06]} rotation={[-Math.PI, -0.46, -Math.PI / 2]} scale={1.52} />
       <instances.Object1 position={[-1.17, 3.98, -4.45]} rotation={[0, 0.17, Math.PI / 2]} scale={1.52} />
       <instances.Object1 position={[-0.94, 3.98, -4.66]} rotation={[Math.PI, 0.02, -Math.PI / 2]} scale={1.52} />
-      <mesh castShadow receiveShadow geometry={n.Object_140.geometry} material={m.Texture} position={[5.53, 2.18, 0.17]} rotation={[-Math.PI, 0, 0]} scale={-1} />
-      <mesh castShadow receiveShadow geometry={n.Object_144.geometry} material={m.Texture} position={[5.74, 1.57, 0.05]} rotation={[-Math.PI, 0, 0]} scale={-1} />
-      <mesh castShadow receiveShadow geometry={n.Object_148.geometry} material={m.Texture} position={[5.65, 2.79, 0.11]} rotation={[-Math.PI, 0, 0]} scale={-1} />
-      <mesh castShadow receiveShadow geometry={n.Object_152.geometry} material={m.Texture} position={[5.46, 3.41, 0.26]} rotation={[-Math.PI, 0, 0]} scale={-1} />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={n.Object_140.geometry}
+        material={m.Texture}
+        position={[5.53, 2.18, 0.17]}
+        rotation={[-Math.PI, 0, 0]}
+        scale={-1}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={n.Object_144.geometry}
+        material={m.Texture}
+        position={[5.74, 1.57, 0.05]}
+        rotation={[-Math.PI, 0, 0]}
+        scale={-1}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={n.Object_148.geometry}
+        material={m.Texture}
+        position={[5.65, 2.79, 0.11]}
+        rotation={[-Math.PI, 0, 0]}
+        scale={-1}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={n.Object_152.geometry}
+        material={m.Texture}
+        position={[5.46, 3.41, 0.26]}
+        rotation={[-Math.PI, 0, 0]}
+        scale={-1}
+      />
       <mesh castShadow receiveShadow geometry={n.Object_156.geometry} material={m.Texture} position={[4.86, 0, -2.54]} rotation={[-Math.PI, 0, 0]} scale={-1} />
       <mesh castShadow receiveShadow geometry={n.Object_160.geometry} material={m.Texture} position={[5.06, 0, -1.6]} rotation={[-Math.PI, 0, 0]} scale={-1} />
       <mesh castShadow receiveShadow geometry={n.Object_164.geometry} material={m.Texture} position={[2.59, 0, -4]} rotation={[-Math.PI, 0, 0]} scale={-1} />
@@ -101,15 +141,63 @@ export function Computers(props) {
       <mesh castShadow receiveShadow geometry={n.Object_170.geometry} material={m.Texture} position={[0.59, 0, -4.7]} rotation={[-Math.PI, 0, 0]} scale={-1} />
       <instances.Object13 position={[4.89, 1.83, -1.62]} rotation={[-Math.PI, 0, 0]} scale={-1} />
       <instances.Object14 position={[3.75, 1.83, -3.28]} rotation={[-Math.PI, 0, 0]} scale={-1} />
-      <mesh castShadow receiveShadow geometry={n.Object_176.geometry} material={m.Texture} position={[1.33, 1.83, -3.82]} rotation={[-Math.PI, 0, 0]} scale={-1} />
-      <mesh castShadow receiveShadow geometry={n.Object_180.geometry} material={m.Texture} position={[4.86, 2.14, -2.54]} rotation={[-Math.PI, 0, 0]} scale={-1} />
-      <mesh castShadow receiveShadow geometry={n.Object_184.geometry} material={m.Texture} position={[5.06, 2.14, -1.6]} rotation={[-Math.PI, 0, 0]} scale={-1} />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={n.Object_176.geometry}
+        material={m.Texture}
+        position={[1.33, 1.83, -3.82]}
+        rotation={[-Math.PI, 0, 0]}
+        scale={-1}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={n.Object_180.geometry}
+        material={m.Texture}
+        position={[4.86, 2.14, -2.54]}
+        rotation={[-Math.PI, 0, 0]}
+        scale={-1}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={n.Object_184.geometry}
+        material={m.Texture}
+        position={[5.06, 2.14, -1.6]}
+        rotation={[-Math.PI, 0, 0]}
+        scale={-1}
+      />
       <mesh castShadow receiveShadow geometry={n.Object_188.geometry} material={m.Texture} position={[2.59, 2.14, -4]} rotation={[-Math.PI, 0, 0]} scale={-1} />
-      <mesh castShadow receiveShadow geometry={n.Object_192.geometry} material={m.Texture} position={[1.66, 2.14, -4.54]} rotation={[-Math.PI, 0, 0]} scale={-1} />
-      <mesh castShadow receiveShadow geometry={n.Object_194.geometry} material={m.Texture} position={[0.59, 2.14, -4.7]} rotation={[-Math.PI, 0, 0]} scale={-1} />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={n.Object_192.geometry}
+        material={m.Texture}
+        position={[1.66, 2.14, -4.54]}
+        rotation={[-Math.PI, 0, 0]}
+        scale={-1}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={n.Object_194.geometry}
+        material={m.Texture}
+        position={[0.59, 2.14, -4.7]}
+        rotation={[-Math.PI, 0, 0]}
+        scale={-1}
+      />
       <instances.Object13 position={[4.89, 3.98, -1.62]} rotation={[-Math.PI, 0, 0]} scale={-1} />
       <instances.Object14 position={[3.75, 3.98, -3.28]} rotation={[-Math.PI, 0, 0]} scale={-1} />
-      <mesh castShadow receiveShadow geometry={n.Object_200.geometry} material={m.Texture} position={[0.75, 3.98, -4.66]} rotation={[-Math.PI, 0, 0]} scale={-1} />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={n.Object_200.geometry}
+        material={m.Texture}
+        position={[0.75, 3.98, -4.66]}
+        rotation={[-Math.PI, 0, 0]}
+        scale={-1}
+      />
       <mesh castShadow receiveShadow geometry={n.Object_18.geometry} material={m.Texture} position={[-0.19, 0, -2.96]} rotation={[0, -0.06, 0]} scale={1.52} />
       <instances.Object23 position={[-2.29, 1.56, -2.26]} rotation={[0, -0.005, -Math.PI / 2]} scale={1.52} />
       <instances.Object24 position={[-2.19, 2.19, -1.87]} rotation={[0, 0.51, Math.PI / 2]} scale={-1.52} />
@@ -132,17 +220,73 @@ export function Computers(props) {
       <instances.Object23 position={[-3.73, 2.14, -3.1]} rotation={[Math.PI, -0.64, Math.PI]} scale={1.52} />
       <instances.Object23 position={[-0.08, 2.14, -5.03]} rotation={[0, 0.04, 0]} scale={1.52} />
       <instances.Object24 position={[-4.19, 3.98, -2.77]} rotation={[Math.PI, -0.66, -Math.PI / 2]} scale={-1.52} />
-      <mesh castShadow receiveShadow geometry={n.Object_142.geometry} material={m.Texture} position={[5.79, 0.94, 0.18]} rotation={[-Math.PI, 0, 0]} scale={-1} />
-      <mesh castShadow receiveShadow geometry={n.Object_146.geometry} material={m.Texture} position={[5.43, 0.32, 0.37]} rotation={[-Math.PI, 0, 0]} scale={-1} />
-      <mesh castShadow receiveShadow geometry={n.Object_150.geometry} material={m.Texture} position={[5.56, 4.03, 0.35]} rotation={[-Math.PI, 0, 0]} scale={-1} />
-      <mesh castShadow receiveShadow geometry={n.Object_154.geometry} material={m.Texture} position={[5.87, 4.66, 0.08]} rotation={[-Math.PI, 0, 0]} scale={-1} />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={n.Object_142.geometry}
+        material={m.Texture}
+        position={[5.79, 0.94, 0.18]}
+        rotation={[-Math.PI, 0, 0]}
+        scale={-1}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={n.Object_146.geometry}
+        material={m.Texture}
+        position={[5.43, 0.32, 0.37]}
+        rotation={[-Math.PI, 0, 0]}
+        scale={-1}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={n.Object_150.geometry}
+        material={m.Texture}
+        position={[5.56, 4.03, 0.35]}
+        rotation={[-Math.PI, 0, 0]}
+        scale={-1}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={n.Object_154.geometry}
+        material={m.Texture}
+        position={[5.87, 4.66, 0.08]}
+        rotation={[-Math.PI, 0, 0]}
+        scale={-1}
+      />
       <mesh castShadow receiveShadow geometry={n.Object_158.geometry} material={m.Texture} position={[5.53, 0, -0.85]} rotation={[-Math.PI, 0, 0]} scale={-1} />
       <mesh castShadow receiveShadow geometry={n.Object_162.geometry} material={m.Texture} position={[4.05, 0, -2.96]} rotation={[-Math.PI, 0, 0]} scale={-1} />
       <mesh castShadow receiveShadow geometry={n.Object_166.geometry} material={m.Texture} position={[3.29, 0, -3.1]} rotation={[-Math.PI, 0, 0]} scale={-1} />
       <instances.Object32 position={[3.77, 1.84, -2.98]} rotation={[-Math.PI, 0, 0]} scale={-1} />
-      <mesh castShadow receiveShadow geometry={n.Object_182.geometry} material={m.Texture} position={[5.53, 2.14, -0.85]} rotation={[-Math.PI, 0, 0]} scale={-1} />
-      <mesh castShadow receiveShadow geometry={n.Object_186.geometry} material={m.Texture} position={[4.05, 2.14, -2.96]} rotation={[-Math.PI, 0, 0]} scale={-1} />
-      <mesh castShadow receiveShadow geometry={n.Object_190.geometry} material={m.Texture} position={[3.3, 2.14, -3.31]} rotation={[-Math.PI, 0, 0]} scale={-1} />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={n.Object_182.geometry}
+        material={m.Texture}
+        position={[5.53, 2.14, -0.85]}
+        rotation={[-Math.PI, 0, 0]}
+        scale={-1}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={n.Object_186.geometry}
+        material={m.Texture}
+        position={[4.05, 2.14, -2.96]}
+        rotation={[-Math.PI, 0, 0]}
+        scale={-1}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={n.Object_190.geometry}
+        material={m.Texture}
+        position={[3.3, 2.14, -3.31]}
+        rotation={[-Math.PI, 0, 0]}
+        scale={-1}
+      />
       <instances.Object32 position={[3.77, 3.98, -2.98]} rotation={[-Math.PI, 0, 0]} scale={-1} />
       <instances.Object36 position={[0.35, 2.35, -3.34]} rotation={[-0.26, 0, 0]} />
       <instances.Object36 position={[0.18, 2.8, -2.85]} rotation={[0.09, 0.15, -0.005]} />
@@ -151,7 +295,15 @@ export function Computers(props) {
       <instances.Object36 position={[3.95, 2.49, 1.61]} rotation={[0, -Math.PI / 3, 0]} />
       <instances.Object36 position={[-1.1, 4.29, -4.43]} rotation={[0, 0.36, 0]} />
       <instances.Object36 position={[-5.25, 4.29, -1.47]} rotation={[0, 1.25, 0]} />
-      <mesh castShadow receiveShadow geometry={n.Object_204.geometry} material={m.Texture} position={[3.2, 4.29, -3.09]} rotation={[-Math.PI, 0.56, 0]} scale={-1} />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={n.Object_204.geometry}
+        material={m.Texture}
+        position={[3.2, 4.29, -3.09]}
+        rotation={[-Math.PI, 0.56, 0]}
+        scale={-1}
+      />
       <ScreenInteractive frame="Object_206" panel="Object_207" position={[0.27, 1.53, -2.61]} />
       <ScreenText frame="Object_209" panel="Object_210" y={5} position={[-1.43, 2.5, -1.8]} rotation={[0, 1, 0]} />
       <ScreenText invert frame="Object_212" panel="Object_213" x={-5} y={5} position={[-2.73, 0.63, -0.52]} rotation={[0, 1.09, 0]} />

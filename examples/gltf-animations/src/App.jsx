@@ -1,7 +1,7 @@
-import { Suspense } from "react"
-import { Canvas, useFrame } from "@react-three/fiber"
-import { easing } from "maath"
-import Model from "./Model"
+import { Suspense } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { easing } from 'maath'
+import Model from './Model'
 
 function Rig() {
   return useFrame((state, delta) => {

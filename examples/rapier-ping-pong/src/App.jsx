@@ -1,16 +1,16 @@
-import * as THREE from "three"
-import { useCallback, useRef } from "react"
-import { Canvas, useFrame, useThree } from "@react-three/fiber"
-import { Text, useGLTF, useTexture } from "@react-three/drei"
-import { Physics, RigidBody, CylinderCollider, CuboidCollider, BallCollider } from "@react-three/rapier"
-import { EffectComposer, N8AO, TiltShift2, ToneMapping } from "@react-three/postprocessing"
-import { proxy, useSnapshot } from "valtio"
-import clamp from "lodash-es/clamp"
-import { easing } from "maath"
-import pingSound from "./resources/ping.mp3"
-import logo from "./resources/crossp.jpg"
-import bg from "./resources/bg.jpg"
-import pingpongModel from "./resources/pingpong.glb?url"
+import * as THREE from 'three'
+import { useCallback, useRef } from 'react'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { Text, useGLTF, useTexture } from '@react-three/drei'
+import { Physics, RigidBody, CylinderCollider, CuboidCollider, BallCollider } from '@react-three/rapier'
+import { EffectComposer, N8AO, TiltShift2, ToneMapping } from '@react-three/postprocessing'
+import { proxy, useSnapshot } from 'valtio'
+import clamp from 'lodash-es/clamp'
+import { easing } from 'maath'
+import pingSound from './resources/ping.mp3'
+import logo from './resources/crossp.jpg'
+import bg from './resources/bg.jpg'
+import pingpongModel from './resources/pingpong.glb?url'
 
 const ping = new Audio(pingSound)
 const state = proxy({
@@ -22,14 +22,14 @@ const state = proxy({
       ping.play()
       if (velocity > 10) ++state.count
     },
-    reset: () => (state.count = 0),
-  },
+    reset: () => (state.count = 0)
+  }
 })
 
 export default function App({ ready }) {
   return (
     <Canvas shadows dpr={[1, 1.5]} gl={{ antialias: false }} camera={{ position: [0, 5, 12], fov: 45 }}>
-      <color attach="background" args={["#f0f0f0"]} />
+      <color attach="background" args={['#f0f0f0']} />
       <ambientLight intensity={0.5 * Math.PI} />
       <spotLight decay={0} position={[-10, 15, -5]} angle={1} penumbra={1} intensity={2} castShadow shadow-mapSize={1024} shadow-bias={-0.0001} />
       <Physics gravity={[0, -40, 0]} timeStep="vary">

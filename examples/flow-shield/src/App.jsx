@@ -61,8 +61,7 @@ export default function App() {
           camera={{ position: [8, 5, 8], fov: 50, near: 0.1, far: 200 }}
           gl={{ antialias: true, alpha: false }}
           style={{ background: '#0e0d0c' }}
-          dpr={[1, 1.5]}
-        >
+          dpr={[1, 1.5]}>
           <SceneContent showGrid={showGrid} mode={mode} glbUrl={glbUrl} onModelLoaded={handleModelLoaded} preset={preset} />
         </Canvas>
       </div>

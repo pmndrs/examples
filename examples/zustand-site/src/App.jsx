@@ -27,7 +27,7 @@ function Scene({ dof }) {
     { texture: textures[2], z: 20, scale: scaleW },
     { texture: textures[3], z: 30, scaleFactor: 0.83, scale: scaleN },
     { texture: textures[4], factor: 0.03, scaleFactor: 1, z: 40, wiggle: 0.6, scale: scaleW },
-    { texture: textures[5], factor: 0.04, scaleFactor: 1.3, z: 49, wiggle: 1, scale: scaleW },
+    { texture: textures[5], factor: 0.04, scaleFactor: 1.3, z: 49, wiggle: 1, scale: scaleW }
   ]
 
   useFrame((state, delta) => {
@@ -43,14 +43,7 @@ function Scene({ dof }) {
       <Fireflies count={20} radius={80} colors={['orange']} />
       {layers.map(({ scale, texture, ref, factor = 0, scaleFactor = 1, wiggle = 0, z }, i) => (
         <Plane scale={scale} args={[1, 1, wiggle ? 10 : 1, wiggle ? 10 : 1]} position-z={z} key={i} ref={ref}>
-          <layerMaterial
-            movement={movement}
-            textr={texture}
-            factor={factor}
-            ref={(el) => (layersRef.current[i] = el)}
-            wiggle={wiggle}
-            scale={scaleFactor}
-          />
+          <layerMaterial movement={movement} textr={texture} factor={factor} ref={(el) => (layersRef.current[i] = el)} wiggle={wiggle} scale={scaleFactor} />
         </Plane>
       ))}
     </group>

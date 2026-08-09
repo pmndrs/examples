@@ -1,9 +1,9 @@
-import * as THREE from "three"
-import { easing } from "maath"
-import { Canvas, useFrame, useThree } from "@react-three/fiber"
-import { Sky, Bvh } from "@react-three/drei"
-import { EffectComposer, Selection, Outline, N8AO, TiltShift2, ToneMapping } from "@react-three/postprocessing"
-import { Scene } from "./Scene"
+import * as THREE from 'three'
+import { easing } from 'maath'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { Sky, Bvh } from '@react-three/drei'
+import { EffectComposer, Selection, Outline, N8AO, TiltShift2, ToneMapping } from '@react-three/postprocessing'
+import { Scene } from './Scene'
 
 export const App = () => (
   <Canvas flat dpr={[1, 1.5]} gl={{ antialias: false }} camera={{ position: [0, 1, 6], fov: 25, near: 1, far: 20 }}>

@@ -1,11 +1,11 @@
-import * as THREE from "three"
-import { useRef, useState } from "react"
-import { Canvas, extend, useFrame } from "@react-three/fiber"
-import { useTexture, shaderMaterial } from "@react-three/drei"
+import * as THREE from 'three'
+import { useRef, useState } from 'react'
+import { Canvas, extend, useFrame } from '@react-three/fiber'
+import { useTexture, shaderMaterial } from '@react-three/drei'
 
-import img1 from "./img/Img1.jpg"
-import img2 from "./img/Img2.jpg"
-import img3 from "./img/displacement/13.jpg"
+import img1 from './img/Img1.jpg'
+import img2 from './img/Img2.jpg'
+import img3 from './img/displacement/13.jpg'
 
 export const ImageFadeMaterial = shaderMaterial(
   {

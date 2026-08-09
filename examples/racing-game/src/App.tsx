@@ -81,10 +81,9 @@ export function App() {
           broadphase="SAP"
           defaultContactMaterial={{
             contactEquationRelaxation: 4,
-            friction: 1e-3,
+            friction: 1e-3
           }}
-          allowSleep
-        >
+          allowSleep>
           <ToggledDebug scale={1.0001} color="white">
             <Vehicle angularVelocity={[...angularVelocity]} position={[...position]} rotation={[...rotation]}>
               {light && <primitive object={light.target} />}

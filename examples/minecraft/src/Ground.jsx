@@ -1,8 +1,8 @@
-import * as THREE from "three"
-import { useTexture } from "@react-three/drei"
-import { CuboidCollider, RigidBody } from "@react-three/rapier"
+import * as THREE from 'three'
+import { useTexture } from '@react-three/drei'
+import { CuboidCollider, RigidBody } from '@react-three/rapier'
 
-import grassImg from "./grass.jpg"
+import grassImg from './grass.jpg'
 
 export function Ground(props) {
   const texture = useTexture(grassImg)

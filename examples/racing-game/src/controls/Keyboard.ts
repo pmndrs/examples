@@ -61,8 +61,8 @@ export function Keyboard() {
     {
       keys: ['c', 'C'],
       fn: () => set((state) => ({ camera: cameras[(cameras.indexOf(state.camera) + 1) % cameras.length] })),
-      up: false,
-    },
+      up: false
+    }
   ])
   return null
 }

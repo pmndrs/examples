@@ -1,12 +1,12 @@
 // Based on https://codepen.io/al-ro/pen/jJJygQ by al-ro, but rewritten in react-three-fiber
-import * as THREE from "three"
-import React, { useRef, useMemo } from "react"
-import SimplexNoise from "simplex-noise"
-import { useFrame, useLoader } from "@react-three/fiber"
+import * as THREE from 'three'
+import React, { useRef, useMemo } from 'react'
+import SimplexNoise from 'simplex-noise'
+import { useFrame, useLoader } from '@react-three/fiber'
 //These have been taken from "Realistic real-time grass rendering" by Eddie Lee, 2010
-import bladeDiffuse from "./resources/blade_diffuse.jpg"
-import bladeAlpha from "./resources/blade_alpha.jpg"
-import "./GrassMaterial"
+import bladeDiffuse from './resources/blade_diffuse.jpg'
+import bladeAlpha from './resources/blade_alpha.jpg'
+import './GrassMaterial'
 
 const simplex = new SimplexNoise(Math.random)
 
@@ -40,8 +40,7 @@ export default function Grass({ options = { bW: 0.12, bH: 1, joints: 5 }, width 
           index={baseGeom.index}
           attributes-position={baseGeom.attributes.position}
           attributes-uv={baseGeom.attributes.uv}
-          boundingSphere={boundingSphere}
-        >
+          boundingSphere={boundingSphere}>
           <instancedBufferAttribute attach="attributes-offset" args={[new Float32Array(attributeData.offsets), 3]} />
           <instancedBufferAttribute attach="attributes-orientation" args={[new Float32Array(attributeData.orientations), 4]} />
           <instancedBufferAttribute attach="attributes-stretch" args={[new Float32Array(attributeData.stretches), 1]} />
@@ -131,7 +130,7 @@ function getAttributeData(instances, width) {
     orientations,
     stretches,
     halfRootAngleCos,
-    halfRootAngleSin,
+    halfRootAngleSin
   }
 }
 

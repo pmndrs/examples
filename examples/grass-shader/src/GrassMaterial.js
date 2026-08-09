@@ -1,6 +1,6 @@
-import * as THREE from "three"
-import { shaderMaterial } from "@react-three/drei"
-import { extend } from "@react-three/fiber"
+import * as THREE from 'three'
+import { shaderMaterial } from '@react-three/drei'
+import { extend } from '@react-three/fiber'
 
 const GrassMaterial = shaderMaterial(
   {
@@ -9,7 +9,7 @@ const GrassMaterial = shaderMaterial(
     alphaMap: null,
     time: 0,
     tipColor: new THREE.Color(0.0, 0.6, 0.0).convertSRGBToLinear(),
-    bottomColor: new THREE.Color(0.0, 0.1, 0.0).convertSRGBToLinear(),
+    bottomColor: new THREE.Color(0.0, 0.1, 0.0).convertSRGBToLinear()
   },
   `   precision mediump float;
       attribute vec3 offset;
@@ -118,7 +118,7 @@ const GrassMaterial = shaderMaterial(
       }`,
   (self) => {
     self.side = THREE.DoubleSide
-  },
+  }
 )
 
 extend({ GrassMaterial })

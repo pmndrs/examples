@@ -1,21 +1,21 @@
-import * as THREE from "three"
-import { Canvas, useFrame, useThree } from "@react-three/fiber"
-import { Outlines, Environment, useTexture } from "@react-three/drei"
-import { Physics, useSphere } from "@react-three/cannon"
-import { EffectComposer, N8AO, SMAA } from "@react-three/postprocessing"
-import { useControls } from "leva"
+import * as THREE from 'three'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { Outlines, Environment, useTexture } from '@react-three/drei'
+import { Physics, useSphere } from '@react-three/cannon'
+import { EffectComposer, N8AO, SMAA } from '@react-three/postprocessing'
+import { useControls } from 'leva'
 
-import adamsbridgeHdr from "./adamsbridge.hdr?url"
-import crossImg from "./cross.jpg"
+import adamsbridgeHdr from './adamsbridge.hdr?url'
+import crossImg from './cross.jpg'
 
 const rfs = THREE.MathUtils.randFloatSpread
 const sphereGeometry = new THREE.SphereGeometry(1, 32, 32)
-const baubleMaterial = new THREE.MeshStandardMaterial({ color: "white", roughness: 0, envMapIntensity: 1 })
+const baubleMaterial = new THREE.MeshStandardMaterial({ color: 'white', roughness: 0, envMapIntensity: 1 })
 
 export const App = () => (
   <Canvas shadows gl={{ antialias: false }} dpr={[1, 1.5]} camera={{ position: [0, 0, 20], fov: 35, near: 1, far: 40 }}>
     <ambientLight intensity={0.5 * Math.PI} />
-    <color attach="background" args={["#dfdfdf"]} />
+    <color attach="background" args={['#dfdfdf']} />
     <spotLight intensity={Math.PI} decay={0} angle={0.2} penumbra={1} position={[30, 30, 30]} castShadow shadow-mapSize={[512, 512]} />
     <Physics gravity={[0, 2, 0]} iterations={10}>
       <Pointer />
@@ -51,6 +51,6 @@ function Clump({ mat = new THREE.Matrix4(), vec = new THREE.Vector3(), ...props 
 
 function Pointer() {
   const viewport = useThree((state) => state.viewport)
-  const [, api] = useSphere(() => ({ type: "Kinematic", args: [3], position: [0, 0, 0] }))
+  const [, api] = useSphere(() => ({ type: 'Kinematic', args: [3], position: [0, 0, 0] }))
   return useFrame((state) => api.position.set((state.mouse.x * viewport.width) / 2, (state.mouse.y * viewport.height) / 2, 0))
 }

@@ -12,8 +12,7 @@ export default function App() {
         parent.removeChild(canvas)
         parent.appendChild(gl.domElement)
         return gl
-      }}
-    >
+      }}>
       <TorusKnot />
     </Canvas>
   )

@@ -70,8 +70,7 @@ export const Node = forwardRef(({ color = 'black', name, connectedTo = [], posit
         position={[0, 0, 0.1]}
         onPointerOver={() => setHovered(true)}
         onPointerOut={() => setHovered(false)}
-        color={hovered ? '#ff1050' : color}
-      >
+        color={hovered ? '#ff1050' : color}>
         <Text position={[0, 0, 1]} fontSize={0.25}>
           {name}
         </Text>

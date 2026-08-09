@@ -27,8 +27,7 @@ export function App() {
         eventSource={container}
         // Re-define the event-compute function which now uses pageX/Y instead of offsetX/Y
         // Without this the right hand would reset to client 0/0 if it hovers over any of the HTML elements
-        eventPrefix="page"
-      >
+        eventPrefix="page">
         <directionalLight castShadow intensity={0.4 * Math.PI} position={[-10, 50, 300]} shadow-mapSize={[512, 512]} shadow-bias={-0.002}>
           <orthographicCamera attach="shadow-camera" args={[-2000, 2000, 2000, -2000, -10000, 10000]} />
         </directionalLight>
@@ -60,7 +59,7 @@ function Test() {
 
       //downloadJSON(gltf)
     },
-    {},
+    {}
   )
 }
 
@@ -82,7 +81,7 @@ function Scene({ portal, ...props }) {
         node.name !== 'Cube 8' &&
         node.name !== 'Cube 17' &&
         node.name !== 'Cube 24' &&
-        Object.assign(node.material, stencil),
+        Object.assign(node.material, stencil)
     )
   }, [])
   useFrame((state) => {
@@ -140,8 +139,7 @@ function Scene({ portal, ...props }) {
                 click(false)
               }}
               receiveShadow
-              geometry={nodes.screen.geometry}
-            >
+              geometry={nodes.screen.geometry}>
               <meshStandardMaterial transparent opacity={0.1} />
             </mesh>
           </group>

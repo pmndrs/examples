@@ -9,7 +9,7 @@ const objects = ['Stool', 'Table', 'Bench']
 const models = [stoolModel, tableModel, benchModel]
 const fakeObjects =
   'Lamp base. Stool. Outside table. Dish drainer. Closet door. Table. Square stool. Clothes rack. Bench. Bird feeder. Shelf. Handeplane surfing. Marking knife. Cutting board. Watch display'.split(
-    '. ',
+    '. '
   )
 
 const Item = ({ text, onHover, index, active }) => {

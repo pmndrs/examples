@@ -14,5 +14,5 @@ createRoot(document.getElementById('root')).render(
       <span>VISIT</span>
       <span>SHOP</span>
     </div>
-  </>,
+  </>
 )

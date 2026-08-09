@@ -30,90 +30,20 @@ export function Droideka() {
               <group name="Armature026_15" position={[3.307, 6.413, -0.113]} rotation={[0, 0, -1.848]} scale={3.495}>
                 <group name="GLTF_created_0">
                   <primitive object={nodes.GLTF_created_0_rootJoint} />
-                  <skinnedMesh
-                    name="Object_11"
-                    geometry={nodes.Object_11.geometry}
-                    material={materials.Material}
-                    skeleton={nodes.Object_11.skeleton}
-                  />
-                  <skinnedMesh
-                    name="Object_13"
-                    geometry={nodes.Object_13.geometry}
-                    material={materials.Material}
-                    skeleton={nodes.Object_13.skeleton}
-                  />
-                  <skinnedMesh
-                    name="Object_15"
-                    geometry={nodes.Object_15.geometry}
-                    material={materials.Material}
-                    skeleton={nodes.Object_15.skeleton}
-                  />
-                  <skinnedMesh
-                    name="Object_17"
-                    geometry={nodes.Object_17.geometry}
-                    material={materials.Material}
-                    skeleton={nodes.Object_17.skeleton}
-                  />
-                  <skinnedMesh
-                    name="Object_19"
-                    geometry={nodes.Object_19.geometry}
-                    material={materials.Material}
-                    skeleton={nodes.Object_19.skeleton}
-                  />
-                  <skinnedMesh
-                    name="Object_21"
-                    geometry={nodes.Object_21.geometry}
-                    material={materials['Material.004']}
-                    skeleton={nodes.Object_21.skeleton}
-                  />
-                  <skinnedMesh
-                    name="Object_22"
-                    geometry={nodes.Object_22.geometry}
-                    material={materials['Material.006']}
-                    skeleton={nodes.Object_22.skeleton}
-                  />
-                  <skinnedMesh
-                    name="Object_23"
-                    geometry={nodes.Object_23.geometry}
-                    material={materials.Material}
-                    skeleton={nodes.Object_23.skeleton}
-                  />
-                  <skinnedMesh
-                    name="Object_25"
-                    geometry={nodes.Object_25.geometry}
-                    material={materials.Material}
-                    skeleton={nodes.Object_25.skeleton}
-                  />
-                  <skinnedMesh
-                    name="Object_27"
-                    geometry={nodes.Object_27.geometry}
-                    material={materials.Material}
-                    skeleton={nodes.Object_27.skeleton}
-                  />
-                  <skinnedMesh
-                    name="Object_28"
-                    geometry={nodes.Object_28.geometry}
-                    material={materials['Material.006']}
-                    skeleton={nodes.Object_28.skeleton}
-                  />
-                  <skinnedMesh
-                    name="Object_30"
-                    geometry={nodes.Object_30.geometry}
-                    material={materials['Material.001']}
-                    skeleton={nodes.Object_30.skeleton}
-                  />
-                  <skinnedMesh
-                    name="Object_31"
-                    geometry={nodes.Object_31.geometry}
-                    material={materials.Material}
-                    skeleton={nodes.Object_31.skeleton}
-                  />
-                  <skinnedMesh
-                    name="Object_32"
-                    geometry={nodes.Object_32.geometry}
-                    material={materials['Material.002']}
-                    skeleton={nodes.Object_32.skeleton}
-                  />
+                  <skinnedMesh name="Object_11" geometry={nodes.Object_11.geometry} material={materials.Material} skeleton={nodes.Object_11.skeleton} />
+                  <skinnedMesh name="Object_13" geometry={nodes.Object_13.geometry} material={materials.Material} skeleton={nodes.Object_13.skeleton} />
+                  <skinnedMesh name="Object_15" geometry={nodes.Object_15.geometry} material={materials.Material} skeleton={nodes.Object_15.skeleton} />
+                  <skinnedMesh name="Object_17" geometry={nodes.Object_17.geometry} material={materials.Material} skeleton={nodes.Object_17.skeleton} />
+                  <skinnedMesh name="Object_19" geometry={nodes.Object_19.geometry} material={materials.Material} skeleton={nodes.Object_19.skeleton} />
+                  <skinnedMesh name="Object_21" geometry={nodes.Object_21.geometry} material={materials['Material.004']} skeleton={nodes.Object_21.skeleton} />
+                  <skinnedMesh name="Object_22" geometry={nodes.Object_22.geometry} material={materials['Material.006']} skeleton={nodes.Object_22.skeleton} />
+                  <skinnedMesh name="Object_23" geometry={nodes.Object_23.geometry} material={materials.Material} skeleton={nodes.Object_23.skeleton} />
+                  <skinnedMesh name="Object_25" geometry={nodes.Object_25.geometry} material={materials.Material} skeleton={nodes.Object_25.skeleton} />
+                  <skinnedMesh name="Object_27" geometry={nodes.Object_27.geometry} material={materials.Material} skeleton={nodes.Object_27.skeleton} />
+                  <skinnedMesh name="Object_28" geometry={nodes.Object_28.geometry} material={materials['Material.006']} skeleton={nodes.Object_28.skeleton} />
+                  <skinnedMesh name="Object_30" geometry={nodes.Object_30.geometry} material={materials['Material.001']} skeleton={nodes.Object_30.skeleton} />
+                  <skinnedMesh name="Object_31" geometry={nodes.Object_31.geometry} material={materials.Material} skeleton={nodes.Object_31.skeleton} />
+                  <skinnedMesh name="Object_32" geometry={nodes.Object_32.geometry} material={materials['Material.002']} skeleton={nodes.Object_32.skeleton} />
                   <group name="Cube120_6" />
                   <group name="Cube121_7" />
                   <group name="Cube122_8" />
@@ -138,30 +68,10 @@ export function Droideka() {
               <group name="Armature023_77" position={[2.317, 1.462, 1.508]} rotation={[Math.PI, 0.831, -1.584]} scale={0.755}>
                 <group name="GLTF_created_1">
                   <primitive object={nodes.GLTF_created_1_rootJoint} />
-                  <skinnedMesh
-                    name="Object_140"
-                    geometry={nodes.Object_140.geometry}
-                    material={materials.Material}
-                    skeleton={nodes.Object_140.skeleton}
-                  />
-                  <skinnedMesh
-                    name="Object_142"
-                    geometry={nodes.Object_142.geometry}
-                    material={materials.Material}
-                    skeleton={nodes.Object_142.skeleton}
-                  />
-                  <skinnedMesh
-                    name="Object_144"
-                    geometry={nodes.Object_144.geometry}
-                    material={materials.Material}
-                    skeleton={nodes.Object_144.skeleton}
-                  />
-                  <skinnedMesh
-                    name="Object_146"
-                    geometry={nodes.Object_146.geometry}
-                    material={materials.Material}
-                    skeleton={nodes.Object_146.skeleton}
-                  />
+                  <skinnedMesh name="Object_140" geometry={nodes.Object_140.geometry} material={materials.Material} skeleton={nodes.Object_140.skeleton} />
+                  <skinnedMesh name="Object_142" geometry={nodes.Object_142.geometry} material={materials.Material} skeleton={nodes.Object_142.skeleton} />
+                  <skinnedMesh name="Object_144" geometry={nodes.Object_144.geometry} material={materials.Material} skeleton={nodes.Object_144.skeleton} />
+                  <skinnedMesh name="Object_146" geometry={nodes.Object_146.geometry} material={materials.Material} skeleton={nodes.Object_146.skeleton} />
                   <group name="Cylinder201_73" />
                   <group name="Cylinder202_74" />
                   <group name="Cylinder203_75" />
@@ -171,30 +81,10 @@ export function Droideka() {
               <group name="Armature024_86" position={[2.308, 1.462, -1.721]} rotation={[Math.PI, -0.831, -1.584]} scale={0.755}>
                 <group name="GLTF_created_2">
                   <primitive object={nodes.GLTF_created_2_rootJoint} />
-                  <skinnedMesh
-                    name="Object_155"
-                    geometry={nodes.Object_155.geometry}
-                    material={materials.Material}
-                    skeleton={nodes.Object_155.skeleton}
-                  />
-                  <skinnedMesh
-                    name="Object_157"
-                    geometry={nodes.Object_157.geometry}
-                    material={materials.Material}
-                    skeleton={nodes.Object_157.skeleton}
-                  />
-                  <skinnedMesh
-                    name="Object_159"
-                    geometry={nodes.Object_159.geometry}
-                    material={materials.Material}
-                    skeleton={nodes.Object_159.skeleton}
-                  />
-                  <skinnedMesh
-                    name="Object_161"
-                    geometry={nodes.Object_161.geometry}
-                    material={materials.Material}
-                    skeleton={nodes.Object_161.skeleton}
-                  />
+                  <skinnedMesh name="Object_155" geometry={nodes.Object_155.geometry} material={materials.Material} skeleton={nodes.Object_155.skeleton} />
+                  <skinnedMesh name="Object_157" geometry={nodes.Object_157.geometry} material={materials.Material} skeleton={nodes.Object_157.skeleton} />
+                  <skinnedMesh name="Object_159" geometry={nodes.Object_159.geometry} material={materials.Material} skeleton={nodes.Object_159.skeleton} />
+                  <skinnedMesh name="Object_161" geometry={nodes.Object_161.geometry} material={materials.Material} skeleton={nodes.Object_161.skeleton} />
                   <group name="Cylinder204_82" />
                   <group name="Cylinder205_83" />
                   <group name="Cylinder206_84" />
@@ -204,30 +94,10 @@ export function Droideka() {
               <group name="Armature027_95" position={[-1.339, 1.462, -0.102]} rotation={[0, 0, 1.558]} scale={0.755}>
                 <group name="GLTF_created_3">
                   <primitive object={nodes.GLTF_created_3_rootJoint} />
-                  <skinnedMesh
-                    name="Object_170"
-                    geometry={nodes.Object_170.geometry}
-                    material={materials.Material}
-                    skeleton={nodes.Object_170.skeleton}
-                  />
-                  <skinnedMesh
-                    name="Object_172"
-                    geometry={nodes.Object_172.geometry}
-                    material={materials.Material}
-                    skeleton={nodes.Object_172.skeleton}
-                  />
-                  <skinnedMesh
-                    name="Object_174"
-                    geometry={nodes.Object_174.geometry}
-                    material={materials.Material}
-                    skeleton={nodes.Object_174.skeleton}
-                  />
-                  <skinnedMesh
-                    name="Object_176"
-                    geometry={nodes.Object_176.geometry}
-                    material={materials.Material}
-                    skeleton={nodes.Object_176.skeleton}
-                  />
+                  <skinnedMesh name="Object_170" geometry={nodes.Object_170.geometry} material={materials.Material} skeleton={nodes.Object_170.skeleton} />
+                  <skinnedMesh name="Object_172" geometry={nodes.Object_172.geometry} material={materials.Material} skeleton={nodes.Object_172.skeleton} />
+                  <skinnedMesh name="Object_174" geometry={nodes.Object_174.geometry} material={materials.Material} skeleton={nodes.Object_174.skeleton} />
+                  <skinnedMesh name="Object_176" geometry={nodes.Object_176.geometry} material={materials.Material} skeleton={nodes.Object_176.skeleton} />
                   <group name="Cylinder113_91" />
                   <group name="Cylinder114_92" />
                   <group name="Cylinder231_93" />
@@ -236,13 +106,7 @@ export function Droideka() {
               </group>
               <group name="Sphere004_96" position={[1.005, 2.051, -0.104]}>
                 <mesh name="Object_182" castShadow receiveShadow geometry={nodes.Object_182.geometry} material={materials.Material} />
-                <mesh
-                  name="Object_183"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_183.geometry}
-                  material={materials['Material.001']}
-                />
+                <mesh name="Object_183" castShadow receiveShadow geometry={nodes.Object_183.geometry} material={materials['Material.001']} />
               </group>
               <group name="Cylinder171_97" position={[-0.226, 7.058, 0.203]} rotation={[Math.PI / 2, 0, 0]} scale={[0.201, 0.036, 0.201]}>
                 <mesh name="Object_185" castShadow receiveShadow geometry={nodes.Object_185.geometry} material={materials.Material} />
@@ -305,22 +169,10 @@ export function Droideka() {
                 <mesh name="Object_223" castShadow receiveShadow geometry={nodes.Object_223.geometry} material={materials.Material} />
               </group>
               <group name="Cube111_117" position={[1.36, 5.972, -0.122]} scale={[0.197, 0.197, 0.189]}>
-                <mesh
-                  name="Object_225"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_225.geometry}
-                  material={materials['Material.004']}
-                />
+                <mesh name="Object_225" castShadow receiveShadow geometry={nodes.Object_225.geometry} material={materials['Material.004']} />
               </group>
               <group name="Cube112_118" position={[1.537, 5.318, -0.117]} scale={[0.878, 0.878, 0.567]}>
-                <mesh
-                  name="Object_227"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_227.geometry}
-                  material={materials['Material.004']}
-                />
+                <mesh name="Object_227" castShadow receiveShadow geometry={nodes.Object_227.geometry} material={materials['Material.004']} />
               </group>
               <group name="Cube113_119" position={[1.059, 4.738, -0.115]} scale={[0.239, 0.282, 0.282]}>
                 <mesh name="Object_229" castShadow receiveShadow geometry={nodes.Object_229.geometry} material={materials.Material} />
@@ -345,42 +197,15 @@ export function Droideka() {
               </group>
               <group name="Circle004_126" position={[0.057, 6.391, -0.115]} rotation={[-Math.PI / 2, Math.PI / 2, 0]} scale={1.419}>
                 <mesh name="Object_243" castShadow receiveShadow geometry={nodes.Object_243.geometry} material={materials.Material} />
-                <mesh
-                  name="Object_244"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_244.geometry}
-                  material={materials['Material.001']}
-                />
-                <mesh
-                  name="Object_245"
-                  castShadow
-                  receiveShadow
-                  geometry={nodes.Object_245.geometry}
-                  material={materials['Material.002']}
-                />
+                <mesh name="Object_244" castShadow receiveShadow geometry={nodes.Object_244.geometry} material={materials['Material.001']} />
+                <mesh name="Object_245" castShadow receiveShadow geometry={nodes.Object_245.geometry} material={materials['Material.002']} />
               </group>
               <group name="Armature025_135" position={[0.017, 2.597, -0.102]} rotation={[0, 0, -Math.PI / 2]} scale={1.467}>
                 <group name="GLTF_created_4">
                   <primitive object={nodes.GLTF_created_4_rootJoint} />
-                  <skinnedMesh
-                    name="Object_250"
-                    geometry={nodes.Object_250.geometry}
-                    material={materials.Material}
-                    skeleton={nodes.Object_250.skeleton}
-                  />
-                  <skinnedMesh
-                    name="Object_252"
-                    geometry={nodes.Object_252.geometry}
-                    material={materials.Material}
-                    skeleton={nodes.Object_252.skeleton}
-                  />
-                  <skinnedMesh
-                    name="Object_254"
-                    geometry={nodes.Object_254.geometry}
-                    material={materials.Material}
-                    skeleton={nodes.Object_254.skeleton}
-                  />
+                  <skinnedMesh name="Object_250" geometry={nodes.Object_250.geometry} material={materials.Material} skeleton={nodes.Object_250.skeleton} />
+                  <skinnedMesh name="Object_252" geometry={nodes.Object_252.geometry} material={materials.Material} skeleton={nodes.Object_252.skeleton} />
+                  <skinnedMesh name="Object_254" geometry={nodes.Object_254.geometry} material={materials.Material} skeleton={nodes.Object_254.skeleton} />
                   <skinnedMesh
                     name="Object_255"
                     geometry={nodes.Object_255.geometry}

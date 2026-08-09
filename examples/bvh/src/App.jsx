@@ -15,8 +15,7 @@ function Torus(props) {
       {...props}
       onPointerMove={(e) => sphere.current.position.copy(mesh.current.worldToLocal(e.point))}
       onPointerOver={() => (sphere.current.visible = true)}
-      onPointerOut={() => (sphere.current.visible = false)}
-    >
+      onPointerOut={() => (sphere.current.visible = false)}>
       <torusKnotGeometry args={[1, 0.4, 200, 50]} />
       <meshNormalMaterial />
       <mesh raycast={() => null} ref={sphere} visible={false}>

@@ -49,11 +49,7 @@ function App() {
           <Scene />
         </ScrollContainer>
       </Canvas>
-      <div
-        ref={scrollRef}
-        onScroll={(e) => (scroll.current = e.target.scrollTop / (e.target.scrollHeight - e.target.clientHeight))}
-        className="scroll"
-      >
+      <div ref={scrollRef} onScroll={(e) => (scroll.current = e.target.scrollTop / (e.target.scrollHeight - e.target.clientHeight))} className="scroll">
         <div style={{ height: `200vh`, pointerEvents: 'none' }}></div>
       </div>
     </>

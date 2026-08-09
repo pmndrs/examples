@@ -98,7 +98,7 @@ export function Minimap({ size = 200 }): JSX.Element {
             <spriteMaterial color="white" alphaMap={cursor} />
           </sprite>
         </>,
-        virtualScene,
+        virtualScene
       )}
       <OrthographicCamera ref={miniMapCamera} position={[0, 0, 0.1]} />
       <MinimapTexture buffer={buffer} />

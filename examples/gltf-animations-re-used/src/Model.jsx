@@ -5,14 +5,14 @@ all actions and sets up a THREE.AnimationMixer for it so that you don't have to.
 All of the assets actions, action-names and clips are available in its output. 
 */
 
-import React, { useEffect, useState, useMemo } from "react"
-import { useGLTF, useTexture, useCursor, useAnimations } from "@react-three/drei"
-import { useGraph } from "@react-three/fiber"
-import { a, useSpring } from "@react-spring/three"
-import { SkeletonUtils } from "three-stdlib"
+import React, { useEffect, useState, useMemo } from 'react'
+import { useGLTF, useTexture, useCursor, useAnimations } from '@react-three/drei'
+import { useGraph } from '@react-three/fiber'
+import { a, useSpring } from '@react-spring/three'
+import { SkeletonUtils } from 'three-stdlib'
 
-import stacyImg from "./stacy.jpg"
-import stacyModel from "./stacy.glb?url"
+import stacyImg from './stacy.jpg'
+import stacyModel from './stacy.glb?url'
 
 export default function Model({ pose, ...props }) {
   // Fetch model and a separate texture
@@ -31,7 +31,7 @@ export default function Model({ pose, ...props }) {
   const [hovered, setHovered] = useState(false)
   const [index, setIndex] = useState(pose)
   // Animate the selection halo
-  const { color, scale } = useSpring({ scale: hovered ? [1.15, 1.15, 1] : [1, 1, 1], color: hovered ? "hotpink" : "aquamarine" })
+  const { color, scale } = useSpring({ scale: hovered ? [1.15, 1.15, 1] : [1, 1, 1], color: hovered ? 'hotpink' : 'aquamarine' })
   // Change cursor on hover-state
   useCursor(hovered)
 
@@ -50,8 +50,7 @@ export default function Model({ pose, ...props }) {
         onPointerOut={() => setHovered(false)}
         onClick={() => setIndex((index + 1) % names.length)}
         rotation={[Math.PI / 2, 0, 0]}
-        scale={[0.01, 0.01, 0.01]}
-      >
+        scale={[0.01, 0.01, 0.01]}>
         <primitive object={nodes.mixamorigHips} />
         <skinnedMesh
           castShadow
@@ -59,8 +58,7 @@ export default function Model({ pose, ...props }) {
           geometry={nodes.stacy.geometry}
           skeleton={nodes.stacy.skeleton}
           rotation={[-Math.PI / 2, 0, 0]}
-          scale={[100, 100, 100]}
-        >
+          scale={[100, 100, 100]}>
           <meshStandardMaterial map={texture} map-flipY={false} skinning />
         </skinnedMesh>
       </group>

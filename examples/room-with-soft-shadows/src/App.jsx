@@ -1,10 +1,10 @@
-import { useRef, useState } from "react"
-import { Canvas, useFrame } from "@react-three/fiber"
-import { SoftShadows, Float, CameraControls, Sky, PerformanceMonitor } from "@react-three/drei"
-import { useControls } from "leva"
-import { Perf } from "r3f-perf"
-import { easing } from "maath"
-import { Model as Room } from "./Room"
+import { useRef, useState } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { SoftShadows, Float, CameraControls, Sky, PerformanceMonitor } from '@react-three/drei'
+import { useControls } from 'leva'
+import { Perf } from 'r3f-perf'
+import { easing } from 'maath'
+import { Model as Room } from './Room'
 
 function Light() {
   const ref = useRef()
@@ -35,8 +35,8 @@ export default function App() {
       <PerformanceMonitor onDecline={() => set(true)} />
       {enabled && <SoftShadows {...config} samples={bad ? Math.min(6, samples) : samples} />}
       <CameraControls makeDefault />
-      <color attach="background" args={["#d0d0d0"]} />
-      <fog attach="fog" args={["#d0d0d0", 8, 35]} />
+      <color attach="background" args={['#d0d0d0']} />
+      <fog attach="fog" args={['#d0d0d0', 8, 35]} />
       <ambientLight intensity={0.4 * Math.PI} />
       <Light />
       <Room scale={0.5} position={[0, -1, 0]} />
@@ -48,7 +48,7 @@ export default function App() {
   )
 }
 
-function Sphere({ color = "hotpink", floatIntensity = 15, position = [0, 5, -8], scale = 1 }) {
+function Sphere({ color = 'hotpink', floatIntensity = 15, position = [0, 5, -8], scale = 1 }) {
   return (
     <Float floatIntensity={floatIntensity}>
       <mesh castShadow position={position} scale={scale}>

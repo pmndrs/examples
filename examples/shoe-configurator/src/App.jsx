@@ -1,14 +1,14 @@
-import { useRef, useState, useEffect } from "react"
-import { Canvas, useFrame } from "@react-three/fiber"
-import { useGLTF, ContactShadows, Environment, OrbitControls } from "@react-three/drei"
-import { HexColorPicker } from "react-colorful"
-import { proxy, useSnapshot } from "valtio"
+import { useRef, useState, useEffect } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { useGLTF, ContactShadows, Environment, OrbitControls } from '@react-three/drei'
+import { HexColorPicker } from 'react-colorful'
+import { proxy, useSnapshot } from 'valtio'
 
-import shoeModel from "./shoe-draco.glb?url"
+import shoeModel from './shoe-draco.glb?url'
 
 const state = proxy({
   current: null,
-  items: { laces: "#fff", mesh: "#fff", caps: "#fff", inner: "#fff", sole: "#fff", stripes: "#fff", band: "#fff", patch: "#fff" },
+  items: { laces: '#fff', mesh: '#fff', caps: '#fff', inner: '#fff', sole: '#fff', stripes: '#fff', band: '#fff', patch: '#fff' }
 })
 
 export default function App() {
@@ -54,8 +54,7 @@ function Shoe() {
       onPointerOver={(e) => (e.stopPropagation(), set(e.object.material.name))}
       onPointerOut={(e) => e.intersections.length === 0 && set(null)}
       onPointerMissed={() => (state.current = null)}
-      onClick={(e) => (e.stopPropagation(), (state.current = e.object.material.name))}
-    >
+      onClick={(e) => (e.stopPropagation(), (state.current = e.object.material.name))}>
       <mesh receiveShadow castShadow geometry={nodes.shoe.geometry} material={materials.laces} material-color={snap.items.laces} />
       <mesh receiveShadow castShadow geometry={nodes.shoe_1.geometry} material={materials.mesh} material-color={snap.items.mesh} />
       <mesh receiveShadow castShadow geometry={nodes.shoe_2.geometry} material={materials.caps} material-color={snap.items.caps} />
@@ -71,7 +70,7 @@ function Shoe() {
 function Picker() {
   const snap = useSnapshot(state)
   return (
-    <div style={{ display: snap.current ? "block" : "none" }}>
+    <div style={{ display: snap.current ? 'block' : 'none' }}>
       <HexColorPicker className="picker" color={snap.items[snap.current]} onChange={(color) => (state.items[snap.current] = color)} />
       <h1>{snap.current}</h1>
     </div>

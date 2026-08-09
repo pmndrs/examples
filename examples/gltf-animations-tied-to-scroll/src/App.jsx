@@ -1,9 +1,9 @@
-import { useEffect } from "react"
-import { Canvas, useFrame } from "@react-three/fiber"
-import { useGLTF, useAnimations, useScroll, ScrollControls, SoftShadows } from "@react-three/drei"
-import { EffectComposer, TiltShift2 } from "@react-three/postprocessing"
+import { useEffect } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { useGLTF, useAnimations, useScroll, ScrollControls, SoftShadows } from '@react-three/drei'
+import { EffectComposer, TiltShift2 } from '@react-three/postprocessing'
 
-import jumpModel from "./jump-transformed.glb?url"
+import jumpModel from './jump-transformed.glb?url'
 
 function Model(props) {
   const scroll = useScroll()
@@ -21,8 +21,8 @@ function Model(props) {
 
 export const App = () => (
   <Canvas shadows gl={{ antialias: false }} camera={{ position: [1, 0.5, 2.5], fov: 50 }}>
-    <color attach="background" args={["#f0f0f0"]} />
-    <fog attach="fog" args={["#f0f0f0", 0, 20]} />
+    <color attach="background" args={['#f0f0f0']} />
+    <fog attach="fog" args={['#f0f0f0', 0, 20]} />
     <ambientLight intensity={0.5 * Math.PI} />
     <directionalLight intensity={2 * Math.PI} position={[-5, 5, 5]} castShadow shadow-mapSize={2048} shadow-bias={-0.0001} />
     <ScrollControls damping={0.2} maxSpeed={0.5} pages={2}>

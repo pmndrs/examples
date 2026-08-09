@@ -1,4 +1,4 @@
-import { ShaderMaterial, BackSide } from "three"
+import { ShaderMaterial, BackSide } from 'three'
 
 export default class BackfaceMaterial extends ShaderMaterial {
   constructor() {

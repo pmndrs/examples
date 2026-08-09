@@ -32,7 +32,7 @@ const XFadeMaterial = shaderMaterial(
     vec4 finalTexture = mix(_texture1, _texture2, _shownTxt);
     finalTexture =  vec4(finalTexture.rgb, opacity * finalTexture.a);
     gl_FragColor = finalTexture;
-  }`,
+  }`
 )
 
 extend({ XFadeMaterial })
@@ -44,7 +44,5 @@ export function CrossFadeMaterial({ shownTxt = -1, ...props }) {
   useFrame(() => {
     ref.current.shownTxt = THREE.MathUtils.lerp(ref.current.shownTxt, shownTxt, 0.2)
   })
-  return (
-    <xFadeMaterial ref={ref} {...props} resolution={[size.width * dpr, size.height * dpr]} defines={{ FXAA: !gl.capabilities.isWebGL2 }} />
-  )
+  return <xFadeMaterial ref={ref} {...props} resolution={[size.width * dpr, size.height * dpr]} defines={{ FXAA: !gl.capabilities.isWebGL2 }} />
 }

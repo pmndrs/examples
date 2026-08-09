@@ -1,4 +1,4 @@
-import { ShaderMaterial } from "three"
+import { ShaderMaterial } from 'three'
 
 export default class RefractionMaterial extends ShaderMaterial {
   constructor(options) {

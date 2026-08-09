@@ -18,7 +18,7 @@ export const Text = (): JSX.Element => {
       if (ref.current.innerText !== speed) {
         ref.current.innerText = speed
       }
-    }),
+    })
   )
 
   return (

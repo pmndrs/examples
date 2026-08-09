@@ -1,14 +1,14 @@
-import { WebGLRenderTarget, Object3D } from "three"
-import React, { useRef, useMemo, useLayoutEffect } from "react"
-import { useLoader, useThree, useFrame } from "@react-three/fiber"
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
-import lerp from "lerp"
-import BackfaceMaterial from "./BackfaceMaterial"
-import RefractionMaterial from "./RefractionMaterial"
-import { useBlock } from "../blocks"
-import state from "../store"
+import { WebGLRenderTarget, Object3D } from 'three'
+import React, { useRef, useMemo, useLayoutEffect } from 'react'
+import { useLoader, useThree, useFrame } from '@react-three/fiber'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import lerp from 'lerp'
+import BackfaceMaterial from './BackfaceMaterial'
+import RefractionMaterial from './RefractionMaterial'
+import { useBlock } from '../blocks'
+import state from '../store'
 
-import diamondModel from "./diamond.glb?url"
+import diamondModel from './diamond.glb?url'
 
 const dummy = new Object3D()
 export default function Diamonds() {

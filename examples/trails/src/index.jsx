@@ -18,8 +18,7 @@ createRoot(document.getElementById('root')).render(
         gap: 35,
         alignItems: 'center',
         padding: 40
-      }}
-    >
+      }}>
       <Logo style={{ width: 30 }} />
       <div
         style={{
@@ -30,8 +29,7 @@ createRoot(document.getElementById('root')).render(
           alignItems: 'flex-end',
           gap: 35,
           justifyContent: 'space-between'
-        }}
-      >
+        }}>
         pmnd.rs
         <br />
         dev collective

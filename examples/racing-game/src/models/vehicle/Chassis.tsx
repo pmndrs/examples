@@ -86,7 +86,7 @@ export const Chassis = forwardRef<Group, ChassisProps>(({ args = [2, 1.1, 4.7], 
       crashAudio.current?.setVolume(clamp(e.contact.impactVelocity / 10, 0.2, 1))
       if (!crashAudio.current?.isPlaying) crashAudio.current?.play()
     }, 200),
-    [],
+    []
   )
   const [, api] = useBox(() => ({ mass, args, allowSleep: false, onCollide, ...props }), ref)
 

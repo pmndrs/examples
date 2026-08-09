@@ -45,7 +45,15 @@ function Model({ clip, ...props }) {
 function Frame({ id, name, author, bg, width = 1, height = GOLDENRATIO, children, ...props }) {
   return (
     <group {...props}>
-      <Text font={suspend(medium).default} color="black" fontSize={0.25} letterSpacing={-0.025} anchorY="top" anchorX="left" lineHeight={0.8} position={[-0.375, 0.715, 0.01]}>
+      <Text
+        font={suspend(medium).default}
+        color="black"
+        fontSize={0.25}
+        letterSpacing={-0.025}
+        anchorY="top"
+        anchorX="left"
+        lineHeight={0.8}
+        position={[-0.375, 0.715, 0.01]}>
         {name}
       </Text>
       <Text font={suspend(regular).default} color="black" fontSize={0.1} anchorX="right" position={[0.4, -0.659, 0.01]}>

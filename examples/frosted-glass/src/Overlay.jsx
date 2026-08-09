@@ -53,8 +53,8 @@ export function Overlay() {
           <h4>Running Shoes</h4>
           <p className="price">$98.97</p>
           <p>
-            Year after year Pegasus has proven itself on the feet of runners everywhere. Now our most trusted style returns with new
-            innovations that make it more itself than ever. Meet the reliable, comfortable, always ready-to-run Nike Air Zoom Pegasus.
+            Year after year Pegasus has proven itself on the feet of runners everywhere. Now our most trusted style returns with new innovations that make it
+            more itself than ever. Meet the reliable, comfortable, always ready-to-run Nike Air Zoom Pegasus.
           </p>
         </List>
       </div>

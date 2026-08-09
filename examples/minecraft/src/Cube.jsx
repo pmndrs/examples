@@ -1,9 +1,9 @@
-import { useCallback, useRef, useState } from "react"
-import { useTexture } from "@react-three/drei"
-import { RigidBody } from "@react-three/rapier"
-import { create } from "zustand"
+import { useCallback, useRef, useState } from 'react'
+import { useTexture } from '@react-three/drei'
+import { RigidBody } from '@react-three/rapier'
+import { create } from 'zustand'
 
-import dirtImg from "./dirt.jpg"
+import dirtImg from './dirt.jpg'
 
 // This is a naive implementation and wouldn't allow for more than a few thousand boxes.
 // In order to make this scale this has to be one instanced mesh, then it could easily be
@@ -11,7 +11,7 @@ import dirtImg from "./dirt.jpg"
 
 const useCubeStore = create((set) => ({
   cubes: [],
-  addCube: (x, y, z) => set((state) => ({ cubes: [...state.cubes, [x, y, z]] })),
+  addCube: (x, y, z) => set((state) => ({ cubes: [...state.cubes, [x, y, z]] }))
 }))
 
 export const Cubes = () => {
@@ -38,7 +38,7 @@ export function Cube(props) {
       [x, y + 1, z],
       [x, y - 1, z],
       [x, y, z + 1],
-      [x, y, z - 1],
+      [x, y, z - 1]
     ]
     addCube(...dir[Math.floor(e.faceIndex / 2)])
   }, [])
@@ -46,7 +46,7 @@ export function Cube(props) {
     <RigidBody {...props} type="fixed" colliders="cuboid" ref={ref}>
       <mesh receiveShadow castShadow onPointerMove={onMove} onPointerOut={onOut} onClick={onClick}>
         {[...Array(6)].map((_, index) => (
-          <meshStandardMaterial attach={`material-${index}`} key={index} map={texture} color={hover === index ? "hotpink" : "white"} />
+          <meshStandardMaterial attach={`material-${index}`} key={index} map={texture} color={hover === index ? 'hotpink' : 'white'} />
         ))}
         <boxGeometry />
       </mesh>

@@ -1,8 +1,8 @@
-import { createRoot } from "react-dom/client"
-import React, { useRef } from "react"
-import { Canvas, useFrame } from "@react-three/fiber"
-import { Html } from "@react-three/drei"
-import "./styles.css"
+import { createRoot } from 'react-dom/client'
+import React, { useRef } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { Html } from '@react-three/drei'
+import './styles.css'
 
 function Dodecahedron({ time, ...props }) {
   return (
@@ -31,7 +31,7 @@ function Content() {
   )
 }
 
-createRoot(document.getElementById("root")).render(
+createRoot(document.getElementById('root')).render(
   <Canvas camera={{ position: [0, 0, 7.5] }}>
     <pointLight color="indianred" intensity={Math.PI} decay={0} />
     <pointLight position={[10, 10, -10]} color="orange" intensity={Math.PI} decay={0} />

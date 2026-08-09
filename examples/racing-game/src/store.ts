@@ -21,7 +21,7 @@ const controls = {
   forward: false,
   honk: false,
   left: false,
-  right: false,
+  right: false
 }
 
 export const debug = false as const
@@ -41,7 +41,7 @@ export const vehicleConfig = {
   steer: 0.3,
   force: 1800,
   maxBrake: 65,
-  maxSpeed: 88,
+  maxSpeed: 88
 } as const
 
 export type WheelInfo = Required<
@@ -70,7 +70,7 @@ export const wheelInfo: WheelInfo = {
   sideAcceleration: 3,
   suspensionRestLength: 0.35,
   suspensionStiffness: 30,
-  useCustomSlidingRotationalSpeed: true,
+  useCustomSlidingRotationalSpeed: true
 }
 
 const actionNames = ['onFinish', 'onStart', 'reset'] as const
@@ -133,7 +133,7 @@ const useStoreImpl = create<IState>((set: SetState<IState>, get: GetState<IState
 
         return { ...state, finished: 0, start: 0 }
       })
-    },
+    }
   }
 
   return {
@@ -162,7 +162,7 @@ const useStoreImpl = create<IState>((set: SetState<IState>, get: GetState<IState
     stats,
     vehicleConfig,
     wheelInfo,
-    wheels: [createRef<Group>(), createRef<Group>(), createRef<Group>(), createRef<Group>()],
+    wheels: [createRef<Group>(), createRef<Group>(), createRef<Group>(), createRef<Group>()]
   }
 })
 
@@ -178,7 +178,7 @@ export const mutation: Mutation = {
   boost: maxBoost,
   sliding: false,
   speed: 0,
-  velocity: [0, 0, 0],
+  velocity: [0, 0, 0]
 }
 
 // Make the store shallow compare by default

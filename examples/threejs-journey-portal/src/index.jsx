@@ -9,5 +9,5 @@ import { App } from './App'
 createRoot(document.getElementById('root')).render(
   <Suspense fallback={<span>loading...</span>}>
     <App />
-  </Suspense>,
+  </Suspense>
 )

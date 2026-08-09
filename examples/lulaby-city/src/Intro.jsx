@@ -11,9 +11,7 @@ export default function Intro({ children }) {
   const [ready, setReady] = useState(false)
   return (
     <>
-      <Suspense fallback={<Ready setReady={setReady} />}>
-        {cloneElement(children, { ready: clicked && ready })}
-      </Suspense>
+      <Suspense fallback={<Ready setReady={setReady} />}>{cloneElement(children, { ready: clicked && ready })}</Suspense>
       <div className={`fullscreen bg ${ready ? 'ready' : 'notready'} ${clicked && 'clicked'}`}>
         <div className="stack">
           <a href="#" onClick={() => setClicked(true)}>

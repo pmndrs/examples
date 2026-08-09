@@ -14,7 +14,7 @@ export default function App() {
     { name: 'leftward', keys: ['ArrowLeft', 'KeyA'] },
     { name: 'rightward', keys: ['ArrowRight', 'KeyD'] },
     { name: 'jump', keys: ['Space'] },
-    { name: 'run', keys: ['Shift'] },
+    { name: 'run', keys: ['Shift'] }
   ]
   return (
     <Canvas shadows onPointerDown={(e) => e.target.requestPointerLock()}>

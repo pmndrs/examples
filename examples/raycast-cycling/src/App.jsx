@@ -43,8 +43,7 @@ function Stair(props) {
       castShadow
       onClick={(e) => (e.stopPropagation(), setClicked(!clicked))}
       onPointerOver={(e) => (e.stopPropagation(), setHovered(true))}
-      onPointerOut={(e) => setHovered(false)}
-    >
+      onPointerOut={(e) => setHovered(false)}>
       <boxGeometry args={[2, 6, 0.075]} />
       <meshStandardMaterial roughness={1} transparent opacity={0.6} color={clicked ? 'lightblue' : hovered ? 'aquamarine' : 'white'} />
     </mesh>

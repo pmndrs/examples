@@ -1,8 +1,8 @@
-import * as THREE from "three"
-import React, { Suspense, useRef, ReactNode } from "react"
-import { Canvas, useFrame } from "@react-three/fiber"
-import { OrbitControls, Environment, Loader } from "@react-three/drei"
-import Model from "./Model"
+import * as THREE from 'three'
+import React, { Suspense, useRef, ReactNode } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { OrbitControls, Environment, Loader } from '@react-three/drei'
+import Model from './Model'
 
 function Rig({ children }: { children: ReactNode }) {
   const outer = useRef<THREE.Group>(null!)

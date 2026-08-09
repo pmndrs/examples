@@ -32,7 +32,7 @@ export function Vehicle({ angularVelocity, children, position, rotation }: Vehic
     s.editor,
     s.vehicleConfig,
     s.wheelInfo,
-    s.wheels,
+    s.wheels
   ])
   const { back, force, front, height, maxBrake, steer, maxSpeed, width } = vehicleConfig
 
@@ -42,7 +42,7 @@ export function Vehicle({ angularVelocity, children, position, rotation }: Vehic
     return {
       ...wheelInfo,
       chassisConnectionPointLocal: [width * sideMulti, height, length],
-      isFrontWheel: Boolean(index % 2),
+      isFrontWheel: Boolean(index % 2)
     }
   })
 
@@ -52,7 +52,7 @@ export function Vehicle({ angularVelocity, children, position, rotation }: Vehic
     indexRightAxis: 0,
     indexUpAxis: 1,
     wheels,
-    wheelInfos,
+    wheelInfos
   }
 
   const [, api] = useRaycastVehicle(() => raycast, undefined, [wheelInfo])
@@ -92,7 +92,7 @@ export function Vehicle({ angularVelocity, children, position, rotation }: Vehic
     engineValue = lerp(
       engineValue,
       controls.forward || controls.backward ? force * (controls.forward && !controls.backward ? (isBoosting ? -1.5 : -1) : 1) : 0,
-      delta * 20,
+      delta * 20
     )
     steeringValue = lerp(steeringValue, controls.left || controls.right ? steer * (controls.left && !controls.right ? 1 : -1) : 0, delta * 20)
     for (i = 2; i < 4; i++) api.applyEngineForce(speed < maxSpeed ? engineValue : 0, i)

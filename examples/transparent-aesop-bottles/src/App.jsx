@@ -26,26 +26,10 @@ function Zoom({ vec = new THREE.Vector3(0, 0, 100) }) {
 function Spheres() {
   const group = useRef()
   useFrame((state) => {
-    group.current.children[0].position.x = THREE.MathUtils.lerp(
-      group.current.children[0].position.x,
-      -18 - state.mouse.x * 3,
-      0.02
-    )
-    group.current.children[1].position.x = THREE.MathUtils.lerp(
-      group.current.children[1].position.x,
-      -10 - state.mouse.x * 10,
-      0.01
-    )
-    group.current.children[2].position.x = THREE.MathUtils.lerp(
-      group.current.children[2].position.x,
-      18 - state.mouse.x * 5,
-      0.03
-    )
-    group.current.children[3].position.x = THREE.MathUtils.lerp(
-      group.current.children[3].position.x,
-      10 - state.mouse.x * 6,
-      0.04
-    )
+    group.current.children[0].position.x = THREE.MathUtils.lerp(group.current.children[0].position.x, -18 - state.mouse.x * 3, 0.02)
+    group.current.children[1].position.x = THREE.MathUtils.lerp(group.current.children[1].position.x, -10 - state.mouse.x * 10, 0.01)
+    group.current.children[2].position.x = THREE.MathUtils.lerp(group.current.children[2].position.x, 18 - state.mouse.x * 5, 0.03)
+    group.current.children[3].position.x = THREE.MathUtils.lerp(group.current.children[3].position.x, 10 - state.mouse.x * 6, 0.04)
   })
   return (
     <group ref={group}>
@@ -63,26 +47,12 @@ export default function App() {
       <Canvas dpr={[1, 1.5]} shadows camera={{ position: [0, 0, 100], fov: 22 }}>
         <fog attach="fog" args={['#f0f0f0', 100, 150]} />
         <color attach="background" args={['#f0f0f0']} />
-        <spotLight
-          penumbra={1}
-          angle={1}
-          castShadow
-          position={[10, 60, -5]}
-          intensity={8 * Math.PI}
-          decay={0}
-          shadow-mapSize={[512, 512]}
-        />
+        <spotLight penumbra={1} angle={1} castShadow position={[10, 60, -5]} intensity={8 * Math.PI} decay={0} shadow-mapSize={[512, 512]} />
         <Suspense fallback={null}>
           <group position={[2.5, -12, 0]}>
             <Bottles />
             <Spheres />
-            <mesh
-              rotation-x={-Math.PI / 2}
-              position={[0, 0.01, 0]}
-              scale={[200, 200, 200]}
-              receiveShadow
-              renderOrder={100000}
-            >
+            <mesh rotation-x={-Math.PI / 2} position={[0, 0.01, 0]} scale={[200, 200, 200]} receiveShadow renderOrder={100000}>
               <planeGeometry />
               <shadowMaterial transparent color="#251005" opacity={0.25} />
             </mesh>
@@ -100,8 +70,7 @@ export default function App() {
             material-toneMapped={false}
             material-fog={false}
             anchorX="center"
-            anchorY="middle"
-          >
+            anchorY="middle">
             {`Poimandres`}
           </Text>
         </Suspense>

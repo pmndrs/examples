@@ -1,7 +1,7 @@
-import * as THREE from "three"
-import { Canvas, useFrame, useThree } from "@react-three/fiber"
-import { CuboidCollider, Physics, RigidBody } from "@react-three/rapier"
-import { useRef } from "react"
+import * as THREE from 'three'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { CuboidCollider, Physics, RigidBody } from '@react-three/rapier'
+import { useRef } from 'react'
 
 export const App = () => (
   <Canvas camera={{ position: [0, 5, 12], fov: 50 }}>

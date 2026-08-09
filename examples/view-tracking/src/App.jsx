@@ -55,10 +55,7 @@ export function App() {
           but also includes some new and ground-breaking features.
         </div>
         {/** Fixed fullscreen canvas on top of everything, events tied to index root */}
-        <Canvas
-          style={{ position: 'fixed', top: 0, bottom: 0, left: 0, right: 0, overflow: 'hidden' }}
-          eventSource={document.getElementById('root')}
-        >
+        <Canvas style={{ position: 'fixed', top: 0, bottom: 0, left: 0, right: 0, overflow: 'hidden' }} eventSource={document.getElementById('root')}>
           <View.Port />
           <Preload all />
         </Canvas>
@@ -92,16 +89,14 @@ function Link({ href, text, children }) {
         const x = e.nativeEvent.offsetX
         const y = e.nativeEvent.offsetY - e.target.offsetTop - 100
         ref.current.style.transform = `translate3d(${x}px,${y}px,0)`
-      }}
-    >
+      }}>
       {text}
       <View
         ref={ref}
         visible={hovered}
         index={Infinity} // Render this view on top of all others
         className="view"
-        style={{ position: 'absolute', width: 200, display: 'block', pointerEvents: 'none' }}
-      >
+        style={{ position: 'absolute', width: 200, display: 'block', pointerEvents: 'none' }}>
         <group>{children}</group>
       </View>
     </a>

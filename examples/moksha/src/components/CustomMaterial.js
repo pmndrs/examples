@@ -1,5 +1,5 @@
-import { ShaderMaterial, Color } from "three"
-import { extend } from "@react-three/fiber"
+import { ShaderMaterial, Color } from 'three'
+import { extend } from '@react-three/fiber'
 
 class CustomMaterial extends ShaderMaterial {
   constructor() {
@@ -36,7 +36,7 @@ class CustomMaterial extends ShaderMaterial {
         scale: { value: 0 },
         shift: { value: 0 },
         opacity: { value: 1 },
-        color: { value: new Color("white") }
+        color: { value: new Color('white') }
       }
     })
   }

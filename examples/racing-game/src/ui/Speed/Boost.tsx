@@ -35,7 +35,7 @@ export const Boost = () => {
       if (ref.current.style.strokeDashoffset !== strokeDashoffset) {
         ref.current.style.strokeDashoffset = strokeDashoffset
       }
-    }),
+    })
   )
 
   return (

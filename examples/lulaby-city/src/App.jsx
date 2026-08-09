@@ -34,9 +34,7 @@ function Model({ ready }) {
           <mesh material={materials.Scene_Root} geometry={nodes.mesh_2.geometry} />
           <mesh material={materials.Scene_Root} geometry={nodes.mesh_3.geometry} />
         </group>
-        <group position={[100000, 120000, 2000]}>
-          {ready && <PositionalAudio autoplay loop url={zapsplatAudio} distance={3} />}
-        </group>
+        <group position={[100000, 120000, 2000]}>{ready && <PositionalAudio autoplay loop url={zapsplatAudio} distance={3} />}</group>
         <mesh position={[250000, -200000, 50000]}>
           <sphereGeometry args={[30000, 32, 32]} />
           <meshBasicMaterial color="#ff1020" />

@@ -73,8 +73,7 @@ const Box = forwardRef(({ children, ...props }, fref) => {
       scale={clicked ? 1.5 : 1}
       onClick={(event) => click(!clicked)}
       onPointerMove={(event) => (event.stopPropagation(), hover(event.face.materialIndex))}
-      onPointerOut={() => hover(false)}
-    >
+      onPointerOut={() => hover(false)}>
       <boxGeometry />
       <context.Provider value={hovered}>{children}</context.Provider>
     </mesh>

@@ -10,7 +10,7 @@ import bust4Model from './bust-4-d.glb?url'
 // Create 800 objects with random position and rotation data
 const positions = [...Array(800)].map(() => ({
   position: [40 - Math.random() * 80, 40 - Math.random() * 80, 40 - Math.random() * 80],
-  rotation: [Math.random() * Math.PI * 2, Math.random() * Math.PI * 2, Math.random() * Math.PI * 2],
+  rotation: [Math.random() * Math.PI * 2, Math.random() * Math.PI * 2, Math.random() * Math.PI * 2]
 }))
 
 export default function App() {
@@ -21,8 +21,7 @@ export default function App() {
         shadows
         // Only render on changes and movement
         frameloop="demand"
-        camera={{ position: [0, 0, 40] }}
-      >
+        camera={{ position: [0, 0, 40] }}>
         {/* Let's render 800 Bust components with the data above */}
         {positions.map((props, i) => (
           <Bust key={i} {...props} />

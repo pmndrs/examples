@@ -8,5 +8,5 @@ createRoot(document.getElementById('root')).render(
   <>
     <App />
     <img className="controlKeys" src={controlsImage} alt="control keys" />
-  </>,
+  </>
 )

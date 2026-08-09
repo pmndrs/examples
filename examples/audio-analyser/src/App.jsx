@@ -128,7 +128,7 @@ function DancingDot() {
   const { drums, snare } = useStore((state) => state.audio)
   const dot = useRef()
   useFrame((_) =>
-    dot.current.rotation.set(Math.sin(_.clock.elapsedTime * 2) / 10 + (drums.avg * drums.gain) / 100, _.clock.elapsedTime + (snare.avg * snare.gain) / 100, 0),
+    dot.current.rotation.set(Math.sin(_.clock.elapsedTime * 2) / 10 + (drums.avg * drums.gain) / 100, _.clock.elapsedTime + (snare.avg * snare.gain) / 100, 0)
   )
   return (
     <group ref={dot}>

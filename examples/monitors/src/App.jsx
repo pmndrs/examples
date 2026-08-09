@@ -9,7 +9,12 @@ const suzi = import('@pmndrs/assets/models/bunny.glb')
 
 export default function App() {
   return (
-    <Canvas shadows dpr={[1, 1.5]} camera={{ position: [-1.5, 1, 5.5], fov: 45, near: 1, far: 20 }} eventSource={document.getElementById('root')} eventPrefix="client">
+    <Canvas
+      shadows
+      dpr={[1, 1.5]}
+      camera={{ position: [-1.5, 1, 5.5], fov: 45, near: 1, far: 20 }}
+      eventSource={document.getElementById('root')}
+      eventPrefix="client">
       {/* Lights */}
       <color attach="background" args={['black']} />
       <hemisphereLight intensity={0.15} groundColor="black" />

@@ -41,7 +41,7 @@ async function createAudio(url, { threshold, expire } = {}) {
     },
     setGain(level) {
       gainNode.gain.setValueAtTime((state.gain = level), context.currentTime)
-    },
+    }
   }
 
   return state
@@ -65,8 +65,8 @@ const useStore = create((set, get) => {
           audio: {
             drums: await drums,
             snare: await snare,
-            synth: await synth,
-          },
+            synth: await synth
+          }
         })
       },
       start() {
@@ -88,8 +88,8 @@ const useStore = create((set, get) => {
             track.kicks = 0
           }
         })
-      },
-    },
+      }
+    }
   }
 })
 

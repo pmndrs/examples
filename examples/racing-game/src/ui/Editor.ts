@@ -9,7 +9,7 @@ const initialValues = {
   shadows,
   stats,
   ...filteredWheelInfo,
-  ...vehicleConfig,
+  ...vehicleConfig
 }
 
 export function Editor() {
@@ -21,7 +21,7 @@ export function Editor() {
   const [, setVehicleEditor] = useControls(() => ({
     Performance: folder({
       dpr: { value: dpr, min: 1, max: 2, step: 0.5, onChange: (dpr) => set({ dpr }) },
-      shadows: { value: shadows, onChange: (shadows) => set({ shadows }) },
+      shadows: { value: shadows, onChange: (shadows) => set({ shadows }) }
     }),
     Vehicle: folder(
       {
@@ -32,8 +32,8 @@ export function Editor() {
           step: 0.01,
           onChange: (value) =>
             set({
-              wheelInfo: { ...get().wheelInfo, radius: value },
-            }),
+              wheelInfo: { ...get().wheelInfo, radius: value }
+            })
         },
         width: {
           value: width,
@@ -42,8 +42,8 @@ export function Editor() {
           step: 0.01,
           onChange: (value) =>
             set({
-              vehicleConfig: { ...get().vehicleConfig, width: value },
-            }),
+              vehicleConfig: { ...get().vehicleConfig, width: value }
+            })
         },
         height: {
           value: height,
@@ -52,8 +52,8 @@ export function Editor() {
           step: 0.01,
           onChange: (value) =>
             set({
-              vehicleConfig: { ...get().vehicleConfig, height: value },
-            }),
+              vehicleConfig: { ...get().vehicleConfig, height: value }
+            })
         },
         front: {
           value: front,
@@ -62,8 +62,8 @@ export function Editor() {
           step: 0.05,
           onChange: (value) =>
             set({
-              vehicleConfig: { ...get().vehicleConfig, front: value },
-            }),
+              vehicleConfig: { ...get().vehicleConfig, front: value }
+            })
         },
         back: {
           value: back,
@@ -72,39 +72,39 @@ export function Editor() {
           step: 0.05,
           onChange: (value) =>
             set({
-              vehicleConfig: { ...get().vehicleConfig, back: value },
-            }),
+              vehicleConfig: { ...get().vehicleConfig, back: value }
+            })
         },
         steer: {
           value: steer,
           min: 0.1,
           max: 1,
           step: 0.01,
-          onChange: (value) => set({ vehicleConfig: { ...get().vehicleConfig, steer: value } }),
+          onChange: (value) => set({ vehicleConfig: { ...get().vehicleConfig, steer: value } })
         },
         force: {
           value: force,
           min: 0,
           max: 3000,
           step: 1,
-          onChange: (value) => set({ vehicleConfig: { ...get().vehicleConfig, force: value } }),
+          onChange: (value) => set({ vehicleConfig: { ...get().vehicleConfig, force: value } })
         },
         maxBrake: {
           value: maxBrake,
           min: 0.1,
           max: 100,
           step: 0.01,
-          onChange: (value) => set({ vehicleConfig: { ...get().vehicleConfig, maxBrake: value } }),
+          onChange: (value) => set({ vehicleConfig: { ...get().vehicleConfig, maxBrake: value } })
         },
         maxSpeed: {
           value: maxSpeed,
           min: 1,
           max: 150,
           step: 1,
-          onChange: (value) => set({ vehicleConfig: { ...get().vehicleConfig, maxSpeed: value } }),
-        },
+          onChange: (value) => set({ vehicleConfig: { ...get().vehicleConfig, maxSpeed: value } })
+        }
       },
-      { collapsed: true },
+      { collapsed: true }
     ),
     Suspension: folder(
       {
@@ -115,8 +115,8 @@ export function Editor() {
           step: 1,
           onChange: (value) =>
             set({
-              wheelInfo: { ...get().wheelInfo, suspensionStiffness: value },
-            }),
+              wheelInfo: { ...get().wheelInfo, suspensionStiffness: value }
+            })
         },
         suspensionRestLength: {
           value: suspensionRestLength,
@@ -125,15 +125,15 @@ export function Editor() {
           step: 0.01,
           onChange: (value) =>
             set({
-              wheelInfo: { ...get().wheelInfo, suspensionRestLength: value },
-            }),
+              wheelInfo: { ...get().wheelInfo, suspensionRestLength: value }
+            })
         },
         useCustomSlidingRotationalSpeed: {
           value: useCustomSlidingRotationalSpeed,
           onChange: (value) =>
             set({
-              wheelInfo: { ...get().wheelInfo, useCustomSlidingRotationalSpeed: value },
-            }),
+              wheelInfo: { ...get().wheelInfo, useCustomSlidingRotationalSpeed: value }
+            })
         },
         customSlidingRotationalSpeed: {
           value: customSlidingRotationalSpeed,
@@ -142,8 +142,8 @@ export function Editor() {
           step: 0.01,
           onChange: (value) =>
             set({
-              wheelInfo: { ...get().wheelInfo, customSlidingRotationalSpeed: value },
-            }),
+              wheelInfo: { ...get().wheelInfo, customSlidingRotationalSpeed: value }
+            })
         },
         frictionSlip: {
           value: frictionSlip,
@@ -152,8 +152,8 @@ export function Editor() {
           step: 0.01,
           onChange: (value) =>
             set({
-              wheelInfo: { ...get().wheelInfo, frictionSlip: value },
-            }),
+              wheelInfo: { ...get().wheelInfo, frictionSlip: value }
+            })
         },
         sideAcceleration: {
           value: sideAcceleration,
@@ -162,23 +162,23 @@ export function Editor() {
           step: 0.01,
           onChange: (value) =>
             set({
-              wheelInfo: { ...get().wheelInfo, sideAcceleration: value },
-            }),
-        },
+              wheelInfo: { ...get().wheelInfo, sideAcceleration: value }
+            })
+        }
       },
-      { collapsed: true },
+      { collapsed: true }
     ),
     Debug: folder(
       {
         debug: { value: debug, onChange: (debug) => set({ debug }) },
-        stats: { value: stats, onChange: (stats) => set({ stats }) },
+        stats: { value: stats, onChange: (stats) => set({ stats }) }
       },
-      { collapsed: true },
+      { collapsed: true }
     ),
     reset: button(() => {
       // @ts-expect-error -- FIXME: types when using folders seem to be broken
       setVehicleEditor(initialValues)
-    }),
+    })
   }))
   return null
 }

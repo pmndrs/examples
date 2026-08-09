@@ -97,6 +97,6 @@ async function createAudio(url) {
       analyser.getByteFrequencyData(data)
       // Calculate a frequency average
       return (data.avg = data.reduce((prev, cur) => prev + cur / data.length, 0))
-    },
+    }
   }
 }

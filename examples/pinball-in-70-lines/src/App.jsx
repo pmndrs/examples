@@ -1,11 +1,11 @@
-import * as THREE from "three"
-import { forwardRef, useEffect, useImperativeHandle, useRef } from "react"
-import { Canvas, useFrame } from "@react-three/fiber"
-import { PerspectiveCamera, RoundedBox, Environment, useTexture, useAspect } from "@react-three/drei"
-import { Physics, useSphere, useBox, usePlane } from "@react-three/cannon"
+import * as THREE from 'three'
+import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { PerspectiveCamera, RoundedBox, Environment, useTexture, useAspect } from '@react-three/drei'
+import { Physics, useSphere, useBox, usePlane } from '@react-three/cannon'
 
-import crossImg from "./cross.jpg"
-import bgImg from "./bg.jpg"
+import crossImg from './cross.jpg'
+import bgImg from './bg.jpg'
 
 function BallAndCollisions({ args = [1.2, 32, 32], v = new THREE.Vector3() }) {
   const cam = useRef()
@@ -15,7 +15,7 @@ function BallAndCollisions({ args = [1.2, 32, 32], v = new THREE.Vector3() }) {
   usePlane(() => ({ position: [15, 0, 0], rotation: [Math.PI / 2, -Math.PI / 2, 0] }))
   useEffect(
     () => api.position.subscribe((p) => (cam.current.position.lerp(v.set(p[0], p[1], 18 + Math.max(0, p[1]) / 2), 0.05), cam.current.lookAt(0, 0, 0))),
-    [],
+    []
   )
   return (
     <>

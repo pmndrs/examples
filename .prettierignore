@@ -13,7 +13,6 @@ out/
 # be exploded into tens of thousands. Only `.glb` is safe by itself, being
 # binary. Font atlases are deliberately not here: they are json we are happy
 # to see formatted.
-**/draco/
-**/draco-gltf/
+**/draco*/
 **/realism-effects/
 **/*.gltf

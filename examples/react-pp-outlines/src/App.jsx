@@ -1,8 +1,8 @@
-import { Suspense } from "react"
-import { Canvas } from "@react-three/fiber"
-import { Bounds, GizmoHelper, GizmoViewport, Lightformer, Environment, ArcballControls } from "@react-three/drei"
-import { EffectComposer, SSAO, SMAA, Selection, Outline } from "@react-three/postprocessing"
-import { Engine } from "./Engine"
+import { Suspense } from 'react'
+import { Canvas } from '@react-three/fiber'
+import { Bounds, GizmoHelper, GizmoViewport, Lightformer, Environment, ArcballControls } from '@react-three/drei'
+import { EffectComposer, SSAO, SMAA, Selection, Outline } from '@react-three/postprocessing'
+import { Engine } from './Engine'
 
 export default function App() {
   return (
@@ -35,7 +35,7 @@ export default function App() {
       </Suspense>
 
       <GizmoHelper alignment="bottom-right" margin={[80, 80]} renderPriority={2}>
-        <GizmoViewport axisColors={["hotpink", "aquamarine", "#3498DB"]} labelColor="black" />
+        <GizmoViewport axisColors={['hotpink', 'aquamarine', '#3498DB']} labelColor="black" />
       </GizmoHelper>
 
       <ArcballControls enableZoom={false} enablePan={false} makeDefault />

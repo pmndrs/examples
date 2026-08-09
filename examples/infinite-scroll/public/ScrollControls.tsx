@@ -34,15 +34,7 @@ export function useScroll() {
   return React.useContext(context)
 }
 
-export function ScrollControls({
-  eps = 0.00001,
-  infinite,
-  horizontal,
-  pages = 1,
-  distance = 1,
-  damping = 4,
-  children
-}: ScrollControlsProps) {
+export function ScrollControls({ eps = 0.00001, infinite, horizontal, pages = 1, distance = 1, damping = 4, children }: ScrollControlsProps) {
   const gl = useThree((state) => state.gl)
   const invalidate = useThree((state) => state.invalidate)
   const events = useThree((state) => state.events)
@@ -152,27 +144,25 @@ const ScrollCanvas = React.forwardRef(({ children }, ref) => {
   return <group ref={mergeRefs([ref, group])}>{children}</group>
 })
 
-const ScrollHtml = React.forwardRef(
-  ({ children, style, ...props }: { children?: React.ReactNode; style?: React.StyleHTMLAttributes<any> }, ref) => {
-    const state = useScroll()
-    const group = React.useRef<HTMLDivElement>(null!)
-    const { width, height } = useThree((state) => state.size)
-    const fiberState = React.useContext(fiberContext)
-    useFrame(() => {
-      if (state.delta > state.eps) {
-        group.current.style.transform = `translate3d(${state.horizontal ? -width * (state.pages - 1) * state.offset : 0}px,${
-          state.horizontal ? 0 : height * (state.pages - 1) * -state.offset
-        }px,0)`
-      }
-    })
-    ReactDOM.render(
-      <div ref={mergeRefs([ref, group])} style={{ ...style, position: 'absolute', top: 0, left: 0, willChange: 'transform' }} {...props}>
-        <context.Provider value={state}>
-          <fiberContext.Provider value={fiberState}>{children}</fiberContext.Provider>
-        </context.Provider>
-      </div>,
-      state.fixed
-    )
-    return null
-  }
-)
+const ScrollHtml = React.forwardRef(({ children, style, ...props }: { children?: React.ReactNode; style?: React.StyleHTMLAttributes<any> }, ref) => {
+  const state = useScroll()
+  const group = React.useRef<HTMLDivElement>(null!)
+  const { width, height } = useThree((state) => state.size)
+  const fiberState = React.useContext(fiberContext)
+  useFrame(() => {
+    if (state.delta > state.eps) {
+      group.current.style.transform = `translate3d(${state.horizontal ? -width * (state.pages - 1) * state.offset : 0}px,${
+        state.horizontal ? 0 : height * (state.pages - 1) * -state.offset
+      }px,0)`
+    }
+  })
+  ReactDOM.render(
+    <div ref={mergeRefs([ref, group])} style={{ ...style, position: 'absolute', top: 0, left: 0, willChange: 'transform' }} {...props}>
+      <context.Provider value={state}>
+        <fiberContext.Provider value={fiberState}>{children}</fiberContext.Provider>
+      </context.Provider>
+    </div>,
+    state.fixed
+  )
+  return null
+})

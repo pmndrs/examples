@@ -1,12 +1,12 @@
-import * as THREE from "three"
-import React, { Suspense, useEffect, useLayoutEffect, useCallback, useRef, useMemo, useState } from "react"
-import { Canvas, useFrame, useThree, useLoader, createPortal } from "@react-three/fiber"
-import { Physics, useSphere, useBox, usePlane } from "@react-three/cannon"
-import { useAspect, OrthographicCamera, Sphere, Box, Plane, Text, Extrude } from "@react-three/drei"
-import { a, useSpring } from "@react-spring/three"
-import Effects from "./Effects"
-import bgImg from "./resources/bg.jpg"
-import { useStore } from "./store"
+import * as THREE from 'three'
+import React, { Suspense, useEffect, useLayoutEffect, useCallback, useRef, useMemo, useState } from 'react'
+import { Canvas, useFrame, useThree, useLoader, createPortal } from '@react-three/fiber'
+import { Physics, useSphere, useBox, usePlane } from '@react-three/cannon'
+import { useAspect, OrthographicCamera, Sphere, Box, Plane, Text, Extrude } from '@react-three/drei'
+import { a, useSpring } from '@react-spring/three'
+import Effects from './Effects'
+import bgImg from './resources/bg.jpg'
+import { useStore } from './store'
 
 function useCollide(onColide) {
   const contact = useStore((state) => state.contact)
@@ -24,14 +24,14 @@ function Paddle() {
   const { viewport } = useThree()
   const { width, height } = viewport
   const [impact, onCollide] = useCollide()
-  const [ref, api] = useBox(() => ({ type: "Kinematic", args: [2.25, 0.75, 1], onCollide }))
+  const [ref, api] = useBox(() => ({ type: 'Kinematic', args: [2.25, 0.75, 1], onCollide }))
   useFrame((state) => {
     api.position.set(state.mouse.x * (width / 2 + 2), -height / 2.5, 0)
     api.rotation.set(0, 0, (state.mouse.x * Math.PI) / 5)
   })
   return (
     <Box receiveShadow castShadow ref={ref} args={[2.25, 0.75, 1]}>
-      <a.meshStandardMaterial color={impact.to([0, 1], ["lightblue", "white"])} />
+      <a.meshStandardMaterial color={impact.to([0, 1], ['lightblue', 'white'])} />
     </Box>
   )
 }
@@ -53,11 +53,11 @@ function Ball() {
   )
 }
 
-function Enemy({ long = false, right = false, y = 2, speed = 0.1, color = "hotpink" }) {
+function Enemy({ long = false, right = false, y = 2, speed = 0.1, color = 'hotpink' }) {
   const { viewport } = useThree()
   const { width } = viewport
   const [impact, onCollide] = useCollide()
-  const [ref, api] = useBox(() => ({ type: "Static", args: [long ? 2.25 : 1.25, 0.75, 1], rotation: [0, 0, right ? 0.1 : -0.1], onCollide }))
+  const [ref, api] = useBox(() => ({ type: 'Static', args: [long ? 2.25 : 1.25, 0.75, 1], rotation: [0, 0, right ? 0.1 : -0.1], onCollide }))
   let initial = right ? width : -width
   let x = initial
   useFrame((state, delta) => {
@@ -66,7 +66,7 @@ function Enemy({ long = false, right = false, y = 2, speed = 0.1, color = "hotpi
   })
   return (
     <Box receiveShadow castShadow ref={ref} args={[long ? 2.25 : 1.25, 0.75, 1]}>
-      <a.meshStandardMaterial color={impact.to([0, 1], [color, "white"])} />
+      <a.meshStandardMaterial color={impact.to([0, 1], [color, 'white'])} />
     </Box>
   )
 }
@@ -81,9 +81,9 @@ function Walls() {
   const { viewport } = useThree()
   const { width, height } = viewport
   const [, onCollide] = useCollide()
-  const [, apiLeft] = usePlane(() => ({ type: "Static", rotation: [-Math.PI / 2, Math.PI / 2, 0], onCollide }))
-  const [, apiRight] = usePlane(() => ({ type: "Static", rotation: [Math.PI / 2, -Math.PI / 2, 0], onCollide }))
-  const [, apiBottom] = usePlane(() => ({ type: "Static", rotation: [-Math.PI / 2, 0, 0], onCollide: reset }))
+  const [, apiLeft] = usePlane(() => ({ type: 'Static', rotation: [-Math.PI / 2, Math.PI / 2, 0], onCollide }))
+  const [, apiRight] = usePlane(() => ({ type: 'Static', rotation: [Math.PI / 2, -Math.PI / 2, 0], onCollide }))
+  const [, apiBottom] = usePlane(() => ({ type: 'Static', rotation: [-Math.PI / 2, 0, 0], onCollide: reset }))
   useLayoutEffect(() => {
     apiBottom.position.set(0, -height * 2, 0)
     apiLeft.position.set(-width / 2 - 2, 0, 0)
@@ -99,16 +99,16 @@ function Bg() {
 }
 
 const StyledText = React.forwardRef(
-  ({ children, fontSize = 1, offset = 0.25, anchorX = "center", anchorY = "middle", textAlign = "justify", lineHeight = 0.75, ...props }, ref) => {
+  ({ children, fontSize = 1, offset = 0.25, anchorX = 'center', anchorY = 'middle', textAlign = 'justify', lineHeight = 0.75, ...props }, ref) => {
     const { viewport } = useThree()
-    const textProps = { children, anchorX, anchorY, maxWidth: viewport.width, lineHeight, fontSize, "material-depthTest": false }
+    const textProps = { children, anchorX, anchorY, maxWidth: viewport.width, lineHeight, fontSize, 'material-depthTest': false }
     return (
       <group ref={ref} {...props}>
         <Text position-z={-offset} color="#ff3080" {...textProps} />
         <Text color="white" {...textProps} />
       </group>
     )
-  },
+  }
 )
 
 function Startup() {
@@ -117,7 +117,7 @@ function Startup() {
     const s = 1 + 0.01 * (1 + Math.sin(state.clock.getElapsedTime() * 2)) * 2
     if (ref.current) ref.current.scale.set(s, s, s)
   })
-  return <StyledText position={[0, 0.5, 1]} ref={ref} fontSize={1.5} children={"Click\nto start!"} />
+  return <StyledText position={[0, 0.5, 1]} ref={ref} fontSize={1.5} children={'Click\nto start!'} />
 }
 
 function Heart(props) {
@@ -162,7 +162,7 @@ function Status() {
         <Heart position={[width / 2 - 3, 0, 0]} />
       </group>
     </>,
-    virtualScene,
+    virtualScene
   )
 }
 

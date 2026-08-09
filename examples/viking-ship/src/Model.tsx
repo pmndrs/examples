@@ -6,13 +6,13 @@ source: https://sketchfab.com/models/2ef4c45caa35450db1b876a7f94ff79d
 title: Thor and the Midgard Serpent
 */
 
-import type { JSX } from "react"
-import * as THREE from "three"
-import React, { useRef } from "react"
-import { type GLTF } from "three-stdlib"
-import { useGLTF } from "@react-three/drei"
+import type { JSX } from 'react'
+import * as THREE from 'three'
+import React, { useRef } from 'react'
+import { type GLTF } from 'three-stdlib'
+import { useGLTF } from '@react-three/drei'
 
-import thorModel from "./thor_and_the_midgard_serpent-transformed.glb?url"
+import thorModel from './thor_and_the_midgard_serpent-transformed.glb?url'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -38,7 +38,7 @@ type GLTFResult = GLTF & {
   }
 }
 
-export default function Model(props: JSX.IntrinsicElements["group"]) {
+export default function Model(props: JSX.IntrinsicElements['group']) {
   const group = useRef(null)
   const { nodes, materials } = useGLTF(thorModel) as unknown as GLTFResult
   return (
@@ -47,11 +47,7 @@ export default function Model(props: JSX.IntrinsicElements["group"]) {
         <group rotation={[Math.PI / 2, 0, 0]}>
           <group rotation={[-Math.PI / 2, 0, 0]} scale={[100, 100, 100]}>
             <mesh material={materials.EyeFire} geometry={nodes.Circle011_EyeFire_0.geometry} />
-            <mesh
-              material={materials.SerpentBake}
-              geometry={nodes.Circle011_SerpentBake_0.geometry}
-              material-metalness={0}
-            />
+            <mesh material={materials.SerpentBake} geometry={nodes.Circle011_SerpentBake_0.geometry} material-metalness={0} />
           </group>
           <group position={[-1018.2, -380.53, 1332.67]} rotation={[-1.05, 0.72, -0.08]} scale={[100, 100, 100]}>
             <mesh material={materials.EyeFire} geometry={nodes.Hide003_EyeFire_0.geometry} />
@@ -63,14 +59,7 @@ export default function Model(props: JSX.IntrinsicElements["group"]) {
           </group>
           <group position={[0, 27.07, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={[100, 100, 170.02]}>
             <mesh geometry={nodes.Plane044_WaterBake_0.geometry}>
-              <meshPhysicalMaterial
-                color="skyblue"
-                transmission={1}
-                thickness={5}
-                roughness={0}
-                envMapIntensity={2}
-                clearcoat={1}
-              />
+              <meshPhysicalMaterial color="skyblue" transmission={1} thickness={5} roughness={0} envMapIntensity={2} clearcoat={1} />
             </mesh>
           </group>
           <group rotation={[-Math.PI / 2, 0, 0]} scale={[100, 100, 100]}>

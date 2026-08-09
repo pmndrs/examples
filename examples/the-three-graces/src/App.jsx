@@ -70,8 +70,7 @@ function Annotation({ children, ...props }) {
          *  By default it would be a plane. We need round edges here ...
          */
         <roundedPlaneGeometry args={[1.66, 0.47, 0.24]} />
-      }
-    >
+      }>
       <div className="annotation" onClick={() => console.log('.')}>
         {children}
       </div>

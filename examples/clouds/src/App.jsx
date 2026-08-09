@@ -1,8 +1,8 @@
-import * as THREE from "three"
-import { useRef } from "react"
-import { Canvas, useFrame } from "@react-three/fiber"
-import { Clouds, Cloud, CameraControls, Sky as SkyImpl, StatsGl } from "@react-three/drei"
-import { useControls } from "leva"
+import * as THREE from 'three'
+import { useRef } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { Clouds, Cloud, CameraControls, Sky as SkyImpl, StatsGl } from '@react-three/drei'
+import { useControls } from 'leva'
 
 export default function App() {
   return (
@@ -32,7 +32,7 @@ function Sky() {
     x: { value: 6, min: 0, max: 100, step: 1 },
     y: { value: 1, min: 0, max: 100, step: 1 },
     z: { value: 1, min: 0, max: 100, step: 1 },
-    color: "white",
+    color: 'white'
   })
   useFrame((state, delta) => {
     ref.current.rotation.y = Math.cos(state.clock.elapsedTime / 2) / 2

@@ -81,8 +81,7 @@ function Scene({ background = 'white', children, ...props }) {
         // an object, for instance matrix={new THREE.Matrix4()} or position={new THREE.Vector3()}
         // In this rare case we do not want it to copy the matrix, but refer to it.
         onUpdate={(self) => (self.matrix = matrix)}
-        {...props}
-      >
+        {...props}>
         <Center>
           <mesh castShadow geometry={nodes.bricks.geometry} material={materials['Stone.014']} rotation={[Math.PI / 2, 0, 0]}>
             <meshStandardMaterial color="goldenrod" roughness={0} metalness={1} />

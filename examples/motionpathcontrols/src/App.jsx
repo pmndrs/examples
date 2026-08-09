@@ -17,7 +17,7 @@ export function App() {
     attachCamera: true,
     debug: false,
     float: true,
-    path: { value: 'Circle', options: ['Circle', 'Rollercoaster', 'Infinity', 'Heart'] },
+    path: { value: 'Circle', options: ['Circle', 'Rollercoaster', 'Infinity', 'Heart'] }
   })
   const Curve = CURVES[path]
   return (

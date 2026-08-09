@@ -25,12 +25,12 @@ class OriginalWaterEffect extends Effect {
       attributes: EffectAttribute.CONVOLUTION,
       uniforms: new Map([
         ['factor', new Uniform(factor)],
-        ['waterTime', new Uniform(0)],
-      ]),
+        ['waterTime', new Uniform(0)]
+      ])
     })
   }
 }
 
 export const WaterEffect = wrapEffect(OriginalWaterEffect, {
-  blendFunction: BlendFunction.NORMAL,
+  blendFunction: BlendFunction.NORMAL
 })

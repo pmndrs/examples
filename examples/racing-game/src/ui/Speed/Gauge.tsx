@@ -19,7 +19,7 @@ const Background = forwardRef<SVGStopElement, BackgroundProps>(
       </defs>
       <path fillRule="evenodd" clipRule="evenodd" d="M0 40c175.256-2.308 227.867-13.823 289-40v55H0V40z" fill="url(#progress)" />
     </svg>
-  ),
+  )
 )
 
 const Foreground = (): JSX.Element => (
@@ -50,7 +50,7 @@ export const Gauge = () => {
       if (ref.current.getAttribute('offset') !== offset) {
         ref.current.setAttribute('offset', offset)
       }
-    }),
+    })
   )
 
   return (

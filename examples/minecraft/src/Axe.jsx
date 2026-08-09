@@ -6,9 +6,9 @@ source: https://sketchfab.com/models/0d62f4d3676545c88ec8523213c055dd
 title: Minecraft Diamond Axe
 */
 
-import { useGLTF } from "@react-three/drei"
+import { useGLTF } from '@react-three/drei'
 
-import axeModel from "./axe.glb?url"
+import axeModel from './axe.glb?url'
 
 export default function Axe(props) {
   const { nodes, materials } = useGLTF(axeModel)

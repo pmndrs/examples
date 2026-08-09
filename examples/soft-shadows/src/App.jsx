@@ -1,8 +1,8 @@
-import { useRef, useMemo } from "react"
-import { Canvas, useFrame } from "@react-three/fiber"
-import { SoftShadows } from "@react-three/drei"
-import { useControls } from "leva"
-import { Perf } from "r3f-perf"
+import { useRef, useMemo } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { SoftShadows } from '@react-three/drei'
+import { useControls } from 'leva'
+import { Perf } from 'r3f-perf'
 
 const easeInOutCubic = (t) => (t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1)
 function Sphere({ position = [0, 0, 0], ...props }) {
@@ -44,7 +44,7 @@ export default function App() {
   return (
     <Canvas shadows camera={{ position: [-5, 2, 10], fov: 60 }}>
       {enabled && <SoftShadows {...config} />}
-      <fog attach="fog" args={["white", 0, 40]} />
+      <fog attach="fog" args={['white', 0, 40]} />
       <ambientLight intensity={0.5 * Math.PI} />
       <directionalLight castShadow position={[2.5, 8, 5]} intensity={1.5 * Math.PI} shadow-mapSize={1024}>
         <orthographicCamera attach="shadow-camera" args={[-10, 10, -10, 10, 0.1, 50]} />

@@ -72,8 +72,7 @@ export function Box({ scale = 1, ...props }) {
       scale={(clicked ? 1.5 : 1) * scale}
       onClick={() => click(!clicked)}
       onPointerOver={(event) => (event.stopPropagation(), hover(true))}
-      onPointerOut={(event) => hover(false)}
-    >
+      onPointerOut={(event) => hover(false)}>
       <boxGeometry />
       <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
     </mesh>

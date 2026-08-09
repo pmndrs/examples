@@ -8,7 +8,7 @@ import { CrossFadeMaterial } from './XFadeMaterial'
 const transitions = {
   from: { rotation: [0, -Math.PI / 10, 0], scale: [0.8, 0.8, 0.8] },
   enter: { rotation: [0, 0, 0], scale: [1, 1, 1] },
-  leave: { rotation: [0, Math.PI / 10, 0], scale: [0.8, 0.8, 0.8] },
+  leave: { rotation: [0, Math.PI / 10, 0], scale: [0.8, 0.8, 0.8] }
 }
 
 const sceneStyle = { width: '100vw', height: '56vw' }

@@ -1,12 +1,12 @@
-import * as THREE from "three"
-import { useMemo, useRef } from "react"
-import { Canvas, useThree, useFrame } from "@react-three/fiber"
-import { useGLTF, useTexture, MeshRefractionMaterial, CubeCamera } from "@react-three/drei"
-import { EffectComposer, Bloom, DepthOfField } from "@react-three/postprocessing"
-import "./styles.css"
+import * as THREE from 'three'
+import { useMemo, useRef } from 'react'
+import { Canvas, useThree, useFrame } from '@react-three/fiber'
+import { useGLTF, useTexture, MeshRefractionMaterial, CubeCamera } from '@react-three/drei'
+import { EffectComposer, Bloom, DepthOfField } from '@react-three/postprocessing'
+import './styles.css'
 
-import img1 from "./233.jpg"
-import dflatModel from "./dflat.glb?url"
+import img1 from './233.jpg'
+import dflatModel from './dflat.glb?url'
 
 function Background() {
   const texture = useTexture(img1)
@@ -70,7 +70,7 @@ function Diamonds({ count = 40 }) {
 export default function App() {
   return (
     <Canvas dpr={[1, 1.5]} camera={{ fov: 50, position: [0, 0, 25], near: 1, far: 100 }}>
-      <color attach="background" args={["white"]} />
+      <color attach="background" args={['white']} />
       <Background />
       <Diamonds />
       <EffectComposer>

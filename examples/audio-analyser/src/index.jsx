@@ -42,5 +42,5 @@ createRoot(document.querySelector('#root')).render(
   <>
     <App />
     <Overlay />
-  </>,
+  </>
 )

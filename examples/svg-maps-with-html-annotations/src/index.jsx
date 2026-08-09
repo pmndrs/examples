@@ -19,10 +19,7 @@ function Cell({ color, shape, fillOpacity, index }) {
     shape.getPoints().forEach((point) => box.expandByPoint(point))
     return box.getCenter(new THREE.Vector2())
   }, [shape])
-  useEffect(
-    () => void (document.body.style.cursor = hovered ? `url('${hoveredCursor}'), pointer` : `url('${defaultCursor}'), auto`),
-    [hovered]
-  )
+  useEffect(() => void (document.body.style.cursor = hovered ? `url('${hoveredCursor}'), pointer` : `url('${defaultCursor}'), auto`), [hovered])
   return (
     <mesh onPointerOver={(e) => hover(true)} onPointerOut={() => hover(false)}>
       <meshBasicMaterial color={hovered ? 'hotpink' : color} opacity={fillOpacity} depthWrite={false} transparent />

@@ -1,16 +1,16 @@
-import * as THREE from "three"
-import { useRef } from "react"
-import { Canvas, useFrame } from "@react-three/fiber"
-import { Environment, useGLTF } from "@react-three/drei"
-import { EffectComposer, N8AO } from "@react-three/postprocessing"
-import { BallCollider, Physics, RigidBody, CylinderCollider } from "@react-three/rapier"
+import * as THREE from 'three'
+import { useRef } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { Environment, useGLTF } from '@react-three/drei'
+import { EffectComposer, N8AO } from '@react-three/postprocessing'
+import { BallCollider, Physics, RigidBody, CylinderCollider } from '@react-three/rapier'
 
-import capModel from "./cap.glb?url"
-import adamsbridgeHdr from "./adamsbridge.hdr?url"
+import capModel from './cap.glb?url'
+import adamsbridgeHdr from './adamsbridge.hdr?url'
 
 THREE.ColorManagement.legacyMode = false
-const baubleMaterial = new THREE.MeshLambertMaterial({ color: "#c0a0a0", emissive: "red" })
-const capMaterial = new THREE.MeshStandardMaterial({ metalness: 0.75, roughness: 0.15, color: "#8a492f", emissive: "#600000", envMapIntensity: 20 })
+const baubleMaterial = new THREE.MeshLambertMaterial({ color: '#c0a0a0', emissive: 'red' })
+const capMaterial = new THREE.MeshStandardMaterial({ metalness: 0.75, roughness: 0.15, color: '#8a492f', emissive: '#600000', envMapIntensity: 20 })
 const sphereGeometry = new THREE.SphereGeometry(1, 28, 28)
 const baubles = [...Array(50)].map(() => ({ scale: [0.75, 0.75, 1, 1, 1.25][Math.floor(Math.random() * 5)] }))
 
@@ -23,7 +23,7 @@ function Bauble({ vec = new THREE.Vector3(), scale, r = THREE.MathUtils.randFloa
       vec
         .copy(api.current.translation())
         .normalize()
-        .multiply({ x: -50 * delta * scale, y: -150 * delta * scale, z: -50 * delta * scale }),
+        .multiply({ x: -50 * delta * scale, y: -150 * delta * scale, z: -50 * delta * scale })
     )
   })
   return (
@@ -54,8 +54,7 @@ export const App = () => (
     shadows
     gl={{ alpha: true, stencil: false, depth: false, antialias: false }}
     camera={{ position: [0, 0, 20], fov: 32.5, near: 1, far: 100 }}
-    onCreated={(state) => (state.gl.toneMappingExposure = 1.5)}
-  >
+    onCreated={(state) => (state.gl.toneMappingExposure = 1.5)}>
     <ambientLight intensity={Math.PI} />
     <spotLight position={[20, 20, 25]} intensity={Math.PI} decay={0} penumbra={1} angle={0.2} color="white" castShadow shadow-mapSize={[512, 512]} />
     <directionalLight position={[0, 5, -4]} intensity={4 * Math.PI} />

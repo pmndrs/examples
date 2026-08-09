@@ -50,12 +50,7 @@ function Boxes() {
     meshRef.current.instanceMatrix.needsUpdate = true
   })
   return (
-    <instancedMesh
-      ref={meshRef}
-      args={[null, null, 1000]}
-      onPointerMove={(e) => (e.stopPropagation(), set(e.instanceId))}
-      onPointerOut={(e) => set(undefined)}
-    >
+    <instancedMesh ref={meshRef} args={[null, null, 1000]} onPointerMove={(e) => (e.stopPropagation(), set(e.instanceId))} onPointerOut={(e) => set(undefined)}>
       <boxGeometry args={[0.6, 0.6, 0.6]}>
         <instancedBufferAttribute attach="attributes-color" args={[colorArray, 3]} />
       </boxGeometry>

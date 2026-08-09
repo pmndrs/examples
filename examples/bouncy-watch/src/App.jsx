@@ -14,8 +14,7 @@ export default function App() {
         snap={{ mass: 4, tension: 1500 }}
         rotation={[0, 0.3, 0]}
         polar={[-Math.PI / 3, Math.PI / 3]}
-        azimuth={[-Math.PI / 1.4, Math.PI / 2]}
-      >
+        azimuth={[-Math.PI / 1.4, Math.PI / 2]}>
         <Watch rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.25, 0]} scale={0.003} />
       </PresentationControls>
       <ContactShadows position={[0, -1.4, 0]} opacity={0.75} scale={10} blur={3} far={4} />

@@ -1,4 +1,4 @@
-@import url("https://rsms.me/inter/inter.css");
+@import url('https://rsms.me/inter/inter.css');
 
 html,
 body {
@@ -9,7 +9,7 @@ body {
 }
 
 body {
-  font-family: "Inter var", sans-serif;
+  font-family: 'Inter var', sans-serif;
   font-size: 14px;
   color: white;
   background: #f0f0f0;
@@ -36,7 +36,7 @@ canvas {
 }
 
 .content::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 25px;
   left: -40px;

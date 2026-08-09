@@ -11,7 +11,7 @@ import depotHdr from './old_depot_2k.hdr?url'
 export default function App() {
   const { mapping, exposure } = useControls({
     exposure: { value: 0.85, min: 0, max: 4 },
-    mapping: { value: 'ACESFilmic', options: ['No', 'Linear', 'AgX', 'ACESFilmic', 'Reinhard', 'Cineon', 'Custom'] },
+    mapping: { value: 'ACESFilmic', options: ['No', 'Linear', 'AgX', 'ACESFilmic', 'Reinhard', 'Cineon', 'Custom'] }
   })
   return (
     <Canvas>
@@ -52,7 +52,7 @@ function Tone({ mapping, exposure }) {
          color *= newPeak / peak;
          float g = 1. - 1. / (desaturation * (peak - newPeak) + 1.);
          return mix(color, vec3(1, 1, 1), g);
-       }`,
+       }`
     )
     gl.toneMapping = THREE[mapping + 'ToneMapping']
     gl.toneMappingExposure = exposure

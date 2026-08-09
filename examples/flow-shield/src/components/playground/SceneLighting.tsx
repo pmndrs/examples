@@ -24,8 +24,9 @@ const LIGHTING_PRESETS: Record<Preset, Record<string, unknown>> = {
 export default function SceneLighting({ preset }: { preset?: Preset }) {
   const dirLightRef = useRef<DirectionalLight>(null!)
 
-  const [{ ambientIntensity, ambientColor, dirIntensity, dirColor, dirX, dirY, dirZ, castShadow, shadowMapSize, showHelper }, setLighting] =
-    useControls('Scene', () => ({
+  const [{ ambientIntensity, ambientColor, dirIntensity, dirColor, dirX, dirY, dirZ, castShadow, shadowMapSize, showHelper }, setLighting] = useControls(
+    'Scene',
+    () => ({
       Lighting: folder(
         {
           Ambient: folder(
@@ -51,7 +52,8 @@ export default function SceneLighting({ preset }: { preset?: Preset }) {
         },
         { collapsed: true }
       )
-    }))
+    })
+  )
 
   useEffect(() => {
     if (preset) setLighting(LIGHTING_PRESETS[preset])

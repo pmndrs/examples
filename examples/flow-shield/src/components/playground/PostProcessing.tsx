@@ -46,13 +46,7 @@ export default function PostProcessing() {
 
   return (
     <EffectComposer multisampling={0} frameBufferType={THREE.HalfFloatType}>
-      <Bloom
-        intensity={bloomIntensity}
-        luminanceThreshold={luminanceThreshold}
-        radius={bloomRadius}
-        mipmapBlur={mipmapBlur}
-        kernelSize={KernelSize.LARGE}
-      />
+      <Bloom intensity={bloomIntensity} luminanceThreshold={luminanceThreshold} radius={bloomRadius} mipmapBlur={mipmapBlur} kernelSize={KernelSize.LARGE} />
       <Noise premultiply={premultiply} blendFunction={BLEND_MAP[noiseBlend as BlendOption]} opacity={noiseOpacity} />
     </EffectComposer>
   )

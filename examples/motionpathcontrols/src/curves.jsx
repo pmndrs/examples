@@ -15,21 +15,21 @@ export const Circle = ({ centerX = 0, centerY = 0, radius = 5 }) => {
       new THREE.Vector3(centerX + radius, centerY, 0),
       new THREE.Vector3(centerX + radius, centerY, radius),
       new THREE.Vector3(centerX - radius, centerY, radius),
-      new THREE.Vector3(centerX - radius, centerY, 0),
+      new THREE.Vector3(centerX - radius, centerY, 0)
     ],
     [
       new THREE.Vector3(centerX - radius, centerY, 0),
       new THREE.Vector3(centerX - radius, centerY, -radius),
       new THREE.Vector3(centerX + radius, centerY, -radius),
-      new THREE.Vector3(centerX + radius, centerY, 0),
-    ],
+      new THREE.Vector3(centerX + radius, centerY, 0)
+    ]
   ].map(([v0, v1, v2, v3], index) => <cubicBezierCurve3 key={index} v0={v0} v1={v1} v2={v2} v3={v3} />)
 }
 
 export const Rollercoaster = () => {
   return [
     [new THREE.Vector3(-5, -5, 0), new THREE.Vector3(-10, 0, 0), new THREE.Vector3(0, 3, 0), new THREE.Vector3(6, 3, 0)],
-    [new THREE.Vector3(6, 3, 0), new THREE.Vector3(10, 5, 5), new THREE.Vector3(5, 3, 5), new THREE.Vector3(5, 5, 5)],
+    [new THREE.Vector3(6, 3, 0), new THREE.Vector3(10, 5, 5), new THREE.Vector3(5, 3, 5), new THREE.Vector3(5, 5, 5)]
   ].map(([v0, v1, v2, v3], index) => <cubicBezierCurve3 key={index} v0={v0} v1={v1} v2={v2} v3={v3} />)
 }
 

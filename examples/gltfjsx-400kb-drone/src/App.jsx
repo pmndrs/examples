@@ -13,7 +13,17 @@ export default function App() {
       <Stage intensity={0.5} environment="city" shadows={{ type: 'accumulative', bias: -0.001, intensity: Math.PI }} adjustCamera={false}>
         <Kamdo rotation={[0, Math.PI, 0]} />
       </Stage>
-      <Grid renderOrder={-1} position={[0, -1.85, 0]} infiniteGrid cellSize={0.6} cellThickness={0.6} sectionSize={3.3} sectionThickness={1.5} sectionColor={[0.5, 0.5, 10]} fadeDistance={30} />
+      <Grid
+        renderOrder={-1}
+        position={[0, -1.85, 0]}
+        infiniteGrid
+        cellSize={0.6}
+        cellThickness={0.6}
+        sectionSize={3.3}
+        sectionThickness={1.5}
+        sectionColor={[0.5, 0.5, 10]}
+        fadeDistance={30}
+      />
       <OrbitControls autoRotate autoRotateSpeed={0.05} enableZoom={false} makeDefault minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} />
       <EffectComposer disableNormalPass>
         <Bloom luminanceThreshold={2} mipmapBlur />

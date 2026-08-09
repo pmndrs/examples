@@ -116,8 +116,7 @@ function Text({ children, config, font = fontGlyphs, ...props }) {
             bevelSize={0.01}
             bevelSegments={10}
             curveSegments={128}
-            bevelThickness={0.01}
-          >
+            bevelThickness={0.01}>
             {children}
             <MeshTransmissionMaterial {...config} background={texture} />
           </Text3D>

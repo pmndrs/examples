@@ -1,7 +1,7 @@
-import React, { Suspense } from "react"
-import { Canvas } from "@react-three/fiber"
-import { Sky, OrbitControls } from "@react-three/drei"
-import Grass from "./Grass"
+import React, { Suspense } from 'react'
+import { Canvas } from '@react-three/fiber'
+import { Sky, OrbitControls } from '@react-three/drei'
+import Grass from './Grass'
 
 export default function App() {
   return (

@@ -160,14 +160,70 @@ function Model({ instances, ...props }) {
   return (
     <group ref={group} {...props} dispose={null}>
       <group rotation={[Math.PI / 2, 0, 0]}>
-        <mesh castShadow receiveShadow geometry={nodes.filter001.geometry} material={nodes.filter001.material} position={[0.185, -0.096, 0.171]} rotation={[Math.PI / 2, 0, -1.6379]} />
-        <mesh castShadow receiveShadow geometry={nodes.kate1001.geometry} material={nodes.kate1001.material} position={[0.185, 0.11, 0.171]} rotation={[Math.PI / 2, 0, 3.1309]} />
-        <mesh castShadow receiveShadow geometry={nodes.kate2001.geometry} material={nodes.kate2001.material} position={[0.185, 0.092, 0.171]} rotation={[Math.PI / 2, 0, 1.8527]} />
-        <mesh castShadow receiveShadow geometry={nodes.klapp001.geometry} material={nodes.klapp001.material} position={[0.185, 0.054, 0.171]} rotation={[Math.PI / 2, 0, -2.3953]} />
-        <mesh castShadow receiveShadow geometry={nodes.korpus001.geometry} material={nodes.korpus001.material} position={[0.185, -0.118, 0.171]} rotation={[Math.PI / 2, 0, 3.1309]} />
-        <mesh castShadow receiveShadow geometry={nodes.tihend001.geometry} material={nodes.tihend001.material} position={[0.185, 0.117, 0.171]} rotation={[Math.PI / 2, 0, 3.1309]} />
-        <mesh castShadow receiveShadow geometry={nodes.vedru001.geometry} material={nodes.vedru001.material} position={[0.1852, -0.1166, 0.1723]} rotation={[1.5709, 0.0121, 3.1309]} />
-        <mesh castShadow receiveShadow geometry={nodes.võre001.geometry} material={nodes.võre001.material} position={[0.185, -0.092, 0.171]} rotation={[Math.PI / 2, 0, 3.1309]} />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.filter001.geometry}
+          material={nodes.filter001.material}
+          position={[0.185, -0.096, 0.171]}
+          rotation={[Math.PI / 2, 0, -1.6379]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.kate1001.geometry}
+          material={nodes.kate1001.material}
+          position={[0.185, 0.11, 0.171]}
+          rotation={[Math.PI / 2, 0, 3.1309]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.kate2001.geometry}
+          material={nodes.kate2001.material}
+          position={[0.185, 0.092, 0.171]}
+          rotation={[Math.PI / 2, 0, 1.8527]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.klapp001.geometry}
+          material={nodes.klapp001.material}
+          position={[0.185, 0.054, 0.171]}
+          rotation={[Math.PI / 2, 0, -2.3953]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.korpus001.geometry}
+          material={nodes.korpus001.material}
+          position={[0.185, -0.118, 0.171]}
+          rotation={[Math.PI / 2, 0, 3.1309]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.tihend001.geometry}
+          material={nodes.tihend001.material}
+          position={[0.185, 0.117, 0.171]}
+          rotation={[Math.PI / 2, 0, 3.1309]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.vedru001.geometry}
+          material={nodes.vedru001.material}
+          position={[0.1852, -0.1166, 0.1723]}
+          rotation={[1.5709, 0.0121, 3.1309]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.võre001.geometry}
+          material={nodes.võre001.material}
+          position={[0.185, -0.092, 0.171]}
+          rotation={[Math.PI / 2, 0, 3.1309]}
+        />
         <instances.PPushrod position={[-0.0529, -0.054, -0.2329]} rotation={[-0.1895, -0.7764, 3.008]} />
         <instances.PEndLowerforPushrod position={[-0.0317, -0.054, -0.2117]} rotation={[0, Math.PI / 4, -Math.PI]} />
         <instances.PEndUpperforPushrod position={[-0.3549, -0.054, -0.5349]} rotation={[0, Math.PI / 4, 3.1396]} />
@@ -180,7 +236,14 @@ function Model({ instances, ...props }) {
         <instances.ScrewMCapHdSSMx position={[-0.0861, -0.09, -0.2519]} rotation={[-1.855, 0.2734, -0.746]} />
         <instances.ScrewMCapHdSSMx position={[-0.0535, -0.038, -0.2845]} rotation={[-1.855, 0.2734, -0.746]} />
         <instances.ScrewMCapHdSSMx position={[-0.0535, 0.026, -0.2845]} rotation={[-1.855, 0.2734, -0.746]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-012&013_Cylinder_Outer001'].geometry} material={nodes['196-P-012&013_Cylinder_Outer001'].material} position={[0.1563, 0.018, -0.1563]} rotation={[0, -Math.PI / 4, Math.PI / 2]} />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-012&013_Cylinder_Outer001'].geometry}
+          material={nodes['196-P-012&013_Cylinder_Outer001'].material}
+          position={[0.1563, 0.018, -0.1563]}
+          rotation={[0, -Math.PI / 4, Math.PI / 2]}
+        />
         <instances.PSleeveforCylinder position={[0.1945, 0.018, -0.1945]} rotation={[0, Math.PI / 4, Math.PI / 2]} />
         <instances.PDrainforOil position={[0.2314, 0.078, -0.056]} rotation={[1.2277, 0.3245, -0.7287]} />
         <instances.PGasketforCylinderHead position={[0.2977, 0.018, -0.2977]} rotation={[-Math.PI, Math.PI / 4, Math.PI / 2]} />
@@ -217,17 +280,80 @@ function Model({ instances, ...props }) {
         <instances.PEndUpperforPushrod position={[0.3507, -0.018, -0.5307]} rotation={[0, -Math.PI / 4, 3.1396]} />
         <instances.BearingNeedleRollerPreviewCfg position={[0.0276, -0.018, -0.2076]} rotation={[Math.PI, -0.6506, Math.PI / 2]} />
         <instances.PinforPushrod position={[0.0276, -0.018, -0.2076]} rotation={[Math.PI, -Math.PI / 4, 0]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-009_Cam-Shaft001'].geometry} material={nodes['196-P-009_Cam-Shaft001'].material} position={[0, 0.068, -0.18]} rotation={[-Math.PI / 2, 0, 2.0924]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-066_Gear_Output_ISO_-_Spur_gear_2M_60T_20PA_12FW_---S'].geometry} material={nodes['196-P-066_Gear_Output_ISO_-_Spur_gear_2M_60T_20PA_12FW_---S'].material} position={[0, 0.185, -0.18]} rotation={[0, 0.5216, -Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-109_Washer_for_Cam-Shaft001'].geometry} material={nodes['196-P-109_Washer_for_Cam-Shaft001'].material} position={[0, 0.253, -0.18]} rotation={[Math.PI / 2, 0, -2.1678]} />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-009_Cam-Shaft001'].geometry}
+          material={nodes['196-P-009_Cam-Shaft001'].material}
+          position={[0, 0.068, -0.18]}
+          rotation={[-Math.PI / 2, 0, 2.0924]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-066_Gear_Output_ISO_-_Spur_gear_2M_60T_20PA_12FW_---S'].geometry}
+          material={nodes['196-P-066_Gear_Output_ISO_-_Spur_gear_2M_60T_20PA_12FW_---S'].material}
+          position={[0, 0.185, -0.18]}
+          rotation={[0, 0.5216, -Math.PI / 2]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-109_Washer_for_Cam-Shaft001'].geometry}
+          material={nodes['196-P-109_Washer_for_Cam-Shaft001'].material}
+          position={[0, 0.253, -0.18]}
+          rotation={[Math.PI / 2, 0, -2.1678]}
+        />
         <instances.KeyxxR position={[-0.0189, 0.173, -0.2129]} rotation={[0, 0.5216, Math.PI / 2]} />
         <instances.KeyxxR position={[-0.0329, 0.173, -0.1611]} rotation={[Math.PI, 1.0492, -Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes['Locking_Washer,_M25,_MB_5_2_14b001'].geometry} material={nodes['Locking_Washer,_M25,_MB_5_2_14b001'].material} position={[0, -0.139, -0.18]} rotation={[-Math.PI, 1.0492, Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes['Locking_Washer,_M35,_MB_7_2_14b001'].geometry} material={nodes['Locking_Washer,_M35,_MB_7_2_14b001'].material} position={[0, 0.2635, -0.18]} rotation={[Math.PI, 1.0492, -Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes['Locking_Washer,_M40,_MB_8_2_14b001'].geometry} material={nodes['Locking_Washer,_M40,_MB_8_2_14b001'].material} position={[0, 0.1585, -0.18]} rotation={[-Math.PI, 1.0492, Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes['Locknut,_M25x15,_KM_5_2_14b001'].geometry} material={nodes['Locknut,_M25x15,_KM_5_2_14b001'].material} position={[0, -0.139, -0.18]} rotation={[-Math.PI, 1.0167, Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes['Locknut,_M35x15,_KM_7_2_14b001'].geometry} material={nodes['Locknut,_M35x15,_KM_7_2_14b001'].material} position={[0, 0.2635, -0.18]} rotation={[Math.PI, 0.0504, -Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes['Locknut,_M40x15,_KM_8_2_14b001'].geometry} material={nodes['Locknut,_M40x15,_KM_8_2_14b001'].material} position={[0, 0.1585, -0.18]} rotation={[0, -0.4687, -Math.PI / 2]} />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['Locking_Washer,_M25,_MB_5_2_14b001'].geometry}
+          material={nodes['Locking_Washer,_M25,_MB_5_2_14b001'].material}
+          position={[0, -0.139, -0.18]}
+          rotation={[-Math.PI, 1.0492, Math.PI / 2]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['Locking_Washer,_M35,_MB_7_2_14b001'].geometry}
+          material={nodes['Locking_Washer,_M35,_MB_7_2_14b001'].material}
+          position={[0, 0.2635, -0.18]}
+          rotation={[Math.PI, 1.0492, -Math.PI / 2]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['Locking_Washer,_M40,_MB_8_2_14b001'].geometry}
+          material={nodes['Locking_Washer,_M40,_MB_8_2_14b001'].material}
+          position={[0, 0.1585, -0.18]}
+          rotation={[-Math.PI, 1.0492, Math.PI / 2]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['Locknut,_M25x15,_KM_5_2_14b001'].geometry}
+          material={nodes['Locknut,_M25x15,_KM_5_2_14b001'].material}
+          position={[0, -0.139, -0.18]}
+          rotation={[-Math.PI, 1.0167, Math.PI / 2]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['Locknut,_M35x15,_KM_7_2_14b001'].geometry}
+          material={nodes['Locknut,_M35x15,_KM_7_2_14b001'].material}
+          position={[0, 0.2635, -0.18]}
+          rotation={[Math.PI, 0.0504, -Math.PI / 2]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['Locknut,_M40x15,_KM_8_2_14b001'].geometry}
+          material={nodes['Locknut,_M40x15,_KM_8_2_14b001'].material}
+          position={[0, 0.1585, -0.18]}
+          rotation={[0, -0.4687, -Math.PI / 2]}
+        />
         <instances.PGasketforPushrods position={[0.0663, 0.03, -0.2463]} rotation={[Math.PI, Math.PI / 4, -Math.PI / 2]} />
         <instances.PGuideforPushrods position={[0.2063, -0.018, -0.3863]} rotation={[0, Math.PI / 4, 0]} />
         <instances.PGuideforPushrods1 position={[0.2063, -0.018, -0.3863]} rotation={[0, Math.PI / 4, 0]} />
@@ -352,9 +478,30 @@ function Model({ instances, ...props }) {
         <instances.SNGE4 position={[0.3946, 0.1441, -0.3946]} rotation={[2.8356, -0.6467, 2.5031]} />
         <instances.SNGE5 position={[0.3122, 0.0898, -0.3122]} rotation={[-0.306, 0.6467, 0.6385]} />
         <instances.SNGE6 position={[0.3249, 0.0981, -0.3249]} rotation={[-0.306, 0.6467, 0.6385]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-010&011_Cylinder-Head001'].geometry} material={nodes['196-P-010&011_Cylinder-Head001'].material} position={[0.3005, 0.018, -0.3005]} rotation={[0, -Math.PI / 4, -Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-014&015_Rocker-Box001'].geometry} material={nodes['196-P-014&015_Rocker-Box001'].material} position={[0.4243, 0.03, -0.4243]} rotation={[0, -Math.PI / 4, -Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-016&017_Cover_for_Rocker-Box001'].geometry} material={nodes['196-P-016&017_Cover_for_Rocker-Box001'].material} position={[0.4985, 0.0438, -0.4985]} rotation={[0, -Math.PI / 4, -Math.PI / 2]} />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-010&011_Cylinder-Head001'].geometry}
+          material={nodes['196-P-010&011_Cylinder-Head001'].material}
+          position={[0.3005, 0.018, -0.3005]}
+          rotation={[0, -Math.PI / 4, -Math.PI / 2]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-014&015_Rocker-Box001'].geometry}
+          material={nodes['196-P-014&015_Rocker-Box001'].material}
+          position={[0.4243, 0.03, -0.4243]}
+          rotation={[0, -Math.PI / 4, -Math.PI / 2]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-016&017_Cover_for_Rocker-Box001'].geometry}
+          material={nodes['196-P-016&017_Cover_for_Rocker-Box001'].material}
+          position={[0.4985, 0.0438, -0.4985]}
+          rotation={[0, -Math.PI / 4, -Math.PI / 2]}
+        />
         <instances.PPlateforOilSupply position={[0.3408, 0.018, -0.5798]} rotation={[0, Math.PI / 4, Math.PI / 2]} />
         <instances.PPlateforRockerAxles position={[0.5275, 0.018, -0.3932]} rotation={[Math.PI, -Math.PI / 4, Math.PI / 2]} />
         <instances.PAxleforRocker position={[0.4229, 0.0368, -0.4752]} rotation={[0.2972, -0.763, -1.3622]} />
@@ -387,8 +534,22 @@ function Model({ instances, ...props }) {
         <instances.PColletforValve position={[0.4995, -0.0511, -0.4514]} rotation={[-0.2444, -0.7703, -1.514]} />
         <instances.PColletforValve position={[0.4514, -0.0511, -0.4995]} rotation={[-0.2444, -0.7703, 2.0397]} />
         <instances.PColletforValve position={[0.4995, -0.0511, -0.4514]} rotation={[-0.2444, -0.7703, 1.6276]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-043&044_Rocker_Inlet001'].geometry} material={nodes['196-P-043&044_Rocker_Inlet001'].material} position={[0.3859, 0.013, -0.58]} rotation={[-0.0061, -0.7854, -1.5751]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-045&046_Rocker_Exhaust001'].geometry} material={nodes['196-P-045&046_Rocker_Exhaust001'].material} position={[0.4815, 0.0368, -0.4165]} rotation={[0.0072, -0.7854, 1.5759]} />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-043&044_Rocker_Inlet001'].geometry}
+          material={nodes['196-P-043&044_Rocker_Inlet001'].material}
+          position={[0.3859, 0.013, -0.58]}
+          rotation={[-0.0061, -0.7854, -1.5751]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-045&046_Rocker_Exhaust001'].geometry}
+          material={nodes['196-P-045&046_Rocker_Exhaust001'].material}
+          position={[0.4815, 0.0368, -0.4165]}
+          rotation={[0.0072, -0.7854, 1.5759]}
+        />
         <instances.PSliderforPushrod position={[0.3507, -0.018, -0.5307]} rotation={[0, -Math.PI / 4, -Math.PI / 2]} />
         <instances.PSliderforPushrod position={[0.3847, 0.078, -0.5647]} rotation={[0, -Math.PI / 4, -Math.PI / 2]} />
         <instances.PInletManifold position={[0.4325, -0.0879, -0.3269]} rotation={[-1.9584, -0.3614, -0.8571]} />
@@ -478,8 +639,22 @@ function Model({ instances, ...props }) {
         <instances.BearingNeedleRollerPreviewCfg position={[0.0276, 0.078, -0.2076]} rotation={[0, 0.9202, Math.PI / 2]} />
         <instances.PinforPushrod position={[0.0276, 0.078, -0.2076]} rotation={[0, Math.PI / 4, 0]} />
         <instances.PPushrodLong position={[0.0488, 0.078, -0.2288]} rotation={[0.1895, 0.7764, -0.1336]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-057_Disc_A_for_Generator002'].geometry} material={nodes['196-P-057_Disc_A_for_Generator002'].material} position={[0, 0.264, 0]} rotation={[0, 0.1343, -Math.PI]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-058_Disc_B_for_Generator002'].geometry} material={nodes['196-P-058_Disc_B_for_Generator002'].material} position={[0, 0.276, 0]} rotation={[0, 0.1343, -Math.PI]} />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-057_Disc_A_for_Generator002'].geometry}
+          material={nodes['196-P-057_Disc_A_for_Generator002'].material}
+          position={[0, 0.264, 0]}
+          rotation={[0, 0.1343, -Math.PI]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-058_Disc_B_for_Generator002'].geometry}
+          material={nodes['196-P-058_Disc_B_for_Generator002'].material}
+          position={[0, 0.276, 0]}
+          rotation={[0, 0.1343, -Math.PI]}
+        />
         <instances.MagnetMisumiHXNH position={[-0.0352, 0.266, 0.0461]} rotation={[-Math.PI, -0.1491, 0]} />
         <instances.MagnetMisumiHXNH position={[-0.0078, 0.276, -0.0575]} rotation={[0, 0.1413, 0]} />
         <instances.MagnetMisumiHXNH position={[-0.0575, 0.276, 0.0078]} rotation={[-Math.PI, 0.6537, -Math.PI]} />
@@ -488,39 +663,177 @@ function Model({ instances, ...props }) {
         <instances.MagnetMisumiHXNH position={[-0.0461, 0.266, -0.0352]} rotation={[0, 1.2124, -Math.PI]} />
         <instances.MagnetMisumiHXNH position={[0.0352, 0.266, -0.0461]} rotation={[0, -0.9809, -Math.PI]} />
         <instances.MagnetMisumiHXNH position={[0.0575, 0.276, -0.0078]} rotation={[Math.PI, -0.9574, Math.PI]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-006_Crank_Starter-Side002'].geometry} material={nodes['196-P-006_Crank_Starter-Side002'].material} position={[0, 0.051, 0]} rotation={[0, 1.1588, 0]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-006_Crank_Starter-Side003'].geometry} material={nodes['196-P-006_Crank_Starter-Side003'].material} position={[0, 0.051, 0]} rotation={[0, 1.1588, 0]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-007_Crank_Output-Side002'].geometry} material={nodes['196-P-007_Crank_Output-Side002'].material} position={[0, -0.051, 0]} rotation={[0, 1.1588, Math.PI]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-007_Crank_Output-Side003'].geometry} material={nodes['196-P-007_Crank_Output-Side003'].material} position={[0, -0.051, 0]} rotation={[0, 1.1588, Math.PI]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-008_Bar_for_Big-End001'].geometry} material={nodes['196-P-008_Bar_for_Big-End001'].material} position={[-0.0733, 0, -0.032]} rotation={[0, 1.1992, 0]} />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-006_Crank_Starter-Side002'].geometry}
+          material={nodes['196-P-006_Crank_Starter-Side002'].material}
+          position={[0, 0.051, 0]}
+          rotation={[0, 1.1588, 0]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-006_Crank_Starter-Side003'].geometry}
+          material={nodes['196-P-006_Crank_Starter-Side003'].material}
+          position={[0, 0.051, 0]}
+          rotation={[0, 1.1588, 0]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-007_Crank_Output-Side002'].geometry}
+          material={nodes['196-P-007_Crank_Output-Side002'].material}
+          position={[0, -0.051, 0]}
+          rotation={[0, 1.1588, Math.PI]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-007_Crank_Output-Side003'].geometry}
+          material={nodes['196-P-007_Crank_Output-Side003'].material}
+          position={[0, -0.051, 0]}
+          rotation={[0, 1.1588, Math.PI]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-008_Bar_for_Big-End001'].geometry}
+          material={nodes['196-P-008_Bar_for_Big-End001'].material}
+          position={[-0.0733, 0, -0.032]}
+          rotation={[0, 1.1992, 0]}
+        />
         <instances.PClampforCrank position={[-0.0733, -0.051, -0.032]} rotation={[0, 1.1588, 0]} />
         <instances.PClampforCrank position={[-0.0733, 0.051, -0.032]} rotation={[0, 1.1588, 0]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-047__Extender_for_Crank001'].geometry} material={nodes['196-P-047__Extender_for_Crank001'].material} position={[0, 0.22, 0]} rotation={[0, 0.1343, Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-065_Gear_Crank_ISO_-_Spur_gear_2M_30T_20PA_12FW_---S3'].geometry} material={nodes['196-P-065_Gear_Crank_ISO_-_Spur_gear_2M_30T_20PA_12FW_---S3'].material} position={[0, 0.161, 0]} rotation={[0, 1.1588, Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-067_Gear_First_for_Oil-Pump_ISO_-_Spur_gear_2M_15T_20'].geometry} material={nodes['196-P-067_Gear_First_for_Oil-Pump_ISO_-_Spur_gear_2M_15T_20'].material} position={[0, 0.206, 0]} rotation={[0, 1.1588, Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-093_Ratchet_for_Starter001'].geometry} material={nodes['196-P-093_Ratchet_for_Starter001'].material} position={[0, -0.129, 0]} rotation={[0, 1.1588, -Math.PI]} />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-047__Extender_for_Crank001'].geometry}
+          material={nodes['196-P-047__Extender_for_Crank001'].material}
+          position={[0, 0.22, 0]}
+          rotation={[0, 0.1343, Math.PI / 2]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-065_Gear_Crank_ISO_-_Spur_gear_2M_30T_20PA_12FW_---S3'].geometry}
+          material={nodes['196-P-065_Gear_Crank_ISO_-_Spur_gear_2M_30T_20PA_12FW_---S3'].material}
+          position={[0, 0.161, 0]}
+          rotation={[0, 1.1588, Math.PI / 2]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-067_Gear_First_for_Oil-Pump_ISO_-_Spur_gear_2M_15T_20'].geometry}
+          material={nodes['196-P-067_Gear_First_for_Oil-Pump_ISO_-_Spur_gear_2M_15T_20'].material}
+          position={[0, 0.206, 0]}
+          rotation={[0, 1.1588, Math.PI / 2]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-093_Ratchet_for_Starter001'].geometry}
+          material={nodes['196-P-093_Ratchet_for_Starter001'].material}
+          position={[0, -0.129, 0]}
+          rotation={[0, 1.1588, -Math.PI]}
+        />
         <instances.PWasherforBigEndBearings position={[-0.0733, -0.036, -0.032]} rotation={[0, 1.0631, 0]} />
         <instances.PWasherforBigEndBearings position={[-0.0733, 0, -0.032]} rotation={[Math.PI, -0.8111, Math.PI]} />
         <instances.PWasherforBigEndBearings position={[-0.0733, 0.036, -0.032]} rotation={[0, 1.1372, 0]} />
         <instances.BearingNeedleRollerPreviewCfg2 position={[-0.0733, -0.018, -0.032]} rotation={[0, 1.103, -Math.PI / 2]} />
         <instances.BearingNeedleRollerPreviewCfg2 position={[-0.0733, 0.018, -0.032]} rotation={[0, 1.1426, -Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes.Key_10x6x25001.geometry} material={nodes.Key_10x6x25001.material} position={[-0.0275, 0.158, -0.012]} rotation={[0, 1.1588, -Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes['Key_5x5x15-R001'].geometry} material={nodes['Key_5x5x15-R001'].material} position={[-0.0101, 0.198, -0.0044]} rotation={[0, 1.1588, -Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes['Locking_Washer,_M12,_MB_1_2_14b001'].geometry} material={nodes['Locking_Washer,_M12,_MB_1_2_14b001'].material} position={[0, 0.22, 0]} rotation={[0, 1.1588, Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes['Locking_Washer,_M30,_MB_6_2_14b001'].geometry} material={nodes['Locking_Washer,_M30,_MB_6_2_14b001'].material} position={[0, -0.1395, 0]} rotation={[0, -0.412, -Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes['Locknut,_M30x15,_KM_6_2_14b001'].geometry} material={nodes['Locknut,_M30x15,_KM_6_2_14b001'].material} position={[0, -0.1395, 0]} rotation={[0, 1.1173, -Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes['Nut,_Castle,_M8,_DIN935001'].geometry} material={nodes['Nut,_Castle,_M8,_DIN935001'].material} position={[0, 0.281, 0]} rotation={[0, 0.1343, 0]} />
-        <mesh castShadow receiveShadow geometry={nodes.Pin_3x20001.geometry} material={nodes.Pin_3x20001.material} position={[0, 0.268, 0]} rotation={[-3.0404, 1.4358, 1.4705]} />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Key_10x6x25001.geometry}
+          material={nodes.Key_10x6x25001.material}
+          position={[-0.0275, 0.158, -0.012]}
+          rotation={[0, 1.1588, -Math.PI / 2]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['Key_5x5x15-R001'].geometry}
+          material={nodes['Key_5x5x15-R001'].material}
+          position={[-0.0101, 0.198, -0.0044]}
+          rotation={[0, 1.1588, -Math.PI / 2]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['Locking_Washer,_M12,_MB_1_2_14b001'].geometry}
+          material={nodes['Locking_Washer,_M12,_MB_1_2_14b001'].material}
+          position={[0, 0.22, 0]}
+          rotation={[0, 1.1588, Math.PI / 2]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['Locking_Washer,_M30,_MB_6_2_14b001'].geometry}
+          material={nodes['Locking_Washer,_M30,_MB_6_2_14b001'].material}
+          position={[0, -0.1395, 0]}
+          rotation={[0, -0.412, -Math.PI / 2]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['Locknut,_M30x15,_KM_6_2_14b001'].geometry}
+          material={nodes['Locknut,_M30x15,_KM_6_2_14b001'].material}
+          position={[0, -0.1395, 0]}
+          rotation={[0, 1.1173, -Math.PI / 2]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['Nut,_Castle,_M8,_DIN935001'].geometry}
+          material={nodes['Nut,_Castle,_M8,_DIN935001'].material}
+          position={[0, 0.281, 0]}
+          rotation={[0, 0.1343, 0]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Pin_3x20001.geometry}
+          material={nodes.Pin_3x20001.material}
+          position={[0, 0.268, 0]}
+          rotation={[-3.0404, 1.4358, 1.4705]}
+        />
         <instances.ScrewMCapHdSSISOMxS position={[-0.1167, -0.051, -0.0095]} rotation={[0, -0.412, 0]} />
         <instances.ScrewMCapHdSSISOMxS position={[-0.0863, 0.051, -0.0792]} rotation={[0, -0.412, 0]} />
         <instances.ScrewMCapHdSSISOMxS position={[-0.1167, 0.051, -0.0095]} rotation={[0, -0.412, 0]} />
         <instances.ScrewMCapHdSSISOMxS position={[-0.0863, -0.051, -0.0792]} rotation={[0, -0.412, 0]} />
-        <mesh castShadow receiveShadow geometry={nodes.Split_Pin_M8001.geometry} material={nodes.Split_Pin_M8001.material} position={[0, 0.297, 0]} rotation={[Math.PI / 2, 0, -1.7051]} />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Split_Pin_M8001.geometry}
+          material={nodes.Split_Pin_M8001.material}
+          position={[0, 0.297, 0]}
+          rotation={[Math.PI / 2, 0, -1.7051]}
+        />
         <instances.WasherMudguardSSMx position={[0, 0.264, 0]} rotation={[-Math.PI / 2, 0, 1.2113]} />
         <instances.WasherMudguardSSMx position={[0, 0.278, 0]} rotation={[Math.PI / 2, 0, -1.2113]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-004_Front001'].geometry} material={nodes['196-P-004_Front001'].material} position={[0, 0.26, -0.18]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-084_Gasket_for_Front001'].geometry} material={nodes['196-P-084_Gasket_for_Front001'].material} position={[0, 0.26, 0]} />
-        <mesh castShadow receiveShadow geometry={nodes['Oil-Seal-RTC-03004007-ComTech_Oil-Seal-RTC-03004007-ComTech001'].geometry} material={nodes['Oil-Seal-RTC-03004007-ComTech_Oil-Seal-RTC-03004007-ComTech001'].material} position={[0, 0.309, -0.18]} rotation={[0, -0.0292, -Math.PI / 2]} />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-004_Front001'].geometry}
+          material={nodes['196-P-004_Front001'].material}
+          position={[0, 0.26, -0.18]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-084_Gasket_for_Front001'].geometry}
+          material={nodes['196-P-084_Gasket_for_Front001'].material}
+          position={[0, 0.26, 0]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['Oil-Seal-RTC-03004007-ComTech_Oil-Seal-RTC-03004007-ComTech001'].geometry}
+          material={nodes['Oil-Seal-RTC-03004007-ComTech_Oil-Seal-RTC-03004007-ComTech001'].material}
+          position={[0, 0.309, -0.18]}
+          rotation={[0, -0.0292, -Math.PI / 2]}
+        />
         <instances.ScrewMCapHdSSMx7 position={[-0.086, 0.282, -0.2156]} rotation={[0, 0, -Math.PI / 2]} />
         <instances.ScrewMCapHdSSMx7 position={[-0.0356, 0.282, -0.266]} rotation={[0, 0, -Math.PI / 2]} />
         <instances.ScrewMCapHdSSMx7 position={[0.086, 0.282, -0.11]} rotation={[0, 0, -Math.PI / 2]} />
@@ -558,13 +871,33 @@ function Model({ instances, ...props }) {
         <instances.BondedSealMhydroscand position={[-0.1768, 0.14, -0.1004]} rotation={[Math.PI / 2, 0, 0]} />
         <instances.ORingforCoverOringxAISO position={[0, 0.094, 0.2623]} rotation={[Math.PI / 2, 0, 0]} />
         <mesh castShadow receiveShadow geometry={nodes['196-P-001_Crank-Case001'].geometry} material={nodes['196-P-001_Crank-Case001'].material} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-026_Plate_for_Sump001'].geometry} material={nodes['196-P-026_Plate_for_Sump001'].material} position={[0, 0, 0.249]} rotation={[-Math.PI, 0, 0]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-081_Gasket_for_Sump001'].geometry} material={nodes['196-P-081_Gasket_for_Sump001'].material} position={[0, 0, 0.249]} />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-026_Plate_for_Sump001'].geometry}
+          material={nodes['196-P-026_Plate_for_Sump001'].material}
+          position={[0, 0, 0.249]}
+          rotation={[-Math.PI, 0, 0]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-081_Gasket_for_Sump001'].geometry}
+          material={nodes['196-P-081_Gasket_for_Sump001'].material}
+          position={[0, 0, 0.249]}
+        />
         <instances.PScrewSpecialBforOilMx position={[0, -0.052, -0.3012]} rotation={[Math.PI, 0, -0.5787]} />
         <instances.PScrewSpecialBforOilMx position={[0, -0.016, -0.3012]} rotation={[Math.PI, 0, -0.5787]} />
         <instances.PScrewSpecialBforOilMx position={[0, 0.076, -0.3012]} rotation={[Math.PI, 0, -0.5787]} />
         <instances.PScrewSpecialBforOilMx position={[0, 0.04, -0.3012]} rotation={[Math.PI, 0, -0.5787]} />
-        <mesh castShadow receiveShadow geometry={nodes['Bearing_Output_Back_ISO_355-6_-_7FB25_-_Full,DE,AC,Full001'].geometry} material={nodes['Bearing_Output_Back_ISO_355-6_-_7FB25_-_Full,DE,AC,Full001'].material} position={[0, -0.1365, -0.18]} rotation={[0, 0.0767, -Math.PI / 2]} />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['Bearing_Output_Back_ISO_355-6_-_7FB25_-_Full,DE,AC,Full001'].geometry}
+          material={nodes['Bearing_Output_Back_ISO_355-6_-_7FB25_-_Full,DE,AC,Full001'].material}
+          position={[0, -0.1365, -0.18]}
+          rotation={[0, 0.0767, -Math.PI / 2]}
+        />
         <instances.PlainBearingIgusGFM1 position={[-0.0948, -0.101, 0.0948]} rotation={[0, -0.0036, -Math.PI / 2]} />
         <instances.WasherMCopperWasherISO position={[0, 0.04, -0.298]} rotation={[0, -1.5705, 0]} />
         <instances.WasherMCopperWasherISO position={[0, -0.016, -0.298]} rotation={[0, -1.5705, 0]} />
@@ -584,7 +917,14 @@ function Model({ instances, ...props }) {
         <instances.ScrewMCapHdSSMx2 position={[-0.3048, -0.108, -0.1775]} rotation={[Math.PI / 2, 0, -2.3562]} />
         <instances.ScrewMCapHdSSMx2 position={[-0.1775, -0.108, -0.3048]} rotation={[Math.PI / 2, 0, -2.3562]} />
         <instances.ScrewMCapHdSSMx2 position={[-0.3048, 0.072, -0.1775]} rotation={[Math.PI / 2, 0, -2.3562]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-012&013_Cylinder_Outer_Op_Hand001'].geometry} material={nodes['196-P-012&013_Cylinder_Outer_Op_Hand001'].material} position={[-0.1563, -0.018, -0.1563]} rotation={[0, Math.PI / 4, -Math.PI / 2]} />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-012&013_Cylinder_Outer_Op_Hand001'].geometry}
+          material={nodes['196-P-012&013_Cylinder_Outer_Op_Hand001'].material}
+          position={[-0.1563, -0.018, -0.1563]}
+          rotation={[0, Math.PI / 4, -Math.PI / 2]}
+        />
         <instances.PlainBearingIgusGFM position={[0, 0.232, 0.09]} rotation={[0, 0.1363, -Math.PI / 2]} />
         <instances.WasherPlainSSM1 position={[0, 0.259, 0.174]} rotation={[0, -0.2642, -Math.PI / 2]} />
         <instances.WasherPlainSSM2 position={[0, 0.247, 0.174]} rotation={[Math.PI, 0.1864, -Math.PI / 2]} />
@@ -596,19 +936,104 @@ function Model({ instances, ...props }) {
         <instances.ScrewMCapHdSSMx6 position={[0.062, 0.239, 0.234]} rotation={[0, 0, -Math.PI / 2]} />
         <instances.ScrewMCapHdSSMx6 position={[-0.082, 0.239, 0.234]} rotation={[0, 0, -Math.PI / 2]} />
         <instances.ScrewMCapHdSSMx6 position={[0.08, 0.239, 0.058]} rotation={[0, 0, -Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-003_Front-Case001'].geometry} material={nodes['196-P-003_Front-Case001'].material} position={[0, 0.189, -0.18]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-032_Body_for_Water-Pump001'].geometry} material={nodes['196-P-032_Body_for_Water-Pump001'].material} position={[0, 0.26, 0.174]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-033_Rotor_for_Water-Pump001'].geometry} material={nodes['196-P-033_Rotor_for_Water-Pump001'].material} position={[0, 0.2606, 0.174]} rotation={[Math.PI, -0.134, Math.PI]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-034_Cover_for_Water-Pump001'].geometry} material={nodes['196-P-034_Cover_for_Water-Pump001'].material} position={[0, 0.323, 0.174]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-049_Dowel_Stepped001'].geometry} material={nodes['196-P-049_Dowel_Stepped001'].material} position={[0, 0.247, 0.174]} rotation={[0, -0.2883, Math.PI]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-064_Filler_Cap001'].geometry} material={nodes['196-P-064_Filler_Cap001'].material} position={[0.1301, 0.213, 0.0867]} rotation={[0, -Math.PI / 6, 1.0002]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-083_Gasket_for_Front-Case001'].geometry} material={nodes['196-P-083_Gasket_for_Front-Case001'].material} position={[0, 0.188, 0]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-087_Gasket_for_Water-Pump001'].geometry} material={nodes['196-P-087_Gasket_for_Water-Pump001'].material} position={[0, 0.189, 0]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-088_Gasket_forWater-Pump-Cover001'].geometry} material={nodes['196-P-088_Gasket_forWater-Pump-Cover001'].material} position={[0, 0.189, 0]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-107_Hose-Tail_M20_for_20mm-Pipe001'].geometry} material={nodes['196-P-107_Hose-Tail_M20_for_20mm-Pipe001'].material} position={[0.099, 0.288, 0.246]} rotation={[-1.1266, Math.PI / 2, 0]} />
-        <mesh castShadow receiveShadow geometry={nodes['Bearing_Output_Front_ISO_355-2_-_2CE50_-_Full,DE,AC,Full001'].geometry} material={nodes['Bearing_Output_Front_ISO_355-2_-_2CE50_-_Full,DE,AC,Full001'].material} position={[0, 0.253, -0.18]} rotation={[0, -0.1598, Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes['Bonded-Seal_M20_5601-02-20-hydroscand001'].geometry} material={nodes['Bonded-Seal_M20_5601-02-20-hydroscand001'].material} position={[0.096, 0.288, 0.246]} rotation={[0, -1.5705, 0]} />
-        <mesh castShadow receiveShadow geometry={nodes.Cable_Glands_Metal_M16001.geometry} material={nodes.Cable_Glands_Metal_M16001.material} position={[-0.0807, 0.239, 0.086]} rotation={[-1.3431, Math.PI / 2, 0]} />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-003_Front-Case001'].geometry}
+          material={nodes['196-P-003_Front-Case001'].material}
+          position={[0, 0.189, -0.18]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-032_Body_for_Water-Pump001'].geometry}
+          material={nodes['196-P-032_Body_for_Water-Pump001'].material}
+          position={[0, 0.26, 0.174]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-033_Rotor_for_Water-Pump001'].geometry}
+          material={nodes['196-P-033_Rotor_for_Water-Pump001'].material}
+          position={[0, 0.2606, 0.174]}
+          rotation={[Math.PI, -0.134, Math.PI]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-034_Cover_for_Water-Pump001'].geometry}
+          material={nodes['196-P-034_Cover_for_Water-Pump001'].material}
+          position={[0, 0.323, 0.174]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-049_Dowel_Stepped001'].geometry}
+          material={nodes['196-P-049_Dowel_Stepped001'].material}
+          position={[0, 0.247, 0.174]}
+          rotation={[0, -0.2883, Math.PI]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-064_Filler_Cap001'].geometry}
+          material={nodes['196-P-064_Filler_Cap001'].material}
+          position={[0.1301, 0.213, 0.0867]}
+          rotation={[0, -Math.PI / 6, 1.0002]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-083_Gasket_for_Front-Case001'].geometry}
+          material={nodes['196-P-083_Gasket_for_Front-Case001'].material}
+          position={[0, 0.188, 0]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-087_Gasket_for_Water-Pump001'].geometry}
+          material={nodes['196-P-087_Gasket_for_Water-Pump001'].material}
+          position={[0, 0.189, 0]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-088_Gasket_forWater-Pump-Cover001'].geometry}
+          material={nodes['196-P-088_Gasket_forWater-Pump-Cover001'].material}
+          position={[0, 0.189, 0]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-107_Hose-Tail_M20_for_20mm-Pipe001'].geometry}
+          material={nodes['196-P-107_Hose-Tail_M20_for_20mm-Pipe001'].material}
+          position={[0.099, 0.288, 0.246]}
+          rotation={[-1.1266, Math.PI / 2, 0]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['Bearing_Output_Front_ISO_355-2_-_2CE50_-_Full,DE,AC,Full001'].geometry}
+          material={nodes['Bearing_Output_Front_ISO_355-2_-_2CE50_-_Full,DE,AC,Full001'].material}
+          position={[0, 0.253, -0.18]}
+          rotation={[0, -0.1598, Math.PI / 2]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['Bonded-Seal_M20_5601-02-20-hydroscand001'].geometry}
+          material={nodes['Bonded-Seal_M20_5601-02-20-hydroscand001'].material}
+          position={[0.096, 0.288, 0.246]}
+          rotation={[0, -1.5705, 0]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Cable_Glands_Metal_M16001.geometry}
+          material={nodes.Cable_Glands_Metal_M16001.material}
+          position={[-0.0807, 0.239, 0.086]}
+          rotation={[-1.3431, Math.PI / 2, 0]}
+        />
         <instances.MagnetMisumiHXNH1 position={[-0.0123, 0.2906, 0.1445]} />
         <instances.MagnetMisumiHXNH1 position={[-0.0295, 0.2706, 0.1863]} rotation={[0, -0.125, -Math.PI]} />
         <instances.MagnetMisumiHXNH1 position={[0.0295, 0.2706, 0.1617]} rotation={[0, -0.1148, Math.PI]} />
@@ -626,7 +1051,14 @@ function Model({ instances, ...props }) {
         <instances.ScrewMCapHdSSMx9 position={[-0.062, 0.282, 0.236]} rotation={[0, 0, -Math.PI / 2]} />
         <instances.ScrewMCapHdSSMx9 position={[-0.04, 0.338, 0.218]} rotation={[0, 0, -Math.PI / 2]} />
         <instances.ScrewMCapHdSSMx9 position={[0.04, 0.338, 0.126]} rotation={[0, 0, -Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes['Screw_M5_Cap-Hd_SS_M5x30001'].geometry} material={nodes['Screw_M5_Cap-Hd_SS_M5x30001'].material} position={[0.062, 0.312, 0.128]} rotation={[0, 0, -Math.PI / 2]} />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['Screw_M5_Cap-Hd_SS_M5x30001'].geometry}
+          material={nodes['Screw_M5_Cap-Hd_SS_M5x30001'].material}
+          position={[0.062, 0.312, 0.128]}
+          rotation={[0, 0, -Math.PI / 2]}
+        />
         <instances.ScrewMCapHdSSMx11 position={[-0.134, 0.221, -0.2355]} rotation={[0, 0, -Math.PI / 2]} />
         <instances.ScrewMCapHdSSMx11 position={[-0.0555, 0.221, -0.314]} rotation={[0, 0, -Math.PI / 2]} />
         <instances.ScrewMCapHdSSMx11 position={[0.134, 0.221, -0.1245]} rotation={[0, 0, -Math.PI / 2]} />
@@ -744,20 +1176,87 @@ function Model({ instances, ...props }) {
         <instances.ScrewMCapHdSSMx11 position={[-0.1527, -0.1836, 0.2087]} rotation={[0, 0, Math.PI / 2]} />
         <instances.ScrewMCapHdSSMx11 position={[-0.0136, -0.1836, 0.2087]} rotation={[0, 0, Math.PI / 2]} />
         <instances.ScrewMCapHdSSMx11 position={[-0.1923, -0.1836, 0.1131]} rotation={[0, 0, Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-005_Back-Case001'].geometry} material={nodes['196-P-005_Back-Case001'].material} position={[0, -0.211, 0]} />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-005_Back-Case001'].geometry}
+          material={nodes['196-P-005_Back-Case001'].material}
+          position={[0, -0.211, 0]}
+        />
         <instances.PCoverforElectric position={[0, -0.211, -0.18]} rotation={[Math.PI, -1.5705, 0]} />
         <instances.PCoverforElectric position={[0, -0.217, 0]} rotation={[Math.PI, -1.5705, 0]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-060_Former_for_Solanoyd_Coil001'].geometry} material={nodes['196-P-060_Former_for_Solanoyd_Coil001'].material} position={[0, -0.211, 0]} rotation={[0, 0, -Math.PI]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-072_Gear_Starter_Large_ISO_-_Spur_gear_2M_60T_20PA_8F'].geometry} material={nodes['196-P-072_Gear_Starter_Large_ISO_-_Spur_gear_2M_60T_20PA_8F'].material} position={[0, -0.167, 0]} rotation={[-Math.PI, 0.1491, Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-073_Gear_Starter_Intermediate_ISO_-_Spur_gear_2M_23T_'].geometry} material={nodes['196-P-073_Gear_Starter_Intermediate_ISO_-_Spur_gear_2M_23T_'].material} position={[-0.0948, -0.135, 0.0948]} rotation={[-Math.PI, 1.3439, Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-074_Gear_for_Starter-Motor001'].geometry} material={nodes['196-P-074_Gear_for_Starter-Motor001'].material} position={[-0.1527, -0.151, 0.1527]} rotation={[0, 1.1503, 0]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-085_Gasket_for_Back-Case001'].geometry} material={nodes['196-P-085_Gasket_for_Back-Case001'].material} position={[0.1437, -0.2462, -0.02]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-094_Rod_for_Solanoyd001'].geometry} material={nodes['196-P-094_Rod_for_Solanoyd001'].material} position={[0, -0.275, 0]} rotation={[0, 1.4217, -Math.PI]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-095_Plate_for_Solanoyd001'].geometry} material={nodes['196-P-095_Plate_for_Solanoyd001'].material} position={[0, -0.253, 0]} rotation={[0, -0.7097, Math.PI]} />
-        <mesh castShadow receiveShadow geometry={nodes['Bearing_Thrust_10-20-07_ISO_104_-_701020_-_R,12,DE,AC,12001'].geometry} material={nodes['Bearing_Thrust_10-20-07_ISO_104_-_701020_-_R,12,DE,AC,12001'].material} position={[0, -0.224, 0]} rotation={[0, 0.0835, -Math.PI / 2]} />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-060_Former_for_Solanoyd_Coil001'].geometry}
+          material={nodes['196-P-060_Former_for_Solanoyd_Coil001'].material}
+          position={[0, -0.211, 0]}
+          rotation={[0, 0, -Math.PI]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-072_Gear_Starter_Large_ISO_-_Spur_gear_2M_60T_20PA_8F'].geometry}
+          material={nodes['196-P-072_Gear_Starter_Large_ISO_-_Spur_gear_2M_60T_20PA_8F'].material}
+          position={[0, -0.167, 0]}
+          rotation={[-Math.PI, 0.1491, Math.PI / 2]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-073_Gear_Starter_Intermediate_ISO_-_Spur_gear_2M_23T_'].geometry}
+          material={nodes['196-P-073_Gear_Starter_Intermediate_ISO_-_Spur_gear_2M_23T_'].material}
+          position={[-0.0948, -0.135, 0.0948]}
+          rotation={[-Math.PI, 1.3439, Math.PI / 2]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-074_Gear_for_Starter-Motor001'].geometry}
+          material={nodes['196-P-074_Gear_for_Starter-Motor001'].material}
+          position={[-0.1527, -0.151, 0.1527]}
+          rotation={[0, 1.1503, 0]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-085_Gasket_for_Back-Case001'].geometry}
+          material={nodes['196-P-085_Gasket_for_Back-Case001'].material}
+          position={[0.1437, -0.2462, -0.02]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-094_Rod_for_Solanoyd001'].geometry}
+          material={nodes['196-P-094_Rod_for_Solanoyd001'].material}
+          position={[0, -0.275, 0]}
+          rotation={[0, 1.4217, -Math.PI]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-095_Plate_for_Solanoyd001'].geometry}
+          material={nodes['196-P-095_Plate_for_Solanoyd001'].material}
+          position={[0, -0.253, 0]}
+          rotation={[0, -0.7097, Math.PI]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['Bearing_Thrust_10-20-07_ISO_104_-_701020_-_R,12,DE,AC,12001'].geometry}
+          material={nodes['Bearing_Thrust_10-20-07_ISO_104_-_701020_-_R,12,DE,AC,12001'].material}
+          position={[0, -0.224, 0]}
+          rotation={[0, 0.0835, -Math.PI / 2]}
+        />
         <instances.CableGlandsMetalM1 position={[-0.0533, -0.231, -0.16]} rotation={[-2.9409, Math.PI / 2, 0]} />
         <instances.CableGlandsMetalM1 position={[-0.0631, -0.237, 0.02]} rotation={[-2.2862, Math.PI / 2, 0]} />
-        <mesh castShadow receiveShadow geometry={nodes.Coil_for_Solanoyd001.geometry} material={nodes.Coil_for_Solanoyd001.material} position={[0, -0.237, 0]} />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Coil_for_Solanoyd001.geometry}
+          material={nodes.Coil_for_Solanoyd001.material}
+          position={[0, -0.237, 0]}
+        />
         <instances.Fittingumixjes1 position={[0.06, -0.169, -0.26]} rotation={[1.1387, -1.5706, 0]} />
         <instances.NutCastleMDIN1 position={[0, -0.173, 0]} rotation={[Math.PI, -1.4217, Math.PI]} />
         <instances.NutCastleMDIN1 position={[0, -0.256, 0]} rotation={[Math.PI, -1.4217, 0]} />
@@ -774,7 +1273,14 @@ function Model({ instances, ...props }) {
         <instances.PlainBearingIgusGFM2 position={[0, -0.197, 0]} rotation={[0, 0.2169, Math.PI / 2]} />
         <instances.SplitPinM1 position={[0, -0.269, 0]} rotation={[Math.PI / 2, 0, 0.1491]} />
         <instances.SplitPinM1 position={[0, -0.16, 0]} rotation={[Math.PI / 2, 0, 0.1491]} />
-        <mesh castShadow receiveShadow geometry={nodes.Spring_Starter001.geometry} material={nodes.Spring_Starter001.material} position={[0, -0.2322, 0]} rotation={[0, 0.5031, 0]} />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Spring_Starter001.geometry}
+          material={nodes.Spring_Starter001.material}
+          position={[0, -0.2322, 0]}
+          rotation={[0, 0.5031, 0]}
+        />
         <instances.PClampforExhaust position={[0.2946, 0.1365, -0.4337]} rotation={[0, -Math.PI / 4, 0.6981]} />
         <instances.PClampforExhaust position={[0.4337, 0.1365, -0.2946]} rotation={[0, -Math.PI / 4, -0.6981]} />
         <instances.PClampforExhaust position={[-0.4337, 0.1005, -0.2946]} rotation={[0, Math.PI / 4, 0.6981]} />
@@ -850,15 +1356,75 @@ function Model({ instances, ...props }) {
         <instances.ScrewMCapHdSSMx12 position={[0.0787, 0.169, -0.1474]} rotation={[0, 0, -Math.PI / 2]} />
         <instances.ScrewMCapHdSSMx12 position={[-0.082, 0.169, 0.208]} rotation={[0, 0, -Math.PI / 2]} />
         <instances.ScrewMCapHdSSMx12 position={[0.132, 0.169, 0.0603]} rotation={[0, 0, -Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-002_Front-Block001'].geometry} material={nodes['196-P-002_Front-Block001'].material} position={[0, 0.079, 0]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-048_Driver_for_Pump001'].geometry} material={nodes['196-P-048_Driver_for_Pump001'].material} position={[0, 0.252, 0.174]} rotation={[Math.PI, 1.1155, 0]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-068_Gear_Intermediate_for_Oil-Pump_ISO_-_Spur_gear_2M'].geometry} material={nodes['196-P-068_Gear_Intermediate_for_Oil-Pump_ISO_-_Spur_gear_2M'].material} position={[0, 0.218, 0.09]} rotation={[Math.PI, -1.1601, Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-069_Gear_Large_for_Oil-Pump_DIN_-_Spur_gear_2M_27T_20'].geometry} material={nodes['196-P-069_Gear_Large_for_Oil-Pump_DIN_-_Spur_gear_2M_27T_20'].material} position={[0, 0.202, 0.174]} rotation={[-Math.PI, 1.1155, Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-070_Gear_Driving_for_Oil-Pump_ISO_-_Spur_gear_2M_10T_'].geometry} material={nodes['196-P-070_Gear_Driving_for_Oil-Pump_ISO_-_Spur_gear_2M_10T_'].material} position={[0, 0.153, 0.174]} rotation={[0, -1.1155, -Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-071_Gear_Driven_for_Oil-Pump_ISO_-_Spur_gear_2M_10T_2'].geometry} material={nodes['196-P-071_Gear_Driven_for_Oil-Pump_ISO_-_Spur_gear_2M_10T_2'].material} position={[0.04, 0.141, 0.174]} rotation={[0, 1.4215, Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-082_Gasket_for_Front-Block001'].geometry} material={nodes['196-P-082_Gasket_for_Front-Block001'].material} position={[0, 0.14, 0]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-097_Plate_for_Oil-Pump001'].geometry} material={nodes['196-P-097_Plate_for_Oil-Pump001'].material} position={[0.016, 0.14, 0.183]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-099_Fitting_for_Oil-Filter001'].geometry} material={nodes['196-P-099_Fitting_for_Oil-Filter001'].material} position={[0.185, 0.117, 0.171]} rotation={[Math.PI / 2, 0, 0.8681]} />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-002_Front-Block001'].geometry}
+          material={nodes['196-P-002_Front-Block001'].material}
+          position={[0, 0.079, 0]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-048_Driver_for_Pump001'].geometry}
+          material={nodes['196-P-048_Driver_for_Pump001'].material}
+          position={[0, 0.252, 0.174]}
+          rotation={[Math.PI, 1.1155, 0]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-068_Gear_Intermediate_for_Oil-Pump_ISO_-_Spur_gear_2M'].geometry}
+          material={nodes['196-P-068_Gear_Intermediate_for_Oil-Pump_ISO_-_Spur_gear_2M'].material}
+          position={[0, 0.218, 0.09]}
+          rotation={[Math.PI, -1.1601, Math.PI / 2]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-069_Gear_Large_for_Oil-Pump_DIN_-_Spur_gear_2M_27T_20'].geometry}
+          material={nodes['196-P-069_Gear_Large_for_Oil-Pump_DIN_-_Spur_gear_2M_27T_20'].material}
+          position={[0, 0.202, 0.174]}
+          rotation={[-Math.PI, 1.1155, Math.PI / 2]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-070_Gear_Driving_for_Oil-Pump_ISO_-_Spur_gear_2M_10T_'].geometry}
+          material={nodes['196-P-070_Gear_Driving_for_Oil-Pump_ISO_-_Spur_gear_2M_10T_'].material}
+          position={[0, 0.153, 0.174]}
+          rotation={[0, -1.1155, -Math.PI / 2]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-071_Gear_Driven_for_Oil-Pump_ISO_-_Spur_gear_2M_10T_2'].geometry}
+          material={nodes['196-P-071_Gear_Driven_for_Oil-Pump_ISO_-_Spur_gear_2M_10T_2'].material}
+          position={[0.04, 0.141, 0.174]}
+          rotation={[0, 1.4215, Math.PI / 2]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-082_Gasket_for_Front-Block001'].geometry}
+          material={nodes['196-P-082_Gasket_for_Front-Block001'].material}
+          position={[0, 0.14, 0]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-097_Plate_for_Oil-Pump001'].geometry}
+          material={nodes['196-P-097_Plate_for_Oil-Pump001'].material}
+          position={[0.016, 0.14, 0.183]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-099_Fitting_for_Oil-Filter001'].geometry}
+          material={nodes['196-P-099_Fitting_for_Oil-Filter001'].material}
+          position={[0.185, 0.117, 0.171]}
+          rotation={[Math.PI / 2, 0, 0.8681]}
+        />
         <instances.PScrewSpecialCforOilMx position={[0.185, 0.152, 0.0268]} rotation={[Math.PI, 0, -0.5787]} />
         <instances.PScrewSpecialCforOilMx position={[0.2652, 0.172, 0.14]} rotation={[0, 1.5705, 0]} />
         <instances.ScrewMCapHdSSMx13 position={[0.052, 0.1302, 0.144]} rotation={[0, -0.3431, Math.PI / 2]} />
@@ -1100,11 +1666,46 @@ function Model({ instances, ...props }) {
         <instances.SpringOuterforValve position={[-0.4092, 0.041, -0.364]} rotation={[2.1754, 0.3485, -0.8344]} />
         <instances.SpringOuterforValve position={[-0.3993, -0.0741, -0.4474]} rotation={[0.4204, -0.6815, -1.1122]} />
         <instances.SpringOuterforValve position={[-0.4474, -0.0741, -0.3993]} rotation={[1.169, -0.1602, -0.783]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-010&011_Cylinder-Head_Op_Hand001'].geometry} material={nodes['196-P-010&011_Cylinder-Head_Op_Hand001'].material} position={[-0.0629, -0.018, -0.5381]} rotation={[0, Math.PI / 4, -Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-014&015_Rocker-Box_Op_Hand001'].geometry} material={nodes['196-P-014&015_Rocker-Box_Op_Hand001'].material} position={[-0.4243, -0.006, -0.4243]} rotation={[0, Math.PI / 4, -Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-016&017_Cover_for_Rocker-Box_Op_Hand001'].geometry} material={nodes['196-P-016&017_Cover_for_Rocker-Box_Op_Hand001'].material} position={[-0.4985, 0.0078, -0.4985]} rotation={[0, Math.PI / 4, -Math.PI / 2]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-043&044_Rocker_Inlet_Op_Hand001'].geometry} material={nodes['196-P-043&044_Rocker_Inlet_Op_Hand001'].material} position={[-0.3859, -0.023, -0.58]} rotation={[-0.0061, 0.7854, -1.5665]} />
-        <mesh castShadow receiveShadow geometry={nodes['196-P-045&046_Rocker_Exhaust_Op_Hand001'].geometry} material={nodes['196-P-045&046_Rocker_Exhaust_Op_Hand001'].material} position={[-0.4815, 0.0008, -0.4165]} rotation={[0.1574, 0.7792, 1.4597]} />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-010&011_Cylinder-Head_Op_Hand001'].geometry}
+          material={nodes['196-P-010&011_Cylinder-Head_Op_Hand001'].material}
+          position={[-0.0629, -0.018, -0.5381]}
+          rotation={[0, Math.PI / 4, -Math.PI / 2]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-014&015_Rocker-Box_Op_Hand001'].geometry}
+          material={nodes['196-P-014&015_Rocker-Box_Op_Hand001'].material}
+          position={[-0.4243, -0.006, -0.4243]}
+          rotation={[0, Math.PI / 4, -Math.PI / 2]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-016&017_Cover_for_Rocker-Box_Op_Hand001'].geometry}
+          material={nodes['196-P-016&017_Cover_for_Rocker-Box_Op_Hand001'].material}
+          position={[-0.4985, 0.0078, -0.4985]}
+          rotation={[0, Math.PI / 4, -Math.PI / 2]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-043&044_Rocker_Inlet_Op_Hand001'].geometry}
+          material={nodes['196-P-043&044_Rocker_Inlet_Op_Hand001'].material}
+          position={[-0.3859, -0.023, -0.58]}
+          rotation={[-0.0061, 0.7854, -1.5665]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes['196-P-045&046_Rocker_Exhaust_Op_Hand001'].geometry}
+          material={nodes['196-P-045&046_Rocker_Exhaust_Op_Hand001'].material}
+          position={[-0.4815, 0.0008, -0.4165]}
+          rotation={[0.1574, 0.7792, 1.4597]}
+        />
         <instances.PPiston position={[0.2068, 0.018, -0.2068]} rotation={[0, -Math.PI / 4, -Math.PI / 2]} />
         <instances.PPistonRingA position={[0.1912, 0.018, -0.1912]} rotation={[0, -Math.PI / 4, 0]} />
         <instances.PPistonRingA position={[0.1983, 0.018, -0.1983]} rotation={[0, -Math.PI / 4, -Math.PI / 2]} />

@@ -38,10 +38,10 @@ export const Wheel = forwardRef<Group, WheelProps>(({ leftSide, ...props }, ref)
       collisionFilterGroup: 0,
       rotation: [Math.PI / 2, 0, Math.PI / 3],
       args: [radius, radius, 0.5, 16],
-      ...props,
+      ...props
     }),
     ref,
-    [radius],
+    [radius]
   )
   return (
     <group ref={ref} dispose={null}>

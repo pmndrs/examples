@@ -49,7 +49,7 @@ function Scene({ ...props }) {
     temporalDistortion: { value: 0, min: 0, max: 1, step: 0.01 },
     attenuationDistance: { value: 0.5, min: 0, max: 10, step: 0.01 },
     attenuationColor: '#ffffff',
-    color: '#ffffff',
+    color: '#ffffff'
   })
   return (
     <>

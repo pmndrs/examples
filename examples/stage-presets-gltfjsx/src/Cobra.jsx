@@ -25,7 +25,13 @@ export function Model({ color, ...props }) {
       <mesh castShadow receiveShadow geometry={nodes.Material2068.geometry} material={materials.MT__15_1_0} rotation={[-Math.PI / 2, 0, 0]} />
       <mesh castShadow receiveShadow geometry={nodes.Material2071.geometry} material={materials.MT__15_1} rotation={[-Math.PI / 2, 0, 0]} />
       <mesh castShadow receiveShadow geometry={nodes.Material2078.geometry} material={materials.Groundcover_BarkChips} rotation={[-Math.PI / 2, 0, 0]} />
-      <mesh castShadow receiveShadow geometry={nodes.Material2079.geometry} material={materials.Groundcover_Rock_Crushed_Multi_1} rotation={[-Math.PI / 2, 0, 0]} />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Material2079.geometry}
+        material={materials.Groundcover_Rock_Crushed_Multi_1}
+        rotation={[-Math.PI / 2, 0, 0]}
+      />
       <mesh castShadow receiveShadow geometry={nodes.Material3004.geometry} material={materials.MT__15__1} rotation={[-Math.PI / 2, 0, 0]} />
     </group>
   )

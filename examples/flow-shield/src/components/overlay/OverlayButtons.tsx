@@ -67,16 +67,10 @@ export default function OverlayButtons({
     <>
       {/* Preset selector */}
       <div className={styles.presetGroup}>
-        <button
-          onClick={() => onSetPreset('default')}
-          className={`${styles.presetBtn} ${preset === 'default' ? styles.active : styles.inactive}`}
-        >
+        <button onClick={() => onSetPreset('default')} className={`${styles.presetBtn} ${preset === 'default' ? styles.active : styles.inactive}`}>
           Default
         </button>
-        <button
-          onClick={() => onSetPreset('droideka')}
-          className={`${styles.presetBtn} ${preset === 'droideka' ? styles.active : styles.inactive}`}
-        >
+        <button onClick={() => onSetPreset('droideka')} className={`${styles.presetBtn} ${preset === 'droideka' ? styles.active : styles.inactive}`}>
           Droideka
         </button>
       </div>
@@ -153,8 +147,7 @@ export default function OverlayButtons({
           fill="none"
           stroke="currentColor"
           strokeWidth="1.4"
-          className={`${styles.fabIcon} ${open ? styles.fabIconOpen : ''}`}
-        >
+          className={`${styles.fabIcon} ${open ? styles.fabIconOpen : ''}`}>
           {open ? (
             <>
               <line x1="5" y1="5" x2="15" y2="15" />

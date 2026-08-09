@@ -1,8 +1,8 @@
-import * as THREE from "three"
-import { useEffect, useLayoutEffect, useMemo } from "react"
-import { Canvas, useFrame, useThree } from "@react-three/fiber"
-import { Physics, usePlane, useSphere } from "@react-three/cannon"
-import niceColors from "nice-color-palettes"
+import * as THREE from 'three'
+import { useEffect, useLayoutEffect, useMemo } from 'react'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { Physics, usePlane, useSphere } from '@react-three/cannon'
+import niceColors from 'nice-color-palettes'
 
 const tempColor = new THREE.Color()
 const data = Array.from({ length: 200 }, () => ({ color: niceColors[17][Math.floor(Math.random() * 5)], scale: 0.25 + Math.random() }))
@@ -24,7 +24,7 @@ function InstancedSpheres({ count = 200 }) {
   const [ref, api] = useSphere((index) => ({
     mass: data[index].scale * 100,
     position: [4 - Math.random() * 8, viewport.height * 3, 0, 0],
-    args: [data[index].scale],
+    args: [data[index].scale]
   }))
   const colorArray = useMemo(() => Float32Array.from(new Array(count).fill().flatMap((_, i) => tempColor.set(data[i].color).toArray())), [count])
   useLayoutEffect(() => {
@@ -61,6 +61,6 @@ function Plane({ color, position = [0, 0, 0], ...props }) {
 
 function Mouse() {
   const { viewport } = useThree()
-  const [, api] = useSphere(() => ({ type: "Kinematic", args: [4] }))
+  const [, api] = useSphere(() => ({ type: 'Kinematic', args: [4] }))
   useFrame((state) => api.position.set((state.mouse.x * viewport.width) / 2, (state.mouse.y * viewport.height) / 2, 7))
 }

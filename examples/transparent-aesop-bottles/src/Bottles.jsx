@@ -9,7 +9,7 @@ const bottleMaterial = new THREE.MeshPhysicalMaterial({
   transmission: 1,
   roughness: 0.35,
   thickness: 500,
-  envMapIntensity: 4,
+  envMapIntensity: 4
 })
 
 const capMaterial = new THREE.MeshStandardMaterial({ color: new THREE.Color('white') })

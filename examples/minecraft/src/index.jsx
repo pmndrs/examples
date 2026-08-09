@@ -1,8 +1,8 @@
-import { useState } from "react"
-import { createRoot } from "react-dom/client"
-import { Footer } from "@pmndrs/branding"
-import "./styles.css"
-import App from "./App"
+import { useState } from 'react'
+import { createRoot } from 'react-dom/client'
+import { Footer } from '@pmndrs/branding'
+import './styles.css'
+import App from './App'
 
 function Overlay() {
   const [ready, set] = useState(false)
@@ -10,7 +10,7 @@ function Overlay() {
     <>
       <App />
       <div className="dot" />
-      <div className={`fullscreen bg ${ready ? "ready" : "notready"} ${ready && "clicked"}`}>
+      <div className={`fullscreen bg ${ready ? 'ready' : 'notready'} ${ready && 'clicked'}`}>
         <div className="stack">
           <button onClick={() => set(true)}>Start</button>
         </div>
@@ -20,4 +20,4 @@ function Overlay() {
   )
 }
 
-createRoot(document.getElementById("root")).render(<Overlay />)
+createRoot(document.getElementById('root')).render(<Overlay />)

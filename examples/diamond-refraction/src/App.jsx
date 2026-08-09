@@ -43,8 +43,7 @@ function Diamond(props) {
           worldRadius={0.1}
           ior={1.8}
           backfaceIor={1.1}
-          intensity={0.1}
-        >
+          intensity={0.1}>
           <mesh castShadow ref={ref} geometry={nodes.Diamond_1_0.geometry} {...props}>
             <MeshRefractionMaterial envMap={texture} {...config} toneMapped={false} />
           </mesh>
@@ -72,17 +71,7 @@ export default function App() {
         <sphereGeometry args={[1, 64, 64]} />
         <meshStandardMaterial color="hotpink" />
       </mesh>
-      <AccumulativeShadows
-        temporal
-        frames={100}
-        color="orange"
-        colorBlend={2}
-        toneMapped={true}
-        alphaTest={0.7}
-        opacity={1}
-        scale={12}
-        position={[0, -0.5, 0]}
-      >
+      <AccumulativeShadows temporal frames={100} color="orange" colorBlend={2} toneMapped={true} alphaTest={0.7} opacity={1} scale={12} position={[0, -0.5, 0]}>
         <RandomizedLight amount={8} radius={10} ambient={0.5} position={[5, 5, -10]} bias={0.001} />
       </AccumulativeShadows>
       <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/aerodynamics_workshop_1k.hdr" />

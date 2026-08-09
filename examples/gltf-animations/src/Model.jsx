@@ -5,13 +5,13 @@ all actions and sets up a THREE.AnimationMixer for it so that you don't have to.
 All of the assets actions, action-names and clips are available in its output. 
 */
 
-import { useEffect, useState, useRef } from "react"
-import { useFrame } from "@react-three/fiber"
-import { useGLTF, useTexture, useAnimations } from "@react-three/drei"
-import { easing } from "maath"
+import { useEffect, useState, useRef } from 'react'
+import { useFrame } from '@react-three/fiber'
+import { useGLTF, useTexture, useAnimations } from '@react-three/drei'
+import { easing } from 'maath'
 
-import stacyImg from "./stacy.jpg"
-import stacyModel from "./stacy.glb?url"
+import stacyImg from './stacy.jpg'
+import stacyModel from './stacy.glb?url'
 
 export default function Model(props) {
   const halo = useRef()
@@ -25,7 +25,7 @@ export default function Model(props) {
   const [index, setIndex] = useState(4)
 
   // Change cursor on hover-state
-  useEffect(() => void (document.body.style.cursor = hovered ? "pointer" : "auto"), [hovered])
+  useEffect(() => void (document.body.style.cursor = hovered ? 'pointer' : 'auto'), [hovered])
 
   // Change animation when the index changes
   useEffect(() => {
@@ -38,7 +38,7 @@ export default function Model(props) {
   useFrame((state, delta) => {
     // Animate the selection halo
     easing.damp3(halo.current.scale, hovered ? 1.15 : 1, 0.2, delta)
-    easing.dampC(halo.current.material.color, hovered ? "hotpink" : "aquamarine", 0.2, delta)
+    easing.dampC(halo.current.material.color, hovered ? 'hotpink' : 'aquamarine', 0.2, delta)
   })
 
   return (
@@ -54,8 +54,7 @@ export default function Model(props) {
           geometry={nodes.stacy.geometry}
           skeleton={nodes.stacy.skeleton}
           rotation={[-Math.PI / 2, 0, 0]}
-          scale={100}
-        >
+          scale={100}>
           <meshStandardMaterial map={texture} map-flipY={false} skinning />
         </skinnedMesh>
       </group>

@@ -1,9 +1,9 @@
-import * as THREE from "three"
-import { createContext, useContext, useRef, useState } from "react"
-import { Canvas, useFrame } from "@react-three/fiber"
-import { Clouds, Cloud, CameraShake, Environment, OrbitControls, ContactShadows, PerspectiveCamera } from "@react-three/drei"
-import { CuboidCollider, BallCollider, Physics, RigidBody } from "@react-three/rapier"
-import { random } from "maath"
+import * as THREE from 'three'
+import { createContext, useContext, useRef, useState } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { Clouds, Cloud, CameraShake, Environment, OrbitControls, ContactShadows, PerspectiveCamera } from '@react-three/drei'
+import { CuboidCollider, BallCollider, Physics, RigidBody } from '@react-three/rapier'
+import { random } from 'maath'
 
 const context = createContext()
 export default function App() {

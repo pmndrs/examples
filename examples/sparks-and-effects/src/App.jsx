@@ -64,8 +64,7 @@ export default function App() {
       onCreated={({ gl }) => {
         gl.toneMapping = THREE.ACESFilmicToneMapping
         gl.setClearColor(new THREE.Color('#020207'))
-      }}
-    >
+      }}>
       <fog attach="fog" args={['white', 50, 190]} />
       <pointLight distance={100} intensity={4 * Math.PI} decay={0} color="white" />
       <Number />

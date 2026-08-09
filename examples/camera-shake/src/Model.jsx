@@ -12,7 +12,7 @@ const material = new THREE.MeshPhysicalMaterial({
   color: new THREE.Color('#bb86a1').convertSRGBToLinear(),
   roughness: 0,
   clearcoat: 1,
-  clearcoatRoughness: 0,
+  clearcoatRoughness: 0
 })
 
 export default function Model(props) {

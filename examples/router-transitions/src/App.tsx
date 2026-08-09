@@ -1,23 +1,23 @@
-import { Canvas, useFrame, type ThreeElements } from "@react-three/fiber"
-import type { ComponentProps } from "react"
-import type { Mesh } from "three"
-import { useGLTF, Float, Lightformer, Text, Html, ContactShadows, Environment, MeshTransmissionMaterial } from "@react-three/drei"
-import { EffectComposer, N8AO, TiltShift2 } from "@react-three/postprocessing"
-import { Router, Route, Link, useLocation } from "wouter"
-import { suspend } from "suspend-react"
-import { easing } from "maath"
+import { Canvas, useFrame, type ThreeElements } from '@react-three/fiber'
+import type { ComponentProps } from 'react'
+import type { Mesh } from 'three'
+import { useGLTF, Float, Lightformer, Text, Html, ContactShadows, Environment, MeshTransmissionMaterial } from '@react-three/drei'
+import { EffectComposer, N8AO, TiltShift2 } from '@react-three/postprocessing'
+import { Router, Route, Link, useLocation } from 'wouter'
+import { suspend } from 'suspend-react'
+import { easing } from 'maath'
 
-import bombModel from "./bomb-gp.glb?url"
+import bombModel from './bomb-gp.glb?url'
 
-const inter = import("@pmndrs/assets/fonts/inter_regular.woff") as Promise<{ default: string }>
+const inter = import('@pmndrs/assets/fonts/inter_regular.woff') as Promise<{ default: string }>
 useGLTF.preload(bombModel)
 
-const base = import.meta.env.BASE_URL.replace(/\/$/, "")
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
 
 export const App = () => (
   <Router base={base}>
-    <Canvas eventSource={document.getElementById("root")!} eventPrefix="client" shadows camera={{ position: [0, 0, 20], fov: 50 }}>
-      <color attach="background" args={["#e0e0e0"]} />
+    <Canvas eventSource={document.getElementById('root')!} eventPrefix="client" shadows camera={{ position: [0, 0, 20], fov: 50 }}>
+      <color attach="background" args={['#e0e0e0']} />
       <spotLight position={[20, 20, 10]} intensity={Math.PI} decay={0} penumbra={1} castShadow angle={0.2} />
 
       <Status position={[0, 0, -10]} />
@@ -58,33 +58,28 @@ export const App = () => (
 
 function Rig() {
   useFrame((state, delta) => {
-    easing.damp3(
-      state.camera.position,
-      [Math.sin(-state.pointer.x) * 5, state.pointer.y * 3.5, 15 + Math.cos(state.pointer.x) * 10],
-      0.2,
-      delta,
-    )
+    easing.damp3(state.camera.position, [Math.sin(-state.pointer.x) * 5, state.pointer.y * 3.5, 15 + Math.cos(state.pointer.x) * 10], 0.2, delta)
     state.camera.lookAt(0, 0, 0)
   })
 
   return null
 }
 
-const Torus = (props: ThreeElements["mesh"]) => (
+const Torus = (props: ThreeElements['mesh']) => (
   <mesh receiveShadow castShadow {...props}>
     <torusGeometry args={[4, 1.2, 128, 64]} />
     <MeshTransmissionMaterial backside backsideThickness={5} thickness={2} />
   </mesh>
 )
 
-const Knot = (props: ThreeElements["mesh"]) => (
+const Knot = (props: ThreeElements['mesh']) => (
   <mesh receiveShadow castShadow {...props}>
     <torusKnotGeometry args={[3, 1, 256, 32]} />
     <MeshTransmissionMaterial backside backsideThickness={5} thickness={2} />
   </mesh>
 )
 
-function Bomb(props: ThreeElements["mesh"]) {
+function Bomb(props: ThreeElements['mesh']) {
   const { nodes } = useGLTF(bombModel)
   return (
     <mesh receiveShadow castShadow geometry={(nodes.Little_Boy_Little_Boy_Material_0 as Mesh).geometry} {...props}>
@@ -93,14 +88,14 @@ function Bomb(props: ThreeElements["mesh"]) {
   )
 }
 
-function Status(props: Omit<ComponentProps<typeof Text>, "font" | "children">) {
+function Status(props: Omit<ComponentProps<typeof Text>, 'font' | 'children'>) {
   const [loc] = useLocation()
-  const text = loc === "/" ? "/knot" : loc
+  const text = loc === '/' ? '/knot' : loc
 
   return (
     <Text fontSize={14} letterSpacing={-0.025} font={(suspend(inter) as { default: string }).default} color="black" {...props}>
       {text}
-      <Html style={{ color: "transparent", fontSize: "33.5em" }} transform>
+      <Html style={{ color: 'transparent', fontSize: '33.5em' }} transform>
         {text}
       </Html>
     </Text>
