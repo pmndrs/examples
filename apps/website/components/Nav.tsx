@@ -13,7 +13,8 @@ import {
   useRef,
   useState,
 } from "react";
-import { useParams, usePathname } from "next/navigation";
+import { useParams } from "next/navigation";
+import { createSerializer, parseAsString, useQueryStates } from "nuqs";
 import {
   ChevronLeftIcon,
   ListFilterIcon,
@@ -65,6 +66,23 @@ const INITIAL_THUMBNAILS = 6;
    it reserves it for clearing the selection. The sentinel is what the option
    carries; the state stays "". */
 const ALL_LIBRARIES = "__all__";
+
+/* Filters are shareable: `?q=` carries the search text, `?library=` the
+   library filter. nuqs owns the round trip — the URL *is* the state, so the
+   defaults below double as the "no filter" values and `clearOnDefault` (on by
+   default) drops the empty param rather than leaving `?q=` behind.
+
+   Its defaults also cover what the hand-rolled version had to spell out: a
+   shallow `history.replaceState` instead of a router navigation per keystroke,
+   throttled to stay under Safari's History API rate limit. */
+const filterParsers = {
+  q: parseAsString.withDefault(""),
+  library: parseAsString.withDefault(""),
+};
+
+/* Same parsers, used to hang the active filter off every card link so it
+   survives the client navigation into an example. */
+const serializeFilters = createSerializer(filterParsers);
 
 /**
  * Keep the list itself complete for links, roving focus and stable scroll
@@ -270,10 +288,21 @@ export default function Nav({
 
   const [open, setOpenState] = useState(true);
   const [ready, setReady] = useState(false);
-  const [library, setLibrary] = useState("");
   const [libraryOpen, setLibraryOpen] = useState(false);
-  const [search, setSearch] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
+
+  const [{ q: search, library }, setFilters] = useQueryStates(filterParsers);
+  const setSearch = useCallback(
+    (value: string | ((current: string) => string)) =>
+      setFilters((current) => ({
+        q: typeof value === "function" ? value(current.q) : value,
+      })),
+    [setFilters],
+  );
+  const setLibrary = useCallback(
+    (value: string) => setFilters({ library: value }),
+    [setFilters],
+  );
 
   const searchVisible = searchOpen || search !== "";
 
@@ -447,52 +476,24 @@ export default function Nav({
     document.documentElement.removeAttribute("data-nav-collapsed");
   }, [ready]);
 
-  /* Filters are shareable: `?q=` carries the search text, `?library=` the
-     library filter. Read once on mount — declared after the collapse
-     restore above so a shared link can win over a collapsed rail. Written
-     with `history.replaceState` rather than the router: per-keystroke
-     navigations are pointless work, and Safari rate-limits the History API
-     anyway, hence the debounce. */
-  const pathname = usePathname();
-  const urlReadRef = useRef(false);
+  /* A shared filter link has to be visible when it lands, which the search
+     field handles on its own (`searchVisible` reads the state) but the rail
+     does not — hence this, declared after the collapse restore above so the
+     link wins over a collapsed rail. It fires once, on the first non-empty
+     filter, which covers both a link opened cold and one whose params only
+     reach the client after hydration.
+
+     Plain state, not `setOpen`: following someone's filter link should not
+     overwrite this visitor's stored collapse preference. */
+  const filtersRevealed = useRef(false);
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const q = params.get("q");
-    const lib = params.get("library");
+    if (filtersRevealed.current || (!search && !library)) return;
+    filtersRevealed.current = true;
 
-    if (q) {
-      setSearch(q);
-      setSearchOpen(true);
-      /* Plain state, not `setOpen`: following someone's filter link should
-         not overwrite this visitor's stored collapse preference. */
-      setOpenState(true);
-    }
-    if (lib) setLibrary(lib);
-
-    urlReadRef.current = true;
-  }, []);
-
-  /* `pathname` is a dependency so the params survive client navigation:
-     clicking a card pushes a bare `/examples/<name>`, and this puts the
-     active filter back into the address bar. */
-  useEffect(() => {
-    if (!urlReadRef.current) return;
-
-    const id = setTimeout(() => {
-      const url = new URL(window.location.href);
-
-      if (search) url.searchParams.set("q", search);
-      else url.searchParams.delete("q");
-      if (library) url.searchParams.set("library", library);
-      else url.searchParams.delete("library");
-
-      if (url.href !== window.location.href)
-        history.replaceState(history.state, "", url);
-    }, 150);
-
-    return () => clearTimeout(id);
-  }, [search, library, pathname]);
+    if (search) setSearchOpen(true);
+    setOpenState(true);
+  }, [search, library]);
 
   const firstRef = useRef(true);
   useEffect(() => {
@@ -682,7 +683,13 @@ export default function Nav({
                         )}
                       >
                         <Link
-                          href={`/examples/${name}`}
+                          /* The filter rides along: the rail stays mounted
+                             across this navigation, but the URL is the state
+                             now, so a bare `/examples/<name>` would clear it. */
+                          href={serializeFilters(`/examples/${name}`, {
+                            q: search,
+                            library,
+                          })}
                           aria-label={title}
                           aria-current={
                             examplename === name ? "page" : undefined
