@@ -12,14 +12,14 @@ const config = [
   { ignores: [".next/**", "out/**", "next-env.d.ts"] },
   ...nextCoreWebVitals,
   {
-    rules: {
-      /* New in eslint-plugin-react-hooks 7, which `eslint-config-next@16`
-         pulls in. It fires on effects that seed state from the DOM or from
-         the URL on mount -- exactly what `Nav`'s sidebar/search sync and
-         `use-mobile` do. Untangling those is a real refactor, not part of the
-         framework bump, so keep them visible as warnings for now. */
-      "react-hooks/set-state-in-effect": "warn",
-    },
+    /* Vendored by the shadcn CLI and kept stock, so `shadcn diff` stays a
+       review rather than a merge: what the registry ships is not ours to lint.
+       It seeds its state from `matchMedia` on mount, which
+       `react-hooks/set-state-in-effect` — new in eslint-plugin-react-hooks 7,
+       pulled in by `eslint-config-next@16`, and an error by default — reports.
+       Everything this app writes itself answers to the rule. */
+    files: ["hooks/use-mobile.ts"],
+    rules: { "react-hooks/set-state-in-effect": "off" },
   },
 ];
 
