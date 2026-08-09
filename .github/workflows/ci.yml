@@ -49,8 +49,10 @@ jobs:
       #
       # Lint
       #
-      - run: pnpm lint:metadata
-      - run: pnpm lint:versions
+      # `check`, not `lint`: it adds the repo-wide `prettier --check` that the
+      # pre-commit hook cannot afford (every commit would invalidate it), and
+      # so covers a `git commit -n` or anything that wrote outside a commit.
+      - run: pnpm check
 
       #
       # Test

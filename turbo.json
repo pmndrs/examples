@@ -43,6 +43,10 @@
       ],
       "outputs": []
     },
+    "//#format:check": {
+      "inputs": ["$TURBO_DEFAULT$"],
+      "outputs": []
+    },
     "//#lint:versions": {
       "inputs": [
         ".syncpackrc.json",
