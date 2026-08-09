@@ -364,7 +364,8 @@
    to nothing, every card reads as on-screen and all ~160 thumbnails mount at
    once -- and because it is what lets the skeletons sit over the list rather
    than push it down. */
-#example-skeletons {
+#example-skeletons,
+#nav-filters-skeleton {
   display: none;
 }
 
@@ -372,6 +373,17 @@ html[data-nav-filtering] #example-skeletons {
   display: flex;
 }
 
+html[data-nav-filtering] #nav-filters-skeleton {
+  display: block;
+}
+
 html[data-nav-filtering] #example-list {
   visibility: hidden;
+}
+
+/* The filter row is the same story in miniature: whichever of its two forms
+   the HTML was built with is the wrong one here -- the dropdown where the
+   search field belongs, or the dropdown with nothing selected. */
+html[data-nav-filtering] #nav-filters {
+  display: none;
 }
