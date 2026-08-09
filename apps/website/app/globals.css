@@ -350,3 +350,14 @@
     margin-inline-start: calc(var(--sidebar-width) * -1);
   }
 }
+
+/* Same story for `?q=` and `?library=`, one step earlier: a static export
+   ships the list rendered whole, so all ~160 cards paint while the JS that
+   will narrow them down is still loading, and the filter lands as a visible
+   jump. The script marks a filtered arrival and this keeps the list back
+   until React has applied it -- only for those arrivals; everyone else gets
+   the prerendered list painted as it always was. `visibility`, not `display`,
+   so the cards keep the layout the list windowing measures. */
+html[data-nav-filtering] #example-list {
+  visibility: hidden;
+}

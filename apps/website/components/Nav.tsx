@@ -62,6 +62,8 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
+/* Where the rail's collapsed preference lives. `bootNav` in `app/layout.tsx`
+   reads it before first paint; this is the end that writes it. */
 const STORAGE_KEY = "nav-collapsed";
 const MAX_TAGS = 4;
 const INITIAL_THUMBNAILS = 6;
@@ -87,9 +89,9 @@ const filterParsers = {
    survives the client navigation into an example. */
 const serializeFilters = createSerializer(filterParsers);
 
-/* `data-nav-collapsed` is put on <html> before first paint by the inline
-   script in `app/layout.tsx` — the only way a statically exported page can
-   weigh `localStorage`, the `?nav=` override and the current route that early.
+/* `data-nav-collapsed` is put on <html> before first paint by `bootNav`
+   (`app/layout.tsx`) — the only way a statically exported page can weigh
+   `localStorage`, the `?nav=` override and the current route that early.
    React reads the verdict back through `useSyncExternalStore` rather than from
    a mount effect: the value is already there at hydration, and the server
    snapshot is what keeps the first render agreeing with the prerendered HTML.
@@ -520,12 +522,16 @@ export default function Nav({
 
   const { examplename } = useParams();
 
-  /* React hands the pre-paint attribute back once it has rendered a panel of
-     its own: from here on the state above is the truth, and a stale attribute
-     would fight it (see the pre-paint rule in `app/globals.css`). */
+  /* React hands the pre-paint marks back once it has rendered a panel and a
+     list of its own: from here on the state above is the truth, and a stale
+     attribute would fight it (see the pre-paint rules in `app/globals.css`).
+     By this render `q` and `library` have reached the client — the adapter
+     reads them through `useSyncExternalStore`, which settles during the
+     hydration commit, before this effect. */
   useEffect(() => {
     if (!ready) return;
     document.documentElement.removeAttribute("data-nav-collapsed");
+    document.documentElement.removeAttribute("data-nav-filtering");
   }, [ready]);
 
   const firstRef = useRef(true);

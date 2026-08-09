@@ -13,6 +13,45 @@ const inter = Inter({ subsets: ["latin"] });
 const examples = getExamples();
 
 /**
+ * Two things only the client knows, both needed before the first paint, so the
+ * blocking script below runs this and leaves the verdict on <html>: whether the
+ * rail starts collapsed, and whether this is a filtered arrival — `?q=`
+ * /`?library=`, whose list must not paint whole while the JS that will narrow
+ * it is still loading. `globals.css` acts on both marks and `Nav` takes them
+ * over, then drops them. A filter beats a stored collapse: a shared link has to
+ * be able to show what it filtered down to.
+ *
+ * A function rather than a template string, so it is typed, formatted and
+ * linted like everything else — `String(bootNav)` is what ends up in the page.
+ * The catch that comes with that: it has to stay hermetic. No imports, no
+ * module-level constants, nothing but its arguments, or the bundler leaves a
+ * dangling reference in the string. Hence the storage key coming in as one —
+ * `Nav` owns the other half of that contract.
+ */
+function bootNav(storageKey: string) {
+  const parts = window.location.pathname.split("/").filter(Boolean);
+  const examplesIndex = parts.indexOf("examples");
+  const hasExampleSelected = examplesIndex !== -1 && !!parts[examplesIndex + 1];
+
+  const params = new URLSearchParams(window.location.search);
+  const nav = params.get("nav");
+  const filtering = !!(params.get("q") || params.get("library"));
+
+  const collapsed =
+    !hasExampleSelected || filtering
+      ? false
+      : nav === "closed"
+        ? true
+        : nav === "open"
+          ? false
+          : localStorage.getItem(storageKey) === "1";
+
+  const root = document.documentElement;
+  root.toggleAttribute("data-nav-collapsed", collapsed);
+  root.toggleAttribute("data-nav-filtering", filtering);
+}
+
+/**
  * The one hex the whole palette hangs off -- poimandres' signature mint.
  * Material Color Utilities derives every `--md-sys-color-*` role from it, and
  * `globals.css` hands those on to shadcn's tokens. `scheme`, `contrast`, core
@@ -81,21 +120,10 @@ export default function RootLayout({
           precedence="high"
           dangerouslySetInnerHTML={{ __html: mcuCss }}
         />
+        {/* Blocking on purpose: `bootNav` settles what the rail looks like
+            before anything paints. */}
         <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (() => {
-                const storageKey = "nav-collapsed";
-                const parts = window.location.pathname.split("/").filter(Boolean);
-                const examplesIndex = parts.indexOf("examples");
-                const hasExampleSelected = examplesIndex !== -1 && !!parts[examplesIndex + 1];
-                const nav = new URLSearchParams(window.location.search).get("nav");
-                const collapsed =
-                  !hasExampleSelected ? false : nav === "closed" ? true : nav === "open" ? false : localStorage.getItem(storageKey) === "1";
-                document.documentElement.toggleAttribute("data-nav-collapsed", collapsed);
-              })();
-            `,
-          }}
+          dangerouslySetInnerHTML={{ __html: `(${bootNav})("nav-collapsed")` }}
         />
         <ThemeProvider
           attribute="class"
