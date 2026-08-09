@@ -35,6 +35,25 @@
     "lint": {
       "dependsOn": ["^lint"]
     },
+    // Root scripts, so `//#`. Both walk the whole repo rather than one
+    // workspace, hence the explicit `inputs`: without them turbo would hash
+    // the root package and re-run on any commit.
+    "//#lint:metadata": {
+      "inputs": [
+        "bin/validate-pmndrs-metadata.mjs",
+        "schemas/pmndrs.schema.json",
+        "examples/*/{package.json,pmndrs.json}"
+      ],
+      "outputs": []
+    },
+    "//#lint:versions": {
+      "inputs": [
+        ".syncpackrc.json",
+        "package.json",
+        "{apps,examples,packages}/*/package.json"
+      ],
+      "outputs": []
+    },
     "dev2": {
       "cache": false,
       "persistent": true

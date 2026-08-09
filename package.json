@@ -5,7 +5,7 @@
     "build": "turbo build3",
     "postbuild": "./out.sh",
     "dev": "turbo dev2",
-    "lint": "turbo lint",
+    "lint": "turbo lint lint:metadata lint:versions",
     "lint:metadata": "node bin/validate-pmndrs-metadata.mjs",
     "lint:versions": "syncpack lint",
     "fix:versions": "syncpack fix",

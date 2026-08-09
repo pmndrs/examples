@@ -23,20 +23,14 @@ export default {
           ]
         : []),
 
-      // Lint through turbo rather than by calling eslint ourselves, and on
-      // every commit rather than under a glob of our own: which workspaces
-      // have a `lint` task (only `apps/website` today) is the task graph's
-      // business, and the cache turns a commit that moved nothing
-      // lint-relevant into ~0.4s instead of ~3.5s. Sequenced after prettier
-      // -- same array -- because it reads the files prettier just rewrote.
+      // Every linter the repo has (eslint per workspace, the `pmndrs.json`
+      // metadata check, syncpack), on every commit rather than under globs of
+      // our own: what needs re-running is a question turbo answers from each
+      // task's declared `inputs`, and answers better -- a commit that moved
+      // nothing lint-relevant is ~0.5s instead of ~4.5s. Sequenced after
+      // prettier -- same array -- because it reads the files prettier just
+      // rewrote.
       "pnpm lint",
     ];
   },
-
-  // Repo-wide invariants, so they run whole rather than over the staged files:
-  // both are ~1s and mirror what CI checks.
-  "{package.json,pmndrs.json}": () => [
-    "node bin/validate-pmndrs-metadata.mjs",
-    "pnpm exec syncpack lint",
-  ],
 };
