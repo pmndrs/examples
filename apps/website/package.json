@@ -8,7 +8,7 @@
     "build": "NODE_ENV=production next build",
     "build3": "pnpm run build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint"
   },
   "dependencies": {
     "@example/aquarium": "workspace:*",
@@ -173,7 +173,7 @@
     "clsx": "^2.1.1",
     "lucide-react": "^1.28.0",
     "material-theme-builder": "^3.0.0",
-    "next": "15.5.22",
+    "next": "16.3.0",
     "next-themes": "^0.4.6",
     "radix-ui": "^1.6.7",
     "react": "19.2.8",
@@ -190,8 +190,8 @@
     "@types/node": "^20",
     "@types/react": "19.2.17",
     "@types/react-dom": "19.2.3",
-    "eslint": "^8.57.0",
-    "eslint-config-next": "15.5.22",
+    "eslint": "^9.39.0",
+    "eslint-config-next": "16.3.0",
     "postcss": "^8",
     "tailwindcss": "^4.3.3",
     "typescript": "^5.5.4"
