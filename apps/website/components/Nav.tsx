@@ -46,6 +46,7 @@ import {
 } from "@/components/ui/input-group";
 import { Item, ItemFooter, ItemMedia } from "@/components/ui/item";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Select,
   SelectContent,
@@ -62,9 +63,24 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
+/* Where the rail's collapsed preference lives. `bootNav` in `app/layout.tsx`
+   reads it before first paint; this is the end that writes it. */
 const STORAGE_KEY = "nav-collapsed";
 const MAX_TAGS = 4;
 const INITIAL_THUMBNAILS = 6;
+/* Tag-strip widths for the placeholder cards a filtered arrival waits in
+   front of — one row per card, the same handful the list mounts eagerly.
+   Written out rather than drawn at random: the markup has to come out the
+   same on both sides of hydration, and real strips are two or three pills of
+   uneven length. */
+const SKELETON_TAGS = [
+  [56, 88],
+  [72],
+  [64, 104, 48],
+  [96, 60],
+  [52, 76],
+  [80, 44, 92],
+];
 /* `library` is "" for no filter, but Radix rejects an empty SelectItem value —
    it reserves it for clearing the selection. The sentinel is what the option
    carries; the state stays "". */
@@ -87,9 +103,9 @@ const filterParsers = {
    survives the client navigation into an example. */
 const serializeFilters = createSerializer(filterParsers);
 
-/* `data-nav-collapsed` is put on <html> before first paint by the inline
-   script in `app/layout.tsx` — the only way a statically exported page can
-   weigh `localStorage`, the `?nav=` override and the current route that early.
+/* `data-nav-collapsed` is put on <html> before first paint by `bootNav`
+   (`app/layout.tsx`) — the only way a statically exported page can weigh
+   `localStorage`, the `?nav=` override and the current route that early.
    React reads the verdict back through `useSyncExternalStore` rather than from
    a mount effect: the value is already there at hydration, and the server
    snapshot is what keeps the first render agreeing with the prerendered HTML.
@@ -229,7 +245,6 @@ function NavToggle() {
      right one; the label has to agree with it. */
   const shown = isMobile ? openMobile : open;
 
-  const ready = useIsClient();
   const [near, setNear] = useState(false);
 
   useEffect(() => {
@@ -276,10 +291,13 @@ function NavToggle() {
           !shown && "rotate-180",
         )}
       />
+      {/* Written out from the first client render, not once mounted: `shown`
+          reaches back to the pre-paint mark through `useSyncExternalStore`, so
+          the word is already right where a `localStorage` read would have made
+          it a coin flip — and the pill no longer reflows around a label that
+          turns up late. */}
       <span className="tracking-wider uppercase [writing-mode:vertical-rl]">
-        {/* Blank until mounted: the collapsed state comes out of
-              `localStorage`, so before then the word would be a coin flip. */}
-        {ready ? (shown ? "hide" : "show") : ""}
+        {shown ? "hide" : "show"}
       </span>
     </Button>
   );
@@ -520,12 +538,16 @@ export default function Nav({
 
   const { examplename } = useParams();
 
-  /* React hands the pre-paint attribute back once it has rendered a panel of
-     its own: from here on the state above is the truth, and a stale attribute
-     would fight it (see the pre-paint rule in `app/globals.css`). */
+  /* React hands the pre-paint marks back once it has rendered a panel and a
+     list of its own: from here on the state above is the truth, and a stale
+     attribute would fight it (see the pre-paint rules in `app/globals.css`).
+     By this render `q` and `library` have reached the client — the adapter
+     reads them through `useSyncExternalStore`, which settles during the
+     hydration commit, before this effect. */
   useEffect(() => {
     if (!ready) return;
     document.documentElement.removeAttribute("data-nav-collapsed");
+    document.documentElement.removeAttribute("data-nav-filtering");
   }, [ready]);
 
   const firstRef = useRef(true);
@@ -580,56 +602,63 @@ export default function Nav({
             to be set on the two children: `className` here lands on the fixed
             container, and the panel's background is painted a level deeper. */}
         <SidebarHeader className="px-4">
-          {searchVisible ? (
-            <InputGroup className="animate-in border-border bg-input shadow-lg duration-200 fade-in slide-in-from-top-1">
-              {/* Addons come after the control in the DOM — they focus it on
+          {/* Both branches read the URL, so on a filtered arrival both are
+              wrong until React knows it: the row would paint the library
+              filter unset, or paint the dropdown where the search field
+              belongs. `display: contents` so standing in front of them
+              changes nothing about how they lay out. */}
+          <Skeleton id="nav-filters-skeleton" className="h-9 rounded-full" />
+          <div id="nav-filters" className="contents">
+            {searchVisible ? (
+              <InputGroup className="animate-in border-border bg-input shadow-lg duration-200 fade-in slide-in-from-top-1">
+                {/* Addons come after the control in the DOM — they focus it on
                   click and take their visual side from `align`. */}
-              <InputGroupInput
-                ref={searchRef}
-                type="search"
-                value={search}
-                onChange={(event) => setSearch(event.target.value)}
-                onFocus={() => setSearchOpen(true)}
-                placeholder="Search examples"
-                aria-label="Search examples"
-                aria-controls="example-list"
-                aria-describedby="search-results"
-                className="[&::-webkit-search-cancel-button]:hidden"
-              />
-              <InputGroupAddon>
-                <SearchIcon />
-              </InputGroupAddon>
-              <InputGroupAddon align="inline-end">
-                <InputGroupText className="text-xs tabular-nums">
-                  {filteredExamples.length}
-                </InputGroupText>
-                <InputGroupButton
-                  size="icon-xs"
-                  onClick={dismissSearch}
-                  aria-label="Close search"
+                <InputGroupInput
+                  ref={searchRef}
+                  type="search"
+                  value={search}
+                  onChange={(event) => setSearch(event.target.value)}
+                  onFocus={() => setSearchOpen(true)}
+                  placeholder="Search examples"
+                  aria-label="Search examples"
+                  aria-controls="example-list"
+                  aria-describedby="search-results"
+                  className="[&::-webkit-search-cancel-button]:hidden"
+                />
+                <InputGroupAddon>
+                  <SearchIcon />
+                </InputGroupAddon>
+                <InputGroupAddon align="inline-end">
+                  <InputGroupText className="text-xs tabular-nums">
+                    {filteredExamples.length}
+                  </InputGroupText>
+                  <InputGroupButton
+                    size="icon-xs"
+                    onClick={dismissSearch}
+                    aria-label="Close search"
+                  >
+                    <XIcon />
+                  </InputGroupButton>
+                </InputGroupAddon>
+              </InputGroup>
+            ) : (
+              <div className="flex items-center gap-2">
+                <Select
+                  open={libraryOpen}
+                  onOpenChange={setLibraryOpen}
+                  value={library || ALL_LIBRARIES}
+                  onValueChange={(value) =>
+                    setLibrary(value === ALL_LIBRARIES ? "" : value)
+                  }
                 >
-                  <XIcon />
-                </InputGroupButton>
-              </InputGroupAddon>
-            </InputGroup>
-          ) : (
-            <div className="flex items-center gap-2">
-              <Select
-                open={libraryOpen}
-                onOpenChange={setLibraryOpen}
-                value={library || ALL_LIBRARIES}
-                onValueChange={(value) =>
-                  setLibrary(value === ALL_LIBRARIES ? "" : value)
-                }
-              >
-                <SelectTrigger
-                  className="min-w-0 flex-1 border-border bg-input shadow-lg"
-                  aria-label="Filter examples by library"
-                >
-                  <ListFilterIcon className="text-muted-foreground" />
-                  <SelectValue />
-                </SelectTrigger>
-                {/* `item-aligned` — this registry's default, where Radix lays
+                  <SelectTrigger
+                    className="min-w-0 flex-1 border-border bg-input shadow-lg"
+                    aria-label="Filter examples by library"
+                  >
+                    <ListFilterIcon className="text-muted-foreground" />
+                    <SelectValue />
+                  </SelectTrigger>
+                  {/* `item-aligned` — this registry's default, where Radix lays
                     the menu over the trigger with the selected option on top
                     of it — cannot do that for a trigger sitting 26px from the
                     top of the window. It clamps the menu and makes up the
@@ -643,31 +672,34 @@ export default function Nav({
                     `--radix-select-content-available-height` a value, which
                     the component's own `max-h-` reads and item-aligned never
                     sets. */}
-                <SelectContent position="popper" className="backdrop-blur-sm">
-                  <SelectGroup>
-                    <SelectItem value={ALL_LIBRARIES}>All libraries</SelectItem>
-                    {libraryOptions.map((option) => (
-                      <SelectItem key={option} value={option}>
-                        {option}
+                  <SelectContent position="popper" className="backdrop-blur-sm">
+                    <SelectGroup>
+                      <SelectItem value={ALL_LIBRARIES}>
+                        All libraries
                       </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-              <Button
-                type="button"
-                variant="outline"
-                size="icon"
-                onClick={() => focusSearch()}
-                aria-label="Search examples"
-                aria-keyshortcuts="Meta+F Control+F Meta+K Control+K"
-                title="Search examples (⌘F)"
-                className="bg-input shadow-lg"
-              >
-                <SearchIcon />
-              </Button>
-            </div>
-          )}
+                      {libraryOptions.map((option) => (
+                        <SelectItem key={option} value={option}>
+                          {option}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="icon"
+                  onClick={() => focusSearch()}
+                  aria-label="Search examples"
+                  aria-keyshortcuts="Meta+F Control+F Meta+K Control+K"
+                  title="Search examples (⌘F)"
+                  className="bg-input shadow-lg"
+                >
+                  <SearchIcon />
+                </Button>
+              </div>
+            )}
+          </div>
           <span id="search-results" className="sr-only" aria-live="polite">
             {filteredExamples.length} examples
           </span>
@@ -679,7 +711,39 @@ export default function Nav({
             travel, so a list sitting at the top is not faded into its own
             first card. Without scroll-driven-animation support the two fades
             are simply always on. */}
-        <SidebarContent className="scroll-fade px-4">
+        <SidebarContent className="relative scroll-fade px-4">
+          {/* What a filtered arrival looks at while the JS that will narrow
+              the list is still loading — the pre-paint rules in
+              `app/globals.css` swap the two, and the effect above drops the
+              mark once React has rendered the real thing. Laid over the list
+              rather than above it, because the list keeps its box (see those
+              rules); inert, because the list underneath is the real content
+              and is what gets announced. */}
+          <ul
+            id="example-skeletons"
+            aria-hidden
+            className="absolute inset-x-4 top-2 flex flex-col gap-3"
+          >
+            {SKELETON_TAGS.map((widths, index) => (
+              <li key={index} className="relative">
+                <Skeleton className="aspect-video w-full rounded-md" />
+                {/* Same corner as the real strip, so the shape the eye is
+                    waiting for is already there when the cards land. Darker
+                    than the card it sits on, the way the real pills are —
+                    at the card's own tone they read as holes in it. */}
+                <div className="absolute inset-x-0 bottom-0 flex gap-1 p-1.5">
+                  {widths.map((width, tag) => (
+                    <Skeleton
+                      key={tag}
+                      style={{ width }}
+                      className="h-5 rounded-full bg-foreground/10"
+                    />
+                  ))}
+                </div>
+              </li>
+            ))}
+          </ul>
+
           <nav aria-label="Examples">
             <ul
               ref={setListRef}
