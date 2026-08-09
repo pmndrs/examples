@@ -46,6 +46,7 @@ import {
 } from "@/components/ui/input-group";
 import { Item, ItemFooter, ItemMedia } from "@/components/ui/item";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Select,
   SelectContent,
@@ -231,7 +232,6 @@ function NavToggle() {
      right one; the label has to agree with it. */
   const shown = isMobile ? openMobile : open;
 
-  const ready = useIsClient();
   const [near, setNear] = useState(false);
 
   useEffect(() => {
@@ -278,10 +278,13 @@ function NavToggle() {
           !shown && "rotate-180",
         )}
       />
+      {/* Written out from the first client render, not once mounted: `shown`
+          reaches back to the pre-paint mark through `useSyncExternalStore`, so
+          the word is already right where a `localStorage` read would have made
+          it a coin flip — and the pill no longer reflows around a label that
+          turns up late. */}
       <span className="tracking-wider uppercase [writing-mode:vertical-rl]">
-        {/* Blank until mounted: the collapsed state comes out of
-              `localStorage`, so before then the word would be a coin flip. */}
-        {ready ? (shown ? "hide" : "show") : ""}
+        {shown ? "hide" : "show"}
       </span>
     </Button>
   );
@@ -685,7 +688,26 @@ export default function Nav({
             travel, so a list sitting at the top is not faded into its own
             first card. Without scroll-driven-animation support the two fades
             are simply always on. */}
-        <SidebarContent className="scroll-fade px-4">
+        <SidebarContent className="relative scroll-fade px-4">
+          {/* What a filtered arrival looks at while the JS that will narrow
+              the list is still loading — the pre-paint rules in
+              `app/globals.css` swap the two, and the effect above drops the
+              mark once React has rendered the real thing. Laid over the list
+              rather than above it, because the list keeps its box (see those
+              rules); inert, because the list underneath is the real content
+              and is what gets announced. */}
+          <ul
+            id="example-skeletons"
+            aria-hidden
+            className="absolute inset-x-4 top-2 flex flex-col gap-3"
+          >
+            {Array.from({ length: INITIAL_THUMBNAILS }, (_, index) => (
+              <li key={index}>
+                <Skeleton className="aspect-video w-full rounded-md" />
+              </li>
+            ))}
+          </ul>
+
           <nav aria-label="Examples">
             <ul
               ref={setListRef}

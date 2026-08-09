@@ -29,25 +29,30 @@ const examples = getExamples();
  * `Nav` owns the other half of that contract.
  */
 function bootNav(storageKey: string) {
-  const parts = window.location.pathname.split("/").filter(Boolean);
-  const examplesIndex = parts.indexOf("examples");
-  const hasExampleSelected = examplesIndex !== -1 && !!parts[examplesIndex + 1];
-
   const params = new URLSearchParams(window.location.search);
-  const nav = params.get("nav");
   const filtering = !!(params.get("q") || params.get("library"));
 
-  const collapsed =
-    !hasExampleSelected || filtering
-      ? false
-      : nav === "closed"
-        ? true
-        : nav === "open"
-          ? false
-          : localStorage.getItem(storageKey) === "1";
+  const isCollapsed = () => {
+    const parts = window.location.pathname.split("/").filter(Boolean);
+    const examplesIndex = parts.indexOf("examples");
+    const onAnExample = examplesIndex !== -1 && !!parts[examplesIndex + 1];
+
+    /* Two cases where the rail stays out whatever this visitor last left it
+       at: the index, where there is nothing to look at beside it, and a
+       shared filter link, which has to show what it filtered down to. */
+    if (!onAnExample || filtering) return false;
+
+    /* Then `?nav=`, a link saying how it wants to arrive… */
+    const nav = params.get("nav");
+    if (nav === "closed") return true;
+    if (nav === "open") return false;
+
+    /* …and failing that, wherever this visitor left it. */
+    return localStorage.getItem(storageKey) === "1";
+  };
 
   const root = document.documentElement;
-  root.toggleAttribute("data-nav-collapsed", collapsed);
+  root.toggleAttribute("data-nav-collapsed", isCollapsed());
   root.toggleAttribute("data-nav-filtering", filtering);
 }
 

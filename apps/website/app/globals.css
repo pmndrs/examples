@@ -354,10 +354,24 @@
 /* Same story for `?q=` and `?library=`, one step earlier: a static export
    ships the list rendered whole, so all ~160 cards paint while the JS that
    will narrow them down is still loading, and the filter lands as a visible
-   jump. The script marks a filtered arrival and this keeps the list back
-   until React has applied it -- only for those arrivals; everyone else gets
-   the prerendered list painted as it always was. `visibility`, not `display`,
-   so the cards keep the layout the list windowing measures. */
+   jump. `bootNav` marks a filtered arrival, and these hold the list back
+   behind a handful of skeletons until React has applied it -- only for those
+   arrivals; everyone else gets the prerendered list painted as it always was
+   and never renders the skeletons at all.
+
+   `visibility`, not `display`: the cards have to keep their boxes, both
+   because the list windowing measures them on that very commit -- collapsed
+   to nothing, every card reads as on-screen and all ~160 thumbnails mount at
+   once -- and because it is what lets the skeletons sit over the list rather
+   than push it down. */
+#example-skeletons {
+  display: none;
+}
+
+html[data-nav-filtering] #example-skeletons {
+  display: flex;
+}
+
 html[data-nav-filtering] #example-list {
   visibility: hidden;
 }
