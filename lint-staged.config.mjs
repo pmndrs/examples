@@ -27,4 +27,15 @@ export default {
       "pnpm lint",
     ];
   },
+
+  // The turbo-inputs suite, on the files it is about. It is 12s and turbo
+  // cannot cache it (it asserts on cache behaviour), so it does not belong in
+  // the `*` task above -- and its meaning only changes when a task's `inputs`
+  // or the suite itself do. CI runs it against everything else.
+  //
+  // `pnpm test` stays out entirely: `turbo test` is 326 playwright tasks that
+  // a repo-wide change invalidates wholesale (266s in CI for the reformat
+  // commits, against 93s cached), and the snapshots are not time-deterministic
+  // -- a hook that runs them blocks commits at random.
+  "{turbo.json,vitest.config.ts,test/**}": () => "pnpm test:turbo",
 };
