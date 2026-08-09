@@ -4,24 +4,18 @@ const root = import.meta.dirname;
 
 /** @type {import("lint-staged").Configuration} */
 export default {
-  // The hook never formats `examples/*`: each one is a vendored sandbox
-  // carrying its own `.prettierrc` it isn't formatted to, so reformatting a
-  // source file on commit would bury a two-line change under a whole-file
-  // diff. `pnpm format` still covers the `.ts`/`.tsx`/`.md` in there, which
-  // is the only part of an example anyone keeps in shape.
   "*": (files) => {
-    const staged = files
-      .map((file) => path.relative(root, file))
-      .filter((file) => !file.startsWith("examples/"));
+    const staged = files.map((file) => path.relative(root, file));
 
     return [
-      // `--ignore-unknown` so the glob can stay `*`: prettier skips what it
-      // has no parser for (assets, patches) instead of failing the commit.
-      ...(staged.length
-        ? [
-            `prettier --write --ignore-unknown ${staged.map((file) => JSON.stringify(file)).join(" ")}`,
-          ]
-        : []),
+      // Every staged file, `examples/*` included -- formatting is the hook's
+      // to guarantee, not something to leave to a `pnpm format` nobody runs.
+      // Each example keeps its own `.prettierrc`, so a sandbox is formatted
+      // to the style it was written in. `--ignore-unknown` skips what has no
+      // parser (`.glb`, fonts, images) instead of failing the commit; what
+      // prettier *does* have a parser for but must not touch is named in
+      // `.prettierignore`.
+      `prettier --write --ignore-unknown ${staged.map((file) => JSON.stringify(file)).join(" ")}`,
 
       // Every linter the repo has (eslint per workspace, the `pmndrs.json`
       // metadata check, syncpack), on every commit rather than under globs of

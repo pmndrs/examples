@@ -2,3 +2,18 @@ pnpm-lock.yaml
 patches/
 out/
 .turbo/
+
+# Local agent checkouts, plus a vendored skill that has to stay byte-identical
+# to what its registry emits.
+.claude/
+
+# Compiled payloads and 3D assets. Prettier claims a parser for every one of
+# these -- `.gltf` is json to it, minified draco is babel -- so
+# `--ignore-unknown` does not cover them: a single 200k-character line would
+# be exploded into tens of thousands. Only `.glb` is safe by itself, being
+# binary. Font atlases are deliberately not here: they are json we are happy
+# to see formatted.
+**/draco/
+**/draco-gltf/
+**/realism-effects/
+**/*.gltf
