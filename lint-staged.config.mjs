@@ -2,24 +2,28 @@ import path from "node:path";
 
 const root = import.meta.dirname;
 
-// Inside `examples/*`, only what `pnpm format` (`**/*.{ts,tsx,md}`) already
-// keeps in shape. The rest -- the `.jsx`, `.js`, `.css` of every sandbox --
-// is vendored source still on its upstream style, each example carrying its
-// own `.prettierrc` it isn't formatted to; reformatting one on commit would
-// bury a two-line change under a whole-file diff. This can't live in
-// `.prettierignore`: that would take those files away from `pnpm format`
-// too, which is a repo-wide policy change rather than a hook decision.
-const FORMATTED_IN_EXAMPLES = /\.(tsx?|md)$/;
+// The `**/*.{ts,tsx,md}` of the `format` script, as a test on one path.
+const FORMAT_SCRIPT_SCOPE = /\.(ts|tsx|md)$/;
+
+// Outside `examples/*` the hook formats everything; inside, only what the
+// `format` script covers -- which there is the whole of what is kept
+// formatted (544 files, 3 of them currently drifting). The `.js`, `.jsx` and
+// `.css` of a sandbox are vendored source still on the upstream style they
+// were copied with, each example carrying its own `.prettierrc` it isn't
+// formatted to, so reformatting one on commit would bury a two-line change
+// under a whole-file diff. This can't move to `.prettierignore`: gitignore
+// semantics can't re-include a path once its directory is excluded, so
+// ignoring `examples/**` would take those 544 files away from `pnpm format`
+// as well.
+const formattable = (file) =>
+  !file.startsWith("examples/") || FORMAT_SCRIPT_SCOPE.test(file);
 
 /** @type {import("lint-staged").Configuration} */
 export default {
   "*": (files) => {
     const staged = files
       .map((file) => path.relative(root, file))
-      .filter(
-        (file) =>
-          !file.startsWith("examples/") || FORMATTED_IN_EXAMPLES.test(file),
-      );
+      .filter(formattable);
 
     return [
       // `--ignore-unknown` so the glob can stay `*`: prettier skips what it
