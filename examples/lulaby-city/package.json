@@ -38,7 +38,7 @@
     "@types/react-dom": "19.2.3",
     "@types/three": "^0.165.0",
     "@vitejs/plugin-react": "^6.0.4",
-    "lint-staged": "^16.2.7",
+    "lint-staged": "^16.4.0",
     "typescript": "^7.0.2",
     "vite": "^8.1.5"
   },

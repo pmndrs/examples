@@ -10,12 +10,15 @@
     "lint:versions": "syncpack lint",
     "fix:versions": "syncpack fix",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "test": "turbo test"
+    "test": "turbo test",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@playwright/test": "1.62.0",
     "@types/minimist": "^1.2.5",
     "depcheck": "^1.4.7",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "syncpack": "^14.3.0",
