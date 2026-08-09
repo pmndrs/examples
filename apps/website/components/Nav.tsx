@@ -12,9 +12,12 @@ import {
   useMemo,
   useRef,
   useState,
+  useSyncExternalStore,
 } from "react";
 import { useParams } from "next/navigation";
 import { createSerializer, parseAsString, useQueryStates } from "nuqs";
+import { type Options, useHotkeys } from "react-hotkeys-hook";
+import { useEventListener, useIsClient } from "usehooks-ts";
 import {
   ChevronLeftIcon,
   ListFilterIcon,
@@ -84,6 +87,24 @@ const filterParsers = {
    survives the client navigation into an example. */
 const serializeFilters = createSerializer(filterParsers);
 
+/* `data-nav-collapsed` is put on <html> before first paint by the inline
+   script in `app/layout.tsx` — the only way a statically exported page can
+   weigh `localStorage`, the `?nav=` override and the current route that early.
+   React reads the verdict back through `useSyncExternalStore` rather than from
+   a mount effect: the value is already there at hydration, and the server
+   snapshot is what keeps the first render agreeing with the prerendered HTML.
+
+   The read is cached because React hands the attribute back as soon as the
+   panel is its own (see the effect below); a later read would report a rail
+   that is open no matter how the page was painted. */
+let paintedCollapsed: boolean | undefined;
+
+const subscribeToPaintedCollapsed = () => () => {};
+const getPaintedCollapsed = () =>
+  (paintedCollapsed ??=
+    document.documentElement.hasAttribute("data-nav-collapsed"));
+const getPaintedCollapsedOnServer = () => false;
+
 /**
  * Keep the list itself complete for links, roving focus and stable scroll
  * geometry, but only mount expensive thumbnail/tag subtrees near the visible
@@ -98,28 +119,20 @@ function useNearbyExamples(
   const [nearby, setNearby] = useState<ReadonlySet<string>>(() => new Set());
 
   useLayoutEffect(() => {
-    if (!list) {
-      setNearby((current) => (current.size === 0 ? current : new Set()));
-      return;
-    }
+    /* No list, nothing rendered from `nearby`: leaving the old set alone
+       spares a render, and the seed below replaces it wholesale anyway. */
+    if (!list) return;
 
     const items = Array.from(
       list.querySelectorAll<HTMLElement>("[data-example]"),
     );
 
-    if (!("IntersectionObserver" in window)) {
-      setNearby(
-        new Set(
-          items.flatMap((item) =>
-            item.dataset.example ? [item.dataset.example] : [],
-          ),
-        ),
-      );
-      return;
-    }
-
+    const observable = "IntersectionObserver" in window;
     const root = list.closest<HTMLElement>("[data-slot='sidebar-content']");
-    const rootRect = root?.getBoundingClientRect();
+    const rootRect = observable ? root?.getBoundingClientRect() : undefined;
+    /* An unbounded window is also the answer for a browser without
+       IntersectionObserver: nothing will narrow it later, so every card
+       counts as nearby and the seed below is the whole of the fallback. */
     const nearTop = rootRect ? rootRect.top - rootRect.height / 2 : -Infinity;
     const nearBottom = rootRect
       ? rootRect.bottom + rootRect.height / 2
@@ -127,7 +140,13 @@ function useNearbyExamples(
 
     /* IntersectionObserver reports after layout, which leaves a blank frame
        when filtering moves an unmounted thumbnail into view. Seed the same
-       50% margin synchronously so the next render is ready before paint. */
+       50% margin synchronously so the next render is ready before paint.
+
+       This is the measure-then-render pass `useLayoutEffect` exists for, and
+       the one shape `set-state-in-effect` cannot tell apart from a cascading
+       render; the observer below, where this state spends the rest of its
+       life, is the subscription the rule asks for. */
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- measured layout, see above
     setNearby(
       new Set(
         items.flatMap((item) => {
@@ -140,6 +159,8 @@ function useNearbyExamples(
         }),
       ),
     );
+
+    if (!observable) return;
 
     let active = true;
     const observer = new IntersectionObserver(
@@ -208,27 +229,21 @@ function NavToggle() {
      right one; the label has to agree with it. */
   const shown = isMobile ? openMobile : open;
 
-  const [ready, setReady] = useState(false);
+  const ready = useIsClient();
   const [near, setNear] = useState(false);
-
-  useEffect(() => setReady(true), []);
 
   useEffect(() => {
     if (isMobile) setOpenMobile(!examplename);
   }, [examplename, isMobile, setOpenMobile]);
 
   /* Collapsed, the pill mostly tucks itself into the page edge; bringing the
-     pointer over there nudges it back out. */
-  useEffect(() => {
-    if (shown) {
-      setNear(false);
-      return;
-    }
-
-    const onMove = (event: MouseEvent) => setNear(event.clientX < 120);
-    window.addEventListener("mousemove", onMove);
-    return () => window.removeEventListener("mousemove", onMove);
-  }, [shown]);
+     pointer over there nudges it back out. Expanded, the proximity is moot —
+     the class list below never reaches `near` — so the listener stays put and
+     simply reports `false`, which keeps the state honest for the next
+     collapse without a second effect to reset it. */
+  useEventListener("mousemove", (event) =>
+    setNear(!shown && event.clientX < 120),
+  );
 
   return (
     <Button
@@ -241,7 +256,7 @@ function NavToggle() {
         /* `inset-y-0` + `my-auto` centres the capsule without a Y transform.
            Cancel Button's pressed translate so pointer-up cannot introduce a
            one-pixel hop while the rail is already moving horizontally. */
-        "absolute inset-y-0 right-0 z-20 my-auto h-22 w-11 flex-col gap-1.5 rounded-full px-0 text-[0.6rem] leading-none shadow-2xl transition-transform duration-[250ms] ease-out [--secondary:var(--card)] active:not-aria-[haspopup]:translate-y-0 [&_svg]:size-3",
+        "absolute inset-y-0 right-0 z-20 my-auto h-22 w-11 flex-col gap-1.5 rounded-full px-0 text-[0.6rem] leading-none shadow-2xl transition-transform duration-250 ease-out [--secondary:var(--card)] active:not-aria-[haspopup]:translate-y-0 [&_svg]:size-3",
         shown
           ? /* Right edge halfway across the gutter between the rail and the
                example — which is `main`'s padding, since the two are flush. Half
@@ -257,7 +272,7 @@ function NavToggle() {
     >
       <ChevronLeftIcon
         className={cn(
-          "transition-transform duration-[1078ms] ease-expressive",
+          "transition-transform duration-1078 ease-expressive",
           !shown && "rotate-180",
         )}
       />
@@ -286,8 +301,8 @@ export default function Nav({
     setListElement(node);
   }, []);
 
-  const [open, setOpenState] = useState(true);
-  const [ready, setReady] = useState(false);
+  const [openState, setOpenState] = useState<boolean | null>(null);
+  const ready = useIsClient();
   const [libraryOpen, setLibraryOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
 
@@ -306,10 +321,37 @@ export default function Nav({
 
   const searchVisible = searchOpen || search !== "";
 
+  const paintedCollapsed = useSyncExternalStore(
+    subscribeToPaintedCollapsed,
+    getPaintedCollapsed,
+    getPaintedCollapsedOnServer,
+  );
+
   const setOpen = useCallback((next: boolean) => {
     setOpenState(next);
     localStorage.setItem(STORAGE_KEY, next ? "0" : "1");
   }, []);
+
+  /* Until this visitor touches the rail there is nothing to restore: the panel
+     stays as the page was painted. */
+  const open = openState ?? !paintedCollapsed;
+
+  /* Except for a shared filter link, which has to be able to show what it
+     filtered down to — so the first non-empty filter wins over a collapsed
+     rail, covering a link opened cold as much as one whose params only reach
+     the client after hydration. Adjusting state while rendering, rather than
+     from an effect, is React's own answer to "a value changed and some state
+     has to follow": it lands in the same commit instead of a second pass.
+
+     Plain state, not `setOpen`: following someone's filter link should not
+     overwrite this visitor's stored collapse preference. */
+  const hasFilters = search !== "" || library !== "";
+  const [filtersRevealed, setFiltersRevealed] = useState(hasFilters);
+  if (hasFilters && !filtersRevealed) {
+    setFiltersRevealed(true);
+    setOpenState(true);
+    if (search) setSearchOpen(true);
+  }
 
   const libraryOptions = useMemo(() => {
     const popularityByLabel = new Map<string, number>();
@@ -398,49 +440,69 @@ export default function Nav({
     setSearch("");
     setSearchOpen(false);
     searchRef.current?.blur();
-  }, []);
+  }, [setSearch]);
 
-  useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => {
-      const activeElement = document.activeElement;
+  /* The rail's keyboard layer, one hotkey at a time rather than a single
+     window listener with a ladder of early returns: every branch of it reads
+     state that changes as fast as the visitor types, and `useHotkeys` keeps
+     the callbacks in refs, so nothing is torn down and re-subscribed per
+     keystroke. What the ladder said by falling through, `enabled` and
+     `ignoreEventWhen` now say out loud.
 
-      /* The open dropdown is portalled out of the nav, so `activeElement` is
-         nowhere near the trigger and the type-to-search fallthrough below
-         would eat the list's own typeahead. It owns the keyboard while open. */
-      if (libraryOpen) return;
+     `enabled: !libraryOpen` is the ladder's first rung kept whole: the open
+     dropdown is portalled out of the nav, so `activeElement` is nowhere near
+     the trigger and the type-to-search below would eat the list's own
+     typeahead. It owns the keyboard while it is open. */
+  const shortcut = {
+    enabled: !libraryOpen,
+    enableOnFormTags: true,
+    preventDefault: true,
+  } satisfies Options;
 
-      if (
-        (event.metaKey || event.ctrlKey) &&
-        ["f", "k"].includes(event.key.toLocaleLowerCase())
-      ) {
-        event.preventDefault();
-        focusSearch(true);
-        return;
-      }
+  useHotkeys(
+    "meta+f, ctrl+f, meta+k, ctrl+k",
+    () => focusSearch(true),
+    shortcut,
+  );
 
-      if (searchVisible && event.key === "Escape") {
-        event.preventDefault();
-        dismissSearch();
-        return;
-      }
+  useHotkeys("escape", dismissSearch, {
+    ...shortcut,
+    enabled: !libraryOpen && searchVisible,
+  });
 
-      if (hasInteractiveFocus(activeElement)) return;
+  /* Type-to-search, which unlike the shortcuts above must not fire while
+     something else holds the keyboard: leaving `enableOnFormTags` off covers
+     the fields, `ignoreEventWhen` the links and buttons. `useKey` matches the
+     character the visitor typed rather than the physical key, so `/` stays `/`
+     on a layout that puts it elsewhere. */
+  const typeAhead = {
+    enabled: !libraryOpen,
+    ignoreEventWhen: () => hasInteractiveFocus(document.activeElement),
+    preventDefault: true,
+    useKey: true,
+  } satisfies Options;
 
-      if (event.key === "/") {
-        event.preventDefault();
-        focusSearch();
-        return;
-      }
+  useHotkeys("slash", () => focusSearch(), typeAhead);
 
-      if (event.key === "Backspace" && search) {
-        event.preventDefault();
-        setSearch((value) => value.slice(0, -1));
-        focusSearch();
-        return;
-      }
+  useHotkeys(
+    "backspace",
+    () => {
+      setSearch((value) => value.slice(0, -1));
+      focusSearch();
+    },
+    { ...typeAhead, enabled: !libraryOpen && search !== "" },
+  );
 
+  /* Anything else printable lands in the field. `preventDefault` is the
+     callback's business here and not the options': this one matches every key
+     there is, and swallowing Tab or the arrows would take the list's roving
+     focus with it. `/` and Backspace are already spoken for above. */
+  useHotkeys(
+    "*",
+    (event) => {
       if (
         event.key.length !== 1 ||
+        event.key === "/" ||
         event.metaKey ||
         event.ctrlKey ||
         event.altKey ||
@@ -452,48 +514,19 @@ export default function Nav({
       event.preventDefault();
       setSearch((value) => `${value}${event.key}`);
       focusSearch();
-    };
-
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [dismissSearch, focusSearch, libraryOpen, search, searchVisible]);
+    },
+    { ...typeAhead, preventDefault: false },
+  );
 
   const { examplename } = useParams();
 
-  /* `data-nav-collapsed` is put on <html> before first paint by the inline
-     script in `app/layout.tsx` — the only way a statically exported page can
-     know about `localStorage` that early. React picks the state up here. */
-  useEffect(() => {
-    setOpenState(!document.documentElement.hasAttribute("data-nav-collapsed"));
-    setReady(true);
-  }, []);
-
-  /* …and hands the attribute back once that state has rendered: from here on
-     the panel is React's, and a stale attribute would fight it (see the
-     pre-paint rule in `app/globals.css`). */
+  /* React hands the pre-paint attribute back once it has rendered a panel of
+     its own: from here on the state above is the truth, and a stale attribute
+     would fight it (see the pre-paint rule in `app/globals.css`). */
   useEffect(() => {
     if (!ready) return;
     document.documentElement.removeAttribute("data-nav-collapsed");
   }, [ready]);
-
-  /* A shared filter link has to be visible when it lands, which the search
-     field handles on its own (`searchVisible` reads the state) but the rail
-     does not — hence this, declared after the collapse restore above so the
-     link wins over a collapsed rail. It fires once, on the first non-empty
-     filter, which covers both a link opened cold and one whose params only
-     reach the client after hydration.
-
-     Plain state, not `setOpen`: following someone's filter link should not
-     overwrite this visitor's stored collapse preference. */
-  const filtersRevealed = useRef(false);
-
-  useEffect(() => {
-    if (filtersRevealed.current || (!search && !library)) return;
-    filtersRevealed.current = true;
-
-    if (search) setSearchOpen(true);
-    setOpenState(true);
-  }, [search, library]);
 
   const firstRef = useRef(true);
   useEffect(() => {
@@ -531,9 +564,9 @@ export default function Nav({
         } as CSSProperties
       }
       className={cn(
-        "relative w-0 shrink-0 md:[margin-inline-start:var(--nav-offset)] md:w-(--sidebar-width) md:transition-[margin-inline-start] md:duration-[1078ms] md:ease-expressive md:will-change-[margin-inline-start]",
-        "[&_[data-slot=sidebar-gap]]:w-(--sidebar-width)! [&_[data-slot=sidebar-gap]]:transition-none!",
-        "[&_[data-slot=sidebar-container]]:absolute! [&_[data-slot=sidebar-container]]:left-0! [&_[data-slot=sidebar-container]]:transition-none!",
+        "relative w-0 shrink-0 md:ms-(--nav-offset) md:w-(--sidebar-width) md:transition-[margin-inline-start] md:duration-1078 md:ease-expressive md:will-change-[margin-inline-start]",
+        "**:data-[slot=sidebar-gap]:w-(--sidebar-width)! **:data-[slot=sidebar-gap]:transition-none!",
+        "**:data-[slot=sidebar-container]:absolute! **:data-[slot=sidebar-container]:left-0! **:data-[slot=sidebar-container]:transition-none!",
         className,
       )}
       {...props}
@@ -672,7 +705,7 @@ export default function Nav({
                     <li
                       key={thumb}
                       data-example={name}
-                      className="transition-transform duration-[1078ms] ease-expressive active:scale-97"
+                      className="transition-transform duration-1078 ease-expressive active:scale-97"
                     >
                       <Item
                         asChild
@@ -733,7 +766,7 @@ export default function Nav({
                                   It has to be aimed at the viewport: `ScrollArea`
                                   puts its `className` on the root, and the root is
                                   not what scrolls. */}
-                              <ScrollArea className="w-full [&>[data-slot=scroll-area-viewport]]:scroll-fade-x">
+                              <ScrollArea className="w-full *:data-[slot=scroll-area-viewport]:scroll-fade-x">
                                 {/* Padding sits inside the viewport so the
                                     scrollable strip itself runs edge to edge. */}
                                 <div className="flex w-max gap-1 p-1.5">

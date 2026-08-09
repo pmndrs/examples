@@ -70,7 +70,7 @@ export default function RootLayout({
              the dim layer, but remove backdrop filtering: re-blurring a live
              WebGL canvas throughout the sheet animation is prohibitively
              expensive on mobile GPUs. */
-          "[&_[data-slot=sheet-overlay]]:backdrop-filter-none",
+          "**:data-[slot=sheet-overlay]:backdrop-filter-none",
         )}
       >
         {/* `href` + `precedence` is what gets React to hoist this into <head>.
