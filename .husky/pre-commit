@@ -1,1 +1,3 @@
-pnpm exec lint-staged
+# `--concurrent false`: prettier rewrites the staged files that `turbo lint`
+# then reads, so the two tasks must not overlap.
+pnpm exec lint-staged --concurrent false

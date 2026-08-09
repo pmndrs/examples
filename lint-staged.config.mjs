@@ -21,6 +21,12 @@ export default {
     return `prettier --write --ignore-unknown ${staged.map((file) => JSON.stringify(file)).join(" ")}`;
   },
 
+  // Whole-workspace lint, through turbo rather than a direct `eslint` call:
+  // which workspaces have a linter (only `apps/website` today) stays a
+  // property of the task graph, and the cache makes a re-run that touches
+  // nothing lint-relevant ~0.4s instead of ~3.5s.
+  "{apps,packages}/*/**": () => "pnpm lint",
+
   // Repo-wide invariants, so they run whole rather than over the staged files:
   // both are ~1s and mirror what CI checks.
   "{package.json,pmndrs.json}": () => [
