@@ -1,4 +1,4 @@
-@import url('https://rsms.me/inter/inter.css');
+@import url("https://rsms.me/inter/inter.css");
 
 * {
   box-sizing: border-box;
@@ -16,9 +16,10 @@ body,
 body {
   background: #f0f0f0;
   color: #3e3e3d;
-  font-family: 'Inter var', sans-serif;
+  font-family: "Inter var", sans-serif;
   user-select: none;
-  cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxNiIgY3k9IjE2IiByPSIxMCIgZmlsbD0iIzNlM2UzZCIvPjwvc3ZnPg=='),
+  cursor:
+    url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxNiIgY3k9IjE2IiByPSIxMCIgZmlsbD0iIzNlM2UzZCIvPjwvc3ZnPg=="),
     auto;
 }
 

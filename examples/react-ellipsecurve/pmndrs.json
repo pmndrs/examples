@@ -2,9 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "React EllipseCurve",
   "description": "",
-  "tags": [
-    "trails"
-  ],
+  "tags": ["trails"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2022-10-20",
   "source": "https://codesandbox.io/s/xzi6ps",

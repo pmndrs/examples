@@ -1,6 +1,12 @@
-import { Suspense, useEffect } from 'react'
-import { Canvas } from '@react-three/fiber'
-import { useGLTF, OrbitControls, Stage, CameraShake, useAnimations } from '@react-three/drei'
+import { Suspense, useEffect } from "react";
+import { Canvas } from "@react-three/fiber";
+import {
+  useGLTF,
+  OrbitControls,
+  Stage,
+  CameraShake,
+  useAnimations,
+} from "@react-three/drei";
 
 // Handling controls in Threejs is hard bc 3rd party components that change the camera need to know
 // about controls, or else all changes are overwritten. That is the case for both <Stage and <CameraShake.
@@ -9,17 +15,19 @@ import { useGLTF, OrbitControls, Stage, CameraShake, useAnimations } from '@reac
 // Should your own components rely on default controls, throughout the three they're available as:
 //   const controls = useThree(state => state.controls)
 
-import robotModel from './robot-draco.glb?url'
+import robotModel from "./robot-draco.glb?url";
 
-useGLTF.preload(robotModel)
+useGLTF.preload(robotModel);
 function Model(props) {
-  const { scene, animations } = useGLTF(robotModel)
-  const { actions } = useAnimations(animations, scene)
+  const { scene, animations } = useGLTF(robotModel);
+  const { actions } = useAnimations(animations, scene);
   useEffect(() => {
-    actions.Idle.play()
-    scene.traverse((obj) => obj.isMesh && (obj.receiveShadow = obj.castShadow = true))
-  }, [actions, scene])
-  return <primitive object={scene} {...props} />
+    actions.Idle.play();
+    scene.traverse(
+      (obj) => obj.isMesh && (obj.receiveShadow = obj.castShadow = true),
+    );
+  }, [actions, scene]);
+  return <primitive object={scene} {...props} />;
 }
 
 export default function Viewer() {
@@ -42,5 +50,5 @@ export default function Viewer() {
         decayRate={0.65} // if decay = true this is the rate at which intensity will reduce at />
       />
     </Canvas>
-  )
+  );
 }

@@ -1,4 +1,4 @@
-import { Badge } from '@pmndrs/branding'
+import { Badge } from "@pmndrs/branding";
 
 export function Branding() {
   return (
@@ -10,9 +10,13 @@ export function Branding() {
             <br />
             <br />
             <br />
-            <a href="https://github.com/mattdesl/webgl-wireframes">Original</a> by <a href="https://twitter.com/mattdesl">Matt DesLauriers</a>.
+            <a href="https://github.com/mattdesl/webgl-wireframes">
+              Original
+            </a>{" "}
+            by <a href="https://twitter.com/mattdesl">Matt DesLauriers</a>.
             <br />
-            React port by <a href="https://twitter.com/cantbefaraz">Faraz Shaikh</a>
+            React port by{" "}
+            <a href="https://twitter.com/cantbefaraz">Faraz Shaikh</a>
           </p>
         </div>
         <div className="logo">
@@ -20,5 +24,5 @@ export function Branding() {
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -1,8 +1,8 @@
-import { createRoot } from "react-dom/client"
-import React, { useRef } from "react"
-import { Canvas, useFrame } from "@react-three/fiber"
-import { Html } from "@react-three/drei"
-import "./styles.css"
+import { createRoot } from "react-dom/client";
+import React, { useRef } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { Html } from "@react-three/drei";
+import "./styles.css";
 
 function Dodecahedron({ time, ...props }) {
   return (
@@ -16,26 +16,42 @@ function Dodecahedron({ time, ...props }) {
         </div>
       </Html>
     </mesh>
-  )
+  );
 }
 
 function Content() {
-  const ref = useRef()
-  useFrame(() => (ref.current.rotation.x = ref.current.rotation.y = ref.current.rotation.z += 0.01))
+  const ref = useRef();
+  useFrame(
+    () =>
+      (ref.current.rotation.x =
+        ref.current.rotation.y =
+        ref.current.rotation.z +=
+          0.01),
+  );
   return (
     <group ref={ref}>
       <Dodecahedron position={[-2, 0, 0]} />
       <Dodecahedron position={[0, -2, -3]} />
       <Dodecahedron position={[2, 0, 0]} />
     </group>
-  )
+  );
 }
 
 createRoot(document.getElementById("root")).render(
   <Canvas camera={{ position: [0, 0, 7.5] }}>
     <pointLight color="indianred" intensity={Math.PI} decay={0} />
-    <pointLight position={[10, 10, -10]} color="orange" intensity={Math.PI} decay={0} />
-    <pointLight position={[-10, -10, 10]} color="lightblue" intensity={Math.PI} decay={0} />
+    <pointLight
+      position={[10, 10, -10]}
+      color="orange"
+      intensity={Math.PI}
+      decay={0}
+    />
+    <pointLight
+      position={[-10, -10, 10]}
+      color="lightblue"
+      intensity={Math.PI}
+      decay={0}
+    />
     <Content />
-  </Canvas>
-)
+  </Canvas>,
+);

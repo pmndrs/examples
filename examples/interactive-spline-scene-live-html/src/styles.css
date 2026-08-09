@@ -1,5 +1,5 @@
-@import url('https://rsms.me/inter/inter.css');
-@import url('https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css');
+@import url("https://rsms.me/inter/inter.css");
+@import url("https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css");
 
 * {
   box-sizing: border-box;
@@ -27,7 +27,12 @@ body,
 
 body {
   background: rgb(255, 240, 246);
-  background: radial-gradient(circle, rgba(255, 240, 246, 1) 0%, rgba(249, 206, 224, 1) 35%, rgba(255, 163, 201, 1) 100%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 240, 246, 1) 0%,
+    rgba(249, 206, 224, 1) 35%,
+    rgba(255, 163, 201, 1) 100%
+  );
 }
 
 .content-container {

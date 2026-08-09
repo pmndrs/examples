@@ -6,6 +6,10 @@
   "authors": ["Paul Henschel"],
   "publishedAt": "2021-02-26",
   "source": "https://codesandbox.io/s/3k4g6",
-  "libraries": ["@react-three/drei", "@react-three/fiber", "@use-gesture/react"],
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@use-gesture/react"
+  ],
   "assets": []
 }

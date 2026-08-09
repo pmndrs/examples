@@ -1,7 +1,7 @@
-import React, { Suspense } from "react"
-import { Canvas } from "@react-three/fiber"
-import { Sky, OrbitControls } from "@react-three/drei"
-import Grass from "./Grass"
+import React, { Suspense } from "react";
+import { Canvas } from "@react-three/fiber";
+import { Sky, OrbitControls } from "@react-three/drei";
+import Grass from "./Grass";
 
 export default function App() {
   return (
@@ -12,7 +12,10 @@ export default function App() {
       <Suspense fallback={null}>
         <Grass />
       </Suspense>
-      <OrbitControls minPolarAngle={Math.PI / 2.5} maxPolarAngle={Math.PI / 2.5} />
+      <OrbitControls
+        minPolarAngle={Math.PI / 2.5}
+        maxPolarAngle={Math.PI / 2.5}
+      />
     </Canvas>
-  )
+  );
 }

@@ -1,7 +1,16 @@
-import { button, folder, useControls } from 'leva'
-import { debug, dpr, shadows, stats, useStore, vehicleConfig, wheelInfo } from '../store'
+import { button, folder, useControls } from "leva";
+import {
+  debug,
+  dpr,
+  shadows,
+  stats,
+  useStore,
+  vehicleConfig,
+  wheelInfo,
+} from "../store";
 
-const { directionLocal, axleLocal, rollInfluence, ...filteredWheelInfo } = wheelInfo
+const { directionLocal, axleLocal, rollInfluence, ...filteredWheelInfo } =
+  wheelInfo;
 
 const initialValues = {
   debug,
@@ -10,17 +19,38 @@ const initialValues = {
   stats,
   ...filteredWheelInfo,
   ...vehicleConfig,
-}
+};
 
 export function Editor() {
-  const [get, set, debug, dpr, shadows, stats] = useStore((state) => [state.get, state.set, state.debug, state.dpr, state.shadows, state.stats])
-  const { back, force, front, height, maxBrake, maxSpeed, steer, width } = vehicleConfig
-  const { customSlidingRotationalSpeed, frictionSlip, radius, sideAcceleration, suspensionStiffness, suspensionRestLength, useCustomSlidingRotationalSpeed } =
-    wheelInfo
+  const [get, set, debug, dpr, shadows, stats] = useStore((state) => [
+    state.get,
+    state.set,
+    state.debug,
+    state.dpr,
+    state.shadows,
+    state.stats,
+  ]);
+  const { back, force, front, height, maxBrake, maxSpeed, steer, width } =
+    vehicleConfig;
+  const {
+    customSlidingRotationalSpeed,
+    frictionSlip,
+    radius,
+    sideAcceleration,
+    suspensionStiffness,
+    suspensionRestLength,
+    useCustomSlidingRotationalSpeed,
+  } = wheelInfo;
 
   const [, setVehicleEditor] = useControls(() => ({
     Performance: folder({
-      dpr: { value: dpr, min: 1, max: 2, step: 0.5, onChange: (dpr) => set({ dpr }) },
+      dpr: {
+        value: dpr,
+        min: 1,
+        max: 2,
+        step: 0.5,
+        onChange: (dpr) => set({ dpr }),
+      },
       shadows: { value: shadows, onChange: (shadows) => set({ shadows }) },
     }),
     Vehicle: folder(
@@ -80,28 +110,32 @@ export function Editor() {
           min: 0.1,
           max: 1,
           step: 0.01,
-          onChange: (value) => set({ vehicleConfig: { ...get().vehicleConfig, steer: value } }),
+          onChange: (value) =>
+            set({ vehicleConfig: { ...get().vehicleConfig, steer: value } }),
         },
         force: {
           value: force,
           min: 0,
           max: 3000,
           step: 1,
-          onChange: (value) => set({ vehicleConfig: { ...get().vehicleConfig, force: value } }),
+          onChange: (value) =>
+            set({ vehicleConfig: { ...get().vehicleConfig, force: value } }),
         },
         maxBrake: {
           value: maxBrake,
           min: 0.1,
           max: 100,
           step: 0.01,
-          onChange: (value) => set({ vehicleConfig: { ...get().vehicleConfig, maxBrake: value } }),
+          onChange: (value) =>
+            set({ vehicleConfig: { ...get().vehicleConfig, maxBrake: value } }),
         },
         maxSpeed: {
           value: maxSpeed,
           min: 1,
           max: 150,
           step: 1,
-          onChange: (value) => set({ vehicleConfig: { ...get().vehicleConfig, maxSpeed: value } }),
+          onChange: (value) =>
+            set({ vehicleConfig: { ...get().vehicleConfig, maxSpeed: value } }),
         },
       },
       { collapsed: true },
@@ -132,7 +166,10 @@ export function Editor() {
           value: useCustomSlidingRotationalSpeed,
           onChange: (value) =>
             set({
-              wheelInfo: { ...get().wheelInfo, useCustomSlidingRotationalSpeed: value },
+              wheelInfo: {
+                ...get().wheelInfo,
+                useCustomSlidingRotationalSpeed: value,
+              },
             }),
         },
         customSlidingRotationalSpeed: {
@@ -142,7 +179,10 @@ export function Editor() {
           step: 0.01,
           onChange: (value) =>
             set({
-              wheelInfo: { ...get().wheelInfo, customSlidingRotationalSpeed: value },
+              wheelInfo: {
+                ...get().wheelInfo,
+                customSlidingRotationalSpeed: value,
+              },
             }),
         },
         frictionSlip: {
@@ -177,8 +217,8 @@ export function Editor() {
     ),
     reset: button(() => {
       // @ts-expect-error -- FIXME: types when using folders seem to be broken
-      setVehicleEditor(initialValues)
+      setVehicleEditor(initialValues);
     }),
-  }))
-  return null
+  }));
+  return null;
 }

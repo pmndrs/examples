@@ -6,20 +6,26 @@ source: https://sketchfab.com/models/0d62f4d3676545c88ec8523213c055dd
 title: Minecraft Diamond Axe
 */
 
-import { useGLTF } from "@react-three/drei"
+import { useGLTF } from "@react-three/drei";
 
-import axeModel from "./axe.glb?url"
+import axeModel from "./axe.glb?url";
 
 export default function Axe(props) {
-  const { nodes, materials } = useGLTF(axeModel)
+  const { nodes, materials } = useGLTF(axeModel);
   return (
     <group dispose={null} {...props}>
       <group rotation={[0, Math.PI / 1.8, -0.3]} scale={0.5}>
-        <mesh geometry={nodes.Mesh_1001_1.geometry} material={materials.material_2} />
-        <mesh geometry={nodes.Mesh_1001_2.geometry} material={materials.material_3} />
+        <mesh
+          geometry={nodes.Mesh_1001_1.geometry}
+          material={materials.material_2}
+        />
+        <mesh
+          geometry={nodes.Mesh_1001_2.geometry}
+          material={materials.material_3}
+        />
       </group>
     </group>
-  )
+  );
 }
 
-useGLTF.preload(axeModel)
+useGLTF.preload(axeModel);

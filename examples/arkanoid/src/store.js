@@ -1,12 +1,12 @@
-import { create } from "zustand"
-import bgAudio from "./resources/sawsquarenoise_-_01_-_Towel_Defence_Splash_Screen.mp3"
-import pingAudio from "./resources/select_006.ogg"
-import spawnAudio from "./resources/select_007.ogg"
+import { create } from "zustand";
+import bgAudio from "./resources/sawsquarenoise_-_01_-_Towel_Defence_Splash_Screen.mp3";
+import pingAudio from "./resources/select_006.ogg";
+import spawnAudio from "./resources/select_007.ogg";
 
-const ping = new Audio(pingAudio)
-const spawn = new Audio(spawnAudio)
-const bg = new Audio(bgAudio)
-bg.loop = true
+const ping = new Audio(pingAudio);
+const spawn = new Audio(spawnAudio);
+const bg = new Audio(bgAudio);
+bg.loop = true;
 
 const useStore = create((set) => ({
   points: 0,
@@ -28,19 +28,20 @@ const useStore = create((set) => ({
     { right: false, long: false, y: 5, speed: 0.165, color: "orange" },
   ],
   start: () => {
-    set({ startup: false })
+    set({ startup: false });
     //bg.play()
-    document.body.style.cursor = "none"
+    document.body.style.cursor = "none";
   },
   reset: () => {
-    spawn.play((spawn.currentTime = 0))
-    set({ points: 0, restart: true })
-    setTimeout(() => set({ restart: false }), 10)
+    spawn.play((spawn.currentTime = 0));
+    set({ points: 0, restart: true });
+    setTimeout(() => set({ restart: false }), 10);
   },
   contact: (e) => {
-    if (e.contact.impactVelocity > 4) set((state) => ({ points: state.points + 1 }))
-    ping.play((ping.currentTime = 0))
+    if (e.contact.impactVelocity > 4)
+      set((state) => ({ points: state.points + 1 }));
+    ping.play((ping.currentTime = 0));
   },
-}))
+}));
 
-export { useStore }
+export { useStore };

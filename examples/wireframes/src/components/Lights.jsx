@@ -2,7 +2,12 @@
 export default function Lights() {
   return (
     <>
-      <hemisphereLight args={[0xffffff, 0xffffff, Math.PI]} color={0x7095c1} position={[0, 50, 0]} groundColor={0xcbc1b2} />
+      <hemisphereLight
+        args={[0xffffff, 0xffffff, Math.PI]}
+        color={0x7095c1}
+        position={[0, 50, 0]}
+        groundColor={0xcbc1b2}
+      />
       <directionalLight
         position={[100, 200, 100]}
         intensity={Math.PI}
@@ -14,5 +19,5 @@ export default function Lights() {
         shadow-camera-top={22}
       />
     </>
-  )
+  );
 }

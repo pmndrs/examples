@@ -6,6 +6,11 @@
   "authors": ["Gianmarco Simone", "Paul Henschel"],
   "publishedAt": "2021-03-26",
   "source": "https://codesandbox.io/s/gpioq",
-  "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/postprocessing", "meshline"],
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing",
+    "meshline"
+  ],
   "assets": []
 }

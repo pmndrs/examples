@@ -6,6 +6,11 @@
   "authors": ["Christian Ortiz"],
   "publishedAt": "2026-03-24",
   "source": "http://github.com/cortiz2894/flow-shield-effect",
-  "libraries": ["@react-three/drei", "@react-three/fiber", "@react-three/postprocessing", "leva"],
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing",
+    "leva"
+  ],
   "assets": []
 }

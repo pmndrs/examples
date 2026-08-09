@@ -1,18 +1,18 @@
-import { createRef } from 'react'
-import { create } from 'zustand'
-import { shallow } from 'zustand/shallow'
-import { useStoreWithEqualityFn } from 'zustand/traditional'
-import type { RefObject } from 'react'
-import type { PublicApi, WheelInfoOptions } from '@react-three/cannon'
-import type { Group } from 'three'
-import type { StoreApi } from 'zustand'
+import { createRef } from "react";
+import { create } from "zustand";
+import { shallow } from "zustand/shallow";
+import { useStoreWithEqualityFn } from "zustand/traditional";
+import type { RefObject } from "react";
+import type { PublicApi, WheelInfoOptions } from "@react-three/cannon";
+import type { Group } from "three";
+import type { StoreApi } from "zustand";
 
-type GetState<T> = () => T
-type SetState<T> = StoreApi<T>['setState']
-type StateSelector<T, U> = (state: T) => U
+type GetState<T> = () => T;
+type SetState<T> = StoreApi<T>["setState"];
+type StateSelector<T, U> = (state: T) => U;
 
-export const angularVelocity = [0, 0.5, 0] as const
-export const cameras = ['DEFAULT', 'FIRST_PERSON', 'BIRD_EYE'] as const
+export const angularVelocity = [0, 0.5, 0] as const;
+export const cameras = ["DEFAULT", "FIRST_PERSON", "BIRD_EYE"] as const;
 
 const controls = {
   backward: false,
@@ -22,16 +22,16 @@ const controls = {
   honk: false,
   left: false,
   right: false,
-}
+};
 
-export const debug = false as const
-export const dpr = 1.5 as const
-export const levelLayer = 1 as const
-export const maxBoost = 100 as const
-export const position = [-110, 0.75, 220] as const
-export const rotation = [0, Math.PI / 2 + 0.35, 0] as const
-export const shadows = true as const
-export const stats = false as const
+export const debug = false as const;
+export const dpr = 1.5 as const;
+export const levelLayer = 1 as const;
+export const maxBoost = 100 as const;
+export const position = [-110, 0.75, 220] as const;
+export const rotation = [0, Math.PI / 2 + 0.35, 0] as const;
+export const shadows = true as const;
+export const stats = false as const;
 
 export const vehicleConfig = {
   width: 1.7,
@@ -42,23 +42,23 @@ export const vehicleConfig = {
   force: 1800,
   maxBrake: 65,
   maxSpeed: 88,
-} as const
+} as const;
 
 export type WheelInfo = Required<
   Pick<
     WheelInfoOptions,
-    | 'axleLocal'
-    | 'customSlidingRotationalSpeed'
-    | 'directionLocal'
-    | 'frictionSlip'
-    | 'radius'
-    | 'rollInfluence'
-    | 'sideAcceleration'
-    | 'suspensionRestLength'
-    | 'suspensionStiffness'
-    | 'useCustomSlidingRotationalSpeed'
+    | "axleLocal"
+    | "customSlidingRotationalSpeed"
+    | "directionLocal"
+    | "frictionSlip"
+    | "radius"
+    | "rollInfluence"
+    | "sideAcceleration"
+    | "suspensionRestLength"
+    | "suspensionStiffness"
+    | "useCustomSlidingRotationalSpeed"
   >
->
+>;
 
 export const wheelInfo: WheelInfo = {
   axleLocal: [-1, 0, 0],
@@ -71,106 +71,128 @@ export const wheelInfo: WheelInfo = {
   suspensionRestLength: 0.35,
   suspensionStiffness: 30,
   useCustomSlidingRotationalSpeed: true,
-}
+};
 
-const actionNames = ['onFinish', 'onStart', 'reset'] as const
-export type ActionNames = (typeof actionNames)[number]
+const actionNames = ["onFinish", "onStart", "reset"] as const;
+export type ActionNames = (typeof actionNames)[number];
 
-type Camera = (typeof cameras)[number]
-export type Controls = typeof controls
+type Camera = (typeof cameras)[number];
+export type Controls = typeof controls;
 
-type Getter = GetState<IState>
-export type Setter = SetState<IState>
+type Getter = GetState<IState>;
+export type Setter = SetState<IState>;
 
-export type VehicleConfig = typeof vehicleConfig
+export type VehicleConfig = typeof vehicleConfig;
 
-const booleans = ['debug', 'editor', 'help', 'leaderboard', 'map', 'ready', 'shadows', 'sound', 'stats'] as const
-type Booleans = (typeof booleans)[number]
+const booleans = [
+  "debug",
+  "editor",
+  "help",
+  "leaderboard",
+  "map",
+  "ready",
+  "shadows",
+  "sound",
+  "stats",
+] as const;
+type Booleans = (typeof booleans)[number];
 
 type BaseState = {
-  [K in Booleans]: boolean
-}
+  [K in Booleans]: boolean;
+};
 
 export interface IState extends BaseState {
-  actions: Record<ActionNames, () => void>
-  api: PublicApi | null
-  bestCheckpoint: number
-  camera: Camera
-  chassisBody: RefObject<Group | null>
-  controls: Controls
-  dpr: number
-  finished: number
-  get: Getter
-  level: RefObject<Group | null>
-  loaded: boolean
-  session: null
-  set: Setter
-  start: number
-  vehicleConfig: VehicleConfig
-  wheelInfo: WheelInfo
-  wheels: [RefObject<Group | null>, RefObject<Group | null>, RefObject<Group | null>, RefObject<Group | null>]
+  actions: Record<ActionNames, () => void>;
+  api: PublicApi | null;
+  bestCheckpoint: number;
+  camera: Camera;
+  chassisBody: RefObject<Group | null>;
+  controls: Controls;
+  dpr: number;
+  finished: number;
+  get: Getter;
+  level: RefObject<Group | null>;
+  loaded: boolean;
+  session: null;
+  set: Setter;
+  start: number;
+  vehicleConfig: VehicleConfig;
+  wheelInfo: WheelInfo;
+  wheels: [
+    RefObject<Group | null>,
+    RefObject<Group | null>,
+    RefObject<Group | null>,
+    RefObject<Group | null>,
+  ];
 }
 
-const useStoreImpl = create<IState>((set: SetState<IState>, get: GetState<IState>) => {
-  const actions = {
-    onFinish: () => {
-      const { finished, start } = get()
-      if (start && !finished) {
-        set({ finished: Date.now() - start })
-      }
-    },
-    onStart: () => {
-      set({ finished: 0, start: Date.now() })
-    },
-    reset: () => {
-      mutation.boost = maxBoost
+const useStoreImpl = create<IState>(
+  (set: SetState<IState>, get: GetState<IState>) => {
+    const actions = {
+      onFinish: () => {
+        const { finished, start } = get();
+        if (start && !finished) {
+          set({ finished: Date.now() - start });
+        }
+      },
+      onStart: () => {
+        set({ finished: 0, start: Date.now() });
+      },
+      reset: () => {
+        mutation.boost = maxBoost;
 
-      set((state) => {
-        state.api?.angularVelocity.set(...angularVelocity)
-        state.api?.position.set(...position)
-        state.api?.rotation.set(...rotation)
-        state.api?.velocity.set(0, 0, 0)
+        set((state) => {
+          state.api?.angularVelocity.set(...angularVelocity);
+          state.api?.position.set(...position);
+          state.api?.rotation.set(...rotation);
+          state.api?.velocity.set(0, 0, 0);
 
-        return { ...state, finished: 0, start: 0 }
-      })
-    },
-  }
+          return { ...state, finished: 0, start: 0 };
+        });
+      },
+    };
 
-  return {
-    actions,
-    api: null,
-    bestCheckpoint: 0,
-    camera: cameras[0],
-    chassisBody: createRef<Group>(),
-    controls,
-    debug,
-    dpr,
-    editor: false,
-    finished: 0,
-    get,
-    help: false,
-    leaderboard: false,
-    level: createRef<Group>(),
-    loaded: false,
-    map: true,
-    ready: false,
-    session: null,
-    set,
-    shadows,
-    sound: true,
-    start: 0,
-    stats,
-    vehicleConfig,
-    wheelInfo,
-    wheels: [createRef<Group>(), createRef<Group>(), createRef<Group>(), createRef<Group>()],
-  }
-})
+    return {
+      actions,
+      api: null,
+      bestCheckpoint: 0,
+      camera: cameras[0],
+      chassisBody: createRef<Group>(),
+      controls,
+      debug,
+      dpr,
+      editor: false,
+      finished: 0,
+      get,
+      help: false,
+      leaderboard: false,
+      level: createRef<Group>(),
+      loaded: false,
+      map: true,
+      ready: false,
+      session: null,
+      set,
+      shadows,
+      sound: true,
+      start: 0,
+      stats,
+      vehicleConfig,
+      wheelInfo,
+      wheels: [
+        createRef<Group>(),
+        createRef<Group>(),
+        createRef<Group>(),
+        createRef<Group>(),
+      ],
+    };
+  },
+);
 
 interface Mutation {
-  boost: number
-  sliding: boolean
-  speed: number
-  velocity: [number, number, number]
+  boost: number;
+  sliding: boolean;
+  speed: number;
+  velocity: [number, number, number];
 }
 
 export const mutation: Mutation = {
@@ -179,12 +201,13 @@ export const mutation: Mutation = {
   sliding: false,
   speed: 0,
   velocity: [0, 0, 0],
-}
+};
 
 // Make the store shallow compare by default
-const useStore = <T>(sel: StateSelector<IState, T>) => useStoreWithEqualityFn(useStoreImpl, sel, shallow)
-Object.assign(useStore, useStoreImpl)
+const useStore = <T>(sel: StateSelector<IState, T>) =>
+  useStoreWithEqualityFn(useStoreImpl, sel, shallow);
+Object.assign(useStore, useStoreImpl);
 
-const { getState, setState } = useStoreImpl
+const { getState, setState } = useStoreImpl;
 
-export { getState, setState, useStore }
+export { getState, setState, useStore };

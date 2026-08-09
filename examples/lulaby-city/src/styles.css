@@ -1,4 +1,4 @@
-@import url('@pmndrs/branding/styles.css');
+@import url("@pmndrs/branding/styles.css");
 
 * {
   box-sizing: border-box;
@@ -15,7 +15,7 @@ body,
 }
 
 body {
-  font-family: 'Inter var', sans-serif;
+  font-family: "Inter var", sans-serif;
   color: white;
   background: #cc7b32;
   user-select: none;

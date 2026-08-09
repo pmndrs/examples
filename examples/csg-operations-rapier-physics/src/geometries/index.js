@@ -1,2 +1,2 @@
-export * from './BoxBlendGeometry'
-export * from './HeartGeometry'
+export * from "./BoxBlendGeometry";
+export * from "./HeartGeometry";

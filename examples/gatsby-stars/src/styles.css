@@ -1,4 +1,4 @@
-@import url('https://rsms.me/inter/inter.css');
+@import url("https://rsms.me/inter/inter.css");
 
 * {
   box-sizing: border-box;
@@ -16,7 +16,7 @@ body,
 
 body {
   overscroll-behavior-y: none;
-  font-family: 'Inter var', sans-serif;
+  font-family: "Inter var", sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   color: #ddd;

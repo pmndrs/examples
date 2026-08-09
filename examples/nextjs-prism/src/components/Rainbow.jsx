@@ -1,6 +1,6 @@
-import { forwardRef, useRef } from 'react'
-import { extend, useFrame, useThree } from '@react-three/fiber'
-import { shaderMaterial } from '@react-three/drei'
+import { forwardRef, useRef } from "react";
+import { extend, useFrame, useThree } from "@react-three/fiber";
+import { shaderMaterial } from "@react-three/drei";
 
 // Based on
 // "Improving the Rainbow" by Alan Zucconi: https://www.alanzucconi.com/2017/07/15/improving-the-rainbow-2/
@@ -14,7 +14,7 @@ const RainbowMaterial = shaderMaterial(
     startRadius: 1,
     endRadius: 0,
     emissiveIntensity: 2.5,
-    ratio: 1
+    ratio: 1,
   },
   /*glsl*/ ` varying vec2 vUv;
     void main() {
@@ -99,21 +99,43 @@ const RainbowMaterial = shaderMaterial(
       gl_FragColor = vec4(area * co * l * brightness * emissiveIntensity, 1.0);
       if (gl_FragColor.r + gl_FragColor.g + gl_FragColor.b < 0.01) discard;
       #include <colorspace_fragment>
-    }`
-)
+    }`,
+);
 
-extend({ RainbowMaterial })
+extend({ RainbowMaterial });
 
-export const Rainbow = forwardRef(({ startRadius = 0, endRadius = 0.5, emissiveIntensity = 2.5, fade = 0.25, ...props }, fRef) => {
-  const material = useRef(null)
-  const { width, height } = useThree((state) => state.viewport)
-  // calculate the maximum length the rainbow has to have to reach all screen corners
-  const length = Math.hypot(width, height) + 1.5 // add 1.5 to due motion of the rainbow
-  useFrame((state, delta) => (material.current.time += delta * material.current.speed))
-  return (
-    <mesh ref={fRef} scale={[length, length, 1]} {...props}>
-      <planeGeometry />
-      <rainbowMaterial ref={material} key={RainbowMaterial.key} fade={fade} startRadius={startRadius} endRadius={endRadius} ratio={1} toneMapped={false} />
-    </mesh>
-  )
-})
+export const Rainbow = forwardRef(
+  (
+    {
+      startRadius = 0,
+      endRadius = 0.5,
+      emissiveIntensity = 2.5,
+      fade = 0.25,
+      ...props
+    },
+    fRef,
+  ) => {
+    const material = useRef(null);
+    const { width, height } = useThree((state) => state.viewport);
+    // calculate the maximum length the rainbow has to have to reach all screen corners
+    const length = Math.hypot(width, height) + 1.5; // add 1.5 to due motion of the rainbow
+    useFrame(
+      (state, delta) =>
+        (material.current.time += delta * material.current.speed),
+    );
+    return (
+      <mesh ref={fRef} scale={[length, length, 1]} {...props}>
+        <planeGeometry />
+        <rainbowMaterial
+          ref={material}
+          key={RainbowMaterial.key}
+          fade={fade}
+          startRadius={startRadius}
+          endRadius={endRadius}
+          ratio={1}
+          toneMapped={false}
+        />
+      </mesh>
+    );
+  },
+);

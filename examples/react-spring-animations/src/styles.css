@@ -28,7 +28,19 @@ body {
   position: fixed;
   overflow: hidden;
   overscroll-behavior-y: none;
-  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    avenir next,
+    avenir,
+    helvetica neue,
+    helvetica,
+    ubuntu,
+    roboto,
+    noto,
+    segoe ui,
+    arial,
+    sans-serif;
   color: black;
   perspective: 3000px;
   perspective-origin: 50% 50%;
@@ -41,7 +53,8 @@ h1 {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate3d(-50%, -50%, 0) rotate3d(1, 0, 0, 55deg) rotate3d(0, 0, 1, 45deg);
+  transform: translate3d(-50%, -50%, 0) rotate3d(1, 0, 0, 55deg)
+    rotate3d(0, 0, 1, 45deg);
   font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 800;

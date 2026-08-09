@@ -5,22 +5,29 @@
     "build": "turbo build3",
     "postbuild": "./out.sh",
     "dev": "turbo dev2",
-    "lint": "turbo lint",
+    "check": "turbo lint lint:metadata lint:versions format:check",
+    "lint": "turbo lint lint:metadata lint:versions",
     "lint:metadata": "node bin/validate-pmndrs-metadata.mjs",
     "lint:versions": "syncpack lint",
     "fix:versions": "syncpack fix",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "test": "turbo test"
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "turbo test",
+    "test:turbo": "vitest run",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@playwright/test": "1.62.0",
     "@types/minimist": "^1.2.5",
     "depcheck": "^1.4.7",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "syncpack": "^14.3.0",
     "turbo": "^2.10.7",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "vitest": "^4.1.10"
   },
   "engines": {
     "node": ">=24"

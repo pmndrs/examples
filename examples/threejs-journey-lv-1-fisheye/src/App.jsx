@@ -1,6 +1,11 @@
-import { Canvas } from '@react-three/fiber'
-import { Fisheye, CameraControls, PerspectiveCamera, Environment } from '@react-three/drei'
-import { Level, Sudo, Camera, Cactus, Box } from './Scene'
+import { Canvas } from "@react-three/fiber";
+import {
+  Fisheye,
+  CameraControls,
+  PerspectiveCamera,
+  Environment,
+} from "@react-three/drei";
+import { Level, Sudo, Camera, Cactus, Box } from "./Scene";
 
 export default function App() {
   return (
@@ -19,5 +24,5 @@ export default function App() {
         <PerspectiveCamera makeDefault position={[0, 0, 18.5]} />
       </Fisheye>
     </Canvas>
-  )
+  );
 }

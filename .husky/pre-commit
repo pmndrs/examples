@@ -1,0 +1,3 @@
+# `--concurrent false`: prettier rewrites the staged manifests that the
+# metadata/syncpack checks then read, so the tasks must not overlap.
+pnpm exec lint-staged --concurrent false

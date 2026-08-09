@@ -1,5 +1,5 @@
-import { useRef, useState } from 'react'
-import { useFrame } from '@react-three/fiber'
+import { useRef, useState } from "react";
+import { useFrame } from "@react-three/fiber";
 
 export default function App(props) {
   return (
@@ -10,14 +10,14 @@ export default function App(props) {
       <Box position={[-0.9, 0, 0]} />
       <Box position={[0.9, 0, 0]} />
     </group>
-  )
+  );
 }
 
 function Box(props) {
-  const ref = useRef()
-  const [hovered, hover] = useState(false)
-  const [clicked, click] = useState(false)
-  useFrame((state, delta) => (ref.current.rotation.x += delta))
+  const ref = useRef();
+  const [hovered, hover] = useState(false);
+  const [clicked, click] = useState(false);
+  useFrame((state, delta) => (ref.current.rotation.x += delta));
   return (
     <mesh
       {...props}
@@ -25,9 +25,10 @@ function Box(props) {
       scale={clicked ? 1.5 : 1}
       onClick={(event) => click(!clicked)}
       onPointerOver={(event) => hover(true)}
-      onPointerOut={(event) => hover(false)}>
+      onPointerOut={(event) => hover(false)}
+    >
       <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+      <meshStandardMaterial color={hovered ? "hotpink" : "orange"} />
     </mesh>
-  )
+  );
 }

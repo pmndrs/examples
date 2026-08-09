@@ -35,6 +35,27 @@
     "lint": {
       "dependsOn": ["^lint"]
     },
+    "//#lint:metadata": {
+      "inputs": [
+        "bin/validate-pmndrs-metadata.mjs",
+        "schemas/pmndrs.schema.json",
+        "examples/*/{package.json,pmndrs.json}"
+      ],
+      "outputs": []
+    },
+    "//#format:check": {
+      "inputs": ["$TURBO_DEFAULT$"],
+      "outputs": []
+    },
+    "//#lint:versions": {
+      "inputs": [
+        ".syncpackrc.json",
+        "package.json",
+        "pnpm-workspace.yaml",
+        "{apps,examples,packages}/*/package.json"
+      ],
+      "outputs": []
+    },
     "dev2": {
       "cache": false,
       "persistent": true

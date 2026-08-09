@@ -1,4 +1,4 @@
-@import url('https://rsms.me/inter/inter.css');
+@import url("https://rsms.me/inter/inter.css");
 
 body {
   width: 100%;
@@ -8,7 +8,7 @@ body {
   padding: 0;
   background: #1d2142;
   color: white;
-  font-family: 'Inter var', sans-serif;
+  font-family: "Inter var", sans-serif;
 }
 
 canvas {

@@ -1,6 +1,6 @@
-import { Uniform } from 'three'
-import { BlendFunction, Effect, EffectAttribute } from 'postprocessing'
-import { wrapEffect } from '@react-three/postprocessing'
+import { Uniform } from "three";
+import { BlendFunction, Effect, EffectAttribute } from "postprocessing";
+import { wrapEffect } from "@react-three/postprocessing";
 
 const fragmentShader = /* glsl */ `
   uniform float factor;
@@ -16,21 +16,21 @@ const fragmentShader = /* glsl */ `
     distortedUv.y += 0.5 * amplitude * sin(y);
     outputColor = texture(inputBuffer, distortedUv);
   }
-`
+`;
 
 class OriginalWaterEffect extends Effect {
   constructor({ blendFunction = BlendFunction.NORMAL, factor = 0 } = {}) {
-    super('OriginalWaterEffect', fragmentShader, {
+    super("OriginalWaterEffect", fragmentShader, {
       blendFunction,
       attributes: EffectAttribute.CONVOLUTION,
       uniforms: new Map([
-        ['factor', new Uniform(factor)],
-        ['waterTime', new Uniform(0)],
+        ["factor", new Uniform(factor)],
+        ["waterTime", new Uniform(0)],
       ]),
-    })
+    });
   }
 }
 
 export const WaterEffect = wrapEffect(OriginalWaterEffect, {
   blendFunction: BlendFunction.NORMAL,
-})
+});

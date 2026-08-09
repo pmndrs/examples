@@ -1,4 +1,4 @@
-import { Icosahedron, Wireframe, Float } from '@react-three/drei'
+import { Icosahedron, Wireframe, Float } from "@react-three/drei";
 
 export function Primitive(opts) {
   return (
@@ -8,5 +8,5 @@ export function Primitive(opts) {
         <Wireframe {...opts} />
       </Icosahedron>
     </Float>
-  )
+  );
 }

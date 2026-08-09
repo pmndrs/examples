@@ -1,9 +1,9 @@
-import { createRoot } from 'react-dom/client'
-import React from 'react'
-import './styles.css'
-import App from './App'
+import { createRoot } from "react-dom/client";
+import React from "react";
+import "./styles.css";
+import App from "./App";
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   <>
     <App />
     <div className="overlay">
@@ -21,5 +21,5 @@ createRoot(document.getElementById('root')).render(
         and life of all things —
       </h2>
     </div>
-  </>
-)
+  </>,
+);

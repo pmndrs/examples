@@ -26,7 +26,10 @@
   font-family: var(--font-ibm-mono), monospace;
   font-size: 11px;
   letter-spacing: 0.05em;
-  transition: border-color 0.2s, background 0.2s, opacity 0.2s;
+  transition:
+    border-color 0.2s,
+    background 0.2s,
+    opacity 0.2s;
   pointer-events: auto;
 }
 
@@ -112,7 +115,9 @@
   align-items: center;
   justify-content: center;
   pointer-events: auto;
-  transition: border-color 0.2s, background 0.2s;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
 }
 
 .fab:hover,
@@ -148,7 +153,10 @@
   transform-origin: bottom right;
   pointer-events: none;
   visibility: hidden;
-  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0.2s;
 }
 
 .popoverOpen {

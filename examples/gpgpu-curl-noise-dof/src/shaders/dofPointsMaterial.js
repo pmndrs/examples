@@ -1,5 +1,5 @@
-import * as THREE from 'three'
-import { extend } from '@react-three/fiber'
+import * as THREE from "three";
+import { extend } from "@react-three/fiber";
 
 class DofPointsMaterial extends THREE.ShaderMaterial {
   constructor() {
@@ -29,13 +29,13 @@ class DofPointsMaterial extends THREE.ShaderMaterial {
         uTime: { value: 0 },
         uFocus: { value: 5.1 },
         uFov: { value: 50 },
-        uBlur: { value: 30 }
+        uBlur: { value: 30 },
       },
       transparent: true,
       blending: THREE.NormalBlending,
-      depthWrite: false
-    })
+      depthWrite: false,
+    });
   }
 }
 
-extend({ DofPointsMaterial })
+extend({ DofPointsMaterial });

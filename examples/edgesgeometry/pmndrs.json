@@ -2,17 +2,10 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "EdgesGeometry",
   "description": "How to use EdgesGeometry, which expects its target as a constructor argument.",
-  "tags": [
-    "outlines",
-    "gltf",
-    "geometry"
-  ],
+  "tags": ["outlines", "gltf", "geometry"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2020-04-06",
   "source": "https://codesandbox.io/s/iup24",
-  "libraries": [
-    "@react-three/drei",
-    "@react-three/fiber"
-  ],
+  "libraries": ["@react-three/drei", "@react-three/fiber"],
   "assets": []
 }

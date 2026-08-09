@@ -1,8 +1,8 @@
-@import url('https://rsms.me/inter/inter.css');
+@import url("https://rsms.me/inter/inter.css");
 
 @font-face {
-  font-family: 'Meslo';
-  src: url('meslo.woff2') format('woff2');
+  font-family: "Meslo";
+  src: url("meslo.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -25,7 +25,7 @@ body,
 body {
   background: white;
   color: black;
-  font-family: 'Inter';
+  font-family: "Inter";
 }
 
 a {

@@ -19,8 +19,8 @@ overrides:
   postprocessing: 6.36.6
 
 patchedDependencies:
-  '@splinetool/loader@0.9.153': patches/@splinetool__loader@0.9.153.patch
+  "@splinetool/loader@0.9.153": patches/@splinetool__loader@0.9.153.patch
 
 minimumReleaseAgeExclude:
   - material-theme-builder@3.0.0
-  - '@react-three/drei@10.7.8'
+  - "@react-three/drei@10.7.8"

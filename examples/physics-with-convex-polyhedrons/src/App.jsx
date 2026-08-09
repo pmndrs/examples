@@ -40,7 +40,7 @@ function Diamond(props) {
 function Cone({ sides, ...props }) {
   const geo = useMemo(
     () => toConvexProps(new THREE.ConeGeometry(0.7, 0.7, sides, 1)),
-    []
+    [],
   );
   const [ref] = useConvexPolyhedron(() => ({ mass: 100, ...props, args: geo }));
   return (
@@ -56,7 +56,7 @@ function Cube({ size, ...props }) {
   // note, this is wildly inefficient vs useBox
   const geo = useMemo(
     () => toConvexProps(new THREE.BoxGeometry(size, size, size)),
-    []
+    [],
   );
   const [ref] = useConvexPolyhedron(() => ({ mass: 100, ...props, args: geo }));
   return (

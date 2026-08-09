@@ -1,41 +1,81 @@
-import * as THREE from 'three'
-import { useRef, forwardRef } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { Clouds, Cloud, MotionPathControls, useMotion, useTexture, OrbitControls, MeshWobbleMaterial, Gltf, Float, Environment } from '@react-three/drei'
-import { EffectComposer, TiltShift2, HueSaturation, DotScreen } from '@react-three/postprocessing'
-import { useControls } from 'leva'
-import * as CURVES from './curves'
+import * as THREE from "three";
+import { useRef, forwardRef } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import {
+  Clouds,
+  Cloud,
+  MotionPathControls,
+  useMotion,
+  useTexture,
+  OrbitControls,
+  MeshWobbleMaterial,
+  Gltf,
+  Float,
+  Environment,
+} from "@react-three/drei";
+import {
+  EffectComposer,
+  TiltShift2,
+  HueSaturation,
+  DotScreen,
+} from "@react-three/postprocessing";
+import { useControls } from "leva";
+import * as CURVES from "./curves";
 
-import sonyModel from './sony_cinema_camera-transformed.glb?url'
-import stickerImg from './Sticjer_1024x1024@2x.png'
-import stickerInvertImg from './Sticjer_1024x1024@2x_invert.png'
+import sonyModel from "./sony_cinema_camera-transformed.glb?url";
+import stickerImg from "./Sticjer_1024x1024@2x.png";
+import stickerInvertImg from "./Sticjer_1024x1024@2x_invert.png";
 
 export function App() {
-  const poi = useRef()
-  const motionRef = useRef()
+  const poi = useRef();
+  const motionRef = useRef();
   const { float, attachCamera, debug, path } = useControls({
     attachCamera: true,
     debug: false,
     float: true,
-    path: { value: 'Circle', options: ['Circle', 'Rollercoaster', 'Infinity', 'Heart'] },
-  })
-  const Curve = CURVES[path]
+    path: {
+      value: "Circle",
+      options: ["Circle", "Rollercoaster", "Infinity", "Heart"],
+    },
+  });
+  const Curve = CURVES[path];
   return (
     <Canvas camera={{ position: [10, 15, -10], fov: 45 }}>
       <ambientLight intensity={Math.PI} />
       <pointLight position={[10, 10, 10]} intensity={Math.PI} decay={0} />
       {!attachCamera && <OrbitControls />}
-      <MotionPathControls object={attachCamera ? null : motionRef} focus={poi} debug={debug} damping={0.2} focusDamping={0.15}>
+      <MotionPathControls
+        object={attachCamera ? null : motionRef}
+        focus={poi}
+        debug={debug}
+        damping={0.2}
+        focusDamping={0.15}
+      >
         <Curve />
         <Loop />
       </MotionPathControls>
-      <Gltf visible={!attachCamera} src={sonyModel} scale={0.03} ref={motionRef} />
+      <Gltf
+        visible={!attachCamera}
+        src={sonyModel}
+        scale={0.03}
+        ref={motionRef}
+      />
       <Float floatIntensity={20} rotationIntensity={25} speed={float ? 4 : 0}>
         <Sticker position={[1, 0, 1]} scale={2} ref={poi} />
       </Float>
       <Environment preset="city" background blur={0.5} />
       <Clouds>
-        <Cloud concentrate="outside" seed={1} segments={100} bounds={20} volume={20} growth={10} opacity={0.15} position={[0, 0, -10]} speed={1} />
+        <Cloud
+          concentrate="outside"
+          seed={1}
+          segments={100}
+          bounds={20}
+          volume={20}
+          growth={10}
+          opacity={0.15}
+          position={[0, 0, -10]}
+          speed={1}
+        />
       </Clouds>
       <EffectComposer disableNormalPass multisampling={4}>
         <HueSaturation saturation={-1} />
@@ -43,16 +83,16 @@ export function App() {
         <DotScreen scale={2} />
       </EffectComposer>
     </Canvas>
-  )
+  );
 }
 
 function Loop({ factor = 0.2 }) {
-  const motion = useMotion()
-  useFrame((state, delta) => (motion.current += Math.min(0.1, delta) * factor))
+  const motion = useMotion();
+  useFrame((state, delta) => (motion.current += Math.min(0.1, delta) * factor));
 }
 
 const Sticker = forwardRef(({ url, ...props }, ref) => {
-  const [smiley, invert] = useTexture([stickerImg, stickerInvertImg])
+  const [smiley, invert] = useTexture([stickerImg, stickerInvertImg]);
   return (
     <mesh ref={ref} {...props}>
       <planeGeometry args={[1, 1, 32, 32]} />
@@ -71,5 +111,5 @@ const Sticker = forwardRef(({ url, ...props }, ref) => {
         side={THREE.DoubleSide}
       />
     </mesh>
-  )
-})
+  );
+});

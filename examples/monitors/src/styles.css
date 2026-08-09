@@ -1,4 +1,4 @@
-@import url('https://rsms.me/inter/inter.css');
+@import url("https://rsms.me/inter/inter.css");
 
 * {
   box-sizing: border-box;
@@ -16,7 +16,7 @@ body,
 body {
   background: black;
   color: #f0f0f0;
-  font-family: 'Inter';
+  font-family: "Inter";
 }
 
 a {
@@ -49,7 +49,7 @@ canvas {
 }
 
 input {
-  font-family: 'Inter';
+  font-family: "Inter";
   width: 100px;
   border: none;
   background-image: none;

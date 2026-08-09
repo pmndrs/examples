@@ -1,5 +1,5 @@
-import { shaderMaterial } from '@react-three/drei'
-import { extend } from '@react-three/fiber'
+import { shaderMaterial } from "@react-three/drei";
+import { extend } from "@react-three/fiber";
 
 // This material takes care of wiggling and punches a hole into
 // alpha regions so that the depth-of-field effect can process the layers.
@@ -40,6 +40,6 @@ const LayerMaterial = shaderMaterial(
       #include <tonemapping_fragment>
       #include <colorspace_fragment>
     }`,
-)
+);
 
-extend({ LayerMaterial })
+extend({ LayerMaterial });

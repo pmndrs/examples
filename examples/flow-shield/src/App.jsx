@@ -1,67 +1,82 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
-import { Canvas } from '@react-three/fiber'
-import { Leva, useControls } from 'leva'
-import SceneContent from './components/playground/SceneContent'
-import UIOverlay from './components/overlay/UIOverlay'
-import OverlayButtons from './components/overlay/OverlayButtons'
-import LoadingOverlay from './components/overlay/LoadingOverlay'
-import { LEVA_THEME } from './components/theme/theme'
-import { useIsMobile } from './hooks/useIsMobile'
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Canvas } from "@react-three/fiber";
+import { Leva, useControls } from "leva";
+import SceneContent from "./components/playground/SceneContent";
+import UIOverlay from "./components/overlay/UIOverlay";
+import OverlayButtons from "./components/overlay/OverlayButtons";
+import LoadingOverlay from "./components/overlay/LoadingOverlay";
+import { LEVA_THEME } from "./components/theme/theme";
+import { useIsMobile } from "./hooks/useIsMobile";
 
 export default function App() {
-  const [showGrid, setShowGrid] = useState(true)
-  const isMobile = useIsMobile()
-  const [hideLeva, setHideLeva] = useState(isMobile)
+  const [showGrid, setShowGrid] = useState(true);
+  const isMobile = useIsMobile();
+  const [hideLeva, setHideLeva] = useState(isMobile);
 
   // auto-hide Leva when crossing down to mobile
-  useEffect(() => { if (isMobile) setHideLeva(true) }, [isMobile])
-  const [glbUrl, setGlbUrl] = useState(null)
-  const [preset, setPreset] = useState('default')
-  const [isLoadingModel, setIsLoadingModel] = useState(false)
-  const glbUrlRef = useRef(null)
+  useEffect(() => {
+    if (isMobile) setHideLeva(true);
+  }, [isMobile]);
+  const [glbUrl, setGlbUrl] = useState(null);
+  const [preset, setPreset] = useState("default");
+  const [isLoadingModel, setIsLoadingModel] = useState(false);
+  const glbUrlRef = useRef(null);
 
   const handleLoadGlb = useCallback((file) => {
-    if (glbUrlRef.current) URL.revokeObjectURL(glbUrlRef.current)
-    const url = URL.createObjectURL(file)
-    glbUrlRef.current = url
-    setIsLoadingModel(true)
-    setGlbUrl(url)
-  }, [])
+    if (glbUrlRef.current) URL.revokeObjectURL(glbUrlRef.current);
+    const url = URL.createObjectURL(file);
+    glbUrlRef.current = url;
+    setIsLoadingModel(true);
+    setGlbUrl(url);
+  }, []);
 
   const handleModelLoaded = useCallback(() => {
-    setIsLoadingModel(false)
-  }, [])
+    setIsLoadingModel(false);
+  }, []);
 
   const handleClearGlb = useCallback(() => {
-    if (glbUrlRef.current) URL.revokeObjectURL(glbUrlRef.current)
-    glbUrlRef.current = null
-    setGlbUrl(null)
-  }, [])
+    if (glbUrlRef.current) URL.revokeObjectURL(glbUrlRef.current);
+    glbUrlRef.current = null;
+    setGlbUrl(null);
+  }, []);
 
   const { mode } = useControls(
-    'Scene',
+    "Scene",
     {
       mode: {
-        value: 'Background',
-        options: ['Background', 'Frame'],
-        label: 'Mode'
-      }
+        value: "Background",
+        options: ["Background", "Frame"],
+        label: "Mode",
+      },
     },
-    { collapsed: true }
-  )
+    { collapsed: true },
+  );
 
   return (
     <>
-      <Leva theme={LEVA_THEME} titleBar={{ title: 'CONTROLS' }} collapsed={false} flat={false} oneLineLabels={false} hidden={hideLeva} />
-      <div style={{ position: 'fixed', inset: 0 }}>
+      <Leva
+        theme={LEVA_THEME}
+        titleBar={{ title: "CONTROLS" }}
+        collapsed={false}
+        flat={false}
+        oneLineLabels={false}
+        hidden={hideLeva}
+      />
+      <div style={{ position: "fixed", inset: 0 }}>
         <Canvas
           shadows
           camera={{ position: [8, 5, 8], fov: 50, near: 0.1, far: 200 }}
           gl={{ antialias: true, alpha: false }}
-          style={{ background: '#0e0d0c' }}
+          style={{ background: "#0e0d0c" }}
           dpr={[1, 1.5]}
         >
-          <SceneContent showGrid={showGrid} mode={mode} glbUrl={glbUrl} onModelLoaded={handleModelLoaded} preset={preset} />
+          <SceneContent
+            showGrid={showGrid}
+            mode={mode}
+            glbUrl={glbUrl}
+            onModelLoaded={handleModelLoaded}
+            preset={preset}
+          />
         </Canvas>
       </div>
       <UIOverlay />
@@ -78,5 +93,5 @@ export default function App() {
       />
       <LoadingOverlay visible={isLoadingModel} />
     </>
-  )
+  );
 }

@@ -2,11 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Star Wars",
   "description": "",
-  "tags": [
-    "ssr",
-    "bloom",
-    "hdr"
-  ],
+  "tags": ["ssr", "bloom", "hdr"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2022-07-12",
   "source": "https://codesandbox.io/s/fslt99",

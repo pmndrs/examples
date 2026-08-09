@@ -1,5 +1,5 @@
-import * as THREE from 'three'
-import { MAX_HITS } from './consts'
+import * as THREE from "three";
+import { MAX_HITS } from "./consts";
 
 // ── Vertex shader ─────────────────────────────────────────────────────────────
 export const vertexShader = /* glsl */ `
@@ -14,7 +14,7 @@ export const vertexShader = /* glsl */ `
     vViewDir = normalize(-viewPosition.xyz);
     gl_Position = projectionMatrix * viewPosition;
   }
-`
+`;
 
 // ── Fragment shader ───────────────────────────────────────────────────────────
 export const fragmentShader = /* glsl */ `
@@ -237,13 +237,13 @@ export const fragmentShader = /* glsl */ `
 
     gl_FragColor = vec4(shieldColor + edgeGlow, alpha);
   }
-`
+`;
 
 // Each material instance gets its own hit ring buffers.
 function createUniforms() {
   return {
     uTime: { value: 0 },
-    uColor: { value: new THREE.Color('#26aeff') },
+    uColor: { value: new THREE.Color("#26aeff") },
     uLife: { value: 1.0 },
     uHexScale: { value: 3.0 },
     uEdgeWidth: { value: 0.06 },
@@ -254,7 +254,7 @@ function createUniforms() {
     uFlashSpeed: { value: 0.6 },
     uFlashIntensity: { value: 0.11 },
     uNoiseScale: { value: 1.3 },
-    uNoiseEdgeColor: { value: new THREE.Color('#26aeff') },
+    uNoiseEdgeColor: { value: new THREE.Color("#26aeff") },
     uNoiseEdgeWidth: { value: 0.02 },
     uNoiseEdgeIntensity: { value: 10.0 },
     uNoiseEdgeSmoothness: { value: 0.5 },
@@ -263,7 +263,12 @@ function createUniforms() {
     uFlowScale: { value: 2.4 },
     uFlowSpeed: { value: 1.13 },
     uFlowIntensity: { value: 4 },
-    uHitPos: { value: Array.from({ length: MAX_HITS }, () => new THREE.Vector3(0, 1.8, 0)) },
+    uHitPos: {
+      value: Array.from(
+        { length: MAX_HITS },
+        () => new THREE.Vector3(0, 1.8, 0),
+      ),
+    },
     uHitTime: { value: new Array(MAX_HITS).fill(-999) },
     uHitRingSpeed: { value: 1.75 },
     uHitRingWidth: { value: 0.12 },
@@ -271,8 +276,8 @@ function createUniforms() {
     uHitDuration: { value: 1.8 },
     uHitIntensity: { value: 4.1 },
     uHitImpactRadius: { value: 0.3 },
-    uFadeStart: { value: 0.0 }
-  }
+    uFadeStart: { value: 0.0 },
+  };
 }
 
 export class ShieldMaterial extends THREE.ShaderMaterial {
@@ -284,7 +289,7 @@ export class ShieldMaterial extends THREE.ShaderMaterial {
       transparent: true,
       depthWrite: false,
       side: THREE.FrontSide,
-      blending: THREE.AdditiveBlending
-    })
+      blending: THREE.AdditiveBlending,
+    });
   }
 }

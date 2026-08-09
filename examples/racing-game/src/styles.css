@@ -15,7 +15,7 @@ body,
 body {
   background: #101010;
   color: white;
-  font-family: 'Inter var', sans-serif;
+  font-family: "Inter var", sans-serif;
 }
 
 .clock {
@@ -41,11 +41,11 @@ body {
 }
 
 .checkpoint .green {
-  color: green
+  color: green;
 }
 
 .checkpoint .red {
-  color: red
+  color: red;
 }
 
 /* --------------- AUTH --------------- */

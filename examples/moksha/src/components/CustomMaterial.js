@@ -1,5 +1,5 @@
-import { ShaderMaterial, Color } from "three"
-import { extend } from "@react-three/fiber"
+import { ShaderMaterial, Color } from "three";
+import { extend } from "@react-three/fiber";
 
 class CustomMaterial extends ShaderMaterial {
   constructor() {
@@ -36,47 +36,47 @@ class CustomMaterial extends ShaderMaterial {
         scale: { value: 0 },
         shift: { value: 0 },
         opacity: { value: 1 },
-        color: { value: new Color("white") }
-      }
-    })
+        color: { value: new Color("white") },
+      },
+    });
   }
 
   set scale(value) {
-    this.uniforms.scale.value = value
+    this.uniforms.scale.value = value;
   }
 
   get scale() {
-    return this.uniforms.scale.value
+    return this.uniforms.scale.value;
   }
 
   set shift(value) {
-    this.uniforms.shift.value = value
+    this.uniforms.shift.value = value;
   }
 
   get shift() {
-    return this.uniforms.shift.value
+    return this.uniforms.shift.value;
   }
 
   set map(value) {
-    this.uniforms.hasTexture.value = !!value
-    this.uniforms.tex.value = value
+    this.uniforms.hasTexture.value = !!value;
+    this.uniforms.tex.value = value;
   }
 
   get map() {
-    return this.uniforms.tex.value
+    return this.uniforms.tex.value;
   }
 
   get color() {
-    return this.uniforms.color.value
+    return this.uniforms.color.value;
   }
 
   get opacity() {
-    return this.uniforms.opacity.value
+    return this.uniforms.opacity.value;
   }
 
   set opacity(value) {
-    if (this.uniforms) this.uniforms.opacity.value = value
+    if (this.uniforms) this.uniforms.opacity.value = value;
   }
 }
 
-extend({ CustomMaterial })
+extend({ CustomMaterial });
