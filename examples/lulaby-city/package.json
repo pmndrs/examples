@@ -28,17 +28,11 @@
     "tabWidth": 2,
     "printWidth": 120
   },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "prettier --write"
-    ]
-  },
   "devDependencies": {
     "@types/react": "19.2.17",
     "@types/react-dom": "19.2.3",
     "@types/three": "^0.165.0",
     "@vitejs/plugin-react": "^6.0.4",
-    "lint-staged": "^16.4.0",
     "typescript": "^7.0.2",
     "vite": "^8.1.5"
   },
