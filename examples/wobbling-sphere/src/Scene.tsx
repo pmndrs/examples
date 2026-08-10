@@ -7,16 +7,24 @@ import {
   MeshDistortMaterial,
   ContactShadows,
 } from "@react-three/drei";
-import { useSpring } from "@react-spring/core";
+import {
+  useSpring,
+  type SpringRef,
+  type SpringConfig,
+} from "@react-spring/core";
 import { a } from "@react-spring/three";
 
 // React-spring animates native elements, in this case <mesh/> etc,
 // but it can also handle 3rd–party objs, just wrap them in "a".
 const AnimatedMaterial = a(MeshDistortMaterial);
 
-export default function Scene({ setBg }) {
-  const sphere = useRef();
-  const light = useRef();
+type SceneProps = {
+  setBg: SpringRef<{ background: string; fill: string }>;
+};
+
+export default function Scene({ setBg }: SceneProps) {
+  const sphere = useRef<THREE.Mesh>(null!);
+  const light = useRef<THREE.PointLight>(null!);
   const [mode, setMode] = useState(false);
   const [down, setDown] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -59,8 +67,15 @@ export default function Scene({ setBg }) {
       ambient: mode && !hovered ? 1.5 : 0.5,
       env: mode && !hovered ? 0.4 : 1,
       color: hovered ? "#E8B059" : mode ? "#202020" : "white",
-      config: (n) =>
-        n === "wobble" && hovered && { mass: 2, tension: 1000, friction: 10 },
+      // react-spring merges this via `Object.assign`, which silently ignores
+      // non-object values — so returning `false` for every key but "wobble"
+      // is how the original leaves that key's config untouched, even though
+      // the declared config type only accepts a config object.
+      config: ((n: string) =>
+        n === "wobble" &&
+        hovered && { mass: 2, tension: 1000, friction: 10 }) as (
+        key: string,
+      ) => SpringConfig,
     },
     [mode, hovered, down],
   );

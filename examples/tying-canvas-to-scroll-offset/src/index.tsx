@@ -1,11 +1,20 @@
 import * as THREE from "three";
-import { useRef, useState } from "react";
+import { type ReactNode, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import {
+  Canvas,
+  type ThreeElements,
+  useFrame,
+  useThree,
+} from "@react-three/fiber";
 import { Html } from "@react-three/drei";
 import "./styles.css";
 
-function Box({ text, color, ...props }) {
+function Box({
+  text,
+  color,
+  ...props
+}: ThreeElements["mesh"] & { text: ReactNode; color: string }) {
   const [hovered, set] = useState(false);
   return (
     <mesh
@@ -22,9 +31,15 @@ function Box({ text, color, ...props }) {
   );
 }
 
-function ScrollContainer({ scroll, children }) {
+function ScrollContainer({
+  scroll,
+  children,
+}: {
+  scroll: React.RefObject<number>;
+  children: ReactNode;
+}) {
   const { viewport } = useThree();
-  const group = useRef();
+  const group = useRef<THREE.Group>(null!);
   useFrame((state, delta) => {
     group.current.position.y = THREE.MathUtils.damp(
       group.current.position.y,
@@ -51,12 +66,12 @@ function Scene() {
 }
 
 function App() {
-  const scrollRef = useRef();
+  const scrollRef = useRef<HTMLDivElement>(null!);
   const scroll = useRef(0);
   return (
     <>
       <Canvas
-        eventSource={document.getElementById("root")}
+        eventSource={document.getElementById("root")!}
         eventPrefix="client"
       >
         <ambientLight intensity={Math.PI} />
@@ -69,8 +84,9 @@ function App() {
         ref={scrollRef}
         onScroll={(e) =>
           (scroll.current =
-            e.target.scrollTop /
-            (e.target.scrollHeight - e.target.clientHeight))
+            (e.target as HTMLDivElement).scrollTop /
+            ((e.target as HTMLDivElement).scrollHeight -
+              (e.target as HTMLDivElement).clientHeight))
         }
         className="scroll"
       >
@@ -80,4 +96,4 @@ function App() {
   );
 }
 
-createRoot(document.getElementById("root")).render(<App />);
+createRoot(document.getElementById("root")!).render(<App />);

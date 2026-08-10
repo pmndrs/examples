@@ -1,7 +1,7 @@
 import React from "react";
-import { a } from "@react-spring/web";
+import { a, type SpringValue } from "@react-spring/web";
 
-export default function Overlay({ fill }) {
+export default function Overlay({ fill }: { fill: SpringValue<string> }) {
   // Just a Figma export, the fill is animated
   return (
     <div className="overlay">
