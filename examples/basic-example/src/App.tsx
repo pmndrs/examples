@@ -1,10 +1,11 @@
 import { useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import * as THREE from "three";
+import { Canvas, useFrame, type ThreeElements } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 
-function Box(props) {
+function Box(props: ThreeElements["mesh"]) {
   // This reference gives us direct access to the THREE.Mesh object
-  const ref = useRef();
+  const ref = useRef<THREE.Mesh>(null!);
   // Hold state for hovered and clicked events
   const [hovered, hover] = useState(false);
   const [clicked, click] = useState(false);
