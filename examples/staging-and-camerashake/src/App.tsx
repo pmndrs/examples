@@ -1,5 +1,5 @@
 import { Suspense, useEffect } from "react";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, type ThreeElements } from "@react-three/fiber";
 import {
   useGLTF,
   OrbitControls,
@@ -18,13 +18,16 @@ import {
 import robotModel from "./robot-draco.glb?url";
 
 useGLTF.preload(robotModel);
-function Model(props) {
+function Model(props: Omit<ThreeElements["primitive"], "object">) {
   const { scene, animations } = useGLTF(robotModel);
   const { actions } = useAnimations(animations, scene);
   useEffect(() => {
-    actions.Idle.play();
+    actions.Idle!.play();
     scene.traverse(
-      (obj) => obj.isMesh && (obj.receiveShadow = obj.castShadow = true),
+      (obj) =>
+        "isMesh" in obj &&
+        obj.isMesh &&
+        (obj.receiveShadow = obj.castShadow = true),
     );
   }, [actions, scene]);
   return <primitive object={scene} {...props} />;
@@ -34,7 +37,14 @@ export default function Viewer() {
   return (
     <Canvas shadows camera={{ fov: 50 }}>
       <Suspense fallback={null}>
-        <Stage contactShadow={{ opacity: 1, blur: 2 }}>
+        <Stage
+          // `contactShadow` is no longer part of drei's Stage prop types (it was
+          // renamed to `shadows`), but Stage still spreads unrecognized props
+          // through untouched, so this keeps the exact same (no-op) behavior.
+          {...({
+            contactShadow: { opacity: 1, blur: 2 },
+          } as unknown as ThreeElements["group"])}
+        >
           <Model />
         </Stage>
       </Suspense>

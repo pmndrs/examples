@@ -4,7 +4,7 @@ import { Logo } from "@pmndrs/branding";
 import "./styles.css";
 import { App } from "./App";
 
-createRoot(document.getElementById("root")).render(
+createRoot(document.getElementById("root")!).render(
   <>
     <div style={{ position: "absolute", top: 40, left: 40 }}>trails —</div>
     <div

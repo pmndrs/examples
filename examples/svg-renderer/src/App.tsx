@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { SVGRenderer } from "three-stdlib";
+import * as THREE from "three";
 
 export default function App() {
   return (
@@ -8,8 +9,11 @@ export default function App() {
       camera={{ position: [0, 0, 35] }}
       gl={({ canvas }) => {
         const gl = new SVGRenderer();
-        const parent = canvas.parentNode;
-        parent.removeChild(canvas);
+        // `canvas` is typed as HTMLCanvasElement | OffscreenCanvas, but this
+        // is the web build where it's always an HTMLCanvasElement.
+        const el = canvas as HTMLCanvasElement;
+        const parent = el.parentNode!;
+        parent.removeChild(el);
         parent.appendChild(gl.domElement);
         return gl;
       }}
@@ -20,7 +24,7 @@ export default function App() {
 }
 
 function TorusKnot() {
-  const ref = useRef(null);
+  const ref = useRef<THREE.Mesh>(null!);
   const [hovered, set] = useState(false);
   useFrame((state, delta) => {
     ref.current.rotation.x = ref.current.rotation.y += delta / 2;
