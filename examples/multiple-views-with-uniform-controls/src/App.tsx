@@ -1,6 +1,6 @@
 import * as THREE from "three";
-import { forwardRef } from "react";
-import { Canvas } from "@react-three/fiber";
+import { forwardRef, type ReactNode } from "react";
+import { Canvas, type ThreeElements } from "@react-three/fiber";
 import {
   useGLTF,
   View,
@@ -20,12 +20,24 @@ import { Menu, Button } from "@mantine/core";
 import * as ICONS from "@tabler/icons-react";
 import useRefs from "react-use-refs";
 import { create } from "zustand";
+import { type GLTF } from "three-stdlib";
 
 // From the poimandres market (https://market.pmnd.rs/), vendored locally since the original CDN is offline.
 import bricksModel from "./assets/bricks.gltf?url";
 
+type PanelKey = "top" | "middle" | "bottom";
+
+interface StoreState {
+  projection: string;
+  top: string;
+  middle: string;
+  bottom: string;
+  setPanelView: (which: PanelKey, view: string) => void;
+  setProjection: (projection: string) => void;
+}
+
 const matrix = new THREE.Matrix4();
-const positions = {
+const positions: Record<string, [number, number, number]> = {
   Top: [0, 10, 0],
   Bottom: [0, -10, 0],
   Left: [-10, 0, 0],
@@ -33,7 +45,7 @@ const positions = {
   Back: [0, 0, -10],
   Front: [0, 0, 10],
 };
-const useStore = create((set) => ({
+const useStore = create<StoreState>((set) => ({
   projection: "Perspective",
   top: "Back",
   middle: "Top",
@@ -43,14 +55,14 @@ const useStore = create((set) => ({
 }));
 
 export function App() {
-  const [view1, view2, view3, view4] = useRefs();
+  const [view1, view2, view3, view4] = useRefs<HTMLDivElement>(null);
   return (
     <div className="container">
       {/** A single canvas, it will only render when things move or change, and otherwise stay idle ... */}
       <Canvas
         shadows
         frameloop="demand"
-        eventSource={document.getElementById("root")}
+        eventSource={document.getElementById("root")!}
         className="canvas"
       >
         {/** Each view tracks one of the divs above and creates a sandboxed environment that behaves
@@ -116,8 +128,15 @@ export function App() {
   );
 }
 
-function Scene({ background = "white", children, ...props }) {
-  const { nodes, materials } = useGLTF(bricksModel);
+type GLTFResult = GLTF & {
+  nodes: { bricks: THREE.Mesh };
+  materials: { "Stone.014": THREE.MeshStandardMaterial };
+};
+
+type SceneProps = ThreeElements["group"] & { background?: string };
+
+function Scene({ background = "white", children, ...props }: SceneProps) {
+  const { nodes, materials } = useGLTF(bricksModel) as unknown as GLTFResult;
   return (
     <>
       <color attach="background" args={[background]} />
@@ -170,81 +189,100 @@ function CameraSwitcher() {
   );
 }
 
-function PanelCamera({ which }) {
+function PanelCamera({ which }: { which: PanelKey }) {
   const view = useStore((state) => state[which]);
   return (
     <OrthographicCamera makeDefault position={positions[view]} zoom={100} />
   );
 }
 
-const MainPanel = forwardRef(({ children, ...props }, fref) => {
-  const projection = useStore((state) => state.projection);
-  const setProjection = useStore((state) => state.setProjection);
-  return (
-    <div ref={fref} className="panel" style={{ gridArea: "main" }}>
-      <View
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-        }}
-      >
-        {children}
-      </View>
-      <Menu shadow="md" width={200}>
-        <Menu.Target>
-          <Button>{projection}</Button>
-        </Menu.Target>
-        <Menu.Dropdown onClick={(e) => setProjection(e.target.innerText)}>
-          <Menu.Item icon={<ICONS.IconPerspective size={14} />}>
-            Perspective
-          </Menu.Item>
-          <Menu.Item icon={<ICONS.IconPerspectiveOff size={14} />}>
-            Orthographic
-          </Menu.Item>
-        </Menu.Dropdown>
-      </Menu>
-    </div>
-  );
-});
+interface MainPanelProps {
+  children?: ReactNode;
+}
 
-const SidePanel = forwardRef(({ which, children }, fref) => {
-  const value = useStore((state) => state[which]);
-  const setPanelView = useStore((state) => state.setPanelView);
-  return (
-    <div ref={fref} className="panel" style={{ gridArea: which }}>
-      <View
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-        }}
-      >
-        {children}
-      </View>
-      <Menu shadow="md" width={200}>
-        <Menu.Target>
-          <Button>{value}</Button>
-        </Menu.Target>
-        <Menu.Dropdown onClick={(e) => setPanelView(which, e.target.innerText)}>
-          <Menu.Item icon={<ICONS.IconArrowBigUp size={14} />}>Top</Menu.Item>
-          <Menu.Item icon={<ICONS.IconArrowBigDown size={14} />}>
-            Bottom
-          </Menu.Item>
-          <Menu.Item icon={<ICONS.IconArrowBigLeft size={14} />}>
-            Left
-          </Menu.Item>
-          <Menu.Item icon={<ICONS.IconArrowBigRight size={14} />}>
-            Right
-          </Menu.Item>
-          <Menu.Item icon={<ICONS.IconHomeUp size={14} />}>Front</Menu.Item>
-          <Menu.Item icon={<ICONS.IconHomeDown size={14} />}>Back</Menu.Item>
-        </Menu.Dropdown>
-      </Menu>
-    </div>
-  );
-});
+const MainPanel = forwardRef<HTMLDivElement, MainPanelProps>(
+  ({ children, ...props }, fref) => {
+    const projection = useStore((state) => state.projection);
+    const setProjection = useStore((state) => state.setProjection);
+    return (
+      <div ref={fref} className="panel" style={{ gridArea: "main" }}>
+        <View
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+          }}
+        >
+          {children}
+        </View>
+        <Menu shadow="md" width={200}>
+          <Menu.Target>
+            <Button>{projection}</Button>
+          </Menu.Target>
+          <Menu.Dropdown
+            onClick={(e) => setProjection((e.target as HTMLElement).innerText)}
+          >
+            <Menu.Item icon={<ICONS.IconPerspective size={14} />}>
+              Perspective
+            </Menu.Item>
+            <Menu.Item icon={<ICONS.IconPerspectiveOff size={14} />}>
+              Orthographic
+            </Menu.Item>
+          </Menu.Dropdown>
+        </Menu>
+      </div>
+    );
+  },
+);
+
+interface SidePanelProps {
+  which: PanelKey;
+  children?: ReactNode;
+}
+
+const SidePanel = forwardRef<HTMLDivElement, SidePanelProps>(
+  ({ which, children }, fref) => {
+    const value = useStore((state) => state[which]);
+    const setPanelView = useStore((state) => state.setPanelView);
+    return (
+      <div ref={fref} className="panel" style={{ gridArea: which }}>
+        <View
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+          }}
+        >
+          {children}
+        </View>
+        <Menu shadow="md" width={200}>
+          <Menu.Target>
+            <Button>{value}</Button>
+          </Menu.Target>
+          <Menu.Dropdown
+            onClick={(e) =>
+              setPanelView(which, (e.target as HTMLElement).innerText)
+            }
+          >
+            <Menu.Item icon={<ICONS.IconArrowBigUp size={14} />}>Top</Menu.Item>
+            <Menu.Item icon={<ICONS.IconArrowBigDown size={14} />}>
+              Bottom
+            </Menu.Item>
+            <Menu.Item icon={<ICONS.IconArrowBigLeft size={14} />}>
+              Left
+            </Menu.Item>
+            <Menu.Item icon={<ICONS.IconArrowBigRight size={14} />}>
+              Right
+            </Menu.Item>
+            <Menu.Item icon={<ICONS.IconHomeUp size={14} />}>Front</Menu.Item>
+            <Menu.Item icon={<ICONS.IconHomeDown size={14} />}>Back</Menu.Item>
+          </Menu.Dropdown>
+        </Menu>
+      </div>
+    );
+  },
+);
