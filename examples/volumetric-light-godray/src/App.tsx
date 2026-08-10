@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { forwardRef, useState, useEffect } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, type ThreeElements } from "@react-three/fiber";
 import { CubeCamera, Float, MeshReflectorMaterial } from "@react-three/drei";
 import { EffectComposer, GodRays, Bloom } from "@react-three/postprocessing";
 import { easing } from "maath";
@@ -53,6 +53,8 @@ function Rig() {
     );
     state.camera.lookAt(0, 0, 0);
   });
+
+  return null;
 }
 
 const Floor = () => (
@@ -73,41 +75,44 @@ const Floor = () => (
   </mesh>
 );
 
-const Emitter = forwardRef((props, forwardRef) => {
-  const [video] = useState(() =>
-    Object.assign(document.createElement("video"), {
-      src: vid10,
-      crossOrigin: "Anonymous",
-      loop: true,
-      muted: true,
-    }),
-  );
-  useEffect(() => void video.play(), [video]);
-  return (
-    <mesh ref={forwardRef} position={[0, 0, -16]} {...props}>
-      <planeGeometry args={[16, 10]} />
-      <meshBasicMaterial>
-        <videoTexture
-          attach="map"
-          args={[video]}
-          colorSpace={THREE.SRGBColorSpace}
-        />
-      </meshBasicMaterial>
-      <mesh scale={[16.05, 10.05, 1]} position={[0, 0, -0.01]}>
-        <planeGeometry />
-        <meshBasicMaterial color="black" />
+const Emitter = forwardRef<THREE.Mesh, ThreeElements["mesh"]>(
+  (props, forwardRef) => {
+    const [video] = useState(() =>
+      Object.assign(document.createElement("video"), {
+        src: vid10,
+        crossOrigin: "Anonymous",
+        loop: true,
+        muted: true,
+      }),
+    );
+    useEffect(() => void video.play(), [video]);
+    return (
+      <mesh ref={forwardRef} position={[0, 0, -16]} {...props}>
+        <planeGeometry args={[16, 10]} />
+        <meshBasicMaterial>
+          <videoTexture
+            attach="map"
+            args={[video]}
+            colorSpace={THREE.SRGBColorSpace}
+          />
+        </meshBasicMaterial>
+        <mesh scale={[16.05, 10.05, 1]} position={[0, 0, -0.01]}>
+          <planeGeometry />
+          <meshBasicMaterial color="black" />
+        </mesh>
       </mesh>
-    </mesh>
-  );
-});
+    );
+  },
+);
 
 function Screen() {
-  const [material, set] = useState();
+  const [material, set] = useState<THREE.Mesh | null>(null);
   return (
     <>
       <Emitter ref={set} />
       {material && (
-        <EffectComposer disableNormalPass multisampling={8}>
+        // `disableNormalPass` no longer exists in this postprocessing version; the normal pass is already disabled by default
+        <EffectComposer multisampling={8}>
           <GodRays sun={material} exposure={0.34} decay={0.8} blur />
           <Bloom
             luminanceThreshold={0}
