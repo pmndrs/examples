@@ -1,5 +1,11 @@
 import * as THREE from "three";
-import { Canvas, extend } from "@react-three/fiber";
+import { type GLTF } from "three-stdlib";
+import {
+  Canvas,
+  extend,
+  type Catalogue,
+  type ThreeElements,
+} from "@react-three/fiber";
 import {
   useGLTF,
   MeshPortalMaterial,
@@ -12,7 +18,10 @@ import { suspend } from "suspend-react";
 
 import mccreeModel from "./low_poly_mccree-transformed.glb?url";
 
-extend(geometry);
+// `geometry` also exports UV helper functions that aren't constructors;
+// extend()'s Catalogue type only wants constructors, but the extras are
+// harmless additions to the JSX intrinsics catalogue at runtime.
+extend(geometry as unknown as Catalogue);
 const GOLDENRATIO = 1.61803398875;
 const regular = import("@pmndrs/assets/fonts/inter_regular.woff");
 const medium = import("@pmndrs/assets/fonts/inter_medium.woff");
@@ -23,7 +32,7 @@ export const App = () => (
   <Canvas
     gl={{ localClippingEnabled: true }}
     camera={{ fov: 75, position: [0, 0, 1.5] }}
-    eventSource={document.getElementById("root")}
+    eventSource={document.getElementById("root")!}
     eventPrefix="client"
   >
     <color attach="background" args={["#f0f0f0"]} />
@@ -50,8 +59,13 @@ License: CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
 Source: https://sketchfab.com/3d-models/low-poly-mccree-38aedc02c0b2412babdc4d0eac7c6803
 Title: Low poly McCree
 */
-function Model({ clip, ...props }) {
-  const { nodes, materials } = useGLTF(mccreeModel);
+type GLTFResult = GLTF & {
+  nodes: { base: THREE.Mesh };
+  materials: { PaletteMaterial001: THREE.MeshBasicMaterial };
+};
+
+function Model({ clip, ...props }: { clip?: boolean } & ThreeElements["mesh"]) {
+  const { nodes, materials } = useGLTF(mccreeModel) as unknown as GLTFResult;
   return (
     <mesh geometry={nodes.base.geometry} {...props} dispose={null}>
       <meshBasicMaterial
@@ -63,6 +77,15 @@ function Model({ clip, ...props }) {
   );
 }
 
+type FrameProps = Omit<ThreeElements["group"], "id"> & {
+  id: string;
+  name: string;
+  author: string;
+  bg?: string;
+  width?: number;
+  height?: number;
+};
+
 function Frame({
   id,
   name,
@@ -72,11 +95,11 @@ function Frame({
   height = GOLDENRATIO,
   children,
   ...props
-}) {
+}: FrameProps) {
   return (
     <group {...props}>
       <Text
-        font={suspend(medium).default}
+        font={(suspend(medium) as { default: string }).default}
         color="black"
         fontSize={0.25}
         letterSpacing={-0.025}
@@ -88,7 +111,7 @@ function Frame({
         {name}
       </Text>
       <Text
-        font={suspend(regular).default}
+        font={(suspend(regular) as { default: string }).default}
         color="black"
         fontSize={0.1}
         anchorX="right"
@@ -97,7 +120,7 @@ function Frame({
         /{id}
       </Text>
       <Text
-        font={suspend(regular).default}
+        font={(suspend(regular) as { default: string }).default}
         color="black"
         fontSize={0.04}
         anchorX="left"
@@ -107,7 +130,11 @@ function Frame({
       </Text>
       <mesh name={id}>
         <roundedPlaneGeometry args={[width, height, 0.1]} />
-        <MeshPortalMaterial>{children}</MeshPortalMaterial>
+        {/* blur/resolution match MeshPortalMaterial's own defaults; drei's
+        types mark them required even though the component defaults them. */}
+        <MeshPortalMaterial blur={0} resolution={512}>
+          {children}
+        </MeshPortalMaterial>
       </mesh>
       <mesh name={id} position={[0, 0, -0.001]}>
         <roundedPlaneGeometry args={[width + 0.05, height + 0.05, 0.12]} />
