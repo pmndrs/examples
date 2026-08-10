@@ -1,4 +1,7 @@
+import * as THREE from "three";
+import { type GLTF } from "three-stdlib";
 import { Suspense } from "react";
+import { type ThreeElements } from "@react-three/fiber";
 import {
   Mask,
   useMask,
@@ -6,11 +9,12 @@ import {
   PivotControls,
   RoundedBox,
   Float,
+  type RoundedBoxProps,
 } from "@react-three/drei";
 
 import reactModel from "./react-transformed.glb?url";
 
-export default function App(props) {
+export default function App(props: ThreeElements["group"]) {
   return (
     <group {...props}>
       <directionalLight
@@ -55,7 +59,7 @@ function Box({
   smoothness = 4,
   color = "black",
   ...boxProps
-}) {
+}: RoundedBoxProps & { color?: string }) {
   return (
     <RoundedBox
       args={args}
@@ -68,7 +72,7 @@ function Box({
   );
 }
 
-function Frame(props) {
+function Frame(props: ThreeElements["mesh"]) {
   return (
     <mesh {...props}>
       <ringGeometry args={[1.35, 1.5, 64]} />
@@ -77,9 +81,16 @@ function Frame(props) {
   );
 }
 
-function Atom({ invert, ...props }) {
+type GLTFResult = GLTF & {
+  nodes: { atom: THREE.Mesh };
+};
+
+function Atom({
+  invert,
+  ...props
+}: { invert: boolean } & ThreeElements["mesh"]) {
   const stencil = useMask(1, invert);
-  const { nodes } = useGLTF(reactModel);
+  const { nodes } = useGLTF(reactModel) as unknown as GLTFResult;
   return (
     <mesh
       castShadow

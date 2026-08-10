@@ -1,13 +1,18 @@
 import * as THREE from "three";
 import { useRef } from "react";
-import { useFrame, useThree } from "@react-three/fiber";
-import { CuboidCollider, Physics, RigidBody } from "@react-three/rapier";
+import { useFrame, useThree, type ThreeElements } from "@react-three/fiber";
+import {
+  CuboidCollider,
+  Physics,
+  RigidBody,
+  type RapierRigidBody,
+} from "@react-three/rapier";
 
 const euler = new THREE.Euler();
 const quaternion = new THREE.Quaternion();
 const RESTITUTION = 2.2;
 
-export default function App(props) {
+export default function App(props: ThreeElements["group"]) {
   return (
     <group {...props}>
       <ambientLight intensity={0.3 * Math.PI} onPointerOver={() => null} />
@@ -23,9 +28,13 @@ export default function App(props) {
   );
 }
 
-function Ball({ args = [0.75, 32, 32] }) {
+function Ball({
+  args = [0.75, 32, 32],
+}: {
+  args?: ThreeElements["sphereGeometry"]["args"];
+}) {
   const { viewport } = useThree();
-  const ref = useRef();
+  const ref = useRef<RapierRigidBody>(null!);
   return (
     <>
       <RigidBody ref={ref} colliders="ball" mass={1}>
@@ -41,8 +50,10 @@ function Ball({ args = [0.75, 32, 32] }) {
         restitution={RESTITUTION}
         type="fixed"
         onCollisionEnter={() => {
-          ref.current.setTranslation({ x: 0, y: 0, z: 0 });
-          ref.current.setLinvel({ x: 0, y: 10, z: 0 });
+          // rapier's wakeUp flag is required by the types; the JS left it out,
+          // which reached the wasm binding as false.
+          ref.current.setTranslation({ x: 0, y: 0, z: 0 }, false);
+          ref.current.setLinvel({ x: 0, y: 10, z: 0 }, false);
         }}
       >
         <CuboidCollider args={[100, 2, 100]} />
@@ -51,16 +62,24 @@ function Ball({ args = [0.75, 32, 32] }) {
   );
 }
 
-function Paddle({ args = [4, 1, 1] }) {
-  const ref = useRef();
+function Paddle({
+  args = [4, 1, 1],
+}: {
+  args?: ThreeElements["boxGeometry"]["args"];
+}) {
+  const ref = useRef<RapierRigidBody>(null!);
   useFrame((state) => {
-    ref.current.setTranslation({
-      x: (state.mouse.x * state.viewport.width) / 2,
-      y: -3.5,
-      z: 0,
-    });
+    ref.current.setTranslation(
+      {
+        x: (state.mouse.x * state.viewport.width) / 2,
+        y: -3.5,
+        z: 0,
+      },
+      false,
+    );
     ref.current.setRotation(
       quaternion.setFromEuler(euler.set(0, 0, (state.mouse.x * Math.PI) / 5)),
+      false,
     );
   });
   return (
@@ -78,8 +97,16 @@ function Paddle({ args = [4, 1, 1] }) {
   );
 }
 
-function Enemy({ args = [2.5, 1, 1], position, color }) {
-  const ref = useRef();
+function Enemy({
+  args = [2.5, 1, 1],
+  position,
+  color,
+}: {
+  args?: ThreeElements["boxGeometry"]["args"];
+  position: [number, number, number];
+  color: string;
+}) {
+  const ref = useRef<RapierRigidBody>(null!);
   return (
     <RigidBody
       ref={ref}

@@ -1,5 +1,7 @@
 import { Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
+import * as THREE from "three";
+import { type GLTF } from "three-stdlib";
+import { Canvas, type ThreeElements } from "@react-three/fiber";
 import {
   useGLTF,
   Detailed,
@@ -13,18 +15,23 @@ import bust2Model from "./bust-2-d.glb?url";
 import bust3Model from "./bust-3-d.glb?url";
 import bust4Model from "./bust-4-d.glb?url";
 
+type GLTFResult = GLTF & {
+  nodes: { Mesh_0001: THREE.Mesh };
+  materials: { default: THREE.MeshStandardMaterial };
+};
+
 // Create 800 objects with random position and rotation data
 const positions = [...Array(800)].map(() => ({
   position: [
     40 - Math.random() * 80,
     40 - Math.random() * 80,
     40 - Math.random() * 80,
-  ],
+  ] as [number, number, number],
   rotation: [
     Math.random() * Math.PI * 2,
     Math.random() * Math.PI * 2,
     Math.random() * Math.PI * 2,
-  ],
+  ] as [number, number, number],
 }));
 
 export default function App() {
@@ -56,26 +63,33 @@ export default function App() {
   );
 }
 
-function Bust(props) {
+function Bust(props: Pick<ThreeElements["group"], "position" | "rotation">) {
   // This will load 4 GLTF in parallel using React Suspense
-  const levels = useGLTF([bust1Model, bust2Model, bust3Model, bust4Model]);
+  const levels = useGLTF([
+    bust1Model,
+    bust2Model,
+    bust3Model,
+    bust4Model,
+  ]) as unknown as GLTFResult[];
   // By the time we're here these GLTFs exist, they're loaded
   // There are 800 instances of this component, but the GLTF data is cached and will be re-used ootb
   return (
     <Detailed distances={[0, 15, 25, 35, 100]} {...props}>
       {/* All we need to do is dump them into the Detailed component and define some distances
           Since we use a JSX mesh to represent each bust the geometry is being re-used w/o cloning */}
-      {levels.map(({ nodes, materials }, index) => (
-        <mesh
-          receiveShadow
-          castShadow
-          key={index}
-          geometry={nodes.Mesh_0001.geometry}
-          material={materials.default}
-          material-envMapIntensity={0.25}
-        />
-      ))}
-      <group />
+      {[
+        ...levels.map(({ nodes, materials }, index) => (
+          <mesh
+            receiveShadow
+            castShadow
+            key={index}
+            geometry={nodes.Mesh_0001.geometry}
+            material={materials.default}
+            material-envMapIntensity={0.25}
+          />
+        )),
+        <group key={levels.length} />,
+      ]}
     </Detailed>
   );
 }

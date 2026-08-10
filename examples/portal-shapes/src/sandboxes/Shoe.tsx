@@ -1,10 +1,12 @@
+import * as THREE from "three";
+import { type GLTF } from "three-stdlib";
 import { useRef } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, type ThreeElements } from "@react-three/fiber";
 import { useGLTF, PivotControls, Environment } from "@react-three/drei";
 
 import shoeModel from "./shoe-draco.glb?url";
 
-export default function App(props) {
+export default function App(props: ThreeElements["group"]) {
   return (
     <group {...props}>
       <ambientLight intensity={0.2 * Math.PI} />
@@ -23,9 +25,32 @@ export default function App(props) {
   );
 }
 
+type GLTFResult = GLTF & {
+  nodes: {
+    shoe: THREE.Mesh;
+    shoe_1: THREE.Mesh;
+    shoe_2: THREE.Mesh;
+    shoe_3: THREE.Mesh;
+    shoe_4: THREE.Mesh;
+    shoe_5: THREE.Mesh;
+    shoe_6: THREE.Mesh;
+    shoe_7: THREE.Mesh;
+  };
+  materials: {
+    laces: THREE.MeshStandardMaterial;
+    mesh: THREE.MeshStandardMaterial;
+    caps: THREE.MeshStandardMaterial;
+    inner: THREE.MeshStandardMaterial;
+    sole: THREE.MeshStandardMaterial;
+    stripes: THREE.MeshStandardMaterial;
+    band: THREE.MeshStandardMaterial;
+    patch: THREE.MeshStandardMaterial;
+  };
+};
+
 function Shoe() {
-  const ref = useRef();
-  const { nodes, materials } = useGLTF(shoeModel);
+  const ref = useRef<THREE.Group>(null!);
+  const { nodes, materials } = useGLTF(shoeModel) as unknown as GLTFResult;
   useFrame((state) => {
     const t = state.clock.getElapsedTime() * 2;
     ref.current.rotation.set(

@@ -16,7 +16,15 @@ export const Heart = () => {
   ));
 };
 
-export const Circle = ({ centerX = 0, centerY = 0, radius = 5 }) => {
+export const Circle = ({
+  centerX = 0,
+  centerY = 0,
+  radius = 5,
+}: {
+  centerX?: number;
+  centerY?: number;
+  radius?: number;
+}) => {
   return [
     [
       new THREE.Vector3(centerX + radius, centerY, 0),

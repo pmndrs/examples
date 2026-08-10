@@ -1,11 +1,13 @@
+import * as THREE from "three";
+import { type GLTF } from "three-stdlib";
 import { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, type ThreeElements } from "@react-three/fiber";
 
 import rocketModel from "./rocket-transformed.glb?url";
 
-export default function App(props) {
-  const ref = useRef();
+export default function App(props: ThreeElements["group"]) {
+  const ref = useRef<THREE.Group>(null!);
   useFrame((state, delta) => (ref.current.rotation.y += delta / 2));
   return (
     <group ref={ref} {...props}>
@@ -30,8 +32,12 @@ license: CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
 source: https://sketchfab.com/models/91964c1ce1a34c3985b6257441efa500
 title: Space exploration [WLP series #8]
 */
-function Model({ url }) {
-  const { nodes } = useGLTF(url);
+type GLTFResult = GLTF & {
+  nodes: { planet002: THREE.Mesh; planet003: THREE.Mesh };
+};
+
+function Model({ url }: { url: string }) {
+  const { nodes } = useGLTF(url) as unknown as GLTFResult;
   return (
     <group rotation={[-Math.PI / 2, 0, 0]} position={[0, -7, 0]} scale={7}>
       <group rotation={[Math.PI / 13.5, -Math.PI / 5.8, Math.PI / 5.6]}>

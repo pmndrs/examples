@@ -1,7 +1,8 @@
+import * as THREE from "three";
 import { useRef, useState } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, type ThreeElements } from "@react-three/fiber";
 
-export default function App(props) {
+export default function App(props: ThreeElements["group"]) {
   return (
     <group {...props}>
       <ambientLight intensity={0.3 * Math.PI} onPointerOver={() => null} />
@@ -13,8 +14,8 @@ export default function App(props) {
   );
 }
 
-function Box(props) {
-  const ref = useRef();
+function Box(props: ThreeElements["mesh"]) {
+  const ref = useRef<THREE.Mesh>(null!);
   const [hovered, hover] = useState(false);
   const [clicked, click] = useState(false);
   useFrame((state, delta) => (ref.current.rotation.x += delta));

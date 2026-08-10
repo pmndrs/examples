@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { useRef, forwardRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, type ThreeElements } from "@react-three/fiber";
 import {
   Clouds,
   Cloud,
@@ -26,16 +26,18 @@ import sonyModel from "./sony_cinema_camera-transformed.glb?url";
 import stickerImg from "./Sticjer_1024x1024@2x.png";
 import stickerInvertImg from "./Sticjer_1024x1024@2x_invert.png";
 
+type CurveName = keyof typeof CURVES;
+
 export function App() {
-  const poi = useRef();
-  const motionRef = useRef();
+  const poi = useRef<THREE.Mesh>(null!);
+  const motionRef = useRef<THREE.Group>(null!);
   const { float, attachCamera, debug, path } = useControls({
     attachCamera: true,
     debug: false,
     float: true,
     path: {
-      value: "Circle",
-      options: ["Circle", "Rollercoaster", "Infinity", "Heart"],
+      value: "Circle" as CurveName,
+      options: ["Circle", "Rollercoaster", "Infinity", "Heart"] as CurveName[],
     },
   });
   const Curve = CURVES[path];
@@ -45,7 +47,7 @@ export function App() {
       <pointLight position={[10, 10, 10]} intensity={Math.PI} decay={0} />
       {!attachCamera && <OrbitControls />}
       <MotionPathControls
-        object={attachCamera ? null : motionRef}
+        object={attachCamera ? undefined : motionRef}
         focus={poi}
         debug={debug}
         damping={0.2}
@@ -77,7 +79,8 @@ export function App() {
           speed={1}
         />
       </Clouds>
-      <EffectComposer disableNormalPass multisampling={4}>
+      {/* `disableNormalPass` no longer exists in this postprocessing version; the normal pass is already disabled by default */}
+      <EffectComposer multisampling={4}>
         <HueSaturation saturation={-1} />
         <TiltShift2 blur={0.5} />
         <DotScreen scale={2} />
@@ -86,12 +89,16 @@ export function App() {
   );
 }
 
-function Loop({ factor = 0.2 }) {
+function Loop({ factor = 0.2 }: { factor?: number }): null {
   const motion = useMotion();
   useFrame((state, delta) => (motion.current += Math.min(0.1, delta) * factor));
+  return null;
 }
 
-const Sticker = forwardRef(({ url, ...props }, ref) => {
+const Sticker = forwardRef<
+  THREE.Mesh,
+  ThreeElements["mesh"] & { url?: string }
+>(({ url, ...props }, ref) => {
   const [smiley, invert] = useTexture([stickerImg, stickerInvertImg]);
   return (
     <mesh ref={ref} {...props}>

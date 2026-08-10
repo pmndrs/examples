@@ -1,4 +1,5 @@
-import { useRef } from "react";
+import * as THREE from "three";
+import { useRef, type ComponentRef, type ReactNode } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
   Text3D,
@@ -10,8 +11,14 @@ import {
   RenderTexture,
   ContactShadows,
   MeshTransmissionMaterial,
+  type RenderTextureProps,
 } from "@react-three/drei";
-import { Physics, RigidBody, CuboidCollider } from "@react-three/rapier";
+import {
+  Physics,
+  RigidBody,
+  CuboidCollider,
+  type RigidBodyProps,
+} from "@react-three/rapier";
 import Turtle from "./sandboxes/Turtle";
 import Basic from "./sandboxes/Basic";
 import PingPong from "./sandboxes/PingPong";
@@ -55,31 +62,11 @@ export default function App() {
           <Stencil scale={2} />
         </Letter>
         {/** Invisible walls */}
-        <CuboidCollider
-          position={[0, -6, 0]}
-          type="fixed"
-          args={[100, 1, 100]}
-        />
-        <CuboidCollider
-          position={[0, 0, -30]}
-          type="fixed"
-          args={[30, 100, 1]}
-        />
-        <CuboidCollider
-          position={[0, 0, 10]}
-          type="fixed"
-          args={[30, 100, 1]}
-        />
-        <CuboidCollider
-          position={[-30, 0, 0]}
-          type="fixed"
-          args={[1, 100, 30]}
-        />
-        <CuboidCollider
-          position={[30, 0, 0]}
-          type="fixed"
-          args={[1, 100, 30]}
-        />
+        <CuboidCollider position={[0, -6, 0]} args={[100, 1, 100]} />
+        <CuboidCollider position={[0, 0, -30]} args={[30, 100, 1]} />
+        <CuboidCollider position={[0, 0, 10]} args={[30, 100, 1]} />
+        <CuboidCollider position={[-30, 0, 0]} args={[1, 100, 30]} />
+        <CuboidCollider position={[30, 0, 0]} args={[1, 100, 30]} />
       </Physics>
       {/** Environment (for reflections) */}
       <Environment
@@ -139,11 +126,24 @@ export default function App() {
   );
 }
 
-function Letter({ char, children, stencilBuffer = false, ...props }) {
-  const main = useRef();
-  const contents = useRef();
+function Letter({
+  char,
+  children,
+  stencilBuffer = false,
+  ...props
+}: {
+  char: string;
+  children?: ReactNode;
+  stencilBuffer?: boolean;
+} & RigidBodyProps) {
+  const main = useRef<THREE.Group>(null!);
+  const contents = useRef<THREE.Group>(null!);
   const events = useThree((state) => state.events);
-  const controls = useThree((state) => state.controls);
+  // state.controls is typed as THREE.EventDispatcher | null; narrow it to the
+  // concrete controls instance that <CameraControls /> assigns it to.
+  const controls = useThree(
+    (state) => state.controls,
+  ) as unknown as ComponentRef<typeof CameraControls>;
   // The letters contents are moved to its whereabouts in world coordinates
   useFrame(() => contents.current.matrix.copy(main.current.matrixWorld));
   return (
@@ -183,7 +183,11 @@ function Letter({ char, children, stencilBuffer = false, ...props }) {
               stencilBuffer={stencilBuffer}
               width={512}
               height={512}
-              compute={events.compute}
+              // drei types RenderTexture's compute as returning `false | undefined`,
+              // R3F's own ComputeFunction returns void — same function either way.
+              compute={
+                events.compute as unknown as RenderTextureProps["compute"]
+              }
             >
               {/** Everything in here is self-contained, behaves like a regular canvas, but we're *in* the texture */}
               <color attach="background" args={["#4899c9"]} />

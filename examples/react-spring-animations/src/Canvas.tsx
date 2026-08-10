@@ -1,14 +1,27 @@
 import React, { useState, useEffect, useCallback, Suspense } from "react";
+import * as THREE from "three";
+import { type GLTF } from "three-stdlib";
 import { Canvas } from "@react-three/fiber";
 import { useGLTF, useTexture, Shadow, meshBounds } from "@react-three/drei";
 // We take the "a" element from /three here because we want to animate threejs objects
 import { a } from "@react-spring/three";
+import { type SpringValue } from "@react-spring/core";
 
 import switchModel from "./switch.glb?url";
 import crossImg from "./cross.jpg";
 
-function Switch({ x, set }) {
-  const { nodes, materials } = useGLTF(switchModel);
+type GLTFResult = GLTF & {
+  nodes: { Cube: THREE.Mesh };
+  materials: { track: THREE.MeshStandardMaterial };
+};
+
+type SwitchProps = {
+  x: SpringValue<number>;
+  set: React.Dispatch<React.SetStateAction<number>>;
+};
+
+function Switch({ x, set }: SwitchProps) {
+  const { nodes, materials } = useGLTF(switchModel) as unknown as GLTFResult;
   const texture = useTexture(crossImg);
   // Hover state
   const [hovered, setHover] = useState(false);
@@ -65,7 +78,7 @@ function Switch({ x, set }) {
   );
 }
 
-export function Scene({ x, set }) {
+export function Scene({ x, set }: SwitchProps) {
   // Create a color interpolation
   const color = x.to([0, 1], ["#7fffd4", "#c72f46"]);
   return (
