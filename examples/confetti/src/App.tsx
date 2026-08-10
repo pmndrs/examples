@@ -38,12 +38,20 @@ export default function App() {
   );
 }
 
+type ColorInput = THREE.ColorRepresentation | [number, number, number];
+
 function Lines({
   dash,
   count,
   colors,
   radius = 50,
   rand = THREE.MathUtils.randFloatSpread,
+}: {
+  dash: number;
+  count: number;
+  colors: ColorInput[];
+  radius?: number;
+  rand?: (range: number) => number;
 }) {
   const lines = useMemo(() => {
     return Array.from({ length: count }, () => {
@@ -55,7 +63,7 @@ function Lines({
       );
       const curve = new THREE.CatmullRomCurve3(points).getPoints(300);
       return {
-        color: colors[parseInt(colors.length * Math.random())],
+        color: colors[parseInt(String(colors.length * Math.random()))],
         width: Math.max(radius / 100, (radius / 50) * Math.random()),
         speed: Math.max(0.1, 1 * Math.random()),
         curve: curve.flatMap((point) => point.toArray()),
@@ -67,8 +75,20 @@ function Lines({
   ));
 }
 
-function Fatline({ curve, width, color, speed, dash }) {
-  const ref = useRef();
+function Fatline({
+  curve,
+  width,
+  color,
+  speed,
+  dash,
+}: {
+  curve: number[];
+  width: number;
+  color: ColorInput;
+  speed: number;
+  dash: number;
+}) {
+  const ref = useRef<THREE.Mesh<MeshLineGeometry, MeshLineMaterial>>(null!);
   useFrame(
     (state, delta) => (ref.current.material.dashOffset -= (delta * speed) / 10),
   );
@@ -88,7 +108,7 @@ function Fatline({ curve, width, color, speed, dash }) {
   );
 }
 
-function Rig({ radius = 20 }) {
+function Rig({ radius = 20 }: { radius?: number }) {
   useFrame((state, dt) => {
     easing.damp3(
       state.camera.position,
@@ -102,4 +122,5 @@ function Rig({ radius = 20 }) {
     );
     state.camera.lookAt(0, 0, 0);
   });
+  return null;
 }

@@ -6,8 +6,11 @@ import {
   RandomizedLight,
   Center,
   Environment,
+  type EnvironmentProps,
   OrbitControls,
 } from "@react-three/drei";
+
+type Preset = NonNullable<EnvironmentProps["preset"]>;
 
 export default function App() {
   return (
@@ -60,7 +63,7 @@ function Sphere() {
 }
 
 function Env() {
-  const [preset, setPreset] = useState("sunset");
+  const [preset, setPreset] = useState<Preset>("sunset");
   // You can use the "inTransition" boolean to react to the loading in-between state,
   // For instance by showing a message
   const [inTransition, startTransition] = useTransition();

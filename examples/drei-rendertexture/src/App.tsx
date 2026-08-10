@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import * as THREE from "three";
+import { Canvas, useFrame, type ThreeElements } from "@react-three/fiber";
 import {
   RenderTexture,
   OrbitControls,
@@ -36,7 +37,7 @@ export default function App() {
 }
 
 function Cube() {
-  const textRef = useRef();
+  const textRef = useRef<THREE.Mesh>(null!);
   useFrame(
     (state) =>
       (textRef.current.position.x = Math.sin(state.clock.elapsedTime) * 2),
@@ -56,7 +57,7 @@ function Cube() {
           <ambientLight intensity={0.5 * Math.PI} />
           <directionalLight position={[10, 10, 5]} intensity={Math.PI} />
           <Text
-            font={suspend(inter).default}
+            font={(suspend(inter) as { default: string }).default}
             ref={textRef}
             fontSize={4}
             color="#555"
@@ -70,8 +71,8 @@ function Cube() {
   );
 }
 
-function Dodecahedron(props) {
-  const meshRef = useRef();
+function Dodecahedron(props: ThreeElements["group"]) {
+  const meshRef = useRef<THREE.Mesh>(null!);
   const [hovered, hover] = useState(false);
   const [clicked, click] = useState(false);
   useFrame(() => (meshRef.current.rotation.x += 0.01));

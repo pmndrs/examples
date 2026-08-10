@@ -3,7 +3,7 @@ import { Logo } from "@pmndrs/branding";
 import "./styles.css";
 import App from "./App";
 
-createRoot(document.getElementById("root")).render(
+createRoot(document.getElementById("root")!).render(
   <>
     <App />
     <div style={{ position: "absolute", top: 40, left: 40 }}>

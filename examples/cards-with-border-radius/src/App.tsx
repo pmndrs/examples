@@ -2,7 +2,12 @@
 
 import * as THREE from "three";
 import { useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import {
+  Canvas,
+  useFrame,
+  type ThreeElements,
+  type ThreeEvent,
+} from "@react-three/fiber";
 import {
   Image,
   Environment,
@@ -12,6 +17,7 @@ import {
 } from "@react-three/drei";
 import { easing } from "maath";
 import "./util";
+import type { MeshSineMaterial } from "./util";
 
 export const App = () => (
   <Canvas camera={{ position: [0, 0, 100], fov: 15 }}>
@@ -26,12 +32,12 @@ export const App = () => (
   </Canvas>
 );
 
-function Rig(props) {
-  const ref = useRef();
+function Rig(props: ThreeElements["group"]) {
+  const ref = useRef<THREE.Group>(null!);
   const scroll = useScroll();
   useFrame((state, delta) => {
     ref.current.rotation.y = -scroll.offset * (Math.PI * 2); // Rotate contents
-    state.events.update(); // Raycasts every frame rather than on pointer-move
+    state.events.update?.(); // Raycasts every frame rather than on pointer-move
     easing.damp3(
       state.camera.position,
       [-state.pointer.x * 2, state.pointer.y + 1.5, 10],
@@ -43,7 +49,13 @@ function Rig(props) {
   return <group ref={ref} {...props} />;
 }
 
-function Carousel({ radius = 1.4, count = 8 }) {
+function Carousel({
+  radius = 1.4,
+  count = 8,
+}: {
+  radius?: number;
+  count?: number;
+}) {
   return Array.from({ length: count }, (_, i) => (
     <Card
       key={i}
@@ -58,10 +70,16 @@ function Carousel({ radius = 1.4, count = 8 }) {
   ));
 }
 
-function Card({ url, ...props }) {
-  const ref = useRef();
+function Card({
+  url,
+  ...props
+}: { url: string } & Pick<ThreeElements["mesh"], "position" | "rotation">) {
+  const ref = useRef<THREE.Mesh>(null!);
   const [hovered, hover] = useState(false);
-  const pointerOver = (e) => (e.stopPropagation(), hover(true));
+  const pointerOver = (e: ThreeEvent<PointerEvent>) => (
+    e.stopPropagation(),
+    hover(true)
+  );
   const pointerOut = () => hover(false);
   useFrame((state, delta) => {
     easing.damp3(ref.current.scale, hovered ? 1.15 : 1, 0.1, delta);
@@ -89,8 +107,8 @@ function Card({ url, ...props }) {
   );
 }
 
-function Banner(props) {
-  const ref = useRef();
+function Banner(props: ThreeElements["mesh"]) {
+  const ref = useRef<THREE.Mesh<THREE.BufferGeometry, MeshSineMaterial>>(null!);
   const texture = useTexture(
     new URL(`${import.meta.env.BASE_URL}/work_.png`, import.meta.url).href,
   );
@@ -98,7 +116,7 @@ function Banner(props) {
   const scroll = useScroll();
   useFrame((state, delta) => {
     ref.current.material.time.value += Math.abs(scroll.delta) * 4;
-    ref.current.material.map.offset.x += delta / 2;
+    ref.current.material.map!.offset.x += delta / 2;
   });
   return (
     <mesh ref={ref} {...props}>

@@ -1,10 +1,14 @@
 import * as THREE from "three";
 import { extend } from "@react-three/fiber";
+import type { WebGLProgramParametersWithUniforms } from "three";
 
 // Paul West @prisoner849 https://discourse.threejs.org/u/prisoner849
 // https://discourse.threejs.org/t/simple-curved-plane/26647/10
-class BentPlaneGeometry extends THREE.PlaneGeometry {
-  constructor(radius, ...args) {
+export class BentPlaneGeometry extends THREE.PlaneGeometry {
+  constructor(
+    radius: number,
+    ...args: ConstructorParameters<typeof THREE.PlaneGeometry>
+  ) {
     super(...args);
     let p = this.parameters;
     let hw = p.width * 0.5;
@@ -33,13 +37,15 @@ class BentPlaneGeometry extends THREE.PlaneGeometry {
   }
 }
 
-class MeshSineMaterial extends THREE.MeshBasicMaterial {
-  constructor(parameters = {}) {
+export class MeshSineMaterial extends THREE.MeshBasicMaterial {
+  time: { value: number };
+
+  constructor(parameters: THREE.MeshBasicMaterialParameters = {}) {
     super(parameters);
     this.setValues(parameters);
     this.time = { value: 0 };
   }
-  onBeforeCompile(shader) {
+  onBeforeCompile(shader: WebGLProgramParametersWithUniforms) {
     shader.uniforms.time = this.time;
     shader.vertexShader = `
       uniform float time;

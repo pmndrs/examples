@@ -1,5 +1,6 @@
 import { useRef } from "react";
-import { Canvas, useLoader } from "@react-three/fiber";
+import * as THREE from "three";
+import { Canvas, useLoader, type ThreeElements } from "@react-three/fiber";
 import {
   useGLTF,
   Caustics,
@@ -13,14 +14,24 @@ import {
 } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { useControls } from "leva";
-import { RGBELoader } from "three-stdlib";
+import { RGBELoader, type GLTF } from "three-stdlib";
 
 import dflatModel from "./dflat.glb?url";
 import aeroHdr from "./aerodynamics_workshop_1k.hdr?url";
 
-function Diamond(props) {
-  const ref = useRef();
-  const { nodes } = useGLTF(dflatModel);
+type GLTFResult = GLTF & {
+  nodes: { Diamond_1_0: THREE.Mesh };
+};
+
+// `backfaces`/`backfaceIor` aren't part of drei's current CausticsProps type
+// (renamed to `backside`/`backsideIOR`), so keep them in a separately-typed
+// object and spread it — this preserves the exact runtime props/values the
+// original code passed without an `any` escape hatch.
+const diamondCausticsExtraProps = { backfaces: true, backfaceIor: 1.1 };
+
+function Diamond(props: ThreeElements["mesh"]) {
+  const ref = useRef<THREE.Mesh>(null!);
+  const { nodes } = useGLTF(dflatModel) as unknown as GLTFResult;
   // Use a custom envmap/scene-backdrop for the diamond material
   // This way we can have a clear BG while cube-cam can still film other objects
   const texture = useLoader(RGBELoader, aeroHdr);
@@ -36,13 +47,14 @@ function Diamond(props) {
     <CubeCamera resolution={256} frames={1} envMap={texture}>
       {(texture) => (
         <Caustics
-          backfaces
+          causticsOnly={false}
+          backside={false}
+          {...diamondCausticsExtraProps}
           color={config.color}
           position={[0, -0.5, 0]}
           lightSource={[5, 5, -10]}
           worldRadius={0.1}
           ior={1.8}
-          backfaceIor={1.1}
           intensity={0.1}
         >
           <mesh
@@ -72,6 +84,8 @@ export default function App() {
       <pointLight decay={0} position={[-10, -10, -10]} />
       <Diamond rotation={[0, 0, 0.715]} position={[0, -0.175 + 0.5, 0]} />
       <Caustics
+        causticsOnly={false}
+        backside={false}
         color="#FF8F20"
         position={[0, -0.5, 0]}
         lightSource={[5, 5, -10]}

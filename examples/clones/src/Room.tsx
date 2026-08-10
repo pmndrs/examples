@@ -9,13 +9,38 @@ title: [Jesse Riggle] - Futuristic Micro-Apartments
 import * as THREE from "three";
 import { useEffect, useRef, useState } from "react";
 import { useGLTF, Clone, MeshDistortMaterial } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, type ThreeElements } from "@react-three/fiber";
+import { type GLTF } from "three-stdlib";
 
 import sceneModel from "./scene-transformed.glb?url";
 
-export function Room({ ...props }) {
-  const group = useRef();
-  const { nodes } = useGLTF(sceneModel);
+type GLTFResult = GLTF & {
+  nodes: {
+    Lit_ORANGE: THREE.Object3D;
+    Tele_NOIR: THREE.Object3D;
+    Caisse_01_BLANC: THREE.Object3D;
+    Caisse_02_BLANC: THREE.Object3D;
+    Caisse_03_BLANC: THREE.Object3D;
+    Bac_fleurs_BLANC: THREE.Object3D;
+    Carres_muraux_GRIS: THREE.Object3D;
+    Fenetres_VITRE_VITRE_0: THREE.Object3D;
+    Stores_NOIR_NOIR_0: THREE.Object3D;
+    Tablette_NOIR_NOIR_0: THREE.Object3D;
+    Tasse_BLANC_BLANC_0: THREE.Object3D;
+    Tringle_METAL_METAL_0: THREE.Object3D;
+    _Cuisine: THREE.Object3D;
+    _Base: THREE.Object3D;
+    _Boites: THREE.Object3D;
+    _Livres: THREE.Object3D;
+    _Post_it: THREE.Object3D;
+    _Ventilations: THREE.Object3D;
+    _Lumieres: THREE.Object3D;
+  };
+};
+
+export function Room({ ...props }: ThreeElements["group"]) {
+  const group = useRef<THREE.Group>(null!);
+  const { nodes } = useGLTF(sceneModel) as unknown as GLTFResult;
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="_Chambre" rotation={[-Math.PI / 2, 0, 0]}>
@@ -82,10 +107,10 @@ export function Room({ ...props }) {
 }
 
 function Lights() {
-  const ref = useRef();
-  const light = useRef();
+  const ref = useRef<THREE.Group>(null!);
+  const light = useRef<THREE.SpotLight>(null!);
   const [color] = useState(() => new THREE.Color("white"));
-  const { nodes } = useGLTF(sceneModel);
+  const { nodes } = useGLTF(sceneModel) as unknown as GLTFResult;
   useEffect(() => {
     const timeout = setInterval(
       () => color.setRGB(Math.random(), Math.random(), Math.random()),
@@ -96,7 +121,12 @@ function Lights() {
   useFrame(() => {
     light.current.color.lerp(color, 0.01);
     ref.current.traverse(
-      (obj) => obj.isMesh && obj.material.emissive.lerp(color, 0.01),
+      (obj) =>
+        (obj as THREE.Mesh<THREE.BufferGeometry, THREE.MeshStandardMaterial>)
+          .isMesh &&
+        (
+          obj as THREE.Mesh<THREE.BufferGeometry, THREE.MeshStandardMaterial>
+        ).material.emissive.lerp(color, 0.01),
     );
   });
   return (
@@ -123,7 +153,7 @@ function Lights() {
 }
 
 function Screen() {
-  const ref = useRef();
+  const ref = useRef<THREE.SpotLight>(null!);
   useFrame((state, delta) => {
     const sin =
       Math.sin(state.clock.elapsedTime) +
