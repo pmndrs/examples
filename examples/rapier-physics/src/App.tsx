@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { Suspense, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, type ThreeElements } from "@react-three/fiber";
 import {
   useGLTF,
   OrbitControls,
@@ -9,10 +9,15 @@ import {
   Clouds,
   Cloud,
 } from "@react-three/drei";
-import { Physics, RigidBody } from "@react-three/rapier";
+import { type GLTF } from "three-stdlib";
+import { Physics, RigidBody, type RapierRigidBody } from "@react-three/rapier";
 import { useControls } from "leva";
 
 import ballTripModel from "./ball-trip.optimized.glb?url";
+
+type GLTFResult = GLTF & {
+  nodes: { Cylinder: THREE.Mesh };
+};
 
 export default function App() {
   const { debug } = useControls({ debug: false });
@@ -29,7 +34,6 @@ export default function App() {
           shadow-bias={-0.00001}
         />
         <directionalLight
-          decay={0}
           color="red"
           position={[-10, -10, 0]}
           intensity={1.5}
@@ -55,8 +59,8 @@ export default function App() {
   );
 }
 
-function Track(props) {
-  const { nodes } = useGLTF(ballTripModel);
+function Track(props: ThreeElements["mesh"]) {
+  const { nodes } = useGLTF(ballTripModel) as unknown as GLTFResult;
   return (
     <RigidBody colliders="trimesh" type="fixed">
       <mesh geometry={nodes.Cylinder.geometry} {...props} dispose={null}>
@@ -82,7 +86,7 @@ function Track(props) {
 }
 
 function Pacman() {
-  const ref = useRef();
+  const ref = useRef<RapierRigidBody>(null!);
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
     ref.current?.setNextKinematicTranslation({
@@ -107,14 +111,17 @@ function Pacman() {
   );
 }
 
-const Box = ({ length = 4, ...props }) => (
+const Box = ({
+  length = 4,
+  ...props
+}: { length?: number } & ThreeElements["mesh"]) => (
   <mesh castShadow receiveShadow {...props}>
     <boxGeometry args={[length, 0.4, 4]} />
     <meshStandardMaterial color="white" />
   </mesh>
 );
 
-const Sphere = (props) => (
+const Sphere = (props: ThreeElements["mesh"]) => (
   <RigidBody colliders="ball" restitution={0.7}>
     <mesh castShadow receiveShadow {...props}>
       <sphereGeometry args={[0.5, 16, 16]} />
@@ -123,7 +130,7 @@ const Sphere = (props) => (
   </RigidBody>
 );
 
-const Cylinder = (props) => (
+const Cylinder = (props: ThreeElements["mesh"]) => (
   <mesh castShadow receiveShadow {...props}>
     <cylinderGeometry args={[0.25, 0.25, 4]} />
     <meshStandardMaterial />
