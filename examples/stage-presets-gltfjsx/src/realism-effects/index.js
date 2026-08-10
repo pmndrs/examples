@@ -1,7 +1,16 @@
 import { Pass, Effect, RenderPass, Selection, NormalPass } from 'postprocessing';
-import { DataTexture, RGBAFormat, FloatType, ShaderChunk, ShaderLib, UniformsUtils, WebGLMultipleRenderTargets, ShaderMaterial, GLSL3, NoBlending, Uniform, Vector2, Matrix4, Vector3, Clock, Quaternion, LinearFilter, HalfFloatType, FramebufferTexture, TextureLoader, NearestFilter, RepeatWrapping, NoColorSpace, WebGLRenderTarget, ClampToEdgeWrapping, LinearMipMapLinearFilter, EquirectangularReflectionMapping, Color, Matrix3, TangentSpaceNormalMap, RedFormat, Source, Texture, NoToneMapping, PerspectiveCamera, SRGBColorSpace, DepthTexture } from 'three';
+import { DataTexture, RGBAFormat, FloatType, ShaderChunk, ShaderLib, UniformsUtils, ShaderMaterial, GLSL3, NoBlending, Uniform, Vector2, Matrix4, Vector3, Clock, Quaternion, LinearFilter, HalfFloatType, FramebufferTexture, TextureLoader, NearestFilter, RepeatWrapping, NoColorSpace, WebGLRenderTarget, ClampToEdgeWrapping, LinearMipMapLinearFilter, EquirectangularReflectionMapping, Color, Matrix3, TangentSpaceNormalMap, RedFormat, Source, Texture, NoToneMapping, PerspectiveCamera, SRGBColorSpace, DepthTexture } from 'three';
 import _classPrivateFieldLooseBase from '@babel/runtime/helpers/esm/classPrivateFieldLooseBase';
 import _classPrivateFieldLooseKey from '@babel/runtime/helpers/esm/classPrivateFieldLooseKey';
+
+// three r172 removed WebGLMultipleRenderTargets: WebGLRenderTarget took over MRT via a
+// `count` option, and exposes the colour attachments as `.textures` (`.texture` is now
+// just `textures[0]`). Restore the old constructor signature for the passes below.
+class WebGLMultipleRenderTargets extends WebGLRenderTarget {
+  constructor(width, height, count, options) {
+    super(width, height, { ...options, count });
+  }
+}
 
 const getVisibleChildren = object => {
   const queue = [object];
@@ -237,10 +246,10 @@ class CopyPass extends Pass {
     for (let i = 0; i < textureCount; i++) {
       this.fullscreenMaterial.uniforms["inputTexture" + i] = new Uniform(null);
 
-      if (i >= this.renderTarget.texture.length) {
-        const texture = this.renderTarget.texture[0].clone();
+      if (i >= this.renderTarget.textures.length) {
+        const texture = this.renderTarget.textures[0].clone();
         texture.isRenderTargetTexture = true;
-        this.renderTarget.texture.push(texture);
+        this.renderTarget.textures.push(texture);
       }
     }
   }
@@ -411,7 +420,7 @@ class TemporalReprojectPass extends Pass {
       type: HalfFloatType,
       depthBuffer: false
     });
-    this.renderTarget.texture.forEach((texture, index) => texture.name = "TemporalReprojectPass.accumulatedTexture" + index);
+    this.renderTarget.textures.forEach((texture, index) => texture.name = "TemporalReprojectPass.accumulatedTexture" + index);
     this.fullscreenMaterial = new TemporalReprojectMaterial(textureCount, options.temporalReprojectCustomComposeShader);
     this.fullscreenMaterial.defines.textureCount = textureCount;
     if (options.dilation) this.fullscreenMaterial.defines.dilation = "";
@@ -437,7 +446,7 @@ class TemporalReprojectPass extends Pass {
     this.copyPass = new CopyPass(textureCount);
 
     for (let i = 0; i < textureCount; i++) {
-      const accumulatedTexture = this.copyPass.renderTarget.texture[i];
+      const accumulatedTexture = this.copyPass.renderTarget.textures[i];
       accumulatedTexture.type = HalfFloatType;
       accumulatedTexture.minFilter = LinearFilter;
       accumulatedTexture.magFilter = LinearFilter;
@@ -490,7 +499,7 @@ class TemporalReprojectPass extends Pass {
   }
 
   get texture() {
-    return this.renderTarget.texture[0];
+    return this.renderTarget.textures[0];
   }
 
   reset() {
@@ -522,16 +531,16 @@ class TemporalReprojectPass extends Pass {
     this.fullscreenMaterial.uniforms.reset.value = false;
 
     for (let i = 0; i < this.textureCount; i++) {
-      this.copyPass.fullscreenMaterial.uniforms["inputTexture" + i].value = this.renderTarget.texture[i];
-      const copyAccumulatedTexture = this.renderTarget.texture.length > 1 ? this.copyPass.renderTarget.texture[i] : this.framebufferTexture;
+      this.copyPass.fullscreenMaterial.uniforms["inputTexture" + i].value = this.renderTarget.textures[i];
+      const copyAccumulatedTexture = this.renderTarget.textures.length > 1 ? this.copyPass.renderTarget.textures[i] : this.framebufferTexture;
       const accumulatedTexture = this.overrideAccumulatedTextures.length === 0 ? copyAccumulatedTexture : this.overrideAccumulatedTextures[i];
       this.fullscreenMaterial.uniforms["accumulatedTexture" + i].value = accumulatedTexture;
     }
 
-    if (this.renderTarget.texture.length > 1) {
+    if (this.renderTarget.textures.length > 1) {
       this.copyPass.render(renderer);
     } else {
-      renderer.copyFramebufferToTexture(tmpVec2, this.framebufferTexture);
+      renderer.copyFramebufferToTexture(this.framebufferTexture, tmpVec2);
     } // save last transformations
 
 
@@ -817,7 +826,7 @@ class PoissionDenoisePass extends Pass {
   }
 
   get texture() {
-    return this.renderTargetB.texture;
+    return this.renderTargetB.textures;
   }
 
   setGBuffersTexture(texture) {
@@ -838,8 +847,8 @@ class PoissionDenoisePass extends Pass {
     for (let i = 0; i < 2 * this.iterations; i++) {
       const horizontal = i % 2 === 0;
       const inputRenderTarget = horizontal ? this.renderTargetB : this.renderTargetA;
-      this.fullscreenMaterial.uniforms["inputTexture"].value = i === 0 ? this.inputTexture : inputRenderTarget.texture[0];
-      this.fullscreenMaterial.uniforms["inputTexture2"].value = i === 0 ? this.inputTexture2 : inputRenderTarget.texture[1];
+      this.fullscreenMaterial.uniforms["inputTexture"].value = i === 0 ? this.inputTexture : inputRenderTarget.textures[0];
+      this.fullscreenMaterial.uniforms["inputTexture2"].value = i === 0 ? this.inputTexture2 : inputRenderTarget.textures[1];
       const renderTarget = horizontal ? this.renderTargetA : this.renderTargetB;
       renderer.setRenderTarget(renderTarget);
       renderer.render(this.scene, this.camera);
@@ -866,12 +875,12 @@ class SVGF {
       fullAccumulate: true,
       logTransform: true
     });
-    const textures = this.svgfTemporalReprojectPass.renderTarget.texture.slice(0, textureCount); // this.denoisePass = new DenoisePass(camera, textures, options)
+    const textures = this.svgfTemporalReprojectPass.renderTarget.textures.slice(0, textureCount); // this.denoisePass = new DenoisePass(camera, textures, options)
     // this.denoisePass.setMomentTexture(this.svgfTemporalReprojectPass.momentTexture)
 
     this.denoisePass = new PoissionDenoisePass(camera, textures[0], window.depthTexture, options);
     this.denoisePass.inputTexture2 = textures[1];
-    this.svgfTemporalReprojectPass.overrideAccumulatedTextures = this.denoisePass.renderTargetB.texture;
+    this.svgfTemporalReprojectPass.overrideAccumulatedTextures = this.denoisePass.renderTargetB.textures;
     this.setNonJitteredDepthTexture(velocityDepthNormalPass.depthTexture);
   } // the denoised texture
 
@@ -1734,12 +1743,12 @@ class SSGIPass extends Pass {
   }
 
   get texture() {
-    return this.renderTarget.texture[0];
+    return this.renderTarget.textures[0];
   }
 
   get specularTexture() {
     const index = "specularOnly" in this.fullscreenMaterial.defines ? 0 : 1;
-    return this.renderTarget.texture[index];
+    return this.renderTarget.textures[index];
   }
 
   initMRTRenderTarget() {
@@ -2844,7 +2853,7 @@ class VelocityDepthNormalPass extends Pass {
     } = this._scene;
     this._scene.background = backgroundColor;
     renderer.setRenderTarget(this.renderTarget);
-    renderer.copyFramebufferToTexture(zeroVec2, this.lastVelocityTexture);
+    renderer.copyFramebufferToTexture(this.lastVelocityTexture, zeroVec2);
     renderer.render(this._scene, this._camera);
     this._scene.background = background;
     this.unsetVelocityDepthNormalMaterialInScene();
