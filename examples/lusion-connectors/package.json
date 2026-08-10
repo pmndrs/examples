@@ -8,7 +8,7 @@
     "@react-three/rapier": "^2.2.0",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "three": "0.165.0"
+    "three": "0.185.1"
   },
   "scripts": {
     "dev": "vite --host",
