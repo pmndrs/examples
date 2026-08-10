@@ -1,5 +1,6 @@
+import * as THREE from "three";
 import { shaderMaterial } from "@react-three/drei";
-import { extend } from "@react-three/fiber";
+import { extend, type ThreeElement } from "@react-three/fiber";
 
 // This material takes care of wiggling and punches a hole into
 // alpha regions so that the depth-of-field effect can process the layers.
@@ -43,3 +44,16 @@ const LayerMaterial = shaderMaterial(
 );
 
 extend({ LayerMaterial });
+
+// The uniform object literal infers `textr` as `null` and `movement` as
+// `number[]`, but the component actually passes a loaded texture and a
+// THREE.Vector3, so those two are overridden here.
+export type LayerMaterialProps = Omit<
+  ThreeElement<typeof LayerMaterial>,
+  "textr" | "movement"
+> & {
+  textr?: THREE.Texture;
+  movement?: THREE.Vector3;
+};
+
+export { LayerMaterial };

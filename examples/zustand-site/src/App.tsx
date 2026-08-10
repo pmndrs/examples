@@ -8,7 +8,7 @@ import {
   Vignette,
   TiltShift2,
 } from "@react-three/postprocessing";
-import { MaskFunction } from "postprocessing";
+import { MaskFunction, type DepthOfFieldEffect } from "postprocessing";
 import Fireflies from "./components/Fireflies";
 import bgUrl from "./resources/bg.jpg";
 import starsUrl from "./resources/stars.png";
@@ -18,7 +18,17 @@ import leaves1Url from "./resources/leaves1.png";
 import leaves2Url from "./resources/leaves2.png";
 import "./materials/layerMaterial";
 
-function Scene({ dof }) {
+type Layer = {
+  texture: THREE.Texture;
+  z: number;
+  factor?: number;
+  scaleFactor?: number;
+  wiggle?: number;
+  scale: [number, number, number];
+  ref?: React.Ref<THREE.Mesh>;
+};
+
+function Scene({ dof }: { dof?: boolean }) {
   const scaleN = useAspect(1600, 1000, 1.05);
   const scaleW = useAspect(2200, 1000, 1.05);
   const textures = useTexture([
@@ -29,11 +39,11 @@ function Scene({ dof }) {
     leaves1Url,
     leaves2Url,
   ]);
-  const group = useRef();
-  const layersRef = useRef([]);
+  const group = useRef<THREE.Group>(null!);
+  const layersRef = useRef<(THREE.ShaderMaterial | null)[]>([]);
   const [movement] = useState(() => new THREE.Vector3());
   const [temp] = useState(() => new THREE.Vector3());
-  const layers = [
+  const layers: Layer[] = [
     { texture: textures[0], z: 0, factor: 0.005, scale: scaleW },
     { texture: textures[1], z: 10, factor: 0.005, scale: scaleW },
     { texture: textures[2], z: 20, scale: scaleW },
@@ -73,8 +83,8 @@ function Scene({ dof }) {
       -state.mouse.x / 2,
       0.2,
     );
-    layersRef.current[4].uniforms.time.value =
-      layersRef.current[5].uniforms.time.value += delta;
+    layersRef.current[4]!.uniforms.time.value =
+      layersRef.current[5]!.uniforms.time.value += delta;
   }, 1);
 
   return (
@@ -108,13 +118,14 @@ function Scene({ dof }) {
 }
 
 function Effects() {
-  const ref = useRef();
+  const ref = useRef<DepthOfFieldEffect>(null!);
   /*useLayoutEffect(() => {
     const maskMaterial = ref.current.maskPass.getFullscreenMaterial()
     maskMaterial.maskFunction = MaskFunction.MULTIPLY_RGB_SET_ALPHA
   }, [])*/
+  /*<TiltShift2 blur={0.25} samples={10} />*/
   return (
-    <EffectComposer disableNormalPass multisampling={0}>
+    <EffectComposer multisampling={0}>
       <DepthOfField
         ref={ref}
         target={[0, 0, 30]}
@@ -122,7 +133,6 @@ function Effects() {
         focalLength={0.1}
         width={1024}
       />
-      {/*<TiltShift2 blur={0.25} samples={10} />*/}
       <Vignette />
     </EffectComposer>
   );
