@@ -5,12 +5,264 @@ But here it re-uses re-occuring parts. GLTFJSX does this automatically now.
 */
 
 import React, { useRef, useMemo } from "react";
-import { useGLTF, Merged } from "@react-three/drei";
+import * as THREE from "three";
+import { type GLTF } from "three-stdlib";
+import { type ThreeElements } from "@react-three/fiber";
+import {
+  useGLTF,
+  Merged,
+  type MergedProps,
+  type InstanceProps,
+} from "@react-three/drei";
 
 import sceneModel from "./scene-draco.glb?url";
 
-export default function InstancedModel(props) {
-  const { nodes } = useGLTF(sceneModel);
+type GLTFResult = GLTF & {
+  nodes: {
+    "196-P-001_Crank-Case001": THREE.Mesh;
+    "196-P-002_Front-Block001": THREE.Mesh;
+    "196-P-003_Front-Case001": THREE.Mesh;
+    "196-P-004_Front001": THREE.Mesh;
+    "196-P-005_Back-Case001": THREE.Mesh;
+    "196-P-006_Crank_Starter-Side002": THREE.Mesh;
+    "196-P-006_Crank_Starter-Side003": THREE.Mesh;
+    "196-P-007_Crank_Output-Side002": THREE.Mesh;
+    "196-P-007_Crank_Output-Side003": THREE.Mesh;
+    "196-P-008_Bar_for_Big-End001": THREE.Mesh;
+    "196-P-009_Cam-Shaft001": THREE.Mesh;
+    "196-P-010&011_Cylinder-Head001": THREE.Mesh;
+    "196-P-010&011_Cylinder-Head_Op_Hand001": THREE.Mesh;
+    "196-P-012&013_Cylinder_Outer001": THREE.Mesh;
+    "196-P-012&013_Cylinder_Outer_Op_Hand001": THREE.Mesh;
+    "196-P-014&015_Rocker-Box001": THREE.Mesh;
+    "196-P-014&015_Rocker-Box_Op_Hand001": THREE.Mesh;
+    "196-P-016&017_Cover_for_Rocker-Box001": THREE.Mesh;
+    "196-P-016&017_Cover_for_Rocker-Box_Op_Hand001": THREE.Mesh;
+    "196-P-019_Clamp_for_Crank001": THREE.Mesh;
+    "196-P-020_Sleeve_for_Cylinder001": THREE.Mesh;
+    "196-P-021_Piston001": THREE.Mesh;
+    "196-P-022_Piston_Ring_A001": THREE.Mesh;
+    "196-P-023_Piston_Ring_B001": THREE.Mesh;
+    "196-P-024_Piston_Ring_C001": THREE.Mesh;
+    "196-P-025_Gidgion_Pin001": THREE.Mesh;
+    "196-P-026_Plate_for_Sump001": THREE.Mesh;
+    "196-P-027_Plate_for_Oil-Supply001": THREE.Mesh;
+    "196-P-028_Plate_for_Rocker-Axles001": THREE.Mesh;
+    "196-P-029_Axle_for_Rocker001": THREE.Mesh;
+    "196-P-030_Cover_M20x1001": THREE.Mesh;
+    "196-P-031_Drain_for_Oil001": THREE.Mesh;
+    "196-P-032_Body_for_Water-Pump001": THREE.Mesh;
+    "196-P-033_Rotor_for_Water-Pump001": THREE.Mesh;
+    "196-P-034_Cover_for_Water-Pump001": THREE.Mesh;
+    "196-P-035_Valve_Inlet001": THREE.Mesh;
+    "196-P-036_Valve_Exhaust001": THREE.Mesh;
+    "196-P-037_Valve-Guide_Inlet001": THREE.Mesh;
+    "196-P-038_Valve_Guide_Exhaust001": THREE.Mesh;
+    "196-P-039_Top_for_Valve001": THREE.Mesh;
+    "196-P-040_Collet_for_Valve001": THREE.Mesh;
+    "196-P-041_Clamp_for_Exhaust001": THREE.Mesh;
+    "196-P-042_Collet_for_Exhaust001": THREE.Mesh;
+    "196-P-043&044_Rocker_Inlet001": THREE.Mesh;
+    "196-P-043&044_Rocker_Inlet_Op_Hand001": THREE.Mesh;
+    "196-P-045&046_Rocker_Exhaust001": THREE.Mesh;
+    "196-P-045&046_Rocker_Exhaust_Op_Hand001": THREE.Mesh;
+    "196-P-047__Extender_for_Crank001": THREE.Mesh;
+    "196-P-048_Driver_for_Pump001": THREE.Mesh;
+    "196-P-049_Dowel_Stepped001": THREE.Mesh;
+    "196-P-050&051_Pushrod001": THREE.Mesh;
+    "196-P-050&051_Pushrod_Long001": THREE.Mesh;
+    "196-P-052_End_Lower_for_Pushrod001": THREE.Mesh;
+    "196-P-053_End_Upper_for_Pushrod001": THREE.Mesh;
+    "196-P-054_Slider_for_Pushrod001": THREE.Mesh;
+    "196-P-055_Backing-Plate_for_Generator003": THREE.Mesh;
+    "196-P-055_Backing-Plate_for_Generator004": THREE.Mesh;
+    "196-P-055_Backing-Plate_for_Generator007": THREE.Mesh;
+    "196-P-056_Former_for_Generator-Coil001": THREE.Mesh;
+    "196-P-057_Disc_A_for_Generator002": THREE.Mesh;
+    "196-P-058_Disc_B_for_Generator002": THREE.Mesh;
+    "196-P-059_Cover_for_Electric001": THREE.Mesh;
+    "196-P-060_Former_for_Solanoyd_Coil001": THREE.Mesh;
+    "196-P-061_Inlet-Manifold001": THREE.Mesh;
+    "196-P-062_Tappet001": THREE.Mesh;
+    "196-P-063_Ball_for_Tappet001": THREE.Mesh;
+    "196-P-064_Filler_Cap001": THREE.Mesh;
+    "196-P-065_Gear_Crank_ISO_-_Spur_gear_2M_30T_20PA_12FW_---S3": THREE.Mesh;
+    "196-P-066_Gear_Output_ISO_-_Spur_gear_2M_60T_20PA_12FW_---S": THREE.Mesh;
+    "196-P-067_Gear_First_for_Oil-Pump_ISO_-_Spur_gear_2M_15T_20": THREE.Mesh;
+    "196-P-068_Gear_Intermediate_for_Oil-Pump_ISO_-_Spur_gear_2M": THREE.Mesh;
+    "196-P-069_Gear_Large_for_Oil-Pump_DIN_-_Spur_gear_2M_27T_20": THREE.Mesh;
+    "196-P-070_Gear_Driving_for_Oil-Pump_ISO_-_Spur_gear_2M_10T_": THREE.Mesh;
+    "196-P-071_Gear_Driven_for_Oil-Pump_ISO_-_Spur_gear_2M_10T_2": THREE.Mesh;
+    "196-P-072_Gear_Starter_Large_ISO_-_Spur_gear_2M_60T_20PA_8F": THREE.Mesh;
+    "196-P-073_Gear_Starter_Intermediate_ISO_-_Spur_gear_2M_23T_": THREE.Mesh;
+    "196-P-074_Gear_for_Starter-Motor001": THREE.Mesh;
+    "196-P-075_Gasket_for_Cylinder-Head001": THREE.Mesh;
+    "196-P-076_Gasket_for_Exhaust001": THREE.Mesh;
+    "196-P-077_Gasket_for_Cylinder-Base001": THREE.Mesh;
+    "196-P-078_Gasket_for_Rocker-Box001": THREE.Mesh;
+    "196-P-079_Gasket_for_Rocker-Cover001": THREE.Mesh;
+    "196-P-080_Gasket_for_Inlet-Manifold001": THREE.Mesh;
+    "196-P-081_Gasket_for_Sump001": THREE.Mesh;
+    "196-P-082_Gasket_for_Front-Block001": THREE.Mesh;
+    "196-P-083_Gasket_for_Front-Case001": THREE.Mesh;
+    "196-P-084_Gasket_for_Front001": THREE.Mesh;
+    "196-P-085_Gasket_for_Back-Case001": THREE.Mesh;
+    "196-P-086_Gasket_for_Pushrods001": THREE.Mesh;
+    "196-P-087_Gasket_for_Water-Pump001": THREE.Mesh;
+    "196-P-088_Gasket_forWater-Pump-Cover001": THREE.Mesh;
+    "196-P-089_Gasket_for_Oil-Supply-Plate001": THREE.Mesh;
+    "196-P-090_Gasket_for_Rocker-Axles-Plate001": THREE.Mesh;
+    "196-P-091_Throtle-Body_Cast001": THREE.Mesh;
+    "196-P-092_Axle_for_Throttle-Body001": THREE.Mesh;
+    "196-P-093_Ratchet_for_Starter001": THREE.Mesh;
+    "196-P-094_Rod_for_Solanoyd001": THREE.Mesh;
+    "196-P-095_Plate_for_Solanoyd001": THREE.Mesh;
+    "196-P-096_Bracket_for_Throttle-Bodies001": THREE.Mesh;
+    "196-P-097_Plate_for_Oil-Pump001": THREE.Mesh;
+    "196-P-098_Disk_for_Throttle-Body001": THREE.Mesh;
+    "196-P-099_Fitting_for_Oil-Filter001": THREE.Mesh;
+    "196-P-100_Wheel_for_Throttle-Bodies001": THREE.Mesh;
+    "196-P-101_Guide_for_Pushrods002": THREE.Mesh;
+    "196-P-101_Guide_for_Pushrods003": THREE.Mesh;
+    "196-P-102_Screw_Special_A_for_Oil_M6x10001": THREE.Mesh;
+    "196-P-103_Screw_Special_B_for_Oil_M6x10001": THREE.Mesh;
+    "196-P-104_Screw_Special_C_for_Oil_M8x10001": THREE.Mesh;
+    "196-P-105_Screw_for_Generator001": THREE.Mesh;
+    "196-P-106_Hose-Tail_M16_for_16mm-Pipe001": THREE.Mesh;
+    "196-P-107_Hose-Tail_M20_for_20mm-Pipe001": THREE.Mesh;
+    "196-P-108_Washer_for_Big-End-Bearings001": THREE.Mesh;
+    "196-P-109_Washer_for_Cam-Shaft001": THREE.Mesh;
+    "196-P-111_Washer_for_Rocker001": THREE.Mesh;
+    "196-P-116_Exhaust-Pipe_Set004": THREE.Mesh;
+    "196-P-116_Exhaust-Pipe_Set005": THREE.Mesh;
+    "196-P-116_Exhaust-Pipe_Set006": THREE.Mesh;
+    "196-P-116_Exhaust-Pipe_Set007": THREE.Mesh;
+    "Bearing_Needle-Roller_06-15-10_PreviewCfg001": THREE.Mesh;
+    "Bearing_Needle-Roller_12-15-17_ISO_3030_-_61C1215_-_22,DE,A": THREE.Mesh;
+    "Bearing_Needle-Roller_14-20-17_PreviewCfg001": THREE.Mesh;
+    "Bearing_Needle-Roller_25-31-17_PreviewCfg001": THREE.Mesh;
+    "Bearing_Output_Back_ISO_355-6_-_7FB25_-_Full,DE,AC,Full001": THREE.Mesh;
+    "Bearing_Output_Front_ISO_355-2_-_2CE50_-_Full,DE,AC,Full001": THREE.Mesh;
+    "Bearing_Thrust_10-20-07_ISO_104_-_701020_-_R,12,DE,AC,12001": THREE.Mesh;
+    "Bonded-Seal_M16_5601-02-16-hydroscand001": THREE.Mesh;
+    "Bonded-Seal_M20_5601-02-20-hydroscand001": THREE.Mesh;
+    Cable_Glands_Metal_M12001: THREE.Mesh;
+    Cable_Glands_Metal_M16001: THREE.Mesh;
+    Cable_for_Throttles_M6x10004: THREE.Mesh;
+    Cable_for_Throttles_M6x10005: THREE.Mesh;
+    Cable_for_Throttles_M6x10006: THREE.Mesh;
+    Cable_for_Throttles_M6x10007: THREE.Mesh;
+    "Circlip_External_BS_3673-4_-_S006M001": THREE.Mesh;
+    "Circlip_External_BS_3673-4_-_S014M001": THREE.Mesh;
+    Coil_for_Generator001: THREE.Mesh;
+    Coil_for_Solanoyd001: THREE.Mesh;
+    "Fitting_umi_-_06_x_je_813_s001": THREE.Mesh;
+    "Fitting_umi_-_08_x_je_813_s001": THREE.Mesh;
+    ID1279: THREE.Mesh;
+    ID1279_1: THREE.Mesh;
+    ID1408: THREE.Mesh;
+    ID1408_1: THREE.Mesh;
+    ID1506: THREE.Mesh;
+    ID1506_1: THREE.Mesh;
+    ID20: THREE.Mesh;
+    ID20_1: THREE.Mesh;
+    Injector_Aprilia_450_SXV004: THREE.Mesh;
+    Injector_Aprilia_450_SXV006: THREE.Mesh;
+    Injector_Aprilia_450_SXV007: THREE.Mesh;
+    Injector_Aprilia_450_SXV010: THREE.Mesh;
+    Jubilee_Clip_for_44001: THREE.Mesh;
+    Key_10x6x25001: THREE.Mesh;
+    "Key_12x8x12-R001": THREE.Mesh;
+    "Key_5x5x15-R001": THREE.Mesh;
+    "Locking_Washer,_M12,_MB_1_2_14b001": THREE.Mesh;
+    "Locking_Washer,_M25,_MB_5_2_14b001": THREE.Mesh;
+    "Locking_Washer,_M30,_MB_6_2_14b001": THREE.Mesh;
+    "Locking_Washer,_M35,_MB_7_2_14b001": THREE.Mesh;
+    "Locking_Washer,_M40,_MB_8_2_14b001": THREE.Mesh;
+    "Locknut,_M25x15,_KM_5_2_14b001": THREE.Mesh;
+    "Locknut,_M30x15,_KM_6_2_14b001": THREE.Mesh;
+    "Locknut,_M35x15,_KM_7_2_14b001": THREE.Mesh;
+    "Locknut,_M40x15,_KM_8_2_14b001": THREE.Mesh;
+    Magnet_Misumi_HXNH_15_5009: THREE.Mesh;
+    Magnet_Misumi_HXNH_6_10001: THREE.Mesh;
+    "Nut,_Castle,_M6,_DIN935001": THREE.Mesh;
+    "Nut,_Castle,_M8,_DIN935001": THREE.Mesh;
+    Nut_Full_SS_M06001: THREE.Mesh;
+    Nut_Half_SS_M06001: THREE.Mesh;
+    "O-Ring_18x265_O-ring_18x265-A-ISO_3601-1001": THREE.Mesh;
+    "O-Ring_9-18_O-ring_9x18-A-ISO_3601-1001": THREE.Mesh;
+    "O-Ring_for_Cover_O-ring_212x265-A-ISO_3601-1001": THREE.Mesh;
+    Object961: THREE.Mesh;
+    Object962: THREE.Mesh;
+    Object964: THREE.Mesh;
+    Object965: THREE.Mesh;
+    Object966: THREE.Mesh;
+    Object968: THREE.Mesh;
+    "Oil-Seal-RTC-03004007-ComTech_Oil-Seal-RTC-03004007-ComTech001": THREE.Mesh;
+    Pin_3x20001: THREE.Mesh;
+    Pin_for_Piston001: THREE.Mesh;
+    Pin_for_Pushrod001: THREE.Mesh;
+    "Plain_Bearing_Igus_GFM-0608-07001": THREE.Mesh;
+    "Plain_Bearing_Igus_GFM-1012-09001": THREE.Mesh;
+    "Plain_Bearing_Igus_GFM-1012-17001": THREE.Mesh;
+    "SNGE_17-40100_____________014": THREE.Mesh;
+    "SNGE_17-40200_____________014": THREE.Mesh;
+    "SNGE_17-40300_____________014": THREE.Mesh;
+    "SNGE_17-40400_____________014": THREE.Mesh;
+    "SNGE_17-405014": THREE.Mesh;
+    "SNGE_17-40600_____________014": THREE.Mesh;
+    "SNGE_17-407014": THREE.Mesh;
+    "Screw_M10_Cap-Hd_SS_M10_x_25001": THREE.Mesh;
+    "Screw_M10_Cap-Hd_SS_M10_x_45001": THREE.Mesh;
+    "Screw_M25_Pan-Hd_SS_M25_x_06001": THREE.Mesh;
+    "Screw_M25_Pan-Hd_SS_M25_x_08001": THREE.Mesh;
+    "Screw_M4_Cap-Hd_SS_M4_x_08001": THREE.Mesh;
+    "Screw_M4_Cap-Hd_SS_M4_x_12001": THREE.Mesh;
+    "Screw_M4_Pan-Hd_SS_M4_x_12001": THREE.Mesh;
+    "Screw_M5_Cap-Hd_SS_M5x10001": THREE.Mesh;
+    "Screw_M5_Cap-Hd_SS_M5x12001": THREE.Mesh;
+    "Screw_M5_Cap-Hd_SS_M5x16001": THREE.Mesh;
+    "Screw_M5_Cap-Hd_SS_M5x30001": THREE.Mesh;
+    "Screw_M5_Cap-Hd_SS_M5x45001": THREE.Mesh;
+    "Screw_M6_Cap-Hd_SS_M6_x_12001": THREE.Mesh;
+    "Screw_M6_Cap-Hd_SS_M6_x_16001": THREE.Mesh;
+    "Screw_M6_Cap-Hd_SS_M6_x_20001": THREE.Mesh;
+    "Screw_M6_Cap-Hd_SS_M6_x_25001": THREE.Mesh;
+    "Screw_M6_Cap-Hd_SS_M6_x_35001": THREE.Mesh;
+    "Screw_M8_Cap-Hd_SS_ISO_4762_M8_x_25_---_25S001": THREE.Mesh;
+    Split_Pin_M6001: THREE.Mesh;
+    Split_Pin_M8001: THREE.Mesh;
+    Spring_Inner_for_Valve001: THREE.Mesh;
+    Spring_Outer_for_Valve001: THREE.Mesh;
+    Spring_Starter001: THREE.Mesh;
+    "Standoff_Hex_M-F_Steel_M4x30001": THREE.Mesh;
+    "Washer_M6_Copper_Washer_ISO_7092_-_6001": THREE.Mesh;
+    "Washer_M8_Copper_Washer_ISO_7092_-_8001": THREE.Mesh;
+    Washer_Mudguard_SS_M8x30001: THREE.Mesh;
+    Washer_Plain_SS_M02001: THREE.Mesh;
+    Washer_Plain_SS_M04001: THREE.Mesh;
+    Washer_Plain_SS_M06001: THREE.Mesh;
+    Washer_Spring_SS_M02001: THREE.Mesh;
+    Washer_Spring_SS_M04001: THREE.Mesh;
+    Washer_Spring_SS_M06001: THREE.Mesh;
+    _NJ_2306_ECML_PART1003: THREE.Mesh;
+    _NJ_2306_ECML_PART2003: THREE.Mesh;
+    _NJ_2306_ECML_PART3025: THREE.Mesh;
+    filter001: THREE.Mesh;
+    kate1001: THREE.Mesh;
+    kate2001: THREE.Mesh;
+    klapp001: THREE.Mesh;
+    korpus001: THREE.Mesh;
+    tihend001: THREE.Mesh;
+    vedru001: THREE.Mesh;
+    võre001: THREE.Mesh;
+  };
+};
+
+export default function InstancedModel(
+  props: Omit<MergedProps, "meshes" | "children">,
+) {
+  const { nodes } = useGLTF(sceneModel) as unknown as GLTFResult;
   const instances = useMemo(
     () => ({
       PPushrod: nodes["196-P-050&051_Pushrod001"],
@@ -170,9 +422,14 @@ export default function InstancedModel(props) {
   );
 }
 
-function Model({ instances, ...props }) {
-  const group = useRef();
-  const { nodes } = useGLTF(sceneModel);
+function Model({
+  instances,
+  ...props
+}: {
+  instances: React.FC<InstanceProps> & Record<string, React.FC<InstanceProps>>;
+} & ThreeElements["group"]) {
+  const group = useRef<THREE.Group>(null!);
+  const { nodes } = useGLTF(sceneModel) as unknown as GLTFResult;
   return (
     <group ref={group} {...props} dispose={null}>
       <group rotation={[Math.PI / 2, 0, 0]}>

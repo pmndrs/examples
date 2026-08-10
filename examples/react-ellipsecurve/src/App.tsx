@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { useMemo, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, type ThreeElements } from "@react-three/fiber";
 import { Trail, Float, Line, Sphere, Stars } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 
@@ -19,7 +19,7 @@ export default function App() {
   );
 }
 
-function Atom(props) {
+function Atom(props: ThreeElements["group"]) {
   const points = useMemo(
     () =>
       new THREE.EllipseCurve(0, 0, 3, 1.15, 0, 2 * Math.PI, false, 0).getPoints(
@@ -62,8 +62,12 @@ function Atom(props) {
   );
 }
 
-function Electron({ radius = 2.75, speed = 6, ...props }) {
-  const ref = useRef();
+function Electron({
+  radius = 2.75,
+  speed = 6,
+  ...props
+}: ThreeElements["group"] & { radius?: number; speed?: number }) {
+  const ref = useRef<THREE.Mesh>(null!);
   useFrame((state) => {
     const t = state.clock.getElapsedTime() * speed;
     ref.current.position.set(

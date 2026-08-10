@@ -45,7 +45,7 @@ const LeftMiddle = styled.div`
   transform-origin: 100% 50%;
 `;
 
-const Bar = styled.div`
+const Bar = styled.div<{ vertical?: boolean }>`
   position: absolute;
   top: ${(props) => (props.vertical ? "0px" : "50%")};
   left: ${(props) => (props.vertical ? "50%" : "0px")};

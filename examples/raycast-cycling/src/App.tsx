@@ -1,9 +1,13 @@
 import { useState, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import * as THREE from "three";
+import { Canvas, useFrame, type ThreeElements } from "@react-three/fiber";
 import { CycleRaycast, BakeShadows, useCursor } from "@react-three/drei";
 
 export default function App() {
-  const [{ objects, cycle }, set] = useState({ objects: [], cycle: 0 });
+  const [{ objects, cycle }, set] = useState<{
+    objects: THREE.Intersection[];
+    cycle: number;
+  }>({ objects: [], cycle: 0 });
   return (
     <>
       {/* CycleRaycast's status data can now be turned into informative HTML */}
@@ -34,14 +38,19 @@ export default function App() {
           />
         ))}
         {/* This component cycles through the raycast intersections, combine it with event.stopPropagation! */}
-        <CycleRaycast onChanged={(objects, cycle) => set({ objects, cycle })} />
+        <CycleRaycast
+          onChanged={(objects, cycle) => {
+            set({ objects, cycle });
+            return null;
+          }}
+        />
       </Canvas>
     </>
   );
 }
 
-function Stair(props) {
-  const ref = useRef();
+function Stair(props: ThreeElements["mesh"]) {
+  const ref = useRef<THREE.Mesh>(null!);
   const [hovered, setHovered] = useState(false);
   const [clicked, setClicked] = useState(false);
   useFrame((state) =>
