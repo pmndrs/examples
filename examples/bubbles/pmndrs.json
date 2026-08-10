@@ -1,0 +1,32 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Bubbles",
+  "description": "A metallic, mouse-reactive distorted sphere with floating instances, composited with Depth of Field, Bloom, BrightnessContrast, Noise and Vignette.",
+  "tags": ["postprocessing", "bloom", "depth-of-field", "distortion"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/react-postprocessing-dof-blob-pqrpl",
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing"
+  ],
+  "assets": [
+    {
+      "name": "Cube environment map",
+      "files": [
+        "public/cube/px.png",
+        "public/cube/nx.png",
+        "public/cube/py.png",
+        "public/cube/ny.png",
+        "public/cube/pz.png",
+        "public/cube/nz.png"
+      ],
+      "notes": "Bundled with the original CodeSandbox demo; creator/license not specified there."
+    },
+    {
+      "name": "bump.jpg",
+      "files": ["public/bump.jpg"],
+      "notes": "Bundled with the original CodeSandbox demo; creator/license not specified there."
+    }
+  ]
+}

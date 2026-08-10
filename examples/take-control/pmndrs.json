@@ -1,0 +1,17 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Take Control",
+  "description": "Animated frames sliding open around a floating cluster of boxes, with god rays, hue/saturation and vignette tunable through controls.",
+  "tags": ["postprocessing", "god-rays", "spring-animation"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/5jgjz",
+  "libraries": [
+    "@react-spring/core",
+    "@react-spring/three",
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing",
+    "leva"
+  ],
+  "assets": []
+}
