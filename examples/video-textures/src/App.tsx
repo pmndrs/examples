@@ -25,12 +25,12 @@ function Scene() {
   );
 }
 
-function VideoMaterial({ url }) {
+function VideoMaterial({ url }: { url: string }) {
   const texture = useVideoTexture(url);
   return <meshBasicMaterial map={texture} toneMapped={false} />;
 }
 
-function FallbackMaterial({ url }) {
+function FallbackMaterial({ url }: { url: string }) {
   const texture = useTexture(url);
   return <meshBasicMaterial map={texture} toneMapped={false} />;
 }
