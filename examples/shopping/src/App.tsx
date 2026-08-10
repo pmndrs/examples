@@ -46,12 +46,8 @@ function Effects() {
     state.camera.lookAt(state.camera.position.x * 0.9, 0, -4);
   });
   return (
-    <EffectComposer
-      stencilBuffer
-      disableNormalPass
-      autoClear={false}
-      multisampling={4}
-    >
+    // `disableNormalPass` no longer exists in this postprocessing version; the normal pass is already disabled by default
+    <EffectComposer stencilBuffer autoClear={false} multisampling={4}>
       <N8AO
         halfRes
         aoSamples={5}
@@ -60,8 +56,11 @@ function Effects() {
         intensity={1}
       />
       <Outline
-        visibleEdgeColor="white"
-        hiddenEdgeColor="white"
+        // `postprocessing`'s OutlineEffect constructor types visibleEdgeColor
+        // and hiddenEdgeColor as number, but it forwards straight into
+        // `new THREE.Color(...)`, which also accepts a color name string like "white".
+        visibleEdgeColor={"white" as unknown as number}
+        hiddenEdgeColor={"white" as unknown as number}
         blur
         width={size.width * 1.25}
         edgeStrength={10}
