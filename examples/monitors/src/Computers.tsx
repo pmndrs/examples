@@ -1,15 +1,28 @@
 import * as THREE from "three";
-import { useMemo, useContext, createContext, useRef } from "react";
-import { useFrame } from "@react-three/fiber";
+import {
+  useMemo,
+  useContext,
+  createContext,
+  useRef,
+  type FC,
+  type ReactNode,
+} from "react";
+import { useFrame, type ThreeElements } from "@react-three/fiber";
 import {
   useGLTF,
   Merged,
   RenderTexture,
   PerspectiveCamera,
   Text,
+  PositionMesh,
+  type InstanceProps,
+  type MergedProps,
 } from "@react-three/drei";
+import { type GLTF } from "three-stdlib";
 import { SpinningBox } from "./SpinningBox";
-THREE.ColorManagement.legacyMode = false;
+// `legacyMode` was removed from @types/three; kept to match upstream source
+(THREE.ColorManagement as unknown as { legacyMode: boolean }).legacyMode =
+  false;
 
 import computersModel from "./computers_1-transformed.glb?url";
 import inter from "./Inter-Medium.woff";
@@ -24,9 +37,81 @@ Source: https://sketchfab.com/3d-models/old-computers-7bb6e720499a467b8e0427451d
 Title: Old Computers
 */
 
-const context = createContext();
-export function Instances({ children, ...props }) {
-  const { nodes } = useGLTF(computersModel);
+type GLTFResult = GLTF & {
+  nodes: {
+    Object_4: THREE.Mesh;
+    Object_16: THREE.Mesh;
+    Object_52: THREE.Mesh;
+    Object_172: THREE.Mesh;
+    Object_174: THREE.Mesh;
+    Object_22: THREE.Mesh;
+    Object_26: THREE.Mesh;
+    Object_178: THREE.Mesh;
+    Object_28: THREE.Mesh;
+    Object_206: THREE.Mesh;
+    Object_207: THREE.Mesh;
+    Object_215: THREE.Mesh;
+    Object_216: THREE.Mesh;
+    Sphere: THREE.Mesh;
+    Object_24: THREE.Mesh;
+    Object_140: THREE.Mesh;
+    Object_144: THREE.Mesh;
+    Object_148: THREE.Mesh;
+    Object_152: THREE.Mesh;
+    Object_156: THREE.Mesh;
+    Object_160: THREE.Mesh;
+    Object_164: THREE.Mesh;
+    Object_168: THREE.Mesh;
+    Object_170: THREE.Mesh;
+    Object_176: THREE.Mesh;
+    Object_180: THREE.Mesh;
+    Object_184: THREE.Mesh;
+    Object_188: THREE.Mesh;
+    Object_192: THREE.Mesh;
+    Object_194: THREE.Mesh;
+    Object_200: THREE.Mesh;
+    Object_18: THREE.Mesh;
+    Object_142: THREE.Mesh;
+    Object_146: THREE.Mesh;
+    Object_150: THREE.Mesh;
+    Object_154: THREE.Mesh;
+    Object_158: THREE.Mesh;
+    Object_162: THREE.Mesh;
+    Object_166: THREE.Mesh;
+    Object_182: THREE.Mesh;
+    Object_186: THREE.Mesh;
+    Object_190: THREE.Mesh;
+    Object_204: THREE.Mesh;
+    Object_209: THREE.Mesh;
+    Object_210: THREE.Mesh;
+    Object_212: THREE.Mesh;
+    Object_213: THREE.Mesh;
+    Object_218: THREE.Mesh;
+    Object_219: THREE.Mesh;
+    Object_221: THREE.Mesh;
+    Object_222: THREE.Mesh;
+    Object_224: THREE.Mesh;
+    Object_225: THREE.Mesh;
+    Object_227: THREE.Mesh;
+    Object_228: THREE.Mesh;
+    Object_230: THREE.Mesh;
+    Object_231: THREE.Mesh;
+  };
+  materials: {
+    Texture: THREE.MeshStandardMaterial;
+  };
+};
+
+type NodeName = keyof GLTFResult["nodes"];
+
+type Instance = FC<InstanceProps> & Record<string, FC<InstanceProps>>;
+
+const context = createContext<Instance>(null!);
+export function Instances({
+  children,
+  ...props
+}: { children: ReactNode } & Omit<MergedProps, "meshes" | "children">) {
+  const { nodes } = useGLTF(computersModel) as unknown as GLTFResult;
   const instances = useMemo(
     () => ({
       Object: nodes.Object_4,
@@ -55,8 +140,10 @@ export function Instances({ children, ...props }) {
   );
 }
 
-export function Computers(props) {
-  const { nodes: n, materials: m } = useGLTF(computersModel);
+export function Computers(props: ThreeElements["group"]) {
+  const { nodes: n, materials: m } = useGLTF(
+    computersModel,
+  ) as unknown as GLTFResult;
   const instances = useContext(context);
   return (
     <group {...props} dispose={null}>
@@ -741,8 +828,13 @@ export function Computers(props) {
 
 /* This component renders a monitor (taken out of the gltf model)
    It renders a custom scene into a texture and projects it onto monitors screen */
-function Screen({ frame, panel, children, ...props }) {
-  const { nodes, materials } = useGLTF(computersModel);
+function Screen({
+  frame,
+  panel,
+  children,
+  ...props
+}: { frame: NodeName; panel: NodeName } & ThreeElements["group"]) {
+  const { nodes, materials } = useGLTF(computersModel) as unknown as GLTFResult;
   return (
     <group {...props}>
       <mesh
@@ -763,8 +855,20 @@ function Screen({ frame, panel, children, ...props }) {
 }
 
 /* Renders a monitor with some text */
-function ScreenText({ invert, x = 0, y = 1.2, ...props }) {
-  const textRef = useRef();
+function ScreenText({
+  invert,
+  x = 0,
+  y = 1.2,
+  ...props
+}: {
+  invert?: boolean;
+  x?: number;
+  y?: number;
+} & { frame: NodeName; panel: NodeName } & Omit<
+    ThreeElements["group"],
+    "children"
+  >) {
+  const textRef = useRef<THREE.Mesh>(null!);
   const rand = Math.random() * 10000;
   useFrame(
     (state) =>
@@ -797,7 +901,12 @@ function ScreenText({ invert, x = 0, y = 1.2, ...props }) {
 }
 
 /* Renders a monitor with a spinning box */
-function ScreenInteractive(props) {
+function ScreenInteractive(
+  props: { frame: NodeName; panel: NodeName } & Omit<
+    ThreeElements["group"],
+    "children"
+  >,
+) {
   return (
     <Screen {...props}>
       <PerspectiveCamera
@@ -816,15 +925,16 @@ function ScreenInteractive(props) {
 }
 
 // Renders flashing LED's
-function Leds({ instances }) {
-  const ref = useRef();
-  const { nodes } = useGLTF(computersModel);
+function Leds({ instances }: { instances: Instance }) {
+  const ref = useRef<THREE.Group>(null!);
+  const { nodes } = useGLTF(computersModel) as unknown as GLTFResult;
   useMemo(() => {
     nodes.Sphere.material = new THREE.MeshBasicMaterial();
     nodes.Sphere.material.toneMapped = false;
   }, []);
   useFrame((state) => {
-    ref.current.children.forEach((instance) => {
+    // the group's children are the PositionMesh instances rendered below, not plain Object3Ds
+    (ref.current.children as unknown as PositionMesh[]).forEach((instance) => {
       const rand = Math.abs(2 + instance.position.x);
       const t = Math.round(
         (1 + Math.sin(rand * 10000 + state.clock.elapsedTime * rand)) / 2,

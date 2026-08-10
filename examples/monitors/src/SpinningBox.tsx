@@ -1,10 +1,14 @@
 import { useRef, useState } from "react";
-import { useFrame } from "@react-three/fiber";
+import * as THREE from "three";
+import { useFrame, type ThreeElements } from "@react-three/fiber";
 import { useCursor } from "@react-three/drei";
 
-export function SpinningBox({ scale, ...props }) {
+export function SpinningBox({
+  scale,
+  ...props
+}: { scale: number } & Omit<ThreeElements["mesh"], "scale">) {
   // This reference gives us direct access to the THREE.Mesh object
-  const ref = useRef();
+  const ref = useRef<THREE.Mesh>(null!);
   // Hold state for hovered and clicked events
   const [hovered, hover] = useState(false);
   const [clicked, click] = useState(false);

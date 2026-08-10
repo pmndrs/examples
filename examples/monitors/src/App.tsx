@@ -1,4 +1,6 @@
-import { Canvas, useFrame } from "@react-three/fiber";
+import * as THREE from "three";
+import { type GLTF } from "three-stdlib";
+import { Canvas, useFrame, type ThreeElements } from "@react-three/fiber";
 import { useGLTF, MeshReflectorMaterial, BakeShadows } from "@react-three/drei";
 import {
   EffectComposer,
@@ -12,13 +14,17 @@ import { Instances, Computers } from "./Computers";
 
 const suzi = import("@pmndrs/assets/models/bunny.glb");
 
+type GLTFResult = GLTF & {
+  nodes: { mesh: THREE.Mesh };
+};
+
 export default function App() {
   return (
     <Canvas
       shadows
       dpr={[1, 1.5]}
       camera={{ position: [-1.5, 1, 5.5], fov: 45, near: 1, far: 20 }}
-      eventSource={document.getElementById("root")}
+      eventSource={document.getElementById("root")!}
       eventPrefix="client"
     >
       {/* Lights */}
@@ -69,7 +75,8 @@ export default function App() {
         />
       </group>
       {/* Postprocessing */}
-      <EffectComposer disableNormalPass>
+      {/* `disableNormalPass` no longer exists in this postprocessing version; the normal pass is already disabled by default */}
+      <EffectComposer>
         <Bloom
           luminanceThreshold={0}
           mipmapBlur
@@ -91,8 +98,10 @@ export default function App() {
   );
 }
 
-function Bun(props) {
-  const { nodes } = useGLTF(suspend(suzi).default);
+function Bun(props: ThreeElements["mesh"]) {
+  const { nodes } = useGLTF(
+    (suspend(suzi) as { default: string }).default,
+  ) as unknown as GLTFResult;
   console.log(nodes);
   return (
     <mesh receiveShadow castShadow geometry={nodes.mesh.geometry} {...props}>
@@ -102,7 +111,7 @@ function Bun(props) {
 }
 
 function CameraRig() {
-  useFrame((state, delta) => {
+  return useFrame((state, delta) => {
     easing.damp3(
       state.camera.position,
       [
