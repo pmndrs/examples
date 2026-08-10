@@ -1,0 +1,13 @@
+diff --git a/dist/Ecctrl.d.ts b/dist/Ecctrl.d.ts
+index 1111111..2222222 100644
+--- a/dist/Ecctrl.d.ts
++++ b/dist/Ecctrl.d.ts
+@@ -4,7 +4,7 @@ import React from "react";
+ export { EcctrlAnimation } from "./EcctrlAnimation";
+ export { useFollowCam } from "./hooks/useFollowCam";
+ export { useGame } from "./stores/useGame";
+-export { EcctrlJoystick } from "../src/EcctrlJoystick";
++export { EcctrlJoystick } from "./EcctrlJoystick";
+ export { useJoystickControls } from "./stores/useJoystickControls";
+ declare const _default: React.ForwardRefExoticComponent<EcctrlProps & React.RefAttributes<RapierRigidBody>>;
+ export default _default;

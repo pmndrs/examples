@@ -9,6 +9,7 @@ overrides:
 
 patchedDependencies:
   '@splinetool/loader@0.9.153': 87d1c8725410c81bfa246825dab2fc7b9f3fc6ab7ef0ab3e28137e5ebbada172
+  ecctrl@1.0.88: c17a3ee74abb360c35e55c7226e44faa42595c2f5571621ebfaaa5de634477b4
 
 importers:
 
@@ -2041,7 +2042,7 @@ importers:
         version: 2.2.0(@react-three/fiber@9.6.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0))(react@19.2.8)(three@0.165.0)
       ecctrl:
         specifier: 1.0.88
-        version: 1.0.88(@react-three/drei@10.7.8(@react-three/fiber@9.6.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0))(@types/react@19.2.17)(@types/three@0.165.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0))(@react-three/fiber@9.6.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0))(@react-three/rapier@2.2.0(@react-three/fiber@9.6.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0))(react@19.2.8)(three@0.165.0))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0)
+        version: 1.0.88(patch_hash=c17a3ee74abb360c35e55c7226e44faa42595c2f5571621ebfaaa5de634477b4)(@react-three/drei@10.7.8(@react-three/fiber@9.6.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0))(@types/react@19.2.17)(@types/three@0.165.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0))(@react-three/fiber@9.6.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0))(@react-three/rapier@2.2.0(@react-three/fiber@9.6.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0))(react@19.2.8)(three@0.165.0))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0)
       react:
         specifier: 19.2.8
         version: 19.2.8
@@ -17279,7 +17280,7 @@ snapshots:
 
   duplexer3@0.1.5: {}
 
-  ecctrl@1.0.88(@react-three/drei@10.7.8(@react-three/fiber@9.6.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0))(@types/react@19.2.17)(@types/three@0.165.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0))(@react-three/fiber@9.6.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0))(@react-three/rapier@2.2.0(@react-three/fiber@9.6.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0))(react@19.2.8)(three@0.165.0))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0):
+  ecctrl@1.0.88(patch_hash=c17a3ee74abb360c35e55c7226e44faa42595c2f5571621ebfaaa5de634477b4)(@react-three/drei@10.7.8(@react-three/fiber@9.6.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0))(@types/react@19.2.17)(@types/three@0.165.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0))(@react-three/fiber@9.6.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0))(@react-three/rapier@2.2.0(@react-three/fiber@9.6.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0))(react@19.2.8)(three@0.165.0))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0):
     dependencies:
       '@react-spring/three': 9.7.5(@react-three/fiber@9.6.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0))(react@19.2.8)(three@0.165.0)
       '@react-three/drei': 10.7.8(@react-three/fiber@9.6.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0))(@types/react@19.2.17)(@types/three@0.165.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0)
