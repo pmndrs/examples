@@ -140,7 +140,7 @@ function Sphere({
     delta = Math.min(0.1, delta);
     api.current?.applyImpulse(
       vec.copy(api.current.translation()).negate().multiplyScalar(0.2),
-      true,
+      false,
     );
     easing.dampC(ref.current.material.color, color, 0.2, delta);
   });

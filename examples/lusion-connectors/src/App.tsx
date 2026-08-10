@@ -166,7 +166,7 @@ function Connector({
     delta = Math.min(0.1, delta);
     api.current?.applyImpulse(
       vec.copy(api.current.translation()).negate().multiplyScalar(0.2),
-      true,
+      false,
     );
   });
   return (

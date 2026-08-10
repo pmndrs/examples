@@ -133,7 +133,7 @@ function Puffycloud({
     if (impulse === 1) rig?.current?.setIntensity(1);
     api.current?.applyImpulse(
       vec.copy(api.current.translation()).negate().multiplyScalar(10),
-      true,
+      false,
     );
   });
   return (

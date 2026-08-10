@@ -25,8 +25,8 @@ function Ball() {
   const ref = useRef<RapierRigidBody>(null!);
   const { viewport } = useThree();
   const onCollisionEnter = () => (
-    ref.current.setTranslation({ x: 0, y: 0, z: 0 }, true),
-    ref.current.setLinvel({ x: 0, y: 10, z: 0 }, true)
+    ref.current.setTranslation({ x: 0, y: 0, z: 0 }, false),
+    ref.current.setLinvel({ x: 0, y: 10, z: 0 }, false)
   );
   return (
     <>
@@ -84,11 +84,11 @@ function Paddle({
         y: -viewport.height / 3,
         z: 0,
       },
-      true,
+      false,
     );
     ref.current.setRotation(
       quaternion.setFromEuler(euler.set(0, 0, (pointer.x * Math.PI) / 10)),
-      true,
+      false,
     );
   });
   return (

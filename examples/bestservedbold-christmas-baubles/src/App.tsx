@@ -61,7 +61,7 @@ function Bauble({
           y: -150 * delta * scale,
           z: -50 * delta * scale,
         }),
-      true,
+      false,
     );
   });
   const rigidBodyProps = {
