@@ -1,4 +1,4 @@
-import { Canvas } from "@react-three/fiber";
+import { Canvas, type ThreeElements } from "@react-three/fiber";
 import {
   useGLTF,
   AccumulativeShadows,
@@ -6,8 +6,33 @@ import {
   Environment,
   CameraControls,
 } from "@react-three/drei";
+import * as THREE from "three";
+import { type GLTF } from "three-stdlib";
 
 import shoeModel from "./shoe.gltf?url";
+
+type GLTFResult = GLTF & {
+  nodes: {
+    shoe: THREE.Mesh;
+    shoe_1: THREE.Mesh;
+    shoe_2: THREE.Mesh;
+    shoe_3: THREE.Mesh;
+    shoe_4: THREE.Mesh;
+    shoe_5: THREE.Mesh;
+    shoe_6: THREE.Mesh;
+    shoe_7: THREE.Mesh;
+  };
+  materials: {
+    laces: THREE.MeshStandardMaterial;
+    mesh: THREE.MeshStandardMaterial;
+    caps: THREE.MeshStandardMaterial;
+    inner: THREE.MeshStandardMaterial;
+    sole: THREE.MeshStandardMaterial;
+    stripes: THREE.MeshStandardMaterial;
+    band: THREE.MeshStandardMaterial;
+    patch: THREE.MeshStandardMaterial;
+  };
+};
 
 export default function App() {
   return (
@@ -30,8 +55,8 @@ export default function App() {
   );
 }
 
-function Shoe(props) {
-  const { nodes, materials } = useGLTF(shoeModel);
+function Shoe(props: ThreeElements["group"]) {
+  const { nodes, materials } = useGLTF(shoeModel) as unknown as GLTFResult;
   return (
     <group {...props} dispose={null}>
       <mesh
