@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, type ThreeElements } from "@react-three/fiber";
 import {
   PerspectiveCamera,
   RoundedBox,
@@ -8,14 +8,28 @@ import {
   useTexture,
   useAspect,
 } from "@react-three/drei";
-import { Physics, useSphere, useBox, usePlane } from "@react-three/cannon";
+import {
+  Physics,
+  useSphere,
+  useBox,
+  usePlane,
+  type BoxProps,
+  type PublicApi,
+  type Triplet,
+} from "@react-three/cannon";
 
 import crossImg from "./cross.jpg";
 import bgImg from "./bg.jpg";
 
-function BallAndCollisions({ args = [1.2, 32, 32], v = new THREE.Vector3() }) {
-  const cam = useRef();
-  const [ref, api] = useSphere(() => ({
+function BallAndCollisions({
+  args = [1.2, 32, 32],
+  v = new THREE.Vector3(),
+}: {
+  args?: ThreeElements["sphereGeometry"]["args"];
+  v?: THREE.Vector3;
+}) {
+  const cam = useRef<THREE.PerspectiveCamera>(null!);
+  const [ref, api] = useSphere<THREE.Mesh>(() => ({
     args: [1.2],
     mass: 1,
     material: { restitution: 0.95 },
@@ -63,13 +77,19 @@ function BallAndCollisions({ args = [1.2, 32, 32], v = new THREE.Vector3() }) {
   );
 }
 
-const Block = forwardRef(
+type BlockProps = {
+  shake?: number;
+  args?: Triplet;
+  vec?: THREE.Vector3;
+} & BoxProps;
+
+const Block = forwardRef<PublicApi, BlockProps>(
   (
     { shake = 0, args = [1, 1.5, 4], vec = new THREE.Vector3(), ...props },
     ref,
   ) => {
-    const group = useRef();
-    const [block, api] = useBox(() => ({
+    const group = useRef<THREE.Group>(null!);
+    const [block, api] = useBox<THREE.Mesh>(() => ({
       args,
       ...props,
       onCollide: (e) => (shake += e.contact.impactVelocity / 12.5),
@@ -96,8 +116,8 @@ const Block = forwardRef(
   },
 );
 
-function Paddle({ args = [5, 1.5, 4] }) {
-  const api = useRef();
+function Paddle({ args = [5, 1.5, 4] }: { args?: Triplet }) {
+  const api = useRef<PublicApi>(null!);
   useFrame(
     (state) => (
       api.current.position.set(state.mouse.x * 10, -5, 0),
@@ -107,8 +127,12 @@ function Paddle({ args = [5, 1.5, 4] }) {
   return <Block ref={api} args={args} material={{ restitution: 1.3 }} />;
 }
 
-function MovingBlock({ offset = 0, position: [x, y, z], ...props }) {
-  const api = useRef();
+function MovingBlock({
+  offset = 0,
+  position: [x, y, z],
+  ...props
+}: { offset?: number; position: Triplet } & BoxProps) {
+  const api = useRef<PublicApi>(null!);
   useFrame((state) =>
     api.current.position.set(
       x +
@@ -127,7 +151,7 @@ function MovingBlock({ offset = 0, position: [x, y, z], ...props }) {
   );
 }
 
-const Background = (props) => (
+const Background = (props: ThreeElements["mesh"]) => (
   <mesh scale={useAspect(5000, 3800, 3)} {...props}>
     <planeGeometry />
     <meshBasicMaterial map={useTexture(bgImg)} />
