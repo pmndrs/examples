@@ -2,104 +2,53 @@ import reactHooks from "eslint-plugin-react-hooks";
 import tseslint from "typescript-eslint";
 
 /**
- * ESLint for `examples/*`. `apps/website` keeps its own config (Next's
- * `core-web-vitals`); this one exists because the examples had none at all --
- * `pnpm lint` walked 161 packages and ran eslint in exactly one of them.
+ * ESLint for `examples/*`, which had none: `pnpm lint` walked 161 packages and
+ * ran eslint in `apps/website` alone. That app keeps its own config; this one
+ * is deliberately the whole of the examples' setup, so an example stays
+ * copy-pasteable into a sandbox without lint scaffolding of its own.
  *
- * One config at the root rather than a file plus two devDependencies in each
- * of the 161 examples: an example is a teaching artifact people copy out to a
- * sandbox, and lint scaffolding is not part of what it teaches. Prettier is
- * already handled this way -- one `prettier.config.mjs` for the whole repo.
- *
- * Scope is the react-hooks plugin only. `js.configs.recommended` on 161
- * examples authored by 161 people is a separate conversation; hook
- * dependencies are the one class of bug that silently changes what an example
- * *renders*, which is the whole product here.
+ * Only `{ts,tsx}` is matched, which is every example since #164 -- and is why
+ * nothing ignores the build output or the vendored draco decoders: both are
+ * plain `.js`, so they are never picked up in the first place.
  *
  * @type {import('eslint').Linter.Config[]}
  */
-const config = [
+export default [
+  /* Vendored, and pre-annotated for someone else's config. */
+  { ignores: ["**/realism-effects/"] },
   {
-    /* Vendored payloads, same set `.prettierignore` names and for the same
-       reason: not ours, and kept byte-identical to upstream. `realism-effects`
-       alone accounts for 128 unused-`eslint-disable`-directive reports -- it
-       arrives pre-annotated for a config that is not this one. */
-    ignores: ["**/realism-effects/", "**/draco*/", "**/dist/"],
-  },
-  {
-    files: ["examples/**/*.{js,jsx,ts,tsx}"],
-    plugins: { "react-hooks": reactHooks },
+    files: ["examples/**/*.{ts,tsx}"],
+    plugins: {
+      "react-hooks": reactHooks,
+      /* No rules enabled: a gltfjsx file disables `ban-ts-comment` next to its
+         `@ts-nocheck`, and an `eslint-disable` naming a rule ESLint cannot
+         resolve is a hard error. */
+      "@typescript-eslint": tseslint.plugin,
+    },
+    languageOptions: { parser: tseslint.parser },
     linterOptions: {
-      /* Off, and only here. Examples arrive from their authors' sandboxes
-         carrying `eslint-disable` comments written against *their* configs;
-         measured against this one those read as "unused directive", which
-         says nothing about the example and would have us edit code we copied
-         on purpose. */
+      /* ...and registering it leaves that directive unused, which is its own
+         report. Examples arrive carrying `eslint-disable` comments written
+         against their authors' configs; measured against this one they say
+         nothing about the example. */
       reportUnusedDisableDirectives: "off",
     },
     rules: {
-      /* Error: a conditional or nested hook is broken React, not a matter of
-         taste. One documented exception below, so this ratchets. */
       "react-hooks/rules-of-hooks": "error",
 
-      /* Warn, deliberately. 81 violations across 41 examples, none of them
-         auto-fixable, and the repo has 3 committed screenshot baselines for
-         161 examples -- so a fix that restarts an animation or re-runs an
-         imperative mount effect would land unnoticed. Surfacing them is step
-         one; correcting them is per-example work with a baseline to check
-         against.
-
-         The 81 are a ceiling, not an allowance: `lint:examples` passes
-         `--max-warnings 81`, so a new violation fails the run even though the
-         backlog does not. Fixing one means lowering the number in
-         `package.json` in the same commit -- that is the ratchet. It counts
-         rather than fingerprints, so an addition and a deletion in one commit
-         net out; the screenshot baselines are what would close that hole, and
-         they are the reason this is not "error" yet. */
+      /* Warn: the 81 existing violations are not safely fixable while the repo
+         has 3 screenshot baselines for 161 examples -- adding a missing dep can
+         restart or loop an animation, visibly and silently. Not an allowance
+         though: `lint:examples` caps warnings at 81, so the next one fails.
+         Fixing one means lowering that number in the same commit. */
       "react-hooks/exhaustive-deps": "warn",
     },
   },
   {
-    /* Nothing matches this today -- #164 converted every example to
-       TypeScript, and the only `.js` left in `examples/` sits in the vendored
-       directories ignored above. It stays because a file matched by no
-       `languageOptions` block is not linted leniently, it is parsed by espree
-       with no JSX support: the next plain-JS example would fail to parse
-       rather than fail to lint. */
-    files: ["examples/**/*.{js,jsx}"],
-    languageOptions: {
-      ecmaVersion: "latest",
-      sourceType: "module",
-      parserOptions: { ecmaFeatures: { jsx: true } },
-    },
-  },
-  {
-    /* Every example, since #164. The parser is used for syntax only -- no
-       `projectService`, so no per-example `tsconfig` resolution and no
-       type-aware rules to pay for. */
-    files: ["examples/**/*.{ts,tsx}"],
-    /* Registered, no rules enabled. A gltfjsx-generated file disables
-       `@typescript-eslint/ban-ts-comment` next to its `@ts-nocheck`, and an
-       `eslint-disable` naming a rule ESLint cannot resolve is a hard error --
-       so the plugin has to be *known* here even though we turn none of it
-       on. */
-    plugins: { "@typescript-eslint": tseslint.plugin },
-    languageOptions: {
-      parser: tseslint.parser,
-      ecmaVersion: "latest",
-      sourceType: "module",
-    },
-  },
-  {
-    /* `useToggle` is a higher-order component: it returns the component that
-       calls the hook, so the call is legal React the rule cannot see -- it
-       reads the returned arrow as a callback. Scoped off here rather than
-       with an `eslint-disable` in the file, the way `apps/website` keeps
-       `hooks/use-mobile.ts` stock: the example stays the code we meant to
-       ship. */
+    /* A higher-order component: it returns the component that calls the hook,
+       which the rule reads as a callback. Off here rather than in the file, as
+       `apps/website` does for `hooks/use-mobile.ts`. */
     files: ["examples/racing-game/src/useToggle.tsx"],
     rules: { "react-hooks/rules-of-hooks": "off" },
   },
 ];
-
-export default config;
