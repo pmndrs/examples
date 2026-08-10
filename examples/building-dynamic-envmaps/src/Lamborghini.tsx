@@ -1,9 +1,23 @@
 import * as THREE from "three";
 import { useMemo } from "react";
-import { applyProps } from "@react-three/fiber";
+import { applyProps, type ThreeElements } from "@react-three/fiber";
+import { type GLTF } from "three-stdlib";
 import { useGLTF } from "@react-three/drei";
 
 import lamboModel from "./lambo.glb?url";
+
+type GLTFResult = GLTF & {
+  nodes: Record<string, THREE.Mesh>;
+  materials: {
+    BreakDiscs: THREE.MeshStandardMaterial;
+    FrameBlack: THREE.MeshStandardMaterial;
+    Chrome: THREE.MeshStandardMaterial;
+    TiresGum: THREE.MeshStandardMaterial;
+    GreyElements: THREE.MeshStandardMaterial;
+    emitbrake: THREE.MeshStandardMaterial;
+    LightsFrontLed: THREE.MeshStandardMaterial;
+  };
+};
 
 /*
 Author: Steven Grey (https://sketchfab.com/Steven007)
@@ -11,8 +25,10 @@ License: CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
 Source: https://sketchfab.com/3d-models/lamborghini-urus-2650599973b649ddb4460ff6c03e4aa2
 Title: Lamborghini Urus
 */
-export function Lamborghini(props) {
-  const { scene, nodes, materials } = useGLTF(lamboModel);
+export function Lamborghini(props: Omit<ThreeElements["primitive"], "object">) {
+  const { scene, nodes, materials } = useGLTF(
+    lamboModel,
+  ) as unknown as GLTFResult;
   useMemo(() => {
     // ⬇⬇⬇ All this is probably better fixed in Blender ...
     Object.values(nodes).forEach((node) => {

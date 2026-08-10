@@ -1,12 +1,13 @@
 import { useLoader } from "@react-three/fiber";
 import { EffectComposer, SSR, Bloom, LUT } from "@react-three/postprocessing";
 import { useControls } from "leva";
-import { LUTCubeLoader } from "postprocessing";
+import { LUTCubeLoader, type LookupTexture } from "postprocessing";
 
 import lutTex from "./F-6800-STD.cube?url";
 
 export function Effects() {
-  const texture = useLoader(LUTCubeLoader, lutTex);
+  // LUTCubeLoader doesn't type its `loadAsync` result, so useLoader can't infer it.
+  const texture = useLoader(LUTCubeLoader, lutTex) as LookupTexture;
   const { enabled, ...props } = useControls({
     enabled: true,
     temporalResolve: true,
