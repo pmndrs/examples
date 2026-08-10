@@ -2,8 +2,9 @@
 // https://lusion.co
 
 import * as THREE from "three";
-import { useRef, useReducer, useMemo } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { type ReactNode, useRef, useReducer, useMemo } from "react";
+import { type GLTF } from "three-stdlib";
+import { Canvas, useFrame, type CanvasProps } from "@react-three/fiber";
 import {
   useGLTF,
   MeshTransmissionMaterial,
@@ -15,11 +16,17 @@ import {
   BallCollider,
   Physics,
   RigidBody,
+  type RapierRigidBody,
 } from "@react-three/rapier";
 import { EffectComposer, N8AO } from "@react-three/postprocessing";
 import { easing } from "maath";
 
 import cModel from "./c-transformed.glb?url";
+
+type GLTFResult = GLTF & {
+  nodes: { connector: THREE.Mesh };
+  materials: { base: THREE.MeshStandardMaterial };
+};
 
 const accents = ["#4060ff", "#20ffa0", "#ff4060", "#ffcc00"];
 const shuffle = (accent = 0) => [
@@ -50,7 +57,7 @@ export const App = () => (
   </div>
 );
 
-function Scene(props) {
+function Scene(props: CanvasProps) {
   const [accent, click] = useReducer((state) => ++state % accents.length, 0);
   const connectors = useMemo(() => shuffle(accent), [accent]);
   return (
@@ -90,7 +97,8 @@ function Scene(props) {
           </Model>
         </Connector>
       </Physics>
-      <EffectComposer disableNormalPass multisampling={8}>
+      {/* `disableNormalPass` no longer exists in this postprocessing version; the normal pass is already disabled by default */}
+      <EffectComposer multisampling={8}>
         <N8AO distanceFalloff={1} aoRadius={1} intensity={4} />
       </EffectComposer>
       <Environment resolution={256}>
@@ -129,6 +137,17 @@ function Scene(props) {
   );
 }
 
+type ConnectorProps = {
+  position?: [number, number, number];
+  children?: ReactNode;
+  vec?: THREE.Vector3;
+  scale?: number;
+  r?: (range: number) => number;
+  accent?: boolean;
+  color?: string;
+  roughness?: number;
+};
+
 function Connector({
   position,
   children,
@@ -137,13 +156,17 @@ function Connector({
   r = THREE.MathUtils.randFloatSpread,
   accent,
   ...props
-}) {
-  const api = useRef();
-  const pos = useMemo(() => position || [r(10), r(10), r(10)], []);
+}: ConnectorProps) {
+  const api = useRef<RapierRigidBody>(null!);
+  const pos = useMemo<[number, number, number]>(
+    () => position || [r(10), r(10), r(10)],
+    [],
+  );
   useFrame((state, delta) => {
     delta = Math.min(0.1, delta);
     api.current?.applyImpulse(
       vec.copy(api.current.translation()).negate().multiplyScalar(0.2),
+      true,
     );
   });
   return (
@@ -171,8 +194,8 @@ function Connector({
   );
 }
 
-function Pointer({ vec = new THREE.Vector3() }) {
-  const ref = useRef();
+function Pointer({ vec = new THREE.Vector3() }: { vec?: THREE.Vector3 }) {
+  const ref = useRef<RapierRigidBody>(null!);
   useFrame(({ mouse, viewport }) => {
     ref.current?.setNextKinematicTranslation(
       vec.set(
@@ -194,9 +217,20 @@ function Pointer({ vec = new THREE.Vector3() }) {
   );
 }
 
-function Model({ children, color = "white", roughness = 0, ...props }) {
-  const ref = useRef();
-  const { nodes, materials } = useGLTF(cModel);
+function Model({
+  children,
+  color = "white",
+  roughness = 0,
+  ...props
+}: {
+  children?: ReactNode;
+  color?: string;
+  roughness?: number;
+}) {
+  const ref = useRef<
+    THREE.Mesh<THREE.BufferGeometry, THREE.MeshStandardMaterial>
+  >(null!);
+  const { nodes, materials } = useGLTF(cModel) as unknown as GLTFResult;
   useFrame((state, delta) => {
     easing.dampC(ref.current.material.color, color, 0.2, delta);
   });
