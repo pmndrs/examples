@@ -1,0 +1,105 @@
+import * as THREE from "three";
+import React, { Suspense, useEffect, useState } from "react";
+import { Canvas, useFrame, type ThreeElements } from "@react-three/fiber";
+import {
+  MeshReflectorMaterial,
+  Text,
+  useTexture,
+  useGLTF,
+} from "@react-three/drei";
+
+import carlaModel from "./carla-draco.glb?url";
+import inter from "./Inter-Bold.woff?url";
+import dreiVideo from "./drei.mp4";
+import surfaceTex1 from "./SurfaceImperfections003_1K_var1.jpg";
+import surfaceTex2 from "./SurfaceImperfections003_1K_Normal.jpg";
+
+export default function App() {
+  return (
+    <Canvas
+      // `concurrent` and `pixelRatio` were removed from @react-three/fiber's
+      // Canvas props long ago (superseded by `dpr`) and are no longer read at
+      // runtime, so they are dropped here rather than typed as unknown props.
+      gl={{ alpha: false }}
+      camera={{ position: [0, 3, 100], fov: 15 }}
+    >
+      <color attach="background" args={["black"]} />
+      <fog attach="fog" args={["black", 15, 20]} />
+      <Suspense fallback={null}>
+        <group position={[0, -1, 0]}>
+          <Carla
+            rotation={[0, Math.PI - 0.4, 0]}
+            position={[-1.2, 0, 0.6]}
+            scale={[0.26, 0.26, 0.26]}
+          />
+          <VideoText position={[0, 1.3, -2]} />
+          <Ground />
+        </group>
+        <ambientLight intensity={0.5 * Math.PI} />
+        <spotLight position={[0, 10, 0]} intensity={0.3 * Math.PI} decay={0} />
+        <directionalLight position={[-50, 0, -40]} intensity={0.7 * Math.PI} />
+        <Intro />
+      </Suspense>
+    </Canvas>
+  );
+}
+
+function Carla(props: ThreeElements["group"]) {
+  const { scene } = useGLTF(carlaModel);
+  return <primitive object={scene} {...props} />;
+}
+
+function VideoText(props: Omit<ThreeElements["group"], "ref">) {
+  const [video] = useState(() =>
+    Object.assign(document.createElement("video"), {
+      src: dreiVideo,
+      crossOrigin: "Anonymous",
+      loop: true,
+      muted: true,
+    }),
+  );
+  useEffect(() => void video.play(), [video]);
+  return (
+    <Text font={inter} fontSize={3} letterSpacing={-0.06} {...props}>
+      drei
+      <meshBasicMaterial toneMapped={false}>
+        {/* `THREE.sRGBEncoding` and Texture#encoding were removed from
+            three.js (superseded by `colorSpace`); the prop was already a
+            no-op at this three.js version, so it is dropped here. */}
+        <videoTexture attach="map" args={[video]} />
+      </meshBasicMaterial>
+    </Text>
+  );
+}
+
+function Ground() {
+  const [floor, normal] = useTexture([surfaceTex1, surfaceTex2]);
+  return (
+    <mesh rotation={[-Math.PI / 2, 0, Math.PI / 2]}>
+      <planeGeometry args={[10, 10]} />
+      <MeshReflectorMaterial
+        blur={[400, 100]}
+        resolution={512}
+        mirror={0.5}
+        mixBlur={6}
+        mixStrength={1.5}
+        color="#a0a0a0"
+        metalness={0.4}
+        roughnessMap={floor}
+        normalMap={normal}
+        normalScale={[2, 2]}
+      />
+    </mesh>
+  );
+}
+
+function Intro() {
+  const [vec] = useState(() => new THREE.Vector3());
+  return useFrame((state) => {
+    state.camera.position.lerp(
+      vec.set(state.mouse.x * 5, 3 + state.mouse.y * 2, 14),
+      0.05,
+    );
+    state.camera.lookAt(0, 0, 0);
+  });
+}
