@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { extend } from "@react-three/fiber";
+import { extend, type ThreeElement } from "@react-three/fiber";
 import { shaderMaterial } from "@react-three/drei";
 
 // Tutorial: https://www.youtube.com/watch?v=f4s1h2YETNY
@@ -49,5 +49,7 @@ const WaveMaterial = shaderMaterial(
 );
 
 extend({ WaveMaterial });
+
+export type WaveMaterialProps = ThreeElement<typeof WaveMaterial>;
 
 export { WaveMaterial };
