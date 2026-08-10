@@ -1,13 +1,29 @@
 import * as THREE from "three";
 import { useEffect, useRef, useState } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, type ThreeElements } from "@react-three/fiber";
 import { MeshWobbleMaterial, useGLTF } from "@react-three/drei";
-import { useSpring, a } from "@react-spring/three";
+import { useSpring, a, type AnimatedProps } from "@react-spring/three";
+import { type GLTF } from "three-stdlib";
 
 import levelReactModel from "./level-react-draco.glb?url";
 
+type GLTFResult = GLTF & {
+  nodes: {
+    Cactus: THREE.Mesh;
+    Camera: THREE.Mesh;
+    Camera_1: THREE.Mesh;
+    Level: THREE.Mesh;
+    Sudo: THREE.Mesh;
+    SudoHead: THREE.Mesh;
+  };
+  materials: {
+    Cactus: THREE.MeshBasicMaterial;
+    Lens: THREE.MeshBasicMaterial;
+  };
+};
+
 export function Level() {
-  const { nodes } = useGLTF(levelReactModel);
+  const { nodes } = useGLTF(levelReactModel) as unknown as GLTFResult;
   return (
     <mesh
       geometry={nodes.Level.geometry}
@@ -19,20 +35,23 @@ export function Level() {
 }
 
 export function Sudo() {
-  const { nodes } = useGLTF(levelReactModel);
+  const { nodes } = useGLTF(levelReactModel) as unknown as GLTFResult;
   const [spring, api] = useSpring(
-    () => ({ rotation: [Math.PI / 2, 0, 0.29], config: { friction: 40 } }),
+    () => ({
+      rotation: [Math.PI / 2, 0, 0.29] as [number, number, number],
+      config: { friction: 40 },
+    }),
     [],
   );
   useEffect(() => {
-    let timeout;
+    let timeout: ReturnType<typeof setTimeout>;
     const wander = () => {
       api.start({
         rotation: [
           Math.PI / 2 + THREE.MathUtils.randFloatSpread(2) * 0.3,
           0,
           0.29 + THREE.MathUtils.randFloatSpread(2) * 0.2,
-        ],
+        ] as [number, number, number],
       });
       timeout = setTimeout(wander, (1 + Math.random() * 2) * 800);
     };
@@ -51,20 +70,25 @@ export function Sudo() {
         geometry={nodes.SudoHead.geometry}
         material={nodes.SudoHead.material}
         position={[0.68, 0.33, -0.67]}
-        {...spring}
+        // react-spring's MathType typing for Euler-like props can't express a
+        // SpringValue<[number, number, number]> for `rotation`, though it
+        // animates correctly at runtime
+        {...(spring as unknown as AnimatedProps<ThreeElements["mesh"]>)}
       />
     </>
   );
 }
 
 export function Camera() {
-  const { nodes, materials } = useGLTF(levelReactModel);
+  const { nodes, materials } = useGLTF(
+    levelReactModel,
+  ) as unknown as GLTFResult;
   const [spring, api] = useSpring(
     () => ({ "rotation-z": 0, config: { friction: 40 } }),
     [],
   );
   useEffect(() => {
-    let timeout;
+    let timeout: ReturnType<typeof setTimeout>;
     const wander = () => {
       api.start({ "rotation-z": Math.random() });
       timeout = setTimeout(wander, (1 + Math.random() * 2) * 800);
@@ -85,7 +109,9 @@ export function Camera() {
 }
 
 export function Cactus() {
-  const { nodes, materials } = useGLTF(levelReactModel);
+  const { nodes, materials } = useGLTF(
+    levelReactModel,
+  ) as unknown as GLTFResult;
   return (
     <mesh
       geometry={nodes.Cactus.geometry}
@@ -97,8 +123,10 @@ export function Cactus() {
   );
 }
 
-export function Box({ scale = 1, ...props }) {
-  const ref = useRef();
+type BoxProps = Omit<ThreeElements["mesh"], "scale"> & { scale?: number };
+
+export function Box({ scale = 1, ...props }: BoxProps) {
+  const ref = useRef<THREE.Mesh>(null!);
   const [hovered, hover] = useState(false);
   const [clicked, click] = useState(false);
   useFrame(
