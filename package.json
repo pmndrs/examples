@@ -5,8 +5,9 @@
     "build": "turbo build3",
     "postbuild": "./out.sh",
     "dev": "turbo dev2",
-    "check": "turbo lint lint:metadata lint:versions format:check",
-    "lint": "turbo lint lint:metadata lint:versions",
+    "check": "turbo lint lint:examples lint:metadata lint:versions format:check",
+    "lint": "turbo lint lint:examples lint:metadata lint:versions",
+    "lint:examples": "eslint examples --max-warnings 81",
     "lint:metadata": "node bin/validate-pmndrs-metadata.mjs",
     "lint:versions": "syncpack lint",
     "fix:versions": "syncpack fix",
@@ -20,6 +21,8 @@
     "@playwright/test": "1.62.0",
     "@types/minimist": "^1.2.5",
     "depcheck": "^1.4.7",
+    "eslint": "^9.39.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
     "prettier": "^3.3.3",
@@ -27,6 +30,7 @@
     "syncpack": "^14.3.0",
     "turbo": "^2.10.7",
     "typescript": "^5.5.4",
+    "typescript-eslint": "^8.66.0",
     "vitest": "^4.1.10"
   },
   "engines": {
