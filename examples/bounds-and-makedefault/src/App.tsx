@@ -1,0 +1,147 @@
+import { Suspense, type PropsWithChildren } from "react";
+import * as THREE from "three";
+import { Canvas, type ThreeElements } from "@react-three/fiber";
+import {
+  Bounds,
+  useBounds,
+  OrbitControls,
+  ContactShadows,
+  useGLTF,
+} from "@react-three/drei";
+import { type GLTF } from "three-stdlib";
+
+import model from "./compressed.glb?url";
+
+type GLTFResult = GLTF & {
+  nodes: {
+    Curly: THREE.Mesh;
+    DNA: THREE.Mesh;
+    Headphones: THREE.Mesh;
+    Notebook: THREE.Mesh;
+    Rocket003: THREE.Mesh;
+    Roundcube001: THREE.Mesh;
+    Table: THREE.Mesh;
+    VR_Headset: THREE.Mesh;
+    Zeppelin: THREE.Mesh;
+  };
+  materials: { [name: string]: THREE.Material };
+};
+
+export default function App() {
+  return (
+    <Canvas camera={{ position: [0, -10, 80], fov: 50 }} dpr={[1, 2]}>
+      <spotLight
+        position={[-100, -100, -100]}
+        intensity={0.2 * Math.PI}
+        decay={0}
+        angle={0.3}
+        penumbra={1}
+      />
+      <hemisphereLight
+        color="white"
+        groundColor="#ff0f00"
+        position={[-7, 25, 13]}
+        intensity={Math.PI}
+      />
+      <Suspense fallback={null}>
+        <Bounds fit clip observe margin={1.2}>
+          <SelectToZoom>
+            <Model
+              name="Curly"
+              position={[1, -11, -20]}
+              rotation={[2, 0, -0]}
+            />
+            <Model name="DNA" position={[20, 0, -17]} rotation={[1, 1, -2]} />
+            <Model
+              name="Headphones"
+              position={[20, 2, 4]}
+              rotation={[1, 0, -1]}
+            />
+            <Model
+              name="Notebook"
+              position={[-21, -15, -13]}
+              rotation={[2, 0, 1]}
+            />
+            <Model
+              name="Rocket003"
+              position={[18, 15, -25]}
+              rotation={[1, 1, 0]}
+            />
+            <Model
+              name="Roundcube001"
+              position={[-25, -4, 5]}
+              rotation={[1, 0, 0]}
+              scale={0.5}
+            />
+            <Model
+              name="Table"
+              position={[1, -4, -28]}
+              rotation={[1, 0, -1]}
+              scale={0.5}
+            />
+            <Model
+              name="VR_Headset"
+              position={[7, -15, 28]}
+              rotation={[1, 0, -1]}
+              scale={5}
+            />
+            <Model
+              name="Zeppelin"
+              position={[-20, 10, 10]}
+              rotation={[3, -1, 3]}
+              scale={0.005}
+            />
+          </SelectToZoom>
+        </Bounds>
+        <ContactShadows
+          rotation-x={Math.PI / 2}
+          position={[0, -35, 0]}
+          opacity={0.2}
+          width={200}
+          height={200}
+          blur={1}
+          far={50}
+        />
+      </Suspense>
+      <OrbitControls
+        makeDefault
+        minPolarAngle={0}
+        maxPolarAngle={Math.PI / 1.75}
+      />
+    </Canvas>
+  );
+}
+
+function Model({
+  name,
+  ...props
+}: { name: keyof GLTFResult["nodes"] } & ThreeElements["mesh"]) {
+  const { nodes } = useGLTF(model) as unknown as GLTFResult;
+  return (
+    <mesh
+      geometry={nodes[name].geometry}
+      material={nodes[name].material}
+      material-emissive="red"
+      material-roughness={1}
+      {...props}
+      dispose={null}
+    />
+  );
+}
+
+// This component wraps children in a group with a click handler
+// Clicking any object will refresh and fit bounds
+function SelectToZoom({ children }: PropsWithChildren) {
+  const api = useBounds();
+  return (
+    <group
+      onClick={(e) => (
+        e.stopPropagation(),
+        e.delta <= 2 && api.refresh(e.object).fit()
+      )}
+      onPointerMissed={(e) => e.button === 0 && api.refresh().fit()}
+    >
+      {children}
+    </group>
+  );
+}
