@@ -39,7 +39,8 @@ export const App = () => (
       <Clump />
     </Physics>
     <Environment files={adamsbridgeHdr} />
-    <EffectComposer disableNormalPass multisampling={0}>
+    {/* `disableNormalPass` no longer exists in this postprocessing version; the normal pass is already disabled by default */}
+    <EffectComposer multisampling={0}>
       <N8AO
         halfRes
         color="black"
@@ -57,12 +58,15 @@ function Clump({
   mat = new THREE.Matrix4(),
   vec = new THREE.Vector3(),
   ...props
+}: {
+  mat?: THREE.Matrix4;
+  vec?: THREE.Vector3;
 }) {
   const { outlines } = useControls({
     outlines: { value: 0.0, step: 0.01, min: 0, max: 0.05 },
   });
   const texture = useTexture(crossImg);
-  const [ref, api] = useSphere(() => ({
+  const [ref, api] = useSphere<THREE.InstancedMesh>(() => ({
     args: [1],
     mass: 1,
     angularDamping: 0.1,
@@ -72,7 +76,7 @@ function Clump({
   useFrame((state) => {
     for (let i = 0; i < 40; i++) {
       // Get current whereabouts of the instanced sphere
-      ref.current.getMatrixAt(i, mat);
+      ref.current!.getMatrixAt(i, mat);
       // Normalize the position and multiply by a negative force.
       // This is enough to drive it towards the center-point.
       api
@@ -82,7 +86,7 @@ function Clump({
             .setFromMatrixPosition(mat)
             .normalize()
             .multiplyScalar(-40)
-            .toArray(),
+            .toArray() as [number, number, number],
           [0, 0, 0],
         );
     }
@@ -102,7 +106,7 @@ function Clump({
 
 function Pointer() {
   const viewport = useThree((state) => state.viewport);
-  const [, api] = useSphere(() => ({
+  const [, api] = useSphere<THREE.Mesh>(() => ({
     type: "Kinematic",
     args: [3],
     position: [0, 0, 0],

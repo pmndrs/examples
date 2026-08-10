@@ -1,6 +1,7 @@
 import React, { Suspense, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, type ThreeElements } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
+import * as THREE from "three";
 
 import bustLoModel from "./bust-lo-draco.glb?url";
 import bustHiModel from "./bust-hi.glb?url";
@@ -28,15 +29,18 @@ export default function App() {
   );
 }
 
-function Model({ url, ...props }) {
+function Model({
+  url,
+  ...props
+}: { url: string } & Omit<ThreeElements["primitive"], "object">) {
   // useGLTF suspends the component, it literally stops processing
   const { scene } = useGLTF(url);
   // By the time we're here the model is gueranteed to be available
   return <primitive object={scene} {...props} />;
 }
 
-function Rotate(props) {
-  const ref = useRef();
+function Rotate(props: ThreeElements["group"]) {
+  const ref = useRef<THREE.Group>(null!);
   useFrame((state) => (ref.current.rotation.y = state.clock.elapsedTime));
   return <group ref={ref} {...props} />;
 }
