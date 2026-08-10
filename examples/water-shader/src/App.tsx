@@ -1,22 +1,34 @@
 import * as THREE from "three";
-import React, { Suspense, useRef, useMemo } from "react";
+import React, { Suspense, useRef, useMemo, type ComponentProps } from "react";
 import {
   Canvas,
   extend,
-  useThree,
   useLoader,
   useFrame,
+  type ThreeElements,
 } from "@react-three/fiber";
-import { OrbitControls, Sky } from "@react-three/drei";
+import { OrbitControls, Sky as SkyImpl } from "@react-three/drei";
 import { Water } from "three-stdlib";
 
 import waterNormalsImg from "./waternormals.jpeg";
 
 extend({ Water });
 
+// The installed @react-three/drei Sky types don't include `scale`, even
+// though the component spreads unmatched props onto the underlying
+// `<primitive>`; widen the prop type locally instead of changing the value.
+type SkyProps = ComponentProps<typeof SkyImpl> & {
+  scale?: ThreeElements["primitive"]["scale"];
+};
+const Sky = SkyImpl as unknown as (
+  props: SkyProps,
+) => ReturnType<typeof SkyImpl>;
+
 function Ocean() {
-  const ref = useRef();
-  const gl = useThree((state) => state.gl);
+  const ref = useRef<Water>(null!);
+  // `WebGLRenderer#encoding` and `WaterOptions#format` were both removed
+  // from three.js / three-stdlib (superseded by `colorSpace`); the option
+  // was already a no-op at this three.js version, so it is dropped here.
   const waterNormals = useLoader(THREE.TextureLoader, waterNormalsImg);
   waterNormals.wrapS = waterNormals.wrapT = THREE.RepeatWrapping;
   const geom = useMemo(() => new THREE.PlaneGeometry(10000, 10000), []);
@@ -30,7 +42,6 @@ function Ocean() {
       waterColor: 0x001e0f,
       distortionScale: 3.7,
       fog: false,
-      format: gl.encoding,
     }),
     [waterNormals],
   );
@@ -41,7 +52,7 @@ function Ocean() {
 }
 
 function Box() {
-  const ref = useRef();
+  const ref = useRef<THREE.Mesh>(null!);
   useFrame((state, delta) => {
     ref.current.position.y = 10 + Math.sin(state.clock.elapsedTime) * 20;
     ref.current.rotation.x =
