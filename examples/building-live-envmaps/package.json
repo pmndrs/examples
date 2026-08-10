@@ -8,7 +8,7 @@
     "lamina": "1.2.2",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "three": "0.165.0"
+    "three": "0.185.1"
   },
   "devDependencies": {
     "@types/react": "19.2.17",

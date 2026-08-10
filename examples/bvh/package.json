@@ -8,7 +8,7 @@
     "r3f-perf": "^7.2.3",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "three": "0.165.0",
+    "three": "0.185.1",
     "three-mesh-bvh": "0.7.8"
   },
   "devDependencies": {
