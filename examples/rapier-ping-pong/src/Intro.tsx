@@ -1,7 +1,11 @@
-import { cloneElement, useState } from "react";
+import { cloneElement, useState, type ReactElement } from "react";
 import { Footer } from "@pmndrs/branding";
 
-export default function Intro({ children }) {
+export default function Intro({
+  children,
+}: {
+  children: ReactElement<{ ready?: boolean }>;
+}) {
   const [clicked, setClicked] = useState(false);
   return (
     <div className="container" style={{ cursor: clicked ? "none" : "auto" }}>

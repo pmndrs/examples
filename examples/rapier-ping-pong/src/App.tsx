@@ -1,6 +1,11 @@
 import * as THREE from "three";
 import { useCallback, useRef } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import {
+  Canvas,
+  useFrame,
+  useThree,
+  type ThreeElements,
+} from "@react-three/fiber";
 import { Text, useGLTF, useTexture } from "@react-three/drei";
 import {
   Physics,
@@ -8,6 +13,8 @@ import {
   CylinderCollider,
   CuboidCollider,
   BallCollider,
+  type RapierRigidBody,
+  type ContactForcePayload,
 } from "@react-three/rapier";
 import {
   EffectComposer,
@@ -18,16 +25,40 @@ import {
 import { proxy, useSnapshot } from "valtio";
 import clamp from "lodash-es/clamp";
 import { easing } from "maath";
+import { type GLTF } from "three-stdlib";
 import pingSound from "./resources/ping.mp3";
 import logo from "./resources/crossp.jpg";
 import bg from "./resources/bg.jpg";
 import pingpongModel from "./resources/pingpong.glb?url";
 
+type GLTFResult = GLTF & {
+  nodes: {
+    Bone: THREE.Bone;
+    Bone003: THREE.Bone;
+    Bone006: THREE.Bone;
+    Bone010: THREE.Bone;
+    arm: THREE.SkinnedMesh;
+    mesh: THREE.Mesh;
+    mesh_1: THREE.Mesh;
+    mesh_2: THREE.Mesh;
+    mesh_3: THREE.Mesh;
+    mesh_4: THREE.Mesh;
+  };
+  materials: {
+    glove: THREE.MeshStandardMaterial;
+    wood: THREE.MeshStandardMaterial;
+    side: THREE.MeshStandardMaterial;
+    foam: THREE.MeshStandardMaterial;
+    lower: THREE.MeshStandardMaterial;
+    upper: THREE.MeshStandardMaterial;
+  };
+};
+
 const ping = new Audio(pingSound);
 const state = proxy({
   count: 0,
   api: {
-    pong(velocity) {
+    pong(velocity: number) {
       ping.currentTime = 0;
       ping.volume = clamp(velocity / 20, 0, 1);
       ping.play();
@@ -37,7 +68,7 @@ const state = proxy({
   },
 });
 
-export default function App({ ready }) {
+export default function App({ ready }: { ready?: boolean }) {
   return (
     <Canvas
       shadows
@@ -61,7 +92,8 @@ export default function App({ ready }) {
         {ready && <Ball position={[0, 5, 0]} />}
         <Paddle />
       </Physics>
-      <EffectComposer disableNormalPass>
+      {/* `disableNormalPass` no longer exists in this postprocessing version; the normal pass is already disabled by default */}
+      <EffectComposer>
         <N8AO aoRadius={0.5} intensity={2} />
         <TiltShift2 blur={0.2} />
         <ToneMapping />
@@ -71,12 +103,18 @@ export default function App({ ready }) {
   );
 }
 
-function Paddle({ vec = new THREE.Vector3(), dir = new THREE.Vector3() }) {
-  const api = useRef();
-  const model = useRef();
+function Paddle({
+  vec = new THREE.Vector3(),
+  dir = new THREE.Vector3(),
+}: {
+  vec?: THREE.Vector3;
+  dir?: THREE.Vector3;
+}) {
+  const api = useRef<RapierRigidBody>(null!);
+  const model = useRef<THREE.Group>(null!);
   const { count } = useSnapshot(state);
-  const { nodes, materials } = useGLTF(pingpongModel);
-  const contactForce = useCallback((payload) => {
+  const { nodes, materials } = useGLTF(pingpongModel) as unknown as GLTFResult;
+  const contactForce = useCallback((payload: ContactForcePayload) => {
     state.api.pong(payload.totalForceMagnitude / 100);
     model.current.position.y = -payload.totalForceMagnitude / 10000;
   }, []);
@@ -170,14 +208,16 @@ function Paddle({ vec = new THREE.Vector3(), dir = new THREE.Vector3() }) {
   );
 }
 
-function Ball(props) {
-  const api = useRef();
+function Ball(props: ThreeElements["group"]) {
+  const api = useRef<RapierRigidBody>(null!);
   const map = useTexture(logo);
   const { viewport } = useThree();
   const onCollisionEnter = useCallback(() => {
     state.api.reset();
-    api.current.setTranslation({ x: 0, y: 5, z: 0 });
-    api.current.setLinvel({ x: 0, y: 5, z: 0 });
+    // rapier's wakeUp flag is required by the types; the JS left it out,
+    // which reached the wasm binding as false.
+    api.current.setTranslation({ x: 0, y: 5, z: 0 }, false);
+    api.current.setLinvel({ x: 0, y: 5, z: 0 }, false);
   }, []);
   return (
     <group {...props}>
