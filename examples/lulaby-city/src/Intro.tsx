@@ -1,12 +1,22 @@
-import { Suspense, cloneElement, useEffect, useState } from "react";
+import {
+  Suspense,
+  cloneElement,
+  useEffect,
+  useState,
+  type ReactElement,
+} from "react";
 import { Footer } from "@pmndrs/branding";
 
-function Ready({ setReady }) {
+function Ready({ setReady }: { setReady: (ready: boolean) => void }) {
   useEffect(() => () => void setReady(true), []);
   return null;
 }
 
-export default function Intro({ children }) {
+export default function Intro({
+  children,
+}: {
+  children: ReactElement<{ ready?: boolean }>;
+}) {
   const [clicked, setClicked] = useState(false);
   const [ready, setReady] = useState(false);
   return (

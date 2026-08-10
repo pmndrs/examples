@@ -2,10 +2,15 @@ import { useState } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
 import { Html, OrbitControls } from "@react-three/drei";
 import { Slider } from "antd";
+import { type OrbitControls as OrbitControlsImpl } from "three-stdlib";
 
 function Box() {
   const [size, set] = useState(0.5);
-  const controls = useThree((state) => state.controls);
+  // state.controls is typed as THREE.EventDispatcher | null; narrow it to the
+  // concrete controls instance that <OrbitControls /> assigns it to.
+  const controls = useThree(
+    (state) => state.controls,
+  ) as unknown as OrbitControlsImpl;
   return (
     <mesh scale={size * 2}>
       <boxGeometry />

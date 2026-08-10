@@ -1,5 +1,7 @@
 import { useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import * as THREE from "three";
+import { type GLTF } from "three-stdlib";
+import { Canvas, useFrame, type ThreeElements } from "@react-three/fiber";
 import {
   useGLTF,
   Edges,
@@ -11,6 +13,12 @@ import {
 import { useControls } from "leva";
 
 import aoboxModel from "./aobox-transformed.glb?url";
+
+type GLTFResult = GLTF & {
+  nodes: {
+    Cube: THREE.Mesh<THREE.BufferGeometry, THREE.MeshStandardMaterial>;
+  };
+};
 
 export const App = () => (
   <Canvas shadows camera={{ position: [-3, 0.5, 3] }}>
@@ -50,15 +58,27 @@ export const App = () => (
   </Canvas>
 );
 
-function Side({ rotation = [0, 0, 0], bg = "#f0f0f0", children, index }) {
-  const mesh = useRef();
+function Side({
+  rotation = [0, 0, 0],
+  bg = "#f0f0f0",
+  children,
+  index,
+}: ThreeElements["mesh"] & { bg?: string; index: number }) {
+  const mesh = useRef<THREE.Mesh>(null!);
   const { worldUnits } = useControls({ worldUnits: false });
-  const { nodes } = useGLTF(aoboxModel);
+  const { nodes } = useGLTF(aoboxModel) as unknown as GLTFResult;
   useFrame((state, delta) => {
     mesh.current.rotation.x = mesh.current.rotation.y += delta;
   });
   return (
-    <MeshPortalMaterial worldUnits={worldUnits} attach={`material-${index}`}>
+    <MeshPortalMaterial
+      worldUnits={worldUnits}
+      attach={`material-${index}`}
+      // blur/resolution match MeshPortalMaterial's own defaults; drei's
+      // types mark them required even though the component defaults them.
+      blur={0}
+      resolution={512}
+    >
       {/** Everything in here is inside the portal and isolated from the canvas */}
       <ambientLight intensity={0.5 * Math.PI} />
       <Environment preset="city" />

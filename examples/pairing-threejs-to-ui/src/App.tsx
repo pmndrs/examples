@@ -1,5 +1,5 @@
 import { Suspense, useDeferredValue } from "react";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, type ThreeElements } from "@react-three/fiber";
 import { useGLTF, OrbitControls, ContactShadows } from "@react-three/drei";
 import { useControls } from "leva";
 import tunnel from "tunnel-rat";
@@ -11,7 +11,7 @@ import spruceModel from "./assets/tree-spruce.gltf?url";
 
 const status = tunnel();
 
-const MODELS = {
+const MODELS: Record<string, string> = {
   Beech: beechModel,
   Lime: limeModel,
   Spruce: spruceModel,
@@ -53,7 +53,10 @@ export default function App() {
   );
 }
 
-function Model({ url, ...props }) {
+function Model({
+  url,
+  ...props
+}: { url: string } & Omit<ThreeElements["primitive"], "object">) {
   const deferred = useDeferredValue(url);
   const { scene } = useGLTF(deferred);
   // <primitive object={...} mounts an already existing object

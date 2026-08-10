@@ -1,15 +1,21 @@
 import { useState } from "react";
-import { Canvas } from "@react-three/fiber";
+import * as THREE from "three";
+import { Canvas, type ThreeElements } from "@react-three/fiber";
 import { OrbitControls, TransformControls, useCursor } from "@react-three/drei";
 import { useControls } from "leva";
 import { create } from "zustand";
 
-const useStore = create((set) => ({
+type Store = {
+  target: THREE.Object3D | null;
+  setTarget: (target: THREE.Object3D | null) => void;
+};
+
+const useStore = create<Store>((set) => ({
   target: null,
   setTarget: (target) => set({ target }),
 }));
 
-function Box(props) {
+function Box(props: ThreeElements["mesh"]) {
   const setTarget = useStore((state) => state.setTarget);
   const [hovered, setHovered] = useState(false);
   useCursor(hovered);
@@ -26,10 +32,15 @@ function Box(props) {
   );
 }
 
+type TransformMode = "translate" | "rotate" | "scale";
+
 export default function App() {
   const { target, setTarget } = useStore();
   const { mode } = useControls({
-    mode: { value: "translate", options: ["translate", "rotate", "scale"] },
+    mode: {
+      value: "translate" as TransformMode,
+      options: ["translate", "rotate", "scale"] as TransformMode[],
+    },
   });
   return (
     <Canvas dpr={[1, 2]} onPointerMissed={() => setTarget(null)}>
