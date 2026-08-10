@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { useLayoutEffect } from "react";
-import { applyProps, Canvas } from "@react-three/fiber";
+import { applyProps, Canvas, type ThreeElements } from "@react-three/fiber";
+import { type GLTF } from "three-stdlib";
 import {
   useGLTF,
   useBoxProjectedEnv,
@@ -12,6 +13,11 @@ import {
 import { useControls } from "leva";
 
 import courtModel from "./court.glb?url";
+
+type GLTFResult = GLTF & {
+  nodes: { GymFloor_ParquetShader_0: THREE.Mesh };
+  materials: { ParquetShader: THREE.MeshStandardMaterial };
+};
 
 // Noon Grass HDRI from Poly Haven (https://polyhaven.com/a/noon_grass), CC0, vendored locally.
 import noonGrassHdr from "./assets/noon_grass_1k.hdr?url";
@@ -64,12 +70,12 @@ export default function App() {
   );
 }
 
-function Court(props) {
+function Court(props: Omit<ThreeElements["primitive"], "object">) {
   const { scene } = useGLTF(courtModel);
   useLayoutEffect(() => {
     scene.traverse((o) => {
-      if (o.isMesh) {
-        applyProps(o, {
+      if ((o as THREE.Mesh).isMesh) {
+        applyProps(o as THREE.Mesh, {
           castShadow: true,
           receiveShadow: true,
           "material-envMapIntensity": 0.1,
@@ -77,13 +83,13 @@ function Court(props) {
       }
     });
     const floor = scene.getObjectByName("GymFloor_ParquetShader_0");
-    if (floor) floor.parent.remove(floor);
+    if (floor) floor.parent!.remove(floor);
   }, [scene]);
   return <primitive object={scene} {...props} />;
 }
 
-function Floor(props) {
-  const { nodes, materials } = useGLTF(courtModel);
+function Floor(props: Omit<ThreeElements["group"], "children">) {
+  const { nodes, materials } = useGLTF(courtModel) as unknown as GLTFResult;
   const { up, scale, ...config } = useControls({
     up: { value: -0.5, min: -10, max: 10 },
     scale: { value: 27, min: 0, max: 50 },
@@ -112,7 +118,9 @@ function Floor(props) {
           <meshStandardMaterial
             map={materials.ParquetShader.map}
             normalMap={materials.ParquetShader.normalMap}
-            normalMap-encoding={THREE.LinearEncoding}
+            // `THREE.LinearEncoding` and Texture#encoding were removed from
+            // three.js (superseded by `colorSpace`); the prop was already a
+            // no-op at this three.js version, so it is dropped here.
             envMap={texture}
             metalness={0.0}
             normalScale={[0.25, -0.25]}

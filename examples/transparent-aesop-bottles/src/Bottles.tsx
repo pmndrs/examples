@@ -1,6 +1,8 @@
 import * as THREE from "three";
-import { useRef, useState } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import { useCursor, useGLTF } from "@react-three/drei";
+import { type ThreeElements } from "@react-three/fiber";
+import { type GLTF } from "three-stdlib";
 
 import model from "./draco.glb?url";
 
@@ -16,9 +18,37 @@ const capMaterial = new THREE.MeshStandardMaterial({
   color: new THREE.Color("white"),
 });
 
-function Bottle({ glas, cap, children, ...props }) {
-  const ref = useRef();
-  const { nodes } = useGLTF(model);
+type GLTFResult = GLTF & {
+  nodes: {
+    Untitled018: THREE.Mesh;
+    Untitled018_1: THREE.Mesh;
+    Untitled078: THREE.Mesh;
+    Untitled078_1: THREE.Mesh;
+    Untitled064: THREE.Mesh;
+    Untitled064_1: THREE.Mesh;
+    Untitled052: THREE.Mesh;
+    Untitled052_1: THREE.Mesh;
+    Untitled072: THREE.Mesh;
+    Untitled072_1: THREE.Mesh;
+    Untitled007: THREE.Mesh;
+    Untitled007_1: THREE.Mesh;
+  };
+};
+
+type NodeName = keyof GLTFResult["nodes"];
+
+function Bottle({
+  glas,
+  cap,
+  children,
+  ...props
+}: {
+  glas: NodeName;
+  cap: NodeName;
+  children?: ReactNode;
+} & ThreeElements["group"]) {
+  const ref = useRef<THREE.Group>(null!);
+  const { nodes } = useGLTF(model) as unknown as GLTFResult;
   const [hovered, set] = useState(false);
   useCursor(hovered);
   return (
@@ -44,7 +74,7 @@ function Bottle({ glas, cap, children, ...props }) {
   );
 }
 
-export default function Bottles(props) {
+export default function Bottles(props: ThreeElements["group"]) {
   return (
     <group {...props} dispose={null} scale={[0.1, 0.1, 0.1]}>
       <Bottle position={[140, 0, 0]} glas="Untitled018" cap="Untitled018_1" />

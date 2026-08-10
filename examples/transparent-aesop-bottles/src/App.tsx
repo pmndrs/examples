@@ -1,12 +1,12 @@
 import * as THREE from "three";
 import { Fragment, Suspense, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, type ThreeElements } from "@react-three/fiber";
 import { Text, Environment, Loader } from "@react-three/drei";
 import Bottles from "./Bottles";
 
 import kiMediumFont from "./Ki-Medium.ttf?url";
 
-function Sphere(props) {
+function Sphere(props: ThreeElements["mesh"]) {
   return (
     <mesh castShadow {...props} renderOrder={-2000000}>
       <sphereGeometry args={[1, 64, 64]} />
@@ -15,16 +15,18 @@ function Sphere(props) {
   );
 }
 
-function Zoom({ vec = new THREE.Vector3(0, 0, 100) }) {
+function Zoom({ vec = new THREE.Vector3(0, 0, 100) }: { vec?: THREE.Vector3 }) {
   return useFrame((state) => {
     state.camera.position.lerp(vec.set(state.mouse.x * 10, 0, 100), 0.075);
-    state.camera.fov = THREE.MathUtils.lerp(state.camera.fov, 22, 0.075);
-    state.camera.updateProjectionMatrix();
+    if (state.camera instanceof THREE.PerspectiveCamera) {
+      state.camera.fov = THREE.MathUtils.lerp(state.camera.fov, 22, 0.075);
+      state.camera.updateProjectionMatrix();
+    }
   });
 }
 
 function Spheres() {
-  const group = useRef();
+  const group = useRef<THREE.Group>(null!);
   useFrame((state) => {
     group.current.children[0].position.x = THREE.MathUtils.lerp(
       group.current.children[0].position.x,
