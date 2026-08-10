@@ -1,5 +1,5 @@
 import { Suspense, useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, type ThreeElements } from "@react-three/fiber";
 import {
   Mask,
   useMask,
@@ -12,16 +12,20 @@ import {
   useGLTF,
 } from "@react-three/drei";
 import { useControls } from "leva";
+import * as THREE from "three";
 
 // From the poimandres market (https://market.pmnd.rs/), vendored locally since the original CDN is offline.
 import targetModel from "./assets/target-stand.gltf?url";
 
-function MaskedContent({ invert, ...props }) {
+function MaskedContent({
+  invert,
+  ...props
+}: ThreeElements["group"] & { invert: boolean }) {
   /* The useMask hook has to refer to the mask id defined below, the content
    * will then be stamped out.
    */
   const stencil = useMask(1, invert);
-  const group = useRef();
+  const group = useRef<THREE.Group>(null!);
   const [hovered, hover] = useState(false);
   useFrame((state) => (group.current.rotation.y = state.clock.elapsedTime / 2));
   return (
@@ -45,7 +49,7 @@ function MaskedContent({ invert, ...props }) {
   );
 }
 
-function Target(props) {
+function Target(props: Omit<ThreeElements["primitive"], "object">) {
   const { scene } = useGLTF(targetModel);
   return <primitive object={scene} {...props} />;
 }
