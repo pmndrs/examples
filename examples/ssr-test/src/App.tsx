@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { useEffect, useState, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { RoundedBox, useCursor } from "@react-three/drei";
+import { RoundedBox, useCursor, type RoundedBoxProps } from "@react-three/drei";
 import { Effects } from "./Effects";
 
 import dreiVid from "./drei_r.mp4?url";
@@ -55,7 +55,7 @@ export const App = () => (
 );
 
 function Sphere() {
-  const ref = useRef();
+  const ref = useRef<THREE.Mesh>(null!);
   const [active, setActive] = useState(false);
   const [zoom, set] = useState(true);
   useCursor(active);
@@ -64,6 +64,17 @@ function Sphere() {
     state.camera.position.lerp({ x: 50, y: 25, z: zoom ? 50 : -50 }, 0.03);
     state.camera.lookAt(0, 0, 0);
   });
+  // `clearcoat`/`clearcoatRoughness` belong to MeshPhysicalMaterial, not
+  // MeshStandardMaterial; three.js just stores them as inert extra fields on
+  // the material, so kept here (via a non-literal spread) to preserve the
+  // original example's values exactly.
+  const materialProps = {
+    color: active ? "hotpink" : "lightblue",
+    clearcoat: 1,
+    clearcoatRoughness: 0,
+    roughness: 0,
+    metalness: 0.25,
+  };
   return (
     <mesh
       ref={ref}
@@ -74,18 +85,12 @@ function Sphere() {
       onPointerOut={() => setActive(false)}
     >
       <sphereGeometry args={[0.8, 64, 64]} />
-      <meshStandardMaterial
-        color={active ? "hotpink" : "lightblue"}
-        clearcoat={1}
-        clearcoatRoughness={0}
-        roughness={0}
-        metalness={0.25}
-      />
+      <meshStandardMaterial {...materialProps} />
     </mesh>
   );
 }
 
-const Plane = ({ color, ...props }) => (
+const Plane = ({ color, ...props }: { color: string } & RoundedBoxProps) => (
   <RoundedBox
     receiveShadow
     castShadow
@@ -112,6 +117,13 @@ function Video() {
     }),
   );
   useEffect(() => void video.play(), [video]);
+  // `encoding` (and `THREE.sRGBEncoding`) were removed from three.js's public
+  // API after r152 in favor of `colorSpace`; kept here (via a non-literal
+  // spread) as an inert runtime field to preserve the original example's
+  // (already no-op) value exactly.
+  const videoTextureProps = {
+    encoding: (THREE as unknown as { sRGBEncoding?: unknown }).sRGBEncoding,
+  };
   return (
     <mesh
       position={[-2, 4, 0]}
@@ -120,11 +132,7 @@ function Video() {
     >
       <planeGeometry />
       <meshBasicMaterial toneMapped={false}>
-        <videoTexture
-          attach="map"
-          args={[video]}
-          encoding={THREE.sRGBEncoding}
-        />
+        <videoTexture attach="map" args={[video]} {...videoTextureProps} />
       </meshBasicMaterial>
     </mesh>
   );

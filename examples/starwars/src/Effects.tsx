@@ -1,12 +1,13 @@
 import { useLoader } from "@react-three/fiber";
 import { EffectComposer, SSR, Bloom, LUT } from "@react-three/postprocessing";
 import { useControls } from "leva";
-import { LUTCubeLoader } from "postprocessing";
+import { LUTCubeLoader, type LookupTexture } from "postprocessing";
 
 import lutTex from "./F-6800-STD.cube?url";
 
 export function Effects() {
-  const texture = useLoader(LUTCubeLoader, lutTex);
+  // LUTCubeLoader doesn't type its `loadAsync` result, so useLoader can't infer it.
+  const texture = useLoader(LUTCubeLoader, lutTex) as LookupTexture;
   const { enabled, ...props } = useControls({
     enabled: true,
     temporalResolve: true,
@@ -38,9 +39,13 @@ export function Effects() {
     thickness: { value: 10, min: 0, max: 10 },
     ior: { value: 1.45, min: 0, max: 2 },
   });
+  // `disableNormalPass` isn't part of EffectComposerProps (normal pass is now
+  // opt-in via `enableNormalPass`, off by default) — keep it in a separate
+  // object so it still reaches the component exactly like the original prop.
+  const composerProps = { disableNormalPass: true };
   return (
     enabled && (
-      <EffectComposer disableNormalPass>
+      <EffectComposer {...composerProps}>
         <SSR {...props} />
         <Bloom
           luminanceThreshold={0.5}

@@ -4,7 +4,7 @@ import { Leva } from "leva";
 import { App } from "./App";
 import "./styles.css";
 
-createRoot(document.getElementById("root")).render(
+createRoot(document.getElementById("root")!).render(
   <>
     <App />
     <Leva titleBar={{ title: "SSR" }} collapsed />

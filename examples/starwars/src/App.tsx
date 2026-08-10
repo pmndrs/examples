@@ -1,12 +1,20 @@
 import * as THREE from "three";
 import { useLayoutEffect } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, type ThreeElements } from "@react-three/fiber";
 import { useGLTF, Float, Preload } from "@react-three/drei";
+import { type GLTF } from "three-stdlib";
 import { Effects } from "./Effects";
 
 import hallModel from "./hall-transformed.glb?url";
 import probeModel from "./probe-transformed.glb?url";
 import darthModel from "./darth-transformed.glb?url";
+
+type ProbeGLTF = GLTF & {
+  materials: {
+    Material_26: THREE.MeshStandardMaterial;
+    light: THREE.MeshStandardMaterial;
+  };
+};
 
 export default function App() {
   return (
@@ -42,8 +50,8 @@ export default function App() {
   );
 }
 
-function Rig() {
-  useFrame((state) => {
+function Rig(_props: { from: number; to: number }) {
+  return useFrame((state) => {
     state.camera.position.lerp(
       { x: 0, y: -state.pointer.y / 4, z: state.pointer.x / 2 },
       0.1,
@@ -52,13 +60,13 @@ function Rig() {
   });
 }
 
-function Hall({ ...props }) {
+function Hall({ ...props }: Omit<ThreeElements["primitive"], "object">) {
   const { scene } = useGLTF(hallModel);
   return <primitive object={scene} {...props} />;
 }
 
-function Probe({ ...props }) {
-  const { scene, materials } = useGLTF(probeModel);
+function Probe({ ...props }: Omit<ThreeElements["primitive"], "object">) {
+  const { scene, materials } = useGLTF(probeModel) as unknown as ProbeGLTF;
   useLayoutEffect(() => {
     Object.values(materials).forEach((material) => (material.roughness = 0));
     Object.assign(materials.light, {
@@ -71,7 +79,7 @@ function Probe({ ...props }) {
   return <primitive object={scene} {...props} />;
 }
 
-function Darth({ ...props }) {
+function Darth({ ...props }: Omit<ThreeElements["primitive"], "object">) {
   const { scene, materials } = useGLTF(darthModel);
   useLayoutEffect(() => {
     Object.assign(materials.Sabel_svart, {

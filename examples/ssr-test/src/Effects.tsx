@@ -32,8 +32,13 @@ export function Effects() {
     thickness: { value: 10, min: 0, max: 10 },
     ior: { value: 1.45, min: 0, max: 2 },
   });
+  // `disableNormalPass` was renamed to `enableNormalPass` (with inverted
+  // meaning) in @react-three/postprocessing v3; three.js/postprocessing just
+  // ignore unknown props, so kept here (via a non-literal spread) to preserve
+  // the original example's (already no-op) prop exactly.
+  const composerProps = { disableNormalPass: true };
   return (
-    <EffectComposer disableNormalPass>
+    <EffectComposer {...composerProps}>
       <SSR {...props} />
     </EffectComposer>
   );
