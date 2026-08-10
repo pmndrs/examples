@@ -1,13 +1,35 @@
 import * as THREE from "three";
 import React, { Suspense, useRef } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import {
+  Canvas,
+  useFrame,
+  useThree,
+  type ThreeElements,
+} from "@react-three/fiber";
 import { EffectComposer, N8AO } from "@react-three/postprocessing";
 import { ContactShadows } from "@react-three/drei";
-import { a, useTransition, useSpring } from "@react-spring/three";
+import {
+  a,
+  useTransition,
+  useSpring,
+  type AnimatedProps,
+  type SpringValue,
+} from "@react-spring/three";
 import { FontLoader, TextGeometry } from "three-stdlib";
 import { create } from "zustand";
 
-const useStore = create((set) => {
+type Item = {
+  position: [number, number, number];
+  r: number;
+  geometry: THREE.BufferGeometry;
+};
+
+type Store = {
+  items: Item[];
+  material: THREE.MeshStandardMaterial;
+};
+
+const useStore = create<Store>((set) => {
   new FontLoader().load(
     `${import.meta.env.BASE_URL.replace(/\/*$/, "/")}font.blob`,
     (font) => {
@@ -82,8 +104,17 @@ const useStore = create((set) => {
   return { items: [], material: new THREE.MeshStandardMaterial() };
 });
 
-function Geometry({ r, position, ...props }) {
-  const ref = useRef();
+type GeometryProps = {
+  r: number;
+  position: [number, number, number];
+  material: THREE.MeshStandardMaterial;
+  geometry: THREE.BufferGeometry;
+  scale: SpringValue<number[]>;
+  rotation: SpringValue<number[]>;
+};
+
+function Geometry({ r, position, ...props }: GeometryProps) {
+  const ref = useRef<THREE.Group>(null!);
   useFrame((state) => {
     ref.current.rotation.x =
       ref.current.rotation.y =
@@ -95,7 +126,9 @@ function Geometry({ r, position, ...props }) {
   });
   return (
     <group position={position} ref={ref}>
-      <a.mesh {...props} />
+      {/* react-spring's MathType typing for Euler-like props can't express a
+          SpringValue<number[]> for `rotation`, though it animates correctly at runtime */}
+      <a.mesh {...(props as unknown as AnimatedProps<ThreeElements["mesh"]>)} />
     </group>
   );
 }
@@ -170,7 +203,8 @@ export default function App() {
           blur={1}
           far={9}
         />
-        <EffectComposer disableNormalPass>
+        {/* `disableNormalPass` no longer exists in this postprocessing version; the normal pass is already disabled by default */}
+        <EffectComposer>
           <N8AO aoRadius={3} distanceFalloff={3} intensity={1} />
         </EffectComposer>
       </Suspense>
