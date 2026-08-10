@@ -60,8 +60,8 @@ const FORMAT = ["format:check"];
 const BUILD = ["build2"];
 
 const EXAMPLE = "@example/basic-example";
-const EXAMPLE_SOURCE = "examples/basic-example/src/App.jsx";
-const OTHER_EXAMPLE_SOURCE = "examples/wireframes/src/App.jsx";
+const EXAMPLE_SOURCE = "examples/basic-example/src/App.tsx";
+const OTHER_EXAMPLE_SOURCE = "examples/wireframes/src/App.tsx";
 
 describe("build", () => {
   it("re-runs for the example whose source moved, and only that one", () => {

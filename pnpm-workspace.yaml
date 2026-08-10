@@ -20,6 +20,13 @@ overrides:
 
 patchedDependencies:
   "@splinetool/loader@0.9.153": patches/@splinetool__loader@0.9.153.patch
+  # `dist/Ecctrl.d.ts` re-exports `EcctrlJoystick` from `../src/EcctrlJoystick`
+  # -- the untranspiled source -- rather than from the `dist/EcctrlJoystick.d.ts`
+  # it ships right next to it. `skipLibCheck` only exempts `.d.ts`, so that
+  # `.tsx` is pulled into the program and type-checked under our strict config,
+  # failing on the package's own errors. Point the re-export at the sibling
+  # declaration, which is what every other export in the file already does.
+  ecctrl@1.0.88: patches/ecctrl@1.0.88.patch
 
 minimumReleaseAgeExclude:
   - material-theme-builder@3.0.0
