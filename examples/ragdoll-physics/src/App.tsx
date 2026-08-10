@@ -1,6 +1,8 @@
 import { Canvas } from "@react-three/fiber";
 import { MeshReflectorMaterial } from "@react-three/drei";
 import { Physics, usePlane } from "@react-three/cannon";
+import type { PlaneProps } from "@react-three/cannon";
+import type { Mesh } from "three";
 import { Cursor } from "./helpers/Drag";
 import { Guy } from "./components/Guy";
 import { Mug, Chair, Table, Lamp } from "./components/Furniture";
@@ -34,8 +36,8 @@ export default function App() {
   );
 }
 
-function Floor(props) {
-  const [ref] = usePlane(() => ({ type: "Static", ...props }));
+function Floor(props: PlaneProps) {
+  const [ref] = usePlane<Mesh>(() => ({ type: "Static", ...props }));
   return (
     <mesh ref={ref} receiveShadow>
       <planeGeometry args={[100, 100]} />

@@ -7,7 +7,15 @@ import { Popconfirm } from "antd";
 import outsideImg from "./2294472375_24a3b8ef46_o.jpg";
 import insideImg from "./Photosphere1.jpg";
 
-const store = [
+interface Portal {
+  name: string;
+  color: string;
+  position: [number, number, number];
+  url: string;
+  link: number;
+}
+
+const store: Portal[] = [
   {
     name: "outside",
     color: "lightpink",
@@ -25,7 +33,17 @@ const store = [
   // ...
 ];
 
-function Dome({ name, position, texture, onClick }) {
+function Dome({
+  name,
+  position,
+  texture,
+  onClick,
+}: {
+  name: string;
+  position: [number, number, number];
+  texture: THREE.Texture;
+  onClick: () => void;
+}) {
   return (
     <group>
       <mesh>

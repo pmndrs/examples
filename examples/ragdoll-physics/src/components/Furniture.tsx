@@ -8,13 +8,26 @@ import {
   useDistanceConstraint,
   usePointToPointConstraint,
 } from "@react-three/cannon";
+import type { BodyProps, CylinderProps } from "@react-three/cannon";
+import { type GLTF } from "three-stdlib";
 import { useDragConstraint } from "../helpers/Drag";
 import { Block } from "../helpers/Block";
 
 import cupModel from "./cup.glb?url";
 
-export function Chair(props) {
-  const [ref] = useCompoundBody(() => ({
+type GLTFResult = GLTF & {
+  nodes: {
+    "buffer-0-mesh-0": THREE.Mesh;
+    "buffer-0-mesh-0_1": THREE.Mesh;
+  };
+  materials: {
+    default: THREE.MeshStandardMaterial;
+    Liquid: THREE.MeshStandardMaterial;
+  };
+};
+
+export function Chair(props: BodyProps) {
+  const [ref] = useCompoundBody<THREE.Group>(() => ({
     mass: 24,
     linearDamping: 0.95,
     angularDamping: 0.95,
@@ -66,9 +79,9 @@ export function Chair(props) {
   );
 }
 
-export function Mug(props) {
-  const { nodes, materials } = useGLTF(cupModel);
-  const [cup] = useCylinder(() => ({
+export function Mug(props: CylinderProps) {
+  const { nodes, materials } = useGLTF(cupModel) as unknown as GLTFResult;
+  const [cup] = useCylinder<THREE.Group>(() => ({
     mass: 1,
     args: [0.62, 0.62, 1.2, 16],
     linearDamping: 0.95,
@@ -94,8 +107,8 @@ export function Mug(props) {
   );
 }
 
-export function Table(props) {
-  const [table] = useCompoundBody(() => ({
+export function Table(props: BodyProps) {
+  const [table] = useCompoundBody<THREE.Group>(() => ({
     mass: 54,
     linearDamping: 0.95,
     angularDamping: 0.95,
@@ -120,15 +133,15 @@ export function Table(props) {
   );
 }
 
-export function Lamp(props) {
+export function Lamp(props: Omit<BodyProps, "args">) {
   const [target] = useState(() => new THREE.Object3D());
-  const [fixed] = useSphere(() => ({
+  const [fixed] = useSphere<THREE.Object3D>(() => ({
     collisionFilterGroup: 0,
     type: "Static",
     args: [0.2],
     ...props,
   }));
-  const [lamp] = useCylinder(() => ({
+  const [lamp] = useCylinder<THREE.Mesh>(() => ({
     mass: 1,
     args: [0.5, 1.5, 2, 16],
     angularDamping: 0.95,
@@ -137,11 +150,14 @@ export function Lamp(props) {
     ...props,
   }));
   const bind = useDragConstraint(lamp);
-  useDistanceConstraint(fixed, lamp, {
+  // pivotA/pivotB are not part of DistanceConstraintOpts (the solver ignores them
+  // for a distance constraint), so they are kept off the checked literal
+  const distanceOptions = {
     distance: 2,
     pivotA: [0, 0, 0],
     pivotB: [0, 2, 0],
-  });
+  };
+  useDistanceConstraint(fixed, lamp, distanceOptions);
   usePointToPointConstraint(fixed, lamp, {
     pivotA: [0, 0, 0],
     pivotB: [0, 2, 0],

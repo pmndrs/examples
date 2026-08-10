@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import * as THREE from "three";
 import { Canvas } from "@react-three/fiber";
 import {
   Bounds,
@@ -33,18 +34,18 @@ export default function App() {
               radius={0.05}
               intensity={150}
               luminanceInfluence={0.5}
-              color="black"
+              color={new THREE.Color("black")}
             />
             <Outline
-              visibleEdgeColor="white"
-              hiddenEdgeColor="white"
+              visibleEdgeColor={0xffffff}
+              hiddenEdgeColor={0xffffff}
               blur
               width={1000}
               edgeStrength={100}
             />
             <SMAA />
           </EffectComposer>
-          <Bounds fit clip margin={1.2} damping={0}>
+          <Bounds fit clip margin={1.2}>
             <Engine rotation={[Math.PI / 2, 0, 0]} />
           </Bounds>
         </Selection>

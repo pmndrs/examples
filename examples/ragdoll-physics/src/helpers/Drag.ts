@@ -1,24 +1,29 @@
 import { createRef, useCallback, useEffect } from "react";
+import type { RefObject } from "react";
 import { useFrame } from "@react-three/fiber";
+import type { ThreeEvent } from "@react-three/fiber";
 import { usePointToPointConstraint, useSphere } from "@react-three/cannon";
+import type { Object3D } from "three";
 
-const cursor = createRef();
+const cursor = createRef<Object3D>();
 
-function useDragConstraint(child) {
+function useDragConstraint(child: RefObject<Object3D | null>) {
   const [, , api] = usePointToPointConstraint(cursor, child, {
     pivotA: [0, 0, 0],
     pivotB: [0, 0, 0],
   });
   useEffect(() => void api.disable(), []);
-  const onPointerUp = useCallback((e) => {
+  const onPointerUp = useCallback((e: ThreeEvent<PointerEvent>) => {
     document.body.style.cursor = "grab";
-    e.target.releasePointerCapture(e.pointerId);
+    // `target` is the DOM node the pointer event originated from, typed as EventTarget
+    (e.target as Element).releasePointerCapture(e.pointerId);
     api.disable();
   }, []);
-  const onPointerDown = useCallback((e) => {
+  const onPointerDown = useCallback((e: ThreeEvent<PointerEvent>) => {
     document.body.style.cursor = "grabbing";
     e.stopPropagation();
-    e.target.setPointerCapture(e.pointerId);
+    // `target` is the DOM node the pointer event originated from, typed as EventTarget
+    (e.target as Element).setPointerCapture(e.pointerId);
     api.enable();
   }, []);
   return { onPointerUp, onPointerDown };

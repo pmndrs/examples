@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import * as THREE from "three";
+import { Canvas, useFrame, type ThreeElements } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import {
   Selection,
@@ -8,16 +9,16 @@ import {
   Outline,
 } from "@react-three/postprocessing";
 
-function Box(props) {
-  const ref = useRef();
-  const [hovered, hover] = useState(null);
+function Box(props: ThreeElements["mesh"]) {
+  const ref = useRef<THREE.Mesh>(null!);
+  const [hovered, hover] = useState<boolean | null>(null);
   console.log(hovered);
   useFrame(
     (state, delta) =>
       (ref.current.rotation.x = ref.current.rotation.y += delta),
   );
   return (
-    <Select enabled={hovered}>
+    <Select enabled={hovered ?? undefined}>
       <mesh
         ref={ref}
         {...props}
@@ -47,7 +48,10 @@ export default function App() {
         <EffectComposer multisampling={8} autoClear={false}>
           <Outline
             blur
-            visibleEdgeColor="white"
+            // `postprocessing`'s OutlineEffect constructor types visibleEdgeColor
+            // as number, but it forwards straight into `new THREE.Color(...)`,
+            // which also accepts a color name string like "white".
+            visibleEdgeColor={"white" as unknown as number}
             edgeStrength={100}
             width={1000}
           />

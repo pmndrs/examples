@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Physics, usePlane, useBox } from "@react-three/cannon";
+import {
+  Physics,
+  usePlane,
+  useBox,
+  type PlaneProps,
+  type BoxProps,
+} from "@react-three/cannon";
 
-function Plane(props) {
+function Plane(props: PlaneProps) {
   const [ref] = usePlane(() => ({ rotation: [-Math.PI / 2, 0, 0], ...props }));
   return (
     <mesh receiveShadow ref={ref}>
@@ -12,7 +18,7 @@ function Plane(props) {
   );
 }
 
-function Cube(props) {
+function Cube(props: BoxProps) {
   const [ref] = useBox(() => ({ mass: 1, ...props }));
   return (
     <mesh castShadow ref={ref}>

@@ -3,7 +3,12 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 import { useLayoutEffect, useRef } from "react";
-import { extend, useFrame, useLoader } from "@react-three/fiber";
+import {
+  extend,
+  useFrame,
+  useLoader,
+  type ThreeElements,
+} from "@react-three/fiber";
 
 import fireImg from "./fire.png";
 
@@ -23,16 +28,16 @@ class FireMaterial extends THREE.ShaderMaterial {
     super({
       defines: { ITERATIONS: "10", OCTIVES: "3" },
       uniforms: {
-        fireTex: { type: "t", value: null },
-        color: { type: "c", value: null },
-        time: { type: "f", value: 0.0 },
-        seed: { type: "f", value: 0.0 },
-        invModelMatrix: { type: "m4", value: null },
-        scale: { type: "v3", value: null },
-        noiseScale: { type: "v4", value: new THREE.Vector4(1, 2, 1, 0.3) },
-        magnitude: { type: "f", value: 2.5 },
-        lacunarity: { type: "f", value: 3.0 },
-        gain: { type: "f", value: 0.6 },
+        fireTex: { value: null },
+        color: { value: null },
+        time: { value: 0.0 },
+        seed: { value: 0.0 },
+        invModelMatrix: { value: null },
+        scale: { value: null },
+        noiseScale: { value: new THREE.Vector4(1, 2, 1, 0.3) },
+        magnitude: { value: 2.5 },
+        lacunarity: { value: 3.0 },
+        gain: { value: 0.6 },
       },
       vertexShader: `
         varying vec3 vWorldPos;
@@ -203,8 +208,11 @@ class FireMaterial extends THREE.ShaderMaterial {
 
 extend({ FireMaterial });
 
-function Fire({ color, ...props }) {
-  const ref = useRef();
+function Fire({
+  color,
+  ...props
+}: { color?: THREE.Color } & ThreeElements["mesh"]) {
+  const ref = useRef<THREE.Mesh<THREE.BoxGeometry, FireMaterial>>(null!);
   const texture = useLoader(THREE.TextureLoader, fireImg);
   useFrame((state) => {
     const invModelMatrix = ref.current.material.uniforms.invModelMatrix.value;

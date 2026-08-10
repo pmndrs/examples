@@ -1,5 +1,24 @@
+import type { ConeTwistConstraintOpts, Triplet } from "@react-three/cannon";
+
+type ShapeConfig = {
+  color: string;
+  args: Triplet;
+  mass: number;
+  position: Triplet;
+};
+
+type JointConfig = ConeTwistConstraintOpts & {
+  bodyA: string;
+  bodyB: string;
+};
+
 // Converted from the createRagdoll method in CANNON js ragdoll example
-export function createRagdoll(scale, angleA = 0, angleB = 0, twistAngle = 0) {
+export function createRagdoll(
+  scale: number,
+  angleA = 0,
+  angleB = 0,
+  twistAngle = 0,
+) {
   const shouldersDistance = 0.45 * scale,
     upperArmLength = 0.4 * scale,
     lowerArmLength = 0.4 * scale,
@@ -15,13 +34,13 @@ export function createRagdoll(scale, angleA = 0, angleB = 0, twistAngle = 0) {
     lowerLegLength = 0.5 * scale;
 
   // Lower legs
-  const lowerLeftLeg = {
+  const lowerLeftLeg: ShapeConfig = {
     color: "lightblue",
     args: [lowerLegSize, lowerLegLength, lowerArmSize],
     mass: scale,
     position: [-shouldersDistance / 3, lowerLegLength / 2, 0],
   };
-  const lowerRightLeg = {
+  const lowerRightLeg: ShapeConfig = {
     color: "lightblue",
     args: [lowerLegSize, lowerLegLength, lowerArmSize],
     mass: scale,
@@ -29,7 +48,7 @@ export function createRagdoll(scale, angleA = 0, angleB = 0, twistAngle = 0) {
   };
 
   // Upper legs
-  const upperLeftLeg = {
+  const upperLeftLeg: ShapeConfig = {
     color: "lightblue",
     args: [upperLegSize, upperLegLength, lowerArmSize],
     mass: scale,
@@ -39,7 +58,7 @@ export function createRagdoll(scale, angleA = 0, angleB = 0, twistAngle = 0) {
       0,
     ],
   };
-  const upperRightLeg = {
+  const upperRightLeg: ShapeConfig = {
     color: "lightblue",
     args: [upperLegSize, upperLegLength, lowerArmSize],
     mass: scale,
@@ -51,7 +70,7 @@ export function createRagdoll(scale, angleA = 0, angleB = 0, twistAngle = 0) {
   };
 
   // Pelvis
-  const pelvis = {
+  const pelvis: ShapeConfig = {
     color: "lightblue",
     args: [shouldersDistance, pelvisLength, lowerArmSize],
     mass: scale,
@@ -63,7 +82,7 @@ export function createRagdoll(scale, angleA = 0, angleB = 0, twistAngle = 0) {
   };
 
   // Upper body
-  const upperBody = {
+  const upperBody: ShapeConfig = {
     color: "indianred",
     args: [shouldersDistance, upperBodyLength, lowerArmSize * 1.5],
     mass: scale,
@@ -75,7 +94,7 @@ export function createRagdoll(scale, angleA = 0, angleB = 0, twistAngle = 0) {
   };
 
   // Head
-  const head = {
+  const head: ShapeConfig = {
     color: "lightpink",
     args: [headRadius, headRadius, headRadius],
     mass: scale,
@@ -87,7 +106,7 @@ export function createRagdoll(scale, angleA = 0, angleB = 0, twistAngle = 0) {
   };
 
   // Upper arms
-  const upperLeftArm = {
+  const upperLeftArm: ShapeConfig = {
     color: "indianred",
     args: [upperArmLength, upperArmSize, upperArmSize],
     mass: scale,
@@ -97,7 +116,7 @@ export function createRagdoll(scale, angleA = 0, angleB = 0, twistAngle = 0) {
       0,
     ],
   };
-  const upperRightArm = {
+  const upperRightArm: ShapeConfig = {
     color: "indianred",
     args: [upperArmLength, upperArmSize, upperArmSize],
     mass: scale,
@@ -109,7 +128,7 @@ export function createRagdoll(scale, angleA = 0, angleB = 0, twistAngle = 0) {
   };
 
   // lower arms
-  const lowerLeftArm = {
+  const lowerLeftArm: ShapeConfig = {
     color: "lightpink",
     args: [lowerArmLength, lowerArmSize, lowerArmSize],
     mass: scale,
@@ -119,7 +138,7 @@ export function createRagdoll(scale, angleA = 0, angleB = 0, twistAngle = 0) {
       0,
     ],
   };
-  const lowerRightArm = {
+  const lowerRightArm: ShapeConfig = {
     color: "lightpink",
     args: [lowerArmLength, lowerArmSize, lowerArmSize],
     mass: scale,
@@ -133,7 +152,7 @@ export function createRagdoll(scale, angleA = 0, angleB = 0, twistAngle = 0) {
   // joints
 
   // Neck joint
-  const neckJoint = {
+  const neckJoint: JointConfig = {
     bodyA: "head",
     bodyB: "upperBody",
     pivotA: [0, -headRadius - neckLength / 2, 0],
@@ -145,7 +164,7 @@ export function createRagdoll(scale, angleA = 0, angleB = 0, twistAngle = 0) {
   };
 
   // Knee joints
-  const leftKneeJoint = {
+  const leftKneeJoint: JointConfig = {
     bodyA: "lowerLeftLeg",
     bodyB: "upperLeftLeg",
     pivotA: [0, lowerLegLength / 2, 0],
@@ -155,7 +174,7 @@ export function createRagdoll(scale, angleA = 0, angleB = 0, twistAngle = 0) {
     angle: angleA,
     twistAngle: twistAngle,
   };
-  const rightKneeJoint = {
+  const rightKneeJoint: JointConfig = {
     bodyA: "lowerRightLeg",
     bodyB: "upperRightLeg",
     pivotA: [0, lowerLegLength / 2, 0],
@@ -167,7 +186,7 @@ export function createRagdoll(scale, angleA = 0, angleB = 0, twistAngle = 0) {
   };
 
   // Hip joints
-  const leftHipJoint = {
+  const leftHipJoint: JointConfig = {
     bodyA: "upperLeftLeg",
     bodyB: "pelvis",
     pivotA: [0, upperLegLength / 2, 0],
@@ -177,7 +196,7 @@ export function createRagdoll(scale, angleA = 0, angleB = 0, twistAngle = 0) {
     angle: angleA,
     twistAngle: twistAngle,
   };
-  const rightHipJoint = {
+  const rightHipJoint: JointConfig = {
     bodyA: "upperRightLeg",
     bodyB: "pelvis",
     pivotA: [0, upperLegLength / 2, 0],
@@ -189,7 +208,7 @@ export function createRagdoll(scale, angleA = 0, angleB = 0, twistAngle = 0) {
   };
 
   // Spine
-  const spineJoint = {
+  const spineJoint: JointConfig = {
     bodyA: "pelvis",
     bodyB: "upperBody",
     pivotA: [0, pelvisLength / 2, 0],
@@ -201,7 +220,7 @@ export function createRagdoll(scale, angleA = 0, angleB = 0, twistAngle = 0) {
   };
 
   // Shoulders
-  const leftShoulder = {
+  const leftShoulder: JointConfig = {
     bodyA: "upperBody",
     bodyB: "upperLeftArm",
     pivotA: [upperArmLength / 2, 0, 0],
@@ -210,7 +229,7 @@ export function createRagdoll(scale, angleA = 0, angleB = 0, twistAngle = 0) {
     axisB: [1, 0, 0],
     angle: angleB,
   };
-  const rightShoulder = {
+  const rightShoulder: JointConfig = {
     bodyA: "upperBody",
     bodyB: "upperRightArm",
     pivotA: [-upperArmLength / 2, 0, 0],
@@ -222,7 +241,7 @@ export function createRagdoll(scale, angleA = 0, angleB = 0, twistAngle = 0) {
   };
 
   // Elbow joint
-  const leftElbowJoint = {
+  const leftElbowJoint: JointConfig = {
     bodyA: "lowerLeftArm",
     bodyB: "upperLeftArm",
     pivotA: [lowerArmLength / 2, 0, 0],
@@ -232,7 +251,7 @@ export function createRagdoll(scale, angleA = 0, angleB = 0, twistAngle = 0) {
     angle: angleA,
     twistAngle: twistAngle,
   };
-  const rightElbowJoint = {
+  const rightElbowJoint: JointConfig = {
     bodyA: "lowerRightArm",
     bodyB: "upperRightArm",
     pivotA: [-lowerArmLength / 2, 0, 0],

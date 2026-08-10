@@ -1,17 +1,37 @@
 import { createContext, useContext, useRef } from "react";
+import type { ReactNode, RefObject } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useBox, useConeTwistConstraint } from "@react-three/cannon";
+import type { BoxProps, ConeTwistConstraintOpts } from "@react-three/cannon";
+import type { Group, Mesh, Object3D } from "three";
 import { createRagdoll } from "../helpers/createRagdoll";
 import { useDragConstraint } from "../helpers/Drag";
 import { Block } from "../helpers/Block";
 
 const { shapes, joints } = createRagdoll(5.5, Math.PI / 16, Math.PI / 16, 0);
-const context = createContext();
+const context = createContext<RefObject<Object3D | null> | undefined>(
+  undefined,
+);
 
-const BodyPart = ({ config, children, render, name, ...props }) => {
+type TransformProps = Pick<BoxProps, "position" | "rotation">;
+
+type BodyPartProps = TransformProps & {
+  config?: ConeTwistConstraintOpts;
+  children?: ReactNode;
+  render?: ReactNode;
+  name: keyof typeof shapes;
+};
+
+const BodyPart = ({
+  config = {},
+  children,
+  render,
+  name,
+  ...props
+}: BodyPartProps) => {
   const { color, args, mass, position } = shapes[name];
   const parent = useContext(context);
-  const [ref] = useBox(() => ({
+  const [ref] = useBox<Mesh>(() => ({
     mass,
     args,
     position,
@@ -40,8 +60,8 @@ const BodyPart = ({ config, children, render, name, ...props }) => {
 };
 
 function Face() {
-  const mouth = useRef();
-  const eyes = useRef();
+  const mouth = useRef<Mesh>(null!);
+  const eyes = useRef<Group>(null!);
   useFrame((state) => {
     eyes.current.position.y = Math.sin(state.clock.elapsedTime * 2) * 0.1;
     mouth.current.scale.y = (1 + Math.sin(state.clock.elapsedTime * 2)) * 0.6;
@@ -76,7 +96,7 @@ function Face() {
   );
 }
 
-export function Guy(props) {
+export function Guy(props: TransformProps) {
   return (
     <BodyPart name="upperBody" {...props}>
       <BodyPart

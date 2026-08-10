@@ -1,7 +1,15 @@
 import { forwardRef } from "react";
 import { RoundedBox } from "@react-three/drei";
+import type { RoundedBoxProps } from "@react-three/drei";
+import type { ColorRepresentation, Mesh } from "three";
 
-export const Block = forwardRef(
+type BlockProps = RoundedBoxProps & {
+  transparent?: boolean;
+  opacity?: number;
+  color?: ColorRepresentation;
+};
+
+export const Block = forwardRef<Mesh, BlockProps>(
   (
     {
       children,

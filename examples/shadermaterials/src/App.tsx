@@ -1,6 +1,11 @@
 import * as THREE from "three";
 import { useRef, useState } from "react";
-import { Canvas, extend, useFrame } from "@react-three/fiber";
+import {
+  Canvas,
+  extend,
+  useFrame,
+  type ThreeElement,
+} from "@react-three/fiber";
 import { useTexture, shaderMaterial } from "@react-three/drei";
 
 import img1 from "./img/Img1.jpg";
@@ -11,9 +16,9 @@ export const ImageFadeMaterial = shaderMaterial(
   {
     effectFactor: 1.2,
     dispFactor: 0,
-    tex: undefined,
-    tex2: undefined,
-    disp: undefined,
+    tex: null,
+    tex2: null,
+    disp: null,
   },
   ` varying vec2 vUv;
     void main() {
@@ -43,8 +48,17 @@ export const ImageFadeMaterial = shaderMaterial(
 
 extend({ ImageFadeMaterial });
 
+export type ImageFadeMaterialProps = Omit<
+  ThreeElement<typeof ImageFadeMaterial>,
+  "tex" | "tex2" | "disp"
+> & {
+  tex: THREE.Texture;
+  tex2: THREE.Texture;
+  disp: THREE.Texture;
+};
+
 function FadingImage() {
-  const ref = useRef();
+  const ref = useRef<InstanceType<typeof ImageFadeMaterial>>(null!);
   const [texture1, texture2, dispTexture] = useTexture([img1, img2, img3]);
   const [hovered, setHover] = useState(false);
   useFrame(() => {
