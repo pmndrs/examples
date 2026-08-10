@@ -16,12 +16,16 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  deployments: write
 
 jobs:
   build-job:
     runs-on: ubuntu-latest
     env:
       TURBO_TELEMETRY_DISABLED: 1
+      # No token, no preview: that is a fork's pull request, which cannot read
+      # the repo secrets, or a checkout of this repo that never set them.
+      PREVIEW: ${{ github.event_name == 'pull_request' && secrets.VERCEL_TOKEN != '' }}
 
     # Cancel multiple runs when pushing to main
     concurrency:
@@ -89,6 +93,51 @@ jobs:
         if: ${{ github.event_name != 'pull_request' && !inputs.update_snapshots }}
         with:
           path: ./out${{ steps.configurepages.outputs.base_path }}
+
+      #
+      # Preview (only for pull requests)
+      #
+      # The same build with no base path -- a preview is served from its own
+      # domain root -- uploaded as-is: Vercel hosts `out`, it never rebuilds it.
+      - run: pnpm build
+        if: ${{ env.PREVIEW == 'true' }}
+      - id: preview
+        if: ${{ env.PREVIEW == 'true' }}
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          mkdir -p .vercel/output
+          mv out .vercel/output/static
+          # `cleanUrls`: the website exports flat `<name>.html` pages and links
+          # to them without the extension
+          echo '{"version":3,"cleanUrls":true}' > .vercel/output/config.json
+          # `--archive`: one tarball, not 2.4k file uploads
+          url=$(pnpm dlx vercel@latest deploy --prebuilt --archive=tgz --token="$VERCEL_TOKEN")
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+      # The pull request's "View deployment" box, which Vercel's git integration
+      # would have filled had we let it deploy
+      - uses: actions/github-script@v9
+        if: ${{ env.PREVIEW == 'true' }}
+        env:
+          URL: ${{ steps.preview.outputs.url }}
+        with:
+          script: |
+            const { data } = await github.rest.repos.createDeployment({
+              ...context.repo,
+              ref: context.payload.pull_request.head.sha,
+              environment: "preview",
+              transient_environment: true, // superseded by the next one
+              auto_merge: false, // deploy that ref, not a merge of the base into it
+              required_contexts: [], // the checks that would gate it are the ones running this
+            });
+            await github.rest.repos.createDeploymentStatus({
+              ...context.repo,
+              deployment_id: data.id,
+              state: "success",
+              environment_url: process.env.URL,
+            });
 
   deploy-job:
     # only for pushes on main
