@@ -1,5 +1,12 @@
+import * as THREE from "three";
 import { forwardRef, useRef } from "react";
-import { extend, useFrame, useThree } from "@react-three/fiber";
+import {
+  extend,
+  useFrame,
+  useThree,
+  type ThreeElement,
+  type ThreeElements,
+} from "@react-three/fiber";
 import { shaderMaterial } from "@react-three/drei";
 
 // Based on
@@ -104,7 +111,19 @@ const RainbowMaterial = shaderMaterial(
 
 extend({ RainbowMaterial });
 
-export const Rainbow = forwardRef(
+export type RainbowMaterialImpl = InstanceType<typeof RainbowMaterial>;
+export type RainbowMaterialProps = ThreeElement<typeof RainbowMaterial>;
+
+export type RainbowMesh = THREE.Mesh<THREE.BufferGeometry, RainbowMaterialImpl>;
+
+export type RainbowProps = Omit<ThreeElements["mesh"], "ref"> & {
+  startRadius?: number;
+  endRadius?: number;
+  emissiveIntensity?: number;
+  fade?: number;
+};
+
+export const Rainbow = forwardRef<RainbowMesh, RainbowProps>(
   (
     {
       startRadius = 0,
@@ -115,7 +134,7 @@ export const Rainbow = forwardRef(
     },
     fRef,
   ) => {
-    const material = useRef(null);
+    const material = useRef<RainbowMaterialImpl>(null!);
     const { width, height } = useThree((state) => state.viewport);
     // calculate the maximum length the rainbow has to have to reach all screen corners
     const length = Math.hypot(width, height) + 1.5; // add 1.5 to due motion of the rainbow

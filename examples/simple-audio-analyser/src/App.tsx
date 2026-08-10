@@ -1,13 +1,20 @@
 import * as THREE from "three";
 import { Suspense, useEffect, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, type ThreeElements } from "@react-three/fiber";
 import { suspend } from "suspend-react";
 
 import synthSound from "./synth.mp3";
 import snareSound from "./snare.mp3";
 import drumsSound from "./drums.mp3";
 
-export default function App(props) {
+// Safari's non-standard, vendor-prefixed AudioContext constructor.
+declare global {
+  interface Window {
+    webkitAudioContext: typeof AudioContext;
+  }
+}
+
+export default function App() {
   return (
     <Canvas shadows dpr={[1, 2]} camera={{ position: [-1, 1.5, 2], fov: 25 }}>
       <spotLight
@@ -45,8 +52,17 @@ function Track({
   height = 0.05,
   obj = new THREE.Object3D(),
   ...props
-}) {
-  const ref = useRef();
+}: {
+  url: string;
+  y?: number;
+  space?: number;
+  width?: number;
+  height?: number;
+  obj?: THREE.Object3D;
+} & Omit<ThreeElements["instancedMesh"], "args">) {
+  const ref = useRef<
+    THREE.InstancedMesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>
+  >(null!);
   // suspend-react is the library that r3f uses internally for useLoader. It caches promises and
   // integrates them with React suspense. You can use it as-is with or without r3f.
   const { gain, context, update, data } = suspend(
@@ -80,7 +96,7 @@ function Track({
     <instancedMesh
       castShadow
       ref={ref}
-      args={[null, null, data.length]}
+      args={[undefined, undefined, data.length]}
       {...props}
     >
       <planeGeometry args={[width, height]} />
@@ -89,24 +105,26 @@ function Track({
   );
 }
 
-function Zoom({ url }) {
+function Zoom({ url }: { url: string }) {
   // This will *not* re-create a new audio source, suspense is always cached,
   // so this will just access (or create and then cache) the source according to the url
   const { data } = suspend(() => createAudio(url), [url]);
   return useFrame((state) => {
     // Set the cameras field of view according to the frequency average
-    state.camera.fov = 25 - data.avg / 15;
-    state.camera.updateProjectionMatrix();
+    if (state.camera instanceof THREE.PerspectiveCamera) {
+      state.camera.fov = 25 - data.avg / 15;
+      state.camera.updateProjectionMatrix();
+    }
   });
 }
 
-async function createAudio(url) {
+async function createAudio(url: string) {
   // Fetch audio data and create a buffer source
   const res = await fetch(url);
   const buffer = await res.arrayBuffer();
   const context = new (window.AudioContext || window.webkitAudioContext)();
   const source = context.createBufferSource();
-  source.buffer = await new Promise((res) =>
+  source.buffer = await new Promise<AudioBuffer>((res) =>
     context.decodeAudioData(buffer, res),
   );
   source.loop = true;
@@ -120,7 +138,11 @@ async function createAudio(url) {
   source.connect(analyser);
   analyser.connect(gain);
   // The data array receive the audio frequencies
-  const data = new Uint8Array(analyser.frequencyBinCount);
+  const data = new Uint8Array(
+    analyser.frequencyBinCount,
+  ) as Uint8Array<ArrayBuffer> & {
+    avg: number;
+  };
   return {
     context,
     source,

@@ -2,16 +2,21 @@ import * as THREE from "three";
 import { forwardRef, useImperativeHandle, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
-import { Reflect } from "./Reflect";
+import { Reflect, type ReflectApi, type ReflectProps } from "./Reflect";
 
 import tex1 from "../textures/lensflare/lensflare2.png";
 import tex2 from "../textures/lensflare/lensflare0_bw.jpg";
 
-export const Beam = forwardRef(
+export type BeamProps = ReflectProps & {
+  stride?: number;
+  width?: number;
+};
+
+export const Beam = forwardRef<ReflectApi, BeamProps>(
   ({ children, position, stride = 4, width = 8, ...props }, fRef) => {
-    const streaks = useRef(null);
-    const glow = useRef(null);
-    const reflect = useRef(null);
+    const streaks = useRef<THREE.InstancedMesh>(null!);
+    const glow = useRef<THREE.InstancedMesh>(null!);
+    const reflect = useRef<ReflectApi>(null!);
     const [streakTexture, glowTexture] = useTexture([tex1, tex2]);
 
     const obj = new THREE.Object3D();
@@ -79,7 +84,7 @@ export const Beam = forwardRef(
         </Reflect>
         <instancedMesh
           ref={streaks}
-          args={[null, null, 100]}
+          args={[undefined, undefined, 100]}
           instanceMatrix-usage={THREE.DynamicDrawUsage}
         >
           <planeGeometry />
@@ -92,7 +97,7 @@ export const Beam = forwardRef(
         </instancedMesh>
         <instancedMesh
           ref={glow}
-          args={[null, null, 100]}
+          args={[undefined, undefined, 100]}
           instanceMatrix-usage={THREE.DynamicDrawUsage}
         >
           <planeGeometry />

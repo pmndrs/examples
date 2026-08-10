@@ -6,21 +6,75 @@ import {
   useLayoutEffect,
   useImperativeHandle,
 } from "react";
-import { invalidate } from "@react-three/fiber";
+import { invalidate, type ThreeElements } from "@react-three/fiber";
 
-function isRayMesh(object) {
+// A raycast hit, decorated by `update()` with the ray's direction and its reflection
+export type ReflectIntersection = THREE.Intersection & {
+  direction?: THREE.Vector3;
+  reflect?: THREE.Vector3;
+};
+
+export type ReflectHit = {
+  key: string;
+  intersect: ReflectIntersection;
+  stopped: boolean;
+};
+
+export type ReflectApi = {
+  number: number;
+  objects: THREE.Object3D[];
+  hits: Map<string, ReflectHit>;
+  start: THREE.Vector3;
+  end: THREE.Vector3;
+  raycaster: THREE.Raycaster;
+  positions: Float32Array;
+  setRay: (
+    _start?: [number, number, number],
+    _end?: [number, number, number],
+  ) => void;
+  update: () => number;
+};
+
+export type ReflectEvent = {
+  api: ReflectApi;
+  object: THREE.Object3D;
+  position: THREE.Vector3;
+  direction: THREE.Vector3;
+  reflect: THREE.Vector3;
+  normal?: THREE.Vector3;
+  intersect: ReflectIntersection;
+  intersects: ReflectIntersection[];
+  stopPropagation: () => void;
+};
+
+export type ReflectProps = Omit<ThreeElements["group"], "ref"> & {
+  start?: [number, number, number];
+  end?: [number, number, number];
+  bounce?: number;
+  far?: number;
+};
+
+function isRayMesh(object: THREE.Object3D) {
   return (
-    object.isMesh && (object.onRayOver || object.onRayOut || object.onRayMove)
+    // `isMesh` is a discriminator three only declares on Mesh itself
+    (object as THREE.Mesh).isMesh &&
+    (object.onRayOver || object.onRayOut || object.onRayMove)
   );
 }
 
-function createEvent(api, hit, intersect, intersects) {
+function createEvent(
+  api: ReflectApi,
+  hit: ReflectHit,
+  intersect: ReflectIntersection,
+  intersects: ReflectIntersection[],
+): ReflectEvent {
   return {
     api,
     object: intersect.object,
     position: intersect.point,
-    direction: intersect.direction,
-    reflect: intersect.reflect,
+    // `update()` always sets both before it creates an event for the hit
+    direction: intersect.direction!,
+    reflect: intersect.reflect!,
     normal: intersect.face?.normal,
     intersect,
     intersects,
@@ -28,7 +82,7 @@ function createEvent(api, hit, intersect, intersects) {
   };
 }
 
-export const Reflect = forwardRef(
+export const Reflect = forwardRef<ReflectApi, ReflectProps>(
   (
     {
       children,
@@ -42,16 +96,16 @@ export const Reflect = forwardRef(
   ) => {
     bounce = (bounce || 1) + 1;
 
-    const scene = useRef(null);
+    const scene = useRef<THREE.Group>(null!);
     const vStart = new THREE.Vector3();
     const vEnd = new THREE.Vector3();
     const vDir = new THREE.Vector3();
     const vPos = new THREE.Vector3();
 
-    let intersect = null;
-    let intersects = [];
+    let intersect: ReflectIntersection | null = null;
+    let intersects: ReflectIntersection[] = [];
 
-    const api = useMemo(
+    const api: ReflectApi = useMemo(
       () => ({
         number: 0,
         objects: [],
@@ -144,7 +198,7 @@ export const Reflect = forwardRef(
               }
             }
 
-            const hit = api.hits.get(intersect.object.uuid);
+            const hit = api.hits.get(intersect.object.uuid)!;
 
             // Check onRayMove
             if (intersect.object.onRayMove) {

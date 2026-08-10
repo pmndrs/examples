@@ -1,11 +1,21 @@
-import { useLoader } from "@react-three/fiber";
+import * as THREE from "three";
+import { useLoader, type ThreeElements } from "@react-three/fiber";
 import { MeshTransmissionMaterial } from "@react-three/drei";
-import { GLTFLoader } from "three-stdlib";
+import { GLTFLoader, type GLTF } from "three-stdlib";
 
 import prismModel from "../gltf/prism.glb?url";
 
-export function Prism({ onRayOver, onRayOut, onRayMove, ...props }) {
-  const { nodes } = useLoader(GLTFLoader, prismModel);
+type GLTFResult = GLTF & {
+  nodes: { Cone: THREE.Mesh };
+};
+
+export function Prism({
+  onRayOver,
+  onRayOut,
+  onRayMove,
+  ...props
+}: Omit<ThreeElements["group"], "ref">) {
+  const { nodes } = useLoader(GLTFLoader, prismModel) as unknown as GLTFResult;
   return (
     <group {...props}>
       {/* A low-res, invisible representation of the prism that gets hit by the raycaster */}

@@ -16,9 +16,16 @@ function Overlay() {
           <button onClick={() => set(true)}>▶️</button>
         </div>
       </div>
-      <Footer date="2. September" year="2021" />
+      {/* Footer's .d.ts marks link1/link2 as required, the component renders
+          them as-is; passing undefined is identical to omitting them. */}
+      <Footer
+        date="2. September"
+        year="2021"
+        link1={undefined}
+        link2={undefined}
+      />
     </>
   );
 }
 
-createRoot(document.getElementById("root")).render(<Overlay />);
+createRoot(document.getElementById("root")!).render(<Overlay />);

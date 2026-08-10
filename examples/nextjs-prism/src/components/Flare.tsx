@@ -1,15 +1,19 @@
 import * as THREE from "three";
 import { forwardRef, useRef } from "react";
 import { useTexture, Instances, Instance } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, type ThreeElements } from "@react-three/fiber";
 
 import tex1 from "../textures/lensflare/lensflare2.png";
 import tex2 from "../textures/lensflare/lensflare3.png";
 import tex3 from "../textures/lensflare/lensflare0_bw.png";
 
-export const Flare = forwardRef(
+export type FlareProps = Omit<ThreeElements["group"], "ref"> & {
+  streak?: [number, number, number];
+};
+
+export const Flare = forwardRef<THREE.Group, FlareProps>(
   ({ streak = [8, 20, 1], visible, ...props }, fRef) => {
-    const ref = useRef(null);
+    const ref = useRef<THREE.Group>(null!);
     const [streakTexture, dotTexture, glowTexture] = useTexture([
       tex1,
       tex2,

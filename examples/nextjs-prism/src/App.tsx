@@ -1,21 +1,23 @@
 import * as THREE from "three";
 import { useRef, useCallback, useState } from "react";
 import { Canvas, useLoader, useFrame } from "@react-three/fiber";
-import { Center, Text3D } from "@react-three/drei";
+import { Center, Text3D, type FontData } from "@react-three/drei";
 import { Bloom, EffectComposer, LUT } from "@react-three/postprocessing";
-import { LUTCubeLoader } from "postprocessing";
+import { LUTCubeLoader, type LookupTexture } from "postprocessing";
 import { Beam } from "./components/Beam";
-import { Rainbow } from "./components/Rainbow";
+import { Rainbow, type RainbowMesh } from "./components/Rainbow";
 import { Prism } from "./components/Prism";
 import { Flare } from "./components/Flare";
 import { Box } from "./components/Box";
+import { type ReflectApi, type ReflectEvent } from "./components/Reflect";
 import { calculateRefractionAngle, lerp, lerpV3 } from "./util";
 
 import lutTex from "./lut/F-6800-STD.cube?url";
 import inter from "./fonts/Inter_Bold.json";
 
 export default function App() {
-  const texture = useLoader(LUTCubeLoader, lutTex);
+  // LUTCubeLoader doesn't type its `loadAsync` result, so useLoader can't infer it.
+  const texture = useLoader(LUTCubeLoader, lutTex) as LookupTexture;
   return (
     <Canvas
       orthographic
@@ -24,7 +26,8 @@ export default function App() {
     >
       <color attach="background" args={["black"]} />
       <Scene />
-      <EffectComposer disableNormalPass>
+      {/* `disableNormalPass` no longer exists in this postprocessing version; the normal pass is already disabled by default */}
+      <EffectComposer>
         <Bloom
           mipmapBlur
           levels={9}
@@ -40,14 +43,14 @@ export default function App() {
 
 function Scene() {
   const [isPrismHit, hitPrism] = useState(false);
-  const flare = useRef(null);
-  const ambient = useRef(null);
-  const spot = useRef(null);
-  const boxreflect = useRef(null);
-  const rainbow = useRef(null);
+  const flare = useRef<THREE.Group>(null!);
+  const ambient = useRef<THREE.AmbientLight>(null!);
+  const spot = useRef<THREE.SpotLight>(null!);
+  const boxreflect = useRef<ReflectApi>(null!);
+  const rainbow = useRef<RainbowMesh>(null!);
 
   const rayOut = useCallback(() => hitPrism(false), []);
-  const rayOver = useCallback((e) => {
+  const rayOver = useCallback((e: ReflectEvent) => {
     // Break raycast so the ray stops when it touches the prism
     e.stopPropagation();
     hitPrism(true);
@@ -57,31 +60,34 @@ function Scene() {
   }, []);
 
   const vec = new THREE.Vector3();
-  const rayMove = useCallback(({ api, position, direction, normal }) => {
-    if (!normal) return;
-    // Extend the line to the prisms center
-    vec.toArray(api.positions, api.number++ * 3);
-    // Set flare
-    flare.current.position.set(position.x, position.y, -0.5);
-    flare.current.rotation.set(0, 0, -Math.atan2(direction.x, direction.y));
-    // Calculate refraction angles
-    let angleScreenCenter = Math.atan2(-position.y, -position.x);
-    const normalAngle = Math.atan2(normal.y, normal.x);
-    // The angle between the ray and the normal
-    const incidentAngle = angleScreenCenter - normalAngle;
-    // Calculate the refraction for the incident angle
-    const refractionAngle = calculateRefractionAngle(incidentAngle) * 6;
-    // Apply the refraction
-    angleScreenCenter += refractionAngle;
-    rainbow.current.rotation.z = angleScreenCenter;
-    // Set spot light
-    lerpV3(
-      spot.current.target.position,
-      [Math.cos(angleScreenCenter), Math.sin(angleScreenCenter), 0],
-      0.05,
-    );
-    spot.current.target.updateMatrixWorld();
-  }, []);
+  const rayMove = useCallback(
+    ({ api, position, direction, normal }: ReflectEvent) => {
+      if (!normal) return;
+      // Extend the line to the prisms center
+      vec.toArray(api.positions, api.number++ * 3);
+      // Set flare
+      flare.current.position.set(position.x, position.y, -0.5);
+      flare.current.rotation.set(0, 0, -Math.atan2(direction.x, direction.y));
+      // Calculate refraction angles
+      let angleScreenCenter = Math.atan2(-position.y, -position.x);
+      const normalAngle = Math.atan2(normal.y, normal.x);
+      // The angle between the ray and the normal
+      const incidentAngle = angleScreenCenter - normalAngle;
+      // Calculate the refraction for the incident angle
+      const refractionAngle = calculateRefractionAngle(incidentAngle) * 6;
+      // Apply the refraction
+      angleScreenCenter += refractionAngle;
+      rainbow.current.rotation.z = angleScreenCenter;
+      // Set spot light
+      lerpV3(
+        spot.current.target.position,
+        [Math.cos(angleScreenCenter), Math.sin(angleScreenCenter), 0],
+        0.05,
+      );
+      spot.current.target.updateMatrixWorld();
+    },
+    [],
+  );
 
   useFrame((state) => {
     // Tie beam to the mouse
@@ -128,7 +134,14 @@ function Scene() {
       />
       {/* Caption */}
       <Center top bottom position={[0, 2, 0]}>
-        <Text3D size={0.7} letterSpacing={-0.05} height={0.05} font={inter}>
+        {/* The generated font JSON's glyphs don't literally match drei's Glyph
+            type (it has no `_cachedOutline`), so it's cast the same way gltfjsx casts nodes. */}
+        <Text3D
+          size={0.7}
+          letterSpacing={-0.05}
+          height={0.05}
+          font={inter as unknown as FontData}
+        >
           Dynamic without Limits
           <meshStandardMaterial color="white" />
         </Text3D>
