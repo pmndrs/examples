@@ -59,7 +59,7 @@ function Switch({ x, set }: SwitchProps) {
           onPointerOut={onPointerOut}
         >
           <sphereGeometry args={[0.8, 64, 64]} />
-          <a.meshStandardMaterial roughness={0.5} map={texture} />
+          <meshStandardMaterial roughness={0.5} map={texture} />
         </a.mesh>
         <a.pointLight
           intensity={100 * Math.PI}

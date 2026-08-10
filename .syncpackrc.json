@@ -19,10 +19,10 @@
       "pinVersion": "19.2.3"
     },
     {
-      "label": "three is pinned: the @splinetool/loader patch is keyed to r165, and postprocessing 6.36.6 needs < 0.173",
+      "label": "three is capped at 0.181.2: r182 moved shadow maps to sampler2DShadow, which drei 10's <SoftShadows> PCSS override cannot compile (fixed only on the drei 11 alpha line, which needs @react-three/fiber 10)",
       "packages": ["@example/**"],
       "dependencies": ["three"],
-      "pinVersion": "0.165.0"
+      "pinVersion": "0.181.2"
     },
     {
       "label": "@react-three/fiber is pinned: 9.x is the React 19 line, and a caret could raise the three floor",
@@ -43,10 +43,10 @@
       "pinVersion": "1.2.2"
     },
     {
-      "label": "postprocessing is pinned to the last release accepting three 0.165 (6.36.7+ needs >= 0.174); pnpm.overrides pins the transitive copy too",
+      "label": "postprocessing is pinned to the latest release accepting three 0.181 (its peer range is >= 0.168 < 0.186)",
       "packages": ["@example/**"],
       "dependencies": ["postprocessing"],
-      "pinVersion": "6.36.6"
+      "pinVersion": "6.39.4"
     },
     {
       "label": "suspend-react is pinned for all examples (the suspend(promise) pattern requires >= 0.1.3)",
@@ -55,7 +55,7 @@
       "pinVersion": "0.1.3"
     },
     {
-      "label": "@splinetool/loader is pinned to the last release that parses the repo's 2022-era .splinecode scenes (0.9.156+ silently fall back to a default gray material or crash; the three-r165 pnpm patch is keyed to this exact version)",
+      "label": "@splinetool/loader is pinned to the last release that parses the repo's 2022-era .splinecode scenes (0.9.156+ silently fall back to a default gray material or crash; the three-compat pnpm patch is keyed to this exact version)",
       "packages": ["@example/**"],
       "dependencies": ["@splinetool/loader"],
       "pinVersion": "0.9.153"
