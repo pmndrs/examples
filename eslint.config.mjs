@@ -42,7 +42,7 @@ const config = [
          taste. One documented exception below, so this ratchets. */
       "react-hooks/rules-of-hooks": "error",
 
-      /* Warn, deliberately. 58 violations across 38 examples, none of them
+      /* Warn, deliberately. 81 violations across 41 examples, none of them
          auto-fixable, and the repo has 3 committed screenshot baselines for
          161 examples -- so a fix that restarts an animation or re-runs an
          imperative mount effect would land unnoticed. Surfacing them is step
@@ -52,6 +52,12 @@ const config = [
     },
   },
   {
+    /* Nothing matches this today -- #164 converted every example to
+       TypeScript, and the only `.js` left in `examples/` sits in the vendored
+       directories ignored above. It stays because a file matched by no
+       `languageOptions` block is not linted leniently, it is parsed by espree
+       with no JSX support: the next plain-JS example would fail to parse
+       rather than fail to lint. */
     files: ["examples/**/*.{js,jsx}"],
     languageOptions: {
       ecmaVersion: "latest",
@@ -60,8 +66,7 @@ const config = [
     },
   },
   {
-    /* Seven examples are written in TypeScript (racing-game and flow-shield
-       between them are most of it). The parser is used for syntax only -- no
+    /* Every example, since #164. The parser is used for syntax only -- no
        `projectService`, so no per-example `tsconfig` resolution and no
        type-aware rules to pay for. */
     files: ["examples/**/*.{ts,tsx}"],
