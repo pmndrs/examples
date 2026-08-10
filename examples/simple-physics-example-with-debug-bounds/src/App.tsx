@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Physics, Debug, usePlane, useCompoundBody } from "@react-three/cannon";
+import {
+  Physics,
+  Debug,
+  usePlane,
+  useCompoundBody,
+  type PlaneProps,
+  type BodyProps,
+} from "@react-three/cannon";
 
-function Plane(props) {
+function Plane(props: PlaneProps) {
   const [ref] = usePlane(() => ({ type: "Static", ...props }));
   return (
     <mesh receiveShadow ref={ref}>
@@ -12,7 +19,7 @@ function Plane(props) {
   );
 }
 
-function CompoundBody(props) {
+function CompoundBody(props: BodyProps) {
   const [ref] = useCompoundBody(() => ({
     mass: 12,
     ...props,

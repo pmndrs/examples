@@ -1,15 +1,30 @@
 import * as THREE from "three";
-import { Suspense, useEffect, useLayoutEffect } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import {
+  Suspense,
+  useEffect,
+  useLayoutEffect,
+  type ComponentProps,
+} from "react";
+import { Canvas, useFrame, type ThreeElements } from "@react-three/fiber";
 import {
   ScrollControls,
-  Sky,
+  Sky as SkyImpl,
   useScroll,
   useGLTF,
   useAnimations,
 } from "@react-three/drei";
 
 import tokyoModel from "./LittlestTokyo-transformed.glb?url";
+
+// The installed @react-three/drei Sky types don't include `scale`, even
+// though the component spreads unmatched props onto the underlying
+// `<primitive>`; widen the prop type locally instead of changing the value.
+type SkyProps = ComponentProps<typeof SkyImpl> & {
+  scale?: ThreeElements["primitive"]["scale"];
+};
+const Sky = SkyImpl as unknown as (
+  props: SkyProps,
+) => ReturnType<typeof SkyImpl>;
 
 export default function App() {
   return (
@@ -38,7 +53,9 @@ export default function App() {
   );
 }
 
-function LittlestTokyo({ ...props }) {
+function LittlestTokyo({
+  ...props
+}: Omit<ThreeElements["primitive"], "object">) {
   // This hook gives you offets, ranges and other useful things
   const scroll = useScroll();
   const { scene, nodes, animations } = useGLTF(tokyoModel);
@@ -48,9 +65,9 @@ function LittlestTokyo({ ...props }) {
       (node) => (node.receiveShadow = node.castShadow = true),
     ),
   );
-  useEffect(() => void (actions["Take 001"].play().paused = true), [actions]);
+  useEffect(() => void (actions["Take 001"]!.play().paused = true), [actions]);
   useFrame((state, delta) => {
-    const action = actions["Take 001"];
+    const action = actions["Take 001"]!;
     // The offset is between 0 and 1, you can apply it to your models any way you like
     const offset = 1 - scroll.offset;
     action.time = THREE.MathUtils.damp(
