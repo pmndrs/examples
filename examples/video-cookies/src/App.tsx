@@ -1,3 +1,6 @@
+import * as THREE from "three";
+import { type GLTF } from "three-stdlib";
+import { type ThreeElements } from "@react-three/fiber";
 import { Canvas } from "@react-three/fiber";
 import {
   AccumulativeShadows,
@@ -21,6 +24,10 @@ import causticsVid from "./caustics.mp4?url";
 
 // From the poimandres market (https://market.pmnd.rs/), vendored locally since the original CDN is offline.
 import suzanneModel from "./assets/suzanne-high-poly.gltf?url";
+
+type GLTFResult = GLTF & {
+  nodes: { Suzanne: THREE.Mesh };
+};
 
 export default function App() {
   return (
@@ -92,24 +99,27 @@ export default function App() {
 
 function Postpro() {
   return (
-    <EffectComposer disableNormalPass>
-      <HueSaturation saturation={-1} />
-      <BrightnessContrast brightness={0} contrast={0.25} />
-      <WaterEffect factor={0.75} />
-      <TiltShift2 samples={6} blur={0.5} />
-      <Bloom mipmapBlur luminanceThreshold={0} intensity={30} />
-      <ToneMapping />
-    </EffectComposer>
+    <>
+      {/* `disableNormalPass` no longer exists in this postprocessing version; the normal pass is already disabled by default */}
+      <EffectComposer>
+        <HueSaturation saturation={-1} />
+        <BrightnessContrast brightness={0} contrast={0.25} />
+        <WaterEffect factor={0.75} />
+        <TiltShift2 samples={6} blur={0.5} />
+        <Bloom mipmapBlur luminanceThreshold={0} intensity={30} />
+        <ToneMapping />
+      </EffectComposer>
+    </>
   );
 }
 
-function Cookie(props) {
+function Cookie(props: ThreeElements["spotLight"]) {
   const texture = useVideoTexture(causticsVid);
   return <spotLight decay={0} map={texture} castShadow {...props} />;
 }
 
-function Suzi(props) {
-  const { nodes } = useGLTF(suzanneModel);
+function Suzi(props: ThreeElements["mesh"]) {
+  const { nodes } = useGLTF(suzanneModel) as unknown as GLTFResult;
   return (
     <mesh
       castShadow

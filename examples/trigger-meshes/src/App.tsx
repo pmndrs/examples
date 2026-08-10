@@ -1,9 +1,25 @@
-import { Physics, useBox, usePlane, useSphere } from "@react-three/cannon";
-import { Canvas } from "@react-three/fiber";
+import {
+  Physics,
+  useBox,
+  usePlane,
+  useSphere,
+  type CollideEvent,
+  type PlaneProps,
+  type Triplet,
+} from "@react-three/cannon";
+import { Canvas, type CameraProps } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { useState } from "react";
 
-function BoxTrigger({ onCollide, size, position }) {
+function BoxTrigger({
+  onCollide,
+  size,
+  position,
+}: {
+  onCollide: (e: CollideEvent) => void;
+  size: Triplet;
+  position: Triplet;
+}) {
   const [ref] = useBox(() => ({
     isTrigger: true,
     args: size,
@@ -32,7 +48,7 @@ function Ball() {
   );
 }
 
-function Plane(props) {
+function Plane(props: PlaneProps) {
   const [ref] = usePlane(() => ({ type: "Static", ...props }));
   return (
     <mesh ref={ref} receiveShadow>
@@ -48,11 +64,15 @@ export default () => {
     <Canvas
       shadows
       dpr={[1, 2]}
-      camera={{
-        position: [-10, 15, 5],
-        material: { restitution: 10 },
-        fov: 50,
-      }}
+      camera={
+        {
+          position: [-10, 15, 5],
+          // `material` is not part of CameraProps; kept as-is (unknown, then
+          // narrowed) to match the upstream source verbatim.
+          material: { restitution: 10 },
+          fov: 50,
+        } as unknown as CameraProps
+      }
     >
       <OrbitControls />
       <fog attach="fog" args={[bg, 10, 50]} />

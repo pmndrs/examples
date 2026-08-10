@@ -7,7 +7,12 @@ import {
   forwardRef,
   useImperativeHandle,
 } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import {
+  Canvas,
+  useFrame,
+  useThree,
+  type ThreeElements,
+} from "@react-three/fiber";
 import {
   Hud,
   OrbitControls,
@@ -20,7 +25,7 @@ import {
 import { suspend } from "suspend-react";
 
 const medium = import("@pmndrs/assets/fonts/inter_medium.woff");
-const context = createContext();
+const context = createContext<number | false>(null!);
 
 export default function App() {
   return (
@@ -34,7 +39,7 @@ export default function App() {
   );
 }
 
-function Torus(props) {
+function Torus(props: ThreeElements["mesh"]) {
   const [hovered, hover] = useState(false);
   return (
     <mesh
@@ -48,8 +53,14 @@ function Torus(props) {
   );
 }
 
-function Viewcube({ renderPriority = 1, matrix = new THREE.Matrix4() }) {
-  const mesh = useRef(null);
+function Viewcube({
+  renderPriority = 1,
+  matrix = new THREE.Matrix4(),
+}: {
+  renderPriority?: number;
+  matrix?: THREE.Matrix4;
+}) {
+  const mesh = useRef<THREE.Mesh>(null!);
   const { camera, viewport } = useThree();
   const [hovered, hover] = useState(null);
 
@@ -88,31 +99,40 @@ function Viewcube({ renderPriority = 1, matrix = new THREE.Matrix4() }) {
   );
 }
 
-const Box = forwardRef(({ children, ...props }, fref) => {
-  const ref = useRef();
-  const [hovered, hover] = useState(false);
-  const [clicked, click] = useState(false);
-  useFrame((state, delta) => (ref.current.rotation.x += delta));
-  useImperativeHandle(fref, () => ref.current, []);
-  return (
-    <mesh
-      {...props}
-      ref={ref}
-      scale={clicked ? 1.5 : 1}
-      onClick={(event) => click(!clicked)}
-      onPointerMove={(event) => (
-        event.stopPropagation(),
-        hover(event.face.materialIndex)
-      )}
-      onPointerOut={() => hover(false)}
-    >
-      <boxGeometry />
-      <context.Provider value={hovered}>{children}</context.Provider>
-    </mesh>
-  );
-});
+const Box = forwardRef<THREE.Mesh, ThreeElements["mesh"]>(
+  ({ children, ...props }, fref) => {
+    const ref = useRef<THREE.Mesh>(null!);
+    const [hovered, hover] = useState<number | false>(false);
+    const [clicked, click] = useState(false);
+    useFrame((state, delta) => (ref.current.rotation.x += delta));
+    useImperativeHandle(fref, () => ref.current, []);
+    return (
+      <mesh
+        {...props}
+        ref={ref}
+        scale={clicked ? 1.5 : 1}
+        onClick={(event) => click(!clicked)}
+        onPointerMove={(event) => (
+          event.stopPropagation(),
+          hover(event.face!.materialIndex)
+        )}
+        onPointerOut={() => hover(false)}
+      >
+        <boxGeometry />
+        <context.Provider value={hovered}>{children}</context.Provider>
+      </mesh>
+    );
+  },
+);
 
-function FaceMaterial({ children, index, ...props }) {
+function FaceMaterial({
+  children,
+  index,
+  ...props
+}: ThreeElements["meshStandardMaterial"] & {
+  children: string;
+  index: number;
+}) {
   const hovered = useContext(context);
   return (
     <meshStandardMaterial
@@ -131,7 +151,10 @@ function FaceMaterial({ children, index, ...props }) {
           position={[0, 0, 10]}
           zoom={0.5}
         />
-        <Text font={suspend(medium).default} color="black">
+        <Text
+          font={(suspend(medium) as { default: string }).default}
+          color="black"
+        >
           {children}
         </Text>
       </RenderTexture>
