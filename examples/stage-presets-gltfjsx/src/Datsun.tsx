@@ -6,12 +6,49 @@ source: https://sketchfab.com/3d-models/free-1972-datsun-240k-gt-b2303a552b444e5
 title: (FREE) 1972 Datsun 240k GT
 */
 
+import * as THREE from "three";
+import { type GLTF } from "three-stdlib";
+import { type ThreeElements } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 
 import datasunModel from "./datsun-transformed.glb?url";
 
-export function Model({ color, ...props }) {
-  const { nodes, materials } = useGLTF(datasunModel);
+type GLTFResult = GLTF & {
+  nodes: {
+    Cylinder007_alloy_0_1: THREE.Mesh;
+    Cylinder007_alloy_0_2: THREE.Mesh;
+    Cylinder007_alloy_0_3: THREE.Mesh;
+    Cylinder007_alloy_0_4: THREE.Mesh;
+    Cylinder007_alloy_0_5: THREE.Mesh;
+    Cylinder007_alloy_0_6: THREE.Mesh;
+    Cylinder007_alloy_0_7: THREE.Mesh;
+    Cylinder007_alloy_0_8: THREE.Mesh;
+    Cylinder007_alloy_0_9: THREE.Mesh;
+    Cylinder007_alloy_0_10: THREE.Mesh;
+    Cylinder007_alloy_0_11: THREE.Mesh;
+    Cylinder007_alloy_0_12: THREE.Mesh;
+  };
+  materials: {
+    alloy: THREE.MeshStandardMaterial;
+    headlights: THREE.MeshStandardMaterial;
+    black_paint: THREE.MeshStandardMaterial;
+    tire: THREE.MeshStandardMaterial;
+    black_matte: THREE.MeshStandardMaterial;
+    chrome: THREE.MeshStandardMaterial;
+    license: THREE.MeshStandardMaterial;
+    orange_glass: THREE.MeshStandardMaterial;
+    glass: THREE.MeshStandardMaterial;
+    paint: THREE.MeshStandardMaterial;
+    red_glass: THREE.MeshStandardMaterial;
+    stickers: THREE.MeshStandardMaterial;
+  };
+};
+
+export function Model({
+  color,
+  ...props
+}: ThreeElements["group"] & { color?: string }) {
+  const { nodes, materials } = useGLTF(datasunModel) as unknown as GLTFResult;
   return (
     <group {...props} dispose={null}>
       <mesh

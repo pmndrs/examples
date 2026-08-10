@@ -17,7 +17,12 @@ import {
 //import { SSGIEffect, TRAAEffect, MotionBlurEffect, VelocityDepthNormalPass } from './realism-effects/v2'
 //import { SSGIEffect, TRAAEffect, MotionBlurEffect, VelocityDepthNormalPass } from './realism-effects/gdata-in-float'
 
-export function Effects({ importanceSampling }) {
+// The component renders nothing; `undefined` (not `void`) keeps it a valid JSX component.
+export function Effects({
+  importanceSampling,
+}: {
+  importanceSampling: boolean;
+}): undefined {
   const gl = useThree((state) => state.gl);
   const scene = useThree((state) => state.scene);
   const camera = useThree((state) => state.camera);

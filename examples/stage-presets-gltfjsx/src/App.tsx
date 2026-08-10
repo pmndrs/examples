@@ -21,7 +21,7 @@ export default function App() {
       link.setAttribute(
         "href",
         document
-          .querySelector("canvas")
+          .querySelector("canvas")!
           .toDataURL("image/png")
           .replace("image/png", "image/octet-stream"),
       );
