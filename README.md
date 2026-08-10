@@ -96,6 +96,14 @@ This will:
 
 </details>
 
+# deploy
+
+`.github/workflows/ci.yml` publishes `main` to GitHub Pages, and uploads the same
+`out` folder to Vercel for each pull request, as a preview — Vercel only hosts
+it, the build always happens in the CI. Needs `VERCEL_TOKEN`, `VERCEL_ORG_ID` and
+`VERCEL_PROJECT_ID` as repo secrets; a pull request from a fork cannot read them,
+and gets no preview.
+
 # test
 
 ```sh
