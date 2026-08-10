@@ -1,3 +1,4 @@
+import * as THREE from "three";
 import { useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import {
@@ -9,13 +10,27 @@ import {
   OrbitControls,
   Float,
   ContactShadows,
+  type FloatProps,
 } from "@react-three/drei";
+import { type GLTF } from "three-stdlib";
 import { useControls } from "leva";
 
 import aoShapesModel from "./ao_shapes.glb?url";
 
-function Model({ name, floatIntensity = 10, ...props }) {
-  const { nodes } = useGLTF(aoShapesModel);
+type GLTFResult = GLTF & {
+  nodes: {
+    VR_Headset: THREE.Mesh;
+    Headphones: THREE.Mesh;
+    Roundcube001: THREE.Mesh;
+  };
+};
+
+type ModelProps = FloatProps & {
+  name: "VR_Headset" | "Headphones" | "Roundcube001";
+};
+
+function Model({ name, floatIntensity = 10, ...props }: ModelProps) {
+  const { nodes } = useGLTF(aoShapesModel) as unknown as GLTFResult;
   const [hovered, hover] = useState(false);
   return (
     <Float
@@ -78,10 +93,13 @@ export default function App() {
           <mesh position={[0, 5, -5]}>
             <circleGeometry args={[7, 64]} />
             {/** A portal is just a material */}
+            {/* resolution matches MeshPortalMaterial's own default; drei's
+            types mark it required even though the component defaults it. */}
             <MeshPortalMaterial
               worldUnits={worldUnits}
               transparent
               blur={portal1}
+              resolution={512}
             >
               <ambientLight intensity={0.7 * Math.PI} />
               <Model
@@ -94,7 +112,9 @@ export default function App() {
               <mesh position={[0, 0, -10]}>
                 <circleGeometry args={[5, 64]} />
                 {/** You can have portals inside portals */}
-                <MeshPortalMaterial transparent blur={portal2}>
+                {/* resolution matches MeshPortalMaterial's own default; drei's
+                types mark it required even though the component defaults it. */}
+                <MeshPortalMaterial transparent blur={portal2} resolution={512}>
                   <ambientLight intensity={0.7 * Math.PI} />
                   <Model
                     scale={0.15}
