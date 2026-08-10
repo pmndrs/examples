@@ -1,0 +1,21 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Pixelation",
+  "description": "A Suzanne model staged with drei's Stage helper, blocked into chunky pixels by @react-three/postprocessing's Pixelation effect.",
+  "tags": ["postprocessing", "pixelation"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/ed9yo",
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing",
+    "leva"
+  ],
+  "assets": [
+    {
+      "name": "Suzanne",
+      "files": ["src/suzanne.gltf"],
+      "notes": "Blender's mascot mesh, bundled with the original CodeSandbox demo."
+    }
+  ]
+}
