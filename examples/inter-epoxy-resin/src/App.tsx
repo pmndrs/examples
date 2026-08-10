@@ -1,5 +1,5 @@
 import { RGBELoader } from "three-stdlib";
-import { Canvas, useLoader } from "@react-three/fiber";
+import { Canvas, useLoader, type ThreeElements } from "@react-three/fiber";
 import {
   Center,
   Text3D,
@@ -11,6 +11,8 @@ import {
   RandomizedLight,
   AccumulativeShadows,
   MeshTransmissionMaterial,
+  type MeshTransmissionMaterialProps,
+  type FontData,
 } from "@react-three/drei";
 import { useControls, button } from "leva";
 import {
@@ -49,7 +51,7 @@ export function App() {
       link.setAttribute(
         "href",
         document
-          .querySelector("canvas")
+          .querySelector("canvas")!
           .toDataURL("image/png")
           .replace("image/png", "image/octet-stream"),
       );
@@ -146,7 +148,15 @@ export function App() {
   );
 }
 
-const Grid = ({ number = 23, lineWidth = 0.026, height = 0.5 }) => (
+const Grid = ({
+  number = 23,
+  lineWidth = 0.026,
+  height = 0.5,
+}: {
+  number?: number;
+  lineWidth?: number;
+  height?: number;
+}) => (
   // Renders a grid and crosses as instances
   <Instances position={[0, -1.02, 0]}>
     <planeGeometry args={[lineWidth, height]} />
@@ -170,7 +180,18 @@ const Grid = ({ number = 23, lineWidth = 0.026, height = 0.5 }) => (
   </Instances>
 );
 
-function Text({ children, config, font = fontGlyphs, ...props }) {
+function Text({
+  children,
+  config,
+  // The generated font JSON's glyphs don't literally match drei's Glyph type
+  // (it has no `_cachedOutline`), so it's cast the same way gltfjsx casts nodes.
+  font = fontGlyphs as unknown as FontData,
+  ...props
+}: {
+  children: string;
+  config: MeshTransmissionMaterialProps;
+  font?: FontData;
+} & Omit<ThreeElements["group"], "ref">) {
   const texture = useLoader(
     RGBELoader,
     "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/aerodynamics_workshop_1k.hdr",

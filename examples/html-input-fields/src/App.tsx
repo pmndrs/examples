@@ -1,6 +1,11 @@
 import * as THREE from "three";
 import { useState, useRef } from "react";
-import { Canvas, extend, useFrame } from "@react-three/fiber";
+import {
+  Canvas,
+  extend,
+  useFrame,
+  type ThreeElements,
+} from "@react-three/fiber";
 import {
   useGLTF,
   AccumulativeShadows,
@@ -11,8 +16,9 @@ import {
   Environment,
   Center,
   MeshTransmissionMaterial,
+  type TextProps,
 } from "@react-three/drei";
-import { WaterPass } from "three-stdlib";
+import { WaterPass, type GLTF } from "three-stdlib";
 import { ControlledInput } from "./ControlledInput";
 
 // From the poimandres market (https://market.pmnd.rs/), vendored locally since the original CDN is offline.
@@ -76,7 +82,7 @@ export default function App() {
 }
 
 function Postpro() {
-  const ref = useRef();
+  const ref = useRef<WaterPass>(null!);
   useFrame((state) => (ref.current.time = state.clock.elapsedTime * 3));
   return (
     <Effects>
@@ -85,14 +91,15 @@ function Postpro() {
   );
 }
 
-function Rig({ vec = new THREE.Vector3() }) {
+function Rig({ vec = new THREE.Vector3() }: { vec?: THREE.Vector3 }) {
   useFrame((state) => {
     state.camera.position.lerp(vec.set(1 + state.pointer.x, 0.5, 3), 0.01);
     state.camera.lookAt(0, 0, 0);
   });
+  return null;
 }
 
-function Sphere(props) {
+function Sphere(props: Omit<ThreeElements["group"], "ref">) {
   return (
     <Center top {...props}>
       <mesh castShadow receiveShadow>
@@ -103,8 +110,12 @@ function Sphere(props) {
   );
 }
 
-function Model(props) {
-  const { nodes } = useGLTF(bunnyModel);
+type GLTFResult = GLTF & {
+  nodes: { bunny: THREE.Mesh };
+};
+
+function Model(props: ThreeElements["mesh"]) {
+  const { nodes } = useGLTF(bunnyModel) as unknown as GLTFResult;
   return (
     <mesh castShadow receiveShadow geometry={nodes.bunny.geometry} {...props}>
       <MeshTransmissionMaterial
@@ -118,13 +129,15 @@ function Model(props) {
   );
 }
 
-function Input(props) {
+function Input(props: ThreeElements["group"]) {
   const [text, set] = useState("hello world ...");
   return (
     <group {...props}>
       <Text
         position={[-1.2, -0.022, 0]}
-        anchorX="0px"
+        // drei's TextProps only types anchorX as a number or keyword, but the
+        // underlying troika-three-text also accepts a raw string offset.
+        anchorX={"0px" as unknown as TextProps["anchorX"]}
         font={interFont}
         fontSize={0.335}
         letterSpacing={-0.0}

@@ -1,10 +1,10 @@
 import { createRoot } from "react-dom/client";
 import "./styles.css";
-import { App } from "./App";
+import { App, type ImageData } from "./App";
 
-const pexel = (id) =>
+const pexel = (id: number) =>
   `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260`;
-const images = [
+const images: ImageData[] = [
   // Front
   { position: [0, 0, 1.5], rotation: [0, 0, 0], url: pexel(1103970) },
   // Back
@@ -44,4 +44,4 @@ const images = [
   },
 ];
 
-createRoot(document.getElementById("root")).render(<App images={images} />);
+createRoot(document.getElementById("root")!).render(<App images={images} />);

@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { useEffect, useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, type ThreeEvent } from "@react-three/fiber";
 import {
   useCursor,
   MeshReflectorMaterial,
@@ -14,7 +14,13 @@ import getUuid from "uuid-by-string";
 
 const GOLDENRATIO = 1.61803398875;
 
-export const App = ({ images }) => (
+export type ImageData = {
+  position: [number, number, number];
+  rotation: [number, number, number];
+  url: string;
+};
+
+export const App = ({ images }: { images: ImageData[] }) => (
   <Canvas dpr={[1, 1.5]} camera={{ fov: 70, position: [0, 2, 15] }}>
     <color attach="background" args={["#191920"]} />
     <fog attach="fog" args={["#191920", 0, 15]} />
@@ -44,17 +50,21 @@ function Frames({
   images,
   q = new THREE.Quaternion(),
   p = new THREE.Vector3(),
+}: {
+  images: ImageData[];
+  q?: THREE.Quaternion;
+  p?: THREE.Vector3;
 }) {
-  const ref = useRef();
-  const clicked = useRef();
+  const ref = useRef<THREE.Group>(null!);
+  const clicked = useRef<THREE.Object3D | undefined>(undefined);
   const [, params] = useRoute("/item/:id");
   const [, setLocation] = useLocation();
   useEffect(() => {
-    clicked.current = ref.current.getObjectByName(params?.id);
+    clicked.current = ref.current.getObjectByName(params?.id ?? "");
     if (clicked.current) {
-      clicked.current.parent.updateWorldMatrix(true, true);
-      clicked.current.parent.localToWorld(p.set(0, GOLDENRATIO / 2, 1.25));
-      clicked.current.parent.getWorldQuaternion(q);
+      clicked.current.parent!.updateWorldMatrix(true, true);
+      clicked.current.parent!.localToWorld(p.set(0, GOLDENRATIO / 2, 1.25));
+      clicked.current.parent!.getWorldQuaternion(q);
     } else {
       p.set(0, 0, 5.5);
       q.identity();
@@ -67,7 +77,7 @@ function Frames({
   return (
     <group
       ref={ref}
-      onClick={(e) => (
+      onClick={(e: ThreeEvent<MouseEvent>) => (
         e.stopPropagation(),
         setLocation(
           clicked.current === e.object ? "/" : "/item/" + e.object.name,
@@ -82,9 +92,17 @@ function Frames({
   );
 }
 
-function Frame({ url, c = new THREE.Color(), ...props }) {
-  const image = useRef();
-  const frame = useRef();
+function Frame({
+  url,
+  c = new THREE.Color(),
+  ...props
+}: ImageData & { c?: THREE.Color }) {
+  const image = useRef<
+    THREE.Mesh<THREE.BufferGeometry, THREE.ShaderMaterial & { zoom: number }>
+  >(null!);
+  const frame = useRef<
+    THREE.Mesh<THREE.BufferGeometry, THREE.MeshBasicMaterial>
+  >(null!);
   const [, params] = useRoute("/item/:id");
   const [hovered, hover] = useState(false);
   const [rnd] = useState(() => Math.random());
@@ -115,7 +133,10 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
     <group {...props}>
       <mesh
         name={name}
-        onPointerOver={(e) => (e.stopPropagation(), hover(true))}
+        onPointerOver={(e: ThreeEvent<PointerEvent>) => (
+          e.stopPropagation(),
+          hover(true)
+        )}
         onPointerOut={() => hover(false)}
         scale={[1, GOLDENRATIO, 0.05]}
         position={[0, GOLDENRATIO / 2, 0]}

@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import React, { Suspense, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, type ThreeElements } from "@react-three/fiber";
 import {
   Html,
   Environment,
@@ -8,14 +8,34 @@ import {
   ContactShadows,
   OrbitControls,
 } from "@react-three/drei";
+import { type GLTF } from "three-stdlib";
 import HeroPage from "./HeroPage";
 
 import macModel from "./mac-draco.glb?url";
 
-function Model(props) {
-  const group = useRef();
+type GLTFResult = GLTF & {
+  nodes: {
+    Cube008: THREE.Mesh;
+    Cube008_1: THREE.Mesh;
+    Cube008_2: THREE.Mesh;
+    keyboard: THREE.Mesh;
+    Cube002: THREE.Mesh;
+    Cube002_1: THREE.Mesh;
+    touchbar: THREE.Mesh;
+  };
+  materials: {
+    aluminium: THREE.MeshStandardMaterial;
+    "matte.001": THREE.MeshStandardMaterial;
+    keys: THREE.MeshStandardMaterial;
+    trackpad: THREE.MeshStandardMaterial;
+    touchbar: THREE.MeshStandardMaterial;
+  };
+};
+
+function Model(props: ThreeElements["group"]) {
+  const group = useRef<THREE.Group>(null!);
   // Load model
-  const { nodes, materials } = useGLTF(macModel);
+  const { nodes, materials } = useGLTF(macModel) as unknown as GLTFResult;
   // Make it float
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
