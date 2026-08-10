@@ -7,7 +7,7 @@
     "dev": "turbo dev2",
     "check": "turbo lint lint:examples lint:metadata lint:versions format:check",
     "lint": "turbo lint lint:examples lint:metadata lint:versions",
-    "lint:examples": "eslint examples",
+    "lint:examples": "eslint examples --max-warnings 81",
     "lint:metadata": "node bin/validate-pmndrs-metadata.mjs",
     "lint:versions": "syncpack lint",
     "fix:versions": "syncpack fix",

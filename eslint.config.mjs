@@ -47,7 +47,15 @@ const config = [
          161 examples -- so a fix that restarts an animation or re-runs an
          imperative mount effect would land unnoticed. Surfacing them is step
          one; correcting them is per-example work with a baseline to check
-         against. Raise this to "error" once that backlog is closed. */
+         against.
+
+         The 81 are a ceiling, not an allowance: `lint:examples` passes
+         `--max-warnings 81`, so a new violation fails the run even though the
+         backlog does not. Fixing one means lowering the number in
+         `package.json` in the same commit -- that is the ratchet. It counts
+         rather than fingerprints, so an addition and a deletion in one commit
+         net out; the screenshot baselines are what would close that hole, and
+         they are the reason this is not "error" yet. */
       "react-hooks/exhaustive-deps": "warn",
     },
   },
