@@ -7,6 +7,17 @@ import { LayerMaterial, Depth, Fresnel } from "lamina";
 import pmndrsModel from "./pmndrs.glb?url";
 import cursorModel from "./cursor.glb?url";
 
+import type { GLTF, LineMaterial } from "three-stdlib";
+import type { BodyProps, CylinderProps } from "@react-three/cannon";
+
+type PmndrsGLTFResult = GLTF & {
+  nodes: { logo: THREE.Mesh };
+};
+
+type CursorGLTFResult = GLTF & {
+  nodes: { Cube: THREE.Mesh };
+};
+
 const vec = new THREE.Vector3();
 const white = new THREE.MeshBasicMaterial({
   color: "#fefefe",
@@ -18,7 +29,7 @@ const black = new THREE.MeshBasicMaterial({
 });
 const cylinder = new THREE.CylinderGeometry(0.6, 0.6, 0.5, 3);
 
-export const App = ({ amount = 12 }) => (
+export const App = ({ amount = 12 }: { amount?: number }) => (
   <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 5], fov: 50 }}>
     <Physics gravity={[0, 1, 0]}>
       {Array.from({ length: amount }, (_, i) => {
@@ -43,8 +54,8 @@ export const App = ({ amount = 12 }) => (
   </Canvas>
 );
 
-function Vercel(props) {
-  const [ref, api] = useCylinder(() => ({
+function Vercel(props: CylinderProps) {
+  const [ref, api] = useCylinder<THREE.Mesh>(() => ({
     args: [0.6, 0.6, 0.5, 3],
     ...props,
   }));
@@ -60,14 +71,15 @@ function Vercel(props) {
   );
   return (
     <mesh ref={ref} geometry={cylinder} material={white}>
-      <Edges material={black} />
+      {/* Edges expects a LineMaterial; upstream intentionally hands it a MeshBasicMaterial */}
+      <Edges material={black as unknown as LineMaterial} />
     </mesh>
   );
 }
 
-function Pmndrs(props) {
-  const { nodes } = useGLTF(pmndrsModel);
-  const [ref, api] = useCompoundBody(() => ({
+function Pmndrs(props: BodyProps) {
+  const { nodes } = useGLTF(pmndrsModel) as unknown as PmndrsGLTFResult;
+  const [ref, api] = useCompoundBody<THREE.Group>(() => ({
     ...props,
     shapes: [
       { type: "Box", args: [0.65, 0.65, 0.5], position: [0.18, 0.18, 0] },
@@ -93,16 +105,21 @@ function Pmndrs(props) {
         geometry={nodes.logo.geometry}
         material={white}
       >
-        <Edges scale={1.005} material={black} />
+        {/* Edges expects a LineMaterial; upstream intentionally hands it a MeshBasicMaterial */}
+        <Edges scale={1.005} material={black as unknown as LineMaterial} />
       </mesh>
     </group>
   );
 }
 
-function Cursor({ speed = 10, gradient = 0.7, ...props }) {
-  const { nodes } = useGLTF(cursorModel);
+function Cursor({
+  speed = 10,
+  gradient = 0.7,
+  ...props
+}: { speed?: number; gradient?: number } & BodyProps) {
+  const { nodes } = useGLTF(cursorModel) as unknown as CursorGLTFResult;
   const viewport = useThree((state) => state.viewport);
-  const [ref, api] = useCompoundBody(() => ({
+  const [ref, api] = useCompoundBody<THREE.Group>(() => ({
     ...props,
     shapes: [
       {
