@@ -1,0 +1,21 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Chromatic Aberration",
+  "description": "A Suzanne model staged with drei's Stage helper, fringed with @react-three/postprocessing's ChromaticAberration effect.",
+  "tags": ["postprocessing", "chromatic-aberration"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/uoyge",
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing",
+    "leva"
+  ],
+  "assets": [
+    {
+      "name": "Suzanne",
+      "files": ["src/suzanne.gltf"],
+      "notes": "Blender's mascot mesh, bundled with the original CodeSandbox demo."
+    }
+  ]
+}
