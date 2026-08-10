@@ -10,7 +10,8 @@ import {
 import { useEffect, useState } from "react";
 import { SSGIEffect, VelocityDepthNormalPass } from "./realism-effects/v2";
 
-export function Effects() {
+// The component renders nothing; `undefined` (not `void`) keeps it a valid JSX component.
+export function Effects(): undefined {
   const gl = useThree((state) => state.gl);
   const scene = useThree((state) => state.scene);
   const camera = useThree((state) => state.camera);

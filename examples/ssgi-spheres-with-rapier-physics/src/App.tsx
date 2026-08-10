@@ -1,8 +1,13 @@
 import * as THREE from "three";
-import { useRef, useReducer, useMemo } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { type ReactNode, useRef, useReducer, useMemo } from "react";
+import { Canvas, useFrame, type CanvasProps } from "@react-three/fiber";
 import { Environment, Lightformer } from "@react-three/drei";
-import { BallCollider, Physics, RigidBody } from "@react-three/rapier";
+import {
+  BallCollider,
+  Physics,
+  RigidBody,
+  type RapierRigidBody,
+} from "@react-three/rapier";
 import { easing } from "maath";
 import { Effects } from "./Effects";
 
@@ -34,7 +39,7 @@ const shuffle = (accent = 0) => [
   { color: accents[accent], roughness: 0.1, accent: true },
 ];
 
-export default function App(props) {
+export default function App(props: CanvasProps) {
   const [accent, click] = useReducer((state) => ++state % accents.length, 0);
   const connectors = useMemo(() => shuffle(accent), [accent]);
   return (
@@ -99,6 +104,20 @@ export default function App(props) {
   );
 }
 
+type SphereProps = {
+  position?: [number, number, number];
+  children?: ReactNode;
+  vec?: THREE.Vector3;
+  scale?: number;
+  r?: (range: number) => number;
+  accent?: boolean;
+  color?: string;
+  roughness?: number;
+  metalness?: number;
+  transparent?: boolean;
+  opacity?: number;
+};
+
 function Sphere({
   position,
   children,
@@ -108,14 +127,20 @@ function Sphere({
   accent,
   color = "white",
   ...props
-}) {
-  const api = useRef();
-  const ref = useRef();
-  const pos = useMemo(() => position || [r(10), r(10), r(10)], []);
+}: SphereProps) {
+  const api = useRef<RapierRigidBody>(null!);
+  const ref = useRef<
+    THREE.Mesh<THREE.SphereGeometry, THREE.MeshStandardMaterial>
+  >(null!);
+  const pos = useMemo<[number, number, number]>(
+    () => position || [r(10), r(10), r(10)],
+    [],
+  );
   useFrame((state, delta) => {
     delta = Math.min(0.1, delta);
     api.current?.applyImpulse(
       vec.copy(api.current.translation()).negate().multiplyScalar(0.2),
+      true,
     );
     easing.dampC(ref.current.material.color, color, 0.2, delta);
   });
@@ -138,8 +163,8 @@ function Sphere({
   );
 }
 
-function Pointer({ vec = new THREE.Vector3() }) {
-  const ref = useRef();
+function Pointer({ vec = new THREE.Vector3() }: { vec?: THREE.Vector3 }) {
+  const ref = useRef<RapierRigidBody>(null!);
   useFrame(({ mouse, viewport }) =>
     ref.current?.setNextKinematicTranslation(
       vec.set(
