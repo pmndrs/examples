@@ -1,4 +1,4 @@
-import { createRef } from "react";
+import { createRef, type RefObject } from "react";
 import { Vector3 } from "three";
 
 import ph1Img from "./ph1.jpg";
@@ -77,7 +77,8 @@ const state = {
     { x: -5, offset: 7, pos: new Vector3(), scale: 1.8, factor: 2 },
     { x: 0, offset: 8, pos: new Vector3(), scale: 2.5, factor: 6 },
   ],
-  top: createRef(),
+  // the scroll handler fills this in on mount, before the first frame runs
+  top: createRef<number>() as RefObject<number>,
 };
 
 export default state;

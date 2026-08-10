@@ -1,13 +1,19 @@
 import React, { createContext, useRef, useContext } from "react";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useFrame, useThree, type ThreeElements } from "@react-three/fiber";
+import { type Group } from "three";
 import lerp from "lerp";
 import state from "./store";
 
 const offsetContext = createContext(0);
 
-function Block({ children, offset, factor, ...props }) {
+type BlockProps = ThreeElements["group"] & {
+  offset?: number;
+  factor: number;
+};
+
+function Block({ children, offset, factor, ...props }: BlockProps) {
   const { offset: parentOffset, sectionHeight } = useBlock();
-  const ref = useRef();
+  const ref = useRef<Group>(null!);
   offset = offset !== undefined ? offset : parentOffset;
   useFrame(() => {
     const curY = ref.current.position.y;

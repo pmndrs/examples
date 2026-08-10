@@ -1,7 +1,13 @@
-import { ShaderMaterial } from "three";
+import { ShaderMaterial, type Texture } from "three";
+
+type RefractionMaterialOptions = {
+  envMap: Texture;
+  backfaceMap: Texture;
+  resolution: [number, number];
+};
 
 export default class RefractionMaterial extends ShaderMaterial {
-  constructor(options) {
+  constructor(options: RefractionMaterialOptions) {
     super({
       vertexShader: `varying vec3 worldNormal;
       varying vec3 viewDirection;

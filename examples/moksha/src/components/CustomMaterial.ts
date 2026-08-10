@@ -1,7 +1,7 @@
-import { ShaderMaterial, Color } from "three";
+import { ShaderMaterial, Color, type Texture } from "three";
 import { extend } from "@react-three/fiber";
 
-class CustomMaterial extends ShaderMaterial {
+export class CustomMaterial extends ShaderMaterial {
   constructor() {
     super({
       vertexShader: `uniform float scale;
@@ -41,42 +41,47 @@ class CustomMaterial extends ShaderMaterial {
     });
   }
 
-  set scale(value) {
+  set scale(value: number) {
     this.uniforms.scale.value = value;
   }
 
-  get scale() {
+  get scale(): number {
     return this.uniforms.scale.value;
   }
 
-  set shift(value) {
+  set shift(value: number) {
     this.uniforms.shift.value = value;
   }
 
-  get shift() {
+  get shift(): number {
     return this.uniforms.shift.value;
   }
 
-  set map(value) {
+  set map(value: Texture | null) {
     this.uniforms.hasTexture.value = !!value;
     this.uniforms.tex.value = value;
   }
 
-  get map() {
+  get map(): Texture | null {
     return this.uniforms.tex.value;
   }
 
-  get color() {
+  get color(): Color {
     return this.uniforms.color.value;
   }
-
-  get opacity() {
-    return this.uniforms.opacity.value;
-  }
-
-  set opacity(value) {
-    if (this.uniforms) this.uniforms.opacity.value = value;
-  }
 }
+
+// `opacity` is a plain property on THREE.Material and TypeScript forbids a subclass
+// from redeclaring it as an accessor, so install the pair on the prototype instead —
+// the descriptor is the same one a `get`/`set` in the class body would produce.
+Object.defineProperty(CustomMaterial.prototype, "opacity", {
+  configurable: true,
+  get(this: CustomMaterial): number {
+    return this.uniforms.opacity.value;
+  },
+  set(this: CustomMaterial, value: number) {
+    if (this.uniforms) this.uniforms.opacity.value = value;
+  },
+});
 
 extend({ CustomMaterial });

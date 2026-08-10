@@ -2,17 +2,24 @@ import { createRoot } from "react-dom/client";
 import React, { Suspense, useEffect, useRef, useMemo } from "react";
 import { Canvas, useLoader, useFrame } from "@react-three/fiber";
 import { Html } from "@react-three/drei";
-import { TextureLoader, LinearFilter } from "three";
+import {
+  TextureLoader,
+  LinearFilter,
+  type BufferGeometry,
+  type Mesh,
+  type Texture,
+} from "three";
 import lerp from "lerp";
 import { Text, MultilineText } from "./components/Text";
 import Diamonds from "./diamonds/Diamonds";
 import Plane from "./components/Plane";
 import { Block, useBlock } from "./blocks";
 import state from "./store";
+import type { CustomMaterial } from "./components/CustomMaterial";
 import "./styles.css";
 
 function Startup() {
-  const ref = useRef();
+  const ref = useRef<Mesh<BufferGeometry, CustomMaterial>>(null!);
   useFrame(
     () =>
       (ref.current.material.opacity = lerp(
@@ -31,7 +38,25 @@ function Startup() {
   );
 }
 
-function Paragraph({ image, index, offset, factor, header, aspect, text }) {
+type ParagraphProps = {
+  image: Texture;
+  index: number;
+  offset: number;
+  factor: number;
+  header: string;
+  aspect: number;
+  text: string;
+};
+
+function Paragraph({
+  image,
+  index,
+  offset,
+  factor,
+  header,
+  aspect,
+  text,
+}: ParagraphProps) {
   const { contentMaxWidth: w, canvasWidth, margin, mobile } = useBlock();
   const size = aspect < 1 && !mobile ? 0.65 : 1;
   const alignRight = (canvasWidth - w * size - margin) / 2;
@@ -169,8 +194,10 @@ function Content() {
 }
 
 function App() {
-  const scrollArea = useRef();
-  const onScroll = (e) => (state.top.current = e.target.scrollTop);
+  const scrollArea = useRef<HTMLDivElement>(null!);
+  // typed loosely enough that both the DOM event and the synthetic call below fit
+  const onScroll = (e: { target: EventTarget | null }) =>
+    (state.top.current = (e.target as HTMLDivElement).scrollTop);
   useEffect(() => void onScroll({ target: scrollArea.current }), []);
   return (
     <>
@@ -189,16 +216,18 @@ function App() {
         </Suspense>
       </Canvas>
       <div className="scrollArea" ref={scrollArea} onScroll={onScroll}>
-        {new Array(state.sections).fill().map((_, index) => (
-          <div
-            key={index}
-            id={"0" + index}
-            style={{ height: `${(state.pages / state.sections) * 100}vh` }}
-          />
-        ))}
+        {new Array<undefined>(state.sections)
+          .fill(undefined)
+          .map((_, index) => (
+            <div
+              key={index}
+              id={"0" + index}
+              style={{ height: `${(state.pages / state.sections) * 100}vh` }}
+            />
+          ))}
       </div>
     </>
   );
 }
 
-createRoot(document.getElementById("root")).render(<App />);
+createRoot(document.getElementById("root")!).render(<App />);

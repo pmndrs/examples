@@ -1,14 +1,27 @@
 import React, { forwardRef, useRef } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, type ThreeElements } from "@react-three/fiber";
+import { type ColorRepresentation, type Mesh, type Texture } from "three";
 import lerp from "lerp";
 import "./CustomMaterial";
+import type { CustomMaterial } from "./CustomMaterial";
 import { useBlock } from "../blocks";
 import state from "../store";
 
-const Plane = forwardRef(
+type PlaneProps = Omit<ThreeElements["mesh"], "args"> & {
+  color?: ColorRepresentation;
+  shift?: number;
+  opacity?: number;
+  args?: ThreeElements["planeGeometry"]["args"];
+  map?: Texture;
+  // forwarded verbatim to the mesh, the way the untyped version did
+  size?: number;
+  aspect?: number;
+};
+
+const Plane = forwardRef<Mesh, PlaneProps>(
   ({ color = "white", shift = 1, opacity = 1, args, map, ...props }, ref) => {
     const { viewportHeight, offsetFactor } = useBlock();
-    const material = useRef();
+    const material = useRef<CustomMaterial>(null!);
     let last = state.top.current;
     useFrame(() => {
       const { pages, top } = state;

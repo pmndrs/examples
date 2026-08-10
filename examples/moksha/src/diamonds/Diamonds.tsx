@@ -1,7 +1,15 @@
-import { WebGLRenderTarget, Object3D } from "three";
+import {
+  WebGLRenderTarget,
+  Object3D,
+  type InstancedMesh,
+  type Mesh,
+} from "three";
 import React, { useRef, useMemo, useLayoutEffect } from "react";
 import { useLoader, useThree, useFrame } from "@react-three/fiber";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import {
+  GLTFLoader,
+  type GLTF,
+} from "three/examples/jsm/loaders/GLTFLoader.js";
 import lerp from "lerp";
 import BackfaceMaterial from "./BackfaceMaterial";
 import RefractionMaterial from "./RefractionMaterial";
@@ -10,14 +18,21 @@ import state from "../store";
 
 import diamondModel from "./diamond.glb?url";
 
+type GLTFResult = GLTF & {
+  nodes: { pCone1_lambert1_0: Mesh };
+};
+
 const dummy = new Object3D();
 export default function Diamonds() {
-  const { nodes } = useLoader(GLTFLoader, diamondModel);
-  useLayoutEffect(() => nodes.pCone1_lambert1_0.geometry.center(), []);
+  const { nodes } = useLoader(
+    GLTFLoader,
+    diamondModel,
+  ) as unknown as GLTFResult;
+  useLayoutEffect(() => void nodes.pCone1_lambert1_0.geometry.center(), []);
 
   const { size, gl, scene, camera, clock } = useThree();
   const { contentMaxWidth, sectionHeight, mobile } = useBlock();
-  const model = useRef();
+  const model = useRef<InstancedMesh>(null!);
   const ratio = gl.getPixelRatio();
 
   const [envFbo, backfaceFbo, backfaceMaterial, refractionMaterial] =
@@ -36,7 +51,12 @@ export default function Diamonds() {
         backfaceMap: backfaceFbo.texture,
         resolution: [size.width * ratio, size.height * ratio],
       });
-      return [envFbo, backfaceFbo, backfaceMaterial, refractionMaterial];
+      return [
+        envFbo,
+        backfaceFbo,
+        backfaceMaterial,
+        refractionMaterial,
+      ] as const;
     }, [size, ratio]);
 
   useFrame(() => {
@@ -87,7 +107,7 @@ export default function Diamonds() {
     <instancedMesh
       ref={model}
       layers={1}
-      args={[nodes.pCone1_lambert1_0.geometry, null, state.diamonds.length]}
+      args={[nodes.pCone1_lambert1_0.geometry, null!, state.diamonds.length]}
       position={[0, 0, 50]}
     />
   );
