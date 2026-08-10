@@ -7,12 +7,54 @@ Source: https://sketchfab.com/3d-models/room-6417cbc1870a4a1691cca06912ae0369
 Title: Room
 */
 
+import * as THREE from "three";
+import { type GLTF } from "three-stdlib";
 import { useGLTF } from "@react-three/drei";
+import { type ThreeElements } from "@react-three/fiber";
 
 import roomModel from "./room-transformed.glb?url";
 
-export function Model(props) {
-  const { nodes, materials } = useGLTF(roomModel);
+type GLTFResult = GLTF & {
+  nodes: {
+    Object_2: THREE.Mesh;
+    Object_3: THREE.Mesh;
+    Object_4: THREE.Mesh;
+    Object_6: THREE.Mesh;
+    Object_7: THREE.Mesh;
+    Object_8: THREE.Mesh;
+    Object_9: THREE.Mesh;
+    Object_10: THREE.Mesh;
+    Object_11: THREE.Mesh;
+    Object_12: THREE.Mesh;
+    Object_16: THREE.Mesh;
+    Object_5: THREE.Mesh;
+    Object_13: THREE.Mesh;
+    Object_14: THREE.Mesh;
+    Object_15: THREE.Mesh;
+    Object_17: THREE.Mesh;
+    Object_18: THREE.Mesh;
+  };
+  materials: {
+    Material: THREE.MeshStandardMaterial;
+    "Material.002": THREE.MeshStandardMaterial;
+    "Material.003": THREE.MeshStandardMaterial;
+    krzeslo_1: THREE.MeshStandardMaterial;
+    krzeslo_okno: THREE.MeshStandardMaterial;
+    krzeslo_prawe: THREE.MeshStandardMaterial;
+    krzeslo_srodek: THREE.MeshStandardMaterial;
+    podloga: THREE.MeshStandardMaterial;
+    sciana_okno: THREE.MeshStandardMaterial;
+    "stolik.001": THREE.MeshStandardMaterial;
+    "Material.006": THREE.MeshStandardMaterial;
+    "Material.004": THREE.MeshStandardMaterial;
+    "Material.005": THREE.MeshStandardMaterial;
+    mata: THREE.MeshStandardMaterial;
+    stolik: THREE.MeshStandardMaterial;
+  };
+};
+
+export function Model(props: ThreeElements["group"]) {
+  const { nodes, materials } = useGLTF(roomModel) as unknown as GLTFResult;
   return (
     <group {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]}>

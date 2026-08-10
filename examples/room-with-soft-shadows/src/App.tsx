@@ -1,10 +1,12 @@
 import { useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import * as THREE from "three";
+import { Canvas, useFrame, type ThreeElements } from "@react-three/fiber";
 import {
   SoftShadows,
   Float,
   CameraControls,
   Sky,
+  type SkyProps,
   PerformanceMonitor,
 } from "@react-three/drei";
 import { useControls } from "leva";
@@ -13,7 +15,7 @@ import { easing } from "maath";
 import { Model as Room } from "./Room";
 
 function Light() {
-  const ref = useRef();
+  const ref = useRef<THREE.Group>(null!);
   useFrame((state, delta) => {
     easing.dampE(
       ref.current.rotation,
@@ -40,9 +42,16 @@ function Light() {
   );
 }
 
+// SkyProps doesn't declare `scale`, but Sky forwards unrecognized props to the
+// underlying <primitive> (a three-stdlib Sky mesh), which does accept it.
+const skyProps: SkyProps & Pick<ThreeElements["primitive"], "scale"> = {
+  inclination: 0.52,
+  scale: 20,
+};
+
 export default function App() {
   const [bad, set] = useState(false);
-  const { impl, debug, enabled, samples, ...config } = useControls({
+  const { debug, enabled, samples, ...config } = useControls({
     debug: true,
     enabled: true,
     size: { value: 35, min: 0, max: 100, step: 0.1 },
@@ -68,7 +77,7 @@ export default function App() {
       <Sphere />
       <Sphere position={[2, 4, -8]} scale={0.9} />
       <Sphere position={[-2, 2, -8]} scale={0.8} />
-      <Sky inclination={0.52} scale={20} />
+      <Sky {...skyProps} />
     </Canvas>
   );
 }
@@ -78,12 +87,24 @@ function Sphere({
   floatIntensity = 15,
   position = [0, 5, -8],
   scale = 1,
+}: {
+  color?: string;
+  floatIntensity?: number;
+  position?: ThreeElements["mesh"]["position"];
+  scale?: ThreeElements["mesh"]["scale"];
 }) {
   return (
     <Float floatIntensity={floatIntensity}>
       <mesh castShadow position={position} scale={scale}>
         <sphereGeometry />
-        <meshBasicMaterial color={color} roughness={1} />
+        <meshBasicMaterial
+          color={color}
+          // MeshBasicMaterial doesn't type `roughness` (it's unlit and ignores the
+          // value), but the original example sets it, so keep it via drei's own shape.
+          {...({
+            roughness: 1,
+          } as unknown as ThreeElements["meshBasicMaterial"])}
+        />
       </mesh>
     </Float>
   );

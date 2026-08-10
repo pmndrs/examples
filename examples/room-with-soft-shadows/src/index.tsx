@@ -3,7 +3,7 @@ import "./styles.css";
 import App from "./App";
 import { Leva } from "leva";
 
-createRoot(document.getElementById("root")).render(
+createRoot(document.getElementById("root")!).render(
   <>
     <App />
     <Leva collapsed />
