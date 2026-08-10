@@ -1,5 +1,6 @@
-import { Suspense, useMemo, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Suspense, useMemo, useRef, type FC } from "react";
+import * as THREE from "three";
+import { Canvas, useFrame, type ThreeElements } from "@react-three/fiber";
 import {
   useGLTF,
   useScroll,
@@ -8,13 +9,16 @@ import {
   Merged,
   Text,
   MeshReflectorMaterial,
+  type InstanceProps,
 } from "@react-three/drei";
 
 import cabinModel from "./cabin-transformed.glb?url";
 import seatModel from "./seat-transformed.glb?url";
 
+type Models = FC<InstanceProps> & Record<string, FC<InstanceProps>>;
+
 function Train() {
-  const ref = useRef();
+  const ref = useRef<THREE.Group>(null!);
   const scroll = useScroll();
   const [cabin, seat] = useGLTF([cabinModel, seatModel]);
   const meshes = useMemo(
@@ -69,7 +73,11 @@ function Train() {
   );
 }
 
-const Quarter = ({ models, color, ...props }) => (
+const Quarter = ({
+  models,
+  color,
+  ...props
+}: { models: Models; color: string } & ThreeElements["group"]) => (
   <group {...props}>
     <models.Seat color={color} position={[-0.35, 0, 0.7]} />
     <models.Seat color={color} position={[0.35, 0, 0.7]} />
@@ -86,7 +94,11 @@ const Quarter = ({ models, color, ...props }) => (
   </group>
 );
 
-const Row = ({ models, color, ...props }) => (
+const Row = ({
+  models,
+  color,
+  ...props
+}: { models: Models; color: string } & ThreeElements["group"]) => (
   <group {...props}>
     <Quarter models={models} color={color} position={[-1.2, -0.45, 9.75]} />
     <Quarter models={models} color={color} position={[1.2, -0.45, 9.75]} />
@@ -99,7 +111,12 @@ const Cabin = ({
   seatColor = "white",
   name,
   ...props
-}) => (
+}: {
+  models: Models;
+  color?: string;
+  seatColor?: string;
+  name: string;
+} & ThreeElements["group"]) => (
   <group {...props}>
     <Text
       fontSize={4}

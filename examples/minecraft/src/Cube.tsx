@@ -1,6 +1,11 @@
 import { useCallback, useRef, useState } from "react";
+import { type ThreeEvent } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
-import { RigidBody } from "@react-three/rapier";
+import {
+  RigidBody,
+  type RapierRigidBody,
+  type RigidBodyProps,
+} from "@react-three/rapier";
 import { create } from "zustand";
 
 import dirtImg from "./dirt.jpg";
@@ -9,7 +14,14 @@ import dirtImg from "./dirt.jpg";
 // In order to make this scale this has to be one instanced mesh, then it could easily be
 // hundreds of thousands.
 
-const useCubeStore = create((set) => ({
+type CubeCoords = [x: number, y: number, z: number];
+
+type CubeStore = {
+  cubes: CubeCoords[];
+  addCube: (x: number, y: number, z: number) => void;
+};
+
+const useCubeStore = create<CubeStore>((set) => ({
   cubes: [],
   addCube: (x, y, z) =>
     set((state) => ({ cubes: [...state.cubes, [x, y, z]] })),
@@ -20,20 +32,20 @@ export const Cubes = () => {
   return cubes.map((coords, index) => <Cube key={index} position={coords} />);
 };
 
-export function Cube(props) {
-  const ref = useRef();
-  const [hover, set] = useState(null);
+export function Cube(props: RigidBodyProps) {
+  const ref = useRef<RapierRigidBody>(null!);
+  const [hover, set] = useState<number | null>(null);
   const addCube = useCubeStore((state) => state.addCube);
   const texture = useTexture(dirtImg);
-  const onMove = useCallback((e) => {
+  const onMove = useCallback((e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
-    set(Math.floor(e.faceIndex / 2));
+    set(Math.floor(e.faceIndex! / 2));
   }, []);
   const onOut = useCallback(() => set(null), []);
-  const onClick = useCallback((e) => {
+  const onClick = useCallback((e: ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
     const { x, y, z } = ref.current.translation();
-    const dir = [
+    const dir: CubeCoords[] = [
       [x + 1, y, z],
       [x - 1, y, z],
       [x, y + 1, z],
@@ -41,7 +53,7 @@ export function Cube(props) {
       [x, y, z + 1],
       [x, y, z - 1],
     ];
-    addCube(...dir[Math.floor(e.faceIndex / 2)]);
+    addCube(...dir[Math.floor(e.faceIndex! / 2)]);
   }, []);
   return (
     <RigidBody {...props} type="fixed" colliders="cuboid" ref={ref}>

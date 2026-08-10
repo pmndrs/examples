@@ -1,6 +1,11 @@
 import * as THREE from "three";
-import { useLayoutEffect, useRef, useState } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { useLayoutEffect, useRef, useState, type RefObject } from "react";
+import {
+  Canvas,
+  useFrame,
+  useThree,
+  type ThreeElements,
+} from "@react-three/fiber";
 import {
   Html,
   Mask,
@@ -11,11 +16,11 @@ import {
 } from "@react-three/drei";
 import useSpline from "@splinetool/r3f-spline";
 import Embed from "./Embed";
-import { GLTFExporter } from "three/examples/jsm/exporters/GLTFExporter";
+import { GLTFExporter } from "three/examples/jsm/exporters/GLTFExporter.js";
 
 export function App() {
-  const container = useRef();
-  const domContent = useRef();
+  const container = useRef<HTMLDivElement>(null!);
+  const domContent = useRef<HTMLDivElement>(null!);
   return (
     <div ref={container} className="content-container">
       {/* Container for the HTML view */}
@@ -95,15 +100,22 @@ function Test() {
 
       //downloadJSON(gltf)
     },
-    {},
+    // the original code passes an empty object here instead of an error handler;
+    // preserved as-is via a narrowing cast to avoid changing runtime behaviour
+    {} as unknown as (error: ErrorEvent) => void,
   );
+
+  return null;
 }
 
-function Scene({ portal, ...props }) {
-  let timeout = null;
+function Scene({
+  portal,
+  ...props
+}: ThreeElements["group"] & { portal: RefObject<HTMLDivElement> }) {
+  let timeout: number | null = null;
   const v = new THREE.Vector3();
   const wheel = useRef(0);
-  const hand = useRef();
+  const hand = useRef<THREE.Group>(null!);
   const [clicked, click] = useState(false);
   const { nodes, materials } = useSpline(
     import.meta.env.BASE_URL.replace(/\/?$/, "/") + "scroll.splinecode",
@@ -205,15 +217,15 @@ function Scene({ portal, ...props }) {
               onWheel={(e) => {
                 wheel.current = -e.deltaY / 2;
                 // Simple defer to reset wheel offset since the browser will never let delta be zero
-                clearTimeout(timeout);
+                clearTimeout(timeout ?? undefined);
                 timeout = setTimeout(() => (wheel.current = 0), 100);
               }}
               onPointerDown={(e) => {
-                e.target.setPointerCapture(e.pointerId);
+                (e.target as HTMLElement).setPointerCapture(e.pointerId);
                 click(true);
               }}
               onPointerUp={(e) => {
-                e.target.releasePointerCapture(e.pointerId);
+                (e.target as HTMLElement).releasePointerCapture(e.pointerId);
                 click(false);
               }}
               receiveShadow
@@ -228,7 +240,16 @@ function Scene({ portal, ...props }) {
   );
 }
 
-const Float = ({ object, intensity = 300, rotation = 1, ...props }) => (
+const Float = ({
+  object,
+  intensity = 300,
+  rotation = 1,
+  ...props
+}: {
+  object: THREE.Object3D | THREE.Object3D[];
+  intensity?: number;
+  rotation?: number;
+} & Omit<ThreeElements["group"], "ref">) => (
   <FloatImpl floatIntensity={intensity} rotationIntensity={rotation} speed={2}>
     <Clone object={object} {...props} />
   </FloatImpl>
