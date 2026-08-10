@@ -1,5 +1,6 @@
 import { Suspense, useState } from "react";
-import { Canvas, useThree } from "@react-three/fiber";
+import * as THREE from "three";
+import { Canvas, useThree, type ThreeElements } from "@react-three/fiber";
 import {
   OrbitControls,
   TransformControls,
@@ -8,19 +9,40 @@ import {
   useCursor,
 } from "@react-three/drei";
 import { proxy, useSnapshot } from "valtio";
+import { type GLTF } from "three-stdlib";
 
 import model from "./compressed.glb?url";
 
 // Reactive state model, using Valtio ...
-const modes = ["translate", "rotate", "scale"];
-const state = proxy({ current: null, mode: 0 });
+const modes = ["translate", "rotate", "scale"] as const;
+const state = proxy<{ current: string | null; mode: number }>({
+  current: null,
+  mode: 0,
+});
 
-function Model({ name, ...props }) {
+type GLTFResult = GLTF & {
+  nodes: {
+    Curly: THREE.Mesh;
+    DNA: THREE.Mesh;
+    Headphones: THREE.Mesh;
+    Notebook: THREE.Mesh;
+    Rocket003: THREE.Mesh;
+    Roundcube001: THREE.Mesh;
+    Table: THREE.Mesh;
+    VR_Headset: THREE.Mesh;
+    Zeppelin: THREE.Mesh;
+  };
+};
+
+function Model({
+  name,
+  ...props
+}: { name: keyof GLTFResult["nodes"] } & ThreeElements["mesh"]) {
   // Ties this component to the state model
   const snap = useSnapshot(state);
   // Fetching the GLTF, nodes is a collection of all the meshes
   // It's cached/memoized, it only gets loaded and parsed once
-  const { nodes } = useGLTF(model);
+  const { nodes } = useGLTF(model) as unknown as GLTFResult;
   // Feed hover state into useCursor, which sets document.body.style.cursor to pointer|auto
   const [hovered, setHovered] = useState(false);
   useCursor(hovered);

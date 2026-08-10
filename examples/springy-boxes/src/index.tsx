@@ -1,8 +1,8 @@
 import { createRoot } from "react-dom/client";
 import * as THREE from "three";
 import React, { useEffect } from "react";
-import { Canvas } from "@react-three/fiber";
-import { useSprings, a } from "@react-spring/three";
+import { Canvas, type ThreeElements } from "@react-three/fiber";
+import { useSprings, a, type AnimatedProps } from "@react-spring/three";
 import "./styles.css";
 
 const length = 35;
@@ -15,15 +15,27 @@ const colors = [
   "lightblue",
 ];
 const data = Array.from({ length }, () => ({
-  args: [0.1 + Math.random() * 9, 0.1 + Math.random() * 9, 10],
+  args: [0.1 + Math.random() * 9, 0.1 + Math.random() * 9, 10] as [
+    number,
+    number,
+    number,
+  ],
 }));
-const random = (i) => {
+const random = (i: number) => {
   const r = Math.random();
   return {
-    position: [100 - Math.random() * 200, 100 - Math.random() * 200, i * 1.5],
+    position: [
+      100 - Math.random() * 200,
+      100 - Math.random() * 200,
+      i * 1.5,
+    ] as [number, number, number],
     color: colors[Math.round(Math.random() * (colors.length - 1))],
-    scale: [1 + r * 14, 1 + r * 14, 1],
-    rotation: [0, 0, THREE.MathUtils.degToRad(Math.round(Math.random()) * 45)],
+    scale: [1 + r * 14, 1 + r * 14, 1] as [number, number, number],
+    rotation: [
+      0,
+      0,
+      THREE.MathUtils.degToRad(Math.round(Math.random()) * 45),
+    ] as [number, number, number],
   };
 };
 
@@ -42,7 +54,15 @@ function Content() {
     [],
   );
   return data.map((d, index) => (
-    <a.mesh key={index} {...springs[index]} castShadow receiveShadow>
+    <a.mesh
+      key={index}
+      // react-spring's MathType typing for Euler-like props can't express a
+      // SpringValue<[number, number, number]> for `rotation`, though it
+      // animates correctly at runtime
+      {...(springs[index] as unknown as AnimatedProps<ThreeElements["mesh"]>)}
+      castShadow
+      receiveShadow
+    >
       <boxGeometry args={d.args} />
       <a.meshStandardMaterial
         color={springs[index].color}
@@ -53,7 +73,7 @@ function Content() {
   ));
 }
 
-createRoot(document.getElementById("root")).render(
+createRoot(document.getElementById("root")!).render(
   <Canvas flat shadows camera={{ position: [0, 0, 100], fov: 100 }}>
     <pointLight decay={0} intensity={0.5 * Math.PI} />
     <ambientLight intensity={1.85 * Math.PI} />
