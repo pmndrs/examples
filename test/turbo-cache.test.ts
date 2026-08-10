@@ -55,7 +55,7 @@ function withTouched<T>(file: string, run: () => T): T {
   }
 }
 
-const LINT = ["lint", "lint:metadata", "lint:versions"];
+const LINT = ["lint", "lint:examples", "lint:metadata", "lint:versions"];
 const FORMAT = ["format:check"];
 const BUILD = ["build2"];
 
@@ -120,6 +120,37 @@ describe("lint", () => {
     });
   });
 
+  it("re-runs the examples pass when an example source moves", () => {
+    const before = dryRun(LINT);
+
+    withTouched(EXAMPLE_SOURCE, () => {
+      const after = dryRun(LINT);
+
+      expect(after.get("//#lint:examples")!.hash).not.toBe(
+        before.get("//#lint:examples")!.hash,
+      );
+      expect(after.get("//#lint:versions")!.hash).toBe(
+        before.get("//#lint:versions")!.hash,
+      );
+    });
+  });
+
+  it("leaves the examples pass alone for a non-source change", () => {
+    const before = hashOf("//#lint:examples", LINT);
+
+    withTouched("examples/wireframes/pmndrs.json", () => {
+      expect(hashOf("//#lint:examples", LINT)).toBe(before);
+    });
+  });
+
+  it("re-runs the examples pass for its own config", () => {
+    const before = hashOf("//#lint:examples", LINT);
+
+    withTouched("eslint.config.mjs", () => {
+      expect(hashOf("//#lint:examples", LINT)).not.toBe(before);
+    });
+  });
+
   it("re-runs syncpack for its config, but not the metadata check", () => {
     const before = dryRun(LINT);
 
@@ -165,6 +196,7 @@ describe("hash stability", () => {
     for (const [taskId, tasks] of [
       ["//#format:check", FORMAT],
       ["//#lint:metadata", LINT],
+      ["//#lint:examples", LINT],
       ["website#lint", LINT],
       [`${EXAMPLE}#build2`, BUILD],
     ] as const) {

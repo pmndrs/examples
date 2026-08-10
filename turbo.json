@@ -35,6 +35,10 @@
     "lint": {
       "dependsOn": ["^lint"]
     },
+    "//#lint:examples": {
+      "inputs": ["eslint.config.mjs", "examples/*/**/*.{js,jsx,ts,tsx}"],
+      "outputs": []
+    },
     "//#lint:metadata": {
       "inputs": [
         "bin/validate-pmndrs-metadata.mjs",
