@@ -1,5 +1,5 @@
-import { useState, useRef } from "react";
-import { Canvas, addEffect } from "@react-three/fiber";
+import { useState, useRef, type ReactNode } from "react";
+import { Canvas, addEffect, type ThreeElements } from "@react-three/fiber";
 import {
   View,
   Preload,
@@ -37,12 +37,7 @@ export function App() {
           has begun 3 Sep 2021.
           <View className="view translateX">
             <Common color="lightpink" />
-            <PivotControls
-              lineWidth={3}
-              depthTest={false}
-              displayValues={false}
-              scale={2}
-            >
+            <PivotControls lineWidth={3} depthTest={false} scale={2}>
               <Soda scale={6} position={[0, -1.6, 0]} />
             </PivotControls>
             <OrbitControls makeDefault />
@@ -81,7 +76,7 @@ export function App() {
             right: 0,
             overflow: "hidden",
           }}
-          eventSource={document.getElementById("root")}
+          eventSource={document.getElementById("root")!}
         >
           <View.Port />
           <Preload all />
@@ -91,7 +86,7 @@ export function App() {
   );
 }
 
-function Common({ color }) {
+function Common({ color }: { color?: string }) {
   return (
     <>
       {color && <color attach="background" args={[color]} />}
@@ -109,8 +104,16 @@ function Common({ color }) {
   );
 }
 
-function Link({ href, text, children }) {
-  const ref = useRef();
+function Link({
+  href,
+  text,
+  children,
+}: {
+  href: string;
+  text: string;
+  children: ReactNode;
+}) {
+  const ref = useRef<HTMLElement>(null!);
   const [hovered, hover] = useState(false);
   return (
     <a
@@ -119,7 +122,8 @@ function Link({ href, text, children }) {
       onPointerOut={() => hover(false)}
       onPointerMove={(e) => {
         const x = e.nativeEvent.offsetX;
-        const y = e.nativeEvent.offsetY - e.target.offsetTop - 100;
+        const y =
+          e.nativeEvent.offsetY - (e.target as HTMLElement).offsetTop - 100;
         ref.current.style.transform = `translate3d(${x}px,${y}px,0)`;
       }}
     >

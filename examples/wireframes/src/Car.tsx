@@ -7,18 +7,32 @@ Source: https://sketchfab.com/3d-models/car-acccd15d4e454399a39dbe40f4f6df71
 Title: Car
 */
 
-import { useEffect, useRef } from "react";
+import { type ComponentProps, useEffect, useRef } from "react";
+import * as THREE from "three";
+import { type GLTF } from "three-stdlib";
 import { useGLTF, useAnimations, Wireframe } from "@react-three/drei";
 
 import carModel from "./car.glb?url";
 
-export function Model(opts) {
-  const group = useRef();
-  const { nodes, materials, animations } = useGLTF(carModel);
+type GLTFResult = GLTF & {
+  nodes: {
+    _rootJoint: THREE.Bone;
+    Object_78: THREE.SkinnedMesh;
+  };
+  materials: {
+    Mat_Robot: THREE.MeshStandardMaterial;
+  };
+};
+
+export function Model(opts: ComponentProps<typeof Wireframe>) {
+  const group = useRef<THREE.Group>(null!);
+  const { nodes, materials, animations } = useGLTF(
+    carModel,
+  ) as unknown as GLTFResult;
   const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
-    actions["Idle.1"].reset().play();
+    actions["Idle.1"]!.reset().play();
   }, [actions]);
 
   return (

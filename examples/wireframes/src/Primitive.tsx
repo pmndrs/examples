@@ -1,6 +1,7 @@
+import { type ComponentProps } from "react";
 import { Icosahedron, Wireframe, Float } from "@react-three/drei";
 
-export function Primitive(opts) {
+export function Primitive(opts: ComponentProps<typeof Wireframe>) {
   return (
     <Float floatIntensity={4} rotationIntensity={4}>
       <Icosahedron args={[1, 1]}>

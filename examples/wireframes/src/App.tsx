@@ -1,4 +1,5 @@
-import { Suspense, useEffect, useRef } from "react";
+import { type ComponentRef, Suspense, useEffect, useRef } from "react";
+import * as THREE from "three";
 import { Canvas, useThree } from "@react-three/fiber";
 import {
   CameraControls,
@@ -23,8 +24,12 @@ function Thing() {
   });
 
   const [{ background, ...opts }, set] = useOptions();
-  const controls = useThree((s) => s.controls);
-  const ref = useRef();
+  // s.controls is typed as THREE.EventDispatcher | null; narrow it to the
+  // concrete controls instance that <CameraControls /> assigns it to.
+  const controls = useThree((s) => s.controls) as unknown as ComponentRef<
+    typeof CameraControls
+  > | null;
+  const ref = useRef<THREE.Group>(null!);
 
   useEffect(() => {
     if (controls && ref?.current) {

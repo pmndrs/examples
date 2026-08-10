@@ -1,10 +1,10 @@
-import { useMemo } from "react";
+import { type ComponentProps, useMemo } from "react";
 import * as THREE from "three";
 import { Float, Box, Wireframe } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { patchShaders } from "gl-noise/build/glNoise.m";
 
-export function Shader(opts) {
+export function Shader(opts: ComponentProps<typeof Wireframe>) {
   const uniforms = useMemo(() => ({ uTime: { value: 0 } }), []);
 
   useFrame((_, dt) => {
@@ -34,7 +34,9 @@ export function Shader(opts) {
             }
           `
           }
-          fragmentShader={patchShaders(/* glsl */ `
+          // patchShaders is typed `string | string[]`; one shader in, one shader out
+          fragmentShader={
+            patchShaders(/* glsl */ `
             varying vec2 vUv;
             varying vec3 vPosition;
 
@@ -51,7 +53,8 @@ export function Shader(opts) {
               col.rg *= vUv;
               gl_FragColor = vec4(col, mask);
             }
-          `)}
+          `) as string
+          }
         />
       </Box>
     </Float>

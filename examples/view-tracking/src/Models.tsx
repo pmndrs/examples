@@ -1,6 +1,12 @@
 import { useState, useRef } from "react";
+import * as THREE from "three";
 import { useGLTF } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
+import {
+  useFrame,
+  type ThreeElements,
+  type ThreeEvent,
+} from "@react-three/fiber";
+import { type GLTF } from "three-stdlib";
 
 // From the poimandres market (https://market.pmnd.rs/), vendored locally since the original CDN is offline.
 import sodaModel from "./assets/soda-bottle.gltf?url";
@@ -10,10 +16,20 @@ import lightningModel from "./assets/lightning.gltf?url";
 import appleModel from "./assets/apple-half.gltf?url";
 import targetModel from "./assets/target-stand.gltf?url";
 
-export function Soda(props) {
-  const ref = useRef();
+type GLTFResult = GLTF & {
+  nodes: {
+    Mesh_sodaBottle: THREE.Mesh;
+    Mesh_sodaBottle_1: THREE.Mesh;
+  };
+  materials: {
+    red: THREE.MeshStandardMaterial;
+  };
+};
+
+export function Soda(props: ThreeElements["group"]) {
+  const ref = useRef<THREE.Group>(null!);
   const [hovered, spread] = useHover();
-  const { nodes, materials } = useGLTF(sodaModel);
+  const { nodes, materials } = useGLTF(sodaModel) as unknown as GLTFResult;
   useFrame((state, delta) => (ref.current.rotation.y += delta));
   return (
     <group ref={ref} {...props} {...spread} dispose={null}>
@@ -34,7 +50,13 @@ export function Soda(props) {
   );
 }
 
-function useHover() {
+function useHover(): [
+  boolean,
+  {
+    onPointerOver: (e: ThreeEvent<PointerEvent>) => void;
+    onPointerOut: () => void;
+  },
+] {
   const [hovered, hover] = useState(false);
   return [
     hovered,
@@ -42,30 +64,30 @@ function useHover() {
   ];
 }
 
-export function Duck(props) {
+export function Duck(props: ThreeElements["group"]) {
   const { scene } = useGLTF(duckModel);
   return <primitive object={scene} {...props} />;
 }
 
-export function Candy(props) {
+export function Candy(props: ThreeElements["group"]) {
   const { scene } = useGLTF(candyModel);
   useFrame((state, delta) => (scene.rotation.z = scene.rotation.y += delta));
   return <primitive object={scene} {...props} />;
 }
 
-export function Flash(props) {
+export function Flash(props: ThreeElements["group"]) {
   const { scene } = useGLTF(lightningModel);
   useFrame((state, delta) => (scene.rotation.y += delta));
   return <primitive object={scene} {...props} />;
 }
 
-export function Apple(props) {
+export function Apple(props: ThreeElements["group"]) {
   const { scene } = useGLTF(appleModel);
   useFrame((state, delta) => (scene.rotation.y += delta));
   return <primitive object={scene} {...props} />;
 }
 
-export function Target(props) {
+export function Target(props: ThreeElements["group"]) {
   const { scene } = useGLTF(targetModel);
   useFrame((state, delta) => (scene.rotation.y += delta));
   return <primitive object={scene} {...props} />;
