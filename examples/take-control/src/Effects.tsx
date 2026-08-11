@@ -43,7 +43,7 @@ export default function Effects() {
     <>
       <Sun onReady={setSun} />
       {sun && (
-        <EffectComposer multisampling={0}>
+        <EffectComposer multisampling={0} autoClear={false}>
           <GodRays sun={sun} exposure={exposure} decay={decay} blur={blur} />
           <Noise
             opacity={noiseOpacity}
