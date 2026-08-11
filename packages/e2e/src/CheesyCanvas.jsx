@@ -17,8 +17,47 @@ const STEP = 1 / 60;
 //
 const SETTLE = 3000;
 
+//
+// Keeps the compositor producing frames while the render loop is held at
+// `never`.
+//
+// Playwright will not capture a page until the browser hands it a fresh
+// composited frame, and drawing into a WebGL canvas does not itself schedule
+// one: with nothing else moving, Chrome simply stops committing. The first
+// screenshot then waits for a frame that never comes -- measured at ~29s on
+// `aquarium`, against ~80ms with this in place, and every screenshot after the
+// first is instant either way, which is what makes it look like a mystery
+// rather than a stall.
+//
+// One off-screen pixel on its own layer, moved every frame. It costs nothing,
+// it cannot reach the canvas we screenshot, and it is the entire fix.
+//
+function useCompositorHeartbeat() {
+  useEffect(() => {
+    const pixel = document.createElement("div");
+    pixel.style.cssText =
+      "position:fixed;top:-10px;left:-10px;width:1px;height:1px;will-change:transform";
+    document.body.appendChild(pixel);
+
+    let raf;
+    let odd = 0;
+    function beat() {
+      pixel.style.transform = `translateX(${(odd ^= 1)}px)`;
+      raf = requestAnimationFrame(beat);
+    }
+    beat();
+
+    return () => {
+      cancelAnimationFrame(raf);
+      pixel.remove();
+    };
+  }, []);
+}
+
 function SayCheese() {
   const advance = useThree((state) => state.advance);
+
+  useCompositorHeartbeat();
 
   useEffect(() => {
     let frame = 0;

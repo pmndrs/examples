@@ -32,7 +32,7 @@ const merged = join(location, ARCHIVES);
 // Earn a place here by measuring, never by reading the source -- `useFrame`
 // tells you nothing either way. Grow the list as `e2e-flaky` goes green.
 //
-const PUBLISHED = ["backdrop-and-cables", "baking-soft-shadows"];
+const PUBLISHED = ["aquarium", "backdrop-and-cables", "baking-soft-shadows"];
 
 const examples = PUBLISHED.map((name) => ({
   name,
