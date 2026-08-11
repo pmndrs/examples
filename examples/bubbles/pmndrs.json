@@ -3,7 +3,7 @@
   "title": "Bubbles",
   "description": "A metallic, mouse-reactive distorted sphere with floating instances, composited with Depth of Field, Bloom, BrightnessContrast, Noise and Vignette.",
   "tags": ["postprocessing", "bloom", "depth-of-field", "distortion"],
-  "authors": [],
+  "authors": ["Paul Henschel"],
   "source": "https://codesandbox.io/s/react-postprocessing-dof-blob-pqrpl",
   "libraries": [
     "@react-three/drei",

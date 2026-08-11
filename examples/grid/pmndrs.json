@@ -3,7 +3,7 @@
   "title": "Grid",
   "description": "A Suzanne model staged with drei's Stage helper, overlaid with @react-three/postprocessing's Grid effect.",
   "tags": ["postprocessing", "grid"],
-  "authors": [],
+  "authors": ["Sara Vieira"],
   "source": "https://codesandbox.io/s/9ebpg",
   "libraries": [
     "@react-three/drei",

@@ -3,7 +3,7 @@
   "title": "Pixelation",
   "description": "A Suzanne model staged with drei's Stage helper, blocked into chunky pixels by @react-three/postprocessing's Pixelation effect.",
   "tags": ["postprocessing", "pixelation"],
-  "authors": [],
+  "authors": ["Sara Vieira"],
   "source": "https://codesandbox.io/s/ed9yo",
   "libraries": [
     "@react-three/drei",

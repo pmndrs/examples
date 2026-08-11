@@ -3,7 +3,7 @@
   "title": "Sepia",
   "description": "A Suzanne model staged with drei's Stage helper, tinted sepia through @react-three/postprocessing's Sepia effect.",
   "tags": ["postprocessing", "sepia"],
-  "authors": [],
+  "authors": ["Sara Vieira"],
   "source": "https://codesandbox.io/s/6jyby",
   "libraries": [
     "@react-three/drei",

@@ -3,7 +3,7 @@
   "title": "Chromatic Aberration",
   "description": "A Suzanne model staged with drei's Stage helper, fringed with @react-three/postprocessing's ChromaticAberration effect.",
   "tags": ["postprocessing", "chromatic-aberration"],
-  "authors": [],
+  "authors": ["Sara Vieira"],
   "source": "https://codesandbox.io/s/uoyge",
   "libraries": [
     "@react-three/drei",

@@ -3,7 +3,7 @@
   "title": "Dot Screen",
   "description": "A Suzanne model staged with drei's Stage helper, halftoned through @react-three/postprocessing's DotScreen effect.",
   "tags": ["postprocessing", "dot-screen"],
-  "authors": [],
+  "authors": ["Sara Vieira"],
   "source": "https://codesandbox.io/s/xt3fb",
   "libraries": [
     "@react-three/drei",
