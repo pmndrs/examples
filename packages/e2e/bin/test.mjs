@@ -39,6 +39,10 @@ function startVite(base = "/", timeout = 30000) {
 const __filename = fileURLToPath(import.meta.url); // Converts the URL to a file path
 const __dirname = dirname(__filename); // Gets the directory name
 const playwrightConfigPath = resolve(__dirname, "../playwright.config.ts");
+// Per-example, because Playwright wipes this directory when it starts and
+// every example shares the one config -- see `playwright.config.ts`. Resolved
+// out here: inside `startPlaywright`, `resolve` is the promise's own.
+const outputDir = resolve(process.cwd(), "test-results");
 
 function startPlaywright(url) {
   return new Promise((resolve, reject) => {
@@ -58,6 +62,7 @@ function startPlaywright(url) {
         ...process.env,
         EXAMPLENAME: examplename,
         HOST: url,
+        PLAYWRIGHT_OUTPUT_DIR: outputDir,
       },
     });
 

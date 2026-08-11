@@ -29,7 +29,13 @@
         "../../packages/e2e/bin/test.mjs",
         "../../packages/e2e/{playwright.config.ts,snapshot.test.js}"
       ],
-      "outputs": ["../../packages/e2e/snapshot.test.js-snapshots/**"],
+      "outputs": [
+        "../../packages/e2e/snapshot.test.js-snapshots/**",
+        // The Chromatic archive is an output like the baselines are: without
+        // it, a cache hit would leave `pnpm chromatic` with nothing to upload
+        // for that example, and Chromatic would read the gap as a deletion.
+        "test-results/chromatic-archives/**"
+      ],
       "cache": true
     },
     "lint": {

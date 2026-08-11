@@ -15,11 +15,14 @@
     "format:check": "prettier --check .",
     "test": "turbo test",
     "test:turbo": "vitest run",
+    "chromatic": "node bin/chromatic.mjs",
     "prepare": "husky"
   },
   "devDependencies": {
+    "@chromatic-com/playwright": "^0.14.11",
     "@playwright/test": "1.62.0",
     "@types/minimist": "^1.2.5",
+    "chromatic": "^18.1.0",
     "depcheck": "^1.4.7",
     "eslint": "^9.39.0",
     "eslint-plugin-react-hooks": "^7.1.1",
