@@ -16,8 +16,6 @@ if (!pkgname) {
 }
 const examplename = pkgname.split("@example/")[1];
 
-const updateSnapshots = argv["update-snapshots"];
-
 function startVite(base = "/", timeout = 30000) {
   return new Promise(async (resolve, reject) => {
     const timeoutId = setTimeout(() => {
@@ -47,14 +45,6 @@ const outputDir = resolve(process.cwd(), "test-results");
 function startPlaywright(url) {
   return new Promise((resolve, reject) => {
     const args = ["playwright", "test", "--config", playwrightConfigPath];
-    if (updateSnapshots) {
-      // --update-snapshots or --update-snapshots=<all|changed|missing|none>
-      args.push(
-        typeof updateSnapshots === "string"
-          ? `--update-snapshots=${updateSnapshots}`
-          : "--update-snapshots",
-      );
-    }
 
     const proc = spawn("pnpm", ["exec", ...args], {
       stdio: "inherit",

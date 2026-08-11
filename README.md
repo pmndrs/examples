@@ -118,7 +118,10 @@ an upload rather than a rebuild of all 167 examples.
 $ pnpm test
 ```
 
-To update the snapshots: `pnpm test -- -- --update-snapshots`
+Every example with a `test` script gets loaded, held at a fixed thirty frames and
+archived. The test asserts that the shot completed — an example that throws, or
+never mounts its `<Canvas>`, fails here. What the picture _looks_ like is
+Chromatic's question, below; there are no baseline PNGs in this repo.
 
 <details>
 
@@ -167,14 +170,6 @@ $ docker run -it --rm  \
 #
 # pnpm install
 # pnpm test
-```
-
-or in one command to update snapshots:
-
-```sh
-docker run --rm  \
-  -w /app -v "$(pwd)":/app -v /app/node_modules \
-  mcr.microsoft.com/playwright:v1.45.3-jammy /bin/sh -c "pnpm install && pnpm test -- -- --update-snapshots"
 ```
 
 # Colophon

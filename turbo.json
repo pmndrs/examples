@@ -28,7 +28,6 @@
       // input of that example's `build2`, which this task depends on.
       "inputs": [
         "$TURBO_DEFAULT$",
-        "../../packages/e2e/snapshot.test.js-snapshots/**",
         "../../bin/build-catalog.mjs",
         "../../bin/lib/**"
       ],
@@ -43,13 +42,10 @@
         "../../packages/e2e/bin/test.mjs",
         "../../packages/e2e/{playwright.config.ts,snapshot.test.js}"
       ],
-      "outputs": [
-        "../../packages/e2e/snapshot.test.js-snapshots/**",
-        // The Chromatic archive is an output like the baselines are: without
-        // it, a cache hit would leave `pnpm chromatic` with nothing to upload
-        // for that example, and Chromatic would read the gap as a deletion.
-        "test-results/chromatic-archives/**"
-      ],
+      // The archive is the task's only output, and it has to be one: without
+      // it, a cache hit would leave `pnpm chromatic` with nothing to upload
+      // for that example, and Chromatic would read the gap as a deletion.
+      "outputs": ["test-results/chromatic-archives/**"],
       "cache": true
     },
     "lint": {
