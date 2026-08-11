@@ -138,11 +138,11 @@ $ pnpm chromatic     # collects them into one build and uploads it
 Needs `CHROMATIC_PROJECT_TOKEN` (repo secret in the CI, your shell locally); a
 pull request from a fork cannot read it, and gets no Chromatic build.
 
-> [!IMPORTANT] Only the examples listed in `bin/chromatic.mjs` are published,
-> today just one. A snapshot joins the list once it comes out identical from
-> two runs of the same commit — most do not yet, and a build that flags a
-> change nobody made is a build nobody reads. `pnpm test` still covers all
-> three, at its own 5% pixel tolerance.
+> [!IMPORTANT] Only the examples listed in `bin/chromatic.mjs` are published.
+> A snapshot joins the list once `pnpm exec e2e-flaky <example>` says two runs
+> of the same commit produce the same canvas — Chromatic has no pixel
+> tolerance to hide behind, and a build that flags a change nobody made is a
+> build nobody reads.
 
 ## Docker
 
