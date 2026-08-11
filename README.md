@@ -78,10 +78,13 @@ This will:
 - a `--base` set to `${BASE_PATH}/${app_name}`
 - a custom vite `--config`, whith a `monkey()` plugin that will:
   - [`deterministic`](packages/e2e/src/deterministic.js) script into
-    `src/index.jsx`
+    `src/index.jsx` — seeds `Math.random`, and gives every WebGL context
+    `preserveDrawingBuffer` so the archived canvas is not blank
   - monkeypatch the `<Canvas>` with
     [`CheesyCanvas`](packages/e2e/src/CheesyCanvas.jsx) for setting up the scene
-    for playwright screenshots
+    for playwright screenshots — in whichever `src/**.[jt]sx` imports it, which
+    is `App` for most examples and `Scene`, `Bananas`, `Canvas` or `index` for
+    nine of them
 
 2. build the Next.js `apps/website`
 3. copy final result into `out` folder
