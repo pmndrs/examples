@@ -47,6 +47,12 @@ jobs:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
+      # The job runs in a container, so the checkout belongs to a uid the steps
+      # do not run as and git refuses to read it. Nothing noticed until now:
+      # `actions/checkout` does its own fetching, and every other step here
+      # only ever touches the files. Chromatic shells out to `git log` for the
+      # commit it attributes a build to, and gets "dubious ownership" instead.
+      - run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - id: configurepages
         uses: actions/configure-pages@v5
       - uses: pnpm/action-setup@v6
