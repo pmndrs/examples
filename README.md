@@ -132,8 +132,15 @@ $ BASE_PATH=/examples pnpm test
 ```
 
 The CI spreads this over eight shards (`SHARDS` in `.github/workflows/ci.yml`,
-`bin/shard.mjs` deciding who takes what) — a cold run is ~60s per example on a
-runner with no GPU.
+`bin/shard.mjs` deciding who takes what), one example at a time per shard — a
+cold run is ~60s per example on a runner with no GPU, and two of them at once
+just starve each other.
+
+Eight examples are excluded, each with its reason in
+[`bin/e2e-exceptions.mjs`](bin/e2e-exceptions.mjs) — three that were never built
+(`bbuild2`), three that throw, one behind a ▶️ button, one that needs more than
+the 180s budget. An example is in the run if and only if it has a `test` script,
+and `test/e2e-exceptions.test.ts` fails if that list and the scripts disagree.
 
 </details>
 
