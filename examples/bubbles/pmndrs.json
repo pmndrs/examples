@@ -10,23 +10,5 @@
     "@react-three/fiber",
     "@react-three/postprocessing"
   ],
-  "assets": [
-    {
-      "name": "Cube environment map",
-      "files": [
-        "public/cube/px.png",
-        "public/cube/nx.png",
-        "public/cube/py.png",
-        "public/cube/ny.png",
-        "public/cube/pz.png",
-        "public/cube/nz.png"
-      ],
-      "notes": "Bundled with the original CodeSandbox demo; creator/license not specified there."
-    },
-    {
-      "name": "bump.jpg",
-      "files": ["public/bump.jpg"],
-      "notes": "Bundled with the original CodeSandbox demo; creator/license not specified there."
-    }
-  ]
+  "assets": []
 }

@@ -11,11 +11,5 @@
     "@react-three/postprocessing",
     "leva"
   ],
-  "assets": [
-    {
-      "name": "Suzanne",
-      "files": ["src/suzanne.gltf"],
-      "notes": "Blender's mascot mesh, bundled with the original CodeSandbox demo."
-    }
-  ]
+  "assets": []
 }
