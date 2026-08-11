@@ -1,0 +1,15 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Scanline",
+  "description": "A Suzanne model staged with drei's Stage helper, overlaid with @react-three/postprocessing's Scanline effect.",
+  "tags": ["postprocessing", "scanline"],
+  "authors": ["Sara Vieira"],
+  "source": "https://codesandbox.io/s/iy14d",
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing",
+    "leva"
+  ],
+  "assets": []
+}

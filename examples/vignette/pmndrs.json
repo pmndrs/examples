@@ -1,0 +1,15 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Vignette",
+  "description": "Darkening the edges of the frame with @react-three/postprocessing's Vignette effect over a simple studio-lit product shot.",
+  "tags": ["postprocessing", "vignette"],
+  "authors": ["Sara Vieira"],
+  "source": "https://codesandbox.io/s/851sn",
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing",
+    "leva"
+  ],
+  "assets": []
+}

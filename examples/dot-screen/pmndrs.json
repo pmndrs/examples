@@ -1,0 +1,15 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Dot Screen",
+  "description": "A Suzanne model staged with drei's Stage helper, halftoned through @react-three/postprocessing's DotScreen effect.",
+  "tags": ["postprocessing", "dot-screen"],
+  "authors": ["Sara Vieira"],
+  "source": "https://codesandbox.io/s/xt3fb",
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing",
+    "leva"
+  ],
+  "assets": []
+}
