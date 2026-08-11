@@ -5,12 +5,7 @@ on:
     branches:
       - main
   pull_request: {}
-  workflow_dispatch:
-    inputs:
-      update_snapshots:
-        description: "Regenerate playwright snapshot baselines (retrieve them from the run's `snapshots` artifact)"
-        type: boolean
-        default: false
+  workflow_dispatch: {}
 
 permissions:
   contents: read
@@ -18,30 +13,60 @@ permissions:
   id-token: write
   deployments: write
 
+env:
+  TURBO_TELEMETRY_DISABLED: 1
+  # How many jobs the e2e run is spread over. One example is ~60s of software
+  # rendering on a runner with no GPU, and there are 170 of them; three.js runs
+  # five. Raise it and every shard gets shorter, until `pnpm install` and the
+  # turbo cache restore are all a shard does.
+  SHARDS: 8
+
+# Cancel multiple runs when pushing to main
+concurrency:
+  group: ${{ github.event_name != 'pull_request' && 'group-pushmain' || github.run_id }}
+  cancel-in-progress: ${{ github.event_name != 'pull_request' }}
+
 jobs:
-  build-job:
+  #
+  # Lint
+  #
+  # `check`, not `lint`: it adds the repo-wide `prettier --check` that the
+  # pre-commit hook cannot afford (every commit would invalidate it), and so
+  # covers a `git commit -n` or anything that wrote outside a commit.
+  #
+  lint-job:
     runs-on: ubuntu-latest
-    env:
-      TURBO_TELEMETRY_DISABLED: 1
-      # No token, no preview: that is a fork's pull request, which cannot read
-      # the repo secrets, or a checkout of this repo that never set them.
-      PREVIEW: ${{ github.event_name == 'pull_request' && secrets.VERCEL_TOKEN != '' }}
-      # Same rule for Chromatic, minus the pull-request part: main has to
-      # publish too, or a pull request would have no baseline to compare to.
-      CHROMATIC: ${{ secrets.CHROMATIC_PROJECT_TOKEN != '' }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
+      - uses: rharkor/caching-for-turbo@v2.5.1
+      - run: pnpm check
+      # Asserts the `inputs` in turbo.json stay honest: which file makes which
+      # task re-run. Runs turbo with `--dry`, so it costs hashes, not builds.
+      - run: pnpm test:turbo
 
-    # Cancel multiple runs when pushing to main
-    concurrency:
-      group: ${{ github.event_name != 'pull_request' && 'group-pushmain' || github.run_id }}
-      cancel-in-progress: ${{ github.event_name != 'pull_request' }}
-
+  #
+  # Test
+  #
+  # One shard per job, `bin/shard.mjs` deciding who takes what. Each shard
+  # builds only the examples it tests, and every shard shares the one turbo
+  # cache -- so a second run over an untouched example costs a cache restore,
+  # wherever it lands.
+  #
+  test-job:
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4, 5, 6, 7, 8]
+    runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.62.0-jammy
-
     steps:
-      #
-      # Setup
-      #
       # Full history: Chromatic walks the commits back to the last build it
       # knows to pick a baseline, and treats a shallow clone as a first build.
       - uses: actions/checkout@v7
@@ -63,74 +88,109 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - uses: rharkor/caching-for-turbo@v2.5.1
 
-      #
-      # Lint
-      #
-      # `check`, not `lint`: it adds the repo-wide `prettier --check` that the
-      # pre-commit hook cannot afford (every commit would invalidate it), and
-      # so covers a `git commit -n` or anything that wrote outside a commit.
-      - run: pnpm check
-      # Asserts the `inputs` above stay honest: which file makes which task
-      # re-run. Runs turbo with `--dry`, so it costs hashes, not builds.
-      - run: pnpm test:turbo
-
-      #
-      # Test
-      #
       # `--continue`, so one example that fails does not deprive the rest of
-      # the archive Chromatic is about to publish; `continue-on-error`, so the
-      # Chromatic step below still runs when a baseline moved -- which is
-      # exactly when someone wants to look at it. The failure is re-raised
-      # after Chromatic has had its say.
+      # the archive Chromatic is about to publish. An empty filter list would
+      # make turbo run *everything*, so a shard with no examples runs nothing.
       - id: test
-        run: pnpm exec turbo test --continue
-        if: ${{ !inputs.update_snapshots }}
-        continue-on-error: true
+        run: |
+          filters=$(node bin/shard.mjs ${{ matrix.shard }} $SHARDS)
+          echo "Shard ${{ matrix.shard }}/$SHARDS: ${filters:-(empty)}"
+          [ -z "$filters" ] || pnpm exec turbo test --continue $filters
         env:
           BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
-      # Baselines regen: gh workflow run CI --ref <branch> -f update_snapshots=true
-      # --force: a regen must never replay cached test results (their cached
-      # outputs would restore the stale baselines we're regenerating)
-      - run: pnpm exec turbo test --force -- --update-snapshots=all
-        if: ${{ inputs.update_snapshots }}
-        env:
-          BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
-      - uses: actions/upload-artifact@v7
-        if: ${{ always() && inputs.update_snapshots }}
-        with:
-          name: snapshots
-          path: packages/e2e/snapshot.test.js-snapshots/
 
-      #
-      # Chromatic
-      #
-      # The same run, seen the other way round: the step above fails on a
-      # canvas that moved, Chromatic asks a human whether it moved for the
-      # better. So `--exit-zero-on-changes` -- a visual change is not a
-      # regression until someone says it is, and Chromatic's own check reports
-      # it on the pull request.
-      #
-      # The archives come out of the `test` task, cache hit or not, so this
-      # publishes every listed example on every run -- never only the ones
-      # that re-ran, which Chromatic would read as the rest being deleted.
+      # Even when the shard went red: a failing example still archives, and the
+      # Chromatic build has to see every published example or it reads the
+      # missing ones as deleted. A tarball rather than a glob, so the paths
+      # come back exactly where `bin/chromatic.mjs` looks for them.
+      - if: ${{ always() }}
+        run: tar -czf archives.tgz $(find examples -type d -name chromatic-archives -print) || true
+      - uses: actions/upload-artifact@v7
+        if: ${{ always() && hashFiles('archives.tgz') != '' }}
+        with:
+          name: archives-${{ matrix.shard }}
+          path: archives.tgz
+
+  #
+  # Chromatic
+  #
+  # The same run, seen the other way round: a test job fails on an example that
+  # never finished its shot, Chromatic asks a human whether what it draws moved
+  # for the better. So `--exit-zero-on-changes` -- a visual change is not a
+  # regression until someone says it is, and Chromatic's own check reports it
+  # on the pull request.
+  #
+  # `always()`, because a red shard is exactly when someone wants to look.
+  #
+  chromatic-job:
+    needs: test-job
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    env:
+      # `secrets` is not a context `if:` can read, so the question is asked
+      # here, where it can.
+      CHROMATIC: ${{ secrets.CHROMATIC_PROJECT_TOKEN != '' }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
+      - uses: actions/download-artifact@v6
+        with:
+          pattern: archives-*
+          path: archives
+      - run: |
+          for tarball in archives/*/archives.tgz; do
+            [ -f "$tarball" ] && tar -xzf "$tarball"
+          done
+      # No token, no build: a pull request from a fork cannot read the repo
+      # secrets. Main has to publish too, or a pull request would have no
+      # baseline to compare to.
       - run: pnpm chromatic --exit-zero-on-changes
-        if: ${{ env.CHROMATIC == 'true' && !inputs.update_snapshots }}
+        if: ${{ env.CHROMATIC == 'true' }}
         env:
           CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-      # Chromatic has spoken; a moved baseline is still a red build.
-      - if: ${{ !inputs.update_snapshots && steps.test.outcome == 'failure' }}
-        run: exit 1
+
+  #
+  # Build
+  #
+  # `needs: test-job`, so a red example never reaches GitHub Pages -- and never
+  # reaches a preview either, since the preview is the same build.
+  #
+  build-job:
+    needs: test-job
+    runs-on: ubuntu-latest
+    env:
+      # No token, no preview: that is a fork's pull request, which cannot read
+      # the repo secrets, or a checkout of this repo that never set them.
+      PREVIEW: ${{ github.event_name == 'pull_request' && secrets.VERCEL_TOKEN != '' }}
+    steps:
+      - uses: actions/checkout@v7
+      - id: configurepages
+        uses: actions/configure-pages@v5
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
+      - uses: rharkor/caching-for-turbo@v2.5.1
 
       #
-      # Build (only for pushes on main)
+      # Pages (only for pushes on main)
       #
       - run: pnpm build
-        if: ${{ github.event_name != 'pull_request' && !inputs.update_snapshots }}
+        if: ${{ github.event_name != 'pull_request' }}
         env:
           BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
           BASE_URL: ${{ steps.configurepages.outputs.base_url }}
       - uses: actions/upload-pages-artifact@v5
-        if: ${{ github.event_name != 'pull_request' && !inputs.update_snapshots }}
+        if: ${{ github.event_name != 'pull_request' }}
         with:
           path: ./out${{ steps.configurepages.outputs.base_path }}
 
@@ -198,7 +258,7 @@ jobs:
 
   deploy-job:
     # only for pushes on main
-    if: ${{ github.event_name != 'pull_request' && !inputs.update_snapshots && github.ref == 'refs/heads/main' }}
+    if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
