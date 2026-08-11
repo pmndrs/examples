@@ -60,6 +60,11 @@ test(`${examplename}`, async ({ page }) => {
 
   await waitForServer();
 
+  // 🙋 before anything loads: tells the page to wait for us rather than
+  // shooting on its own timer, which would race the wait below and win it on
+  // exactly the slow loads that wait is for
+  await page.addInitScript(() => (window.__cheeseHarness = true));
+
   // ⏳ assets
   await page.goto(`${host}/?saycheese`);
   await waitForAssets(page);
