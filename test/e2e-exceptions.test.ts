@@ -3,7 +3,7 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 
 // @ts-expect-error -- plain ESM, no types, and none worth writing
-import { EXCEPTIONS } from "../bin/e2e-exceptions.mjs";
+import { EXCEPTIONS, UNPUBLISHED } from "../bin/e2e-exceptions.mjs";
 
 /**
  * An example is in the e2e run if and only if it has a `test` script. That is
@@ -51,6 +51,24 @@ describe("e2e exceptions", () => {
       expect(String(reason).length, `${name} has no reason`).toBeGreaterThan(
         10,
       );
+    }
+  });
+});
+
+describe("unpublished", () => {
+  it("only holds back examples the run actually opens", () => {
+    for (const [name, reason] of Object.entries(UNPUBLISHED)) {
+      expect(examples, `${name} is not an example`).toContain(name);
+      expect(String(reason).length, `${name} has no reason`).toBeGreaterThan(
+        10,
+      );
+
+      // Holding back an example nothing shoots says nothing. If it is excluded
+      // from the run, `EXCEPTIONS` is where its reason belongs.
+      expect(
+        hasTestScript(name),
+        `${name} is not tested, so it was never published`,
+      ).toBe(true);
     }
   });
 });

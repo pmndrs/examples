@@ -69,3 +69,18 @@ export const EXCEPTIONS = {
   //
   "merged-instance": "3.2min to over 5min for the same shot, run to run",
 };
+
+//
+// Examples the run opens and archives, but does not send to Chromatic.
+//
+// Everything with a `test` script is published; this is the subtraction, and it
+// is the only thing that still has to be *measured*. Chromatic has no pixel
+// tolerance to hide behind, so an example that draws a different canvas on two
+// runs of the same commit flags a change nobody made, on every build, forever
+// -- and one example crying wolf is enough for nobody to read the report.
+//
+// `e2e-flaky` is what decides, never a reading of the source: `useFrame` tells
+// you nothing either way. Each line carries the hashes that disagreed, so the
+// claim can be checked rather than believed. The nightly re-asks the question.
+//
+export const UNPUBLISHED = {};

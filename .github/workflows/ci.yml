@@ -158,7 +158,19 @@ jobs:
       # No token, no build: a pull request from a fork cannot read the repo
       # secrets. Main has to publish too, or a pull request would have no
       # baseline to compare to.
-      - run: pnpm chromatic --exit-zero-on-changes
+      #
+      # `--auto-accept-changes` on main, and only there. What lands on main has
+      # already been looked at on its pull request, so asking a second time
+      # leaves a queue of unreviewed changes that turns every later build
+      # yellow -- and a permanently yellow dashboard is one nobody opens.
+      #
+      # The obvious objection is that auto-accepting buries a drifting example
+      # in the baseline instead of showing it. True -- if Chromatic were what
+      # catches drift. It is not: `e2e-flaky` is, by shooting the same commit N
+      # times, and the nightly is what keeps asking. Chromatic answers "should
+      # this have changed?", which only makes sense once the answer to "did
+      # anything change by itself?" is no.
+      - run: pnpm chromatic --exit-zero-on-changes ${{ github.ref == 'refs/heads/main' && '--auto-accept-changes' || '' }}
         if: ${{ env.CHROMATIC == 'true' }}
         env:
           CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
