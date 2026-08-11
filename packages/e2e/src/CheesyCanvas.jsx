@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { flushSync } from "react-dom";
 import { Canvas, useThree } from "@react-three/fiber";
 
 //
@@ -11,11 +12,11 @@ const FRAMES = 60;
 const STEP = 1 / 60;
 
 //
-// How long we let assets land before pumping those frames. This is an asset
-// budget, not an animation one: the loop is held at `never` throughout, so
-// waiting longer or shorter changes what is *loaded*, never what has *moved*.
+// The shot normally starts when the harness sets `window.__cheeseShoot`, once
+// it has watched the network go idle -- assets, not a stopwatch. This is the
+// fallback for a human who opened `?saycheese` by hand with nobody to set it.
 //
-const SETTLE = 3000;
+const UNATTENDED = 3000;
 
 //
 // Keeps the compositor producing frames while the render loop is held at
@@ -32,69 +33,62 @@ const SETTLE = 3000;
 // One off-screen pixel on its own layer, moved every frame. It costs nothing,
 // it cannot reach the canvas we screenshot, and it is the entire fix.
 //
-function useCompositorHeartbeat() {
+function SayCheese() {
+  const advance = useThree((state) => state.advance);
+
   useEffect(() => {
     const pixel = document.createElement("div");
     pixel.style.cssText =
       "position:fixed;top:-10px;left:-10px;width:1px;height:1px;will-change:transform";
     document.body.appendChild(pixel);
 
-    let raf;
+    let frame = 0;
     let odd = 0;
-    function beat() {
-      pixel.style.transform = `translateX(${(odd ^= 1)}px)`;
-      raf = requestAnimationFrame(beat);
+    let raf;
+
+    function tick() {
+      pixel.style.transform = `translateX(${(odd ^= 1)}px)`; // keep the compositor honest, before, during and after the shot
+
+      //
+      // Every frame the scene will ever see, one per animation frame. Under
+      // `frameloop="never"` r3f takes the delta from the timestamp we pass
+      // rather than from the wall clock, so `useFrame` receives exactly `STEP`
+      // each time and `clock.elapsedTime` lands on `FRAMES * STEP` -- how long
+      // the browser really took between two of them changes nothing.
+      //
+      // One per animation frame rather than sixty in a row: a synchronous
+      // burst holds the main thread for as long as the heaviest scene needs,
+      // and Playwright is on the other end of that thread.
+      //
+      // `flushSync`, because a `useFrame` that calls `setState` would
+      // otherwise have its commit scheduled rather than applied, and how many
+      // of our frames elapse before it lands would be the scheduler's
+      // business rather than ours. Nothing in this repo does that today; the
+      // 158 examples still to be covered will.
+      //
+      if (window.__cheeseShoot === true && frame < FRAMES) {
+        flushSync(() => advance(++frame * STEP));
+
+        if (frame === FRAMES) {
+          console.log(`📸 Shot ${FRAMES} frames`);
+          window.__cheeseReady = true; // tells the harness to take its screenshot
+        }
+      }
+
+      raf = requestAnimationFrame(tick);
     }
-    beat();
+
+    console.log("😬 Say cheeese (waiting for the go-ahead)");
+    tick();
+
+    const unattended = setTimeout(() => {
+      if (window.__cheeseShoot === undefined) window.__cheeseShoot = true;
+    }, UNATTENDED);
 
     return () => {
+      clearTimeout(unattended);
       cancelAnimationFrame(raf);
       pixel.remove();
-    };
-  }, []);
-}
-
-function SayCheese() {
-  const advance = useThree((state) => state.advance);
-
-  useCompositorHeartbeat();
-
-  useEffect(() => {
-    let frame = 0;
-    let raf;
-
-    //
-    // Every frame the scene will ever see, one per animation frame. Under
-    // `frameloop="never"` r3f takes the delta from the timestamp we pass
-    // rather than from the wall clock, so `useFrame` receives exactly `STEP`
-    // each time and `clock.elapsedTime` lands on `FRAMES * STEP` -- how long
-    // the browser really took between two of them changes nothing.
-    //
-    // One per animation frame rather than sixty in a row: a synchronous burst
-    // wedges the main thread for as long as the heaviest scene needs, and
-    // Playwright, which is on the other end of that thread, stops being able
-    // to resolve so much as a selector.
-    //
-    function shoot() {
-      advance(++frame * STEP);
-
-      if (frame < FRAMES) {
-        raf = requestAnimationFrame(shoot);
-      } else {
-        console.log(`📸 Shot ${FRAMES} frames`);
-        document.dispatchEvent(new Event("playwright:snapshot-ready")); // tells Playwright to take its screenshot
-      }
-    }
-
-    console.log(`😬 Say cheeese (settling for ${SETTLE}ms)`);
-    const timeout = setTimeout(
-      () => (raf = requestAnimationFrame(shoot)),
-      SETTLE,
-    );
-
-    return () => {
-      clearTimeout(timeout);
-      cancelAnimationFrame(raf);
     };
   }, [advance]);
 

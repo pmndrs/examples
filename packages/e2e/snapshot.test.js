@@ -18,14 +18,22 @@ if (!examplename) {
   process.exit(1);
 }
 
-async function waitForEvent(page, eventName) {
-  await page.evaluate(
-    (eventName) =>
-      new Promise((resolve) =>
-        document.addEventListener(eventName, resolve, { once: true }),
-      ),
-    eventName,
-  );
+//
+// What the page waits on before it shoots. `networkidle` is the same signal
+// three.js waits on in its own screenshot harness: it says the scene has
+// everything it is going to get, which a fixed sleep only ever guessed at --
+// and guessed at 3s, once per example, 161 times.
+//
+// It falls through rather than failing. An example that holds a connection
+// open never goes idle, and the frames that follow are deterministic either
+// way; what would not be deterministic is an asset landing mid-shot, and the
+// short settle after idle covers the parsing that follows the last byte.
+//
+async function waitForAssets(page) {
+  await page.waitForLoadState("networkidle", { timeout: 20_000 }).catch(() => {
+    console.log("Network never went idle, shooting anyway");
+  });
+  await page.waitForTimeout(500);
 }
 
 function waitForServer() {
@@ -52,9 +60,13 @@ test(`${examplename}`, async ({ page }) => {
 
   await waitForServer();
 
-  // ⏳ "r3f" event
+  // ⏳ assets
   await page.goto(`${host}/?saycheese`);
-  await waitForEvent(page, "playwright:snapshot-ready");
+  await waitForAssets(page);
+
+  // 🎬 flags rather than events, so neither side can miss the other's
+  await page.evaluate(() => (window.__cheeseShoot = true));
+  await page.waitForFunction(() => window.__cheeseReady === true);
 
   // 📸 <canvas>
   const $canvas = page.locator("canvas[data-engine]");
