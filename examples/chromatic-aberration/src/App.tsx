@@ -16,7 +16,12 @@ export default function App() {
   return (
     <Canvas shadows dpr={[1, 2]} camera={{ fov: 50 }}>
       <Suspense fallback={null}>
-        <Stage preset="rembrandt" intensity={Math.PI} environment="city">
+        <Stage
+          preset="rembrandt"
+          intensity={Math.PI}
+          environment="city"
+          adjustCamera={false}
+        >
           <Model />
         </Stage>
         <EffectComposer>

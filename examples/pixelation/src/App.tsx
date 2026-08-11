@@ -16,7 +16,12 @@ export default function App() {
         <EffectComposer>
           <Pixelation granularity={granularity} />
         </EffectComposer>
-        <Stage preset="rembrandt" intensity={Math.PI} environment="city">
+        <Stage
+          preset="rembrandt"
+          intensity={Math.PI}
+          environment="city"
+          adjustCamera={false}
+        >
           <Model />
         </Stage>
       </Suspense>
