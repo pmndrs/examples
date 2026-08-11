@@ -45,8 +45,9 @@ export const EXCEPTIONS = {
 
   //
   // Too slow, and honestly so: 177s for thirty frames on a machine *with* a
-  // GPU. The budget is 180s and the runner has none. It re-renders the scene
-  // into a cube map every frame, which is the example's whole subject.
+  // GPU, where the whole set averages ~20s. It re-renders the scene into a cube
+  // map every frame, which is the example's entire subject. The budget is 300s
+  // and the runner has no GPU, so this is not a margin, it is a coin toss.
   //
-  "building-live-envmaps": "177s for the shot on a GPU; the budget is 180s",
+  "building-live-envmaps": "177s for the shot on a GPU, ~9x the median",
 };
