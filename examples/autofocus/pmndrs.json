@@ -1,0 +1,15 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Autofocus",
+  "description": "A depth-picking autofocus that follows a target or the pointer, driving @react-three/postprocessing's Autofocus depth-of-field blur.",
+  "tags": ["postprocessing", "autofocus", "depth-of-field"],
+  "authors": [],
+  "source": "https://codesandbox.io/s/dfw6w4",
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing",
+    "leva"
+  ],
+  "assets": []
+}
