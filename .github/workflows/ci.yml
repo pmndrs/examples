@@ -88,6 +88,13 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - uses: rharkor/caching-for-turbo@v2.5.1
 
+      # `--concurrency=1`, and it is not a detail. One e2e test already pins the
+      # runner: two cores, no GPU, every pixel through SwiftShader. Turbo's
+      # default of ten ran eleven vite servers and eleven headless browsers at
+      # once, and the examples starved each other -- a shot that takes 30s alone
+      # took 2.5 to 3 minutes, and six of twenty-one blew the 180s budget. They
+      # were not broken; they were queuing.
+      #
       # `--continue`, so one example that fails does not deprive the rest of
       # the archive Chromatic is about to publish. An empty filter list would
       # make turbo run *everything*, so a shard with no examples runs nothing.
@@ -95,7 +102,7 @@ jobs:
         run: |
           filters=$(node bin/shard.mjs ${{ matrix.shard }} $SHARDS)
           echo "Shard ${{ matrix.shard }}/$SHARDS: ${filters:-(empty)}"
-          [ -z "$filters" ] || pnpm exec turbo test --continue $filters
+          [ -z "$filters" ] || pnpm exec turbo test --continue --concurrency=1 $filters
         env:
           BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
 
