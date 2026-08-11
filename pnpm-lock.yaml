@@ -93,6 +93,9 @@ importers:
       '@example/bruno-simons-20k-challenge':
         specifier: workspace:*
         version: link:../../examples/bruno-simons-20k-challenge
+      '@example/bubbles':
+        specifier: workspace:*
+        version: link:../../examples/bubbles
       '@example/building-live-envmaps':
         specifier: workspace:*
         version: link:../../examples/building-live-envmaps
@@ -120,6 +123,9 @@ importers:
       '@example/cell-fracture':
         specifier: workspace:*
         version: link:../../examples/cell-fracture
+      '@example/chromatic-aberration':
+        specifier: workspace:*
+        version: link:../../examples/chromatic-aberration
       '@example/clones':
         specifier: workspace:*
         version: link:../../examples/clones
@@ -150,6 +156,9 @@ importers:
       '@example/diamond-ring':
         specifier: workspace:*
         version: link:../../examples/diamond-ring
+      '@example/dot-screen':
+        specifier: workspace:*
+        version: link:../../examples/dot-screen
       '@example/drei-rendertexture':
         specifier: workspace:*
         version: link:../../examples/drei-rendertexture
@@ -216,6 +225,9 @@ importers:
       '@example/grass-shader':
         specifier: workspace:*
         version: link:../../examples/grass-shader
+      '@example/grid':
+        specifier: workspace:*
+        version: link:../../examples/grid
       '@example/ground-projected-envmaps-lamina':
         specifier: workspace:*
         version: link:../../examples/ground-projected-envmaps-lamina
@@ -333,6 +345,9 @@ importers:
       '@example/pinball-in-70-lines':
         specifier: workspace:*
         version: link:../../examples/pinball-in-70-lines
+      '@example/pixelation':
+        specifier: workspace:*
+        version: link:../../examples/pixelation
       '@example/pmndrs-vercel':
         specifier: workspace:*
         version: link:../../examples/pmndrs-vercel
@@ -381,6 +396,9 @@ importers:
       '@example/router-transitions':
         specifier: workspace:*
         version: link:../../examples/router-transitions
+      '@example/scanline':
+        specifier: workspace:*
+        version: link:../../examples/scanline
       '@example/scrollcontrols-and-lens-refraction':
         specifier: workspace:*
         version: link:../../examples/scrollcontrols-and-lens-refraction
@@ -393,6 +411,9 @@ importers:
       '@example/selective-outlines':
         specifier: workspace:*
         version: link:../../examples/selective-outlines
+      '@example/sepia':
+        specifier: workspace:*
+        version: link:../../examples/sepia
       '@example/shader-fire':
         specifier: workspace:*
         version: link:../../examples/shader-fire
@@ -462,6 +483,9 @@ importers:
       '@example/t-shirt-configurator':
         specifier: workspace:*
         version: link:../../examples/t-shirt-configurator
+      '@example/take-control':
+        specifier: workspace:*
+        version: link:../../examples/take-control
       '@example/the-three-graces':
         specifier: workspace:*
         version: link:../../examples/the-three-graces
@@ -504,6 +528,9 @@ importers:
       '@example/viewcube':
         specifier: workspace:*
         version: link:../../examples/viewcube
+      '@example/vignette':
+        specifier: workspace:*
+        version: link:../../examples/vignette
       '@example/viking-ship':
         specifier: workspace:*
         version: link:../../examples/viking-ship
