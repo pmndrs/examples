@@ -8,14 +8,27 @@ import tseslint from "typescript-eslint";
  * copy-pasteable into a sandbox without lint scaffolding of its own.
  *
  * Only `{ts,tsx}` is matched, which is every example since #164 -- and is why
- * nothing ignores the build output or the vendored draco decoders: both are
- * plain `.js`, so they are never picked up in the first place.
+ * the vendored draco decoders need no ignore entry: they are plain `.js`, so
+ * they are never picked up in the first place. The build output was assumed to
+ * be in the same case and is not, hence the `dist` entry below.
  *
  * @type {import('eslint').Linter.Config[]}
  */
 export default [
   /* Vendored, and pre-annotated for someone else's config. */
   { ignores: ["**/realism-effects/"] },
+  /*
+   * Build output. Almost all of it is bundled `.js` this config never matches,
+   * which is how it went unnoticed that `infinite-scroll` serves a `.tsx` from
+   * `public/` -- vite copies that directory verbatim, so the file lands in
+   * `dist/` as a second, lintable copy of itself.
+   *
+   * It made the warning count depend on whether you happened to have built:
+   * 81 on a fresh clone, 83 once `dist/` existed. The CI lints before it
+   * builds and so never saw it; every local `pnpm build` broke the pre-commit
+   * and pre-push hooks until the next `git clean`.
+   */
+  { ignores: ["examples/*/dist/"] },
   {
     files: ["examples/**/*.{ts,tsx}"],
     plugins: {
