@@ -131,7 +131,27 @@ You can also:
 $ BASE_PATH=/examples pnpm test
 ```
 
+The CI spreads this over eight shards (`SHARDS` in `.github/workflows/ci.yml`,
+`bin/shard.mjs` deciding who takes what) — a cold run is ~60s per example on a
+runner with no GPU.
+
 </details>
+
+## Is it reproducible?
+
+```sh
+$ pnpm exec e2e-flaky @example/aquarium            # 3 shots, same canvas?
+$ pnpm exec e2e-flaky --runs=10                    # every example with a test
+```
+
+Shoots the same example N times and compares the canvas byte for byte. This is
+what decides whether an example may be published to Chromatic, which has no
+pixel tolerance to hide behind. It has to be measured: `useFrame` tells you
+nothing either way.
+
+The `Flaky` workflow runs it nightly, five shots per example, and goes red when
+an example starts drifting — before Chromatic starts flagging changes nobody
+made.
 
 ## Chromatic
 
@@ -150,7 +170,7 @@ Needs `CHROMATIC_PROJECT_TOKEN` (repo secret in the CI, your shell locally); a
 pull request from a fork cannot read it, and gets no Chromatic build.
 
 > [!IMPORTANT] Only the examples listed in `bin/chromatic.mjs` are published.
-> A snapshot joins the list once `pnpm exec e2e-flaky <example>` says two runs
+> A snapshot joins the list once `pnpm exec e2e-flaky <example>` says N shots
 > of the same commit produce the same canvas — Chromatic has no pixel
 > tolerance to hide behind, and a build that flags a change nobody made is a
 > build nobody reads.
