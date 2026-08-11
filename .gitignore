@@ -17,6 +17,12 @@ node_modules
 coverage
 test-results
 
+# Chromatic (the merged archive `pnpm chromatic` uploads, and its own logs)
+.chromatic
+build-archive.log
+chromatic.log
+chromatic-diagnostics.json
+
 # Turbo
 .turbo
 

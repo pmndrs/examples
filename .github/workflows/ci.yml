@@ -26,6 +26,9 @@ jobs:
       # No token, no preview: that is a fork's pull request, which cannot read
       # the repo secrets, or a checkout of this repo that never set them.
       PREVIEW: ${{ github.event_name == 'pull_request' && secrets.VERCEL_TOKEN != '' }}
+      # Same rule for Chromatic, minus the pull-request part: main has to
+      # publish too, or a pull request would have no baseline to compare to.
+      CHROMATIC: ${{ secrets.CHROMATIC_PROJECT_TOKEN != '' }}
 
     # Cancel multiple runs when pushing to main
     concurrency:
@@ -39,7 +42,11 @@ jobs:
       #
       # Setup
       #
+      # Full history: Chromatic walks the commits back to the last build it
+      # knows to pick a baseline, and treats a shallow clone as a first build.
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
       - id: configurepages
         uses: actions/configure-pages@v5
       - uses: pnpm/action-setup@v6
@@ -64,8 +71,15 @@ jobs:
       #
       # Test
       #
-      - run: pnpm test
+      # `--continue`, so one example that fails does not deprive the rest of
+      # the archive Chromatic is about to publish; `continue-on-error`, so the
+      # Chromatic step below still runs when a baseline moved -- which is
+      # exactly when someone wants to look at it. The failure is re-raised
+      # after Chromatic has had its say.
+      - id: test
+        run: pnpm exec turbo test --continue
         if: ${{ !inputs.update_snapshots }}
+        continue-on-error: true
         env:
           BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
       # Baselines regen: gh workflow run CI --ref <branch> -f update_snapshots=true
@@ -80,6 +94,26 @@ jobs:
         with:
           name: snapshots
           path: packages/e2e/snapshot.test.js-snapshots/
+
+      #
+      # Chromatic
+      #
+      # The same run, seen the other way round: the step above fails on a
+      # canvas that moved, Chromatic asks a human whether it moved for the
+      # better. So `--exit-zero-on-changes` -- a visual change is not a
+      # regression until someone says it is, and Chromatic's own check reports
+      # it on the pull request.
+      #
+      # The archives come out of the `test` task, cache hit or not, so this
+      # publishes every listed example on every run -- never only the ones
+      # that re-ran, which Chromatic would read as the rest being deleted.
+      - run: pnpm chromatic --exit-zero-on-changes
+        if: ${{ env.CHROMATIC == 'true' && !inputs.update_snapshots }}
+        env:
+          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+      # Chromatic has spoken; a moved baseline is still a red build.
+      - if: ${{ !inputs.update_snapshots && steps.test.outcome == 'failure' }}
+        run: exit 1
 
       #
       # Build (only for pushes on main)

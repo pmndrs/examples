@@ -1,5 +1,8 @@
 import http from "http";
-import { test, expect } from "@playwright/test";
+// Chromatic's `test` is `@playwright/test`'s, plus a fixture that archives the
+// page (DOM, styles, assets) at the end of every test and writes it next to
+// the Playwright artifacts, for `pnpm chromatic` to upload.
+import { test, expect } from "@chromatic-com/playwright";
 
 // console.log(process.argv);
 
