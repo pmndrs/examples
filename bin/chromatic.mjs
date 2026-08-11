@@ -24,19 +24,15 @@ const merged = join(location, ARCHIVES);
 
 //
 // Which examples we ask a human to review. Deliberately not "every example
-// that has a `test` script": a snapshot only belongs here once it is
-// reproducible run to run, and most are not yet. Two runs of the same commit
-// give `aquarium` and `baking-soft-shadows` two different canvases -- the
-// first animates, the second accumulates shadow samples -- while
-// `backdrop-and-cables` comes out bit for bit identical. A build that flags a
-// change nobody made is a build nobody reads, so drift stays out until it is
-// fixed rather than being papered over with a threshold.
+// that has a `test` script": a snapshot only belongs here once `e2e-flaky`
+// says two runs of the same commit produce the same canvas. Chromatic has no
+// pixel tolerance to hide behind, and a build that flags a change nobody made
+// is a build nobody reads.
 //
-// `useFrame` is not the tell (`backdrop-and-cables` has two, and its animation
-// tracks a pointer that never moves in headless). The only way to know is to
-// run twice and compare. Grow this list as the determinism work lands.
+// Earn a place here by measuring, never by reading the source -- `useFrame`
+// tells you nothing either way. Grow the list as `e2e-flaky` goes green.
 //
-const PUBLISHED = ["backdrop-and-cables"];
+const PUBLISHED = ["backdrop-and-cables", "baking-soft-shadows"];
 
 const examples = PUBLISHED.map((name) => ({
   name,
