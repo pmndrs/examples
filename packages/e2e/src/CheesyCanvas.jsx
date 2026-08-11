@@ -12,9 +12,13 @@ const FRAMES = 60;
 const STEP = 1 / 60;
 
 //
-// The shot normally starts when the harness sets `window.__cheeseShoot`, once
-// it has watched the network go idle -- assets, not a stopwatch. This is the
-// fallback for a human who opened `?saycheese` by hand with nobody to set it.
+// The shot starts when the harness sets `window.__cheeseShoot`, once it has
+// watched the network go idle -- assets, not a stopwatch. A page opened by
+// hand has nobody to do that, so it shoots on its own after this long.
+//
+// Only when no harness announced itself. A timer that fires anyway would race
+// the very wait it stands in for, and win on exactly the slow loads that wait
+// exists for.
 //
 const UNATTENDED = 3000;
 
@@ -43,6 +47,7 @@ function SayCheese() {
     document.body.appendChild(pixel);
 
     let frame = 0;
+    let started = 0;
     let odd = 0;
     let raf;
 
@@ -67,10 +72,13 @@ function SayCheese() {
       // 158 examples still to be covered will.
       //
       if (window.__cheeseShoot === true && frame < FRAMES) {
+        if (frame === 0) started = performance.now();
         flushSync(() => advance(++frame * STEP));
 
         if (frame === FRAMES) {
-          console.log(`📸 Shot ${FRAMES} frames`);
+          console.log(
+            `📸 Shot ${FRAMES} frames in ${Math.round(performance.now() - started)}ms`,
+          );
           window.__cheeseReady = true; // tells the harness to take its screenshot
         }
       }
@@ -82,7 +90,7 @@ function SayCheese() {
     tick();
 
     const unattended = setTimeout(() => {
-      if (window.__cheeseShoot === undefined) window.__cheeseShoot = true;
+      if (!window.__cheeseHarness) window.__cheeseShoot = true;
     }, UNATTENDED);
 
     return () => {
