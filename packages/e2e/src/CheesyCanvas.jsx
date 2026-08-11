@@ -127,7 +127,7 @@ function SayCheese() {
   return null;
 }
 
-export default function CheesyCanvas({ children, gl, frameloop, ...props }) {
+export default function CheesyCanvas({ children, frameloop, ...props }) {
   useEffect(() => {
     console.log(
       "CheesyCanvas: use ?saycheese in the URL to stop the animation",
@@ -139,32 +139,20 @@ export default function CheesyCanvas({ children, gl, frameloop, ...props }) {
   );
 
   //
-  // Chromatic archives the frozen page by serialising the DOM, and a <canvas>
-  // only survives that as whatever `toDataURL()` returns. WebGL clears its
-  // drawing buffer right after compositing, so by the time the archive is
-  // taken the read comes back blank -- unless the context was created with
-  // `preserveDrawingBuffer`. Only under `?saycheese`: it costs an extra
-  // buffer copy per frame, which no visitor should pay for.
-  //
-  // A `gl` callback builds its own renderer, so there is nothing to merge
-  // into; those examples archive an empty canvas.
-  //
-  const cheesyGl =
-    sayCheeseParam && (typeof gl === "object" || gl === undefined)
-      ? { ...gl, preserveDrawingBuffer: true }
-      : gl;
-
-  //
   // Held from the very first render, not switched off after a wait. That is
   // the difference between a deterministic shot and the previous one: letting
   // the loop run for three seconds and *then* freezing it captured whatever
   // number of frames the machine had managed, and every `useFrame` had
   // already integrated that many deltas of wall clock into the scene.
   //
+  // The one thing here that `deterministic.js` cannot do from outside React,
+  // and the reason the plugin still has to reach the file holding the
+  // `<Canvas>` -- `preserveDrawingBuffer` moved there, this cannot.
+  //
   const cheesyFrameloop = sayCheeseParam ? "never" : frameloop;
 
   return (
-    <Canvas {...props} gl={cheesyGl} frameloop={cheesyFrameloop}>
+    <Canvas {...props} frameloop={cheesyFrameloop}>
       {sayCheeseParam && <SayCheese />}
 
       {children}
