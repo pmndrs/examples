@@ -3,12 +3,36 @@ import { flushSync } from "react-dom";
 import { Canvas, useThree } from "@react-three/fiber";
 
 //
-// How much of the scene's life happens before the shot. 60 steps of 1/60 is
-// one second: enough for damping to settle, for a spring to arrive, and for
-// `<AccumulativeShadows>` to converge -- and the same second on every machine,
-// which is the whole point.
+// How much of the scene's life happens before the shot: half a second, the
+// same half second on every machine, which is the whole point.
 //
-const FRAMES = 60;
+// Determinism only asks that the count be fixed, so one frame would do -- but
+// the count does two other jobs that one frame cannot.
+//
+// It has to leave a picture worth comparing. At one frame `aquarium` has a
+// black band where its transmission buffers have not been filled yet, and
+// `baking-soft-shadows` -- an example whose entire subject is its shadows --
+// has none at all. Ten is enough for both.
+//
+// And it has to *contract* whatever nondeterminism is left. Damping and
+// springs converge on their target, so any residual difference between two
+// runs shrinks with every frame: `backdrop-and-cables` is reproducible at
+// twenty and at sixty, and not at ten. Thirty is that threshold with room
+// either side, which matters more than the seconds do -- one example crying
+// wolf is enough to make nobody read the report.
+//
+// The seconds, for the record. This browser has no GPU (SwiftShader, shaders
+// compiled through LLVM) and the bill is overwhelmingly shader compilation
+// rather than rasterisation -- on `aquarium`, ~16s of it, all paid between
+// the first frame and the fourth:
+//
+//   1: 0.8s    4: 16.2s    10: 18.3s    30: 24.5s    60: 32.5s
+//
+// Which is why cutting the count saves so much less than it looks like it
+// should, and why sixty timed out on a CI runner -- it pays that same fixed
+// toll about three times over -- while thirty does not.
+//
+const FRAMES = 30;
 const STEP = 1 / 60;
 
 //
