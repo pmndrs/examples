@@ -85,11 +85,13 @@ function Instances({ material }: { material: THREE.Material }) {
   );
 }
 
+const baseUrl = import.meta.env.BASE_URL.replace(/\/*$/, "/");
+
 function Scene() {
-  const bumpMap = useTexture("/bump.jpg");
+  const bumpMap = useTexture(`${baseUrl}bump.jpg`);
   const envMap = useCubeTexture(
     ["px.png", "nx.png", "py.png", "ny.png", "pz.png", "nz.png"],
-    { path: "/cube/" },
+    { path: `${baseUrl}cube/` },
   );
   // material is created once and shared by every sphere instance
   const [material, setMaterial] = useState<THREE.Material | null>(null);

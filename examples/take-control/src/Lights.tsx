@@ -14,16 +14,19 @@ export default function Lights() {
         color={color}
         position={[0, 0, -10]}
         intensity={4 * Math.PI}
+        decay={0}
       />
       <pointLight
         color={color}
         position={[0, 1, -10]}
         intensity={0.3 * 4 * Math.PI}
+        decay={0}
       />
       <spotLight
         position={[0, 1, 3]}
         intensity={0.4 * 4 * Math.PI}
         distance={10}
+        decay={0}
         color="blue"
       />
       <directionalLight position={[0, 0, 0]} intensity={0.1 * Math.PI} />

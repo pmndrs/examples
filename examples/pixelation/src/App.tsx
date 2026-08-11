@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Stage } from "@react-three/drei";
+import { CameraControls, Stage } from "@react-three/drei";
 import { EffectComposer, Pixelation } from "@react-three/postprocessing";
 import { useControls } from "leva";
 import Model from "./Model";
@@ -16,10 +16,11 @@ export default function App() {
         <EffectComposer>
           <Pixelation granularity={granularity} />
         </EffectComposer>
-        <Stage preset="rembrandt" intensity={1} environment="city">
+        <Stage preset="rembrandt" intensity={Math.PI} environment="city">
           <Model />
         </Stage>
       </Suspense>
+      <CameraControls makeDefault />
     </Canvas>
   );
 }

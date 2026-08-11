@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Stage } from "@react-three/drei";
+import { CameraControls, Stage } from "@react-three/drei";
 import { BlendFunction } from "postprocessing";
 import { EffectComposer, DotScreen } from "@react-three/postprocessing";
 import { useControls } from "leva";
@@ -15,7 +15,7 @@ export default function App() {
   return (
     <Canvas shadows dpr={[1, 2]} camera={{ fov: 50 }}>
       <Suspense fallback={null}>
-        <Stage preset="rembrandt" intensity={1} environment="city">
+        <Stage preset="rembrandt" intensity={Math.PI} environment="city">
           <Model />
         </Stage>
         <EffectComposer>
@@ -26,6 +26,7 @@ export default function App() {
           />
         </EffectComposer>
       </Suspense>
+      <CameraControls makeDefault />
     </Canvas>
   );
 }
