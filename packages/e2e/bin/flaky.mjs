@@ -25,10 +25,11 @@
 // the build after this one. Three is the default because it is the cheapest
 // number that can outvote a coincidence; the nightly runs more.
 //
-// It used to spend a full `turbo test --force` per run -- rebuild, browser
-// launch, archive, twice. It now builds once (cached, like any other build) and
-// re-shoots the same preview server in the same browser, which is the same page
-// through the same `shoot()` the test uses. What it costs is N shots.
+// It used to spend a full `turbo test --force` per run -- rebuild, archive and
+// all, twice. It now builds once, through the ordinary cached `build2`, and
+// spends the rest on the only part that has to be repeated: N cold shots,
+// through the same `shoot()` the test uses. See `shotOf` for what "cold" costs
+// and why paying it is the whole point.
 //
 
 import { execFileSync } from "node:child_process";
@@ -69,8 +70,47 @@ function build(example) {
   );
 }
 
-const browser = await chromium.launch();
 const results = [];
+
+//
+// One shot, from nothing: its own server, its own browser, its own profile.
+//
+// The cheap version of this reused both across the N runs, and it lied. It
+// reported `aquarium` and `backdrop-and-cables` as drifting, with the first
+// shot disagreeing and every later one agreeing on the value two earlier
+// sessions had already recorded -- because runs 2..N were warm. Warm is not a
+// thing CI ever is: every build there starts a server, a browser and a disk
+// cache from nothing, so a difference between cold and warm is a difference
+// nobody will ever see, and hiding the cold one is exactly backwards.
+//
+// A browser launch is ~200ms against a shot measured in tens of seconds. Cheap
+// was never worth being wrong about.
+//
+async function shotOf(example) {
+  const server = await preview({
+    root: join(root, "examples", example),
+    base: `/${example}`,
+    preview: { host: "127.0.0.1", port: PORT, strictPort: true },
+    logLevel: "silent",
+  });
+  const browser = await chromium.launch();
+
+  try {
+    const context = await browser.newContext({
+      viewport: { width: 1280, height: 720 },
+    });
+    // The same budget the Playwright config gives a test. The library's own
+    // default is 30s, which `aquarium` alone spends compiling shaders.
+    context.setDefaultTimeout(300_000);
+    const page = await context.newPage();
+
+    await shoot(page, server.resolvedUrls.local[0].replace(/\/$/, ""));
+    return await canvasHash(page);
+  } finally {
+    await browser.close();
+    await server.close();
+  }
+}
 
 for (const example of examples) {
   process.stdout.write(`${example.padEnd(40)}`);
@@ -88,37 +128,14 @@ for (const example of examples) {
     continue;
   }
 
-  const server = await preview({
-    root: join(root, "examples", example),
-    base: `/${example}`,
-    preview: { host: "127.0.0.1", port: PORT, strictPort: true },
-    logLevel: "silent",
-  });
-  const host = server.resolvedUrls.local[0].replace(/\/$/, "");
-
   for (let run = 0; run < RUNS; run++) {
-    // A fresh context per run rather than a fresh browser: a reload would keep
-    // whatever the page left in memory, and that is not what CI does.
-    const context = await browser.newContext({
-      viewport: { width: 1280, height: 720 },
-    });
-    // The same 180s the Playwright config gives a test. The library's own
-    // default is 30s, which `aquarium` alone spends compiling shaders.
-    context.setDefaultTimeout(180_000);
-    const page = await context.newPage();
-
     try {
-      await shoot(page, host);
-      result.hashes.push(await canvasHash(page));
+      result.hashes.push(await shotOf(example));
     } catch (error) {
       result.hashes.push(null);
       result.why ??= error.message.split("\n")[0].slice(0, 120);
     }
-
-    await context.close();
   }
-
-  await server.close();
 
   const [first, ...rest] = result.hashes;
   result.status =
@@ -138,8 +155,6 @@ for (const example of examples) {
 
   results.push(result);
 }
-
-await browser.close();
 
 if (argv.json) {
   writeFileSync(

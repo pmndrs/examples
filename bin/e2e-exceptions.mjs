@@ -1,4 +1,12 @@
 //
+// The two lists that carve out exceptions from "every example", and the reason
+// for each one.
+//
+//   EXCEPTIONS   not opened by the e2e run at all
+//   UNPUBLISHED  opened and archived, but not sent to Chromatic
+//
+// ---------------------------------------------------------------------------
+//
 // Examples the e2e run does not open, and why.
 //
 // three.js keeps the same list for the same reason: a suite that is red for
@@ -50,4 +58,14 @@ export const EXCEPTIONS = {
   // and the runner has no GPU, so this is not a margin, it is a coin toss.
   //
   "building-live-envmaps": "177s for the shot on a GPU, ~9x the median",
+
+  //
+  // Slow *and* wildly variable, which is worse than slow. Three runs of the
+  // same commit on the runner: 3.2 minutes, then over five, then over five
+  // again -- the first one under a shard that was fighting ten other browsers,
+  // the later ones with the runner to itself. Raising the budget from 180s to
+  // 300s did not catch it, and there is no number that would, because the
+  // spread is the problem. Why it costs what it costs is worth its own look.
+  //
+  "merged-instance": "3.2min to over 5min for the same shot, run to run",
 };
