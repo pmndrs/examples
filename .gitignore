@@ -30,7 +30,9 @@ build
 dist
 # Written by bin/build-catalog.mjs into the website's public/, on its way to
 # out/. Here rather than in apps/website/.gitignore so that prettier, which
-# only reads the root one, skips it as well.
+# only reads the root one, skips them as well.
+apps/website/public/examples/
+apps/website/public/llms.txt
 apps/website/public/catalog/
 
 

@@ -97,13 +97,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      {/* The whole gallery as one line per example, for readers that arrive
-          without knowing the catalog exists. Site-wide rather than on the home
-          page alone, and as a literal `<link>` rather than page metadata: an
-          example page sets its own `alternates` for its own markdown, and page
-          metadata replaces the layout's field rather than merging with it. */}
+      {/* The whole gallery as one line per example, the way every site built
+          with pmndrs/docs points at its own `llms.txt`. Site-wide rather than on
+          the home page alone, and as a literal `<link>` rather than page
+          metadata: an example page sets its own `alternates` for its own
+          markdown, and page metadata replaces the layout's field rather than
+          merging with it. */}
       <head>
-        <link rel="alternate" type="text/markdown" href={catalogIndexUrl} />
+        <link rel="alternate" type="text/plain" href={catalogIndexUrl} />
       </head>
       {/* No `bg-*` on the body: `globals.css` paints it in `@layer base`, and a
           utility here would win over it in both schemes. The two custom
