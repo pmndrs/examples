@@ -14,6 +14,26 @@ import getUuid from "uuid-by-string";
 
 const GOLDENRATIO = 1.61803398875;
 
+//
+// Not `Math.random()`, and the reason is not style.
+//
+// The harness seeds `Math.random` so the sequence is fixed -- but every three.js
+// object, material, geometry and texture draws four values from that same
+// sequence for a UUID, and the order they are created in follows the order
+// assets happen to arrive. So a card that draws after a texture resolved gets a
+// different number than one that drew before, and the gallery laid itself out
+// differently on every run.
+//
+// Deriving it from the image URL removes the question: the same card gets the
+// same number whenever it mounts.
+//
+function stableRandom(key: string) {
+  let h = 2166136261;
+  for (let i = 0; i < key.length; i++)
+    h = Math.imul(h ^ key.charCodeAt(i), 16777619);
+  return ((h >>> 0) % 10000) / 10000;
+}
+
 export type ImageData = {
   position: [number, number, number];
   rotation: [number, number, number];
@@ -105,7 +125,7 @@ function Frame({
   >(null!);
   const [, params] = useRoute("/item/:id");
   const [hovered, hover] = useState(false);
-  const [rnd] = useState(() => Math.random());
+  const [rnd] = useState(() => stableRandom(url));
   const name = getUuid(url);
   const isActive = params?.id === name;
   useCursor(hovered);

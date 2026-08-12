@@ -63,12 +63,48 @@ if (sayCheeseParam) {
 
   performance.now = () => virtual;
   Date.now = () => EPOCH + virtual;
+  // three.js patches this one too, and it is not redundant: `new Date().getTime()`
+  // never goes through `Date.now`.
+  Date.prototype.getTime = () => EPOCH + virtual;
 
   const rAF = window.requestAnimationFrame.bind(window);
   window.requestAnimationFrame = (callback) => rAF(() => callback(virtual));
 
   // Called by the pump in CheesyCanvas, once per frame, before it advances r3f.
   window.__cheeseAdvanceClock = (ms) => (virtual += ms);
+
+  //
+  // A `<video>` answers to none of the above: it plays off the media clock, in
+  // its own thread, and a texture sampled from it lands on whatever frame the
+  // decoder had reached. It is the single strongest predictor of drift we
+  // measured -- ten times over-represented among the examples that will not
+  // hold still.
+  //
+  // three.js pins it by letting playback start and pausing on the first
+  // `timeupdate`, and calls the result "semi-deterministic" for good reason:
+  // `timeupdate` fires about four times a second, so where playback stops still
+  // depends on how quickly the machine got there. We measured that as still
+  // drifting.
+  //
+  // So it never plays. It seeks to a fixed position instead, and waits for the
+  // decoder to say it landed -- `seeked` is the guarantee that this exact frame
+  // is the one a texture will sample. Half a second in, because the first frame
+  // of a video is often black or a fade.
+  //
+  const SEEK = 0.5;
+  HTMLVideoElement.prototype.play = function () {
+    const seek = () => {
+      this.pause();
+      this.currentTime = SEEK;
+    };
+
+    // `currentTime` before metadata is a no-op, so wait for the duration to
+    // exist when it does not yet.
+    if (this.readyState >= 1) seek();
+    else this.addEventListener("loadedmetadata", seek, { once: true });
+
+    return Promise.resolve();
+  };
 
   var style = document.createElement("style");
   style.innerHTML = `
