@@ -42,12 +42,13 @@ import { chromium } from "@playwright/test";
 import { preview } from "vite";
 
 import { canvasHash, shoot } from "../lib/shoot.mjs";
+import { UNPUBLISHED } from "../../../bin/e2e-exceptions.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 
 const argv = minimist(process.argv.slice(2));
 const RUNS = Number(argv.runs) || 3;
-const PORT = 5399; // one example at a time, so one port is enough
+const PORT = Number(argv.port) || 5399; // `--port` so two sweeps can run at once
 
 const asked = argv._.map((a) => String(a).replace("@example/", ""));
 const examples = (
@@ -90,7 +91,9 @@ async function shotOf(example) {
   const server = await preview({
     root: join(root, "examples", example),
     base: `/${example}`,
-    preview: { host: "127.0.0.1", port: PORT, strictPort: true },
+    // Not `strictPort`: vite walks up from here, so a port left busy by
+    // another sweep costs a second, not the whole run.
+    preview: { host: "127.0.0.1", port: PORT },
     logLevel: "silent",
   });
   const browser = await chromium.launch();
@@ -163,15 +166,47 @@ if (argv.json) {
   );
 }
 
-const unstable = results.filter((r) => r.status !== "stable");
+//
+// What this reports is a change of status, not a census.
+//
+// The nightly shoots every example that has a `test` script, and some of those
+// are in `UNPUBLISHED` precisely because they were measured drifting. Failing on
+// them would paint the nightly red every night for reasons already written
+// down -- and a job that is always red is a job nobody opens, which would cost
+// us the one thing this exists to catch.
+//
+// So there are two kinds of news, and they point in opposite directions:
+//
+//   a published example that drifted     -- a regression, and Chromatic is
+//                                           about to flag a change nobody made
+//   an unpublished one that held still   -- a fix worth collecting, whether it
+//                                           was aimed at this or not
+//
+const drifted = results.filter(
+  (r) => r.status !== "stable" && !(r.example in UNPUBLISHED),
+);
+const settled = results.filter(
+  (r) => r.status === "stable" && r.example in UNPUBLISHED,
+);
 
-if (unstable.length) {
+if (settled.length) {
   console.log(
-    `\n${unstable.length}/${results.length} would flag a phantom change:\n${unstable
+    `\n🎉 ${settled.length} held still over ${RUNS} shots and could be published:\n${settled
+      .map((r) => `  ${r.example.padEnd(40)}${r.hashes[0]}`)
+      .join("\n")}`,
+  );
+}
+
+if (drifted.length) {
+  console.log(
+    `\n${drifted.length} published example(s) would now flag a phantom change:\n${drifted
       .map((r) => `  ${r.example.padEnd(40)}${r.status}`)
       .join("\n")}`,
   );
   process.exit(1);
 }
 
-console.log(`\n${results.length}/${results.length} stable over ${RUNS} runs.`);
+const expected = results.length - drifted.length - settled.length;
+console.log(
+  `\n${expected}/${results.length} as expected over ${RUNS} shots -- nothing to report.`,
+);
