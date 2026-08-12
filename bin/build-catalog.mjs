@@ -48,14 +48,6 @@ const publicDirectory = path.join(websiteDirectory, "public");
 const outputDirectory = path.join(publicDirectory, "examples");
 const indexPath = path.join(publicDirectory, "llms.txt");
 
-/**
- * Where these lived before the move, kept for exactly one release: the deployed
- * MCP server still asks for them, and the two repos deploy on their own
- * schedules. Delete once pmndrs/docs is serving from the URLs above -- nothing
- * else has ever read them.
- */
-const legacyDirectory = path.join(publicDirectory, "catalog");
-
 // Same derivation as `lib/helper.ts`: absolute when the build knows where it is
 // deploying, relative otherwise, so a local build never emits production links.
 const BASE_PATH = process.env.BASE_PATH || "";
@@ -123,10 +115,8 @@ if (names.length === 0) {
 
 const index = [];
 
-for (const directory of [outputDirectory, legacyDirectory]) {
-  fs.rmSync(directory, { recursive: true, force: true });
-  fs.mkdirSync(directory, { recursive: true });
-}
+fs.rmSync(outputDirectory, { recursive: true, force: true });
+fs.mkdirSync(outputDirectory, { recursive: true });
 
 for (const name of names) {
   const exampleDirectory = path.join(examplesDirectory, name);
@@ -180,17 +170,17 @@ for (const name of names) {
 
   // The JSON is the structured form; the markdown is the reading form, and it
   // is what both the MCP server and `rel="alternate"` hand out.
-  const document = renderExample(example);
   fs.writeFileSync(
     path.join(outputDirectory, `${name}.json`),
     `${JSON.stringify(example, null, 2)}\n`,
   );
-  fs.writeFileSync(path.join(outputDirectory, `${name}.md`), document);
-  fs.writeFileSync(path.join(legacyDirectory, `${name}.md`), document);
+  fs.writeFileSync(
+    path.join(outputDirectory, `${name}.md`),
+    renderExample(example),
+  );
 }
 
 fs.writeFileSync(indexPath, renderIndex(index));
-fs.writeFileSync(path.join(legacyDirectory, "index.md"), renderIndex(index));
 
 console.log(
   `Wrote ${index.length} examples to ${path.relative(root, outputDirectory)}, and ${path.relative(root, indexPath)}.`,
