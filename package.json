@@ -31,7 +31,8 @@
     "turbo": "^2.10.7",
     "typescript": "^5.5.4",
     "typescript-eslint": "^8.66.0",
-    "vitest": "^4.1.10"
+    "vitest": "^4.1.10",
+    "yaml": "^2.9.0"
   },
   "engines": {
     "node": ">=24"

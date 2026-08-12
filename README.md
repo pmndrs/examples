@@ -104,6 +104,11 @@ it, the build always happens in the CI. Needs `VERCEL_TOKEN`, `VERCEL_ORG_ID` an
 `VERCEL_PROJECT_ID` as repo secrets; a pull request from a fork cannot read them,
 and gets no preview.
 
+The preview is built with the same `BASE_PATH` as the Pages one, so it is served
+from `<deployment-url>/examples` and not from the domain root — same layout as
+production, and the same `build2` cache entries, which is what keeps a preview
+an upload rather than a rebuild of all 167 examples.
+
 # test
 
 ```sh
