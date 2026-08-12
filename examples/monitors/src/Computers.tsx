@@ -869,7 +869,7 @@ function ScreenText({
     "children"
   >) {
   const textRef = useRef<THREE.Mesh>(null!);
-  const rand = Math.random() * 10000;
+  const rand = stablePhase(props.frame); // not Math.random(): see the note below
   useFrame(
     (state) =>
       (textRef.current.position.x =
@@ -996,4 +996,19 @@ function Leds({ instances }: { instances: Instance }) {
       />
     </group>
   );
+}
+
+//
+// A phase offset that depends on which screen this is, not on when it mounted.
+//
+// `Math.random()` looks harmless here -- it only spreads the screens' text out
+// of sync. But three.js draws four values from the same seeded sequence for
+// every object it creates, so where this call lands in that sequence follows
+// the order assets happened to resolve, and the offsets differed on every run.
+//
+function stablePhase(key: string) {
+  let h = 2166136261;
+  for (let i = 0; i < key.length; i++)
+    h = Math.imul(h ^ key.charCodeAt(i), 16777619);
+  return (h >>> 0) % 10000;
 }

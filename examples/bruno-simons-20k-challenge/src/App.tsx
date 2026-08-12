@@ -168,7 +168,8 @@ function Hats({
     (_, i) => ({
       key: i,
       position: [rand(2) + 1, 10 + i / 2, rand(2) - 2],
-      rotation: [Math.random(), Math.random(), Math.random()],
+      // From the index, not the shared seeded sequence -- see e2e/deterministic.js
+      rotation: [spread(i), spread(i + 1), spread(i + 2)],
     }),
   );
   return (
@@ -193,4 +194,10 @@ function Hats({
       </instancedMesh>
     </InstancedRigidBodies>
   );
+}
+
+/** A repeatable stand-in for `Math.random()`, keyed on the instance. */
+function spread(n: number) {
+  const x = Math.sin(n * 12.9898) * 43758.5453;
+  return x - Math.floor(x);
 }

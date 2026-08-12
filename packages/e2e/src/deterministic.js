@@ -70,8 +70,75 @@ if (sayCheeseParam) {
   const rAF = window.requestAnimationFrame.bind(window);
   window.requestAnimationFrame = (callback) => rAF(() => callback(virtual));
 
+  //
+  // Timers move onto the virtual clock too -- but only once the shot starts.
+  //
+  // `setTimeout` is how a scene schedules anything it does not want to do right
+  // now, and it was still keeping wall time: `threejs-journey-lv-1-fisheye`
+  // re-aims its subject on `setTimeout(wander, (1 + Math.random() * 2) * 800)`,
+  // so how many of our frames elapse before it fires depended entirely on how
+  // fast the machine drew them.
+  //
+  // Only once the shot starts, and that boundary was measured rather than
+  // guessed. Virtualising from page load instead -- to catch `clones`, which
+  // recolours its light on `setInterval(..., 3000)` a machine-dependent number
+  // of times *while loading* -- deadlocked the load: the clock does not move
+  // until we pump, so anything waiting on a long timer waits forever.
+  // `bruno-simons-20k-challenge` never finished loading and spent all three of
+  // its shots hitting the 300s budget. Exempting short delays was not enough.
+  //
+  // So a scene that does something time-based before the shot is beyond this,
+  // and has to stop doing it -- see `clones`.
+  //
+  const realSetTimeout = window.setTimeout.bind(window);
+  const pending = new Map();
+  let nextId = 1;
+  let shooting = false;
+
+  const realSetInterval = window.setInterval.bind(window);
+
+  function schedule(callback, delay, args, every) {
+    const id = -nextId++; // negative, so it cannot collide with a real handle
+    pending.set(id, { at: virtual + delay, callback, args, every });
+    return id;
+  }
+
+  window.setTimeout = (callback, delay = 0, ...args) =>
+    shooting
+      ? schedule(callback, delay, args, 0)
+      : realSetTimeout(callback, delay, ...args);
+
+  // `clones` recolours its light on `setInterval(..., 3000)`, drawing from the
+  // shared sequence each time it fires -- so what it had drawn by the shot
+  // depended on how long the shot took to reach.
+  window.setInterval = (callback, delay = 0, ...args) =>
+    shooting
+      ? schedule(callback, delay, args, delay)
+      : realSetInterval(callback, delay, ...args);
+
+  const realClearTimeout = window.clearTimeout.bind(window);
+  const realClearInterval = window.clearInterval.bind(window);
+  window.clearTimeout = (id) =>
+    id < 0 ? pending.delete(id) : realClearTimeout(id);
+  window.clearInterval = (id) =>
+    id < 0 ? pending.delete(id) : realClearInterval(id);
+
   // Called by the pump in CheesyCanvas, once per frame, before it advances r3f.
-  window.__cheeseAdvanceClock = (ms) => (virtual += ms);
+  window.__cheeseAdvanceClock = (ms) => {
+    shooting = true;
+    virtual += ms;
+
+    // Due callbacks, oldest first, and taken out of the map before they run so
+    // that one rescheduling itself cannot loop inside this frame.
+    for (const [id, timer] of [...pending].sort((a, b) => a[1].at - b[1].at)) {
+      if (timer.at > virtual) break;
+
+      if (timer.every) timer.at += timer.every;
+      else pending.delete(id);
+
+      timer.callback(...timer.args);
+    }
+  };
 
   //
   // A `<video>` answers to none of the above: it plays off the media clock, in
