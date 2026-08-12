@@ -48,6 +48,45 @@ if (sayCheeseParam) {
   };
 
   //
+  // Draw order must not depend on which asset finished decoding first.
+  //
+  // three's default opaque sort (`painterSortStable`) orders by `material.id`
+  // before depth -- and that id is a global counter, burned in whatever order
+  // GLTFLoader's async pipeline happened to construct materials: Draco decodes
+  // in a four-worker pool, textures land when they land, and
+  // `assignFinalMaterial` mints its clones as each mesh's Promise.all
+  // resolves. The loader cache then hands those same instances to the second
+  // mount, so the remount cannot renumber them and the reseed cannot reach a
+  // module-private counter. Wherever two of those materials meet on a
+  // coplanar surface -- or anywhere at all inside a depthTest=false overdraw
+  // pass like ContactShadows' depth bake -- the draw order IS the picture.
+  //
+  // Measured as the entire remaining drift of `bloom-hdr-workflow-gltf` (one
+  // MSAA-contested pixel, 10/10 identical with this in place) and
+  // `bruno-simons-20k-challenge` (9/9), and the same mechanism was traced in
+  // `bounds-and-makedefault`, `clones` and `html-markers`.
+  //
+  // Same keys the default uses, minus `material.id`. The `id` tiebreaker is
+  // `object.id`, which the second take mints in JSX order. Installed through
+  // the `__THREE_DEVTOOLS__` hook because every renderer announces itself
+  // there at construction, whichever version of three and whoever created it
+  // -- this module just has to exist first, and it is the entry's first
+  // import.
+  //
+  const opaqueSort = (a, b) =>
+    a.groupOrder - b.groupOrder ||
+    a.renderOrder - b.renderOrder ||
+    a.z - b.z ||
+    a.id - b.id;
+  window.__THREE_DEVTOOLS__ = {
+    dispatchEvent(event) {
+      const it = event.detail;
+      if (it && it.isWebGLRenderer && it.setOpaqueSort)
+        it.setOpaqueSort(opaqueSort);
+    },
+  };
+
+  //
   // The clock the whole page reads, replaced by one that only moves when we
   // move it -- the same thing three.js does in its own screenshot harness.
   //
