@@ -42,7 +42,13 @@ if (sayCheeseParam) {
       this,
       type,
       /^(webgl2?|experimental-webgl)$/.test(type)
-        ? { ...attributes, preserveDrawingBuffer: true }
+        ? // `antialias: false` too: which surface wins each MSAA sample on a
+          // knife edge is resolved inside the driver, below anything a page
+          // can patch. `room-with-soft-shadows` flipped two pixels of its
+          // window pane by one sample's worth, run to run, with every
+          // JS-visible state byte-identical -- and held 8/8 without MSAA.
+          // Aliased edges are the price of a comparison with zero tolerance.
+          { ...attributes, preserveDrawingBuffer: true, antialias: false }
         : attributes,
     );
   };
@@ -66,23 +72,43 @@ if (sayCheeseParam) {
   // `bruno-simons-20k-challenge` (9/9), and the same mechanism was traced in
   // `bounds-and-makedefault`, `clones` and `html-markers`.
   //
-  // Same keys the default uses, minus `material.id`. The `id` tiebreaker is
-  // `object.id`, which the second take mints in JSX order. Installed through
-  // the `__THREE_DEVTOOLS__` hook because every renderer announces itself
-  // there at construction, whichever version of three and whoever created it
-  // -- this module just has to exist first, and it is the entry's first
-  // import.
+  // Same keys the defaults use, minus `material.id`, and with the final
+  // tiebreak on the object's *name* before its id. `object.id` is only safe
+  // for meshes the second take minted itself, in JSX order; a mesh drawn
+  // straight out of a cached GLTF scene graph carries an id burned at parse
+  // time, in the same racy order as the materials'. Its name, though, comes
+  // from the file. The transparent sort needs the same treatment for its
+  // z-ties -- `sport-hall`'s backboard glass sits exactly on its trim, and
+  // three's default falls back to `object.id` right there.
   //
+  // Installed through the `__THREE_DEVTOOLS__` hook because every renderer
+  // announces itself there at construction, whichever version of three and
+  // whoever created it -- this module just has to exist first, and it is the
+  // entry's first import.
+  //
+  const byName = (a, b) =>
+    a.object.name < b.object.name
+      ? -1
+      : a.object.name > b.object.name
+        ? 1
+        : a.id - b.id;
   const opaqueSort = (a, b) =>
     a.groupOrder - b.groupOrder ||
     a.renderOrder - b.renderOrder ||
     a.z - b.z ||
-    a.id - b.id;
+    byName(a, b);
+  const transparentSort = (a, b) =>
+    a.groupOrder - b.groupOrder ||
+    a.renderOrder - b.renderOrder ||
+    b.z - a.z ||
+    byName(a, b);
   window.__THREE_DEVTOOLS__ = {
     dispatchEvent(event) {
       const it = event.detail;
-      if (it && it.isWebGLRenderer && it.setOpaqueSort)
+      if (it && it.isWebGLRenderer && it.setOpaqueSort) {
         it.setOpaqueSort(opaqueSort);
+        it.setTransparentSort(transparentSort);
+      }
     },
   };
 
@@ -98,16 +124,26 @@ if (sayCheeseParam) {
   // That is why postprocessing and physics never correlated with drift (they
   // live inside `useFrame`) while springs and easings did.
   //
-  // So: time starts at zero, stays there through loading, and advances exactly
+  // So: time starts frozen, stays frozen through loading, and advances exactly
   // `1/60` per frame we pump. `rAF` callbacks get the same virtual timestamp,
   // for anything that reads the argument rather than the clock.
+  //
+  // Frozen at one frame's worth, not at zero. Zero is the one value a clock
+  // must never idle on: react-spring's `rafz` computes its delta as
+  // `prevTs ? ts - prevTs : 16.667`, so a clock stuck at 0 keeps `prevTs`
+  // falsy forever and every *real* pre-shot rAF tick advances every spring by
+  // a full frame -- how many, the machine decides. Stuck at 16.667 instead,
+  // the fallback fires once and every later tick computes `dt = 0`: springs
+  // hold perfectly still until the pump moves the clock. Measured on
+  // `springy-boxes`, which entered the shot a machine-dependent number of
+  // frames into flight.
   //
   // `Date.now` moves with it off a fixed epoch. `new Date()` is deliberately
   // left alone: patching the constructor breaks `instanceof` for very little,
   // since animation libraries read `performance.now` or `Date.now`.
   //
   const EPOCH = 1767225600000; // 2026-01-01T00:00:00Z, an arbitrary fixed point
-  let virtual = 0;
+  let virtual = 1000 / 60;
 
   // Kept for the one thing that still wants wall clock: reporting how long the
   // shot really took, which is what tells us whether the budget still fits.
@@ -225,12 +261,23 @@ if (sayCheeseParam) {
     return Promise.resolve();
   };
 
+  //
+  // CSS animations run on the compositor's timeline, which none of the clock
+  // patching above can reach -- and they do not have to touch the canvas to
+  // move pixels in it: `view-tracking` animates plain divs whose bounding
+  // rects drei's <View> reads every frame to place its scissor, so the
+  // picture followed real seconds since page load. Killed everywhere, not
+  // just on the canvas: the hash is canvas-only, so a frozen page costs
+  // nothing, and no example gates its loading on an animation ever ending.
+  //
   var style = document.createElement("style");
   style.innerHTML = `
-  canvas[data-engine] {
+  *, *::before, *::after {
     animation: none !important;
     transition: none !important;
+  }
 
+  canvas[data-engine] {
     opacity: 1!important;
   }
 `;
