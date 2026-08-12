@@ -1,31 +1,36 @@
 #!/usr/bin/env node
 
 /**
- * Emits the machine-readable catalog the website ships alongside its pages, at
- * `/catalog/index.{json,md}` and `/catalog/<example>.{json,md}`.
+ * Emits what the website ships for readers that cannot run it: the pmndrs docs
+ * MCP server serves examples to coding agents out of these files, and so does
+ * anything that just fetches a URL.
  *
- * It exists for readers that cannot run the site: the pmndrs docs MCP server
- * serves examples to coding agents out of these files, so an agent can find the
- * example that already solves a problem and read its source without cloning
- * anything.
+ * The URLs are the page URLs with an extension, so they can be guessed rather
+ * than discovered:
  *
- * Two forms of each. The JSON is the structured one -- dependencies as a map,
- * sizes as numbers. The markdown is what a reader is actually handed, and it is
- * written here rather than by whichever server passes it on, because it is
- * published too: every example page points at its `.md` with `rel="alternate"`,
- * so an agent arriving from the open web gets the same document as one arriving
- * over MCP.
+ *     /examples/aquarium        the page
+ *     /examples/aquarium.md     the same example, as the document an agent reads
+ *     /examples/aquarium.json   the same, structured -- deps as a map, sizes as numbers
+ *     /llms.txt                 the whole gallery, one line each
  *
- * Two files rather than one on purpose. The index is small enough (~95 kB, and
- * an eighth of that over the wire) to pull on every question, and carries just
- * enough -- title, description, tags, libraries -- to pick from; the per-example
- * file then costs one more request for the ~6 kB that actually answers it. A
- * single bundle would be ~2 MB, paid in full to read one example.
+ * `/llms.txt` rather than `/examples.md` because appending an extension only
+ * works for a page that has a filename: an agent that tries it on the gallery
+ * root asks for `/.md`. The root convention for "the whole site, for agents"
+ * already exists, and pmndrs/docs already publishes one.
+ *
+ * The markdown is written here rather than by whichever server passes it on,
+ * because it is published: every example page points at its `.md` with
+ * `rel="alternate"`, so an agent arriving from the open web gets the same
+ * document as one arriving over MCP.
+ *
+ * The index and the example are separate fetches on purpose. `/llms.txt` is
+ * ~19 kB and is read on every question; the example is the ~6 kB that answers
+ * it. One bundle would be ~2 MB, paid in full to read one example.
  *
  * The published set is whatever `apps/website/package.json` depends on, which is
  * what the site itself builds from (`apps/website/lib/helper.ts`). Example
  * directories that are not workspace dependencies -- `ssr-test`, `starwars` --
- * are not on the site and are not in the catalog either.
+ * are not on the site and are not published here either.
  */
 
 import fs from "node:fs";
@@ -37,7 +42,19 @@ import { renderExample, renderIndex } from "./lib/render.mjs";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const examplesDirectory = path.join(root, "examples");
 const websiteDirectory = path.join(root, "apps", "website");
-const outputDirectory = path.join(websiteDirectory, "public", "catalog");
+const publicDirectory = path.join(websiteDirectory, "public");
+// Siblings of the exported pages: Next writes `out/examples/<name>.html`, and
+// `public/` is copied over it verbatim.
+const outputDirectory = path.join(publicDirectory, "examples");
+const indexPath = path.join(publicDirectory, "llms.txt");
+
+/**
+ * Where these lived before the move, kept for exactly one release: the deployed
+ * MCP server still asks for them, and the two repos deploy on their own
+ * schedules. Delete once pmndrs/docs is serving from the URLs above -- nothing
+ * else has ever read them.
+ */
+const legacyDirectory = path.join(publicDirectory, "catalog");
 
 // Same derivation as `lib/helper.ts`: absolute when the build knows where it is
 // deploying, relative otherwise, so a local build never emits production links.
@@ -106,8 +123,10 @@ if (names.length === 0) {
 
 const index = [];
 
-fs.rmSync(outputDirectory, { recursive: true, force: true });
-fs.mkdirSync(outputDirectory, { recursive: true });
+for (const directory of [outputDirectory, legacyDirectory]) {
+  fs.rmSync(directory, { recursive: true, force: true });
+  fs.mkdirSync(directory, { recursive: true });
+}
 
 for (const name of names) {
   const exampleDirectory = path.join(examplesDirectory, name);
@@ -161,22 +180,18 @@ for (const name of names) {
 
   // The JSON is the structured form; the markdown is the reading form, and it
   // is what both the MCP server and `rel="alternate"` hand out.
+  const document = renderExample(example);
   fs.writeFileSync(
     path.join(outputDirectory, `${name}.json`),
     `${JSON.stringify(example, null, 2)}\n`,
   );
-  fs.writeFileSync(
-    path.join(outputDirectory, `${name}.md`),
-    renderExample(example),
-  );
+  fs.writeFileSync(path.join(outputDirectory, `${name}.md`), document);
+  fs.writeFileSync(path.join(legacyDirectory, `${name}.md`), document);
 }
 
-fs.writeFileSync(
-  path.join(outputDirectory, "index.json"),
-  `${JSON.stringify({ site, count: index.length, examples: index }, null, 2)}\n`,
-);
-fs.writeFileSync(path.join(outputDirectory, "index.md"), renderIndex(index));
+fs.writeFileSync(indexPath, renderIndex(index));
+fs.writeFileSync(path.join(legacyDirectory, "index.md"), renderIndex(index));
 
 console.log(
-  `Wrote catalog for ${index.length} examples to ${path.relative(root, outputDirectory)}.`,
+  `Wrote ${index.length} examples to ${path.relative(root, outputDirectory)}, and ${path.relative(root, indexPath)}.`,
 );

@@ -3,10 +3,13 @@
   "globalEnv": ["BASE_PATH"],
   "tasks": {
     "build2": {
+      // `vite.config.build.ts`, not `vite.config.ts`: the latter has never
+      // existed, so this pattern matched nothing and editing the config the
+      // build actually loads left the cache looking valid.
       "inputs": [
         "$TURBO_DEFAULT$",
         "../../packages/e2e/bin/build.mjs",
-        "../../packages/e2e/src/{CheesyCanvas.jsx,deterministic.js,vite-plugin-monkey.js,vite.config.ts}"
+        "../../packages/e2e/src/{CheesyCanvas.jsx,deterministic.js,vite-plugin-monkey.js,vite-plugin-head.js,vite.config.build.ts}"
       ],
       "outputs": ["dist/**"],
       "cache": true

@@ -87,6 +87,24 @@ describe("build", () => {
       expect(hashOf(`${EXAMPLE}#build2`, BUILD, EXAMPLE)).toBe(before);
     });
   });
+
+  /**
+   * The regression this exists for: `inputs` listed
+   * `packages/e2e/src/vite.config.ts`, which has never existed. The config the
+   * build actually loads is `vite.config.build.ts`, so every example's build
+   * kept replaying a cached pass over a config that had changed.
+   */
+  it.each([
+    "packages/e2e/src/vite.config.build.ts",
+    "packages/e2e/src/vite-plugin-head.js",
+    "packages/e2e/src/vite-plugin-monkey.js",
+  ])("re-runs every example build when %s moves", (file) => {
+    const before = hashOf(`${EXAMPLE}#build2`, BUILD, EXAMPLE);
+
+    withTouched(file, () => {
+      expect(hashOf(`${EXAMPLE}#build2`, BUILD, EXAMPLE)).not.toBe(before);
+    });
+  });
 });
 
 /**
