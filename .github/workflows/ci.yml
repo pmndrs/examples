@@ -97,25 +97,42 @@ jobs:
       #
       # Preview (only for pull requests)
       #
-      # The same build with no base path -- a preview is served from its own
-      # domain root -- uploaded as-is: Vercel hosts `out`, it never rebuilds it.
+      # The same `BASE_PATH` as the Pages build, and for the same reason the
+      # step above exists at all: `BASE_PATH` is a `globalEnv`, and it really
+      # does change every example's `dist` (vite's `--base`). Building the
+      # preview without it gave every `build2` a different hash -- 167 rebuilds,
+      # ~3.5min, and never a cache hit across runs either, since `main` never
+      # produces those hashes and a pull request cannot read another one's
+      # cache. With it, `pnpm test` above has already built all of them.
+      #
+      # What it costs: the preview is served from `<url>${BASE_PATH}`, not the
+      # domain root, since the pages link to each other by absolute path. That
+      # is the production layout, which is what a preview should be showing.
       - run: pnpm build
         if: ${{ env.PREVIEW == 'true' }}
+        env:
+          BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
       - id: preview
         if: ${{ env.PREVIEW == 'true' }}
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
         run: |
           mkdir -p .vercel/output
+          # `out`, not `out${BASE_PATH}`: the site lives one level down, and the
+          # static root has to be the level its absolute links resolve against
           mv out .vercel/output/static
           # `cleanUrls`: the website exports flat `<name>.html` pages and links
-          # to them without the extension
-          echo '{"version":3,"cleanUrls":true}' > .vercel/output/config.json
+          # to them without the extension. The route sends the bare deployment
+          # URL -- the one Vercel prints, and the one anyone trims to -- to the
+          # home page, which now sits under the base path rather than at `/`.
+          printf '{"version":3,"cleanUrls":true,"routes":[{"src":"/","status":308,"headers":{"Location":"%s"}}]}' \
+            "${BASE_PATH:-/}" > .vercel/output/config.json
           # `--archive`: one tarball, not 2.4k file uploads
           url=$(pnpm dlx vercel@latest deploy --prebuilt --archive=tgz --token="$VERCEL_TOKEN")
-          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "url=$url$BASE_PATH" >> "$GITHUB_OUTPUT"
       # The pull request's "View deployment" box, which Vercel's git integration
       # would have filled had we let it deploy
       - uses: actions/github-script@v9
