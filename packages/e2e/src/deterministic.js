@@ -7,6 +7,19 @@ if (sayCheeseParam) {
   seedrandom("hello.", { global: true });
 
   //
+  // Seeding fixes the *sequence*; it does not fix who draws from it in what
+  // order. Assets resolve in whatever order the network hands them back, the
+  // components waiting on them mount in that order, and every draw they make
+  // -- a spread position, a phase, the four values three.js burns per object
+  // for a UUID -- lands on a different point of the same fixed sequence.
+  //
+  // The harness deals with that by mounting the scene twice (see
+  // `CheesyCanvas`), and the second mount only helps if it starts from the top
+  // of the sequence. This is the rewind.
+  //
+  window.__cheeseReseed = () => seedrandom("hello.", { global: true });
+
+  //
   // Chromatic archives the frozen page by serialising the DOM, and a <canvas>
   // only survives that as whatever `toDataURL()` returns. WebGL clears its
   // drawing buffer right after compositing, so by the time the archive is

@@ -41,6 +41,35 @@ export async function shoot(page, host) {
   await page.goto(`${host}/?saycheese`);
   await waitForAssets(page);
 
+  //
+  // 🔁 second take -- see `CheesyCanvas`. The first mount happened in
+  // asset-arrival order, which is the network's order, not ours. Now that
+  // every loader cache is warm, remounting the scene is one synchronous
+  // render in JSX order, and everything the mount order decides -- `useFrame`
+  // registration, scene-graph children, physics insertion, who draws what
+  // from the seeded random sequence -- comes out the same, every run.
+  //
+  // `networkidle` cannot be waited on twice (load states are monotonic per
+  // navigation), and mostly nothing loads here anyway: the point of the
+  // second take is that the caches answer. What can still be in flight is a
+  // `<video>` element recreated by the remount, re-pinning itself to its
+  // fixed frame, so that is what gets waited on -- then the same settle the
+  // first wait uses.
+  //
+  await page.evaluate(() => window.__cheeseRemount?.());
+  await page
+    .waitForFunction(
+      () =>
+        [...document.querySelectorAll("video")].every(
+          (video) => video.paused && video.readyState >= 2,
+        ),
+      { timeout: 20_000 },
+    )
+    .catch(() => {
+      console.log("A video never pinned itself, shooting anyway");
+    });
+  await page.waitForTimeout(500);
+
   // 🎬 flags rather than events, so neither side can miss the other's
   await page.evaluate(() => (window.__cheeseShoot = true));
   await page.waitForFunction(() => window.__cheeseReady === true);
