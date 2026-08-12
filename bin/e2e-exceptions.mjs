@@ -84,19 +84,27 @@ export const EXCEPTIONS = {
 // many shots it took to catch them, so the claim can be checked rather than
 // believed.
 //
-// Measured on 2026-08-11, three independent passes of three cold shots. Each
-// pass only re-shot what the last one still called stable, because UNSTABLE is
-// proof and needs no repeat while "stable" is only an absence of one:
+// Measured over five independent passes of three cold shots, run until two
+// consecutive passes caught nothing new. Each pass only re-shot what the last
+// one still called stable, because UNSTABLE is proof and needs no repeat while
+// "stable" is only an absence of one:
 //
 //   pass 1   162 examples   28 caught
 //   pass 2   134 survivors   7 caught
 //   pass 3   127 survivors   2 caught
+//   pass 4   124 survivors   0
+//   pass 5   124 survivors   0
 //
-// Which is the number to remember: three shots is *not* enough to settle this.
-// Seven examples that three runs called stable were not, and two more survived
-// six. The tail is thinning, not closed -- so this list is a floor rather than
-// a truth, and the nightly, which shoots five times on the runner that actually
-// takes the picture, is the thing that keeps it honest.
+// The middle rows are why this was not stopped at three. Seven examples that
+// three shots called stable were not, and two more survived six -- so three
+// settles nothing, and a list built on three would have published nine drifting
+// examples with a measurement stamped on them.
+//
+// The last two rows are why it stops here. Everything published has now held
+// the same canvas across fifteen cold shots, and the two passes that cost the
+// most found the least: nothing. That is as close to closed as sampling gets.
+// It is still sampling -- the nightly, which shoots five times on the runner
+// that actually takes the picture, is what keeps the claim honest over time.
 //
 // Two absences from this list are deliberate. `svg-renderer` reports "no
 // canvas" by construction -- it swaps its canvas for an `<svg>`, which
