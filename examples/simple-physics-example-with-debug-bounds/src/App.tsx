@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Canvas } from "@react-three/fiber";
+import React, { useState, useRef } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
 import {
   Physics,
   Debug,
@@ -52,10 +52,25 @@ function CompoundBody(props: BodyProps) {
   );
 }
 
-export default function () {
-  // Mount a 3rd <CompoundBody /> object after 2 seconds
+// Mounts its children after `seconds` of *scene* time. A wall-clock
+// setTimeout lands whenever the machine gets there; counting through
+// useFrame keeps the two-second entrance exact at any refresh rate.
+function MountAfter({
+  seconds,
+  children,
+}: {
+  seconds: number;
+  children: React.ReactNode;
+}) {
   const [flag, set] = useState(false);
-  useEffect(() => void setTimeout(() => set(true), 2000), []);
+  const elapsed = useRef(0);
+  useFrame((_, delta) => {
+    if (!flag && (elapsed.current += delta) >= seconds) set(true);
+  });
+  return flag ? <>{children}</> : null;
+}
+
+export default function () {
   return (
     <Canvas
       dpr={[1, 2]}
@@ -80,12 +95,13 @@ export default function () {
           <Plane rotation={[-Math.PI / 2, 0, 0]} />
           <CompoundBody position={[1.5, 5, 0.5]} rotation={[1.25, 0, 0]} />
           <CompoundBody position={[2.5, 3, 0.25]} rotation={[1.25, -1.25, 0]} />
-          {flag && (
+          {/* A third body makes its entrance after 2 seconds */}
+          <MountAfter seconds={2}>
             <CompoundBody
               position={[2.5, 4, 0.25]}
               rotation={[1.25, -1.25, 0]}
             />
-          )}
+          </MountAfter>
         </Debug>
       </Physics>
     </Canvas>
