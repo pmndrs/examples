@@ -96,12 +96,21 @@ function SayCheese() {
       // 158 examples still to be covered will.
       //
       if (window.__cheeseShoot === true && frame < FRAMES) {
-        if (frame === 0) started = performance.now();
+        if (frame === 0) started = window.__cheeseRealNow?.() ?? 0;
+
+        //
+        // The page's clock moves here, and only here -- see `deterministic.js`.
+        // Before `advance`, so that anything reading `performance.now()` inside
+        // this frame (a spring, an easing, a `rafz` tick) sees the same instant
+        // r3f is about to render.
+        //
+        window.__cheeseAdvanceClock?.(STEP * 1000);
+
         flushSync(() => advance(++frame * STEP));
 
         if (frame === FRAMES) {
           console.log(
-            `📸 Shot ${FRAMES} frames in ${Math.round(performance.now() - started)}ms`,
+            `📸 Shot ${FRAMES} frames in ${Math.round((window.__cheeseRealNow?.() ?? 0) - started)}ms`,
           );
           window.__cheeseReady = true; // tells the harness to take its screenshot
         }
