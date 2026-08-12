@@ -43,8 +43,18 @@ export type Example = ExampleMetadata & {
   thumb: string;
   embed_url: string;
   website_url: string;
+  catalog_url: string;
   isNew: boolean;
 };
+
+/**
+ * The whole catalog as one line per example. Site-level rather than per-example,
+ * so it takes the deployment origin without a port -- unlike `host()` above,
+ * which in development points at whichever vite server runs that example.
+ */
+export const catalogIndexUrl = `${
+  BASE_URL ? new URL(BASE_URL).origin : ""
+}${BASE_PATH}/catalog/index.md`;
 
 function getMetadata(examplename: string): ExampleMetadata {
   const metadataPath = path.join(
@@ -77,6 +87,10 @@ export function getExamples(): Example[] {
         thumb: `${embed_url}/thumbnail.webp`,
         embed_url,
         website_url,
+        // What `bin/build-catalog.mjs` wrote for this example. The page points at
+        // it with `rel="alternate"`, so an agent that lands on the HTML finds the
+        // readable form without having to know the catalog exists.
+        catalog_url: `${h}${BASE_PATH}/catalog/${examplename}.md`,
         isNew: NEW_EXAMPLES.has(examplename),
       };
     });
