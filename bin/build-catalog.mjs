@@ -121,6 +121,13 @@ for (const name of names) {
     ...metadata,
     demo: `${site}/examples/${name}`,
     thumbnail: `${site}/${name}/thumbnail.webp`,
+    // How much source a reader takes on by opening this one. Examples run from
+    // a few hundred bytes to 90 kB, and without this in the index the choice is
+    // made blind -- which is what pushes a reader into "open one and hope"
+    // instead of opening the two that would answer the question.
+    bytes: paths
+      .filter(isInlinable)
+      .reduce((total, file) => total + sizeOf(file), 0),
   };
   index.push(summary);
 
