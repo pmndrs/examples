@@ -14,9 +14,14 @@
     "website#build3": {
       "dependsOn": ["^build2"],
       "env": ["BASE_URL"],
+      // The catalog generator is a root file, so it falls outside the package's
+      // own inputs. What it *reads* need not be listed: every example's
+      // `pmndrs.json`, `package.json` and `src/` is already an input of that
+      // example's `build2`, which this task depends on.
       "inputs": [
         "$TURBO_DEFAULT$",
-        "../../packages/e2e/snapshot.test.js-snapshots/**"
+        "../../packages/e2e/snapshot.test.js-snapshots/**",
+        "../../bin/build-catalog.mjs"
       ],
       "outputs": [".next/**", "!.next/cache/**", "out/**"],
       "cache": true
