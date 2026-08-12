@@ -22,7 +22,27 @@ export async function waitForAssets(page) {
   await page.waitForLoadState("networkidle", { timeout: 20_000 }).catch(() => {
     console.log("Network never went idle, shooting anyway");
   });
+  await waitForDecodes(page);
   await page.waitForTimeout(500);
+}
+
+//
+// `networkidle` says the bytes arrived, not that they were decoded: a Draco
+// mesh still has a worker round-trip ahead of it, an HDR a parse, and under
+// load the settle can lose that race -- at which point the second take
+// re-suspends and mounts in arrival order again, reviving exactly what the
+// remount exists to fix. The page tracks its loading manager (see
+// `deterministic.js`), whose `itemEnd` fires after the parse, and this waits
+// for it to go quiet.
+//
+async function waitForDecodes(page) {
+  await page
+    .waitForFunction(() => (window.__cheeseInflight?.() ?? 0) === 0, {
+      timeout: 60_000,
+    })
+    .catch(() => {
+      console.log("Loaders never went quiet, shooting anyway");
+    });
 }
 
 /**
@@ -57,6 +77,7 @@ export async function shoot(page, host) {
   // first wait uses.
   //
   await page.evaluate(() => window.__cheeseRemount?.());
+  await waitForDecodes(page); // in case the second take re-suspended anything
   await page
     .waitForFunction(
       () =>

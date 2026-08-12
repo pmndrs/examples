@@ -1,10 +1,36 @@
 import seedrandom from "seedrandom";
+import { DefaultLoadingManager } from "three";
 
 const sayCheeseParam = new URLSearchParams(window.location.search).has(
   "saycheese",
 );
 if (sayCheeseParam) {
   seedrandom("hello.", { global: true });
+
+  //
+  // `networkidle` says the bytes arrived; it says nothing about the decode
+  // that follows -- a Draco mesh unpacks in a worker pool, an HDR parses off
+  // the main thread, and under load the settle after idle can lose that
+  // race. Then the second take re-suspends and mounts in arrival order
+  // again, quietly reviving everything the remount exists to fix
+  // (`iridescent-decals` flipped once in ten shots exactly this way, only
+  // under full-sweep load). The loading manager is the signal with the right
+  // shape: `itemEnd` fires after the parse, not after the bytes. Patched at
+  // the method rather than the `onLoad` slot, which drei's `useProgress`
+  // overwrites for its own loader UI.
+  //
+  let inflight = 0;
+  const itemStart = DefaultLoadingManager.itemStart.bind(DefaultLoadingManager);
+  const itemEnd = DefaultLoadingManager.itemEnd.bind(DefaultLoadingManager);
+  DefaultLoadingManager.itemStart = (url) => {
+    inflight += 1;
+    itemStart(url);
+  };
+  DefaultLoadingManager.itemEnd = (url) => {
+    inflight -= 1;
+    itemEnd(url);
+  };
+  window.__cheeseInflight = () => inflight;
 
   //
   // Seeding fixes the *sequence*; it does not fix who draws from it in what
