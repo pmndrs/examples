@@ -45,8 +45,10 @@ export default function Model(props: ThreeElements["group"]) {
   useEffect(() => {
     // Reset and fade in animation after an index has been changed
     actions[names[index]]!.reset().fadeIn(0.5).play();
-    // In the clean-up phase, fade it out
-    return () => void actions[names[index]]!.fadeOut(0.5);
+    // In the clean-up phase, fade it out. On unmount the hook has already
+    // uncached the action, so the lookup can come back empty -- and a cleanup
+    // that throws takes the whole React root down with it.
+    return () => void actions[names[index]]?.fadeOut(0.5);
   }, [index, actions, names]);
 
   useFrame((state, delta) => {
