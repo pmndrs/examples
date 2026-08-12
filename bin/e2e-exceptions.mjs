@@ -98,10 +98,18 @@ export const EXCEPTIONS = {
 //
 // Measured under that harness over repeated passes of three cold shots each,
 // on every former drifter plus three always-stable controls, until two
-// consecutive passes caught nothing:
-//
-//   pass 1   38 examples   0 caught
-//   pass 2   38 survivors   0 caught
+// consecutive passes caught nothing. The first protocol run came back clean
+// at six shots per example -- and doubling it under full-machine load caught
+// three more, each flipping once in ten to fifteen shots and only under
+// load. That is the measurement lesson next to "warm is not cold" and
+// "three shots settle nothing": an idle machine hides flakers, so the
+// certifying run keeps the machine busy on purpose. All three were
+// diagnosed to a proven mechanism (an async Worker reply landing mid-shot,
+// networkidle saying "arrived" when Draco had not finished decoding, and a
+// texture() sampled where GLSL leaves derivatives undefined), fixed, and
+// re-measured 9/9 under load each. The final certification -- all 38 under
+// sustained load, plus a parallel sweep hammering the six heaviest with
+// ~135 extra shots -- caught nothing, twice over.
 //
 // It is still sampling -- the nightly, which shoots five times on the runner
 // that actually takes the picture, is what keeps the claim honest over time,
