@@ -3,6 +3,11 @@
   "globalEnv": ["BASE_PATH"],
   "tasks": {
     "build2": {
+      // `vite-plugin-head` puts absolute URLs in each demo's <head>, so it
+      // needs the deployment origin. Undeclared, turbo does not pass it to the
+      // task at all -- not a stale cache, the variable simply never arrives --
+      // and every demo shipped root-relative links instead.
+      "env": ["BASE_URL"],
       // `vite.config.build.ts`, not `vite.config.ts`: the latter has never
       // existed, so this pattern matched nothing and editing the config the
       // build actually loads left the cache looking valid.
