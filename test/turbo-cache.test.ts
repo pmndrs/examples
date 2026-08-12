@@ -58,6 +58,7 @@ function withTouched<T>(file: string, run: () => T): T {
 const LINT = ["lint", "lint:examples", "lint:metadata", "lint:versions"];
 const FORMAT = ["format:check"];
 const BUILD = ["build2"];
+const WEBSITE_BUILD = ["build3"];
 
 const EXAMPLE = "@example/basic-example";
 const EXAMPLE_SOURCE = "examples/basic-example/src/App.tsx";
@@ -84,6 +85,38 @@ describe("build", () => {
 
     withTouched(OTHER_EXAMPLE_SOURCE, () => {
       expect(hashOf(`${EXAMPLE}#build2`, BUILD, EXAMPLE)).toBe(before);
+    });
+  });
+});
+
+/**
+ * The website build also emits `/catalog/*.json` (`bin/build-catalog.mjs`),
+ * which is what the docs MCP server reads. A cache hit that skips it serves a
+ * catalog describing examples that have since changed -- and unlike a stale
+ * page, nobody looks at it, so nothing would ever report it.
+ */
+describe("catalog", () => {
+  it("re-runs the website build for the generator itself", () => {
+    const before = hashOf("website#build3", WEBSITE_BUILD);
+
+    withTouched("bin/build-catalog.mjs", () => {
+      expect(hashOf("website#build3", WEBSITE_BUILD)).not.toBe(before);
+    });
+  });
+
+  it("re-runs the website build when an example's metadata moves", () => {
+    const before = hashOf("website#build3", WEBSITE_BUILD);
+
+    withTouched("examples/wireframes/pmndrs.json", () => {
+      expect(hashOf("website#build3", WEBSITE_BUILD)).not.toBe(before);
+    });
+  });
+
+  it("leaves the website build alone for a docs-only change", () => {
+    const before = hashOf("website#build3", WEBSITE_BUILD);
+
+    withTouched("docs/agents/domain.md", () => {
+      expect(hashOf("website#build3", WEBSITE_BUILD)).toBe(before);
     });
   });
 });
