@@ -105,6 +105,23 @@ describe("build", () => {
       expect(hashOf(`${EXAMPLE}#build2`, BUILD, EXAMPLE)).not.toBe(before);
     });
   });
+
+  /**
+   * `vite-plugin-head` puts absolute URLs in each demo's `<head>`, so the
+   * deployment origin is part of the output. Undeclared, turbo does not pass
+   * `BASE_URL` to the task at all -- not a stale cache, the variable simply
+   * never arrives -- and every demo shipped root-relative links instead.
+   */
+  it("re-runs every example build when the deployment origin changes", () => {
+    const before = hashOf(`${EXAMPLE}#build2`, BUILD, EXAMPLE);
+
+    process.env.BASE_URL = "https://example.test";
+    try {
+      expect(hashOf(`${EXAMPLE}#build2`, BUILD, EXAMPLE)).not.toBe(before);
+    } finally {
+      delete process.env.BASE_URL;
+    }
+  });
 });
 
 /**
