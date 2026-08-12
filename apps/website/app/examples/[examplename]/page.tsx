@@ -25,6 +25,11 @@ export async function generateMetadata({ params }: Props) {
   return {
     title,
     description,
+    // The same document the MCP server hands out, reachable by anything that
+    // reads the page instead: a URL pasted into a chat, a search result, an
+    // agent with no pmndrs plugin. Next renders `types` as
+    // `<link rel="alternate" type="text/markdown">`.
+    alternates: { types: { "text/markdown": example.catalog_url } },
     openGraph: {
       title,
       description,

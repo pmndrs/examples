@@ -2,12 +2,19 @@
 
 /**
  * Emits the machine-readable catalog the website ships alongside its pages, at
- * `/catalog/index.json` and `/catalog/<example>.json`.
+ * `/catalog/index.{json,md}` and `/catalog/<example>.{json,md}`.
  *
  * It exists for readers that cannot run the site: the pmndrs docs MCP server
  * serves examples to coding agents out of these files, so an agent can find the
  * example that already solves a problem and read its source without cloning
  * anything.
+ *
+ * Two forms of each. The JSON is the structured one -- dependencies as a map,
+ * sizes as numbers. The markdown is what a reader is actually handed, and it is
+ * written here rather than by whichever server passes it on, because it is
+ * published too: every example page points at its `.md` with `rel="alternate"`,
+ * so an agent arriving from the open web gets the same document as one arriving
+ * over MCP.
  *
  * Two files rather than one on purpose. The index is small enough (~95 kB, and
  * an eighth of that over the wire) to pull on every question, and carries just
@@ -24,6 +31,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+
+import { renderExample, renderIndex } from "./lib/render.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const examplesDirectory = path.join(root, "examples");
@@ -131,30 +140,34 @@ for (const name of names) {
   };
   index.push(summary);
 
+  const example = {
+    ...summary,
+    repository: `https://github.com/pmndrs/examples/tree/main/examples/${name}`,
+    install: `npx degit pmndrs/examples/examples/${name}`,
+    dependencies: packageJson.dependencies ?? {},
+    files: paths.filter(isInlinable).map((file) => ({
+      path: file,
+      content: fs.readFileSync(path.join(exampleDirectory, file), "utf8"),
+    })),
+    // Binary companions of the source -- models, textures, audio. Left as
+    // paths: they are in the repository, and `assets` says who made them.
+    binaries: paths.filter((file) => !isText(file)),
+    // Text, but generated or vendored past the point of being readable.
+    oversized: paths
+      .filter((file) => isText(file) && !isInlinable(file))
+      .map((file) => ({ path: file, bytes: sizeOf(file) })),
+    assets,
+  };
+
+  // The JSON is the structured form; the markdown is the reading form, and it
+  // is what both the MCP server and `rel="alternate"` hand out.
   fs.writeFileSync(
     path.join(outputDirectory, `${name}.json`),
-    `${JSON.stringify(
-      {
-        ...summary,
-        repository: `https://github.com/pmndrs/examples/tree/main/examples/${name}`,
-        install: `npx degit pmndrs/examples/examples/${name}`,
-        dependencies: packageJson.dependencies ?? {},
-        files: paths.filter(isInlinable).map((file) => ({
-          path: file,
-          content: fs.readFileSync(path.join(exampleDirectory, file), "utf8"),
-        })),
-        // Binary companions of the source -- models, textures, audio. Left as
-        // paths: they are in the repository, and `assets` says who made them.
-        binaries: paths.filter((file) => !isText(file)),
-        // Text, but generated or vendored past the point of being readable.
-        oversized: paths
-          .filter((file) => isText(file) && !isInlinable(file))
-          .map((file) => ({ path: file, bytes: sizeOf(file) })),
-        assets,
-      },
-      null,
-      2,
-    )}\n`,
+    `${JSON.stringify(example, null, 2)}\n`,
+  );
+  fs.writeFileSync(
+    path.join(outputDirectory, `${name}.md`),
+    renderExample(example),
   );
 }
 
@@ -162,6 +175,7 @@ fs.writeFileSync(
   path.join(outputDirectory, "index.json"),
   `${JSON.stringify({ site, count: index.length, examples: index }, null, 2)}\n`,
 );
+fs.writeFileSync(path.join(outputDirectory, "index.md"), renderIndex(index));
 
 console.log(
   `Wrote catalog for ${index.length} examples to ${path.relative(root, outputDirectory)}.`,
