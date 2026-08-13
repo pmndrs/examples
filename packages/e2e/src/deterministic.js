@@ -19,18 +19,30 @@ if (sayCheeseParam) {
   // the method rather than the `onLoad` slot, which drei's `useProgress`
   // overwrites for its own loader UI.
   //
-  let inflight = 0;
+  // Counted per URL, and never below zero, because the pairing is a loader's
+  // to honour and one of them does not: `postprocessing` 6.39's
+  // `LUTCubeLoader.load()` calls `itemEnd` on a URL it never called
+  // `itemStart` for (6.36 did both, and the six examples loading a `.cube`
+  // are exactly the ones that felt it). A single counter turns that into
+  // `inflight - 1` for the rest of the page's life -- so it reads 0 at
+  // whatever moment exactly one real item is in flight, which is the shot
+  // going off *during* a decode, and reads -1 forever otherwise, which is the
+  // wait never ending: `glass-flower` and `nextjs-prism` sat there for the
+  // full 300s budget. An `itemEnd` for a URL nobody started is ignored.
+  const inflight = new Map();
   const itemStart = DefaultLoadingManager.itemStart.bind(DefaultLoadingManager);
   const itemEnd = DefaultLoadingManager.itemEnd.bind(DefaultLoadingManager);
   DefaultLoadingManager.itemStart = (url) => {
-    inflight += 1;
+    inflight.set(url, (inflight.get(url) ?? 0) + 1);
     itemStart(url);
   };
   DefaultLoadingManager.itemEnd = (url) => {
-    inflight -= 1;
+    const pending = inflight.get(url) ?? 0;
+    if (pending > 0) inflight.set(url, pending - 1);
     itemEnd(url);
   };
-  window.__cheeseInflight = () => inflight;
+  window.__cheeseInflight = () =>
+    [...inflight.values()].reduce((total, pending) => total + pending, 0);
 
   //
   // Seeding fixes the *sequence*; it does not fix who draws from it in what
