@@ -11,6 +11,7 @@
   "bin": {
     "e2e-build": "./bin/build.mjs",
     "e2e-test": "./bin/test.mjs",
+    "e2e-flaky": "./bin/flaky.mjs",
     "e2e-dev": "./bin/dev.mjs"
   },
   "dependencies": {

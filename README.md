@@ -127,6 +127,28 @@ $ BASE_PATH=/examples pnpm test
 
 </details>
 
+## Chromatic
+
+The same runs also archive each page — DOM, styles, assets, and the `<canvas>`
+as a still — for [Chromatic](https://www.chromatic.com/docs/playwright/), which
+re-renders them in its own browsers and asks a human to accept or reject what
+moved. Where `pnpm test` answers "did this change?", Chromatic answers "should
+it have?".
+
+```sh
+$ pnpm test          # writes examples/*/test-results/chromatic-archives/
+$ pnpm chromatic     # collects them into one build and uploads it
+```
+
+Needs `CHROMATIC_PROJECT_TOKEN` (repo secret in the CI, your shell locally); a
+pull request from a fork cannot read it, and gets no Chromatic build.
+
+> [!IMPORTANT] Only the examples listed in `bin/chromatic.mjs` are published.
+> A snapshot joins the list once `pnpm exec e2e-flaky <example>` says two runs
+> of the same commit produce the same canvas — Chromatic has no pixel
+> tolerance to hide behind, and a build that flags a change nobody made is a
+> build nobody reads.
+
 ## Docker
 
 For generating reproductible snapshots, we use
