@@ -105,6 +105,14 @@ jobs:
           [ -z "$filters" ] || pnpm exec turbo test --continue --concurrency=1 $filters
         env:
           BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
+          # `build2` hashes on `BASE_URL` too (`vite-plugin-head` writes the
+          # deployment origin into each demo's <head>). Without it here, the
+          # shards built a *different* artifact from the one `build-job`
+          # publishes -- so the shot was of a dist nobody deploys, and every
+          # `build2` below re-ran despite 161 warm cache entries, since a
+          # different env is a different hash. Same value, same artifact:
+          # what gets tested is what ships, and build-job is a cache hit.
+          BASE_URL: ${{ steps.configurepages.outputs.base_url }}
 
       # Even when the shard went red: a failing example still archives, and the
       # Chromatic build has to see every published example or it reads the
@@ -231,6 +239,11 @@ jobs:
         if: ${{ env.PREVIEW == 'true' }}
         env:
           BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
+          # The production origin, deliberately: the <head> URLs are canonical
+          # links, and a preview that is "the production layout" should carry
+          # them too -- besides, a different value is a different `build2`
+          # hash, and the whole point is that the shards already built this.
+          BASE_URL: ${{ steps.configurepages.outputs.base_url }}
       - id: preview
         if: ${{ env.PREVIEW == 'true' }}
         env:
