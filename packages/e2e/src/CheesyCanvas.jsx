@@ -96,6 +96,19 @@ function SayCheese() {
       // 158 examples still to be covered will.
       //
       if (window.__cheeseShoot === true && frame < FRAMES) {
+        //
+        // Not while a physics worker still owes a reply. Cannon steps by
+        // transferring its buffers to a worker and skips every step until
+        // they come back, so how many steps land inside our thirty frames
+        // would otherwise be the machine's choice -- see `deterministic.js`,
+        // which keeps the count this reads. Skipping the advance (rather
+        // than blocking) keeps the compositor pixel moving above.
+        //
+        if (window.__cheesePhysicsSettled?.() === false) {
+          raf = requestAnimationFrame(tick);
+          return;
+        }
+
         if (frame === 0) started = window.__cheeseRealNow?.() ?? 0;
 
         //
@@ -197,7 +210,33 @@ export default function CheesyCanvas({ children, frameloop, ...props }) {
     <Canvas {...props} frameloop={cheesyFrameloop}>
       {sayCheeseParam && <SayCheese />}
 
-      <React.Fragment key={take}>{children}</React.Fragment>
+      <React.Fragment key={take}>
+        {children}
+        {sayCheeseParam && <Probe take={take} />}
+      </React.Fragment>
     </Canvas>
   );
+}
+
+//
+// Announces that a take has *finished* mounting -- render committed, effects
+// run -- which `flushSync` in `__cheeseRemount` cannot promise: the children
+// live behind the `<Canvas>` bridge, in r3f's own root, whose render the DOM
+// side schedules rather than flushes. Measured on `trails` under CPU
+// throttle: both flushSyncs long returned, and the second take still
+// assembled itself at frames 1-2 of the pump -- its physics worker created,
+// connected and populated across running frames, at whichever frame the
+// machine chose (and the first take's, not yet unmounted, stepping in the
+// meantime). The harness waits for this signal before it starts the shot --
+// see `shoot.mjs`.
+//
+// Last in the fragment, because effects flush in tree order: by the time this
+// one runs, every sibling before it has run its own -- for physics, that is
+// where the worker is created and every body added.
+//
+function Probe({ take }) {
+  useEffect(() => {
+    window.__cheeseTake = take;
+  }, [take]);
+  return null;
 }
