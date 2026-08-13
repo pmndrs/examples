@@ -76,7 +76,25 @@ export async function shoot(page, host) {
   // fixed frame, so that is what gets waited on -- then the same settle the
   // first wait uses.
   //
+  //
+  // The remount's `flushSync` returns when the *DOM* side has committed; the
+  // scene lives behind the `<Canvas>` bridge in r3f's own root, whose render
+  // is scheduled, not flushed. Under load that render -- and the effects
+  // where a physics world is built, worker and all -- landed *inside* the
+  // shot, assembling the scene across pumped frames at whichever frame the
+  // machine chose (`trails`, measured under CPU throttle). So the page says
+  // when the take has finished mounting -- committed and effects run, see
+  // `Probe` in `CheesyCanvas` -- and the shot waits for it to say so.
+  //
+  const take = await page.evaluate(() => window.__cheeseTake ?? 0);
   await page.evaluate(() => window.__cheeseRemount?.());
+  await page
+    .waitForFunction((before) => window.__cheeseTake > before, take, {
+      timeout: 60_000,
+    })
+    .catch(() => {
+      console.log("The second take never finished mounting, shooting anyway");
+    });
   await waitForDecodes(page); // in case the second take re-suspended anything
   await page
     .waitForFunction(
