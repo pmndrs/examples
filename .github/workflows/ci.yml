@@ -167,8 +167,15 @@ jobs:
       # secrets. Main has to publish too, or a pull request would have no
       # baseline to compare to.
       #
+      # No `--exit-zero-on-changes`: a visual change fails the pull request
+      # until someone accepts it in the Chromatic UI and re-runs this job. The
+      # snapshots are deterministic, so a change is never noise -- either the
+      # pull request meant it, and accepting is the review working, or it
+      # touched nothing near that example and red is the right answer. Build 42
+      # went green with exactly such a change waiting unreviewed.
+      #
       # `--auto-accept-changes` on main, and only there. What lands on main has
-      # already been looked at on its pull request, so asking a second time
+      # already been accepted on its pull request, so asking a second time
       # leaves a queue of unreviewed changes that turns every later build
       # yellow -- and a permanently yellow dashboard is one nobody opens.
       #
@@ -178,7 +185,7 @@ jobs:
       # times, and the nightly is what keeps asking. Chromatic answers "should
       # this have changed?", which only makes sense once the answer to "did
       # anything change by itself?" is no.
-      - run: pnpm chromatic --exit-zero-on-changes ${{ github.ref == 'refs/heads/main' && '--auto-accept-changes' || '' }}
+      - run: pnpm chromatic ${{ github.ref == 'refs/heads/main' && '--auto-accept-changes' || '' }}
         if: ${{ env.CHROMATIC == 'true' }}
         env:
           CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
