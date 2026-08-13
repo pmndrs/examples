@@ -22,7 +22,27 @@ export async function waitForAssets(page) {
   await page.waitForLoadState("networkidle", { timeout: 20_000 }).catch(() => {
     console.log("Network never went idle, shooting anyway");
   });
+  await waitForDecodes(page);
   await page.waitForTimeout(500);
+}
+
+//
+// `networkidle` says the bytes arrived, not that they were decoded: a Draco
+// mesh still has a worker round-trip ahead of it, an HDR a parse, and under
+// load the settle can lose that race -- at which point the second take
+// re-suspends and mounts in arrival order again, reviving exactly what the
+// remount exists to fix. The page tracks its loading manager (see
+// `deterministic.js`), whose `itemEnd` fires after the parse, and this waits
+// for it to go quiet.
+//
+async function waitForDecodes(page) {
+  await page
+    .waitForFunction(() => (window.__cheeseInflight?.() ?? 0) === 0, {
+      timeout: 60_000,
+    })
+    .catch(() => {
+      console.log("Loaders never went quiet, shooting anyway");
+    });
 }
 
 /**
@@ -40,6 +60,36 @@ export async function shoot(page, host) {
   // ⏳ assets
   await page.goto(`${host}/?saycheese`);
   await waitForAssets(page);
+
+  //
+  // 🔁 second take -- see `CheesyCanvas`. The first mount happened in
+  // asset-arrival order, which is the network's order, not ours. Now that
+  // every loader cache is warm, remounting the scene is one synchronous
+  // render in JSX order, and everything the mount order decides -- `useFrame`
+  // registration, scene-graph children, physics insertion, who draws what
+  // from the seeded random sequence -- comes out the same, every run.
+  //
+  // `networkidle` cannot be waited on twice (load states are monotonic per
+  // navigation), and mostly nothing loads here anyway: the point of the
+  // second take is that the caches answer. What can still be in flight is a
+  // `<video>` element recreated by the remount, re-pinning itself to its
+  // fixed frame, so that is what gets waited on -- then the same settle the
+  // first wait uses.
+  //
+  await page.evaluate(() => window.__cheeseRemount?.());
+  await waitForDecodes(page); // in case the second take re-suspended anything
+  await page
+    .waitForFunction(
+      () =>
+        [...document.querySelectorAll("video")].every(
+          (video) => video.paused && video.readyState >= 2,
+        ),
+      { timeout: 20_000 },
+    )
+    .catch(() => {
+      console.log("A video never pinned itself, shooting anyway");
+    });
+  await page.waitForTimeout(500);
 
   // 🎬 flags rather than events, so neither side can miss the other's
   await page.evaluate(() => (window.__cheeseShoot = true));

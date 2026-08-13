@@ -111,14 +111,21 @@ function Lights() {
   const light = useRef<THREE.SpotLight>(null!);
   const [color] = useState(() => new THREE.Color("white"));
   const { nodes } = useGLTF(sceneModel) as unknown as GLTFResult;
-  useEffect(() => {
-    const timeout = setInterval(
-      () => color.setRGB(Math.random(), Math.random(), Math.random()),
-      3000,
-    );
-    return () => clearInterval(timeout);
-  }, []);
+  //
+  // Counted in frames rather than seconds, and drawn from a cycle rather than
+  // `Math.random()`. Both for the same reason: on a `setInterval`, the light had
+  // already been recoloured a machine-dependent number of times by the time the
+  // scene was first drawn, and each draw pulled from a shared random sequence
+  // that three.js also consumes -- four values per object it creates -- so no
+  // two loads agreed. Every 180 frames is the same three seconds at 60fps.
+  //
+  const tick = useRef(0);
   useFrame(() => {
+    if (tick.current++ % 180 === 0) {
+      const hue = ((tick.current / 180) * 0.618) % 1; // golden angle: spread, repeatable
+      color.setHSL(hue, 0.8, 0.55);
+    }
+
     light.current.color.lerp(color, 0.01);
     ref.current.traverse(
       (obj) =>

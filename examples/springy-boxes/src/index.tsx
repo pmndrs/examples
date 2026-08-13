@@ -1,7 +1,7 @@
 import { createRoot } from "react-dom/client";
 import * as THREE from "three";
-import React, { useEffect } from "react";
-import { Canvas, type ThreeElements } from "@react-three/fiber";
+import React, { useRef } from "react";
+import { Canvas, useFrame, type ThreeElements } from "@react-three/fiber";
 import { useSprings, a, type AnimatedProps } from "@react-spring/three";
 import "./styles.css";
 
@@ -45,14 +45,17 @@ function Content() {
     ...random(i),
     config: { mass: 20, tension: 150, friction: 50 },
   }));
-  useEffect(
-    () =>
-      void setInterval(
-        () => set((i) => ({ ...random(i), delay: i * 40 })),
-        3000,
-      ),
-    [],
-  );
+  // Every 3s of *scene* time, not a wall-clock interval: a real timer set at
+  // mount fires whenever the machine gets there, and it was never cleared, so
+  // each mount stacked another one.
+  const elapsed = useRef(0);
+  useFrame((_, delta) => {
+    elapsed.current += delta;
+    if (elapsed.current >= 3) {
+      elapsed.current = 0;
+      set((i) => ({ ...random(i), delay: i * 40 }));
+    }
+  });
   return data.map((d, index) => (
     <a.mesh
       key={index}

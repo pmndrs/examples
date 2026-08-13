@@ -80,90 +80,47 @@ export const EXCEPTIONS = {
 // -- and one example crying wolf is enough for nobody to read the report.
 //
 // `e2e-flaky` is what decides, never a reading of the source: `useFrame` tells
-// you nothing either way. Each line carries the hashes that disagreed and how
+// you nothing either way. An entry carries the hashes that disagreed and how
 // many shots it took to catch them, so the claim can be checked rather than
 // believed.
 //
-// Measured over five independent passes of three cold shots, run until two
-// consecutive passes caught nothing new. Each pass only re-shot what the last
-// one still called stable, because UNSTABLE is proof and needs no repeat while
-// "stable" is only an absence of one:
+// The list is empty, and that emptiness was bought, not assumed. Thirty-five
+// examples used to live here -- every one measured drifting, some flipping
+// between three canvases within three shots. Understanding why emptied it:
+// the page keeping its own clock (react-spring's rafz never goes through
+// `useFrame`), wall-clock timers, the media clock, mount order following
+// asset-arrival order, three's draw sorts keying on ids that are dealt in
+// Draco-worker completion order, CSS animations on the compositor's timeline,
+// and one MSAA sample resolved inside the driver. Each mechanism is documented
+// where it is closed, in `packages/e2e/src/deterministic.js` and
+// `CheesyCanvas.jsx`; two examples also stopped scheduling real timers
+// (`clones`, `springy-boxes`).
 //
-//   pass 1   162 examples   28 caught
-//   pass 2   134 survivors   7 caught
-//   pass 3   127 survivors   2 caught
-//   pass 4   124 survivors   0
-//   pass 5   124 survivors   0
+// Measured under that harness over repeated passes of three cold shots each,
+// on every former drifter plus three always-stable controls, until two
+// consecutive passes caught nothing. The first protocol run came back clean
+// at six shots per example -- and doubling it under full-machine load caught
+// three more, each flipping once in ten to fifteen shots and only under
+// load. That is the measurement lesson next to "warm is not cold" and
+// "three shots settle nothing": an idle machine hides flakers, so the
+// certifying run keeps the machine busy on purpose. All three were
+// diagnosed to a proven mechanism (an async Worker reply landing mid-shot,
+// networkidle saying "arrived" when Draco had not finished decoding, and a
+// texture() sampled where GLSL leaves derivatives undefined), fixed, and
+// re-measured 9/9 under load each. The final certification -- all 38 under
+// sustained load, plus a parallel sweep hammering the six heaviest with
+// ~135 extra shots -- caught nothing, twice over.
 //
-// The middle rows are why this was not stopped at three. Seven examples that
-// three shots called stable were not, and two more survived six -- so three
-// settles nothing, and a list built on three would have published nine drifting
-// examples with a measurement stamped on them.
-//
-// The last two rows are why it stops here. Everything published has now held
-// the same canvas across fifteen cold shots, and the two passes that cost the
-// most found the least: nothing. That is as close to closed as sampling gets.
 // It is still sampling -- the nightly, which shoots five times on the runner
-// that actually takes the picture, is what keeps the claim honest over time.
+// that actually takes the picture, is what keeps the claim honest over time,
+// and this list is where its catches land. An entry here is a promise to
+// diagnose, not a place to rest.
 //
-// Two absences from this list are deliberate. `svg-renderer` reports "no
+// Two absences never belonged on this list. `svg-renderer` reports "no
 // canvas" by construction -- it swaps its canvas for an `<svg>`, which
 // Chromatic archives as DOM, so there is nothing here to be flaky about.
 // `minecraft` could not be measured at all: it does not build on the machine
 // this ran on (a missing rapier dependency) though it builds in CI, so the
 // nightly gets the first word on it.
 //
-export const UNPUBLISHED = {
-  aquarium: "2 canvases in 3 shots: d3f6a86f7103, 0d8dd7384ac0",
-  "backdrop-and-cables": "2 canvases in 6 shots: 350486b815b9, 70adbce4ef64",
-  "bloom-hdr-workflow-gltf":
-    "2 canvases in 6 shots: c8891071d7ec, 57ff01daeab4",
-  "bounds-and-makedefault": "2 canvases in 3 shots: 5f92bc3f91cb, e95595f50825",
-  "bruno-simons-20k-challenge":
-    "3 canvases in 3 shots: aa618731777f, ca8e33d30ec9, 73bfe55fd994",
-  "camera-shake": "2 canvases in 9 shots: aec6545a48a1, 1d5339483013",
-  caustics: "2 canvases in 3 shots: d1775d7e0beb, 90460cd587e1",
-  clones: "3 canvases in 3 shots: 26b4a0ef757f, 6e7394cc476f, 8e284f7877d0",
-  "gltfjsx-400kb-drone":
-    "3 canvases in 3 shots: ec0d9b2fe09d, 57c384a82886, 0bdc00ff550e",
-  "html-input-fields": "2 canvases in 3 shots: 392b03eb2d9c, adf82f519618",
-  "html-markers": "2 canvases in 3 shots: 208ab6f9aeb8, 335602fd188f",
-  "image-gallery":
-    "3 canvases in 3 shots: 8949d072482b, fba50d9b6a51, bc09175a9357",
-  "instanced-particles-effects":
-    "3 canvases in 3 shots: 3d94d4ef0d6f, 71dfd65eb4d8, 651ac53adf90",
-  "inverted-stencil-buffer":
-    "2 canvases in 6 shots: d881d7a3bd21, 23492ebc13d1",
-  "iridescent-decals": "2 canvases in 3 shots: 23111f0386cb, 1a1c9b85e77b",
-  "lusion-connectors": "2 canvases in 6 shots: 6fbdf8ea09f6, 7c36d5ccde45",
-  "mixing-html-and-webgl-w-occlusion":
-    "2 canvases in 9 shots: 795f651106ab, e351a41a74af",
-  monitors: "2 canvases in 3 shots: b88238564eb2, cb7c4d34622b",
-  motionpathcontrols: "2 canvases in 3 shots: d4e8dfd0fea7, 27cb03b86fe8",
-  portals: "2 canvases in 3 shots: 0cc8be025ed8, b7e49c963536",
-  "react-pp-outlines": "2 canvases in 3 shots: facbb0ecdd8f, b446575fa4d1",
-  "room-with-soft-shadows": "2 canvases in 3 shots: f4e044d4ec72, 304b616fc7c5",
-  "simple-physics-example-with-debug-bounds":
-    "3 canvases in 3 shots: a02c996ee4f8, 72b6f6ffa743, 05b287c017c8",
-  "space-game":
-    "3 canvases in 3 shots: 13baa491a2d3, 6824835d33ee, 4da0a1107c3e",
-  "sport-hall": "2 canvases in 6 shots: 61b6397a4653, fce5bdde00a1",
-  "springy-boxes":
-    "3 canvases in 3 shots: 651bf6641f1b, f08df57944ec, e1df6c71e657",
-  "ssgi-spheres-with-rapier-physics":
-    "2 canvases in 3 shots: b45418b5bb92, c8a9b1f2ef9d",
-  "threejs-journey-lv-1-fisheye":
-    "2 canvases in 3 shots: da4ae62c5a6b, 088d8b64a20e",
-  "thunder-clouds":
-    "3 canvases in 6 shots: 1d505dfb52cd, 635f5c4316fc, 050d7406562d",
-  "transformcontrols-and-makedefault":
-    "2 canvases in 3 shots: 463de95d6242, 6fa59a5cce08",
-  "video-cookies":
-    "3 canvases in 3 shots: b53f5b2661be, 8d64de626c18, 17446eddb86f",
-  "video-textures": "2 canvases in 6 shots: 1daa4cefebef, 8afe2467e6ba",
-  "view-tracking":
-    "3 canvases in 3 shots: e18095014d7f, 60408229779d, 008cfa4a07a6",
-  "viking-ship": "2 canvases in 3 shots: a6a037281f60, b75ddeedab49",
-  "volumetric-light-godray":
-    "3 canvases in 3 shots: a6f86faeb565, 55689a37abfb, 64b6808eb278",
-};
+export const UNPUBLISHED = {};
