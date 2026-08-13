@@ -45,6 +45,62 @@ if (sayCheeseParam) {
     [...inflight.values()].reduce((total, pending) => total + pending, 0);
 
   //
+  // Physics lives in a worker, and a worker keeps its own time.
+  //
+  // `@react-three/cannon` steps by ping-pong: each frame the provider posts
+  // `step` and *transfers* the position buffers to the worker; until the
+  // worker's `frame` reply hands them back, every further step is silently
+  // skipped (`byteLength === 0`) and its 1/60th of simulation is dropped, not
+  // deferred. So the picture is spawn + (completed round trips) x 1/60 -- and
+  // how many round trips fit into thirty pumped frames is the scheduler's
+  // call, not ours. Measured on `basic-ballpit`: 30/30 round trips at full
+  // speed, 28 under an 8x CPU throttle, each with its own perfectly
+  // reproducible canvas -- two stable pictures, chosen by machine speed.
+  // Chromatic's runner sits between the two and picks per run; twelve
+  // examples ride `@react-three/cannon`.
+  //
+  // So the round trips are counted -- `step` out, `frame` back, per worker --
+  // and the pump (see `SayCheese`) holds the next frame until the count
+  // settles. Every machine then completes exactly one step per frame.
+  // `terminate()` forgives what a dying worker still owes: the second take
+  // unmounts the whole physics provider, and a reply that will never come
+  // must not hold the pump forever.
+  //
+  const owed = new Map();
+  const dead = new WeakSet();
+  const RealWorker = window.Worker;
+  window.Worker = class extends RealWorker {
+    postMessage(message, ...rest) {
+      // A step posted to a terminated worker is a debt nobody will honour:
+      // posting is a silent void, so counting it would hold the pump for the
+      // full 300s budget. It can happen -- `terminate()` runs in one effect's
+      // cleanup and the `useFrame` unsubscribe in another's.
+      if (message?.op === "step" && !dead.has(this))
+        owed.set(this, (owed.get(this) ?? 0) + 1);
+      super.postMessage(message, ...rest);
+    }
+    get onmessage() {
+      return super.onmessage;
+    }
+    set onmessage(handler) {
+      super.onmessage = (event) => {
+        if (event.data?.op === "frame" && owed.get(this))
+          owed.set(this, owed.get(this) - 1);
+        handler(event);
+      };
+    }
+    terminate() {
+      dead.add(this);
+      owed.delete(this);
+      super.terminate();
+    }
+  };
+  window.__cheesePhysicsSettled = () => {
+    for (const count of owed.values()) if (count > 0) return false;
+    return true;
+  };
+
+  //
   // Seeding fixes the *sequence*; it does not fix who draws from it in what
   // order. Assets resolve in whatever order the network hands them back, the
   // components waiting on them mount in that order, and every draw they make
