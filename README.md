@@ -78,10 +78,13 @@ This will:
 - a `--base` set to `${BASE_PATH}/${app_name}`
 - a custom vite `--config`, whith a `monkey()` plugin that will:
   - [`deterministic`](packages/e2e/src/deterministic.js) script into
-    `src/index.jsx`
+    `src/index.jsx` — seeds `Math.random`, and gives every WebGL context
+    `preserveDrawingBuffer` so the archived canvas is not blank
   - monkeypatch the `<Canvas>` with
     [`CheesyCanvas`](packages/e2e/src/CheesyCanvas.jsx) for setting up the scene
-    for playwright screenshots
+    for playwright screenshots — in whichever `src/**.[jt]sx` imports it, which
+    is `App` for most examples and `Scene`, `Bananas`, `Canvas` or `index` for
+    nine of them
 
 2. build the Next.js `apps/website`
 3. copy final result into `out` folder
@@ -115,7 +118,10 @@ an upload rather than a rebuild of all 167 examples.
 $ pnpm test
 ```
 
-To update the snapshots: `pnpm test -- -- --update-snapshots`
+Every example with a `test` script gets loaded, held at a fixed thirty frames and
+archived. The test asserts that the shot completed — an example that throws, or
+never mounts its `<Canvas>`, fails here. What the picture _looks_ like is
+Chromatic's question, below; there are no baseline PNGs in this repo.
 
 <details>
 
@@ -125,7 +131,34 @@ You can also:
 $ BASE_PATH=/examples pnpm test
 ```
 
+The CI spreads this over eight shards (`SHARDS` in `.github/workflows/ci.yml`,
+`bin/shard.mjs` deciding who takes what), one example at a time per shard — a
+cold run is ~60s per example on a runner with no GPU, and two of them at once
+just starve each other.
+
+Eight examples are excluded, each with its reason in
+[`bin/e2e-exceptions.mjs`](bin/e2e-exceptions.mjs) — three that were never built
+(`bbuild2`), three that throw, one behind a ▶️ button, one that needs more than
+the 180s budget. An example is in the run if and only if it has a `test` script,
+and `test/e2e-exceptions.test.ts` fails if that list and the scripts disagree.
+
 </details>
+
+## Is it reproducible?
+
+```sh
+$ pnpm exec e2e-flaky @example/aquarium            # 3 shots, same canvas?
+$ pnpm exec e2e-flaky --runs=10                    # every example with a test
+```
+
+Shoots the same example N times and compares the canvas byte for byte. This is
+what decides whether an example may be published to Chromatic, which has no
+pixel tolerance to hide behind. It has to be measured: `useFrame` tells you
+nothing either way.
+
+The `Flaky` workflow runs it nightly, five shots per example, and goes red when
+an example starts drifting — before Chromatic starts flagging changes nobody
+made.
 
 ## Chromatic
 
@@ -144,7 +177,7 @@ Needs `CHROMATIC_PROJECT_TOKEN` (repo secret in the CI, your shell locally); a
 pull request from a fork cannot read it, and gets no Chromatic build.
 
 > [!IMPORTANT] Only the examples listed in `bin/chromatic.mjs` are published.
-> A snapshot joins the list once `pnpm exec e2e-flaky <example>` says two runs
+> A snapshot joins the list once `pnpm exec e2e-flaky <example>` says N shots
 > of the same commit produce the same canvas — Chromatic has no pixel
 > tolerance to hide behind, and a build that flags a change nobody made is a
 > build nobody reads.
@@ -164,14 +197,6 @@ $ docker run -it --rm  \
 #
 # pnpm install
 # pnpm test
-```
-
-or in one command to update snapshots:
-
-```sh
-docker run --rm  \
-  -w /app -v "$(pwd)":/app -v /app/node_modules \
-  mcr.microsoft.com/playwright:v1.45.3-jammy /bin/sh -c "pnpm install && pnpm test -- -- --update-snapshots"
 ```
 
 # Colophon

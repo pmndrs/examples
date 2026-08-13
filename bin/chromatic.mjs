@@ -12,9 +12,18 @@
 //
 
 import { execFileSync } from "node:child_process";
-import { cpSync, existsSync, mkdirSync, rmSync } from "node:fs";
+import {
+  cpSync,
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  readdirSync,
+  rmSync,
+} from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+
+import { UNPUBLISHED } from "./e2e-exceptions.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -23,16 +32,30 @@ const location = join(root, "packages/e2e/.chromatic");
 const merged = join(location, ARCHIVES);
 
 //
-// Which examples we ask a human to review. Deliberately not "every example
-// that has a `test` script": a snapshot only belongs here once `e2e-flaky`
-// says two runs of the same commit produce the same canvas. Chromatic has no
-// pixel tolerance to hide behind, and a build that flags a change nobody made
-// is a build nobody reads.
+// Which examples we ask a human to review: everything the e2e run opens, minus
+// the ones `e2e-flaky` caught drifting.
 //
-// Earn a place here by measuring, never by reading the source -- `useFrame`
-// tells you nothing either way. Grow the list as `e2e-flaky` goes green.
+// This list used to be written the other way round -- three names, added by
+// hand as each was measured. At 162 that inversion is the only honest shape:
+// the default is that an example is published, and an absence has to carry a
+// reason, in `UNPUBLISHED`, next to the reasons an example is not tested at
+// all. A list of 162 names nobody could read would rot into fiction.
 //
-const PUBLISHED = ["aquarium", "backdrop-and-cables", "baking-soft-shadows"];
+// What still has to be measured is the exclusion. Chromatic has no pixel
+// tolerance to hide behind, so an example that draws a different canvas on
+// every run flags a change nobody made, on every build, forever -- and one
+// example crying wolf is enough to make nobody read the report. `e2e-flaky`
+// is what says which; the nightly is what keeps saying it.
+//
+const PUBLISHED = readdirSync(join(root, "examples"))
+  .filter((name) => {
+    const pkg = join(root, "examples", name, "package.json");
+    return (
+      existsSync(pkg) && JSON.parse(readFileSync(pkg, "utf8")).scripts?.test
+    );
+  })
+  .filter((name) => !(name in UNPUBLISHED))
+  .sort();
 
 const examples = PUBLISHED.map((name) => ({
   name,
@@ -41,9 +64,23 @@ const examples = PUBLISHED.map((name) => ({
 
 if (examples.length === 0) {
   console.error(
-    `No ${ARCHIVES}/ for ${PUBLISHED.join(", ")}. Run \`pnpm test\` first.`,
+    `No ${ARCHIVES}/ for any of the ${PUBLISHED.length} published examples. Run \`pnpm test\` first.`,
   );
   process.exit(1);
+}
+
+//
+// Chromatic reads a gap as a deletion, so an example that is published but has
+// no archive this run would quietly drop out of the baseline. Say which.
+//
+const missing = PUBLISHED.length - examples.length;
+if (missing > 0) {
+  console.warn(
+    `⚠️  ${missing} published example(s) have no archive; Chromatic will read them as deleted:\n` +
+      PUBLISHED.filter((name) => !examples.some((e) => e.name === name))
+        .map((name) => `   ${name}`)
+        .join("\n"),
+  );
 }
 
 // A stale archive is worse than a missing one: Chromatic would compare against
