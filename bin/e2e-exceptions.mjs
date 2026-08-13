@@ -111,6 +111,16 @@ export const EXCEPTIONS = {
 // sustained load, plus a parallel sweep hammering the six heaviest with
 // ~135 extra shots -- caught nothing, twice over.
 //
+// One mechanism arrived after that certification, and from production, which
+// is the other measurement lesson: the certifying protocol hashes the WebGL
+// canvas, Chromatic archives the whole DOM -- stats-gl's little panel
+// canvases included -- so `clouds` could flip a digit of real CPU time on its
+// StatsGl panel through every local pass without the protocol ever seeing
+// it. Chromatic build 42 saw it. The wall time got there through the User
+// Timing API: `performance.mark` stamps the browser's internal clock, not
+// `performance.now`, so it walked straight past the virtual clock until
+// `deterministic.js` moved marks onto it too.
+//
 // It is still sampling -- the nightly, which shoots five times on the runner
 // that actually takes the picture, is what keeps the claim honest over time,
 // and this list is where its catches land. An entry here is a promise to
