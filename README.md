@@ -1,3 +1,5 @@
+[![Chromatic](https://img.shields.io/badge/Chromatic-visual%20tests-FC521F?logo=chromatic&logoColor=white)](https://www.chromatic.com/library?appId=6a7ac255b03218d7d84e6ca9)
+
 index: [examples](examples)
 
 To use a given [`basic-example`](examples/basic-example) as a template for a new
@@ -78,10 +80,13 @@ This will:
 - a `--base` set to `${BASE_PATH}/${app_name}`
 - a custom vite `--config`, whith a `monkey()` plugin that will:
   - [`deterministic`](packages/e2e/src/deterministic.js) script into
-    `src/index.jsx`
+    `src/index.jsx` — seeds `Math.random`, and gives every WebGL context
+    `preserveDrawingBuffer` so the archived canvas is not blank
   - monkeypatch the `<Canvas>` with
     [`CheesyCanvas`](packages/e2e/src/CheesyCanvas.jsx) for setting up the scene
-    for playwright screenshots
+    for playwright screenshots — in whichever `src/**.[jt]sx` imports it, which
+    is `App` for most examples and `Scene`, `Bananas`, `Canvas` or `index` for
+    nine of them
 
 2. build the Next.js `apps/website`
 3. copy final result into `out` folder
@@ -104,13 +109,21 @@ it, the build always happens in the CI. Needs `VERCEL_TOKEN`, `VERCEL_ORG_ID` an
 `VERCEL_PROJECT_ID` as repo secrets; a pull request from a fork cannot read them,
 and gets no preview.
 
+The preview is built with the same `BASE_PATH` as the Pages one, so it is served
+from `<deployment-url>/examples` and not from the domain root — same layout as
+production, and the same `build2` cache entries, which is what keeps a preview
+an upload rather than a rebuild of all 167 examples.
+
 # test
 
 ```sh
 $ pnpm test
 ```
 
-To update the snapshots: `pnpm test -- -- --update-snapshots`
+Every example with a `test` script gets loaded, held at a fixed thirty frames and
+archived. The test asserts that the shot completed — an example that throws, or
+never mounts its `<Canvas>`, fails here. What the picture _looks_ like is
+Chromatic's question, below; there are no baseline PNGs in this repo.
 
 <details>
 
@@ -120,7 +133,56 @@ You can also:
 $ BASE_PATH=/examples pnpm test
 ```
 
+The CI spreads this over eight shards (`SHARDS` in `.github/workflows/ci.yml`,
+`bin/shard.mjs` deciding who takes what), one example at a time per shard — a
+cold run is ~60s per example on a runner with no GPU, and two of them at once
+just starve each other.
+
+Eight examples are excluded, each with its reason in
+[`bin/e2e-exceptions.mjs`](bin/e2e-exceptions.mjs) — three that were never built
+(`bbuild2`), three that throw, one behind a ▶️ button, one that needs more than
+the 180s budget. An example is in the run if and only if it has a `test` script,
+and `test/e2e-exceptions.test.ts` fails if that list and the scripts disagree.
+
 </details>
+
+## Is it reproducible?
+
+```sh
+$ pnpm exec e2e-flaky @example/aquarium            # 3 shots, same canvas?
+$ pnpm exec e2e-flaky --runs=10                    # every example with a test
+```
+
+Shoots the same example N times and compares the canvas byte for byte. This is
+what decides whether an example may be published to Chromatic, which has no
+pixel tolerance to hide behind. It has to be measured: `useFrame` tells you
+nothing either way.
+
+The `Flaky` workflow runs it nightly, five shots per example, and goes red when
+an example starts drifting — before Chromatic starts flagging changes nobody
+made.
+
+## Chromatic
+
+The same runs also archive each page — DOM, styles, assets, and the `<canvas>`
+as a still — for [Chromatic](https://www.chromatic.com/docs/playwright/), which
+re-renders them in its own browsers and asks a human to accept or reject what
+moved. Where `pnpm test` answers "did this change?", Chromatic answers "should
+it have?".
+
+```sh
+$ pnpm test          # writes examples/*/test-results/chromatic-archives/
+$ pnpm chromatic     # collects them into one build and uploads it
+```
+
+Needs `CHROMATIC_PROJECT_TOKEN` (repo secret in the CI, your shell locally); a
+pull request from a fork cannot read it, and gets no Chromatic build.
+
+> [!IMPORTANT] Only the examples listed in `bin/chromatic.mjs` are published.
+> A snapshot joins the list once `pnpm exec e2e-flaky <example>` says N shots
+> of the same commit produce the same canvas — Chromatic has no pixel
+> tolerance to hide behind, and a build that flags a change nobody made is a
+> build nobody reads.
 
 ## Docker
 
@@ -137,14 +199,6 @@ $ docker run -it --rm  \
 #
 # pnpm install
 # pnpm test
-```
-
-or in one command to update snapshots:
-
-```sh
-docker run --rm  \
-  -w /app -v "$(pwd)":/app -v /app/node_modules \
-  mcr.microsoft.com/playwright:v1.45.3-jammy /bin/sh -c "pnpm install && pnpm test -- -- --update-snapshots"
 ```
 
 # Colophon

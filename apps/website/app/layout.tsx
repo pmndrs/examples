@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/react";
 import "./globals.css";
 import Nav from "@/components/Nav";
-import { getExamples } from "@/lib/helper";
+import { catalogIndexUrl, getExamples } from "@/lib/helper";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
@@ -97,6 +97,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      {/* The whole gallery as one line per example, the way every site built
+          with pmndrs/docs points at its own `llms.txt`. Site-wide rather than on
+          the home page alone, and as a literal `<link>` rather than page
+          metadata: an example page sets its own `alternates` for its own
+          markdown, and page metadata replaces the layout's field rather than
+          merging with it. */}
+      <head>
+        <link rel="alternate" type="text/plain" href={catalogIndexUrl} />
+      </head>
       {/* No `bg-*` on the body: `globals.css` paints it in `@layer base`, and a
           utility here would win over it in both schemes. The two custom
           properties are read by `Nav` — `--sidebar-w` is handed to the sidebar

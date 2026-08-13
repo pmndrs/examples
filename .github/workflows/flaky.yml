@@ -1,0 +1,72 @@
+name: Flaky
+
+#
+# Are the published snapshots still reproducible?
+#
+# `PUBLISHED` in `bin/chromatic.mjs` is a claim about every example in it: that
+# two builds of the same commit draw the same canvas. Nothing was checking that
+# claim -- so a dependency bump could quietly make an example nondeterministic,
+# Chromatic would start flagging changes nobody made, and there would be nothing
+# to point at. This is what points at it.
+#
+# Nightly rather than per-pull-request: five shots per example is far too much
+# to spend on a commit, and drift arrives with a dependency bump or a browser
+# update rather than with a diff.
+#
+
+on:
+  schedule:
+    # 03:17 UTC -- off the hour, where every other repo's cron is queued
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+    inputs:
+      runs:
+        description: "Shots per example (more runs, more confidence)"
+        type: string
+        default: "5"
+
+permissions:
+  contents: read
+
+env:
+  # Same reasoning as the CI's, and the same duplication: `matrix` cannot read
+  # `env`, so the list below has to agree with this number by hand.
+  SHARDS: 8
+  RUNS: ${{ inputs.runs || '5' }}
+
+concurrency:
+  group: flaky
+  cancel-in-progress: true
+
+jobs:
+  flaky-job:
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4, 5, 6, 7, 8]
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.62.0-jammy
+    steps:
+      - uses: actions/checkout@v7
+      - run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
+      - uses: rharkor/caching-for-turbo@v2.5.1
+
+      # An empty shard has nothing to say, and `e2e-flaky` with no names would
+      # take that as "every example".
+      - id: flaky
+        run: |
+          names=$(node bin/shard.mjs ${{ matrix.shard }} $SHARDS --names)
+          echo "Shard ${{ matrix.shard }}/$SHARDS: ${names:-(empty)}"
+          [ -z "$names" ] || pnpm exec e2e-flaky --runs=$RUNS --json=flaky-${{ matrix.shard }}.json $names
+      - uses: actions/upload-artifact@v7
+        if: ${{ always() && hashFiles(format('flaky-{0}.json', matrix.shard)) != '' }}
+        with:
+          name: flaky-${{ matrix.shard }}
+          path: flaky-${{ matrix.shard }}.json

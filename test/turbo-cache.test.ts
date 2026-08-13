@@ -58,6 +58,7 @@ function withTouched<T>(file: string, run: () => T): T {
 const LINT = ["lint", "lint:examples", "lint:metadata", "lint:versions"];
 const FORMAT = ["format:check"];
 const BUILD = ["build2"];
+const WEBSITE_BUILD = ["build3"];
 
 const EXAMPLE = "@example/basic-example";
 const EXAMPLE_SOURCE = "examples/basic-example/src/App.tsx";
@@ -84,6 +85,82 @@ describe("build", () => {
 
     withTouched(OTHER_EXAMPLE_SOURCE, () => {
       expect(hashOf(`${EXAMPLE}#build2`, BUILD, EXAMPLE)).toBe(before);
+    });
+  });
+
+  /**
+   * The regression this exists for: `inputs` listed
+   * `packages/e2e/src/vite.config.ts`, which has never existed. The config the
+   * build actually loads is `vite.config.build.ts`, so every example's build
+   * kept replaying a cached pass over a config that had changed.
+   */
+  it.each([
+    "packages/e2e/src/vite.config.build.ts",
+    "packages/e2e/src/vite-plugin-head.js",
+    "packages/e2e/src/vite-plugin-monkey.js",
+  ])("re-runs every example build when %s moves", (file) => {
+    const before = hashOf(`${EXAMPLE}#build2`, BUILD, EXAMPLE);
+
+    withTouched(file, () => {
+      expect(hashOf(`${EXAMPLE}#build2`, BUILD, EXAMPLE)).not.toBe(before);
+    });
+  });
+
+  /**
+   * `vite-plugin-head` puts absolute URLs in each demo's `<head>`, so the
+   * deployment origin is part of the output. Undeclared, turbo does not pass
+   * `BASE_URL` to the task at all -- not a stale cache, the variable simply
+   * never arrives -- and every demo shipped root-relative links instead.
+   */
+  it("re-runs every example build when the deployment origin changes", () => {
+    const before = hashOf(`${EXAMPLE}#build2`, BUILD, EXAMPLE);
+
+    process.env.BASE_URL = "https://example.test";
+    try {
+      expect(hashOf(`${EXAMPLE}#build2`, BUILD, EXAMPLE)).not.toBe(before);
+    } finally {
+      delete process.env.BASE_URL;
+    }
+  });
+});
+
+/**
+ * The website build also emits `/catalog/*.{json,md}` (`bin/build-catalog.mjs`),
+ * which is what the docs MCP server and every example page's `rel="alternate"`
+ * hand out. A cache hit that skips it serves a catalog describing examples that
+ * have since changed -- and unlike a stale page, nobody looks at it, so nothing
+ * would ever report it.
+ */
+describe("catalog", () => {
+  it("re-runs the website build for the generator itself", () => {
+    const before = hashOf("website#build3", WEBSITE_BUILD);
+
+    withTouched("bin/build-catalog.mjs", () => {
+      expect(hashOf("website#build3", WEBSITE_BUILD)).not.toBe(before);
+    });
+  });
+
+  it("re-runs the website build when the renderers move", () => {
+    const before = hashOf("website#build3", WEBSITE_BUILD);
+
+    withTouched("bin/lib/render.mjs", () => {
+      expect(hashOf("website#build3", WEBSITE_BUILD)).not.toBe(before);
+    });
+  });
+
+  it("re-runs the website build when an example's metadata moves", () => {
+    const before = hashOf("website#build3", WEBSITE_BUILD);
+
+    withTouched("examples/wireframes/pmndrs.json", () => {
+      expect(hashOf("website#build3", WEBSITE_BUILD)).not.toBe(before);
+    });
+  });
+
+  it("leaves the website build alone for a docs-only change", () => {
+    const before = hashOf("website#build3", WEBSITE_BUILD);
+
+    withTouched("docs/agents/domain.md", () => {
+      expect(hashOf("website#build3", WEBSITE_BUILD)).toBe(before);
     });
   });
 });

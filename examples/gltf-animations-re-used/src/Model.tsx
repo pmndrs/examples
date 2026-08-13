@@ -65,9 +65,11 @@ export default function Model({ pose, ...props }: ModelProps) {
   useEffect(() => {
     // Reset and fade in animation after an index has been changed
     actions[names[index]]!.reset().fadeIn(0.5).play();
-    // In the clean-up phase, fade it out
+    // In the clean-up phase, fade it out. On unmount the hook has already
+    // uncached the action, so the lookup can come back empty -- and a cleanup
+    // that throws takes the whole React root down with it.
     return () => {
-      actions[names[index]]!.fadeOut(0.5);
+      actions[names[index]]?.fadeOut(0.5);
     };
   }, [index, actions, names]);
 

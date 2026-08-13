@@ -3,10 +3,18 @@
   "globalEnv": ["BASE_PATH"],
   "tasks": {
     "build2": {
+      // `vite-plugin-head` puts absolute URLs in each demo's <head>, so it
+      // needs the deployment origin. Undeclared, turbo does not pass it to the
+      // task at all -- not a stale cache, the variable simply never arrives --
+      // and every demo shipped root-relative links instead.
+      "env": ["BASE_URL"],
+      // `vite.config.build.ts`, not `vite.config.ts`: the latter has never
+      // existed, so this pattern matched nothing and editing the config the
+      // build actually loads left the cache looking valid.
       "inputs": [
         "$TURBO_DEFAULT$",
         "../../packages/e2e/bin/build.mjs",
-        "../../packages/e2e/src/{CheesyCanvas.jsx,deterministic.js,vite-plugin-monkey.js,vite.config.ts}"
+        "../../packages/e2e/src/{CheesyCanvas.jsx,deterministic.js,vite-plugin-monkey.js,vite-plugin-head.js,vite.config.build.ts}"
       ],
       "outputs": ["dist/**"],
       "cache": true
@@ -14,9 +22,14 @@
     "website#build3": {
       "dependsOn": ["^build2"],
       "env": ["BASE_URL"],
+      // The catalog generator and its renderers are root files, so they fall
+      // outside the package's own inputs. What they *read* need not be listed:
+      // every example's `pmndrs.json`, `package.json` and `src/` is already an
+      // input of that example's `build2`, which this task depends on.
       "inputs": [
         "$TURBO_DEFAULT$",
-        "../../packages/e2e/snapshot.test.js-snapshots/**"
+        "../../bin/build-catalog.mjs",
+        "../../bin/lib/**"
       ],
       "outputs": [".next/**", "!.next/cache/**", "out/**"],
       "cache": true
@@ -29,7 +42,10 @@
         "../../packages/e2e/bin/test.mjs",
         "../../packages/e2e/{playwright.config.ts,snapshot.test.js}"
       ],
-      "outputs": ["../../packages/e2e/snapshot.test.js-snapshots/**"],
+      // The archive is the task's only output, and it has to be one: without
+      // it, a cache hit would leave `pnpm chromatic` with nothing to upload
+      // for that example, and Chromatic would read the gap as a deletion.
+      "outputs": ["test-results/chromatic-archives/**"],
       "cache": true
     },
     "lint": {

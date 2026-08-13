@@ -5,12 +5,7 @@ on:
     branches:
       - main
   pull_request: {}
-  workflow_dispatch:
-    inputs:
-      update_snapshots:
-        description: "Regenerate playwright snapshot baselines (retrieve them from the run's `snapshots` artifact)"
-        type: boolean
-        default: false
+  workflow_dispatch: {}
 
 permissions:
   contents: read
@@ -18,27 +13,227 @@ permissions:
   id-token: write
   deployments: write
 
+env:
+  TURBO_TELEMETRY_DISABLED: 1
+  # How many jobs the e2e run is spread over. One example is ~60s of software
+  # rendering on a runner with no GPU, and there are 170 of them; three.js runs
+  # five. Raise it and every shard gets shorter, until `pnpm install` and the
+  # turbo cache restore are all a shard does.
+  SHARDS: 8
+
+# Cancel multiple runs when pushing to main
+concurrency:
+  group: ${{ github.event_name != 'pull_request' && 'group-pushmain' || github.run_id }}
+  cancel-in-progress: ${{ github.event_name != 'pull_request' }}
+
 jobs:
-  build-job:
+  #
+  # Lint
+  #
+  # `check`, not `lint`: it adds the repo-wide `prettier --check` that the
+  # pre-commit hook cannot afford (every commit would invalidate it), and so
+  # covers a `git commit -n` or anything that wrote outside a commit.
+  #
+  lint-job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
+      - uses: rharkor/caching-for-turbo@v2.5.1
+      - run: pnpm check
+      # Asserts the `inputs` in turbo.json stay honest: which file makes which
+      # task re-run. Runs turbo with `--dry`, so it costs hashes, not builds.
+      - run: pnpm test:turbo
+
+  #
+  # Test
+  #
+  # One shard per job, `bin/shard.mjs` deciding who takes what. Each shard
+  # builds only the examples it tests, and every shard shares the one turbo
+  # cache -- so a second run over an untouched example costs a cache restore,
+  # wherever it lands.
+  #
+  test-job:
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4, 5, 6, 7, 8]
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.62.0-jammy
+    steps:
+      # Full history: Chromatic walks the commits back to the last build it
+      # knows to pick a baseline, and treats a shallow clone as a first build.
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      # The job runs in a container, so the checkout belongs to a uid the steps
+      # do not run as and git refuses to read it. Nothing noticed until now:
+      # `actions/checkout` does its own fetching, and every other step here
+      # only ever touches the files. Chromatic shells out to `git log` for the
+      # commit it attributes a build to, and gets "dubious ownership" instead.
+      - run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - id: configurepages
+        uses: actions/configure-pages@v5
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
+      - uses: rharkor/caching-for-turbo@v2.5.1
+
+      # `--concurrency=1`, and it is not a detail. One e2e test already pins the
+      # runner: two cores, no GPU, every pixel through SwiftShader. Turbo's
+      # default of ten ran eleven vite servers and eleven headless browsers at
+      # once, and the examples starved each other -- a shot that takes 30s alone
+      # took 2.5 to 3 minutes, and six of twenty-one blew the 180s budget. They
+      # were not broken; they were queuing.
+      #
+      # `--continue`, so one example that fails does not deprive the rest of
+      # the archive Chromatic is about to publish. An empty filter list would
+      # make turbo run *everything*, so a shard with no examples runs nothing.
+      - id: test
+        run: |
+          filters=$(node bin/shard.mjs ${{ matrix.shard }} $SHARDS)
+          echo "Shard ${{ matrix.shard }}/$SHARDS: ${filters:-(empty)}"
+          [ -z "$filters" ] || pnpm exec turbo test --continue --concurrency=1 $filters
+        env:
+          BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
+          # `build2` hashes on `BASE_URL` too (`vite-plugin-head` writes the
+          # deployment origin into each demo's <head>). Without it here, the
+          # shards built a *different* artifact from the one `build-job`
+          # publishes -- so the shot was of a dist nobody deploys, and every
+          # `build2` below re-ran despite 161 warm cache entries, since a
+          # different env is a different hash. Same value, same artifact:
+          # what gets tested is what ships, and build-job is a cache hit.
+          BASE_URL: ${{ steps.configurepages.outputs.base_url }}
+
+      # Even when the shard went red: a failing example still archives, and the
+      # Chromatic build has to see every published example or it reads the
+      # missing ones as deleted. A tarball rather than a glob, so the paths
+      # come back exactly where `bin/chromatic.mjs` looks for them.
+      - if: ${{ always() }}
+        run: tar -czf archives.tgz $(find examples -type d -name chromatic-archives -print) || true
+      - uses: actions/upload-artifact@v7
+        if: ${{ always() && hashFiles('archives.tgz') != '' }}
+        with:
+          name: archives-${{ matrix.shard }}
+          path: archives.tgz
+
+  #
+  # Chromatic
+  #
+  # The same run, seen the other way round: a test job fails on an example that
+  # never finished its shot, Chromatic asks a human whether what it draws moved
+  # for the better. So `--exit-zero-on-changes` -- a visual change is not a
+  # regression until someone says it is, and Chromatic's own check reports it
+  # on the pull request.
+  #
+  # `always()`, because a red shard is exactly when someone wants to look.
+  #
+  chromatic-job:
+    needs: test-job
+    if: ${{ always() }}
     runs-on: ubuntu-latest
     env:
-      TURBO_TELEMETRY_DISABLED: 1
+      # `secrets` is not a context `if:` can read, so the question is asked
+      # here, where it can.
+      CHROMATIC: ${{ secrets.CHROMATIC_PROJECT_TOKEN != '' }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
+      - uses: actions/download-artifact@v6
+        with:
+          pattern: archives-*
+          path: archives
+      - run: |
+          for tarball in archives/*/archives.tgz; do
+            [ -f "$tarball" ] && tar -xzf "$tarball"
+          done
+      # No token, no build: a pull request from a fork cannot read the repo
+      # secrets. Main has to publish too, or a pull request would have no
+      # baseline to compare to.
+      #
+      # `--exit-zero-on-changes`: a visual change is Chromatic's to report, not
+      # this job's. The job answers "did the upload work?"; the UI Tests check
+      # Chromatic posts on the commit answers "should this have changed?", and
+      # it stays red until someone accepts the build -- no re-run of this job
+      # needed. Failing here on top of that said "broken" where the truth was
+      # "waiting for you", and it hid a real one: a `pnpm chromatic` that
+      # cannot upload looks exactly like 68 snapshots pending review.
+      #
+      # That requires the Chromatic GitHub app to be installed on the
+      # repository, which is what publishes the UI Tests check. Without it a
+      # changed build reports nothing at all, and this flag is how changes pile
+      # up unreviewed -- build 42 went green with exactly one waiting.
+      #
+      # `--auto-accept-changes` on main, and only there. What lands on main has
+      # already been accepted on its pull request, so asking a second time
+      # leaves a queue of unreviewed changes that turns every later build
+      # yellow -- and a permanently yellow dashboard is one nobody opens.
+      #
+      # The obvious objection is that auto-accepting buries a drifting example
+      # in the baseline instead of showing it. True -- if Chromatic were what
+      # catches drift. It is not: `e2e-flaky` is, by shooting the same commit N
+      # times, and the nightly is what keeps asking. Chromatic answers "should
+      # this have changed?", which only makes sense once the answer to "did
+      # anything change by itself?" is no.
+      #
+      # `CHROMATIC_SHA`, and the branch and slug that have to travel with it,
+      # because on a `pull_request` event `GITHUB_SHA` is the *merge* commit
+      # GitHub builds for the run -- a commit that exists on no branch. Left
+      # alone, Chromatic posts `UI Tests` and `UI Review` there, where the pull
+      # request shows them (GitHub knows the merge commit is its) but a
+      # required status check cannot: those are read off the head commit,
+      # which is where every Actions job already reports. Measured on #187:
+      # twelve check runs on `5520f5f2`, three Chromatic statuses on the merge
+      # commit `aefcbe4`, no overlap.
+      #
+      # It also picks the wrong baseline. That merge commit has the latest
+      # build on main for an ancestor -- the pull request's own branch does
+      # not -- so every comparison is made against main rather than against
+      # what this branch last looked like.
+      #
+      # Chromatic's own answer is to run this on `push` instead, which for
+      # this workflow would mean the whole 20-minute sweep on every branch
+      # push, pull request or not. So: the documented alternative, verbatim,
+      # falling back to the push values on main.
+      #
+      - run: pnpm chromatic ${{ github.ref == 'refs/heads/main' && '--auto-accept-changes' || '--exit-zero-on-changes' }}
+        if: ${{ env.CHROMATIC == 'true' }}
+        env:
+          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          CHROMATIC_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          CHROMATIC_BRANCH: ${{ github.event.pull_request.head.ref || github.ref_name }}
+          CHROMATIC_SLUG: ${{ github.repository }}
+
+  #
+  # Build
+  #
+  # `needs: test-job`, so a red example never reaches GitHub Pages -- and never
+  # reaches a preview either, since the preview is the same build.
+  #
+  build-job:
+    needs: test-job
+    runs-on: ubuntu-latest
+    env:
       # No token, no preview: that is a fork's pull request, which cannot read
       # the repo secrets, or a checkout of this repo that never set them.
       PREVIEW: ${{ github.event_name == 'pull_request' && secrets.VERCEL_TOKEN != '' }}
-
-    # Cancel multiple runs when pushing to main
-    concurrency:
-      group: ${{ github.event_name != 'pull_request' && 'group-pushmain' || github.run_id }}
-      cancel-in-progress: ${{ github.event_name != 'pull_request' }}
-
-    container:
-      image: mcr.microsoft.com/playwright:v1.62.0-jammy
-
     steps:
-      #
-      # Setup
-      #
       - uses: actions/checkout@v7
       - id: configurepages
         uses: actions/configure-pages@v5
@@ -51,71 +246,62 @@ jobs:
       - uses: rharkor/caching-for-turbo@v2.5.1
 
       #
-      # Lint
-      #
-      # `check`, not `lint`: it adds the repo-wide `prettier --check` that the
-      # pre-commit hook cannot afford (every commit would invalidate it), and
-      # so covers a `git commit -n` or anything that wrote outside a commit.
-      - run: pnpm check
-      # Asserts the `inputs` above stay honest: which file makes which task
-      # re-run. Runs turbo with `--dry`, so it costs hashes, not builds.
-      - run: pnpm test:turbo
-
-      #
-      # Test
-      #
-      - run: pnpm test
-        if: ${{ !inputs.update_snapshots }}
-        env:
-          BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
-      # Baselines regen: gh workflow run CI --ref <branch> -f update_snapshots=true
-      # --force: a regen must never replay cached test results (their cached
-      # outputs would restore the stale baselines we're regenerating)
-      - run: pnpm exec turbo test --force -- --update-snapshots=all
-        if: ${{ inputs.update_snapshots }}
-        env:
-          BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
-      - uses: actions/upload-artifact@v7
-        if: ${{ always() && inputs.update_snapshots }}
-        with:
-          name: snapshots
-          path: packages/e2e/snapshot.test.js-snapshots/
-
-      #
-      # Build (only for pushes on main)
+      # Pages (only for pushes on main)
       #
       - run: pnpm build
-        if: ${{ github.event_name != 'pull_request' && !inputs.update_snapshots }}
+        if: ${{ github.event_name != 'pull_request' }}
         env:
           BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
           BASE_URL: ${{ steps.configurepages.outputs.base_url }}
       - uses: actions/upload-pages-artifact@v5
-        if: ${{ github.event_name != 'pull_request' && !inputs.update_snapshots }}
+        if: ${{ github.event_name != 'pull_request' }}
         with:
           path: ./out${{ steps.configurepages.outputs.base_path }}
 
       #
       # Preview (only for pull requests)
       #
-      # The same build with no base path -- a preview is served from its own
-      # domain root -- uploaded as-is: Vercel hosts `out`, it never rebuilds it.
+      # The same `BASE_PATH` as the Pages build, and for the same reason the
+      # step above exists at all: `BASE_PATH` is a `globalEnv`, and it really
+      # does change every example's `dist` (vite's `--base`). Building the
+      # preview without it gave every `build2` a different hash -- 167 rebuilds,
+      # ~3.5min, and never a cache hit across runs either, since `main` never
+      # produces those hashes and a pull request cannot read another one's
+      # cache. With it, `pnpm test` above has already built all of them.
+      #
+      # What it costs: the preview is served from `<url>${BASE_PATH}`, not the
+      # domain root, since the pages link to each other by absolute path. That
+      # is the production layout, which is what a preview should be showing.
       - run: pnpm build
         if: ${{ env.PREVIEW == 'true' }}
+        env:
+          BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
+          # The production origin, deliberately: the <head> URLs are canonical
+          # links, and a preview that is "the production layout" should carry
+          # them too -- besides, a different value is a different `build2`
+          # hash, and the whole point is that the shards already built this.
+          BASE_URL: ${{ steps.configurepages.outputs.base_url }}
       - id: preview
         if: ${{ env.PREVIEW == 'true' }}
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
         run: |
           mkdir -p .vercel/output
+          # `out`, not `out${BASE_PATH}`: the site lives one level down, and the
+          # static root has to be the level its absolute links resolve against
           mv out .vercel/output/static
           # `cleanUrls`: the website exports flat `<name>.html` pages and links
-          # to them without the extension
-          echo '{"version":3,"cleanUrls":true}' > .vercel/output/config.json
+          # to them without the extension. The route sends the bare deployment
+          # URL -- the one Vercel prints, and the one anyone trims to -- to the
+          # home page, which now sits under the base path rather than at `/`.
+          printf '{"version":3,"cleanUrls":true,"routes":[{"src":"/","status":308,"headers":{"Location":"%s"}}]}' \
+            "${BASE_PATH:-/}" > .vercel/output/config.json
           # `--archive`: one tarball, not 2.4k file uploads
           url=$(pnpm dlx vercel@latest deploy --prebuilt --archive=tgz --token="$VERCEL_TOKEN")
-          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "url=$url$BASE_PATH" >> "$GITHUB_OUTPUT"
       # The pull request's "View deployment" box, which Vercel's git integration
       # would have filled had we let it deploy
       - uses: actions/github-script@v9
@@ -141,7 +327,7 @@ jobs:
 
   deploy-job:
     # only for pushes on main
-    if: ${{ github.event_name != 'pull_request' && !inputs.update_snapshots && github.ref == 'refs/heads/main' }}
+    if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

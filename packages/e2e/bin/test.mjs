@@ -16,8 +16,6 @@ if (!pkgname) {
 }
 const examplename = pkgname.split("@example/")[1];
 
-const updateSnapshots = argv["update-snapshots"];
-
 function startVite(base = "/", timeout = 30000) {
   return new Promise(async (resolve, reject) => {
     const timeoutId = setTimeout(() => {
@@ -39,18 +37,14 @@ function startVite(base = "/", timeout = 30000) {
 const __filename = fileURLToPath(import.meta.url); // Converts the URL to a file path
 const __dirname = dirname(__filename); // Gets the directory name
 const playwrightConfigPath = resolve(__dirname, "../playwright.config.ts");
+// Per-example, because Playwright wipes this directory when it starts and
+// every example shares the one config -- see `playwright.config.ts`. Resolved
+// out here: inside `startPlaywright`, `resolve` is the promise's own.
+const outputDir = resolve(process.cwd(), "test-results");
 
 function startPlaywright(url) {
   return new Promise((resolve, reject) => {
     const args = ["playwright", "test", "--config", playwrightConfigPath];
-    if (updateSnapshots) {
-      // --update-snapshots or --update-snapshots=<all|changed|missing|none>
-      args.push(
-        typeof updateSnapshots === "string"
-          ? `--update-snapshots=${updateSnapshots}`
-          : "--update-snapshots",
-      );
-    }
 
     const proc = spawn("pnpm", ["exec", ...args], {
       stdio: "inherit",
@@ -58,6 +52,7 @@ function startPlaywright(url) {
         ...process.env,
         EXAMPLENAME: examplename,
         HOST: url,
+        PLAYWRIGHT_OUTPUT_DIR: outputDir,
       },
     });
 
