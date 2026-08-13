@@ -184,6 +184,29 @@ if (sayCheeseParam) {
   const rAF = window.requestAnimationFrame.bind(window);
   window.requestAnimationFrame = (callback) => rAF(() => callback(virtual));
 
+  // The User Timing API is its own clock: `performance.mark()` stamps the
+  // browser's internal monotonic time, and `measure().duration` is computed
+  // from those stamps -- none of it goes through `performance.now`, so it is
+  // the one channel wall time still had into the page. And into the pixels:
+  // stats-gl profiles each frame's CPU cost with mark/measure pairs, and the
+  // max of that range is printed onto the `clouds` StatsGl panel, one machine
+  // measurement away from flipping a digit. Marks land on the virtual clock
+  // instead; anything measured inside one pumped frame is exactly 0. Nothing
+  // is forwarded to the native calls on purpose -- a real entry in the buffer
+  // would hand `getEntriesByName` the same wall time back.
+  const marks = new Map();
+  performance.mark = (name) => {
+    marks.set(name, virtual);
+    return { name, entryType: "mark", startTime: virtual, duration: 0 };
+  };
+  performance.measure = (name, start, end) => {
+    // Marks we never saw (or the options-object form) resolve to `virtual`:
+    // every unknown duration is 0, which is the deterministic answer.
+    const from = marks.get(start) ?? virtual;
+    const to = marks.get(end) ?? virtual;
+    return { name, entryType: "measure", startTime: from, duration: to - from };
+  };
+
   //
   // Timers move onto the virtual clock too -- but only once the shot starts.
   //
