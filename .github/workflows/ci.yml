@@ -202,15 +202,23 @@ jobs:
       # twelve check runs on `5520f5f2`, three Chromatic statuses on the merge
       # commit `aefcbe4`, no overlap.
       #
-      # Empty on a push, where `GITHUB_SHA` is already the commit itself.
+      # It also picks the wrong baseline. That merge commit has the latest
+      # build on main for an ancestor -- the pull request's own branch does
+      # not -- so every comparison is made against main rather than against
+      # what this branch last looked like.
+      #
+      # Chromatic's own answer is to run this on `push` instead, which for
+      # this workflow would mean the whole 20-minute sweep on every branch
+      # push, pull request or not. So: the documented alternative, verbatim,
+      # falling back to the push values on main.
       #
       - run: pnpm chromatic ${{ github.ref == 'refs/heads/main' && '--auto-accept-changes' || '--exit-zero-on-changes' }}
         if: ${{ env.CHROMATIC == 'true' }}
         env:
           CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          CHROMATIC_SHA: ${{ github.event.pull_request.head.sha }}
-          CHROMATIC_BRANCH: ${{ github.event.pull_request.head.ref }}
-          CHROMATIC_SLUG: ${{ github.event.pull_request.head.repo.full_name }}
+          CHROMATIC_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          CHROMATIC_BRANCH: ${{ github.event.pull_request.head.ref || github.ref_name }}
+          CHROMATIC_SLUG: ${{ github.repository }}
 
   #
   # Build
