@@ -1,3 +1,5 @@
+[![Chromatic](https://img.shields.io/badge/Chromatic-visual%20tests-FC521F?logo=chromatic&logoColor=white)](https://www.chromatic.com/library?appId=6a7ac255b03218d7d84e6ca9)
+
 index: [examples](examples)
 
 To use a given [`basic-example`](examples/basic-example) as a template for a new
