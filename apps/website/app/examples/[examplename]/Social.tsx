@@ -6,7 +6,8 @@ import { GoCommandPalette } from "react-icons/go";
 import { RxOpenInNewWindow } from "react-icons/rx";
 import { SiCodesandbox, SiGithub, SiStackblitz } from "react-icons/si";
 
-import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
 import {
   Tooltip,
@@ -92,36 +93,43 @@ export function Social({
       >
         {actions.map(({ label, icon, href }) => (
           <Tooltip key={label}>
-            <TooltipTrigger asChild>
-              {href ? (
-                /* `icon-lg`, not `lg`: on the icon scale that is the size —
-                   plain `lg` would add the text sizes' horizontal padding and
-                   stretch each square into a lozenge. */
-                <Button asChild variant="secondary" size="icon-lg">
+            <TooltipTrigger
+              render={
+                href ? (
+                  /* The variants, not the component: Base UI's `Button` is a
+                     real <button> and asks to stay one — rendered as an <a> it
+                     wants `nativeButton={false}`, which trades the link role
+                     for `role="button"`. These are links. */
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
                     href={href}
                     aria-label={label}
-                    /* Prose links are underlined site-wide from `@layer base`;
-                       an icon-only button is not prose. */
-                    className="no-underline"
+                    className={cn(
+                      /* `icon-lg`, not `lg`: on the icon scale that is the
+                         size — plain `lg` would add the text sizes' horizontal
+                         padding and stretch each square into a lozenge. */
+                      buttonVariants({ variant: "secondary", size: "icon-lg" }),
+                      /* Prose links are underlined site-wide from
+                         `@layer base`; an icon-only button is not prose. */
+                      "no-underline",
+                    )}
                   >
                     {icon}
                   </a>
-                </Button>
-              ) : (
-                <Button
-                  type="button"
-                  variant="secondary"
-                  size="icon-lg"
-                  onClick={handleClick}
-                  aria-label={label}
-                >
-                  {icon}
-                </Button>
-              )}
-            </TooltipTrigger>
+                ) : (
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    size="icon-lg"
+                    onClick={handleClick}
+                    aria-label={label}
+                  >
+                    {icon}
+                  </Button>
+                )
+              }
+            />
             <TooltipContent side="bottom">{label}</TooltipContent>
           </Tooltip>
         ))}

@@ -81,9 +81,9 @@ const SKELETON_TAGS = [
   [52, 76],
   [80, 44, 92],
 ];
-/* `library` is "" for no filter, but Radix rejects an empty SelectItem value —
-   it reserves it for clearing the selection. The sentinel is what the option
-   carries; the state stays "". */
+/* `library` is "" for no filter, but Base UI counts an empty string as nothing
+   selected: the trigger would go to its placeholder state and grey the label
+   out. The sentinel is what the option carries; the state stays "". */
 const ALL_LIBRARIES = "__all__";
 
 /* Filters are shareable: `?q=` carries the search text, `?library=` the
@@ -125,8 +125,8 @@ const getPaintedCollapsedOnServer = () => false;
  * Keep the list itself complete for links, roving focus and stable scroll
  * geometry, but only mount expensive thumbnail/tag subtrees near the visible
  * part of the SidebarContent scroller. One observer handles the whole list;
- * the hook reruns when filtering changes its children or Radix mounts the
- * mobile Sheet's list.
+ * the hook reruns when filtering changes its children or the mobile Sheet
+ * mounts its list.
  */
 function useNearbyExamples(
   list: HTMLUListElement | null,
@@ -402,6 +402,17 @@ export default function Nav({
       .map(([label]) => label);
   }, [examples]);
 
+  /* Base UI's `SelectValue` prints the *value* unless the root is handed the
+     value → label map: left to itself the trigger would read `__all__` where
+     Radix used to echo the selected item's own text. */
+  const libraryItems = useMemo(
+    () => [
+      { value: ALL_LIBRARIES, label: "All libraries" },
+      ...libraryOptions.map((label) => ({ value: label, label })),
+    ],
+    [libraryOptions],
+  );
+
   const filteredExamples = useMemo(() => {
     const terms = search
       .trim()
@@ -646,9 +657,10 @@ export default function Nav({
                 <Select
                   open={libraryOpen}
                   onOpenChange={setLibraryOpen}
+                  items={libraryItems}
                   value={library || ALL_LIBRARIES}
                   onValueChange={(value) =>
-                    setLibrary(value === ALL_LIBRARIES ? "" : value)
+                    setLibrary(value && value !== ALL_LIBRARIES ? value : "")
                   }
                 >
                   <SelectTrigger
@@ -658,28 +670,25 @@ export default function Nav({
                     <ListFilterIcon className="text-muted-foreground" />
                     <SelectValue />
                   </SelectTrigger>
-                  {/* `item-aligned` — this registry's default, where Radix lays
-                    the menu over the trigger with the selected option on top
-                    of it — cannot do that for a trigger sitting 26px from the
-                    top of the window. It clamps the menu and makes up the
-                    difference by scrolling the viewport, here by the 4px of
+                  {/* `alignItemWithTrigger` — this registry's default, where
+                    the menu is laid over the trigger with the selected option
+                    on top of it — cannot do that for a trigger sitting 26px
+                    from the top of the window. It clamps the menu and makes up
+                    the difference by scrolling it, here by the 4px of
                     `SelectGroup` padding above the first option. That is a
                     non-zero `scrollTop`, which is the whole of what mounts
                     `SelectScrollUpButton`: an arrow offering to scroll back to
-                    an option already in view. `popper` anchors the menu below
-                    the trigger instead and never pre-scrolls, so the arrows
-                    are left to mean what they say. It also gives
-                    `--radix-select-content-available-height` a value, which
-                    the component's own `max-h-` reads and item-aligned never
-                    sets. */}
-                  <SelectContent position="popper" className="backdrop-blur-sm">
+                    an option already in view. Turned off, the menu is anchored
+                    below the trigger and never pre-scrolls, so the arrows are
+                    left to mean what they say. */}
+                  <SelectContent
+                    alignItemWithTrigger={false}
+                    className="backdrop-blur-sm"
+                  >
                     <SelectGroup>
-                      <SelectItem value={ALL_LIBRARIES}>
-                        All libraries
-                      </SelectItem>
-                      {libraryOptions.map((option) => (
-                        <SelectItem key={option} value={option}>
-                          {option}
+                      {libraryItems.map(({ value, label }) => (
+                        <SelectItem key={value} value={value}>
+                          {label}
                         </SelectItem>
                       ))}
                     </SelectGroup>
@@ -772,77 +781,78 @@ export default function Nav({
                       className="transition-transform duration-1078 ease-expressive active:scale-97"
                     >
                       <Item
-                        asChild
+                        render={
+                          <Link
+                            /* The filter rides along: the rail stays mounted
+                               across this navigation, but the URL is the state
+                               now, so a bare `/examples/<name>` would clear
+                               it. */
+                            href={serializeFilters(`/examples/${name}`, {
+                              q: search,
+                              library,
+                            })}
+                            aria-label={title}
+                            aria-current={
+                              examplename === name ? "page" : undefined
+                            }
+                            className="no-underline"
+                          />
+                        }
                         variant="default"
                         className={cn(
                           "relative overflow-hidden rounded-md bg-card p-0 transition-[color,box-shadow] duration-200 hover:shadow-lg",
                           examplename === name && "ring-2 ring-foreground",
                         )}
                       >
-                        <Link
-                          /* The filter rides along: the rail stays mounted
-                             across this navigation, but the URL is the state
-                             now, so a bare `/examples/<name>` would clear it. */
-                          href={serializeFilters(`/examples/${name}`, {
-                            q: search,
-                            library,
-                          })}
-                          aria-label={title}
-                          aria-current={
-                            examplename === name ? "page" : undefined
-                          }
-                          className="no-underline"
-                        >
-                          {/* Every card keeps its aspect-ratio box mounted, so
+                        {/* Every card keeps its aspect-ratio box mounted, so
                               observing and arrow-key focus never change scroll
                               geometry. Only the costly contents are windowed. */}
-                          <ItemMedia
-                            variant="image"
-                            className="relative aspect-video size-auto w-full rounded-none"
-                          >
-                            {renderDetails && (
-                              /* Thumbnails are served by each example, not by
+                        <ItemMedia
+                          variant="image"
+                          className="relative aspect-video size-auto w-full rounded-none"
+                        >
+                          {renderDetails && (
+                            /* Thumbnails are served by each example, not by
                                  this site, so in dev every card but the running
                                  one 404s. A broken img stops being a replaced
                                  element, which is when its pseudo-elements
                                  render: `after` covers the browser glyph and
                                  restores the alt text. */
-                              <Image
-                                src={thumb}
-                                fill
-                                sizes="(min-width: 640px) 260px, 200px"
-                                alt={title}
-                                className="after:absolute after:inset-0 after:grid after:place-items-center after:bg-card after:px-3 after:text-center after:text-xs after:text-muted-foreground after:content-[attr(alt)]"
-                              />
-                            )}
-                          </ItemMedia>
-                          {isNew && (
-                            <Badge
-                              variant="secondary"
-                              className="absolute top-1.5 right-1.5 bg-new text-new-foreground"
-                            >
-                              New
-                            </Badge>
+                            <Image
+                              src={thumb}
+                              fill
+                              sizes="(min-width: 640px) 260px, 200px"
+                              alt={title}
+                              className="after:absolute after:inset-0 after:grid after:place-items-center after:bg-card after:px-3 after:text-center after:text-xs after:text-muted-foreground after:content-[attr(alt)]"
+                            />
                           )}
-                          {renderDetails && tags.length > 0 && (
-                            <ItemFooter className="absolute inset-x-0 bottom-0">
-                              {/* Same fade as the example list, on the other axis.
+                        </ItemMedia>
+                        {isNew && (
+                          <Badge
+                            variant="secondary"
+                            className="absolute top-1.5 right-1.5 bg-new text-new-foreground"
+                          >
+                            New
+                          </Badge>
+                        )}
+                        {renderDetails && tags.length > 0 && (
+                          <ItemFooter className="absolute inset-x-0 bottom-0">
+                            {/* Same fade as the example list, on the other axis.
                                   It has to be aimed at the viewport: `ScrollArea`
                                   puts its `className` on the root, and the root is
                                   not what scrolls. */}
-                              <ScrollArea className="w-full *:data-[slot=scroll-area-viewport]:scroll-fade-x">
-                                {/* Padding sits inside the viewport so the
+                            <ScrollArea className="w-full *:data-[slot=scroll-area-viewport]:scroll-fade-x">
+                              {/* Padding sits inside the viewport so the
                                     scrollable strip itself runs edge to edge. */}
-                                <div className="flex w-max gap-1 p-1.5">
-                                  {tags.slice(0, MAX_TAGS).map((tag) => (
-                                    <Badge key={tag}>{tag}</Badge>
-                                  ))}
-                                </div>
-                                <ScrollBar orientation="horizontal" />
-                              </ScrollArea>
-                            </ItemFooter>
-                          )}
-                        </Link>
+                              <div className="flex w-max gap-1 p-1.5">
+                                {tags.slice(0, MAX_TAGS).map((tag) => (
+                                  <Badge key={tag}>{tag}</Badge>
+                                ))}
+                              </div>
+                              <ScrollBar orientation="horizontal" />
+                            </ScrollArea>
+                          </ItemFooter>
+                        )}
                       </Item>
                     </li>
                   );

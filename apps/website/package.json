@@ -11,6 +11,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@base-ui/react": "^1.7.0",
     "@example/aquarium": "workspace:*",
     "@example/arkanoid": "workspace:*",
     "@example/arkanoid-under-60-loc": "workspace:*",
@@ -185,7 +186,6 @@
     "next": "16.3.0",
     "next-themes": "^0.4.6",
     "nuqs": "^2.9.5",
-    "radix-ui": "^1.6.7",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "react-hotkeys-hook": "^5.3.3",
