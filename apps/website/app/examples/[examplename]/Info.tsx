@@ -64,16 +64,15 @@ export function Info({ example }: { example: Example }) {
               each trigger is handed the element it should become, so both sets
               of props end up on the one button.
 
-              `data-slot` is pinned all the way down because each wrapper
-              stamps its own, and two levels of `render` deep the server keeps
-              the outermost while the client keeps the innermost — a hydration
-              mismatch on the attribute alone. Agreeing on the one it describes
-              settles it. */}
+              Each wrapper stamps its own `data-slot`, and two levels of
+              `render` deep the server keeps the outermost while the client
+              keeps the innermost — a hydration mismatch on that attribute
+              alone. The outermost is the one that wins on the server, so
+              naming the element it ends up being settles it. */}
           <TooltipTrigger
             data-slot="button"
             render={
               <PopoverTrigger
-                data-slot="button"
                 render={
                   <Button
                     variant="secondary"
@@ -100,10 +99,6 @@ export function Info({ example }: { example: Example }) {
       <PopoverContent
         align="end"
         sideOffset={8}
-        /* 12px of clearance, the same margin the bar itself keeps — the panel
-           is as wide as the viewport allows on a phone, so without it Base UI
-           would park it flush against the edge. */
-        collisionPadding={12}
         /* Base UI measures the room left under the trigger and publishes it on
            the positioner as `--available-height`, which the panel inherits.
            That is what the old `max-height: min(100dvh - 4.5rem, 34rem)` was

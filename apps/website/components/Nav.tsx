@@ -81,10 +81,6 @@ const SKELETON_TAGS = [
   [52, 76],
   [80, 44, 92],
 ];
-/* `library` is "" for no filter, but Base UI counts an empty string as nothing
-   selected: the trigger would go to its placeholder state and grey the label
-   out. The sentinel is what the option carries; the state stays "". */
-const ALL_LIBRARIES = "__all__";
 
 /* Filters are shareable: `?q=` carries the search text, `?library=` the
    library filter. nuqs owns the round trip — the URL *is* the state, so the
@@ -402,17 +398,6 @@ export default function Nav({
       .map(([label]) => label);
   }, [examples]);
 
-  /* Base UI's `SelectValue` prints the *value* unless the root is handed the
-     value → label map: left to itself the trigger would read `__all__` where
-     Radix used to echo the selected item's own text. */
-  const libraryItems = useMemo(
-    () => [
-      { value: ALL_LIBRARIES, label: "All libraries" },
-      ...libraryOptions.map((label) => ({ value: label, label })),
-    ],
-    [libraryOptions],
-  );
-
   const filteredExamples = useMemo(() => {
     const terms = search
       .trim()
@@ -657,38 +642,25 @@ export default function Nav({
                 <Select
                   open={libraryOpen}
                   onOpenChange={setLibraryOpen}
-                  items={libraryItems}
-                  value={library || ALL_LIBRARIES}
-                  onValueChange={(value) =>
-                    setLibrary(value && value !== ALL_LIBRARIES ? value : "")
-                  }
+                  value={library || null}
+                  onValueChange={(value) => setLibrary(value ?? "")}
                 >
                   <SelectTrigger
                     className="min-w-0 flex-1 border-border bg-input shadow-lg"
                     aria-label="Filter examples by library"
                   >
                     <ListFilterIcon className="text-muted-foreground" />
-                    <SelectValue />
+                    <SelectValue placeholder="All libraries" />
                   </SelectTrigger>
-                  {/* `alignItemWithTrigger` — this registry's default, where
-                    the menu is laid over the trigger with the selected option
-                    on top of it — cannot do that for a trigger sitting 26px
-                    from the top of the window. It clamps the menu and makes up
-                    the difference by scrolling it, here by the 4px of
-                    `SelectGroup` padding above the first option. That is a
-                    non-zero `scrollTop`, which is the whole of what mounts
-                    `SelectScrollUpButton`: an arrow offering to scroll back to
-                    an option already in view. Turned off, the menu is anchored
-                    below the trigger and never pre-scrolls, so the arrows are
-                    left to mean what they say. */}
-                  <SelectContent
-                    alignItemWithTrigger={false}
-                    className="backdrop-blur-sm"
-                  >
+                  <SelectContent className="backdrop-blur-sm">
                     <SelectGroup>
-                      {libraryItems.map(({ value, label }) => (
-                        <SelectItem key={value} value={value}>
-                          {label}
+                      {/* `null` is Base UI's cleared value, so the option that
+                        drops the filter is the one that carries it and the
+                        state stays "". */}
+                      <SelectItem value={null}>All libraries</SelectItem>
+                      {libraryOptions.map((option) => (
+                        <SelectItem key={option} value={option}>
+                          {option}
                         </SelectItem>
                       ))}
                     </SelectGroup>
