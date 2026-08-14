@@ -177,7 +177,7 @@ describe("ci.yml", () => {
   // writes the deployment origin into each demo's <head>), so it is part of the
   // hash for the same reason `BASE_PATH` is. #180 added it to the build steps
   // only, and for a while the shards quietly built -- and shot -- a dist nobody
-  // deploys, while build-job rebuilt all 161 examples on every run.
+  // deploys, while the deploying job rebuilt all 161 examples on every run.
   for (const name of ["BASE_PATH", "BASE_URL"] as const) {
     it(`gives each of those steps a ${name}`, () => {
       for (const step of buildingSteps()) {
