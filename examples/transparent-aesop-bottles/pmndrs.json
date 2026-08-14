@@ -1,7 +1,7 @@
 {
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Transparent Aesop Bottles",
-  "description": "Six bottles sharing one physical transmission material, with render order pinned so the backdrop draws first.",
+  "description": "PBR transmission and thickness to emulate glass.",
   "tags": ["reflections", "transmission"],
   "apis": ["Environment"],
   "authors": ["Paul Henschel"],
