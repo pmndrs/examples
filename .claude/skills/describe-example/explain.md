@@ -15,7 +15,15 @@ The one-line `description` is what the index can afford. It is not what a reader
 
 That is the whole design. A direct read produces a confident paragraph about a demo nobody understood, and there is no way to tell one of those from the real thing by reading it. So `--explain` runs `/mattpocock-skills:teach` in sub-agents first, and writes only from what they distil.
 
+The mechanism that makes this work is narrower than "a sub-agent reads more carefully", and worth naming because it is what would be lost if the orchestration were ever trimmed for cost: **the quiz**. A pass writes a lesson, then sits it, predicting before it checks. Both examples in the #214 pilot came back having been wrong on most of their predictions — nine of twelve in one case, and the corrections were load-bearing rather than cosmetic. Direct reading has no falsification step; nothing in it can be surprised.
+
+Which is also why **the orchestrator does not read the example's source before the passes.** Read it and the distillation arrives as confirmation of something already believed, the passes become expensive agreement, and the one check on the prose is gone. Read `pmndrs.json` and the title for the mission, and nothing else until the proposal.
+
 `teach` sets `disable-model-invocation`, so the Skill tool will not launch it — the sub-agent reads the skill file and follows it. The repo's `.claude/settings.json` enables `mattpocock-skills@mattpocock`, which puts it at `~/.claude/plugins/marketplaces/mattpocock/skills/productivity/teach/SKILL.md`. If the plugin layout has moved, find it: `find ~/.claude/plugins -path '*productivity/teach/SKILL.md'`.
+
+Name its four sibling format files to the sub-agent as well — `MISSION-FORMAT.md`, `RESOURCES-FORMAT.md`, `LEARNING-RECORD-FORMAT.md` and **`GLOSSARY-FORMAT.md`**. The last one matters here out of proportion to its size: the glossary is one of the two artifacts that leave the workspace, and `SKILL.md`'s own list of workspace files does not mention it, so a sub-agent told only to "follow the skill" can reasonably never open it.
+
+`teach` delegates to no other skill — its dependency graph is those five files and nothing else. But the sub-agent still has the full roster, and should use it as any session executing `teach` would; the pilot's passes reached for `pmndrs:docs` and reported it earned its place, by disagreeing with the installed source in one instance and with a plain fetch of the same page in another. Ask the pass to record in `NOTES.md` which skills it invoked and what each contributed, so the next one is deciding from evidence rather than from habit.
 
 ### 1. The workspace is ephemeral and outside the repo
 
@@ -62,7 +70,9 @@ Headless, the sub-agent is both teacher and learner: it writes the lesson and it
 
 Each pass ends by answering one question in its report: **is a load-bearing sub-topic still unclear enough to warrant another pass, and which one?** If yes, launch another sub-agent on the same workspace with that sub-topic as its focus — `teach` is stateful, so it reads the learning records the previous pass left and picks up from them.
 
-**Three passes total, then stop regardless.** Without a cap an obscure demo chains passes indefinitely, and the marginal pass stops paying long before the sub-agent runs out of things it would like to understand better. A sub-topic still unclear after the third pass is a caveat in the proposal, not a fourth pass.
+**"Load-bearing" is a criterion you apply, not an answer you record.** The pass proposes a candidate; whether it warrants a pass is judged here, against the writing contract below — a sub-topic is load-bearing only if the explainer would be wrong or thin without it. `teach` is built to compute a learner's zone of proximal development, so its candidate tends to be *what I would learn next*, which is a different question. Both pilot passes proposed one: extending a demo into something it is not, and a technique whose identifiers appear nowhere in that example's `src/` and which the backtick rule therefore bars the prose from naming. Neither could reach the deliverable. Both examples were finished, well, in one pass.
+
+**Three passes total, then stop regardless.** Without a cap an obscure demo chains passes indefinitely, and the marginal pass stops paying long before the sub-agent runs out of things it would like to understand better. A sub-topic still unclear after the third pass is a caveat in the proposal, not a fourth pass. One pass is the normal number, on the evidence so far; the cap is there for the demo that genuinely resists, not as a target.
 
 ### 4. Only the distillation comes back
 
@@ -78,6 +88,8 @@ Nothing else. Lessons, quizzes and learning records stay in the temp directory.
 **Structure is fixed, length is not** — the problem, the technique, the pitfalls. A fixed structure resists drift better than a word ceiling, and a demo that needs 200 words should not be padded to 400 nor one that needs 600 be truncated.
 
 **It names the technique and its APIs; it never walks the code.** No line numbers, no local variable names, no "the file X does Y". Same principle as the one-liner: what cannot be checked mechanically is at least made hard to write wrong.
+
+**Where a demo is defined by what it does _not_ do, say so unmistakably.** Some techniques are recognised by the reader as a pattern they already know, and are then read as that pattern — `gpgpu-curl-noise-dof` has no ping-pong, holds no state, and its directory name announces the opposite. A paragraph describing a mechanism the demo lacks is worse than no paragraph if it can be mistaken for a description of it, so the absence goes in the prose as an absence, not as an omission.
 
 **Every identifier the prose puts in backticks must appear somewhere in the example's `src/`.** This is looser than the check on `apis`, deliberately — `apis` is a list of library APIs, so an entry that is not _imported_ has no business there, whereas prose may legitimately name the demo's own components (`Aquarium`, `Turtle`) and its props (`stencil` in `gl={{ stencil: true }}`).
 
