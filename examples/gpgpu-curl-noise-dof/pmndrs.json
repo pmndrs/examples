@@ -1,8 +1,9 @@
 {
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "GPGPU Curl Noise DOF",
-  "description": "Curl noise and depth of field.",
+  "description": "Particle positions recomputed into a float texture each frame, with sprite size standing in for depth of field.",
   "tags": ["gpu", "shader", "curl", "dof"],
+  "apis": ["useFBO", "createPortal", "extend"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2021-09-05",
   "source": "https://codesandbox.io/s/zgsyn",

@@ -1,8 +1,9 @@
 {
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Inverted Stencil Buffer",
-  "description": "How to invert a masked stencil.",
+  "description": "One mask, two readings: the inversion is a comparison on the masked material, not a property of the mask.",
   "tags": ["stencil", "portal"],
+  "apis": ["useMask", "Mask"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2022-05-20",
   "source": "https://codesandbox.io/s/7n2yru",
