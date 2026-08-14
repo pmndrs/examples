@@ -118,7 +118,7 @@ export default function RootLayout({
           inter.className,
           "flex h-dvh overflow-hidden",
           "[--main-p:1.5rem] [--sidebar-w:200px] sm:[--sidebar-w:260px]",
-          /* Radix portals the mobile sidebar's overlay under <body>, outside
+          /* Base UI portals the mobile sidebar's overlay under <body>, outside
              `Nav`, so this is the nearest call site that can reach it. Keep
              the dim layer, but remove backdrop filtering: re-blurring a live
              WebGL canvas throughout the sheet animation is prohibitively

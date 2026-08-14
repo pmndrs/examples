@@ -155,7 +155,7 @@ jobs:
           node-version-file: ".nvmrc"
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
-      - uses: actions/download-artifact@v6
+      - uses: actions/download-artifact@v8
         with:
           pattern: archives-*
           path: archives
@@ -221,18 +221,62 @@ jobs:
           CHROMATIC_SLUG: ${{ github.repository }}
 
   #
-  # Build
+  # Pages (only for pushes on main)
   #
-  # `needs: test-job`, so a red example never reaches GitHub Pages -- and never
-  # reaches a preview either, since the preview is the same build.
+  # `needs: test-job`, so a red example never reaches production.
   #
-  build-job:
+  pages-job:
     needs: test-job
+    if: ${{ github.event_name != 'pull_request' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - id: configurepages
+        uses: actions/configure-pages@v5
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
+      - uses: rharkor/caching-for-turbo@v2.5.1
+      - run: pnpm build
+        env:
+          BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
+          BASE_URL: ${{ steps.configurepages.outputs.base_url }}
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: ./out${{ steps.configurepages.outputs.base_path }}
+
+  #
+  # Preview (only for pull requests)
+  #
+  # No `needs`, deliberately. `test` dependsOn `build2`, so a shard builds the
+  # examples it is about to test -- and this job used to wait for all eight of
+  # them, for the warm cache that made its own `pnpm build` a cache hit. It was
+  # waiting on the wrong half. Measured on #200: the build it needs took 31s of
+  # that wait, the tests it also waited for took 3m16. On a pull request that
+  # touches many examples the same two numbers are ~3m30 and ~20m -- 170
+  # examples at ~60s of software rendering is what makes the sweep long, and
+  # building them was never the expensive part.
+  #
+  # So it builds all of them itself, at t=0. The preview lands at ~2min rather
+  # than 5m21. The turbo cache is shared and written as each shard's tasks
+  # finish, so what this actually rebuilds is whatever the shards have not
+  # reached yet: the duplicated work is a ceiling, not a bill -- and on a public
+  # repository the runner it occupies is free.
+  #
+  # What it gives up: an example whose test is red now reaches the preview.
+  # Which is what a preview is for -- `chromatic-job` publishes on `always()`
+  # for the same reason -- and merging is still gated on the tests.
+  #
+  preview-job:
+    if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
     env:
       # No token, no preview: that is a fork's pull request, which cannot read
       # the repo secrets, or a checkout of this repo that never set them.
-      PREVIEW: ${{ github.event_name == 'pull_request' && secrets.VERCEL_TOKEN != '' }}
+      PREVIEW: ${{ secrets.VERCEL_TOKEN != '' }}
     steps:
       - uses: actions/checkout@v7
       - id: configurepages
@@ -245,29 +289,14 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - uses: rharkor/caching-for-turbo@v2.5.1
 
-      #
-      # Pages (only for pushes on main)
-      #
-      - run: pnpm build
-        if: ${{ github.event_name != 'pull_request' }}
-        env:
-          BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
-          BASE_URL: ${{ steps.configurepages.outputs.base_url }}
-      - uses: actions/upload-pages-artifact@v5
-        if: ${{ github.event_name != 'pull_request' }}
-        with:
-          path: ./out${{ steps.configurepages.outputs.base_path }}
-
-      #
-      # Preview (only for pull requests)
-      #
-      # The same `BASE_PATH` as the Pages build, and for the same reason the
-      # step above exists at all: `BASE_PATH` is a `globalEnv`, and it really
-      # does change every example's `dist` (vite's `--base`). Building the
-      # preview without it gave every `build2` a different hash -- 167 rebuilds,
-      # ~3.5min, and never a cache hit across runs either, since `main` never
-      # produces those hashes and a pull request cannot read another one's
-      # cache. With it, `pnpm test` above has already built all of them.
+      # The same `BASE_PATH` as the Pages build, and not for tidiness:
+      # `BASE_PATH` is a `globalEnv`, and it really does change every example's
+      # `dist` (vite's `--base`). Building the preview without it gave every
+      # `build2` a different hash from the one the rest of this workflow
+      # produces -- 167 rebuilds, ~3.5min, and never a cache hit across runs
+      # either, since `main` never produces those hashes and a pull request
+      # cannot read another one's cache. With it, the hashes line up, and what
+      # is actually built here is what the shards have not cached yet.
       #
       # What it costs: the preview is served from `<url>${BASE_PATH}`, not the
       # domain root, since the pages link to each other by absolute path. That
@@ -279,7 +308,7 @@ jobs:
           # The production origin, deliberately: the <head> URLs are canonical
           # links, and a preview that is "the production layout" should carry
           # them too -- besides, a different value is a different `build2`
-          # hash, and the whole point is that the shards already built this.
+          # hash, and these have to be the hashes everything else produces.
           BASE_URL: ${{ steps.configurepages.outputs.base_url }}
       - id: preview
         if: ${{ env.PREVIEW == 'true' }}
@@ -332,7 +361,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: build-job
+    needs: pages-job
     steps:
       - id: deployment
         uses: actions/deploy-pages@v5
