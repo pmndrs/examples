@@ -37,7 +37,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { renderExample, renderIndex } from "./lib/render.mjs";
+import { renderExample, renderIndex } from "./lib/render-llms.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const examplesDirectory = path.join(root, "examples");

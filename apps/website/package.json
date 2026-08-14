@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node ../../bin/build-catalog.mjs && next dev",
+    "dev": "node ../../bin/build-llms.mjs && next dev",
     "dev2": "pnpm run dev",
-    "build": "node ../../bin/build-catalog.mjs && NODE_ENV=production next build",
+    "build": "node ../../bin/build-llms.mjs && NODE_ENV=production next build",
     "build3": "pnpm run build",
     "start": "next start",
     "lint": "eslint"

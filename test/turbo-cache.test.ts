@@ -125,7 +125,7 @@ describe("build", () => {
 });
 
 /**
- * The website build also emits `/catalog/*.{json,md}` (`bin/build-catalog.mjs`),
+ * The website build also emits `/examples/*.{json,md}` (`bin/build-llms.mjs`),
  * which is what the docs MCP server and every example page's `rel="alternate"`
  * hand out. A cache hit that skips it serves a catalog describing examples that
  * have since changed -- and unlike a stale page, nobody looks at it, so nothing
@@ -135,7 +135,7 @@ describe("catalog", () => {
   it("re-runs the website build for the generator itself", () => {
     const before = hashOf("website#build3", WEBSITE_BUILD);
 
-    withTouched("bin/build-catalog.mjs", () => {
+    withTouched("bin/build-llms.mjs", () => {
       expect(hashOf("website#build3", WEBSITE_BUILD)).not.toBe(before);
     });
   });
@@ -143,7 +143,7 @@ describe("catalog", () => {
   it("re-runs the website build when the renderers move", () => {
     const before = hashOf("website#build3", WEBSITE_BUILD);
 
-    withTouched("bin/lib/render.mjs", () => {
+    withTouched("bin/lib/render-llms.mjs", () => {
       expect(hashOf("website#build3", WEBSITE_BUILD)).not.toBe(before);
     });
   });

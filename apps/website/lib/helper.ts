@@ -88,7 +88,7 @@ export function getExamples(): Example[] {
         thumb: `${embed_url}/thumbnail.webp`,
         embed_url,
         website_url,
-        // What `bin/build-catalog.mjs` wrote for this example -- this page's URL
+        // What `bin/build-llms.mjs` wrote for this example -- this page's URL
         // with `.md` on the end. The page points at it with `rel="alternate"`
         // for readers that look, and the shape lets the rest guess.
         catalog_url: `${website_url}.md`,

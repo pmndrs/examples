@@ -34,7 +34,7 @@ chromatic-diagnostics.json
 out/
 build
 dist
-# Written by bin/build-catalog.mjs into the website's public/, on its way to
+# Written by bin/build-llms.mjs into the website's public/, on its way to
 # out/. Here rather than in apps/website/.gitignore so that prettier, which
 # only reads the root one, skips them as well.
 apps/website/public/examples/

@@ -1,7 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-// @ts-expect-error -- plain JS, shared with bin/build-catalog.mjs
-import { renderExample, renderIndex, summaryLine } from "../bin/lib/render.mjs";
+// @ts-expect-error -- plain JS, shared with bin/build-llms.mjs
+import {
+  renderExample,
+  renderIndex,
+  summaryLine,
+} from "../bin/lib/render-llms.mjs";
 
 /**
  * What these protect is the shape of the document an agent reads. It is

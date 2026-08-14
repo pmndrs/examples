@@ -3,7 +3,7 @@
  * the index, one document per example.
  *
  * This lives here rather than in whichever server hands it out, because the
- * rendered form is published too -- `/catalog/<name>.md` sits next to the JSON
+ * rendered form is published too -- `/examples/<name>.md` sits next to the JSON
  * and the example's own page points at it with `rel="alternate"`. A static host
  * cannot render on demand, so the only way an agent arriving from the open web
  * gets the same document as one arriving over MCP is for the producer to write
