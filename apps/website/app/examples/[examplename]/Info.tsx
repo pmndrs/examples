@@ -60,24 +60,38 @@ export function Info({ example }: { example: Example }) {
           beside it without the pill having to be rebuilt. */}
       <ButtonGroup className="rounded-4xl shadow-lg backdrop-blur-sm">
         <Tooltip>
-          <TooltipTrigger asChild>
-            <PopoverTrigger asChild>
-              <Button
-                variant="secondary"
-                /* `icon-lg`, not `lg`: on the icon scale that is the size —
-                   plain `lg` would add the text sizes' horizontal padding and
-                   stretch the disc into a lozenge. */
-                size="icon-lg"
-                aria-label="Show example info"
-                /* `secondary` reads the same open or shut; the panel is
-                   anchored to this button, so it should look pressed while the
-                   panel is up. */
-                className="aria-expanded:bg-primary aria-expanded:text-primary-foreground"
-              >
-                <RxInfoCircled />
-              </Button>
-            </PopoverTrigger>
-          </TooltipTrigger>
+          {/* Base UI composes through `render` rather than Radix's `asChild`:
+              each trigger is handed the element it should become, so both sets
+              of props end up on the one button.
+
+              Each wrapper stamps its own `data-slot`, and two levels of
+              `render` deep the server keeps the outermost while the client
+              keeps the innermost — a hydration mismatch on that attribute
+              alone. The outermost is the one that wins on the server, so
+              naming the element it ends up being settles it. */}
+          <TooltipTrigger
+            data-slot="button"
+            render={
+              <PopoverTrigger
+                render={
+                  <Button
+                    variant="secondary"
+                    /* `icon-lg`, not `lg`: on the icon scale that is the size —
+                       plain `lg` would add the text sizes' horizontal padding
+                       and stretch the disc into a lozenge. */
+                    size="icon-lg"
+                    aria-label="Show example info"
+                    /* `secondary` reads the same open or shut; the panel is
+                       anchored to this button, so it should look pressed while
+                       the panel is up. */
+                    className="aria-expanded:bg-primary aria-expanded:text-primary-foreground"
+                  >
+                    <RxInfoCircled />
+                  </Button>
+                }
+              />
+            }
+          />
           <TooltipContent side="bottom">info</TooltipContent>
         </Tooltip>
       </ButtonGroup>
@@ -85,15 +99,11 @@ export function Info({ example }: { example: Example }) {
       <PopoverContent
         align="end"
         sideOffset={8}
-        /* 12px of clearance, the same margin the bar itself keeps — the panel
-           is as wide as the viewport allows on a phone, so without it Radix
-           would park it flush against the edge. */
-        collisionPadding={12}
-        /* Radix measures the room left under the trigger and publishes it as
-           `--radix-popover-content-available-height`, which is what the old
-           `max-height: min(100dvh - 4.5rem, 34rem)` was approximating by
-           hand. */
-        className="max-h-(--radix-popover-content-available-height) w-[min(24rem,calc(100dvw-1.5rem))] overflow-y-auto overscroll-contain rounded-xl border border-border backdrop-blur-sm duration-200"
+        /* Base UI measures the room left under the trigger and publishes it on
+           the positioner as `--available-height`, which the panel inherits.
+           That is what the old `max-height: min(100dvh - 4.5rem, 34rem)` was
+           approximating by hand. */
+        className="max-h-(--available-height) w-[min(24rem,calc(100dvw-1.5rem))] overflow-y-auto overscroll-contain rounded-xl border border-border backdrop-blur-sm duration-200"
       >
         <PopoverHeader>
           <PopoverTitle>{example.title}</PopoverTitle>
@@ -124,8 +134,8 @@ export function Info({ example }: { example: Example }) {
           <Section title="Tags">
             <ul className="flex flex-wrap gap-1">
               {example.tags.map((tag) => (
-                <Badge key={tag} variant="secondary" asChild>
-                  <li>{tag}</li>
+                <Badge key={tag} variant="secondary" render={<li />}>
+                  {tag}
                 </Badge>
               ))}
             </ul>
@@ -136,8 +146,8 @@ export function Info({ example }: { example: Example }) {
           <Section title="Libraries">
             <ul className="flex flex-wrap gap-1">
               {libraryLabels.map((library) => (
-                <Badge key={library} variant="secondary" asChild>
-                  <li>{library}</li>
+                <Badge key={library} variant="secondary" render={<li />}>
+                  {library}
                 </Badge>
               ))}
             </ul>
