@@ -4,6 +4,11 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import {
+  DESCRIPTION_MAX_LENGTH,
+  OVERLONG,
+  UNDESCRIBED,
+} from "./description-exceptions.mjs";
 import { importedIdentifiers } from "./lib/imports.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -121,8 +126,23 @@ for (const exampleName of exampleNames) {
   if (typeof metadata.title !== "string" || metadata.title.length === 0) {
     addError(exampleName, '"title" must be a non-empty string');
   }
+  // An empty description is published, as a directory name and nothing else,
+  // so it is an error rather than a gap. The examples that cannot pass this
+  // yet are named in `bin/description-exceptions.mjs`, with the reasoning; the
+  // lists only shrink, and leaving one is what `/describe-example` does.
   if (typeof metadata.description !== "string") {
     addError(exampleName, '"description" must be a string');
+  } else if (metadata.description.trim().length === 0) {
+    if (!UNDESCRIBED.includes(exampleName)) {
+      addError(exampleName, '"description" is empty');
+    }
+  } else if (metadata.description.length > DESCRIPTION_MAX_LENGTH) {
+    if (!(exampleName in OVERLONG)) {
+      addError(
+        exampleName,
+        `"description" is ${metadata.description.length} characters, over ${DESCRIPTION_MAX_LENGTH}`,
+      );
+    }
   }
 
   for (const field of ["tags", "authors", "libraries"]) {

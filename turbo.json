@@ -62,6 +62,7 @@
       // which is the one thing the rule exists to catch.
       "inputs": [
         "bin/validate-pmndrs-metadata.mjs",
+        "bin/description-exceptions.mjs",
         "bin/lib/imports.mjs",
         "schemas/pmndrs.schema.json",
         "examples/*/{package.json,pmndrs.json}",
