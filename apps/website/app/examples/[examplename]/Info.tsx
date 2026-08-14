@@ -114,12 +114,6 @@ export function Info({ example }: { example: Example }) {
           </Section>
         )}
 
-        {example.notes && (
-          <Section title="Notes">
-            <p>{example.notes}</p>
-          </Section>
-        )}
-
         {example.tags.length > 0 && (
           <Section title="Tags">
             <ul className="flex flex-wrap gap-1">
@@ -187,14 +181,6 @@ export function Info({ example }: { example: Example }) {
                           ) : (
                             asset.license
                           ))}
-                      </ItemDescription>
-                    )}
-                    {/* Notes are the only free text here, and the stock
-                        two-line clamp is measured for a row in a list, not for
-                        a panel the reader opened to read. */}
-                    {asset.notes && (
-                      <ItemDescription className="line-clamp-none text-xs">
-                        {asset.notes}
                       </ItemDescription>
                     )}
                   </ItemContent>

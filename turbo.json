@@ -56,10 +56,16 @@
       "outputs": []
     },
     "//#lint:metadata": {
+      // `apis` is checked against what the example imports, so the sources are
+      // an input too: without them a dropped import replays a cached pass and
+      // the metadata keeps advertising an identifier that is no longer there --
+      // which is the one thing the rule exists to catch.
       "inputs": [
         "bin/validate-pmndrs-metadata.mjs",
+        "bin/lib/imports.mjs",
         "schemas/pmndrs.schema.json",
-        "examples/*/{package.json,pmndrs.json}"
+        "examples/*/{package.json,pmndrs.json}",
+        "examples/*/src/**/*.{js,jsx,ts,tsx,mjs,cjs}"
       ],
       "outputs": []
     },

@@ -137,6 +137,13 @@ export function renderExample(example) {
     example.publishedAt && `Published: ${example.publishedAt}`,
     example.authors.length && `Authors: ${example.authors.join(", ")}`,
     example.tags.length && `Tags: ${example.tags.join(", ")}`,
+    // The identifiers the technique is carried by, ordered by the metadata, not
+    // alphabetically -- the first one is the answer to "what makes this one
+    // different". They are here rather than on the index line because ~34
+    // characters x 167 lines is 6 kB on a file read at the start of every
+    // question, and by the time you are reading this document you already
+    // chose.
+    example.apis?.length && `APIs: ${example.apis.join(", ")}`,
     `Ported from: ${example.source}`,
     `Dependencies: ${Object.entries(example.dependencies)
       .map(([name, version]) => `${name}@${version}`)
@@ -156,7 +163,6 @@ export function renderExample(example) {
     `# ${example.title}`,
     example.description.trim(),
     facts.join("\n"),
-    example.notes?.trim(),
     example.assets.length &&
       `## Asset attribution\n\n${attribution(example.assets)}`,
     ...example.files.map((file) => {

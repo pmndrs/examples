@@ -86,7 +86,7 @@ Identifiers are data, not prose. Keeping them out of `description` is what makes
    node -e 'const m=require("./examples/<name>/pmndrs.json");console.log(m.description.length, "|", m.description)'
    ```
 
-   `lint:metadata` reads `schemas/pmndrs.schema.json`, so if it reports `unknown field "apis"` the schema does not carry the field yet — fix the schema, not the entry. What it can never check is whether the sentence is true or well turned. That stays human, and is why step 4 exists.
+   `lint:metadata` carries `apis ⊆ imports`, so `api "X" is not imported in src/` means the entry names something this example does not import — a typo, a prop, or a local component. What it can never check is whether the sentence is true or well turned. That stays human, and is why step 4 exists.
 
 ## `--explain`
 

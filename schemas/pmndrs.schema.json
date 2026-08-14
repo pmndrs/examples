@@ -33,6 +33,14 @@
       },
       "uniqueItems": true
     },
+    "apis": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
     "authors": {
       "type": "array",
       "items": {
@@ -44,10 +52,6 @@
     "publishedAt": {
       "type": "string",
       "format": "date"
-    },
-    "notes": {
-      "type": "string",
-      "minLength": 1
     },
     "source": {
       "type": "string",
@@ -123,10 +127,6 @@
         },
         "modified": {
           "type": "boolean"
-        },
-        "notes": {
-          "type": "string",
-          "minLength": 1
         }
       }
     }

@@ -2,7 +2,6 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Router Transitions",
   "description": "Shows how to implement routes and mount/unmount transition within the canvas using Wouter.",
-  "notes": "Updated for MeshTransmissionMaterial in 2023.",
   "tags": ["router", "transitions", "html", "transmission"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2021-04-19",

@@ -197,6 +197,36 @@ describe("lint", () => {
     });
   });
 
+  /**
+   * `apis` is checked against the identifiers the example imports, so a source
+   * file is as much an input as the metadata that names them. Cached past a
+   * dropped import, the rule stops catching the drift it exists for.
+   */
+  it("re-runs the metadata check when an example source moves", () => {
+    const before = hashOf("//#lint:metadata", LINT);
+
+    withTouched(EXAMPLE_SOURCE, () => {
+      expect(hashOf("//#lint:metadata", LINT)).not.toBe(before);
+    });
+  });
+
+  it("re-runs the metadata check when the import reader moves", () => {
+    const before = hashOf("//#lint:metadata", LINT);
+
+    withTouched("bin/lib/imports.mjs", () => {
+      expect(hashOf("//#lint:metadata", LINT)).not.toBe(before);
+    });
+  });
+
+  it("leaves the metadata check alone for the llms renderer", () => {
+    // It shares `bin/lib/`, and nothing else.
+    const before = hashOf("//#lint:metadata", LINT);
+
+    withTouched("bin/lib/render-llms.mjs", () => {
+      expect(hashOf("//#lint:metadata", LINT)).toBe(before);
+    });
+  });
+
   it("re-runs the examples pass when an example source moves", () => {
     const before = dryRun(LINT);
 

@@ -23,16 +23,15 @@ export type AssetAttribution = {
   license?: string;
   licenseUrl?: string;
   modified?: boolean;
-  notes?: string;
 };
 
 export type ExampleMetadata = {
   title: string;
   description: string;
   tags: string[];
+  apis?: string[];
   authors: string[];
   publishedAt?: string;
-  notes?: string;
   source: string;
   libraries: string[];
   assets: AssetAttribution[];

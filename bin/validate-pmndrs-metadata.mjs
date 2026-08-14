@@ -4,6 +4,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { importedIdentifiers } from "./lib/imports.mjs";
+
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const examplesDirectory = path.join(root, "examples");
 const schemaPath = path.join(root, "schemas", "pmndrs.schema.json");
@@ -44,6 +46,38 @@ function isDate(value) {
     /^\d{4}-\d{2}-\d{2}$/.test(value) &&
     !Number.isNaN(Date.parse(`${value}T00:00:00Z`))
   );
+}
+
+const SOURCE_EXTENSIONS = new Set([
+  ".ts",
+  ".tsx",
+  ".js",
+  ".jsx",
+  ".mjs",
+  ".cjs",
+]);
+
+/** Every identifier the example's own `src/` imports, across all of its files. */
+function importsOf(exampleDirectory) {
+  const identifiers = new Set();
+
+  const walk = (dir) => {
+    if (!fs.existsSync(dir)) return;
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const absolute = path.join(dir, entry.name);
+      if (entry.isDirectory()) walk(absolute);
+      else if (SOURCE_EXTENSIONS.has(path.extname(entry.name))) {
+        for (const identifier of importedIdentifiers(
+          fs.readFileSync(absolute, "utf8"),
+        )) {
+          identifiers.add(identifier);
+        }
+      }
+    }
+  };
+
+  walk(path.join(exampleDirectory, "src"));
+  return identifiers;
 }
 
 const exampleNames = fs
@@ -116,6 +150,25 @@ for (const exampleName of exampleNames) {
         exampleName,
         `library "${library}" is not listed in dependencies`,
       );
+    }
+  }
+
+  // Optional until every example carries one, but never wrong: an entry the
+  // example does not import is a name a reader would go looking for and not
+  // find. The check is local and only local -- whether drei still exports it at
+  // the pinned version is the bundler's job, and it already fails on it.
+  if (metadata.apis !== undefined) {
+    if (!isStringArray(metadata.apis)) {
+      addError(exampleName, '"apis" must contain non-empty strings');
+    } else if (hasDuplicates(metadata.apis)) {
+      addError(exampleName, '"apis" contains duplicates');
+    } else {
+      const imported = importsOf(exampleDirectory);
+      for (const api of metadata.apis) {
+        if (!imported.has(api)) {
+          addError(exampleName, `api "${api}" is not imported in src/`);
+        }
+      }
     }
   }
 

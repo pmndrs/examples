@@ -106,6 +106,14 @@ describe("summaryLine", () => {
     ).toBe("caustics · One idea, spread over lines.");
   });
 
+  it("leaves the APIs to the example's own document", () => {
+    // ~34 characters x 167 lines, on the file read at the start of every
+    // question, to say what is one fetch away once the choice is made.
+    expect(
+      summaryLine(summary({ apis: ["useMask", "MeshTransmissionMaterial"] })),
+    ).toBe("caustics");
+  });
+
   it("says nothing about size for an example that is cheap to open", () => {
     // The marker has to stay rare to mean anything: its absence is the signal
     // that a reader can open two of these without weighing the budget.
@@ -156,10 +164,24 @@ describe("renderExample", () => {
   });
 
   it("omits the facts an example does not carry", () => {
-    const text = renderExample(example({ authors: [], tags: [] }));
+    const text = renderExample(example({ authors: [], tags: [], apis: [] }));
 
     expect(text).not.toContain("Authors:");
     expect(text).not.toContain("Tags:");
+    expect(text).not.toContain("APIs:");
+  });
+
+  it("names the APIs, in the order the metadata puts them", () => {
+    // Next to the tags, which are the same thing said for a human: what this
+    // example is about, in the vocabulary of its code.
+    expect(
+      renderExample(
+        example({
+          tags: ["transmission"],
+          apis: ["useMask", "MeshTransmissionMaterial"],
+        }),
+      ),
+    ).toContain("Tags: transmission\nAPIs: useMask, MeshTransmissionMaterial");
   });
 
   it("fences each file under its own path, tagged by extension", () => {
