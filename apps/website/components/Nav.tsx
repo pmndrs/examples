@@ -821,7 +821,17 @@ export default function Nav({
                                   <Badge key={tag}>{tag}</Badge>
                                 ))}
                               </div>
-                              <ScrollBar orientation="horizontal" />
+                              {/* Radix kept the bar out of the DOM until the
+                                    pointer was over the area (`type="hover"`).
+                                    Base UI mounts it as soon as the axis
+                                    overflows and leaves it to CSS to say when
+                                    it shows, so the resting state is spelled
+                                    out here: the fade is the affordance, the
+                                    bar is for the hand already on it. */}
+                              <ScrollBar
+                                orientation="horizontal"
+                                className="opacity-0 transition-opacity duration-150 data-hovering:opacity-100 data-scrolling:opacity-100"
+                              />
                             </ScrollArea>
                           </ItemFooter>
                         )}
