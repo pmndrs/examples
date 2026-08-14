@@ -30,7 +30,11 @@ const examples = getExamples();
  */
 function bootNav(storageKey: string) {
   const params = new URLSearchParams(window.location.search);
-  const filtering = !!(params.get("q") || params.get("library"));
+  const filtering = !!(
+    params.get("q") ||
+    params.get("library") ||
+    params.get("tags")
+  );
 
   const isCollapsed = () => {
     const parts = window.location.pathname.split("/").filter(Boolean);

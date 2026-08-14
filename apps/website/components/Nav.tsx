@@ -15,15 +15,15 @@ import {
   useSyncExternalStore,
 } from "react";
 import { useParams } from "next/navigation";
-import { createSerializer, parseAsString, useQueryStates } from "nuqs";
+import {
+  createSerializer,
+  parseAsArrayOf,
+  parseAsString,
+  useQueryStates,
+} from "nuqs";
 import { type Options, useHotkeys } from "react-hotkeys-hook";
 import { useEventListener, useIsClient } from "usehooks-ts";
-import {
-  ChevronLeftIcon,
-  ListFilterIcon,
-  SearchIcon,
-  XIcon,
-} from "lucide-react";
+import { ChevronLeftIcon, ListFilterIcon, XIcon } from "lucide-react";
 
 import { getLibraryLabel, getLibraryPopularity } from "@/const/libraries";
 import { useRovingTabIndex } from "@/hooks/use-roving-tabindex";
@@ -38,15 +38,14 @@ import {
   EmptyTitle,
 } from "@/components/ui/empty";
 import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupButton,
-  InputGroupInput,
-  InputGroupText,
-} from "@/components/ui/input-group";
-import { Item, ItemFooter, ItemMedia } from "@/components/ui/item";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Skeleton } from "@/components/ui/skeleton";
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+} from "@/components/ui/combobox";
+import { InputGroupAddon, InputGroupText } from "@/components/ui/input-group";
 import {
   Select,
   SelectContent,
@@ -55,6 +54,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Item, ItemFooter, ItemMedia } from "@/components/ui/item";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Sidebar,
   SidebarContent,
@@ -82,18 +84,29 @@ const SKELETON_TAGS = [
   [80, 44, 92],
 ];
 
-/* Filters are shareable: `?q=` carries the search text, `?library=` the
-   library filter. nuqs owns the round trip — the URL *is* the state, so the
-   defaults below double as the "no filter" values and `clearOnDefault` (on by
-   default) drops the empty param rather than leaving `?q=` behind.
+/* Filters are shareable: `?q=` carries the search text, `?library=` and
+   `?tags=` the picked options. nuqs owns the round trip — the URL *is* the
+   state, so the defaults below double as the "no filter" values and
+   `clearOnDefault` (on by default) drops the empty param rather than leaving
+   `?q=` behind.
 
    Its defaults also cover what the hand-rolled version had to spell out: a
    shallow `history.replaceState` instead of a router navigation per keystroke,
-   throttled to stay under Safari's History API rate limit. */
+   throttled to stay under Safari's History API rate limit.
+
+   `?library=` keeps both its name and its labels through the move to a
+   multi-select: a list parser reads a link written when it held one value as
+   the one-element list it now is, which is a compatibility layer nobody has to
+   write, deprecate or eventually delete. */
 const filterParsers = {
   q: parseAsString.withDefault(""),
-  library: parseAsString.withDefault(""),
+  library: parseAsArrayOf(parseAsString).withDefault([]),
+  tags: parseAsArrayOf(parseAsString).withDefault([]),
 };
+
+/* The floor of the rule the two option lists are cut by; see where they are
+   derived. */
+const MIN_USAGE = 2;
 
 /* Same parsers, used to hang the active filter off every card link so it
    survives the client navigation into an example. */
@@ -308,7 +321,10 @@ export default function Nav({
   const ulRef = useRef<ElementRef<"ul">>(null);
   const [listElement, setListElement] = useState<HTMLUListElement | null>(null);
   const roving = useRovingTabIndex(ulRef);
-  const searchRef = useRef<HTMLInputElement>(null);
+  const pickedRef = useRef<ElementRef<"div">>(null);
+  const pickedRoving = useRovingTabIndex(pickedRef, {
+    orientation: "horizontal",
+  });
 
   const setListRef = useCallback((node: HTMLUListElement | null) => {
     ulRef.current = node;
@@ -317,10 +333,12 @@ export default function Nav({
 
   const [openState, setOpenState] = useState<boolean | null>(null);
   const ready = useIsClient();
+  const [comboOpen, setComboOpen] = useState(false);
   const [libraryOpen, setLibraryOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
+  const fieldRef = useRef<ElementRef<"div">>(null);
 
-  const [{ q: search, library }, setFilters] = useQueryStates(filterParsers);
+  const [{ q: search, library, tags }, setFilters] =
+    useQueryStates(filterParsers);
   const setSearch = useCallback(
     (value: string | ((current: string) => string)) =>
       setFilters((current) => ({
@@ -328,12 +346,45 @@ export default function Nav({
       })),
     [setFilters],
   );
+
+  const setTags = useCallback(
+    (next: string[]) => setFilters({ tags: next }),
+    [setFilters],
+  );
   const setLibrary = useCallback(
-    (value: string) => setFilters({ library: value }),
+    (next: string[]) => setFilters({ library: next }),
     [setFilters],
   );
 
-  const searchVisible = searchOpen || search !== "";
+  const clearFilters = useCallback(
+    () => setFilters({ q: "", library: [], tags: [] }),
+    [setFilters],
+  );
+
+  /* Bound once here rather than spelled out at the card links below, where
+     `tags` is the example's own and would quietly win. */
+  const filters = useMemo(
+    () => ({ q: search, library, tags }),
+    [library, search, tags],
+  );
+
+  /* Both vocabularies in the order they are offered, libraries first, so the
+     row underneath the field reads the same way round as the two controls
+     above it. */
+  const picked = useMemo(
+    () => [
+      ...library.map((value) => ({ kind: "library" as const, value })),
+      ...tags.map((value) => ({ kind: "tags" as const, value })),
+    ],
+    [library, tags],
+  );
+  const unpick = useCallback(
+    (kind: "library" | "tags", value: string) =>
+      setFilters((current) => ({
+        [kind]: current[kind].filter((picked) => picked !== value),
+      })),
+    [setFilters],
+  );
 
   const paintedCollapsed = useSyncExternalStore(
     subscribeToPaintedCollapsed,
@@ -359,43 +410,75 @@ export default function Nav({
 
      Plain state, not `setOpen`: following someone's filter link should not
      overwrite this visitor's stored collapse preference. */
-  const hasFilters = search !== "" || library !== "";
+  const hasFilters = search !== "" || library.length > 0 || tags.length > 0;
   const [filtersRevealed, setFiltersRevealed] = useState(hasFilters);
   if (hasFilters && !filtersRevealed) {
     setFiltersRevealed(true);
     setOpenState(true);
-    if (search) setSearchOpen(true);
   }
 
-  const libraryOptions = useMemo(() => {
-    const popularityByLabel = new Map<string, number>();
-    const usageByLabel = new Map<string, number>();
-    const libraries = new Set(examples.flatMap((example) => example.libraries));
+  /* Two vocabularies, two controls, one rule. An option earns its place by
+     partitioning the corpus: a value carried by one example alone leaves out
+     nothing worth leaving out, and a value carried by all of them leaves out
+     nothing at all. Both ends are the same defect, so both go — which is why
+     `@react-three/fiber`, on every example here, is in neither list without
+     being named in either. Read off the corpus rather than written down, it
+     cannot go stale.
 
-    libraries.forEach((exampleLibrary) => {
-      const label = getLibraryLabel(exampleLibrary);
-      popularityByLabel.set(
-        label,
-        (popularityByLabel.get(label) ?? 0) +
-          getLibraryPopularity(exampleLibrary),
-      );
-    });
+     It governs what is *offered*, never what is *accepted*: `filteredExamples`
+     honours a value that has dropped out of a list, so a link shared before it
+     dropped still narrows to what it said it would. */
+  const { tagOptions, libraryOptions, counts } = useMemo(() => {
+    const usage = new Map<string, number>();
+    const bump = (value: string) =>
+      usage.set(value, (usage.get(value) ?? 0) + 1);
 
     examples.forEach((example) => {
-      const labels = new Set(example.libraries.map(getLibraryLabel));
-      labels.forEach((label) => {
-        usageByLabel.set(label, (usageByLabel.get(label) ?? 0) + 1);
-      });
+      new Set(example.tags).forEach(bump);
+      new Set(example.libraries.map(getLibraryLabel)).forEach(bump);
     });
 
-    return Array.from(popularityByLabel)
-      .sort(
-        ([labelA, popularityA], [labelB, popularityB]) =>
-          (usageByLabel.get(labelB) ?? 0) - (usageByLabel.get(labelA) ?? 0) ||
-          popularityB - popularityA ||
-          labelA.localeCompare(labelB),
-      )
-      .map(([label]) => label);
+    /* A label can stand for several packages — the three `@react-spring/*` are
+       one "React Spring" — so its pull is theirs added up. */
+    const popularity = new Map<string, number>();
+    new Set(examples.flatMap((example) => example.libraries)).forEach(
+      (exampleLibrary) => {
+        const label = getLibraryLabel(exampleLibrary);
+        popularity.set(
+          label,
+          (popularity.get(label) ?? 0) + getLibraryPopularity(exampleLibrary),
+        );
+      },
+    );
+
+    const partitions = (value: string) => {
+      const count = usage.get(value) ?? 0;
+      return count >= MIN_USAGE && count < examples.length;
+    };
+    const by = (value: string) => usage.get(value) ?? 0;
+
+    const labels = new Set(
+      examples.flatMap((example) => example.libraries.map(getLibraryLabel)),
+    );
+    const tagNames = new Set(examples.flatMap((example) => example.tags));
+
+    return {
+      counts: usage,
+      tagOptions: Array.from(tagNames)
+        .filter(partitions)
+        .sort((a, b) => by(b) - by(a) || a.localeCompare(b)),
+      /* Libraries break their usage ties on npm popularity, which is the one
+         thing the corpus cannot say and the reason that table exists. Tags
+         have no such second opinion. */
+      libraryOptions: Array.from(labels)
+        .filter(partitions)
+        .sort(
+          (a, b) =>
+            by(b) - by(a) ||
+            (popularity.get(b) ?? 0) - (popularity.get(a) ?? 0) ||
+            a.localeCompare(b),
+        ),
+    };
   }, [examples]);
 
   const filteredExamples = useMemo(() => {
@@ -407,14 +490,13 @@ export default function Nav({
 
     return examples
       .filter((example) => {
-        if (
-          library &&
-          !example.libraries.some(
-            (exampleLibrary) => getLibraryLabel(exampleLibrary) === library,
-          )
-        ) {
+        /* Every chip narrows, within a vocabulary as much as across the two:
+           one rule, so the count under the field only ever falls as chips are
+           added. `Cannon` + `Rapier` is empty, and says so. */
+        const labels = example.libraries.map(getLibraryLabel);
+        if (!library.every((wanted) => labels.includes(wanted))) return false;
+        if (!tags.every((wanted) => example.tags.includes(wanted)))
           return false;
-        }
 
         if (terms.length === 0) return true;
 
@@ -434,27 +516,26 @@ export default function Nav({
       .sort(
         (exampleA, exampleB) => Number(exampleB.isNew) - Number(exampleA.isNew),
       );
-  }, [examples, library, search]);
+  }, [examples, library, search, tags]);
   const nearbyExamples = useNearbyExamples(listElement, filteredExamples);
 
+  /* Reached through the row that holds it rather than by a ref of its own:
+     the field is the registry's, rendered a couple of wrappers below this call
+     site, and a `ref` handed down that far arrives empty. The row is ours, and
+     the only `input` in it is this one. Same reasoning as
+     `use-roving-tabindex`, which reads the DOM for the same reason. */
   const focusSearch = useCallback(
     (select = false) => {
       setOpen(true);
-      setSearchOpen(true);
 
       requestAnimationFrame(() => {
-        searchRef.current?.focus();
-        if (select) searchRef.current?.select();
+        const field = fieldRef.current?.querySelector("input");
+        field?.focus();
+        if (select) field?.select();
       });
     },
     [setOpen],
   );
-
-  const dismissSearch = useCallback(() => {
-    setSearch("");
-    setSearchOpen(false);
-    searchRef.current?.blur();
-  }, [setSearch]);
 
   /* The rail's keyboard layer, one hotkey at a time rather than a single
      window listener with a ladder of early returns: every branch of it reads
@@ -466,7 +547,13 @@ export default function Nav({
      `enabled: !libraryOpen` is the ladder's first rung kept whole: the open
      dropdown is portalled out of the nav, so `activeElement` is nowhere near
      the trigger and the type-to-search below would eat the list's own
-     typeahead. It owns the keyboard while it is open. */
+     typeahead. It owns the keyboard while it is open.
+
+     The combobox gets no such rung, because it is open the entire time
+     someone is typing into it rather than by exception, and the same guard
+     would switch the layer off at the first keystroke. It needs none: an open
+     popup means its input has focus, and the focus test below already stands
+     the type-ahead down for any input. */
   const shortcut = {
     enabled: !libraryOpen,
     enableOnFormTags: true,
@@ -479,9 +566,13 @@ export default function Nav({
     shortcut,
   );
 
-  useHotkeys("escape", dismissSearch, {
+  /* Escape in two beats, and this is the second one. Base UI owns the first:
+     while the popup is open the key closes it and never reaches here, so the
+     one press that dismisses a list cannot also throw away what the list was
+     filtering. Closed and filtered, the same key clears. */
+  useHotkeys("escape", clearFilters, {
     ...shortcut,
-    enabled: !libraryOpen && searchVisible,
+    enabled: !comboOpen && !libraryOpen && hasFilters,
   });
 
   /* Type-to-search, which unlike the shortcuts above must not fire while
@@ -598,86 +689,135 @@ export default function Nav({
             to be set on the two children: `className` here lands on the fixed
             container, and the panel's background is painted a level deeper. */}
         <SidebarHeader className="px-4">
-          {/* Both branches read the URL, so on a filtered arrival both are
-              wrong until React knows it: the row would paint the library
-              filter unset, or paint the dropdown where the search field
-              belongs. `display: contents` so standing in front of them
-              changes nothing about how they lay out. */}
-          <Skeleton id="nav-filters-skeleton" className="h-9 rounded-full" />
+          {/* The field reads the URL, so on a filtered arrival it is wrong
+              until React knows it: the row would paint with neither the chips
+              nor the text it was linked with. One line, which is what an
+              unfilled field measures — a link carrying enough chips to wrap
+              lands taller than this, and the top of the list moves once as it
+              does. `display: contents` so standing in front of the real thing
+              changes nothing about how it lays out. */}
+          <Skeleton id="nav-filters-skeleton" className="h-9 rounded-4xl" />
           <div id="nav-filters" className="contents">
-            {searchVisible ? (
-              <InputGroup className="animate-in border-border bg-input shadow-lg duration-200 fade-in slide-in-from-top-1">
-                {/* Addons come after the control in the DOM — they focus it on
-                  click and take their visual side from `align`. */}
-                <InputGroupInput
-                  ref={searchRef}
-                  type="search"
-                  value={search}
-                  onChange={(event) => setSearch(event.target.value)}
-                  onFocus={() => setSearchOpen(true)}
-                  placeholder="Search examples"
-                  aria-label="Search examples"
+            <div ref={fieldRef} className="flex items-center gap-2">
+              {/* Libraries keep a control of their own rather than joining the
+                  list below: two vocabularies in one popup is two lists to
+                  scroll past, and the shorter of them is the one nobody types.
+                  Icon and count only — the rail is 200px, and what is picked
+                  is named in the row underneath. */}
+              <Select
+                multiple
+                open={libraryOpen}
+                onOpenChange={setLibraryOpen}
+                value={library}
+                onValueChange={(next: string[]) => setLibrary(next)}
+              >
+                <SelectTrigger
+                  className="shrink-0 gap-1 border-border bg-input px-2.5 shadow-lg"
+                  aria-label="Filter examples by library"
+                >
+                  <ListFilterIcon className="text-muted-foreground" />
+                  <SelectValue>
+                    {(value: string[]) =>
+                      value.length > 0 ? (
+                        <span className="text-xs tabular-nums">
+                          {value.length}
+                        </span>
+                      ) : null
+                    }
+                  </SelectValue>
+                </SelectTrigger>
+                <SelectContent className="backdrop-blur-sm">
+                  <SelectGroup>
+                    {libraryOptions.map((option) => (
+                      <SelectItem key={option} value={option}>
+                        <span className="min-w-0 flex-1 truncate">
+                          {option}
+                        </span>
+                        <span className="text-xs text-muted-foreground tabular-nums">
+                          {counts.get(option)}
+                        </span>
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+              {/* Picked tags are shown in the row below rather than inside the
+                  field, so the field is one line at every filter it can hold —
+                  which is what the pre-paint skeleton in front of it measures,
+                  and what keeps a pill radius honest. */}
+              <Combobox
+                multiple
+                items={tagOptions}
+                value={tags}
+                onValueChange={(next: string[]) => setTags(next)}
+                inputValue={search}
+                /* Base UI treats the typed text as the popup's own scratch
+                   space and wipes it on close. Here it is a filter in its own
+                   right and it lives in the URL, so that one write is refused
+                   and every other reason is let through. */
+                onInputValueChange={(next: string, details) => {
+                  if (details.reason === "input-clear") return details.cancel();
+                  setSearch(next);
+                }}
+                open={comboOpen}
+                onOpenChange={(next: boolean) => setComboOpen(next)}
+              >
+                <ComboboxInput
+                  showTrigger={false}
+                  placeholder="Filter examples"
+                  aria-label="Filter examples"
                   aria-controls="example-list"
                   aria-describedby="search-results"
-                  className="[&::-webkit-search-cancel-button]:hidden"
-                />
-                <InputGroupAddon>
-                  <SearchIcon />
-                </InputGroupAddon>
-                <InputGroupAddon align="inline-end">
-                  <InputGroupText className="text-xs tabular-nums">
-                    {filteredExamples.length}
-                  </InputGroupText>
-                  <InputGroupButton
-                    size="icon-xs"
-                    onClick={dismissSearch}
-                    aria-label="Close search"
-                  >
-                    <XIcon />
-                  </InputGroupButton>
-                </InputGroupAddon>
-              </InputGroup>
-            ) : (
-              <div className="flex items-center gap-2">
-                <Select
-                  open={libraryOpen}
-                  onOpenChange={setLibraryOpen}
-                  value={library || null}
-                  onValueChange={(value) => setLibrary(value ?? "")}
-                >
-                  <SelectTrigger
-                    className="min-w-0 flex-1 border-border bg-input shadow-lg"
-                    aria-label="Filter examples by library"
-                  >
-                    <ListFilterIcon className="text-muted-foreground" />
-                    <SelectValue placeholder="All libraries" />
-                  </SelectTrigger>
-                  <SelectContent className="backdrop-blur-sm">
-                    <SelectGroup>
-                      {/* `null` is Base UI's cleared value, so the option that
-                        drops the filter is the one that carries it and the
-                        state stays "". */}
-                      <SelectItem value={null}>All libraries</SelectItem>
-                      {libraryOptions.map((option) => (
-                        <SelectItem key={option} value={option}>
-                          {option}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="icon"
-                  onClick={() => focusSearch()}
-                  aria-label="Search examples"
                   aria-keyshortcuts="Meta+F Control+F Meta+K Control+K"
-                  title="Search examples (⌘F)"
-                  className="bg-input shadow-lg"
+                  className="min-w-0 flex-1 border-border bg-input shadow-lg"
                 >
-                  <SearchIcon />
-                </Button>
+                  <InputGroupAddon align="inline-end">
+                    <InputGroupText className="text-xs tabular-nums">
+                      {filteredExamples.length}
+                    </InputGroupText>
+                  </InputGroupAddon>
+                </ComboboxInput>
+                <ComboboxContent className="backdrop-blur-sm">
+                  <ComboboxEmpty>
+                    Nothing in the list says that — filtering on the text alone.
+                  </ComboboxEmpty>
+                  <ComboboxList>
+                    {(tag: string) => (
+                      <ComboboxItem key={tag} value={tag}>
+                        <span className="min-w-0 flex-1 truncate">{tag}</span>
+                        <span className="text-xs text-muted-foreground tabular-nums">
+                          {counts.get(tag)}
+                        </span>
+                      </ComboboxItem>
+                    )}
+                  </ComboboxList>
+                </ComboboxContent>
+              </Combobox>
+            </div>
+            {/* Everything picked, from either control, in one row: the Select
+                is an icon and a number, so this is the only place that says
+                which libraries are on. Its own roving tabindex — a row that
+                grows with the filter would otherwise grow the site's tab
+                sequence with it. */}
+            {picked.length > 0 && (
+              <div
+                ref={pickedRef}
+                className="flex flex-wrap gap-1"
+                {...pickedRoving}
+              >
+                {picked.map(({ kind, value }) => (
+                  <Badge key={`${kind}:${value}`} className="ps-2 pe-1">
+                    {value}
+                    <button
+                      type="button"
+                      onClick={() => unpick(kind, value)}
+                      aria-label={`Remove ${value}`}
+                      className="ms-0.5 rounded-full p-0.5 opacity-50 transition-opacity hover:opacity-100"
+                    >
+                      <XIcon className="size-3" />
+                    </button>
+                  </Badge>
+                ))}
               </div>
             )}
           </div>
@@ -759,10 +899,10 @@ export default function Nav({
                                across this navigation, but the URL is the state
                                now, so a bare `/examples/<name>` would clear
                                it. */
-                            href={serializeFilters(`/examples/${name}`, {
-                              q: search,
-                              library,
-                            })}
+                            href={serializeFilters(
+                              `/examples/${name}`,
+                              filters,
+                            )}
                             aria-label={title}
                             aria-current={
                               examplename === name ? "page" : undefined
@@ -849,10 +989,7 @@ export default function Nav({
                   type="button"
                   variant="outline"
                   size="sm"
-                  onClick={() => {
-                    dismissSearch();
-                    setLibrary("");
-                  }}
+                  onClick={clearFilters}
                 >
                   Clear filters
                 </Button>
