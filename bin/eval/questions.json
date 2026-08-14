@@ -1,0 +1,86 @@
+[
+  {
+    "question": "how do I do refractive glass?",
+    "expected": ["diamond-refraction", "transparent-aesop-bottles"]
+  },
+  {
+    "question": "I want a glass tank with objects visible inside it, without the transparency sorting falling apart. Which example shows that?",
+    "expected": ["aquarium"]
+  },
+  {
+    "question": "how do I blur whatever is behind a translucent panel, like frosted glass?",
+    "expected": ["frosted-glass"]
+  },
+  {
+    "question": "how do I cut a hole in the screen so that only what is inside it draws?",
+    "expected": ["stencil-mask", "inverted-stencil-buffer"]
+  },
+  {
+    "question": "how do I throw caustics from a glass object onto the floor under it?",
+    "expected": ["caustics"]
+  },
+  {
+    "question": "how do I let the camera travel through a doorway into the scene on the other side?",
+    "expected": ["enter-portals", "pass-through-portals"]
+  },
+  {
+    "question": "how do I render a second live scene onto a screen inside my scene?",
+    "expected": ["drei-rendertexture", "monitors"]
+  },
+  {
+    "question": "how do I add a third-person character controller with keyboard movement and a camera that follows?",
+    "expected": ["ecctrl-fisheye"]
+  },
+  {
+    "question": "clicking a part of my model should outline it and move the camera to frame it. Which example does that?",
+    "expected": ["faucets-select-highlight"]
+  },
+  {
+    "question": "how do I make my HDRI environment act as the ground the model stands on, instead of just a backdrop?",
+    "expected": ["envmap-ground-projection", "ground-projected-envmaps-lamina"]
+  },
+  {
+    "question": "how do I cast a patterned shadow from a spot light, like leaves moving over a wall?",
+    "expected": ["spotlight-shadows"]
+  },
+  {
+    "question": "my GLTF has several animation clips and I need to cross-fade between them. Which example shows that?",
+    "expected": ["gltf-animations", "gltf-animations-re-used"]
+  },
+  {
+    "question": "how do I build a product configurator where the user swaps colours and materials on a model?",
+    "expected": ["shoe-configurator", "t-shirt-configurator"]
+  },
+  {
+    "question": "my HTML labels show through the geometry in front of them. How do I occlude them?",
+    "expected": ["html-markers", "mixing-html-and-webgl-w-occlusion"]
+  },
+  {
+    "question": "how do I drive the camera along a path authored in Blender as the page scrolls?",
+    "expected": ["camera-scroll"]
+  },
+  {
+    "question": "how do I draw thousands of copies of one mesh, each with its own colour?",
+    "expected": ["instances", "instanced-vertex-colors"]
+  },
+  {
+    "question": "how do I subtract one mesh from another to get a boolean cut?",
+    "expected": [
+      "csg-house",
+      "csg-operations-rapier-physics",
+      "csg-bunny-usegroups"
+    ]
+  },
+  {
+    "question": "how do I make a car you can actually drive around, with suspension and physics?",
+    "expected": ["racing-game"]
+  },
+  {
+    "question": "how do I read the frequency spectrum of a track and drive the scene from it?",
+    "expected": ["simple-audio-analyser", "audio-analyser"]
+  },
+  {
+    "question": "I have a glass ornament model and want it bloomed and colour-graded through a LUT. Which example stages that?",
+    "expected": ["glass-flower"]
+  }
+]
