@@ -45,7 +45,6 @@ import {
   InputGroupText,
 } from "@/components/ui/input-group";
 import { Item, ItemFooter, ItemMedia } from "@/components/ui/item";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   Select,
@@ -809,20 +808,25 @@ export default function Nav({
                         )}
                         {renderDetails && tags.length > 0 && (
                           <ItemFooter className="absolute inset-x-0 bottom-0">
-                            {/* Same fade as the example list, on the other axis.
-                                  It has to be aimed at the viewport: `ScrollArea`
-                                  puts its `className` on the root, and the root is
-                                  not what scrolls. */}
-                            <ScrollArea className="w-full *:data-[slot=scroll-area-viewport]:scroll-fade-x">
-                              {/* Padding sits inside the viewport so the
+                            {/* A plain scroller, not `ScrollArea`. The fade is
+                                  driven by `animation-timeline: scroll(self)`,
+                                  which binds to whatever is a scroll container
+                                  when the style first resolves — and Base UI's
+                                  viewport owns its own `overflow`, so the
+                                  timeline lands inactive and the strip loses
+                                  its edges. Overflow declared in CSS is there
+                                  from the first frame. The bar the component
+                                  brought was permanently visible here anyway,
+                                  where the fade is what says "there is more". */}
+                            <div className="w-full scroll-fade-x [scrollbar-width:none] overflow-x-auto [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+                              {/* Padding sits inside the scroller so the
                                     scrollable strip itself runs edge to edge. */}
                               <div className="flex w-max gap-1 p-1.5">
                                 {tags.slice(0, MAX_TAGS).map((tag) => (
                                   <Badge key={tag}>{tag}</Badge>
                                 ))}
                               </div>
-                              <ScrollBar orientation="horizontal" />
-                            </ScrollArea>
+                            </div>
                           </ItemFooter>
                         )}
                       </Item>
