@@ -1,8 +1,9 @@
 {
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Caustics",
-  "description": "",
+  "description": "Refraction baked from the light’s point of view into a photon-density map, projected additively onto a ground plane.",
   "tags": ["transmission"],
+  "apis": ["Caustics", "MeshTransmissionMaterial", "AccumulativeShadows"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2023-01-09",
   "source": "https://codesandbox.io/s/szj6p7",

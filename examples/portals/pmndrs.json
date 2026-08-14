@@ -1,8 +1,9 @@
 {
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Portals",
-  "description": "",
+  "description": "The frame masks rather than displays — each world is sampled by screen position, so parallax is real and they nest.",
   "tags": [],
+  "apis": ["MeshPortalMaterial", "Environment"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2023-06-05",
   "source": "https://codesandbox.io/s/ik11ln",

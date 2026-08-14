@@ -41,25 +41,27 @@
 export const DESCRIPTION_MAX_LENGTH = 120;
 
 //
-// Examples that ship `"description": ""`. Thirty-three of the hundred and
+// Examples that ship `"description": ""`. Thirty-one of the hundred and
 // seventy; the rest run to a median of 56 characters.
 //
 // Nothing groups them. They are not the old examples, or the small ones, or
-// the ones nobody looks at -- `caustics` and `portals` are here, and
-// `aquarium` was until it became the first entry this list lost. The field was
-// simply never required to hold anything, so for these it never got anything.
+// the ones nobody looks at -- `caustics` and `portals` sat here until the
+// rollout reached them, and `aquarium` until it became the first entry this
+// list lost. The field was simply never required to hold anything, so for
+// these it never got anything.
 //
 // It started at forty. `aquarium` left it first, then the six the pilot of
 // #198 drew from it -- `ecctrl-fisheye`, `glass-flower`,
 // `pass-through-portals`, `react-ellipsecurve`,
 // `ssgi-spheres-with-rapier-physics` and `water-shader`, chosen for what they
-// would break rather than for being easy to write.
+// would break rather than for being easy to write. `caustics` and `portals`
+// are the first two of the rollout proper (#216); from here the list only
+// shrinks, an example at a time, until it is empty and this file goes with it.
 //
 export const UNDESCRIBED = [
   "bloom-hdr-workflow-gltf",
   "cards",
   "cards-with-border-radius",
-  "caustics",
   "csg-bunny-usegroups",
   "csg-house",
   "csg-operations-rapier-physics",
@@ -83,7 +85,6 @@ export const UNDESCRIBED = [
   "pairing-threejs-to-ui",
   "pmndrs-vercel",
   "portal-shapes",
-  "portals",
   "rapier-physics",
   "shopping",
   "stage-presets-gltfjsx",
