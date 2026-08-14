@@ -66,3 +66,11 @@ default because it is what the gateway's free tier serves — the hosted Anthrop
 and OpenAI models need credits on the workspace. With credits, pass
 `--model anthropic/claude-opus-5` and take a fresh baseline before comparing
 against it; do not read a run on one model against a number from another.
+
+## This file is temporary
+
+It records one run of a harness that is itself scaffolding. When every example
+carries a description, an `apis` list and an explainer, `bin/eval.mjs` and these
+records go, and `questions.json` stays. The numbers will have done their work by
+then: they exist to decide whether the rewrite is worth continuing, not to be
+kept as a score.

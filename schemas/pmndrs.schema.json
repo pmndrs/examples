@@ -23,6 +23,7 @@
       "minLength": 1
     },
     "description": {
+      "description": "One English sentence, at most 120 characters, naming the technique rather than the code. Prose only -- identifiers belong in `apis`. Say nothing the index line already says: it prints the directory name, the non-implied libraries, the tags and a size marker around this sentence, and fiber and drei are implied everywhere. A technique carried by a prop, a namespace import or a renamed default import cannot go in `apis`, and is said here instead. `bin/validate-pmndrs-metadata.mjs` enforces the bound and the non-emptiness; whether the sentence is true and well turned is a human's call.",
       "type": "string"
     },
     "tags": {
@@ -34,6 +35,7 @@
       "uniqueItems": true
     },
     "apis": {
+      "description": "The identifiers the technique is carried by -- typically two or three, ordered with the load-bearing one first. Imported identifiers only, and only ones this example's own `src/` imports, which `lint:metadata` checks. What every example imports (`Canvas`, `useFrame`, `OrbitControls`, `THREE`) discriminates nothing and stays out. An empty list is a finding, not a failure: some techniques live in a prop or a shader, and the description carries them alone.",
       "type": "array",
       "items": {
         "type": "string",

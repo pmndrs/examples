@@ -76,3 +76,6 @@ Expect ±1, and expect it to take fifteen to twenty minutes: the gateway's free
 tier answers a handful of questions and then rate-limits, and each 429 costs a
 60-second backoff. A workspace with credits never waits. The score is only
 comparable within one model — see the last section of `baseline.md`.
+
+This file is temporary, on the same terms as `baseline.md`: it goes when
+`bin/eval.mjs` goes, and the decision it argues for outlives it in #198.

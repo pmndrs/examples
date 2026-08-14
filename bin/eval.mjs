@@ -34,6 +34,13 @@
  * `vercel env pull` writes into the gitignored `.env.local`. That token lasts
  * twelve hours, so a 401 here usually means pulling it again rather than
  * anything being wrong.
+ *
+ * **Delete this file when the rewrite is done** -- when every example carries a
+ * description, an `apis` list and an explainer. It is scaffolding: it never runs
+ * in CI, it costs a key and twenty minutes, and its whole purpose is to say
+ * whether a finite piece of work was worth doing. Keep `bin/eval/questions.json`
+ * and drop the rest, including the recorded runs: the twenty hand-written
+ * answers are what cost something to produce and what a future run would need.
  */
 
 import fs from "node:fs";

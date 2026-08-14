@@ -93,3 +93,11 @@ Identifiers are data, not prose. Keeping them out of `description` is what makes
 The long-form explainer, in the example's own `README.md`, plus its glossary in `CONTEXT.md`. It does not read the source and write: it runs `teach` in sub-agents first, and only its distillation comes back. The orchestration, the mission it has to supply, and the writing contract are in [explain.md](./explain.md).
 
 Both modes live in one skill because both enforce contracts that must not drift apart — the one-liner is the compression of the same understanding the explainer spends 400 words on, and writing them from two separate readings is how they end up describing two different demos.
+
+## When this file goes away
+
+This skill is scaffolding for a finite job: every example in the gallery carrying a `description`, an `apis` list and a `README.md` explainer. **When that is done, delete it** — along with `bin/eval.mjs` and the measurement records under `bin/eval/`, keeping only `questions.json`, whose twenty hand-written answers are the expensive part and the only part worth a second run.
+
+What survives is what runs on its own and fails loudly: `apis ⊆ imports`, the description bound and non-emptiness, and the backticked-identifiers check on `README.md` and `CONTEXT.md` — all in `lint:metadata`. The `description` and `apis` contracts above are stated again, in one paragraph each, on those two fields in `schemas/pmndrs.schema.json`, which is where the author of a *new* example meets them and which outlives this file.
+
+A skill nobody runs is a document that rots while claiming to be a tool. This one has a finish line; the note is here so that reaching it is not mistaken for a reason to keep it.
