@@ -10,9 +10,9 @@ Two fields of one example's `pmndrs.json`, written by reading its source: the on
 
 ## Why this is a skill
 
-The gallery publishes an agent-readable surface — `llms.txt`, `/examples/<name>.md`, `/examples/<name>.json`, built by `bin/build-llms.mjs` and served both over the pmndrs docs MCP server and by `rel="alternate"` on every example page. The pipeline is sound. The content it carries is not: **40 of the 170 descriptions are empty**, and the other 130 run to a median of **56 characters** that generally name no technique.
+The gallery publishes an agent-readable surface — `llms.txt`, `/examples/<name>.md`, `/examples/<name>.json`, built by `bin/build-llms.mjs` and served both over the pmndrs docs MCP server and by `rel="alternate"` on every example page. The pipeline is sound. The content it carries is not: **39 of the 170 descriptions are empty**, and the rest run to a median of **56 characters** that generally name no technique.
 
-`aquarium` is the case that names the problem. It ships an empty description and the single tag `transmission`, while what actually makes the demo work is a **stencil mask** — `useMask` plus a backside `MeshTransmissionMaterial` — named nowhere. An agent asking "how do I do refractive glass" cannot tell it from the other 169, and having opened it, pays full token price to rediscover the trick by reading 200 lines of TSX.
+`aquarium` is the case that names the problem, and the one this skill has been run on. It shipped an empty description and the single tag `transmission`, while what actually makes the demo work is a **stencil mask** — `useMask` plus a backside `MeshTransmissionMaterial` — named nowhere. An agent asking "how do I do refractive glass" cannot tell it from the other 169, and having opened it, pays full token price to rediscover the trick by reading 200 lines of TSX.
 
 Fixing that is 170 acts of judgement. The two contracts below are what keeps those 170 acts consistent, which is why they live in this file rather than in a reviewer's memory.
 

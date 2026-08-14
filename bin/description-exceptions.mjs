@@ -41,16 +41,15 @@
 export const DESCRIPTION_MAX_LENGTH = 120;
 
 //
-// Examples that ship `"description": ""`. Forty of the hundred and seventy, on
-// 2026-08-14; the other hundred and thirty run to a median of 56 characters.
+// Examples that ship `"description": ""`. Thirty-nine of the hundred and
+// seventy; the rest run to a median of 56 characters.
 //
 // Nothing groups them. They are not the old examples, or the small ones, or
-// the ones nobody looks at -- `aquarium`, `caustics` and `portals` are here.
-// The field was simply never required to hold anything, so for these forty it
-// never got anything.
+// the ones nobody looks at -- `caustics` and `portals` are here, and
+// `aquarium` was until it became the first entry this list lost. The field was
+// simply never required to hold anything, so for these it never got anything.
 //
 export const UNDESCRIBED = [
-  "aquarium",
   "bloom-hdr-workflow-gltf",
   "cards",
   "cards-with-border-radius",

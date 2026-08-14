@@ -9,6 +9,11 @@ import {
   OVERLONG,
   UNDESCRIBED,
 } from "./description-exceptions.mjs";
+import {
+  backtickedIdentifiers,
+  explainerOf,
+  identifiersIn,
+} from "./lib/explainer.mjs";
 import { importedIdentifiers } from "./lib/imports.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -62,27 +67,90 @@ const SOURCE_EXTENSIONS = new Set([
   ".cjs",
 ]);
 
-/** Every identifier the example's own `src/` imports, across all of its files. */
-function importsOf(exampleDirectory) {
-  const identifiers = new Set();
+/**
+ * What the prose is checked against, which is wider than what the imports are
+ * read from: a shader uniform or a class name is as much a thing an explainer
+ * can name as a drei export.
+ */
+const TEXT_EXTENSIONS = new Set([
+  ...SOURCE_EXTENSIONS,
+  ".css",
+  ".json",
+  ".glsl",
+  ".vert",
+  ".frag",
+]);
+
+/** Every file under the example's `src/`, at any depth, with those extensions. */
+function sourceFiles(exampleDirectory, extensions) {
+  const files = [];
 
   const walk = (dir) => {
     if (!fs.existsSync(dir)) return;
     for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
       const absolute = path.join(dir, entry.name);
       if (entry.isDirectory()) walk(absolute);
-      else if (SOURCE_EXTENSIONS.has(path.extname(entry.name))) {
-        for (const identifier of importedIdentifiers(
-          fs.readFileSync(absolute, "utf8"),
-        )) {
-          identifiers.add(identifier);
-        }
-      }
+      else if (extensions.has(path.extname(entry.name))) files.push(absolute);
     }
   };
 
   walk(path.join(exampleDirectory, "src"));
+  return files;
+}
+
+/** Every identifier the example's own `src/` imports, across all of its files. */
+function importsOf(exampleDirectory) {
+  const identifiers = new Set();
+
+  for (const file of sourceFiles(exampleDirectory, SOURCE_EXTENSIONS)) {
+    for (const identifier of importedIdentifiers(
+      fs.readFileSync(file, "utf8"),
+    )) {
+      identifiers.add(identifier);
+    }
+  }
+
   return identifiers;
+}
+
+/**
+ * Every identifier-shaped word anywhere in the example's `src/`, comments and
+ * strings included. Looser than `importsOf` on purpose -- see the rule below.
+ */
+function vocabularyOf(exampleDirectory) {
+  const vocabulary = new Set();
+
+  for (const file of sourceFiles(exampleDirectory, TEXT_EXTENSIONS)) {
+    for (const word of identifiersIn(fs.readFileSync(file, "utf8"))) {
+      vocabulary.add(word);
+    }
+  }
+
+  return vocabulary;
+}
+
+/**
+ * The two documents an example can carry prose in: the explainer under the
+ * badges in `README.md`, and the glossary in `CONTEXT.md`. Both are optional,
+ * and on most examples neither exists.
+ */
+function proseOf(exampleDirectory) {
+  const documents = [];
+
+  const readmePath = path.join(exampleDirectory, "README.md");
+  if (fs.existsSync(readmePath)) {
+    // Only what is under the badges: the header is generated scaffolding, and
+    // its `degit` line names the repository, not this example's source.
+    const explainer = explainerOf(fs.readFileSync(readmePath, "utf8"));
+    if (explainer) documents.push(["README.md", explainer]);
+  }
+
+  const contextPath = path.join(exampleDirectory, "CONTEXT.md");
+  if (fs.existsSync(contextPath)) {
+    documents.push(["CONTEXT.md", fs.readFileSync(contextPath, "utf8")]);
+  }
+
+  return documents;
 }
 
 const exampleNames = fs
@@ -187,6 +255,32 @@ for (const exampleName of exampleNames) {
       for (const api of metadata.apis) {
         if (!imported.has(api)) {
           addError(exampleName, `api "${api}" is not imported in src/`);
+        }
+      }
+    }
+  }
+
+  // Prose that explains code goes stale on its own, and the obvious tripwire --
+  // a hash of the source, stored next to the explainer -- would have fired on
+  // 161 examples the day a prettier hook landed, training the reflex of
+  // re-stamping without reading. This one fires on renames instead: every
+  // identifier the prose puts in backticks has to still appear somewhere in the
+  // example's `src/`. `useMask` disappears in a drei migration and it breaks on
+  // precisely the explainers that named it; a formatting sweep never wakes it.
+  //
+  // Deliberately looser than the rule on `apis`, because it guards prose rather
+  // than a data field: an entry in `apis` that is not *imported* has no
+  // business there, whereas an explainer may name the demo's own components
+  // (`Aquarium`, `Turtle`) and its props (`stencil` in `gl={{ stencil: true }}`).
+  // What it gives up is small -- an identifier deleted from the code but
+  // surviving in a comment still passes.
+  const prose = proseOf(exampleDirectory);
+  if (prose.length > 0) {
+    const vocabulary = vocabularyOf(exampleDirectory);
+    for (const [file, text] of prose) {
+      for (const name of backtickedIdentifiers(text)) {
+        if (!vocabulary.has(name)) {
+          addError(exampleName, `${file} names \`${name}\`, absent from src/`);
         }
       }
     }

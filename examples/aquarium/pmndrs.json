@@ -1,8 +1,9 @@
 {
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Aquarium",
-  "description": "",
+  "description": "Glass rendered as a stencil mask rather than transparency, with a backside transmission material.",
   "tags": ["transmission"],
+  "apis": ["useMask", "MeshTransmissionMaterial"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2023-01-29",
   "source": "https://codesandbox.io/s/n7jf0f",

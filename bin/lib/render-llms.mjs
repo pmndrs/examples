@@ -163,6 +163,12 @@ export function renderExample(example) {
     `# ${example.title}`,
     example.description.trim(),
     facts.join("\n"),
+    // The explainer, from the example's own README. Under the facts and above
+    // the source, because it is what the facts were chosen to introduce and
+    // what the source is read against -- an agent that stops here should have
+    // the technique, and one that reads on should know what to look for.
+    // Absent on most examples, and that is the expected state.
+    example.explainer?.trim(),
     example.assets.length &&
       `## Asset attribution\n\n${attribution(example.assets)}`,
     ...example.files.map((file) => {

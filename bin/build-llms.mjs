@@ -37,6 +37,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { explainerOf } from "./lib/explainer.mjs";
 import { renderExample, renderIndex } from "./lib/render-llms.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -149,10 +150,22 @@ for (const name of names) {
   };
   index.push(summary);
 
+  // The explanation a reader wants once they have chosen. It lives in the
+  // example's `README.md` -- where GitHub renders it and `degit` carries it
+  // into whatever the reader scaffolds -- and is inlined here so the document
+  // an agent is served is not the one that stops at a single line. It stays out
+  // of `summary`, and so out of `llms.txt`: that file is read at the start of
+  // every question, and one line each is what it can afford.
+  const readmePath = path.join(exampleDirectory, "README.md");
+  const explainer = fs.existsSync(readmePath)
+    ? explainerOf(fs.readFileSync(readmePath, "utf8"))
+    : "";
+
   const example = {
     ...summary,
     repository: `https://github.com/pmndrs/examples/tree/main/examples/${name}`,
     install: `npx degit pmndrs/examples/examples/${name}`,
+    ...(explainer && { explainer }),
     dependencies: packageJson.dependencies ?? {},
     files: paths.filter(isInlinable).map((file) => ({
       path: file,

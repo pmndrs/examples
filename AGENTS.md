@@ -12,7 +12,7 @@ Canonical vocabulary: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-fo
 
 ### Domain docs
 
-Single-context: one `CONTEXT.md` + `docs/adr/` at the repo root (created lazily by `/domain-modeling`). See `docs/agents/domain.md`.
+Multi-context: one `CONTEXT.md` + `docs/adr/` per workspace package — `apps/website/`, `packages/e2e/`, and one per `examples/<demo>/` — with the root `docs/adr/` holding system-wide decisions (build, CI, dependency policy). The context is resolved by path, and every file is created lazily by `/domain-modeling`. See `docs/agents/domain.md`.
 
 ### UI components
 

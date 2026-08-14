@@ -184,6 +184,35 @@ describe("renderExample", () => {
     ).toContain("Tags: transmission\nAPIs: useMask, MeshTransmissionMaterial");
   });
 
+  /**
+   * The explanation, from the example's own README. Under the facts because
+   * that is what they were chosen to introduce, and above the source because it
+   * is what the source is read against.
+   */
+  it("carries the explainer between the facts and the source", () => {
+    const text = renderExample(
+      example({
+        explainer: "## The problem\n\nGlass that contains something.",
+      }),
+    );
+
+    expect(text.indexOf("## The problem")).toBeGreaterThan(
+      text.indexOf("Scaffold:"),
+    );
+    expect(text.indexOf("## The problem")).toBeLessThan(
+      text.indexOf("## src/App.tsx"),
+    );
+  });
+
+  it("says nothing where an example has no explainer, which is most of them", () => {
+    expect(renderExample(example())).toContain(
+      "Scaffold: npx degit pmndrs/examples/examples/caustics\n",
+    );
+    expect(renderExample(example({ explainer: "" }))).toBe(
+      renderExample(example()),
+    );
+  });
+
   it("fences each file under its own path, tagged by extension", () => {
     const text = renderExample(
       example({

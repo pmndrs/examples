@@ -59,14 +59,19 @@
       // `apis` is checked against what the example imports, so the sources are
       // an input too: without them a dropped import replays a cached pass and
       // the metadata keeps advertising an identifier that is no longer there --
-      // which is the one thing the rule exists to catch.
+      // which is the one thing the rule exists to catch. The same holds, one
+      // step wider, for the backticked identifiers in `README.md` and
+      // `CONTEXT.md`: the prose is checked against anything in `src/`, shaders
+      // and stylesheets included, so both the prose and that whole tree are
+      // inputs. Cached past either, the rule stops being one.
       "inputs": [
         "bin/validate-pmndrs-metadata.mjs",
         "bin/description-exceptions.mjs",
         "bin/lib/imports.mjs",
+        "bin/lib/explainer.mjs",
         "schemas/pmndrs.schema.json",
-        "examples/*/{package.json,pmndrs.json}",
-        "examples/*/src/**/*.{js,jsx,ts,tsx,mjs,cjs}"
+        "examples/*/{package.json,pmndrs.json,README.md,CONTEXT.md}",
+        "examples/*/src/**/*.{js,jsx,ts,tsx,mjs,cjs,css,json,glsl,vert,frag}"
       ],
       "outputs": []
     },

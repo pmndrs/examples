@@ -210,6 +210,24 @@ describe("lint", () => {
     });
   });
 
+  /**
+   * The explainer's identifiers are checked against the same `src/`, so the
+   * prose is an input on exactly the same argument -- and this is the pair the
+   * rule exists for. Cached past a README, a stale identifier replays a pass
+   * that once looked at a different sentence.
+   */
+  it.each([
+    "examples/aquarium/README.md",
+    "examples/aquarium/CONTEXT.md",
+    "bin/lib/explainer.mjs",
+  ])("re-runs the metadata check when %s moves", (file) => {
+    const before = hashOf("//#lint:metadata", LINT);
+
+    withTouched(file, () => {
+      expect(hashOf("//#lint:metadata", LINT)).not.toBe(before);
+    });
+  });
+
   it("re-runs the metadata check when the import reader moves", () => {
     const before = hashOf("//#lint:metadata", LINT);
 
