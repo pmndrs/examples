@@ -15,7 +15,12 @@ import {
   useSyncExternalStore,
 } from "react";
 import { useParams } from "next/navigation";
-import { createSerializer, parseAsString, useQueryStates } from "nuqs";
+import {
+  createSerializer,
+  parseAsArrayOf,
+  parseAsString,
+  useQueryStates,
+} from "nuqs";
 import { type Options, useHotkeys } from "react-hotkeys-hook";
 import { useEventListener, useIsClient } from "usehooks-ts";
 import {
@@ -83,16 +88,20 @@ const SKELETON_TAGS = [
 ];
 
 /* Filters are shareable: `?q=` carries the search text, `?library=` the
-   library filter. nuqs owns the round trip — the URL *is* the state, so the
-   defaults below double as the "no filter" values and `clearOnDefault` (on by
-   default) drops the empty param rather than leaving `?q=` behind.
+   libraries — a comma-separated list, so one link can pin more than one.
+   A link written when the field took a single value parses as the
+   one-element list it always was, which is the whole of that migration.
+   nuqs owns the round trip — the URL *is* the state, so the defaults below
+   double as the "no filter" values and `clearOnDefault` (on by default) drops
+   the empty param rather than leaving `?q=` behind. It compares arrays by
+   their items, so an emptied list drops `?library=` the same way.
 
    Its defaults also cover what the hand-rolled version had to spell out: a
    shallow `history.replaceState` instead of a router navigation per keystroke,
    throttled to stay under Safari's History API rate limit. */
 const filterParsers = {
   q: parseAsString.withDefault(""),
-  library: parseAsString.withDefault(""),
+  library: parseAsArrayOf(parseAsString).withDefault([]),
 };
 
 /* Same parsers, used to hang the active filter off every card link so it
@@ -320,7 +329,8 @@ export default function Nav({
   const [libraryOpen, setLibraryOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
 
-  const [{ q: search, library }, setFilters] = useQueryStates(filterParsers);
+  const [{ q: search, library: libraries }, setFilters] =
+    useQueryStates(filterParsers);
   const setSearch = useCallback(
     (value: string | ((current: string) => string)) =>
       setFilters((current) => ({
@@ -328,8 +338,8 @@ export default function Nav({
       })),
     [setFilters],
   );
-  const setLibrary = useCallback(
-    (value: string) => setFilters({ library: value }),
+  const setLibraries = useCallback(
+    (value: string[]) => setFilters({ library: value }),
     [setFilters],
   );
 
@@ -359,7 +369,7 @@ export default function Nav({
 
      Plain state, not `setOpen`: following someone's filter link should not
      overwrite this visitor's stored collapse preference. */
-  const hasFilters = search !== "" || library !== "";
+  const hasFilters = search !== "" || libraries.length > 0;
   const [filtersRevealed, setFiltersRevealed] = useState(hasFilters);
   if (hasFilters && !filtersRevealed) {
     setFiltersRevealed(true);
@@ -407,12 +417,14 @@ export default function Nav({
 
     return examples
       .filter((example) => {
-        if (
-          library &&
-          !example.libraries.some(
-            (exampleLibrary) => getLibraryLabel(exampleLibrary) === library,
-          )
-        ) {
+        const exampleLibraries = new Set(
+          example.libraries.map(getLibraryLabel),
+        );
+
+        /* Every pick narrows, the same way a second search word does: the
+           example has to carry all of them. Two libraries that never meet
+           come out empty, and the `Empty` block below says so. */
+        if (!libraries.every((library) => exampleLibraries.has(library))) {
           return false;
         }
 
@@ -424,7 +436,7 @@ export default function Nav({
           example.description,
           ...example.tags,
           ...example.authors,
-          ...example.libraries.map(getLibraryLabel),
+          ...exampleLibraries,
         ]
           .join(" ")
           .toLocaleLowerCase();
@@ -434,7 +446,7 @@ export default function Nav({
       .sort(
         (exampleA, exampleB) => Number(exampleB.isNew) - Number(exampleA.isNew),
       );
-  }, [examples, library, search]);
+  }, [examples, libraries, search]);
   const nearbyExamples = useNearbyExamples(listElement, filteredExamples);
 
   const focusSearch = useCallback(
@@ -640,24 +652,41 @@ export default function Nav({
             ) : (
               <div className="flex items-center gap-2">
                 <Select
+                  multiple
                   open={libraryOpen}
                   onOpenChange={setLibraryOpen}
-                  value={library || null}
-                  onValueChange={(value) => setLibrary(value ?? "")}
+                  value={libraries}
+                  onValueChange={setLibraries}
                 >
                   <SelectTrigger
                     className="min-w-0 flex-1 border-border bg-input shadow-lg"
                     aria-label="Filter examples by library"
                   >
                     <ListFilterIcon className="text-muted-foreground" />
-                    <SelectValue placeholder="All libraries" />
+                    {/* One line at every count the rail can hold: the first
+                        pick spelled out and the rest as a tally, rather than a
+                        field that grows a row per library. "All libraries" is
+                        the empty end of the same label — there is no row to
+                        pick for it, unpicking the last one is what says it.
+                        Written out here rather than through `placeholder`,
+                        which only covers that end; the trigger still reads
+                        `data-placeholder` for the muted tone. */}
+                    <SelectValue>
+                      {(picked: string[]) =>
+                        picked.length > 1
+                          ? `${picked[0]} +${picked.length - 1}`
+                          : (picked[0] ?? "All libraries")
+                      }
+                    </SelectValue>
                   </SelectTrigger>
-                  <SelectContent className="backdrop-blur-sm">
+                  {/* The popup stays put rather than sliding the selected row
+                      under the trigger: with several rows selected there is no
+                      one row for it to line up with. */}
+                  <SelectContent
+                    alignItemWithTrigger={false}
+                    className="backdrop-blur-sm"
+                  >
                     <SelectGroup>
-                      {/* `null` is Base UI's cleared value, so the option that
-                        drops the filter is the one that carries it and the
-                        state stays "". */}
-                      <SelectItem value={null}>All libraries</SelectItem>
                       {libraryOptions.map((option) => (
                         <SelectItem key={option} value={option}>
                           {option}
@@ -761,7 +790,7 @@ export default function Nav({
                                it. */
                             href={serializeFilters(`/examples/${name}`, {
                               q: search,
-                              library,
+                              library: libraries,
                             })}
                             aria-label={title}
                             aria-current={
@@ -851,7 +880,7 @@ export default function Nav({
                   size="sm"
                   onClick={() => {
                     dismissSearch();
-                    setLibrary("");
+                    setLibraries([]);
                   }}
                 >
                   Clear filters
