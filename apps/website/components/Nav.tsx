@@ -45,7 +45,7 @@ import {
   InputGroupText,
 } from "@/components/ui/input-group";
 import { Item, ItemFooter, ItemMedia } from "@/components/ui/item";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   Select,
@@ -821,17 +821,11 @@ export default function Nav({
                                   <Badge key={tag}>{tag}</Badge>
                                 ))}
                               </div>
-                              {/* Radix kept the bar out of the DOM until the
-                                    pointer was over the area (`type="hover"`).
-                                    Base UI mounts it as soon as the axis
-                                    overflows and leaves it to CSS to say when
-                                    it shows, so the resting state is spelled
-                                    out here: the fade is the affordance, the
-                                    bar is for the hand already on it. */}
-                              <ScrollBar
-                                orientation="horizontal"
-                                className="opacity-0 transition-opacity duration-150 data-hovering:opacity-100 data-scrolling:opacity-100"
-                              />
+                              {/* No `ScrollBar`: the fade is the affordance,
+                                    and it says so without being pointed at —
+                                    which is the whole of what a finger gets.
+                                    A bar would be 10px of the strip's 32,
+                                    laid over the pills it is describing. */}
                             </ScrollArea>
                           </ItemFooter>
                         )}
