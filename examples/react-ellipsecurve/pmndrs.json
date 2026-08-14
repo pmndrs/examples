@@ -1,8 +1,9 @@
 {
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "React EllipseCurve",
-  "description": "",
+  "description": "An atom whose electrons drag tapered trails around thick world-space orbits, over-bright so bloom catches them.",
   "tags": ["trails"],
+  "apis": ["Trail", "Line", "Bloom"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2022-10-20",
   "source": "https://codesandbox.io/s/xzi6ps",

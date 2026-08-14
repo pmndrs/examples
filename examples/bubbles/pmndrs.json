@@ -1,8 +1,9 @@
 {
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Bubbles",
-  "description": "A metallic, mouse-reactive distorted sphere with floating instances, composited with Depth of Field, Bloom, BrightnessContrast, Noise and Vignette.",
+  "description": "A single distorting material built outside the tree and handed to every sphere, lit by a cube-map environment.",
   "tags": ["postprocessing", "bloom", "depth-of-field", "distortion"],
+  "apis": ["MeshDistortMaterial", "useCubeTexture", "DepthOfField"],
   "authors": ["Paul Henschel"],
   "source": "https://codesandbox.io/s/react-postprocessing-dof-blob-pqrpl",
   "libraries": [

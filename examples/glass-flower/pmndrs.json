@@ -1,8 +1,9 @@
 {
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Glass Flower",
-  "description": "",
+  "description": "Iridescent glass bloomed and graded through a cube LUT, with tone mapping left to the composer, not the renderer.",
   "tags": ["transmission"],
+  "apis": ["MeshTransmissionMaterial", "LUT", "LUTCubeLoader"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2023-04-13",
   "source": "https://codesandbox.io/s/dq6wwe",

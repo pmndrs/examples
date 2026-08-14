@@ -1,8 +1,9 @@
 {
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Ecctrl Fisheye",
-  "description": "",
+  "description": "A third-person character controller on a physics body, keyboard-mapped and pointer-locked, seen through a fisheye lens.",
   "tags": [],
+  "apis": ["Fisheye", "KeyboardControls", "Gltf"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2023-10-10",
   "source": "https://codesandbox.io/s/nvk9pf",

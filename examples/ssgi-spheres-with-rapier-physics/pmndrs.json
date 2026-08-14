@@ -1,8 +1,9 @@
 {
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "SSGI Spheres With Rapier Physics",
-  "description": "",
+  "description": "Global illumination hand-wired into a raw effect composer, over spheres drawn together by impulses rather than gravity.",
   "tags": [],
+  "apis": ["SSGIEffect", "VelocityDepthNormalPass", "EffectPass"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2023-11-12",
   "source": "https://codesandbox.io/s/5w35n6",

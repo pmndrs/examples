@@ -41,13 +41,19 @@
 export const DESCRIPTION_MAX_LENGTH = 120;
 
 //
-// Examples that ship `"description": ""`. Thirty-nine of the hundred and
+// Examples that ship `"description": ""`. Thirty-three of the hundred and
 // seventy; the rest run to a median of 56 characters.
 //
 // Nothing groups them. They are not the old examples, or the small ones, or
 // the ones nobody looks at -- `caustics` and `portals` are here, and
 // `aquarium` was until it became the first entry this list lost. The field was
 // simply never required to hold anything, so for these it never got anything.
+//
+// It started at forty. `aquarium` left it first, then the six the pilot of
+// #198 drew from it -- `ecctrl-fisheye`, `glass-flower`,
+// `pass-through-portals`, `react-ellipsecurve`,
+// `ssgi-spheres-with-rapier-physics` and `water-shader`, chosen for what they
+// would break rather than for being easy to write.
 //
 export const UNDESCRIBED = [
   "bloom-hdr-workflow-gltf",
@@ -59,13 +65,11 @@ export const UNDESCRIBED = [
   "csg-operations-rapier-physics",
   "dbismut-furniture",
   "diamond-ring",
-  "ecctrl-fisheye",
   "enter-portals",
   "environment-blur-and-transitions",
   "envmap-ground-projection",
   "faucets-select-highlight",
   "gatsby-stars",
-  "glass-flower",
   "ground-projected-envmaps-lamina",
   "html-input-fields",
   "inter-epoxy-resin",
@@ -77,35 +81,31 @@ export const UNDESCRIBED = [
   "motionpathcontrols",
   "nextjs-prism",
   "pairing-threejs-to-ui",
-  "pass-through-portals",
   "pmndrs-vercel",
   "portal-shapes",
   "portals",
   "rapier-physics",
-  "react-ellipsecurve",
   "shopping",
-  "ssgi-spheres-with-rapier-physics",
   "stage-presets-gltfjsx",
   "starwars",
   "t-shirt-configurator",
-  "water-shader",
 ];
 
 //
-// Examples whose description is written, and too long. Five, with the length
+// Examples whose description is written, and too long. Four, with the length
 // recorded so the entry can be checked rather than believed -- the test reads
 // the file and fails on a number that has drifted.
 //
 // None of them is a truncation away from fitting. Each spends its overflow
-// listing the stack in prose -- `bubbles` names five postprocessing effects,
-// `pixelation` and `vignette` each spell out a package -- which is the
-// identifiers-in-`description` habit that the `apis` field now exists to
-// absorb. Cutting the sentence at 120 would leave the same bad line, shorter.
-// So they are rewrites, they are `describe-example` work, and this change has
-// to land before any description is written.
+// listing the stack in prose -- `pixelation` and `vignette` each spell out a
+// package, and `bubbles` named five postprocessing effects until the pilot of
+// #198 rewrote it -- which is the identifiers-in-`description` habit that the
+// `apis` field now exists to absorb. Cutting the sentence at 120 would leave
+// the same bad line, shorter. So they are rewrites, they are
+// `describe-example` work, and this change has to land before any description
+// is written.
 //
 export const OVERLONG = {
-  bubbles: 147,
   pixelation: 127,
   "take-control": 133,
   vignette: 122,

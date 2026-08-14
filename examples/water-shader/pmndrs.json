@@ -1,8 +1,9 @@
 {
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Water Shader",
-  "description": "",
+  "description": "The three.js ocean add-on registered as a JSX element, with its time uniform advanced every frame.",
   "tags": ["shader", "water"],
+  "apis": ["Water", "extend"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2021-04-15",
   "source": "https://codesandbox.io/s/1b40u",

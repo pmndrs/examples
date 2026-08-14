@@ -1,8 +1,9 @@
 {
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Pass Through Portals",
-  "description": "",
+  "description": "A model that breaks out of the frame it is drawn in: a second copy outside, sliced away by local clipping planes.",
   "tags": ["portal"],
+  "apis": ["MeshPortalMaterial"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2023-06-17",
   "source": "https://codesandbox.io/s/qvk72r",
