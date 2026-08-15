@@ -1,33 +1,25 @@
 #
-# Preview (only for a fork's pull request, and only on request)
+# Preview (a fork's pull request, on request)
 #
-# `ci.yml`'s `preview-job` deploys its own build and always has. It cannot do
-# that for a fork: `pull_request` gives a fork's run a read-only token and no
-# secrets, on purpose, because everything that run executes is the pull
-# request's code (`pnpm install` alone is arbitrary `postinstall` scripts).
-# That is the property being kept, not an obstacle being routed around -- so
-# `preview-job` builds and stops, leaving the build in an artifact, and this
-# workflow deploys it from here, where the token is.
+# `ci.yml`'s `preview-job` deploys its own build, and cannot do that for a
+# fork: a `pull_request` run from a fork gets no secrets, on purpose, because
+# everything it executes is that pull request's code (`pnpm install` alone is
+# arbitrary `postinstall` scripts). So it builds and stops, leaving `out` in an
+# artifact -- and this workflow, which has the token, uploads that. It is safe
+# for exactly as long as it runs none of that code, and it runs none: no
+# checkout of the head, no install, no build.
 #
-# It is safe for exactly as long as it runs none of that code, and it runs
-# none: no checkout of the head, no install, no build. It downloads the
-# artifact and uploads it. That artifact is the boundary, and everything inside
-# it is untrusted input -- hence the two precautions below, the Build Output
-# API's own `config.json` written here rather than taken from it, and the
-# `base_path` check.
+# So the artifact is the boundary, and it is untrusted input. `config.json` is
+# written here rather than taken from it, or a pull request could put
+# serverless functions on the account, and `out` can only become `static/`.
+# What a fork reaches in the end is static files it wrote, on a `*.vercel.app`
+# URL, in a project with no environment variables and no domain of ours.
 #
-# What is left for a fork to reach: static files it wrote, on a `*.vercel.app`
-# URL, in a project with no environment variables and no domain of ours. Which
-# is what a preview of its own code is.
-#
-# The button is the `preview` label. Applying a label needs triage rights on
-# this repository, so the authorization is GitHub's own and not a check we
-# could write wrong -- and the contributor cannot label their own pull request.
-# The label comes straight back off, so the next click is another deploy.
-#
-# `pull_request_target` is what lets that event see the secrets. It is the
-# usual footgun when a workflow checks out the pull request's head and then
-# executes it, which is the one thing this file is built not to do.
+# The button is the `preview` label. Applying one needs triage rights here, so
+# the authorization is GitHub's own and the contributor cannot label their own
+# pull request. `pull_request_target` is what lets that event see the secrets;
+# the footgun there is checking out the head and then running it, which is the
+# one thing this file does not do.
 #
 name: Preview
 
@@ -35,103 +27,64 @@ on:
   pull_request_target:
     types: [labeled]
 
-# Deliberately not the repository defaults: this workflow holds the token, so
-# it gets the three permissions it uses and nothing else. `actions: read` reads
-# the artifact off another run, `pull-requests: write` takes the label off.
 permissions:
-  actions: read
-  deployments: write
-  pull-requests: write
+  actions: read # the artifact, off another run
+  deployments: write # the "View deployment" box
 
 jobs:
   preview-job:
-    # A pull request from a branch of this repository already has its preview,
-    # deployed by `preview-job` at the end of its own build, and never uploaded
-    # an artifact for this one to find.
+    # A branch of this repository deployed its own preview an hour ago and
+    # uploaded no artifact for this to find
     if: >-
       ${{ github.event.label.name == 'preview'
         && github.event.pull_request.head.repo.full_name != github.repository }}
     runs-on: ubuntu-latest
-    env:
-      # No token, no preview: a checkout of this repo that never set them
-      PREVIEW: ${{ secrets.VERCEL_TOKEN != '' }}
     steps:
-      # Off first, and not at the end: a deploy that fails leaves a button that
-      # can be pressed again rather than a label to clear by hand.
-      - uses: actions/github-script@v9
-        continue-on-error: true # it is the button, not the deploy
-        with:
-          script: |
-            await github.rest.issues.removeLabel({
-              ...context.repo,
-              issue_number: context.payload.pull_request.number,
-              name: "preview",
-            });
-
-      # Which run built this commit. The sha is the event's, and the run has to
-      # be a CI run of this repository on that exact sha -- a fork chooses what
-      # is in its own head commit, and nothing else here.
-      - id: what
+      # The run that built this commit. Pressed before `preview-job` has
+      # finished, the download below says so and the label can be pressed again.
+      - id: ci
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SHA: ${{ github.event.pull_request.head.sha }}
         run: |
-          # The label can land before the build has finished, in which case the
-          # artifact is not there yet and the download below says so: press it
-          # again once `preview-job` is green.
-          run_id=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs?head_sha=$SHA&event=pull_request" \
-            --jq '[.workflow_runs[] | select(.name == "CI")] | first | .id')
-          echo "run_id=$run_id" >> "$GITHUB_OUTPUT"
-
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs?head_sha=$SHA&event=pull_request" \
+            --jq '"run_id=\(.workflow_runs[0].id)"' >> "$GITHUB_OUTPUT"
       - uses: actions/download-artifact@v8
-        if: ${{ env.PREVIEW == 'true' }}
         with:
           name: preview
           path: artifact
-          run-id: ${{ steps.what.outputs.run_id }}
+          run-id: ${{ steps.ci.outputs.run_id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      # From here down, `ci.yml`'s deploy step, verbatim apart from where the
-      # `out` directory comes from
+      # `ci.yml`'s deploy step, less the build that used to sit in front of it
       - id: preview
-        if: ${{ env.PREVIEW == 'true' }}
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
-          base_path=$(cat artifact/base_path)
-          # It came out of a job that ran the pull request's code, and it ends
-          # up in a `Location`. A leading `//` is a URL to somebody else's host,
-          # which is the whole of what could go wrong here.
-          case "$base_path" in
-            //*|*[!A-Za-z0-9._/-]*) echo "refusing base_path: $base_path"; exit 1 ;;
-            /*|"") ;;
-            *) echo "refusing base_path: $base_path"; exit 1 ;;
-          esac
-
+          # `basename`: this was written by a job that ran the pull request's
+          # code, and it ends up in a `Location`. One path segment is what a
+          # Pages base path is, and all this can be afterwards -- `//evil.com`
+          # comes out `/evil.com`, a path on the deployment's own host.
+          base_path=/$(basename "$(cat artifact/base_path)")
           mkdir -p .vercel/output
           # `out`, not `out${base_path}`: the site lives one level down, and the
-          # static root has to be the level its absolute links resolve against.
-          # `static/` is also the only thing the artifact is allowed to become
-          # -- a `functions/` the pull request wrote inside `out` lands under it
-          # as a file, not as code Vercel would run.
+          # static root has to be the level its absolute links resolve against
           mv artifact/out .vercel/output/static
           # `cleanUrls`: the website exports flat `<name>.html` pages and links
           # to them without the extension. The route sends the bare deployment
           # URL -- the one Vercel prints, and the one anyone trims to -- to the
           # home page, which now sits under the base path rather than at `/`.
           printf '{"version":3,"cleanUrls":true,"routes":[{"src":"/","status":308,"headers":{"Location":"%s"}}]}' \
-            "${base_path:-/}" > .vercel/output/config.json
+            "$base_path" > .vercel/output/config.json
           # `--archive`: one tarball, not 2.4k file uploads
           url=$(npx --yes vercel@latest deploy --prebuilt --archive=tgz --token="$VERCEL_TOKEN")
           echo "url=$url$base_path" >> "$GITHUB_OUTPUT"
 
       # The pull request's "View deployment" box, which Vercel's git integration
-      # would have filled had we let it deploy. The fork's head commit is
-      # reachable from here as `refs/pull/N/head`.
+      # would have filled had we let it deploy
       - uses: actions/github-script@v9
-        if: ${{ env.PREVIEW == 'true' }}
         env:
           URL: ${{ steps.preview.outputs.url }}
         with:

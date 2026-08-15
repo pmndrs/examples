@@ -274,10 +274,9 @@ jobs:
     if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
     env:
-      # No token, no deploy *from here*: that is a fork's pull request, which
+      # No token, no deploy from here: that is a fork's pull request, which
       # cannot read the repo secrets, or a checkout of this repo that never set
-      # them. It still builds -- the artifact at the bottom is how that build
-      # reaches `preview.yml`, which has the token and does not run this code.
+      # them. It still builds; the artifact at the bottom is where that goes.
       PREVIEW: ${{ secrets.VERCEL_TOKEN != '' }}
     steps:
       - uses: actions/checkout@v7
@@ -355,10 +354,10 @@ jobs:
               environment_url: process.env.URL,
             });
 
-      # A fork's build stops here otherwise, which is the whole of what it used
-      # to do: skip. `preview.yml` picks this up when a maintainer asks it to,
-      # and `base_path` travels with it because that workflow cannot recompute
-      # it without a Pages permission it has no other use for.
+      # Otherwise the build stops here, which is all a fork's used to do.
+      # `preview.yml` deploys it when a maintainer asks, and needs `base_path`
+      # with it: `configure-pages` reads the Pages settings, and that is a
+      # permission a workflow holding the Vercel token has no other use for.
       - if: ${{ env.PREVIEW != 'true' }}
         run: echo "${{ steps.configurepages.outputs.base_path }}" > base_path
       - if: ${{ env.PREVIEW != 'true' }}
@@ -368,9 +367,7 @@ jobs:
           path: |
             out
             base_path
-          # The label is pressed while the pull request is being looked at, or
-          # not at all. 90 days of 235MB tarballs is the other option.
-          retention-days: 7
+          retention-days: 7 # pressed while it is being looked at, or not at all
 
   deploy-job:
     # only for pushes on main
