@@ -3,7 +3,7 @@
   "title": "Bloom",
   "description": "A glass Suzanne model staged with drei's Stage helper, glowing with @react-three/postprocessing's Bloom under an orbiting light.",
   "tags": ["postprocessing", "bloom"],
-  "authors": [],
+  "authors": ["v 1 r t l"],
   "source": "https://codesandbox.io/s/r9ujf",
   "libraries": [
     "@react-three/drei",

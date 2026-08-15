@@ -3,7 +3,7 @@
   "title": "Color Average",
   "description": "A cluster of glossy, palette-colored spheres that drains to grayscale as @react-three/postprocessing's ColorAverage effect fades in.",
   "tags": ["postprocessing", "color-average", "grayscale"],
-  "authors": [],
+  "authors": ["Łukasz Kwas"],
   "source": "https://pmndrs.github.io/postprocessing/public/docs/class/src/effects/ColorAverageEffect.js~ColorAverageEffect.html",
   "libraries": [
     "@react-three/drei",

@@ -3,7 +3,7 @@
   "title": "Glitch",
   "description": "A Suzanne model staged with drei's Stage helper, disrupted with @react-three/postprocessing's Glitch effect.",
   "tags": ["postprocessing", "glitch"],
-  "authors": [],
+  "authors": ["Sara Vieira"],
   "source": "https://codesandbox.io/p/sandbox/bs1i1",
   "libraries": [
     "@react-three/drei",

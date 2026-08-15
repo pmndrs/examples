@@ -3,7 +3,7 @@
   "title": "Noise",
   "description": "A Suzanne model staged with drei's Stage helper, grained with @react-three/postprocessing's Noise effect.",
   "tags": ["postprocessing", "noise", "grain"],
-  "authors": [],
+  "authors": ["Sara Vieira"],
   "source": "https://codesandbox.io/p/sandbox/fjb06",
   "libraries": [
     "@react-three/drei",

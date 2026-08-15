@@ -3,7 +3,7 @@
   "title": "Tone Mapping",
   "description": "A Suzanne model staged with drei's Stage helper, graded with @react-three/postprocessing's ToneMapping effect across its different modes.",
   "tags": ["postprocessing", "tone-mapping"],
-  "authors": [],
+  "authors": ["Anderson Mancini"],
   "source": "https://codesandbox.io/p/sandbox/5ydkm4",
   "libraries": [
     "@react-three/drei",
