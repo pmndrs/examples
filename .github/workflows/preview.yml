@@ -1,0 +1,114 @@
+#
+# Preview
+#
+# The half of `ci.yml`'s `preview-job` that needs the Vercel token, split off
+# so that a fork's pull request can have a preview at all.
+#
+# `pull_request` gives a fork's run a read-only token and no secrets, on
+# purpose: everything it runs is the pull request's code. `workflow_run` is the
+# way back -- it runs here, in this repository, on the default branch's copy of
+# this file, with the secrets -- and it is only safe for as long as this
+# workflow runs none of that code. So: no checkout of the head, no
+# `pnpm install`, no build. It downloads what `ci.yml` built and uploads it.
+#
+# The artifact is the boundary, and everything inside it is untrusted input.
+# Two consequences, both of them below: the Build Output API's own directories
+# (`functions/`, `config.json`) are written here and never taken from the
+# artifact -- otherwise a pull request could put serverless functions on this
+# account -- and `base_path`, which reaches a `Location` header, is checked
+# before it is used.
+#
+# What is left for the fork to reach: static files it wrote, on a
+# `*.vercel.app` URL, in a project that has no environment variables and no
+# domain of ours. Which is what a preview of its own code is.
+#
+name: Preview
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+
+# Deliberately not the repository defaults: this workflow holds the token, so
+# it gets the two permissions it uses and nothing else. `actions: read` is what
+# reads another run's artifact.
+permissions:
+  actions: read
+  deployments: write
+
+jobs:
+  preview-job:
+    # A push on main has its own deployment, and `workflow_run` fires for it too
+    if: ${{ github.event.workflow_run.event == 'pull_request' }}
+    runs-on: ubuntu-latest
+    env:
+      # No token, no preview: a checkout of this repository that never set them
+      PREVIEW: ${{ secrets.VERCEL_TOKEN != '' }}
+    steps:
+      # No artifact is a build that failed, and the run goes red here rather
+      # than on the pull request -- where `preview-job` is already red for it.
+      - uses: actions/download-artifact@v8
+        if: ${{ env.PREVIEW == 'true' }}
+        with:
+          name: preview
+          path: artifact
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - id: preview
+        if: ${{ env.PREVIEW == 'true' }}
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          base_path=$(cat artifact/base_path)
+          # It came out of a job that ran the pull request's code, and it ends
+          # up in a `Location`. A leading `//` is a URL to somebody else's host,
+          # which is the whole of what could go wrong here.
+          case "$base_path" in
+            //*|*[!A-Za-z0-9._/-]*) echo "refusing base_path: $base_path"; exit 1 ;;
+            /*|"") ;;
+            *) echo "refusing base_path: $base_path"; exit 1 ;;
+          esac
+
+          mkdir -p .vercel/output
+          # `out`, not `out${base_path}`: the site lives one level down, and the
+          # static root has to be the level its absolute links resolve against.
+          # `static/` is also the only thing the artifact is allowed to become
+          # -- a `functions/` the pull request wrote inside `out` lands under it
+          # as a file, not as code Vercel would run.
+          mv artifact/out .vercel/output/static
+          # `cleanUrls`: the website exports flat `<name>.html` pages and links
+          # to them without the extension. The route sends the bare deployment
+          # URL -- the one Vercel prints, and the one anyone trims to -- to the
+          # home page, which now sits under the base path rather than at `/`.
+          printf '{"version":3,"cleanUrls":true,"routes":[{"src":"/","status":308,"headers":{"Location":"%s"}}]}' \
+            "${base_path:-/}" > .vercel/output/config.json
+          # `--archive`: one tarball, not 2.4k file uploads
+          url=$(npx --yes vercel@latest deploy --prebuilt --archive=tgz --token="$VERCEL_TOKEN")
+          echo "url=$url$base_path" >> "$GITHUB_OUTPUT"
+
+      # The pull request's "View deployment" box, which Vercel's git integration
+      # would have filled had we let it deploy. The sha is the event's, not the
+      # artifact's: a fork's head commit is reachable here as `refs/pull/N/head`.
+      - uses: actions/github-script@v9
+        if: ${{ env.PREVIEW == 'true' }}
+        env:
+          URL: ${{ steps.preview.outputs.url }}
+        with:
+          script: |
+            const { data } = await github.rest.repos.createDeployment({
+              ...context.repo,
+              ref: context.payload.workflow_run.head_sha,
+              environment: "preview",
+              transient_environment: true, // superseded by the next one
+              auto_merge: false, // deploy that ref, not a merge of the base into it
+              required_contexts: [], // the checks that would gate it are the ones running this
+            });
+            await github.rest.repos.createDeploymentStatus({
+              ...context.repo,
+              deployment_id: data.id,
+              state: "success",
+              environment_url: process.env.URL,
+            });

@@ -270,13 +270,21 @@ jobs:
   # Which is what a preview is for -- `chromatic-job` publishes on `always()`
   # for the same reason -- and merging is still gated on the tests.
   #
+  # It builds, and it does not deploy. This workflow runs on `pull_request`,
+  # which for a fork's pull request means a read-only token and no access to
+  # the repo secrets -- and that is the property worth keeping, because
+  # everything this job runs is the pull request's own code (`pnpm install`
+  # alone is arbitrary `postinstall` scripts). So the deployment moved to
+  # `preview.yml`, which `workflow_run` runs back in this repository's context
+  # with the Vercel token, and which never executes any of it: it unpacks the
+  # artifact below and uploads it. The artifact is the boundary between the two.
+  #
+  # What it costs: a fork's pull request now pays this ~2min build where it used
+  # to skip it -- on a public repository, a free runner.
+  #
   preview-job:
     if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
-    env:
-      # No token, no preview: that is a fork's pull request, which cannot read
-      # the repo secrets, or a checkout of this repo that never set them.
-      PREVIEW: ${{ secrets.VERCEL_TOKEN != '' }}
     steps:
       - uses: actions/checkout@v7
       - id: configurepages
@@ -302,7 +310,6 @@ jobs:
       # domain root, since the pages link to each other by absolute path. That
       # is the production layout, which is what a preview should be showing.
       - run: pnpm build
-        if: ${{ env.PREVIEW == 'true' }}
         env:
           BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
           # The production origin, deliberately: the <head> URLs are canonical
@@ -310,49 +317,18 @@ jobs:
           # them too -- besides, a different value is a different `build2`
           # hash, and these have to be the hashes everything else produces.
           BASE_URL: ${{ steps.configurepages.outputs.base_url }}
-      - id: preview
-        if: ${{ env.PREVIEW == 'true' }}
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-          BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
-        run: |
-          mkdir -p .vercel/output
-          # `out`, not `out${BASE_PATH}`: the site lives one level down, and the
-          # static root has to be the level its absolute links resolve against
-          mv out .vercel/output/static
-          # `cleanUrls`: the website exports flat `<name>.html` pages and links
-          # to them without the extension. The route sends the bare deployment
-          # URL -- the one Vercel prints, and the one anyone trims to -- to the
-          # home page, which now sits under the base path rather than at `/`.
-          printf '{"version":3,"cleanUrls":true,"routes":[{"src":"/","status":308,"headers":{"Location":"%s"}}]}' \
-            "${BASE_PATH:-/}" > .vercel/output/config.json
-          # `--archive`: one tarball, not 2.4k file uploads
-          url=$(pnpm dlx vercel@latest deploy --prebuilt --archive=tgz --token="$VERCEL_TOKEN")
-          echo "url=$url$BASE_PATH" >> "$GITHUB_OUTPUT"
-      # The pull request's "View deployment" box, which Vercel's git integration
-      # would have filled had we let it deploy
-      - uses: actions/github-script@v9
-        if: ${{ env.PREVIEW == 'true' }}
-        env:
-          URL: ${{ steps.preview.outputs.url }}
+
+      # `base_path` travels with the build because the job that deploys it
+      # cannot recompute it: `configure-pages` reads the Pages settings, and
+      # asking for that permission in a workflow that holds the Vercel token
+      # buys nothing. `preview.yml` validates the value before it uses it.
+      - run: echo "${{ steps.configurepages.outputs.base_path }}" > base_path
+      - uses: actions/upload-artifact@v7
         with:
-          script: |
-            const { data } = await github.rest.repos.createDeployment({
-              ...context.repo,
-              ref: context.payload.pull_request.head.sha,
-              environment: "preview",
-              transient_environment: true, // superseded by the next one
-              auto_merge: false, // deploy that ref, not a merge of the base into it
-              required_contexts: [], // the checks that would gate it are the ones running this
-            });
-            await github.rest.repos.createDeploymentStatus({
-              ...context.repo,
-              deployment_id: data.id,
-              state: "success",
-              environment_url: process.env.URL,
-            });
+          name: preview
+          path: |
+            out
+            base_path
 
   deploy-job:
     # only for pushes on main
