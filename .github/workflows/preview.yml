@@ -22,6 +22,9 @@
 # `*.vercel.app` URL, in a project that has no environment variables and no
 # domain of ours. Which is what a preview of its own code is.
 #
+# A maintainer approves each one on top of that -- see `environment` below,
+# which is careful about what that click is and is not.
+#
 name: Preview
 
 on:
@@ -41,6 +44,28 @@ jobs:
     # A push on main has its own deployment, and `workflow_run` fires for it too
     if: ${{ github.event.workflow_run.event == 'pull_request' }}
     runs-on: ubuntu-latest
+
+    # The environment's required reviewers hold this job until a maintainer
+    # approves it, and what they are approving is worth being precise about:
+    # not the pull request's code -- nothing here runs it, and no click could
+    # honestly vouch for a lockfile's `postinstall` scripts anyway -- but a
+    # tarball of static files going onto our Vercel account. A question a human
+    # can actually answer.
+    #
+    # It is a gate, not the safety property: with no reviewers configured the
+    # environment lets every run straight through, and everything above still
+    # holds. Note that GitHub creates the environment on first use if it does
+    # not exist, unprotected -- so the reviewers have to be set before this
+    # merges, or the first preview sails past ungated.
+    #
+    # `url` is what the run's environment box links to, since the deployment
+    # this job records lands on the default branch's ref (a `workflow_run` runs
+    # there, not on the pull request); the box on the pull request itself is the
+    # deployment created at the end, against the fork's head sha.
+    environment:
+      name: preview
+      url: ${{ steps.preview.outputs.url }}
+
     env:
       # No token, no preview: a checkout of this repository that never set them
       PREVIEW: ${{ secrets.VERCEL_TOKEN != '' }}
