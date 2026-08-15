@@ -25,9 +25,9 @@
 # Two doors in, and which one a pull request gets is the only difference the
 # fork makes:
 #
-#   - a branch on this repository -- `workflow_run`, as soon as CI has built
-#     it. Nobody approves their own colleague's preview, and that is how this
-#     behaved before the split.
+#   - a branch on this repository -- `workflow_run`, as soon as
+#     `preview-build.yml` has built it. Nobody approves a colleague's
+#     preview, and that is how this behaved before the split.
 #
 #   - a fork -- nothing, until a maintainer puts the `preview` label on the
 #     pull request. That label is the button: adding one needs triage rights
@@ -44,7 +44,7 @@ name: Preview
 
 on:
   workflow_run:
-    workflows: [CI]
+    workflows: [Preview build]
     types: [completed]
   pull_request_target:
     types: [labeled]
@@ -101,11 +101,11 @@ jobs:
           RUN_ID: ${{ github.event.workflow_run.id }}
         run: |
           if [ -z "$RUN_ID" ]; then
-            # The label can land before CI has finished, in which case the
-            # artifact is not there yet and the download below says so: press
-            # it again once the build is green.
+            # The label can land before the build has finished, in which
+            # case the artifact is not there yet and the download below
+            # says so: press it again once the build is green.
             RUN_ID=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs?head_sha=$SHA&event=pull_request" \
-              --jq '[.workflow_runs[] | select(.name == "CI")] | first | .id')
+              --jq '[.workflow_runs[] | select(.name == "Preview build")] | first | .id')
           fi
           echo "sha=$SHA" >> "$GITHUB_OUTPUT"
           echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
