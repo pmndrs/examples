@@ -1,57 +1,43 @@
 #
-# Preview
+# Preview (only for a fork's pull request, and only on request)
 #
-# The half of `ci.yml`'s `preview-job` that needs the Vercel token, split off
-# so that a fork's pull request can have a preview at all.
+# `ci.yml`'s `preview-job` deploys its own build and always has. It cannot do
+# that for a fork: `pull_request` gives a fork's run a read-only token and no
+# secrets, on purpose, because everything that run executes is the pull
+# request's code (`pnpm install` alone is arbitrary `postinstall` scripts).
+# That is the property being kept, not an obstacle being routed around -- so
+# `preview-job` builds and stops, leaving the build in an artifact, and this
+# workflow deploys it from here, where the token is.
 #
-# `pull_request` gives a fork's run a read-only token and no secrets, on
-# purpose: everything it runs is the pull request's code. So the deploy happens
-# here instead, in a workflow that runs in this repository, with the secrets --
-# and that is only safe for as long as it runs none of that code. It does not:
-# no checkout of the head, no `pnpm install`, no build. It downloads what
-# `ci.yml` built and uploads it.
+# It is safe for exactly as long as it runs none of that code, and it runs
+# none: no checkout of the head, no install, no build. It downloads the
+# artifact and uploads it. That artifact is the boundary, and everything inside
+# it is untrusted input -- hence the two precautions below, the Build Output
+# API's own `config.json` written here rather than taken from it, and the
+# `base_path` check.
 #
-# The artifact is the boundary, and everything inside it is untrusted input.
-# Two consequences, both of them below: the Build Output API's own directories
-# (`functions/`, `config.json`) are written here and never taken from the
-# artifact -- otherwise a pull request could put serverless functions on this
-# account -- and `base_path`, which reaches a `Location` header, is checked
-# before it is used.
+# What is left for a fork to reach: static files it wrote, on a `*.vercel.app`
+# URL, in a project with no environment variables and no domain of ours. Which
+# is what a preview of its own code is.
 #
-# What is left for the fork to reach: static files it wrote, on a
-# `*.vercel.app` URL, in a project that has no environment variables and no
-# domain of ours. Which is what a preview of its own code is.
+# The button is the `preview` label. Applying a label needs triage rights on
+# this repository, so the authorization is GitHub's own and not a check we
+# could write wrong -- and the contributor cannot label their own pull request.
+# The label comes straight back off, so the next click is another deploy.
 #
-# Two doors in, and which one a pull request gets is the only difference the
-# fork makes:
-#
-#   - a branch on this repository -- `workflow_run`, as soon as
-#     `preview-build.yml` has built it. Nobody approves a colleague's
-#     preview, and that is how this behaved before the split.
-#
-#   - a fork -- nothing, until a maintainer puts the `preview` label on the
-#     pull request. That label is the button: adding one needs triage rights
-#     here, which is exactly the set of people who should be deciding, and the
-#     contributor cannot add it to their own. It comes straight back off, so
-#     the next click is another deploy.
-#
-# `pull_request_target` is what makes that label event able to see the secrets.
-# The reason it is usually a footgun is a checkout of the pull request's head
-# followed by anything that executes it -- which is the one thing this file is
-# built not to do.
+# `pull_request_target` is what lets that event see the secrets. It is the
+# usual footgun when a workflow checks out the pull request's head and then
+# executes it, which is the one thing this file is built not to do.
 #
 name: Preview
 
 on:
-  workflow_run:
-    workflows: [Preview build]
-    types: [completed]
   pull_request_target:
     types: [labeled]
 
 # Deliberately not the repository defaults: this workflow holds the token, so
-# it gets the permissions it uses and nothing else. `actions: read` reads
-# another run's artifact, `pull-requests: write` takes the label back off.
+# it gets the three permissions it uses and nothing else. `actions: read` reads
+# the artifact off another run, `pull-requests: write` takes the label off.
 permissions:
   actions: read
   deployments: write
@@ -59,29 +45,20 @@ permissions:
 
 jobs:
   preview-job:
+    # A pull request from a branch of this repository already has its preview,
+    # deployed by `preview-job` at the end of its own build, and never uploaded
+    # an artifact for this one to find.
     if: >-
-      ${{ (github.event_name == 'workflow_run'
-        && github.event.workflow_run.event == 'pull_request'
-        && github.event.workflow_run.head_repository.full_name == github.repository)
-        || (github.event_name == 'pull_request_target'
-        && github.event.label.name == 'preview') }}
+      ${{ github.event.label.name == 'preview'
+        && github.event.pull_request.head.repo.full_name != github.repository }}
     runs-on: ubuntu-latest
-    # The box on the run, which is the only place the URL would otherwise not
-    # appear. Required reviewers on this environment would work, and would be a
-    # second approval on top of the label, in the Actions tab rather than on the
-    # pull request -- the label is the gate.
-    environment:
-      name: preview
-      url: ${{ steps.preview.outputs.url }}
-
     env:
-      # No token, no preview: a checkout of this repository that never set them
+      # No token, no preview: a checkout of this repo that never set them
       PREVIEW: ${{ secrets.VERCEL_TOKEN != '' }}
     steps:
-      # Off first, and not at the end: a failed deploy leaves a button that can
-      # be pressed again rather than a label to remove by hand.
+      # Off first, and not at the end: a deploy that fails leaves a button that
+      # can be pressed again rather than a label to clear by hand.
       - uses: actions/github-script@v9
-        if: ${{ github.event_name == 'pull_request_target' }}
         continue-on-error: true # it is the button, not the deploy
         with:
           script: |
@@ -91,27 +68,21 @@ jobs:
               name: "preview",
             });
 
-      # Which commit, and which run built it. Both come from the event -- the
-      # only thing a pull request chooses here is its own head, and the run has
-      # to be a CI run of this repository on that exact sha.
+      # Which run built this commit. The sha is the event's, and the run has to
+      # be a CI run of this repository on that exact sha -- a fork chooses what
+      # is in its own head commit, and nothing else here.
       - id: what
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SHA: ${{ github.event.workflow_run.head_sha || github.event.pull_request.head.sha }}
-          RUN_ID: ${{ github.event.workflow_run.id }}
+          SHA: ${{ github.event.pull_request.head.sha }}
         run: |
-          if [ -z "$RUN_ID" ]; then
-            # The label can land before the build has finished, in which
-            # case the artifact is not there yet and the download below
-            # says so: press it again once the build is green.
-            RUN_ID=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs?head_sha=$SHA&event=pull_request" \
-              --jq '[.workflow_runs[] | select(.name == "Preview build")] | first | .id')
-          fi
-          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
-          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+          # The label can land before the build has finished, in which case the
+          # artifact is not there yet and the download below says so: press it
+          # again once `preview-job` is green.
+          run_id=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs?head_sha=$SHA&event=pull_request" \
+            --jq '[.workflow_runs[] | select(.name == "CI")] | first | .id')
+          echo "run_id=$run_id" >> "$GITHUB_OUTPUT"
 
-      # No artifact is a build that failed, and the run goes red here rather
-      # than on the pull request -- where `preview-job` is already red for it.
       - uses: actions/download-artifact@v8
         if: ${{ env.PREVIEW == 'true' }}
         with:
@@ -120,6 +91,8 @@ jobs:
           run-id: ${{ steps.what.outputs.run_id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
+      # From here down, `ci.yml`'s deploy step, verbatim apart from where the
+      # `out` directory comes from
       - id: preview
         if: ${{ env.PREVIEW == 'true' }}
         env:
@@ -155,18 +128,17 @@ jobs:
           echo "url=$url$base_path" >> "$GITHUB_OUTPUT"
 
       # The pull request's "View deployment" box, which Vercel's git integration
-      # would have filled had we let it deploy. The sha is the event's, not the
-      # artifact's: a fork's head commit is reachable here as `refs/pull/N/head`.
+      # would have filled had we let it deploy. The fork's head commit is
+      # reachable from here as `refs/pull/N/head`.
       - uses: actions/github-script@v9
         if: ${{ env.PREVIEW == 'true' }}
         env:
           URL: ${{ steps.preview.outputs.url }}
-          SHA: ${{ steps.what.outputs.sha }}
         with:
           script: |
             const { data } = await github.rest.repos.createDeployment({
               ...context.repo,
-              ref: process.env.SHA,
+              ref: context.payload.pull_request.head.sha,
               environment: "preview",
               transient_environment: true, // superseded by the next one
               auto_merge: false, // deploy that ref, not a merge of the base into it

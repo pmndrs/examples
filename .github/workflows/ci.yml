@@ -248,6 +248,130 @@ jobs:
         with:
           path: ./out${{ steps.configurepages.outputs.base_path }}
 
+  #
+  # Preview (only for pull requests)
+  #
+  # No `needs`, deliberately. `test` dependsOn `build2`, so a shard builds the
+  # examples it is about to test -- and this job used to wait for all eight of
+  # them, for the warm cache that made its own `pnpm build` a cache hit. It was
+  # waiting on the wrong half. Measured on #200: the build it needs took 31s of
+  # that wait, the tests it also waited for took 3m16. On a pull request that
+  # touches many examples the same two numbers are ~3m30 and ~20m -- 170
+  # examples at ~60s of software rendering is what makes the sweep long, and
+  # building them was never the expensive part.
+  #
+  # So it builds all of them itself, at t=0. The preview lands at ~2min rather
+  # than 5m21. The turbo cache is shared and written as each shard's tasks
+  # finish, so what this actually rebuilds is whatever the shards have not
+  # reached yet: the duplicated work is a ceiling, not a bill -- and on a public
+  # repository the runner it occupies is free.
+  #
+  # What it gives up: an example whose test is red now reaches the preview.
+  # Which is what a preview is for -- `chromatic-job` publishes on `always()`
+  # for the same reason -- and merging is still gated on the tests.
+  #
+  preview-job:
+    if: ${{ github.event_name == 'pull_request' }}
+    runs-on: ubuntu-latest
+    env:
+      # No token, no deploy *from here*: that is a fork's pull request, which
+      # cannot read the repo secrets, or a checkout of this repo that never set
+      # them. It still builds -- the artifact at the bottom is how that build
+      # reaches `preview.yml`, which has the token and does not run this code.
+      PREVIEW: ${{ secrets.VERCEL_TOKEN != '' }}
+    steps:
+      - uses: actions/checkout@v7
+      - id: configurepages
+        uses: actions/configure-pages@v5
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
+      - uses: rharkor/caching-for-turbo@v2.5.1
+
+      # The same `BASE_PATH` as the Pages build, and not for tidiness:
+      # `BASE_PATH` is a `globalEnv`, and it really does change every example's
+      # `dist` (vite's `--base`). Building the preview without it gave every
+      # `build2` a different hash from the one the rest of this workflow
+      # produces -- 167 rebuilds, ~3.5min, and never a cache hit across runs
+      # either, since `main` never produces those hashes and a pull request
+      # cannot read another one's cache. With it, the hashes line up, and what
+      # is actually built here is what the shards have not cached yet.
+      #
+      # What it costs: the preview is served from `<url>${BASE_PATH}`, not the
+      # domain root, since the pages link to each other by absolute path. That
+      # is the production layout, which is what a preview should be showing.
+      - run: pnpm build
+        env:
+          BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
+          # The production origin, deliberately: the <head> URLs are canonical
+          # links, and a preview that is "the production layout" should carry
+          # them too -- besides, a different value is a different `build2`
+          # hash, and these have to be the hashes everything else produces.
+          BASE_URL: ${{ steps.configurepages.outputs.base_url }}
+      - id: preview
+        if: ${{ env.PREVIEW == 'true' }}
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
+        run: |
+          mkdir -p .vercel/output
+          # `out`, not `out${BASE_PATH}`: the site lives one level down, and the
+          # static root has to be the level its absolute links resolve against
+          mv out .vercel/output/static
+          # `cleanUrls`: the website exports flat `<name>.html` pages and links
+          # to them without the extension. The route sends the bare deployment
+          # URL -- the one Vercel prints, and the one anyone trims to -- to the
+          # home page, which now sits under the base path rather than at `/`.
+          printf '{"version":3,"cleanUrls":true,"routes":[{"src":"/","status":308,"headers":{"Location":"%s"}}]}' \
+            "${BASE_PATH:-/}" > .vercel/output/config.json
+          # `--archive`: one tarball, not 2.4k file uploads
+          url=$(pnpm dlx vercel@latest deploy --prebuilt --archive=tgz --token="$VERCEL_TOKEN")
+          echo "url=$url$BASE_PATH" >> "$GITHUB_OUTPUT"
+      # The pull request's "View deployment" box, which Vercel's git integration
+      # would have filled had we let it deploy
+      - uses: actions/github-script@v9
+        if: ${{ env.PREVIEW == 'true' }}
+        env:
+          URL: ${{ steps.preview.outputs.url }}
+        with:
+          script: |
+            const { data } = await github.rest.repos.createDeployment({
+              ...context.repo,
+              ref: context.payload.pull_request.head.sha,
+              environment: "preview",
+              transient_environment: true, // superseded by the next one
+              auto_merge: false, // deploy that ref, not a merge of the base into it
+              required_contexts: [], // the checks that would gate it are the ones running this
+            });
+            await github.rest.repos.createDeploymentStatus({
+              ...context.repo,
+              deployment_id: data.id,
+              state: "success",
+              environment_url: process.env.URL,
+            });
+
+      # A fork's build stops here otherwise, which is the whole of what it used
+      # to do: skip. `preview.yml` picks this up when a maintainer asks it to,
+      # and `base_path` travels with it because that workflow cannot recompute
+      # it without a Pages permission it has no other use for.
+      - if: ${{ env.PREVIEW != 'true' }}
+        run: echo "${{ steps.configurepages.outputs.base_path }}" > base_path
+      - if: ${{ env.PREVIEW != 'true' }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: preview
+          path: |
+            out
+            base_path
+          # The label is pressed while the pull request is being looked at, or
+          # not at all. 90 days of 235MB tarballs is the other option.
+          retention-days: 7
+
   deploy-job:
     # only for pushes on main
     if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
