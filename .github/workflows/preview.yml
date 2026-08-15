@@ -5,11 +5,11 @@
 # so that a fork's pull request can have a preview at all.
 #
 # `pull_request` gives a fork's run a read-only token and no secrets, on
-# purpose: everything it runs is the pull request's code. `workflow_run` is the
-# way back -- it runs here, in this repository, on the default branch's copy of
-# this file, with the secrets -- and it is only safe for as long as this
-# workflow runs none of that code. So: no checkout of the head, no
-# `pnpm install`, no build. It downloads what `ci.yml` built and uploads it.
+# purpose: everything it runs is the pull request's code. So the deploy happens
+# here instead, in a workflow that runs in this repository, with the secrets --
+# and that is only safe for as long as it runs none of that code. It does not:
+# no checkout of the head, no `pnpm install`, no build. It downloads what
+# `ci.yml` built and uploads it.
 #
 # The artifact is the boundary, and everything inside it is untrusted input.
 # Two consequences, both of them below: the Build Output API's own directories
@@ -22,8 +22,23 @@
 # `*.vercel.app` URL, in a project that has no environment variables and no
 # domain of ours. Which is what a preview of its own code is.
 #
-# A maintainer approves each one on top of that -- see `environment` below,
-# which is careful about what that click is and is not.
+# Two doors in, and which one a pull request gets is the only difference the
+# fork makes:
+#
+#   - a branch on this repository -- `workflow_run`, as soon as CI has built
+#     it. Nobody approves their own colleague's preview, and that is how this
+#     behaved before the split.
+#
+#   - a fork -- nothing, until a maintainer puts the `preview` label on the
+#     pull request. That label is the button: adding one needs triage rights
+#     here, which is exactly the set of people who should be deciding, and the
+#     contributor cannot add it to their own. It comes straight back off, so
+#     the next click is another deploy.
+#
+# `pull_request_target` is what makes that label event able to see the secrets.
+# The reason it is usually a footgun is a checkout of the pull request's head
+# followed by anything that executes it -- which is the one thing this file is
+# built not to do.
 #
 name: Preview
 
@@ -31,37 +46,30 @@ on:
   workflow_run:
     workflows: [CI]
     types: [completed]
+  pull_request_target:
+    types: [labeled]
 
 # Deliberately not the repository defaults: this workflow holds the token, so
-# it gets the two permissions it uses and nothing else. `actions: read` is what
-# reads another run's artifact.
+# it gets the permissions it uses and nothing else. `actions: read` reads
+# another run's artifact, `pull-requests: write` takes the label back off.
 permissions:
   actions: read
   deployments: write
+  pull-requests: write
 
 jobs:
   preview-job:
-    # A push on main has its own deployment, and `workflow_run` fires for it too
-    if: ${{ github.event.workflow_run.event == 'pull_request' }}
+    if: >-
+      ${{ (github.event_name == 'workflow_run'
+        && github.event.workflow_run.event == 'pull_request'
+        && github.event.workflow_run.head_repository.full_name == github.repository)
+        || (github.event_name == 'pull_request_target'
+        && github.event.label.name == 'preview') }}
     runs-on: ubuntu-latest
-
-    # The environment's required reviewers hold this job until a maintainer
-    # approves it, and what they are approving is worth being precise about:
-    # not the pull request's code -- nothing here runs it, and no click could
-    # honestly vouch for a lockfile's `postinstall` scripts anyway -- but a
-    # tarball of static files going onto our Vercel account. A question a human
-    # can actually answer.
-    #
-    # It is a gate, not the safety property: with no reviewers configured the
-    # environment lets every run straight through, and everything above still
-    # holds. Note that GitHub creates the environment on first use if it does
-    # not exist, unprotected -- so the reviewers have to be set before this
-    # merges, or the first preview sails past ungated.
-    #
-    # `url` is what the run's environment box links to, since the deployment
-    # this job records lands on the default branch's ref (a `workflow_run` runs
-    # there, not on the pull request); the box on the pull request itself is the
-    # deployment created at the end, against the fork's head sha.
+    # The box on the run, which is the only place the URL would otherwise not
+    # appear. Required reviewers on this environment would work, and would be a
+    # second approval on top of the label, in the Actions tab rather than on the
+    # pull request -- the label is the gate.
     environment:
       name: preview
       url: ${{ steps.preview.outputs.url }}
@@ -70,6 +78,38 @@ jobs:
       # No token, no preview: a checkout of this repository that never set them
       PREVIEW: ${{ secrets.VERCEL_TOKEN != '' }}
     steps:
+      # Off first, and not at the end: a failed deploy leaves a button that can
+      # be pressed again rather than a label to remove by hand.
+      - uses: actions/github-script@v9
+        if: ${{ github.event_name == 'pull_request_target' }}
+        continue-on-error: true # it is the button, not the deploy
+        with:
+          script: |
+            await github.rest.issues.removeLabel({
+              ...context.repo,
+              issue_number: context.payload.pull_request.number,
+              name: "preview",
+            });
+
+      # Which commit, and which run built it. Both come from the event -- the
+      # only thing a pull request chooses here is its own head, and the run has
+      # to be a CI run of this repository on that exact sha.
+      - id: what
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SHA: ${{ github.event.workflow_run.head_sha || github.event.pull_request.head.sha }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+        run: |
+          if [ -z "$RUN_ID" ]; then
+            # The label can land before CI has finished, in which case the
+            # artifact is not there yet and the download below says so: press
+            # it again once the build is green.
+            RUN_ID=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs?head_sha=$SHA&event=pull_request" \
+              --jq '[.workflow_runs[] | select(.name == "CI")] | first | .id')
+          fi
+          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
+          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+
       # No artifact is a build that failed, and the run goes red here rather
       # than on the pull request -- where `preview-job` is already red for it.
       - uses: actions/download-artifact@v8
@@ -77,7 +117,7 @@ jobs:
         with:
           name: preview
           path: artifact
-          run-id: ${{ github.event.workflow_run.id }}
+          run-id: ${{ steps.what.outputs.run_id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - id: preview
@@ -121,11 +161,12 @@ jobs:
         if: ${{ env.PREVIEW == 'true' }}
         env:
           URL: ${{ steps.preview.outputs.url }}
+          SHA: ${{ steps.what.outputs.sha }}
         with:
           script: |
             const { data } = await github.rest.repos.createDeployment({
               ...context.repo,
-              ref: context.payload.workflow_run.head_sha,
+              ref: process.env.SHA,
               environment: "preview",
               transient_environment: true, // superseded by the next one
               auto_merge: false, // deploy that ref, not a merge of the base into it
