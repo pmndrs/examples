@@ -305,7 +305,7 @@ export default function Nav({
   const [libraryOpen, setLibraryOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
 
-  const [{ q: search, library, tag }, setFilters] =
+  const [{ q: search, library, tag: activeTags }, setFilters] =
     useQueryStates(filterParsers);
   const setSearch = useCallback(
     (value: string | ((current: string) => string)) =>
@@ -345,7 +345,7 @@ export default function Nav({
 
      Plain state, not `setOpen`: following someone's filter link should not
      overwrite this visitor's stored collapse preference. */
-  const hasFilters = search !== "" || library !== "" || tag !== "";
+  const hasFilters = search !== "" || library !== "" || activeTags.length > 0;
   const [filtersRevealed, setFiltersRevealed] = useState(hasFilters);
   if (hasFilters && !filtersRevealed) {
     setFiltersRevealed(true);
@@ -402,11 +402,12 @@ export default function Nav({
           return false;
         }
 
-        /* One tag at a time, crossed with the library filter rather than with
-           another tag: of the 423 pairs of tags that co-occur at all, 29 cover
-           more than a single example, so a second tag is a reliable way to
-           reach an empty list. */
-        if (tag && !example.tags.includes(tag)) return false;
+        /* Tags AND together. What keeps that from being a way to reach an
+           empty list — most pairs of tags share no example — is that a badge
+           which would empty it is never offered; see `TagFilterProvider`. */
+        if (!activeTags.every((active) => example.tags.includes(active))) {
+          return false;
+        }
 
         if (terms.length === 0) return true;
 
@@ -426,7 +427,7 @@ export default function Nav({
       .sort(
         (exampleA, exampleB) => Number(exampleB.isNew) - Number(exampleA.isNew),
       );
-  }, [examples, library, search, tag]);
+  }, [examples, library, search, activeTags]);
   const nearbyExamples = useNearbyExamples(listElement, filteredExamples);
 
   const focusSearch = useCallback(
@@ -738,13 +739,17 @@ export default function Nav({
                     nearbyExamples.has(name) ||
                     examplename === name;
 
-                  /* The tag being filtered on leads its own strip. Only four
-                     pills fit, so without this the card can be filtered by a
-                     tag it does not appear to carry. */
-                  const stripTags =
-                    tag && tags.includes(tag)
-                      ? [tag, ...tags.filter((other) => other !== tag)]
-                      : tags;
+                  /* The tags being filtered on lead the strip. Only four pills
+                     fit, so without this a card can be filtered by tags it
+                     does not appear to carry. */
+                  const stripTags = activeTags.some((active) =>
+                    tags.includes(active),
+                  )
+                    ? [
+                        ...activeTags.filter((active) => tags.includes(active)),
+                        ...tags.filter((other) => !activeTags.includes(other)),
+                      ]
+                    : tags;
 
                   return (
                     <li
@@ -798,7 +803,7 @@ export default function Nav({
                           href={serializeFilters(`/examples/${name}`, {
                             q: search,
                             library,
-                            tag,
+                            tag: activeTags,
                           })}
                           aria-label={title}
                           aria-current={

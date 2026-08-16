@@ -1,4 +1,4 @@
-import { createSerializer, parseAsString } from "nuqs";
+import { createSerializer, parseAsArrayOf, parseAsString } from "nuqs";
 
 /* Filters are shareable: `?q=` carries the search text, `?library=` the library
    filter, `?tag=` the tag one. nuqs owns the round trip — the URL *is* the
@@ -16,7 +16,11 @@ import { createSerializer, parseAsString } from "nuqs";
 export const filterParsers = {
   q: parseAsString.withDefault(""),
   library: parseAsString.withDefault(""),
-  tag: parseAsString.withDefault(""),
+  /* Comma-separated, ANDed. Of the 6,786 pairs two of the 117 tags can make,
+     336 occur together at all — so a second tag reaches an empty list unless
+     something stops it being offered. `useTagAvailability` is that something;
+     see `TagFilterProvider`. */
+  tag: parseAsArrayOf(parseAsString).withDefault([]),
 };
 
 /* Same parsers, used to hang the active filters off every card link so they

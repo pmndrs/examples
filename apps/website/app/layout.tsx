@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/react";
 import "./globals.css";
 import Nav from "@/components/Nav";
+import { TagFilterProvider } from "@/components/TagFilterProvider";
 import { catalogIndexUrl, getExamples } from "@/lib/helper";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "@/components/ui/sonner";
@@ -160,10 +161,15 @@ export default function RootLayout({
               still ships prerendered and picks the params up on hydration —
               which is exactly what the hand-rolled version did. */}
           <NuqsAdapter>
-            <Nav examples={examples} />
-            <main className="grid h-dvh min-w-0 flex-1 place-items-center overflow-hidden p-(--main-p)">
-              {children}
-            </main>
+            {/* Tags AND together, so a badge has to know whether adding it
+                would empty the list — which takes the whole catalog, on both
+                sides of `main`. */}
+            <TagFilterProvider examples={examples}>
+              <Nav examples={examples} />
+              <main className="grid h-dvh min-w-0 flex-1 place-items-center overflow-hidden p-(--main-p)">
+                {children}
+              </main>
+            </TagFilterProvider>
           </NuqsAdapter>
           <Toaster />
         </ThemeProvider>
