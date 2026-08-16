@@ -12,7 +12,12 @@ import { useControls } from "leva";
 function GradientBox({ position }: { position: [number, number, number] }) {
   return (
     <Float speed={2} floatIntensity={0.5}>
-      <RoundedBox args={[1.5, 1.5, 1.5]} position={position} radius={0.15} smoothness={4}>
+      <RoundedBox
+        args={[1.5, 1.5, 1.5]}
+        position={position}
+        radius={0.15}
+        smoothness={4}
+      >
         <meshStandardMaterial>
           <GradientTexture
             stops={[0, 0.5, 1]}

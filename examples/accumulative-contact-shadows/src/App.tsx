@@ -18,7 +18,13 @@ function AccumulativeSection() {
 
   return (
     <group position={[-2, 0, 0]}>
-      <RoundedBox args={[1, 1, 1]} position={[0, 0.5, 0]} radius={0.1} smoothness={4} castShadow>
+      <RoundedBox
+        args={[1, 1, 1]}
+        position={[0, 0.5, 0]}
+        radius={0.1}
+        smoothness={4}
+        castShadow
+      >
         <meshStandardMaterial color="#e74c3c" />
       </RoundedBox>
 
@@ -58,7 +64,12 @@ function ContactSection() {
 
   return (
     <group position={[2, 0, 0]}>
-      <RoundedBox args={[1, 1, 1]} position={[0, 0.5, 0]} radius={0.1} smoothness={4}>
+      <RoundedBox
+        args={[1, 1, 1]}
+        position={[0, 0.5, 0]}
+        radius={0.1}
+        smoothness={4}
+      >
         <meshStandardMaterial color="#9b59b6" />
       </RoundedBox>
 

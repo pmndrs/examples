@@ -1,10 +1,6 @@
 import { useRef } from "react";
 import { Canvas } from "@react-three/fiber";
-import {
-  CameraControls,
-  Environment,
-  RoundedBox,
-} from "@react-three/drei";
+import { CameraControls, Environment, RoundedBox } from "@react-three/drei";
 import { useControls, button } from "leva";
 import type CameraControlsImpl from "camera-controls";
 
