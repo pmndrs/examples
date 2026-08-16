@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Water Shader",
   "description": "",
-  "tags": ["shader", "water"],
+  "tags": ["shader"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2021-04-15",
   "source": "https://codesandbox.io/s/1b40u",

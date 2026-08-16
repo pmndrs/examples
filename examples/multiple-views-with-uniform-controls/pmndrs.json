@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Multiple Views With Uniform Controls",
   "description": "Shows how to form self-contained components with their own state and user interaction.",
-  "tags": [],
+  "tags": ["views", "controls", "state", "soft-shadows"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2023-01-19",
   "source": "https://codesandbox.io/s/r9w2ob",

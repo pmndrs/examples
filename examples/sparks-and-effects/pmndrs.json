@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Sparks And Effects",
   "description": "Demonstrating fake-particles, mesh-lines and effect composition.",
-  "tags": ["glow", "mesh-line", "effects", "particles", "text-geometry"],
+  "tags": ["bloom", "particles", "text-geometry"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2020-01-10",
   "source": "https://codesandbox.io/s/sbf2i",

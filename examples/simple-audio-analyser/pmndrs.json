@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Simple Audio Analyser",
   "description": "Audio frequency analysis.",
-  "tags": ["analyser", "audio"],
+  "tags": ["audio"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2021-09-02",
   "source": "https://codesandbox.io/s/wu51m",

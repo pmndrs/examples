@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Sport Hall",
   "description": "Shows how to form self-contained components with their own state and user interaction.",
-  "tags": ["box projected", "environment", "ground mapping", "reflections"],
+  "tags": ["ground-projection", "environment", "reflections"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2022-02-09",
   "source": "https://codesandbox.io/s/s006f",

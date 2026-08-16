@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "useIntersect and ScrollControls",
   "description": "Combining useIntersect with scrollcontrols.",
-  "tags": ["vertical", "useintersect", "intersection", "scroll"],
+  "tags": ["vertical", "intersection", "scroll"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2021-10-18",
   "source": "https://codesandbox.io/s/gsm1y",

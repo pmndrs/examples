@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Building Dynamic Env Maps",
   "description": "Shows how to form self-contained components with their own state and user interaction.",
-  "tags": ["ssr", "reflections", "glow", "environment", "bloom", "lut"],
+  "tags": ["ssr", "reflections", "bloom", "environment", "lut"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2022-03-04",
   "source": "https://codesandbox.io/s/e662p3",

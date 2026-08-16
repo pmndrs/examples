@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Diamond Ring",
   "description": "",
-  "tags": ["bloom", "refraction", "diamond", "ring", "html"],
+  "tags": ["bloom", "refraction", "html"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2022-09-18",
   "source": "https://codesandbox.io/s/4gy946",

@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Bounds and makeDefault",
   "description": "Combining TransformControls, OrbitControls and Valtio.",
-  "tags": ["fit-all", "bounds"],
+  "tags": ["bounds"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2021-10-28",
   "source": "https://codesandbox.io/s/rz2g0",

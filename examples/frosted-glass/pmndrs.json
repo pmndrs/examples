@@ -3,7 +3,7 @@
   "title": "Frosted Glass",
   "description": "Shader mip-map blur to mimic frosted glass. ",
   "notes": "Updated for MeshTransmissionMaterial in 2023.",
-  "tags": ["frosted-glas", "shaders", "transmission"],
+  "tags": ["shader", "transmission"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2021-03-22",
   "source": "https://codesandbox.io/s/imn42",

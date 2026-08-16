@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "T-Shirt Configurator",
   "description": "",
-  "tags": ["decals"],
+  "tags": ["decal"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2022-08-15",
   "source": "https://codesandbox.io/s/ioxywi",

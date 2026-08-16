@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Rapier Ping Pong",
   "description": "Mini ping-pong implementation using rapier-physics.",
-  "tags": [],
+  "tags": ["physics", "game", "collisions", "audio"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2024-01-20",
   "source": "https://codesandbox.io/s/ptdgrn",

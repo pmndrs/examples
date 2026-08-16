@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Gatsby Stars",
   "description": "",
-  "tags": ["stars", "text", "gradient", "instances"],
+  "tags": ["text", "gradient", "instances"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2022-02-25",
   "source": "https://codesandbox.io/s/2csbr1",

@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Thunder Clouds",
   "description": "Trying out drei's new cloud component.",
-  "tags": [],
+  "tags": ["volumetric", "camera-shake", "physics", "contact-shadows"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2023-09-25",
   "source": "https://codesandbox.io/s/gwthnh",

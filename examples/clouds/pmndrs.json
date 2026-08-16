@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Clouds",
   "description": "Trying out drei's new cloud component.",
-  "tags": ["clouds"],
+  "tags": ["volumetric"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2020-11-16",
   "source": "https://codesandbox.io/s/mbfzf",

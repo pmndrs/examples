@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Baking Soft Shadows",
   "description": "How to use drei/AccumulativeShadows and RandomizedLight",
-  "tags": ["baking", "softshadows", "shadows", "lightmap", "progressive"],
+  "tags": ["baking", "soft-shadows", "lightmap", "progressive"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2022-07-30",
   "source": "https://codesandbox.io/s/hxcc1x",

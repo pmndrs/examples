@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "GLTF Animations",
   "description": "This examples shows how to blend GLTF animation keyframes.",
-  "tags": ["skinnedmesh", "gltf", "bones", "animations", "useanimations"],
+  "tags": ["gltf", "bones", "animation"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2020-12-06",
   "source": "https://codesandbox.io/s/pecl6",

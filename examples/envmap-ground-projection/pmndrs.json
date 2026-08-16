@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Env Map Ground Projection",
   "description": "",
-  "tags": ["cube camera", "reflections"],
+  "tags": ["ground-projection", "reflections"],
   "authors": ["Faraz Shaikh"],
   "publishedAt": "2022-04-10",
   "source": "https://codesandbox.io/s/q48jgy",

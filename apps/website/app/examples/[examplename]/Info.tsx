@@ -3,6 +3,7 @@ import { RxInfoCircled } from "react-icons/rx";
 
 import { getLibraryLabel } from "@/const/libraries";
 import type { Example } from "@/lib/helper";
+import { TagBadge } from "@/components/TagBadge";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
@@ -134,9 +135,9 @@ export function Info({ example }: { example: Example }) {
           <Section title="Tags">
             <ul className="flex flex-wrap gap-1">
               {example.tags.map((tag) => (
-                <Badge key={tag} variant="secondary" render={<li />}>
-                  {tag}
-                </Badge>
+                <li key={tag}>
+                  <TagBadge tag={tag} variant="secondary" />
+                </li>
               ))}
             </ul>
           </Section>

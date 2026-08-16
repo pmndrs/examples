@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Video Cookies",
   "description": "How to use drei/AccumulativeShadows and RandomizedLight",
-  "tags": [],
+  "tags": ["video-texture", "gobo", "soft-shadows", "postprocessing"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2022-08-31",
   "source": "https://codesandbox.io/s/hmbn1l",
