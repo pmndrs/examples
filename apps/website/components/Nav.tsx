@@ -755,7 +755,11 @@ export default function Nav({
                     <li
                       key={thumb}
                       data-example={name}
-                      className="transition-transform duration-1078 ease-expressive active:scale-97"
+                      /* The press belongs to the link, not to the card: `:active`
+                         reaches every ancestor, so a plain `active:` would have
+                         the whole vignette sink under a tag pill being toggled —
+                         a gesture that goes nowhere near the example. */
+                      className="transition-transform duration-1078 ease-expressive has-[a:active]:scale-97"
                     >
                       <Item
                         variant="default"

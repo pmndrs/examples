@@ -48,7 +48,9 @@ export function TagBadge({
       }
       onClick={() => toggle(tag)}
       {...(focusable ? {} : { tabIndex: -1, "data-roving-skip": "" })}
-      className="cursor-pointer disabled:cursor-default disabled:opacity-40"
+      /* The badge's own hover is written `[a]:hover:`, so it lands on anchors
+         and this is a button — the pill has to say it is pressable itself. */
+      className="cursor-pointer not-disabled:hover:opacity-80 disabled:cursor-default disabled:opacity-40"
     >
       {tag}
     </Badge>
