@@ -10,6 +10,16 @@ Issues are tracked on GitHub (pmndrs/examples) via the `gh` CLI; external PRs ar
 
 Canonical vocabulary: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. See `docs/agents/triage-labels.md`.
 
+### Example tags
+
+Closed vocabulary, held as the `enum` on `tags` in `schemas/pmndrs.schema.json` — the same treatment `libraries` gets, and `bin/validate-pmndrs-metadata.mjs` reads both lists out of that file. An unknown tag fails `pnpm lint:metadata`, and every example carries at least one.
+
+Closed because a tag is a filter: the badges on the example page and the cards set `?tag=`, so a misspelt tag is a pill that returns nothing rather than a cosmetic slip. The cost is a line in the schema for each new term — paid in the same pull request as the example that needs it, and the editor offers the list while you type, since every `pmndrs.json` points `$schema` at that file.
+
+One axis: the technique. Not what the scene depicts (`arkanoid`, `minecraft`, a brand) — the title and the description already say that — and not the API that implements it (`MeshReflectorMaterial`, `useAnimations`), which the source does. `reflections`, not `meshreflectormaterial`.
+
+Form is kebab-case and lower-case. Between a singular and a plural, the form the catalog already carries more often wins, and a tie goes to the singular — which is why it is `shader` and `animation` but `reflections` and `particles`.
+
 ### Domain docs
 
 Single-context: one `CONTEXT.md` + `docs/adr/` at the repo root (created lazily by `/domain-modeling`). See `docs/agents/domain.md`.

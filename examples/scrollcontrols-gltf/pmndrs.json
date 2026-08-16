@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "ScrollControls GLTF",
   "description": "Connecting models with useScroll",
-  "tags": ["gltf", "scrollcontrols"],
+  "tags": ["gltf", "scroll"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2021-10-22",
   "source": "https://codesandbox.io/s/4jr4p",

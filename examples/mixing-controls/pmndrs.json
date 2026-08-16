@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Mixing Controls",
   "description": "Switching off one control while the other is active.",
-  "tags": ["orbit-controls", "controls", "transform-controls"],
+  "tags": ["controls"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2019-09-10",
   "source": "https://codesandbox.io/s/hf1cs",

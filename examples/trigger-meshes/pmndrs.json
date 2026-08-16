@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Trigger Meshes",
   "description": "Shows how to implement trigger meshes that inform the application of collisions.",
-  "tags": [],
+  "tags": ["physics", "collisions"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2021-06-05",
   "source": "https://codesandbox.io/s/h545c",

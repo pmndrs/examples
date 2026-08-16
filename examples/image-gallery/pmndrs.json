@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Image Gallery",
   "description": "Stage a couple of frames with a reflective, blurred out ground.",
-  "tags": ["image", "meshreflectormaterial"],
+  "tags": ["reflections", "router", "text"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2022-01-05",
   "source": "https://codesandbox.io/s/lx2h8",

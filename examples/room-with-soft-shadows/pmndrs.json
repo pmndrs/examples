@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Room With Soft Shadows",
   "description": "Percentage closer soft shadows.",
-  "tags": [],
+  "tags": ["pcss", "soft-shadows", "gltf"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2023-02-27",
   "source": "https://codesandbox.io/s/ykfpwf",

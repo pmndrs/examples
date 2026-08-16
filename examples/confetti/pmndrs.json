@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Confetti",
   "description": "Meshline particles.",
-  "tags": ["particles", "confetti"],
+  "tags": ["particles"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2019-10-19",
   "source": "https://codesandbox.io/s/vl221",

@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Color Grading",
   "description": "Shows how to use LUTPass to grade colors.",
-  "tags": ["grading"],
+  "tags": ["lut"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2020-11-09",
   "source": "https://codesandbox.io/s/wvgxp",

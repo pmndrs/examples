@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Spotlight Shadows",
   "description": "Casting a patterned gobo shadow from a spot light, with a custom shader that repeats the leaf texture and fakes wind.",
-  "tags": ["spotlight", "shadow", "gobo", "shader", "texture"],
+  "tags": ["spotlight", "shadows", "gobo", "shader", "texture"],
   "authors": ["Faraz Shaikh"],
   "source": "https://codesandbox.io/s/yyk6gv",
   "libraries": ["@react-three/drei", "@react-three/fiber"],

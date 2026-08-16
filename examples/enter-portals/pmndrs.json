@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Enter Portals",
   "description": "",
-  "tags": [],
+  "tags": ["portal", "router", "text", "gltf"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2023-06-14",
   "source": "https://codesandbox.io/s/9m4tpc",

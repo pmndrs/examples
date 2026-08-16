@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Faucets Select Highlight",
   "description": "",
-  "tags": ["bounds", "highlight", "selection", "metal", "reflections"],
+  "tags": ["bounds", "highlight", "selection", "reflections"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2022-07-15",
   "source": "https://codesandbox.io/s/8flefh",

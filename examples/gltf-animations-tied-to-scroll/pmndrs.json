@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "GLTF Animations Tied To Scroll",
   "description": "This examples shows how to blend GLTF animation keyframes.",
-  "tags": [],
+  "tags": ["gltf", "animation", "scroll", "soft-shadows"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2023-05-15",
   "source": "https://codesandbox.io/s/hg3ejl",

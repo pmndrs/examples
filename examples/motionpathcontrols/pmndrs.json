@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "MotionPathControls",
   "description": "",
-  "tags": [],
+  "tags": ["controls", "bezier", "postprocessing", "gltf"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2023-09-17",
   "source": "https://codesandbox.io/s/2y73c6",

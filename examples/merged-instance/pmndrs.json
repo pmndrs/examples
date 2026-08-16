@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Merged Instance",
   "description": "Loading massive assemblies and re-using their parts while keeping the natural  scene graph alive.",
-  "tags": ["batching", "merging", "instancing"],
+  "tags": ["batching", "merging", "instances"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2021-09-19",
   "source": "https://codesandbox.io/s/kud9p",

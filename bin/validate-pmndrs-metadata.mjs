@@ -9,6 +9,7 @@ const examplesDirectory = path.join(root, "examples");
 const schemaPath = path.join(root, "schemas", "pmndrs.schema.json");
 const schema = JSON.parse(fs.readFileSync(schemaPath, "utf8"));
 const allowedLibraries = new Set(schema.properties.libraries.items.enum);
+const allowedTags = new Set(schema.properties.tags.items.enum);
 const requiredFields = new Set(schema.required);
 const allowedFields = new Set(Object.keys(schema.properties));
 const allowedAssetFields = new Set(Object.keys(schema.$defs.asset.properties));
@@ -96,6 +97,22 @@ for (const exampleName of exampleNames) {
       addError(exampleName, `"${field}" must contain non-empty strings`);
     } else if (hasDuplicates(metadata[field])) {
       addError(exampleName, `"${field}" contains duplicates`);
+    }
+  }
+
+  /* The vocabulary is closed, and an unknown tag is not a spelling nit: a tag
+     is a filter now, so `gtlf` is a pill that returns nothing. Adding a term is
+     a line in the schema, in the same pull request as the example that needs
+     it -- and because every `pmndrs.json` points `$schema` at that file, the
+     editor offers the list while it is being typed. */
+  if (isStringArray(metadata.tags)) {
+    if (metadata.tags.length === 0) {
+      addError(exampleName, '"tags" must carry at least one tag');
+    }
+    for (const tag of metadata.tags) {
+      if (!allowedTags.has(tag)) {
+        addError(exampleName, `unknown tag "${tag}"`);
+      }
     }
   }
 

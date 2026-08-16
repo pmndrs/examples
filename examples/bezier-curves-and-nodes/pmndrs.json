@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Bezier Curves And Nodes",
   "description": "Creating node diagrams with drei's Line and bezier curves.",
-  "tags": ["line2", "graph", "nodes", "bezier"],
+  "tags": ["bezier"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2021-02-26",
   "source": "https://codesandbox.io/s/3k4g6",

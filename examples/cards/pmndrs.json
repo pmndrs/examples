@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Cards",
   "description": "",
-  "tags": [],
+  "tags": ["scroll", "infinite", "text"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2023-12-11",
   "source": "https://codesandbox.io/s/dc5fjy",

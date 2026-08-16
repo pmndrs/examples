@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Minecraft",
   "description": "Mini Minecraft implementation.",
-  "tags": ["pointerlock-controls", "game", "minecraft"],
+  "tags": ["controls", "game"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2020-09-09",
   "source": "https://codesandbox.io/s/vkgi6",

@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Interactive Spline Scene Live HTML",
   "description": "Scene exported with Spline",
-  "tags": ["spline", "stencil", "html"],
+  "tags": ["stencil", "html"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2022-06-15",
   "source": "https://codesandbox.io/s/f79ucc",

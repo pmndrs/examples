@@ -146,7 +146,9 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          {/* `Nav` is the only nuqs consumer, so the adapter wraps it alone.
+          {/* Both nuqs consumers sit under here: the rail, which owns the
+              filters, and the tag pills in the example page's info panel,
+              which set `?tag=` from the other side of `main`.
 
               The plain-React adapter, not `nuqs/adapters/next/app`: this site
               is `output: "export"`, so there is no server for the Next adapter
@@ -159,10 +161,10 @@ export default function RootLayout({
               which is exactly what the hand-rolled version did. */}
           <NuqsAdapter>
             <Nav examples={examples} />
+            <main className="grid h-dvh min-w-0 flex-1 place-items-center overflow-hidden p-(--main-p)">
+              {children}
+            </main>
           </NuqsAdapter>
-          <main className="grid h-dvh min-w-0 flex-1 place-items-center overflow-hidden p-(--main-p)">
-            {children}
-          </main>
           <Toaster />
         </ThemeProvider>
       </body>

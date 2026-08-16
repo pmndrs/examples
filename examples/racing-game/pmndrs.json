@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Racing Game",
   "description": "A semi-complete racing game.",
-  "tags": ["game", "vehicle", "racing", "physics"],
+  "tags": ["game", "physics"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2021-07-23",
   "source": "https://codesandbox.io/s/lo6kp",

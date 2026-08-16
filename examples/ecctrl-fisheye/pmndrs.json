@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Ecctrl Fisheye",
   "description": "",
-  "tags": [],
+  "tags": ["fisheye", "physics", "controls", "game"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2023-10-10",
   "source": "https://codesandbox.io/s/nvk9pf",
