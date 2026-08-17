@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Flying Bananas",
   "description": "Shows how to form self-contained components with their own state and user interaction.",
-  "tags": [],
+  "tags": ["lod", "gltf", "dof", "postprocessing"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2021-09-29",
   "source": "https://codesandbox.io/s/2ycs3",

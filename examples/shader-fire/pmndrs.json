@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Shader Fire",
   "description": "A volumetric fire effect.",
-  "tags": ["fire", "volumetric", "shader"],
+  "tags": ["volumetric", "shader"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2021-05-14",
   "source": "https://codesandbox.io/s/3878x",

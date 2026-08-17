@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Ragdoll Physics",
   "description": "A mini game using cannon ragdoll physics. Throw the little guy around.",
-  "tags": ["game", "ragdoll", "physics"],
+  "tags": ["game", "physics"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2020-09-25",
   "source": "https://codesandbox.io/s/wdzv4",

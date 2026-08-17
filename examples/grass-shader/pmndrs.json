@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Grass Shader",
   "description": "Grass shader using simplex noise.",
-  "tags": ["noise", "shader", "simplex", "grass"],
+  "tags": ["noise", "shader"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2020-06-10",
   "source": "https://codesandbox.io/s/5xho4",

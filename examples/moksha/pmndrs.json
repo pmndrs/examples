@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Moksha",
   "description": "Exploration into scroll containers tied to webgl content made for codrops.",
-  "tags": ["codrops", "shaders", "refraction", "scroll", "gltf", "html"],
+  "tags": ["shader", "refraction", "scroll", "gltf", "html"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2019-12-16",
   "source": "https://codesandbox.io/s/f1ixt",

@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Simple Physics Example With Debug Bounds",
   "description": "A box dropping onto a plane using use-cannon / cannon-es.",
-  "tags": [],
+  "tags": ["physics", "debug"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2021-06-08",
   "source": "https://codesandbox.io/s/0k27n",

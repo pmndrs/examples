@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "CSG House",
   "description": "",
-  "tags": [],
+  "tags": ["csg", "controls", "soft-shadows", "environment"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2023-01-22",
   "source": "https://codesandbox.io/s/y52tmt",

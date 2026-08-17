@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Magic Box",
   "description": "",
-  "tags": [],
+  "tags": ["portal", "controls", "gltf"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2023-06-07",
   "source": "https://codesandbox.io/s/drc6qg",

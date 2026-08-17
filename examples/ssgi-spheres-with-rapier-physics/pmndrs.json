@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "SSGI Spheres With Rapier Physics",
   "description": "",
-  "tags": [],
+  "tags": ["ssgi", "physics", "postprocessing", "environment"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2023-11-12",
   "source": "https://codesandbox.io/s/5w35n6",

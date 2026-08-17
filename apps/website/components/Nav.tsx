@@ -15,7 +15,7 @@ import {
   useSyncExternalStore,
 } from "react";
 import { useParams } from "next/navigation";
-import { createSerializer, parseAsString, useQueryStates } from "nuqs";
+import { useQueryStates } from "nuqs";
 import { type Options, useHotkeys } from "react-hotkeys-hook";
 import { useEventListener, useIsClient } from "usehooks-ts";
 import {
@@ -27,8 +27,10 @@ import {
 
 import { getLibraryLabel, getLibraryPopularity } from "@/const/libraries";
 import { useRovingTabIndex } from "@/hooks/use-roving-tabindex";
+import { filterParsers, serializeFilters } from "@/lib/filters";
 import type { Example } from "@/lib/helper";
 import { cn } from "@/lib/utils";
+import { TagBadge } from "@/components/TagBadge";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -81,23 +83,6 @@ const SKELETON_TAGS = [
   [52, 76],
   [80, 44, 92],
 ];
-
-/* Filters are shareable: `?q=` carries the search text, `?library=` the
-   library filter. nuqs owns the round trip — the URL *is* the state, so the
-   defaults below double as the "no filter" values and `clearOnDefault` (on by
-   default) drops the empty param rather than leaving `?q=` behind.
-
-   Its defaults also cover what the hand-rolled version had to spell out: a
-   shallow `history.replaceState` instead of a router navigation per keystroke,
-   throttled to stay under Safari's History API rate limit. */
-const filterParsers = {
-  q: parseAsString.withDefault(""),
-  library: parseAsString.withDefault(""),
-};
-
-/* Same parsers, used to hang the active filter off every card link so it
-   survives the client navigation into an example. */
-const serializeFilters = createSerializer(filterParsers);
 
 /* `data-nav-collapsed` is put on <html> before first paint by `bootNav`
    (`app/layout.tsx`) — the only way a statically exported page can weigh
@@ -320,7 +305,8 @@ export default function Nav({
   const [libraryOpen, setLibraryOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
 
-  const [{ q: search, library }, setFilters] = useQueryStates(filterParsers);
+  const [{ q: search, library, tag: activeTags }, setFilters] =
+    useQueryStates(filterParsers);
   const setSearch = useCallback(
     (value: string | ((current: string) => string)) =>
       setFilters((current) => ({
@@ -359,7 +345,7 @@ export default function Nav({
 
      Plain state, not `setOpen`: following someone's filter link should not
      overwrite this visitor's stored collapse preference. */
-  const hasFilters = search !== "" || library !== "";
+  const hasFilters = search !== "" || library !== "" || activeTags.length > 0;
   const [filtersRevealed, setFiltersRevealed] = useState(hasFilters);
   if (hasFilters && !filtersRevealed) {
     setFiltersRevealed(true);
@@ -416,6 +402,13 @@ export default function Nav({
           return false;
         }
 
+        /* Tags AND together. What keeps that from being a way to reach an
+           empty list — most pairs of tags share no example — is that a badge
+           which would empty it is never offered; see `TagFilterProvider`. */
+        if (!activeTags.every((active) => example.tags.includes(active))) {
+          return false;
+        }
+
         if (terms.length === 0) return true;
 
         const searchableText = [
@@ -434,7 +427,7 @@ export default function Nav({
       .sort(
         (exampleA, exampleB) => Number(exampleB.isNew) - Number(exampleA.isNew),
       );
-  }, [examples, library, search]);
+  }, [examples, library, search, activeTags]);
   const nearbyExamples = useNearbyExamples(listElement, filteredExamples);
 
   const focusSearch = useCallback(
@@ -746,30 +739,29 @@ export default function Nav({
                     nearbyExamples.has(name) ||
                     examplename === name;
 
+                  /* The tags being filtered on lead the strip. Only four pills
+                     fit, so without this a card can be filtered by tags it
+                     does not appear to carry. */
+                  const stripTags = activeTags.some((active) =>
+                    tags.includes(active),
+                  )
+                    ? [
+                        ...activeTags.filter((active) => tags.includes(active)),
+                        ...tags.filter((other) => !activeTags.includes(other)),
+                      ]
+                    : tags;
+
                   return (
                     <li
                       key={thumb}
                       data-example={name}
-                      className="transition-transform duration-1078 ease-expressive active:scale-97"
+                      /* The press belongs to the link, not to the card: `:active`
+                         reaches every ancestor, so a plain `active:` would have
+                         the whole vignette sink under a tag pill being toggled —
+                         a gesture that goes nowhere near the example. */
+                      className="transition-transform duration-1078 ease-expressive has-[a:active]:scale-97"
                     >
                       <Item
-                        render={
-                          <Link
-                            /* The filter rides along: the rail stays mounted
-                               across this navigation, but the URL is the state
-                               now, so a bare `/examples/<name>` would clear
-                               it. */
-                            href={serializeFilters(`/examples/${name}`, {
-                              q: search,
-                              library,
-                            })}
-                            aria-label={title}
-                            aria-current={
-                              examplename === name ? "page" : undefined
-                            }
-                            className="no-underline"
-                          />
-                        }
                         variant="default"
                         className={cn(
                           "relative overflow-hidden rounded-md bg-card p-0 transition-[color,box-shadow] duration-200 hover:shadow-lg",
@@ -799,6 +791,30 @@ export default function Nav({
                             />
                           )}
                         </ItemMedia>
+                        {/* A stretched link rather than a card that *is* one:
+                            the tag pills below are buttons, and a button
+                            inside an anchor is as invalid as an anchor inside
+                            one. Covering the card from a sibling keeps the
+                            whole rectangle clickable and leaves the pills a
+                            layer above it. After the media in the DOM so it
+                            paints over the thumbnail, which is positioned.
+
+                            The filters ride along: the rail stays mounted
+                            across this navigation, but the URL is the state
+                            now, so a bare `/examples/<name>` would clear
+                            them. */}
+                        <Link
+                          href={serializeFilters(`/examples/${name}`, {
+                            q: search,
+                            library,
+                            tag: activeTags,
+                          })}
+                          aria-label={title}
+                          aria-current={
+                            examplename === name ? "page" : undefined
+                          }
+                          className="absolute inset-0 rounded-md no-underline focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none"
+                        />
                         {isNew && (
                           <Badge
                             variant="secondary"
@@ -808,7 +824,7 @@ export default function Nav({
                           </Badge>
                         )}
                         {renderDetails && tags.length > 0 && (
-                          <ItemFooter className="absolute inset-x-0 bottom-0">
+                          <ItemFooter className="absolute inset-x-0 bottom-0 z-10">
                             {/* Same fade as the example list, on the other axis.
                                   It has to be aimed at the viewport: `ScrollArea`
                                   puts its `className` on the root, and the root is
@@ -817,9 +833,15 @@ export default function Nav({
                               {/* Padding sits inside the viewport so the
                                     scrollable strip itself runs edge to edge. */}
                               <div className="flex w-max gap-1 p-1.5">
-                                {tags.slice(0, MAX_TAGS).map((tag) => (
-                                  <Badge key={tag}>{tag}</Badge>
-                                ))}
+                                {stripTags
+                                  .slice(0, MAX_TAGS)
+                                  .map((exampleTag) => (
+                                    <TagBadge
+                                      key={exampleTag}
+                                      tag={exampleTag}
+                                      focusable={false}
+                                    />
+                                  ))}
                               </div>
                               {/* No `ScrollBar`: the fade is the affordance,
                                     and it says so without being pointed at —

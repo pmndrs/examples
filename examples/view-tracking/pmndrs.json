@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "View Tracking",
   "description": "Shows how to form self-contained components with their own state and user interaction.",
-  "tags": [],
+  "tags": ["views", "scroll", "html", "controls"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2022-03-29",
   "source": "https://codesandbox.io/s/bp6tmc",

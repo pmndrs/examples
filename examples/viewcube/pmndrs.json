@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "View Cube",
   "description": "Shows how to do heads-up-displays using React.portals.",
-  "tags": ["portal", "viewcube", "hud"],
+  "tags": ["portal", "hud"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2019-11-05",
   "source": "https://codesandbox.io/s/py4db",

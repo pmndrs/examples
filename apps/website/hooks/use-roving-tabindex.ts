@@ -8,8 +8,15 @@ import {
   type RefObject,
 } from "react";
 
-/** What would otherwise be a tab stop of its own inside the group. */
-const ITEMS = "a[href], button:not([disabled])";
+/** What would otherwise be a tab stop of its own inside the group.
+ *
+ * `data-roving-skip` opts a control out — for controls that ride along inside
+ * an item rather than being one, like the tag pills on an example card. They
+ * are a pointer affordance there; the keyboard reaches the same tags from the
+ * example's info panel, which sits outside any roving group. Without the
+ * opt-out the arrow keys would walk pill by pill instead of card by card. */
+const ITEMS =
+  "a[href]:not([data-roving-skip]), button:not([disabled]):not([data-roving-skip])";
 
 /**
  * Roving tabindex: a group of controls that answers to Tab once, and to the

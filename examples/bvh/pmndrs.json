@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "BVH",
   "description": "Shows how to form self-contained components with their own state and user interaction.",
-  "tags": [],
+  "tags": ["bvh", "raycast"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2023-01-25",
   "source": "https://codesandbox.io/s/txzeq8",

@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Instanced Vertex Colors",
   "description": "Instancing objectes with variable colors and effects.",
-  "tags": ["vertex-colors", "ambient-occlusion", "bloom", "instancing"],
+  "tags": ["vertex-colors", "ambient-occlusion", "bloom", "instances"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2020-01-18",
   "source": "https://codesandbox.io/s/8fo01",

@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Raycast Cycling",
   "description": "Bringing multiple objects underneath the cursor up front through raycast cycling",
-  "tags": ["raycast", "cycling"],
+  "tags": ["raycast"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2021-09-22",
   "source": "https://codesandbox.io/s/ls503",

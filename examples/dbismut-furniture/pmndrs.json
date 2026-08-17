@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "D. Bismut Furniture",
   "description": "",
-  "tags": [],
+  "tags": ["transitions", "spring", "gltf", "html"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2023-03-27",
   "source": "https://codesandbox.io/s/62o18n",

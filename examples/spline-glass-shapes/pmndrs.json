@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Spline Glass Shapes",
   "description": "Scene exported with Spline",
-  "tags": ["spline", "transmission"],
+  "tags": ["transmission"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2023-01-07",
   "source": "https://codesandbox.io/s/ju368j",

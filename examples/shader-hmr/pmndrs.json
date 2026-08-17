@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Shader HMR",
   "description": "Shows how to create HMR shaders",
-  "tags": [],
+  "tags": ["shader", "material", "hmr"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2021-07-18",
   "source": "https://codesandbox.io/s/ib0jc",

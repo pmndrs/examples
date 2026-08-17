@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Bloom HDR Workflow GLTF",
   "description": "",
-  "tags": ["bloom", "hdr", "glow", "gltf", "selective"],
+  "tags": ["bloom", "hdr", "gltf", "selective"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2022-06-23",
   "source": "https://codesandbox.io/s/whnhyr",

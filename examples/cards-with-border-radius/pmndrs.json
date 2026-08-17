@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Cards With Border Radius",
   "description": "",
-  "tags": [],
+  "tags": ["scroll", "infinite", "shader"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2024-01-18",
   "source": "https://codesandbox.io/s/9s2wd9",

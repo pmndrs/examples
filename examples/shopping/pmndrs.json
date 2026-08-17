@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Shopping",
   "description": "",
-  "tags": [],
+  "tags": ["outlines", "postprocessing", "bvh", "mask"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2022-09-18",
   "source": "https://codesandbox.io/s/4gy946",

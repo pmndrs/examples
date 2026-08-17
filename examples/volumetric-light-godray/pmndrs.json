@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Volumetric Light God Rays",
   "description": "Experimenting with volumetric lights.",
-  "tags": ["postprocessing", "godray"],
+  "tags": ["postprocessing", "god-rays"],
   "authors": ["Paul Henschel"],
   "publishedAt": "2023-06-24",
   "source": "https://codesandbox.io/s/yggpw5",
