@@ -2,7 +2,7 @@
   "$schema": "../../schemas/pmndrs.schema.json",
   "title": "Ramp",
   "description": "A custom gradient-ramp postprocessing effect (linear, radial or mirrored) masking or tinting a grid of interactive boxes, layered with ASCII or Bloom.",
-  "tags": ["postprocessing", "ramp", "custom-effect", "ascii", "bloom"],
+  "tags": ["postprocessing", "gradient", "mask", "ascii", "bloom"],
   "authors": ["Chase Davis"],
   "source": "https://codesandbox.io/p/sandbox/zdpzei",
   "libraries": [
