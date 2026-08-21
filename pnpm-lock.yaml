@@ -84,6 +84,9 @@ importers:
       '@example/audio-analyser':
         specifier: workspace:*
         version: link:../../examples/audio-analyser
+      '@example/autofocus':
+        specifier: workspace:*
+        version: link:../../examples/autofocus
       '@example/backdrop-and-cables':
         specifier: workspace:*
         version: link:../../examples/backdrop-and-cables
@@ -102,6 +105,9 @@ importers:
       '@example/bezier-curves-and-nodes':
         specifier: workspace:*
         version: link:../../examples/bezier-curves-and-nodes
+      '@example/bloom':
+        specifier: workspace:*
+        version: link:../../examples/bloom
       '@example/bloom-hdr-workflow-gltf':
         specifier: workspace:*
         version: link:../../examples/bloom-hdr-workflow-gltf
@@ -111,6 +117,9 @@ importers:
       '@example/bounds-and-makedefault':
         specifier: workspace:*
         version: link:../../examples/bounds-and-makedefault
+      '@example/brightness-contrast':
+        specifier: workspace:*
+        version: link:../../examples/brightness-contrast
       '@example/bruno-simons-20k-challenge':
         specifier: workspace:*
         version: link:../../examples/bruno-simons-20k-challenge
@@ -153,6 +162,9 @@ importers:
       '@example/clouds':
         specifier: workspace:*
         version: link:../../examples/clouds
+      '@example/color-average':
+        specifier: workspace:*
+        version: link:../../examples/color-average
       '@example/color-grading':
         specifier: workspace:*
         version: link:../../examples/color-grading
@@ -171,6 +183,9 @@ importers:
       '@example/dbismut-furniture':
         specifier: workspace:*
         version: link:../../examples/dbismut-furniture
+      '@example/depth-of-field':
+        specifier: workspace:*
+        version: link:../../examples/depth-of-field
       '@example/diamond-refraction':
         specifier: workspace:*
         version: link:../../examples/diamond-refraction
@@ -228,6 +243,9 @@ importers:
       '@example/glass-flower':
         specifier: workspace:*
         version: link:../../examples/glass-flower
+      '@example/glitch':
+        specifier: workspace:*
+        version: link:../../examples/glitch
       '@example/gltf-animations':
         specifier: workspace:*
         version: link:../../examples/gltf-animations
@@ -270,6 +288,9 @@ importers:
       '@example/html-markers':
         specifier: workspace:*
         version: link:../../examples/html-markers
+      '@example/hue-saturation':
+        specifier: workspace:*
+        version: link:../../examples/hue-saturation
       '@example/image-gallery':
         specifier: workspace:*
         version: link:../../examples/image-gallery
@@ -351,6 +372,9 @@ importers:
       '@example/night-train':
         specifier: workspace:*
         version: link:../../examples/night-train
+      '@example/noise':
+        specifier: workspace:*
+        version: link:../../examples/noise
       '@example/object-clump':
         specifier: workspace:*
         version: link:../../examples/object-clump
@@ -387,6 +411,9 @@ importers:
       '@example/ragdoll-physics':
         specifier: workspace:*
         version: link:../../examples/ragdoll-physics
+      '@example/ramp':
+        specifier: workspace:*
+        version: link:../../examples/ramp
       '@example/rapier-physics':
         specifier: workspace:*
         version: link:../../examples/rapier-physics
@@ -429,6 +456,9 @@ importers:
       '@example/scrollcontrols-with-minimap':
         specifier: workspace:*
         version: link:../../examples/scrollcontrols-with-minimap
+      '@example/selective-bloom':
+        specifier: workspace:*
+        version: link:../../examples/selective-bloom
       '@example/selective-outlines':
         specifier: workspace:*
         version: link:../../examples/selective-outlines
@@ -483,6 +513,9 @@ importers:
       '@example/springy-boxes':
         specifier: workspace:*
         version: link:../../examples/springy-boxes
+      '@example/ssao':
+        specifier: workspace:*
+        version: link:../../examples/ssao
       '@example/ssgi-spheres-with-rapier-physics':
         specifier: workspace:*
         version: link:../../examples/ssgi-spheres-with-rapier-physics
@@ -519,6 +552,9 @@ importers:
       '@example/thunder-clouds':
         specifier: workspace:*
         version: link:../../examples/thunder-clouds
+      '@example/tone-mapping':
+        specifier: workspace:*
+        version: link:../../examples/tone-mapping
       '@example/trails':
         specifier: workspace:*
         version: link:../../examples/trails
