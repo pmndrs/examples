@@ -19,18 +19,86 @@ if (sayCheeseParam) {
   // the method rather than the `onLoad` slot, which drei's `useProgress`
   // overwrites for its own loader UI.
   //
-  let inflight = 0;
+  // Counted per URL, and never below zero, because the pairing is a loader's
+  // to honour and one of them does not: `postprocessing` 6.39's
+  // `LUTCubeLoader.load()` calls `itemEnd` on a URL it never called
+  // `itemStart` for (6.36 did both, and the six examples loading a `.cube`
+  // are exactly the ones that felt it). A single counter turns that into
+  // `inflight - 1` for the rest of the page's life -- so it reads 0 at
+  // whatever moment exactly one real item is in flight, which is the shot
+  // going off *during* a decode, and reads -1 forever otherwise, which is the
+  // wait never ending: `glass-flower` and `nextjs-prism` sat there for the
+  // full 300s budget. An `itemEnd` for a URL nobody started is ignored.
+  const inflight = new Map();
   const itemStart = DefaultLoadingManager.itemStart.bind(DefaultLoadingManager);
   const itemEnd = DefaultLoadingManager.itemEnd.bind(DefaultLoadingManager);
   DefaultLoadingManager.itemStart = (url) => {
-    inflight += 1;
+    inflight.set(url, (inflight.get(url) ?? 0) + 1);
     itemStart(url);
   };
   DefaultLoadingManager.itemEnd = (url) => {
-    inflight -= 1;
+    const pending = inflight.get(url) ?? 0;
+    if (pending > 0) inflight.set(url, pending - 1);
     itemEnd(url);
   };
-  window.__cheeseInflight = () => inflight;
+  window.__cheeseInflight = () =>
+    [...inflight.values()].reduce((total, pending) => total + pending, 0);
+
+  //
+  // Physics lives in a worker, and a worker keeps its own time.
+  //
+  // `@react-three/cannon` steps by ping-pong: each frame the provider posts
+  // `step` and *transfers* the position buffers to the worker; until the
+  // worker's `frame` reply hands them back, every further step is silently
+  // skipped (`byteLength === 0`) and its 1/60th of simulation is dropped, not
+  // deferred. So the picture is spawn + (completed round trips) x 1/60 -- and
+  // how many round trips fit into thirty pumped frames is the scheduler's
+  // call, not ours. Measured on `basic-ballpit`: 30/30 round trips at full
+  // speed, 28 under an 8x CPU throttle, each with its own perfectly
+  // reproducible canvas -- two stable pictures, chosen by machine speed.
+  // Chromatic's runner sits between the two and picks per run; twelve
+  // examples ride `@react-three/cannon`.
+  //
+  // So the round trips are counted -- `step` out, `frame` back, per worker --
+  // and the pump (see `SayCheese`) holds the next frame until the count
+  // settles. Every machine then completes exactly one step per frame.
+  // `terminate()` forgives what a dying worker still owes: the second take
+  // unmounts the whole physics provider, and a reply that will never come
+  // must not hold the pump forever.
+  //
+  const owed = new Map();
+  const dead = new WeakSet();
+  const RealWorker = window.Worker;
+  window.Worker = class extends RealWorker {
+    postMessage(message, ...rest) {
+      // A step posted to a terminated worker is a debt nobody will honour:
+      // posting is a silent void, so counting it would hold the pump for the
+      // full 300s budget. It can happen -- `terminate()` runs in one effect's
+      // cleanup and the `useFrame` unsubscribe in another's.
+      if (message?.op === "step" && !dead.has(this))
+        owed.set(this, (owed.get(this) ?? 0) + 1);
+      super.postMessage(message, ...rest);
+    }
+    get onmessage() {
+      return super.onmessage;
+    }
+    set onmessage(handler) {
+      super.onmessage = (event) => {
+        if (event.data?.op === "frame" && owed.get(this))
+          owed.set(this, owed.get(this) - 1);
+        handler(event);
+      };
+    }
+    terminate() {
+      dead.add(this);
+      owed.delete(this);
+      super.terminate();
+    }
+  };
+  window.__cheesePhysicsSettled = () => {
+    for (const count of owed.values()) if (count > 0) return false;
+    return true;
+  };
 
   //
   // Seeding fixes the *sequence*; it does not fix who draws from it in what
