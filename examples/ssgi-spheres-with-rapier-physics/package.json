@@ -7,7 +7,7 @@
     "@react-three/fiber": "9.6.1",
     "@react-three/rapier": "^2.2.0",
     "maath": "^0.10.8",
-    "postprocessing": "6.36.6",
+    "postprocessing": "6.39.4",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "three": "0.165.0"

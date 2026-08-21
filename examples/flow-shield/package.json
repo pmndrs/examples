@@ -6,7 +6,7 @@
     "@react-three/fiber": "9.6.1",
     "@react-three/postprocessing": "^3.0.4",
     "leva": "^0.10.1",
-    "postprocessing": "6.36.6",
+    "postprocessing": "6.39.4",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "three": "0.165.0"
