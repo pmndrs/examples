@@ -1,0 +1,15 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Depth of Field",
+  "description": "A Suzanne model staged with drei's Stage helper, focused with @react-three/postprocessing's DepthOfField effect.",
+  "tags": ["postprocessing", "dof"],
+  "authors": ["Sara Vieira"],
+  "source": "https://codesandbox.io/p/sandbox/bu796",
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing",
+    "leva"
+  ],
+  "assets": []
+}

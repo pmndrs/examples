@@ -1,0 +1,15 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Selective Bloom",
+  "description": "A cluster of objects that bloom on hover using @react-three/postprocessing's SelectiveBloom effect; the torus knot can also be locked on via a Leva checkbox and the sphere via click.",
+  "tags": ["postprocessing", "bloom", "selective", "selection"],
+  "authors": ["Łukasz Kwas"],
+  "source": "https://pmndrs.github.io/postprocessing/public/docs/class/src/effects/SelectiveBloomEffect.js~SelectiveBloomEffect.html",
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing",
+    "leva"
+  ],
+  "assets": []
+}
