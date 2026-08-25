@@ -1,0 +1,26 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "ASCII",
+  "description": "A still-life scene rendered as ASCII art with @react-three/postprocessing's ASCII effect, blended with the scene's own color underneath.",
+  "tags": ["postprocessing", "ascii"],
+  "authors": ["Łukasz Kwas"],
+  "source": "https://github.com/emilwidlund/ASCII",
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing",
+    "leva"
+  ],
+  "assets": [
+    {
+      "name": "Still life, Based on Heather's artwork",
+      "files": ["src/model-transformed.glb"],
+      "creator": "Omar Faruq Tawsif",
+      "source": "https://sketchfab.com/3d-models/still-life-based-on-heathers-artwork-abbcbfa6be104fcc8dc8d5b07b607719",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
+      "modified": true,
+      "notes": "Transformed/compressed with gltfjsx --transform (1.53MB -> 170KB)."
+    }
+  ]
+}
