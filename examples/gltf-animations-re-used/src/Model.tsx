@@ -52,10 +52,10 @@ export default function Model({ pose, ...props }: ModelProps) {
   const [hovered, setHovered] = useState(false);
   const [index, setIndex] = useState(pose);
   // Animate the selection halo
+  // Spring the scale per-axis: three types `Vector3.set()`'s z as optional, so
+  // r3f's tuple form for `scale` no longer matches a spring of a whole tuple
   const { color, scale } = useSpring({
-    scale: hovered
-      ? ([1.15, 1.15, 1] as [number, number, number])
-      : ([1, 1, 1] as [number, number, number]),
+    scale: hovered ? 1.15 : 1,
     color: hovered ? "hotpink" : "aquamarine",
   });
   // Change cursor on hover-state
@@ -102,7 +102,7 @@ export default function Model({ pose, ...props }: ModelProps) {
           />
         </skinnedMesh>
       </group>
-      <a.mesh receiveShadow position={[0, 1, -1]} scale={scale}>
+      <a.mesh receiveShadow position={[0, 1, -1]} scale={[scale, scale, 1]}>
         <circleGeometry args={[0.6, 64]} />
         <a.meshStandardMaterial color={color} />
       </a.mesh>

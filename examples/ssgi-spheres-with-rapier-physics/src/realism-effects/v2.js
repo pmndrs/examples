@@ -1,5 +1,14 @@
 import { Pass, Effect, RenderPass, Selection, NormalPass } from 'postprocessing';
-import { ShaderChunk, ShaderLib, UniformsUtils, ShaderMaterial, Uniform, Vector2, Matrix4, Vector3, NoBlending, GLSL3, Clock, Quaternion, WebGLMultipleRenderTargets, NearestFilter, FramebufferTexture, LinearFilter, WebGLRenderTarget, FloatType, DataTexture, RGBAFormat, ClampToEdgeWrapping, LinearMipMapLinearFilter, EquirectangularReflectionMapping, TextureLoader, RepeatWrapping, NoColorSpace, MeshPhysicalMaterial, Color, DepthTexture, RedFormat, Matrix3, HalfFloatType, SRGBColorSpace } from 'three';
+import { ShaderChunk, ShaderLib, UniformsUtils, ShaderMaterial, Uniform, Vector2, Matrix4, Vector3, NoBlending, GLSL3, Clock, Quaternion, NearestFilter, FramebufferTexture, LinearFilter, WebGLRenderTarget, FloatType, DataTexture, RGBAFormat, ClampToEdgeWrapping, LinearMipMapLinearFilter, EquirectangularReflectionMapping, TextureLoader, RepeatWrapping, NoColorSpace, MeshPhysicalMaterial, Color, DepthTexture, RedFormat, Matrix3, HalfFloatType, SRGBColorSpace } from 'three';
+
+// three r172 removed WebGLMultipleRenderTargets: WebGLRenderTarget took over MRT via a
+// `count` option, and exposes the colour attachments as `.textures` (`.texture` is now
+// just `textures[0]`). Restore the old constructor signature for the passes below.
+class WebGLMultipleRenderTargets extends WebGLRenderTarget {
+  constructor(width, height, count, options) {
+    super(width, height, { ...options, count });
+  }
+}
 
 // from: https://news.ycombinator.com/item?id=17876741
 
@@ -248,7 +257,7 @@ class TemporalReprojectPass extends Pass {
       type: texture.type,
       depthBuffer: false
     });
-    this.renderTarget.texture.forEach((texture, index) => texture.name = "TemporalReprojectPass.accumulatedTexture" + index);
+    this.renderTarget.textures.forEach((texture, index) => texture.name = "TemporalReprojectPass.accumulatedTexture" + index);
     this.fullscreenMaterial = new TemporalReprojectMaterial(textureCount);
     this.fullscreenMaterial.defines.textureCount = textureCount;
     if (options.dilation) this.fullscreenMaterial.defines.dilation = "";
@@ -316,7 +325,7 @@ class TemporalReprojectPass extends Pass {
   }
 
   get texture() {
-    return this.renderTarget.texture[0];
+    return this.renderTarget.textures[0];
   }
 
   reset() {
@@ -353,7 +362,7 @@ class TemporalReprojectPass extends Pass {
 
     if (this.overrideAccumulatedTextures.length === 0) {
       this.framebufferTexture.needsUpdate = true;
-      renderer.copyFramebufferToTexture(tmpVec2, this.framebufferTexture);
+      renderer.copyFramebufferToTexture(this.framebufferTexture, tmpVec2);
     } // save last transformations
 
 
@@ -1683,7 +1692,7 @@ class VelocityDepthNormalPass extends Pass {
     } = this._scene;
     this._scene.background = backgroundColor;
     renderer.setRenderTarget(this.renderTarget);
-    renderer.copyFramebufferToTexture(zeroVec2, this.lastVelocityTexture);
+    renderer.copyFramebufferToTexture(this.lastVelocityTexture, zeroVec2);
     renderer.render(this._scene, this._camera);
     this._scene.background = background;
     this.unsetVelocityDepthNormalMaterialInScene();
@@ -1948,10 +1957,10 @@ class PoissonDenoisePass extends Pass {
     this.renderTargetA = new WebGLMultipleRenderTargets(1, 1, textureCount, renderTargetOptions);
     this.renderTargetB = new WebGLMultipleRenderTargets(1, 1, textureCount, renderTargetOptions); // give the textures of renderTargetA and renderTargetB names
 
-    this.renderTargetB.texture[0].name = "PoissonDenoisePass." + (isTextureSpecular[0] ? "specular" : "diffuse");
+    this.renderTargetB.textures[0].name = "PoissonDenoisePass." + (isTextureSpecular[0] ? "specular" : "diffuse");
 
     if (textureCount > 1) {
-      this.renderTargetB.texture[1].name = "PoissonDenoisePass." + (isTextureSpecular[1] ? "specular" : "diffuse");
+      this.renderTargetB.textures[1].name = "PoissonDenoisePass." + (isTextureSpecular[1] ? "specular" : "diffuse");
     }
 
     const {
@@ -1968,7 +1977,7 @@ class PoissonDenoisePass extends Pass {
   }
 
   get texture() {
-    return this.renderTargetB.texture;
+    return this.renderTargetB.textures;
   } // can either be a GBufferPass or a VelocityDepthNormalPass
 
 
@@ -2002,8 +2011,8 @@ class PoissonDenoisePass extends Pass {
     for (let i = 0; i < 2 * this.iterations; i++) {
       const horizontal = i % 2 === 0;
       const inputRenderTarget = horizontal ? this.renderTargetB : this.renderTargetA;
-      this.fullscreenMaterial.uniforms["inputTexture"].value = i === 0 ? this.textures[0] : inputRenderTarget.texture[0];
-      this.fullscreenMaterial.uniforms["inputTexture2"].value = i === 0 ? this.textures[1] : inputRenderTarget.texture[1];
+      this.fullscreenMaterial.uniforms["inputTexture"].value = i === 0 ? this.textures[0] : inputRenderTarget.textures[0];
+      this.fullscreenMaterial.uniforms["inputTexture2"].value = i === 0 ? this.textures[1] : inputRenderTarget.textures[1];
       const renderTarget = horizontal ? this.renderTargetA : this.renderTargetB;
       renderer.setRenderTarget(renderTarget);
       renderer.render(this.scene, this.camera);
@@ -2045,14 +2054,14 @@ class Denoiser {
       neighborhoodClampIntensity: 0.5,
       ...options
     });
-    const textures = this.temporalReprojectPass.renderTarget.texture.slice(0, textureCount);
+    const textures = this.temporalReprojectPass.renderTarget.textures.slice(0, textureCount);
 
     if (this.options.denoiseMode === "full" || this.options.denoiseMode === "denoised") {
       var _options$gBufferPass;
 
       this.denoisePass = new PoissonDenoisePass(camera, textures, options);
       this.denoisePass.setGBufferPass((_options$gBufferPass = options.gBufferPass) !== null && _options$gBufferPass !== void 0 ? _options$gBufferPass : this.velocityDepthNormalPass);
-      this.temporalReprojectPass.overrideAccumulatedTextures = this.denoisePass.renderTargetB.texture;
+      this.temporalReprojectPass.overrideAccumulatedTextures = this.denoisePass.renderTargetB.textures;
     }
 
     const composerInputTextures = (_this$denoisePass$tex = (_this$denoisePass = this.denoisePass) == null ? void 0 : _this$denoisePass.texture) !== null && _this$denoisePass$tex !== void 0 ? _this$denoisePass$tex : textures;
@@ -3120,7 +3129,7 @@ class TAAPass extends Pass {
     this.lastCameraQuaternion.copy(this._camera.quaternion);
     renderer.setRenderTarget(null);
     renderer.render(this.scene, this.camera);
-    renderer.copyFramebufferToTexture(this.renderTarget, this.framebufferTexture);
+    renderer.copyFramebufferToTexture(this.framebufferTexture);
   }
 
 }
