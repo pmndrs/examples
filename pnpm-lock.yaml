@@ -821,8 +821,8 @@ importers:
         specifier: 9.6.1
         version: 9.6.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0)
       '@react-three/postprocessing':
-        specifier: ^3.0.5
-        version: 3.0.5(@react-three/fiber@9.6.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0))(@types/three@0.165.0)(postprocessing@6.36.6(three@0.165.0))(react@19.2.8)(three@0.165.0)
+        specifier: ^3.1.0
+        version: 3.1.0(@react-three/fiber@9.6.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0))(@types/three@0.165.0)(postprocessing@6.36.6(three@0.165.0))(react@19.2.8)(three@0.165.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -9818,6 +9818,14 @@ packages:
       react: ^19.2.0
       three: '>= 0.182.0'
 
+  '@react-three/postprocessing@3.1.0':
+    resolution: {integrity: sha512-8FryG7R08ZzGvXWgehPnen9Rb/tpU++CqwyVcnotkKXmv3b3pBPQaSPKGf4Pv36RAx5E9ik0ujtm+opxIUXrrA==}
+    peerDependencies:
+      '@react-three/fiber': '>=9.7.0'
+      postprocessing: 6.36.6
+      react: ^19.2.0
+      three: '>= 0.182.0'
+
   '@react-three/rapier@2.2.0':
     resolution: {integrity: sha512-mVsqbKXlGZoN+XrqdhzFZUQmy8pibEOVzl4k7LC+LHe84bQnYBSagy1Hvbda6bL1PJDdTFyiDiBk5buKFinNIQ==}
     peerDependencies:
@@ -16057,6 +16065,17 @@ snapshots:
       - '@types/three'
 
   '@react-three/postprocessing@3.0.5(@react-three/fiber@9.6.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0))(@types/three@0.165.0)(postprocessing@6.36.6(three@0.165.0))(react@19.2.8)(three@0.165.0)':
+    dependencies:
+      '@react-three/fiber': 9.6.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0)
+      maath: 0.10.8(@types/three@0.165.0)(three@0.165.0)
+      n8ao: 2.0.0(postprocessing@6.36.6(three@0.165.0))(three@0.165.0)
+      postprocessing: 6.36.6(three@0.165.0)
+      react: 19.2.8
+      three: 0.165.0
+    transitivePeerDependencies:
+      - '@types/three'
+
+  '@react-three/postprocessing@3.1.0(@react-three/fiber@9.6.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0))(@types/three@0.165.0)(postprocessing@6.36.6(three@0.165.0))(react@19.2.8)(three@0.165.0)':
     dependencies:
       '@react-three/fiber': 9.6.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0)
       maath: 0.10.8(@types/three@0.165.0)(three@0.165.0)
