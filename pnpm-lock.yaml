@@ -81,6 +81,9 @@ importers:
       '@example/arkanoid-under-60-loc':
         specifier: workspace:*
         version: link:../../examples/arkanoid-under-60-loc
+      '@example/ascii':
+        specifier: workspace:*
+        version: link:../../examples/ascii
       '@example/audio-analyser':
         specifier: workspace:*
         version: link:../../examples/audio-analyser
@@ -366,6 +369,9 @@ importers:
       '@example/multiple-views-with-uniform-controls':
         specifier: workspace:*
         version: link:../../examples/multiple-views-with-uniform-controls
+      '@example/n8ao':
+        specifier: workspace:*
+        version: link:../../examples/n8ao
       '@example/nextjs-prism':
         specifier: workspace:*
         version: link:../../examples/nextjs-prism
@@ -4840,6 +4846,49 @@ importers:
       zustand:
         specifier: ^5.0.14
         version: 5.0.14(@types/react@19.2.17)(react@19.2.8)(use-sync-external-store@1.6.0(react@19.2.8))
+    devDependencies:
+      '@types/react':
+        specifier: 19.2.17
+        version: 19.2.17
+      '@types/react-dom':
+        specifier: 19.2.3
+        version: 19.2.3(@types/react@19.2.17)
+      '@types/three':
+        specifier: ^0.165.0
+        version: 0.165.0
+      '@vitejs/plugin-react':
+        specifier: ^6.0.4
+        version: 6.0.4(vite@8.1.5(@types/node@24.13.3)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.9.0))
+      typescript:
+        specifier: ^7.0.2
+        version: 7.0.2
+      vite:
+        specifier: ^8.1.5
+        version: 8.1.5(@types/node@24.13.3)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.9.0)
+
+  examples/n8ao:
+    dependencies:
+      '@react-three/drei':
+        specifier: 10.7.8
+        version: 10.7.8(@react-three/fiber@9.6.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0))(@types/react@19.2.17)(@types/three@0.165.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0)
+      '@react-three/fiber':
+        specifier: 9.6.1
+        version: 9.6.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0)
+      '@react-three/postprocessing':
+        specifier: ^3.1.0
+        version: 3.1.0(@react-three/fiber@9.6.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0))(@types/three@0.165.0)(postprocessing@6.36.6(three@0.165.0))(react@19.2.8)(three@0.165.0)
+      leva:
+        specifier: ^0.10.1
+        version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      react:
+        specifier: 19.2.8
+        version: 19.2.8
+      react-dom:
+        specifier: 19.2.8
+        version: 19.2.8(react@19.2.8)
+      three:
+        specifier: 0.165.0
+        version: 0.165.0
     devDependencies:
       '@types/react':
         specifier: 19.2.17

@@ -1,0 +1,15 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "N8AO",
+  "description": "A dense skyline of touching boxes whose contact creases are carved out by @react-three/postprocessing's N8AO multi-bounce ambient occlusion effect.",
+  "tags": ["postprocessing", "ambient-occlusion"],
+  "authors": ["Łukasz Kwas"],
+  "source": "https://github.com/N8python/n8ao",
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing",
+    "leva"
+  ],
+  "assets": []
+}
