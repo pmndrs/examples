@@ -5,7 +5,7 @@
   "tags": ["inverse-kinematics", "bones", "animation", "reflections"],
   "authors": ["Antoine BERNIER"],
   "source": "https://threejs.org/examples/#webgl_animation_skinning_ik",
-  "libraries": ["@react-three/drei", "@react-three/fiber", "leva"],
+  "libraries": ["@react-three/drei", "@react-three/fiber", "leva", "maath"],
   "assets": [
     {
       "name": "Kira's bedroom",

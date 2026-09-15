@@ -1,25 +1,22 @@
 import {
-  OrbitControls,
-  TransformControls,
+  CameraControls,
+  PivotControls,
   useCubeCamera,
   useGLTF,
 } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { button, useControls } from "leva";
+import { easing } from "maath";
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import {
+  Matrix4,
   MeshBasicMaterial,
   type Mesh,
   type Object3D,
   type SkinnedMesh,
   Vector3,
 } from "three";
-import {
-  CCDIKHelper,
-  CCDIKSolver,
-  type IKS,
-  type OrbitControls as OrbitControlsImpl,
-} from "three-stdlib";
+import { CCDIKHelper, CCDIKSolver, type IKS } from "three-stdlib";
 import kiraUrl from "./kira.glb?url";
 
 // Indices into `Kira_Shirt_left.skeleton.bones` -- see the joint list of the glb.
@@ -45,8 +42,10 @@ const iks = [
 ] as unknown as IKS[];
 
 const v0 = new Vector3();
+const v1 = new Vector3();
 
 export default function Scene() {
+  const camera = useThree((state) => state.camera);
   const { scene, nodes } = useGLTF(kiraUrl);
 
   const sphere = nodes.boule as Mesh;
@@ -55,11 +54,11 @@ export default function Scene() {
   const targetHand = nodes.target_hand_l as Object3D;
   const kira = nodes.Kira_Shirt_left as SkinnedMesh;
 
-  const { orbitTarget, solver, helper } = useMemo(() => {
+  const { restPosition, solver, helper } = useMemo(() => {
     scene.updateMatrixWorld(true);
 
     // Where the camera looks at start -- the sphere's resting place, before it is picked up.
-    const orbitTarget = sphere.getWorldPosition(new Vector3());
+    const restPosition = sphere.getWorldPosition(new Vector3());
 
     // From now on the sphere rides in the character's hand.
     hand.attach(sphere);
@@ -68,7 +67,7 @@ export default function Scene() {
     kira.add(kira.skeleton.bones[0]);
 
     return {
-      orbitTarget,
+      restPosition,
       solver: new CCDIKSolver(kira, iks),
       helper: new CCDIKHelper(kira, iks, 0.01),
     };
@@ -115,24 +114,41 @@ export default function Scene() {
     "IK manual update()": button(() => updateIKRef.current()),
   });
 
-  const orbitControls = useRef<OrbitControlsImpl>(null);
+  const cameraControls = useRef<CameraControls>(null);
 
-  useFrame(() => {
+  // The gizmo drives the IK target rather than wrapping it: the bone has to stay
+  // in the skeleton. `PivotControls` owns this matrix and writes the drag into it.
+  const pivotMatrix = useMemo(
+    () => new Matrix4().setPosition(targetHand.getWorldPosition(new Vector3())),
+    [targetHand],
+  );
+
+  // `setLookAt` rather than `setTarget`, which would carry the camera along with
+  // the target and lose the position the <Canvas> was given.
+  useEffect(() => {
+    cameraControls.current?.setLookAt(
+      camera.position.x,
+      camera.position.y,
+      camera.position.z,
+      restPosition.x,
+      restPosition.y,
+      restPosition.z,
+      false,
+    );
+  }, [camera, restPosition]);
+
+  useFrame((_state, delta) => {
     // The sphere must not see itself.
     sphere.visible = false;
     sphere.getWorldPosition(cubeCamera.position);
     updateCubeCamera();
     sphere.visible = true;
 
-    if (followSphere && orbitControls.current) {
+    if (followSphere && cameraControls.current) {
       sphere.getWorldPosition(v0);
-      orbitControls.current.target.lerp(v0, 0.1);
-
-      // drei only calls `update()` on enabled controls, and they are disabled
-      // for the whole of a gizmo drag -- exactly when the target moves most.
-      // Left alone, the camera holds still and then catches up in one jump on
-      // release; the three.js original updates every frame regardless.
-      if (!orbitControls.current.enabled) orbitControls.current.update();
+      cameraControls.current.getTarget(v1);
+      easing.damp3(v1, v0, 0.25, delta);
+      cameraControls.current.setTarget(v1.x, v1.y, v1.z, false);
     }
 
     if (turnHead) {
@@ -155,21 +171,29 @@ export default function Scene() {
       <primitive object={scene} />
       <primitive object={helper} />
 
-      <OrbitControls
+      <CameraControls
         makeDefault
-        ref={orbitControls}
-        target={orbitTarget}
+        ref={cameraControls}
         minDistance={0.2}
         maxDistance={1.5}
-        enableDamping
       />
 
-      {/* Dragging this disables the orbit controls, since they are `makeDefault`. */}
-      <TransformControls
-        object={targetHand}
-        size={0.75}
-        showX={false}
-        space="world"
+      {/* `makeDefault` above is what lets this disable the camera while dragging. */}
+      <PivotControls
+        matrix={pivotMatrix}
+        activeAxes={[false, true, true]}
+        disableSliders
+        disableRotations
+        disableScaling
+        depthTest={false}
+        fixed
+        scale={100}
+        lineWidth={3}
+        onDrag={(_local, _deltaLocal, world) => {
+          v0.setFromMatrixPosition(world);
+          targetHand.parent?.worldToLocal(v0);
+          targetHand.position.copy(v0);
+        }}
       />
     </>
   );
