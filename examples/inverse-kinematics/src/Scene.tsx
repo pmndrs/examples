@@ -127,6 +127,12 @@ export default function Scene() {
     if (followSphere && orbitControls.current) {
       sphere.getWorldPosition(v0);
       orbitControls.current.target.lerp(v0, 0.1);
+
+      // drei only calls `update()` on enabled controls, and they are disabled
+      // for the whole of a gizmo drag -- exactly when the target moves most.
+      // Left alone, the camera holds still and then catches up in one jump on
+      // release; the three.js original updates every frame regardless.
+      if (!orbitControls.current.enabled) orbitControls.current.update();
     }
 
     if (turnHead) {
