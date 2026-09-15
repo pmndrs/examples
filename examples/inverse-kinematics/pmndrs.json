@@ -1,0 +1,20 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Inverse kinematics",
+  "description": "A character reaches for a mirror ball with a CCD inverse-kinematics solver: drag the gizmo and the arm chain follows, within per-bone rotation limits.",
+  "tags": ["inverse-kinematics", "bones", "animation", "reflections"],
+  "authors": ["Antoine BERNIER"],
+  "source": "https://threejs.org/examples/#webgl_animation_skinning_ik",
+  "libraries": ["@react-three/drei", "@react-three/fiber", "leva"],
+  "assets": [
+    {
+      "name": "Kira's bedroom",
+      "files": ["src/kira.glb"],
+      "creator": "Antoine BERNIER",
+      "source": "https://abernier.link/edin",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "notes": "Character model by Aki (https://assetstore.unity.com/packages/3d/characters/humanoids/humans/kira-lowpoly-character-100303), furniture from poly.pizza, scene assembled by abernier. Draco-compressed."
+    }
+  ]
+}

@@ -93,6 +93,7 @@
     "@example/instances": "workspace:*",
     "@example/inter-epoxy-resin": "workspace:*",
     "@example/interactive-spline-scene-live-html": "workspace:*",
+    "@example/inverse-kinematics": "workspace:*",
     "@example/inverted-stencil-buffer": "workspace:*",
     "@example/iridescent-decals": "workspace:*",
     "@example/lamina-1x": "workspace:*",

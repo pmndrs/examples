@@ -94,6 +94,7 @@
           "instances",
           "interaction",
           "intersection",
+          "inverse-kinematics",
           "lerp",
           "lightformer",
           "lighting",

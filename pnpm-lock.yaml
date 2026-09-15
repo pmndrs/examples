@@ -315,6 +315,9 @@ importers:
       '@example/interactive-spline-scene-live-html':
         specifier: workspace:*
         version: link:../../examples/interactive-spline-scene-live-html
+      '@example/inverse-kinematics':
+        specifier: workspace:*
+        version: link:../../examples/inverse-kinematics
       '@example/inverted-stencil-buffer':
         specifier: workspace:*
         version: link:../../examples/inverted-stencil-buffer
@@ -4081,6 +4084,49 @@ importers:
       three:
         specifier: 0.165.0
         version: 0.165.0
+    devDependencies:
+      '@types/react':
+        specifier: 19.2.17
+        version: 19.2.17
+      '@types/react-dom':
+        specifier: 19.2.3
+        version: 19.2.3(@types/react@19.2.17)
+      '@types/three':
+        specifier: ^0.165.0
+        version: 0.165.0
+      '@vitejs/plugin-react':
+        specifier: ^6.0.4
+        version: 6.0.4(vite@8.1.5(@types/node@24.13.3)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.9.0))
+      typescript:
+        specifier: ^7.0.2
+        version: 7.0.2
+      vite:
+        specifier: ^8.1.5
+        version: 8.1.5(@types/node@24.13.3)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.9.0)
+
+  examples/inverse-kinematics:
+    dependencies:
+      '@react-three/drei':
+        specifier: 10.7.8
+        version: 10.7.8(@react-three/fiber@9.6.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0))(@types/react@19.2.17)(@types/three@0.165.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0)
+      '@react-three/fiber':
+        specifier: 9.6.1
+        version: 9.6.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.165.0)
+      leva:
+        specifier: ^0.10.1
+        version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      react:
+        specifier: 19.2.8
+        version: 19.2.8
+      react-dom:
+        specifier: 19.2.8
+        version: 19.2.8(react@19.2.8)
+      three:
+        specifier: 0.165.0
+        version: 0.165.0
+      three-stdlib:
+        specifier: ^2.32.2
+        version: 2.36.1(three@0.165.0)
     devDependencies:
       '@types/react':
         specifier: 19.2.17
