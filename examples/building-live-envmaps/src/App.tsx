@@ -84,10 +84,20 @@ License: CC-BY-SA-4.0 (http://creativecommons.org/licenses/by-sa/4.0/)
 Source: https://sketchfab.com/3d-models/free-porsche-911-carrera-4s-d01b254483794de3819786d93e0e1ebf
 Title: (FREE) Porsche 911 Carrera 4S
 */
+
+function useSceneEnvironment() {
+  const [environment, setEnvironment] = useState<THREE.Texture | null>(null);
+  useFrame(({ scene }) => {
+    if (scene.environment !== environment) setEnvironment(scene.environment);
+  });
+  return environment;
+}
+
 function Porsche(props: Omit<ThreeElements["primitive"], "object">) {
   const { scene, nodes, materials } = useGLTF(
     porscheModel,
   ) as unknown as GLTFResult;
+  const environment = useSceneEnvironment();
   useLayoutEffect(() => {
     Object.values(nodes).forEach(
       (node) =>
@@ -107,17 +117,20 @@ function Porsche(props: Omit<ThreeElements["primitive"], "object">) {
       clearcoat: 0.1,
     });
     applyProps(materials.coat, {
+      envMap: environment,
       envMapIntensity: 4,
       roughness: 0.5,
       metalness: 1,
     });
     applyProps(materials.paint, {
+      envMap: environment,
       envMapIntensity: 2,
       roughness: 0.45,
       metalness: 0.8,
       color: "#555",
     });
-  }, [nodes, materials]);
+  }, [nodes, materials, environment]);
+
   return <primitive object={scene} {...props} />;
 }
 

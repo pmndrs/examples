@@ -2,7 +2,7 @@ import * as THREE from "three";
 import { useRef } from "react";
 import { type GLTF } from "three-stdlib";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment, useGLTF } from "@react-three/drei";
+import { Environment, useEnvironment, useGLTF } from "@react-three/drei";
 import { EffectComposer, N8AO } from "@react-three/postprocessing";
 import {
   BallCollider,
@@ -49,6 +49,7 @@ function Bauble({
   r?: (range: number) => number;
 }) {
   const { nodes } = useGLTF(capModel) as unknown as GLTFResult;
+  const environment = useEnvironment({ files: adamsbridgeHdr });
   const api = useRef<RapierRigidBody>(null!);
   useFrame((state, delta) => {
     delta = Math.min(0.1, delta);
@@ -96,6 +97,7 @@ function Bauble({
         position={[0, 0, -1.8 * scale]}
         geometry={nodes.Mesh_1.geometry}
         material={capMaterial}
+        material-envMap={environment}
       />
     </RigidBody>
   );

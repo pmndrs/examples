@@ -1,15 +1,13 @@
-import * as THREE from "three";
-import { Canvas, type ThreeElements } from "@react-three/fiber";
 import {
-  Sparkles,
-  Shadow,
-  ContactShadows,
   Billboard,
   Environment,
-  BakeShadows,
   OrbitControls,
+  Shadow,
+  Sparkles,
 } from "@react-three/drei";
-import { LayerMaterial, Depth } from "lamina";
+import { Canvas, type ThreeElements } from "@react-three/fiber";
+import { Depth, LayerMaterial } from "lamina";
+import * as THREE from "three";
 
 export const App = () => (
   <Canvas camera={{ position: [0, 0, 12], fov: 30 }}>
@@ -21,6 +19,7 @@ export const App = () => (
     <Environment
       files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/2k/evening_road_01_2k.hdr"
       ground={{ height: 5, radius: 40, scale: 20 }}
+      environmentIntensity={0.2}
     />
     <Sphere
       color="white"
@@ -76,7 +75,6 @@ const Sphere = ({
       roughness={0}
       color={color}
       emissive={emissive || color}
-      envMapIntensity={0.2}
     />
     <Glow scale={size * 1.2} near={-25} color={glow || emissive || color} />
     <Sparkles count={amount} scale={size * 2} size={6} speed={0.4} />

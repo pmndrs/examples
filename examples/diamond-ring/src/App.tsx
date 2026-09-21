@@ -60,6 +60,7 @@ function Ring({
         geometry={nodes.ring.geometry}
         material={materials.ring}
         material-color={color}
+        material-envMap={map}
         material-envMapIntensity={4}
       />
       <Html
