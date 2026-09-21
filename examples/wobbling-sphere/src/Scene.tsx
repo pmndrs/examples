@@ -17,6 +17,7 @@ import { a } from "@react-spring/three";
 // React-spring animates native elements, in this case <mesh/> etc,
 // but it can also handle 3rd–party objs, just wrap them in "a".
 const AnimatedMaterial = a(MeshDistortMaterial);
+const AnimatedEnvironment = a(Environment);
 
 type SceneProps = {
   setBg: SpringRef<{ background: string; fill: string }>;
@@ -111,13 +112,12 @@ export default function Scene({ setBg }: SceneProps) {
           <sphereGeometry args={[1, 64, 64]} />
           <AnimatedMaterial
             color={color}
-            envMapIntensity={env}
             clearcoat={coat}
             clearcoatRoughness={0}
             metalness={0.1}
           />
         </a.mesh>
-        <Environment preset="warehouse" />
+        <AnimatedEnvironment preset="warehouse" environmentIntensity={env} />
         <ContactShadows
           rotation={[Math.PI / 2, 0, 0]}
           position={[0, -1.6, 0]}

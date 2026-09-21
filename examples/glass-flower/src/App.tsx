@@ -1,7 +1,13 @@
 // https://twitter.com/igor_3000A/status/1646542441112297474
 
 import * as THREE from "three";
-import { Canvas, useLoader, type ThreeElements } from "@react-three/fiber";
+import { useState } from "react";
+import {
+  Canvas,
+  useFrame,
+  useLoader,
+  type ThreeElements,
+} from "@react-three/fiber";
 import {
   Environment,
   Lightformer,
@@ -35,8 +41,17 @@ type GLTFResult = GLTF & {
   };
 };
 
+function useSceneEnvironment() {
+  const [environment, setEnvironment] = useState<THREE.Texture | null>(null);
+  useFrame(({ scene }) => {
+    if (scene.environment !== environment) setEnvironment(scene.environment);
+  });
+  return environment;
+}
+
 function Model(props: ThreeElements["group"]) {
   const { nodes } = useGLTF(flowerModel) as unknown as GLTFResult;
+  const environment = useSceneEnvironment();
   return (
     <group {...props} dispose={null}>
       <mesh geometry={nodes.petals.geometry}>
@@ -50,6 +65,7 @@ function Model(props: ThreeElements["group"]) {
           iridescenceIOR={1}
           iridescenceThicknessRange={[0, 1400]}
           clearcoat={1}
+          envMap={environment}
           envMapIntensity={0.5}
         />
         <mesh geometry={nodes.Sphere.geometry}>

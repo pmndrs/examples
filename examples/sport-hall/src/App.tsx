@@ -64,7 +64,7 @@ export default function App() {
         <Floor />
       </group>
       <OrbitControls minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} />
-      <Environment files={noonGrassHdr} background />
+      <Environment files={noonGrassHdr} background environmentIntensity={0.1} />
       <BakeShadows />
     </Canvas>
   );
@@ -78,7 +78,6 @@ function Court(props: Omit<ThreeElements["primitive"], "object">) {
         applyProps(o as THREE.Mesh, {
           castShadow: true,
           receiveShadow: true,
-          "material-envMapIntensity": 0.1,
         });
       }
     });

@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { useRef, useState, type ReactNode } from "react";
-import { useCursor, useGLTF } from "@react-three/drei";
+import { useCursor, useEnvironment, useGLTF } from "@react-three/drei";
 import { type ThreeElements } from "@react-three/fiber";
 import { type GLTF } from "three-stdlib";
 
@@ -51,6 +51,7 @@ function Bottle({
   const { nodes } = useGLTF(model) as unknown as GLTFResult;
   const [hovered, set] = useState(false);
   useCursor(hovered);
+  const environment = useEnvironment({ preset: "warehouse" });
   return (
     <group
       rotation={[Math.PI / 2, 0, 3]}
@@ -63,6 +64,7 @@ function Bottle({
           castShadow
           geometry={nodes[glas].geometry}
           material={bottleMaterial}
+          material-envMap={environment}
         />
         <mesh
           castShadow

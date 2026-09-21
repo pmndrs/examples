@@ -56,7 +56,7 @@ export default function App() {
           position={[50, 50, 50]}
           castShadow
         />
-        <Environment preset="city" />
+        <Environment preset="city" environmentIntensity={0.25} />
         <BakeShadows />
       </Canvas>
     </Suspense>
@@ -85,7 +85,6 @@ function Bust(props: Pick<ThreeElements["group"], "position" | "rotation">) {
             key={index}
             geometry={nodes.Mesh_0001.geometry}
             material={materials.default}
-            material-envMapIntensity={0.25}
           />
         )),
         <group key={levels.length} />,

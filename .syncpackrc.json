@@ -19,16 +19,22 @@
       "pinVersion": "19.2.3"
     },
     {
-      "label": "three is pinned: the @splinetool/loader patch is keyed to r165, and postprocessing 6.36.6 needs < 0.173",
+      "label": "three is pinned to the latest release accepted by postprocessing 6.39.5 (its peer range is >= 0.168 < 0.187)",
       "packages": ["@example/**"],
       "dependencies": ["three"],
-      "pinVersion": "0.165.0"
+      "pinVersion": "0.186.0"
+    },
+    {
+      "label": "three types track the pinned three line",
+      "packages": ["@example/**"],
+      "dependencies": ["@types/three"],
+      "pinVersion": "^0.186.0"
     },
     {
       "label": "@react-three/fiber is pinned: 9.x is the React 19 line, and a caret could raise the three floor",
       "packages": ["@example/**"],
       "dependencies": ["@react-three/fiber"],
-      "pinVersion": "9.6.1"
+      "pinVersion": "9.7.0"
     },
     {
       "label": "@react-three/drei is pinned: 10.x is the line matching @react-three/fiber 9",
@@ -43,10 +49,16 @@
       "pinVersion": "1.2.2"
     },
     {
-      "label": "postprocessing is pinned to the last release accepting three 0.165 (6.36.7+ needs >= 0.174); pnpm.overrides pins the transitive copy too",
+      "label": "postprocessing is pinned to the latest release accepting three 0.186 (its peer range is >= 0.168 < 0.187)",
       "packages": ["@example/**"],
       "dependencies": ["postprocessing"],
-      "pinVersion": "6.36.6"
+      "pinVersion": "6.39.5"
+    },
+    {
+      "label": "@react-three/postprocessing 3.1 is the wrapper line for fiber 9.7 and three 0.182+",
+      "packages": ["@example/**"],
+      "dependencies": ["@react-three/postprocessing"],
+      "pinVersion": "^3.1.0"
     },
     {
       "label": "suspend-react is pinned for all examples (the suspend(promise) pattern requires >= 0.1.3)",
@@ -55,7 +67,7 @@
       "pinVersion": "0.1.3"
     },
     {
-      "label": "@splinetool/loader is pinned to the last release that parses the repo's 2022-era .splinecode scenes (0.9.156+ silently fall back to a default gray material or crash; the three-r165 pnpm patch is keyed to this exact version)",
+      "label": "@splinetool/loader is pinned to the last release that parses the repo's 2022-era .splinecode scenes (0.9.156+ silently fall back to a default gray material or crash; the three-compat pnpm patch is keyed to this exact version)",
       "packages": ["@example/**"],
       "dependencies": ["@splinetool/loader"],
       "pinVersion": "0.9.153"
@@ -64,7 +76,6 @@
       "label": "Examples must use identical versions of shared dependencies",
       "packages": ["@example/**"],
       "dependencies": [
-        "@react-three/postprocessing",
         "@react-three/rapier",
         "@react-three/cannon",
         "@react-three/csg",
@@ -92,7 +103,6 @@
         "lodash-es",
         "@babel/runtime",
         "babel-plugin-glsl",
-        "@types/three",
         "@vitejs/plugin-react",
         "typescript",
         "vite"

@@ -53,7 +53,9 @@ type HeightmapProps = Required<
 export function Heightmap({ elementSize, position, rotation }: HeightmapProps) {
   const heightmap = useTexture(assetUrl("textures/heightmap_1024.png"));
   const heights = useAsset<number[][], Texture[]>(
-    async () => createHeightfieldMatrix(heightmap.image),
+    // three types `Texture.image` as `unknown`; the loader hands us the
+    // <img> the heightmap was decoded from
+    async () => createHeightfieldMatrix(heightmap.image as HTMLImageElement),
     heightmap,
   );
   useHeightfield(

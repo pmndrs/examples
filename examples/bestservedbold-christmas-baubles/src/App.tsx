@@ -2,8 +2,9 @@ import * as THREE from "three";
 import { useRef } from "react";
 import { type GLTF } from "three-stdlib";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment, useGLTF } from "@react-three/drei";
-import { EffectComposer, N8AO } from "@react-three/postprocessing";
+import { Environment, useEnvironment, useGLTF } from "@react-three/drei";
+import { EffectComposer, N8AO, ToneMapping } from "@react-three/postprocessing";
+import { ToneMappingMode } from "postprocessing";
 import {
   BallCollider,
   Physics,
@@ -49,6 +50,7 @@ function Bauble({
   r?: (range: number) => number;
 }) {
   const { nodes } = useGLTF(capModel) as unknown as GLTFResult;
+  const environment = useEnvironment({ files: adamsbridgeHdr });
   const api = useRef<RapierRigidBody>(null!);
   useFrame((state, delta) => {
     delta = Math.min(0.1, delta);
@@ -96,6 +98,7 @@ function Bauble({
         position={[0, 0, -1.8 * scale]}
         geometry={nodes.Mesh_1.geometry}
         material={capMaterial}
+        material-envMap={environment}
       />
     </RigidBody>
   );
@@ -159,7 +162,8 @@ export const App = () => (
     <Environment files={adamsbridgeHdr} />
     {/* `disableNormalPass` no longer exists in this postprocessing version; the normal pass is already disabled by default */}
     <EffectComposer>
-      <N8AO color="red" aoRadius={2} intensity={1} />
+      <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
+      <N8AO color="red" aoRadius={2} distanceFalloff={2.5} intensity={1} />
     </EffectComposer>
   </Canvas>
 );

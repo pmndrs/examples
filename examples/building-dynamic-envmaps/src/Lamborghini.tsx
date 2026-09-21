@@ -1,6 +1,6 @@
 import * as THREE from "three";
-import { useMemo } from "react";
-import { applyProps, type ThreeElements } from "@react-three/fiber";
+import { useLayoutEffect, useMemo, useState } from "react";
+import { applyProps, useFrame, type ThreeElements } from "@react-three/fiber";
 import { type GLTF } from "three-stdlib";
 import { useGLTF } from "@react-three/drei";
 
@@ -25,11 +25,21 @@ License: CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
 Source: https://sketchfab.com/3d-models/lamborghini-urus-2650599973b649ddb4460ff6c03e4aa2
 Title: Lamborghini Urus
 */
+
+function useSceneEnvironment() {
+  const [environment, setEnvironment] = useState<THREE.Texture | null>(null);
+  useFrame(({ scene }) => {
+    if (scene.environment !== environment) setEnvironment(scene.environment);
+  });
+  return environment;
+}
+
 export function Lamborghini(props: Omit<ThreeElements["primitive"], "object">) {
   const { scene, nodes, materials } = useGLTF(
     lamboModel,
   ) as unknown as GLTFResult;
-  useMemo(() => {
+  const environment = useSceneEnvironment();
+  const paint = useMemo(() => {
     // ⬇⬇⬇ All this is probably better fixed in Blender ...
     Object.values(nodes).forEach((node) => {
       if (node.isMesh) {
@@ -73,7 +83,7 @@ export function Lamborghini(props: Omit<ThreeElements["primitive"], "object">) {
       toneMapped: false,
     });
     // Paint, from yellow to black
-    nodes.yellow_WhiteCar_0.material = new THREE.MeshPhysicalMaterial({
+    const paint = new THREE.MeshPhysicalMaterial({
       roughness: 0.3,
       metalness: 0.05,
       color: "#111",
@@ -81,6 +91,13 @@ export function Lamborghini(props: Omit<ThreeElements["primitive"], "object">) {
       clearcoatRoughness: 0,
       clearcoat: 1,
     });
+    nodes.yellow_WhiteCar_0.material = paint;
+    return paint;
   }, [nodes, materials]);
+
+  useLayoutEffect(() => {
+    paint.envMap = environment;
+  }, [paint, environment]);
+
   return <primitive object={scene} {...props} />;
 }

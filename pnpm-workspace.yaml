@@ -12,11 +12,9 @@ allowBuilds:
   unrs-resolver: true
 
 overrides:
-  # @react-three/postprocessing 3.x depends on postprocessing ^6.36.6, which
-  # floats to 6.39.x -- and 6.37+ requires three >= 0.174. The examples stay on
-  # three 0.165 (the @splinetool/loader patch is keyed to r165), so pin the
-  # transitive copy to the last release that accepts it (>= 0.157 < 0.173).
-  postprocessing: 6.36.6
+  # Keep the transitive copy used by @react-three/postprocessing on the newest
+  # release that accepts the repository's three 0.186 line.
+  postprocessing: 6.39.5
 
 patchedDependencies:
   "@splinetool/loader@0.9.153": patches/@splinetool__loader@0.9.153.patch
@@ -30,4 +28,3 @@ patchedDependencies:
 
 minimumReleaseAgeExclude:
   - material-theme-builder@3.0.0
-  - "@react-three/drei@10.7.8"

@@ -7,6 +7,7 @@ import {
   Image,
   Text,
   Environment,
+  useEnvironment,
 } from "@react-three/drei";
 import { useRoute, useLocation } from "wouter";
 import { easing } from "maath";
@@ -129,6 +130,7 @@ function Frame({
   const name = getUuid(url);
   const isActive = params?.id === name;
   useCursor(hovered);
+  const environment = useEnvironment({ preset: "city" });
   useFrame((state, dt) => {
     image.current.material.zoom =
       2 + Math.sin(rnd * 10000 + state.clock.elapsedTime / 3) / 2;
@@ -166,6 +168,7 @@ function Frame({
           color="#151515"
           metalness={0.5}
           roughness={0.5}
+          envMap={environment}
           envMapIntensity={2}
         />
         <mesh

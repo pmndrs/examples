@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import * as THREE from "three";
-import { useGLTF } from "@react-three/drei";
+import { useGLTF, useEnvironment } from "@react-three/drei";
 import {
   useFrame,
   type ThreeElements,
@@ -30,6 +30,7 @@ export function Soda(props: ThreeElements["group"]) {
   const ref = useRef<THREE.Group>(null!);
   const [hovered, spread] = useHover();
   const { nodes, materials } = useGLTF(sodaModel) as unknown as GLTFResult;
+  const environment = useEnvironment({ preset: "dawn" });
   useFrame((state, delta) => (ref.current.rotation.y += delta));
   return (
     <group ref={ref} {...props} {...spread} dispose={null}>
@@ -38,12 +39,14 @@ export function Soda(props: ThreeElements["group"]) {
           color={hovered ? "red" : "green"}
           roughness={0.33}
           metalness={0.8}
+          envMap={environment}
           envMapIntensity={2}
         />
       </mesh>
       <mesh
         geometry={nodes.Mesh_sodaBottle_1.geometry}
         material={materials.red}
+        material-envMap={environment}
         material-envMapIntensity={0}
       />
     </group>

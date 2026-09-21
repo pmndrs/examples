@@ -5,6 +5,7 @@ import {
   PerspectiveCamera,
   RoundedBox,
   Environment,
+  useEnvironment,
   useTexture,
   useAspect,
 } from "@react-three/drei";
@@ -70,6 +71,7 @@ function BallAndCollisions({
           transmission={1}
           roughness={0}
           thickness={10}
+          envMap={useEnvironment({ preset: "warehouse" })}
           envMapIntensity={1}
         />
       </mesh>
@@ -104,12 +106,7 @@ const Block = forwardRef<PublicApi, BlockProps>(
     return (
       <group ref={group}>
         <RoundedBox ref={block} args={args} radius={0.4} smoothness={10}>
-          <meshPhysicalMaterial
-            transmission={1}
-            roughness={0}
-            thickness={3}
-            envMapIntensity={4}
-          />
+          <meshPhysicalMaterial transmission={1} roughness={0} thickness={3} />
         </RoundedBox>
       </group>
     );
@@ -178,7 +175,7 @@ export const App = () => (
         rotation={[0, 0, 0.7]}
         material={{ restitution: 1.2 }}
       />
-      <Environment preset="warehouse" />
+      <Environment preset="warehouse" environmentIntensity={4} />
       <Background position={[0, 0, -5]} />
     </Physics>
   </Canvas>

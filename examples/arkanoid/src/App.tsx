@@ -267,23 +267,27 @@ function Heart(props: ThreeElements["group"]) {
 
 function Status() {
   const [virtualScene] = useState(() => new THREE.Scene());
-  const virtualCamera = useRef<THREE.OrthographicCamera>(null!);
+  const [virtualCamera, setVirtualCamera] =
+    useState<THREE.OrthographicCamera | null>(null);
   const points = useStore((state) => state.points);
   const { gl, scene, camera, viewport } = useThree();
-  const { width, height } = viewport.getCurrentViewport(virtualCamera.current);
+  const { width, height } = virtualCamera
+    ? viewport.getCurrentViewport(virtualCamera)
+    : viewport;
   useFrame(() => {
+    if (!virtualCamera) return;
     gl.autoClear = true;
     gl.render(scene, camera);
     gl.autoClear = false;
     gl.clearDepth();
-    gl.render(virtualScene, virtualCamera.current);
+    gl.render(virtualScene, virtualCamera);
   }, 2);
   return createPortal(
     <>
       <OrthographicCamera
         position={[0, 0, 10]}
         zoom={100}
-        ref={virtualCamera}
+        ref={setVirtualCamera}
       />
       <group position={[0, height / 2 - 1, 0]}>
         <StyledText

@@ -110,8 +110,17 @@ const causticsLegacyProps = {
   backfaceIor: 1.26,
 };
 
+function useSceneEnvironment() {
+  const [environment, setEnvironment] = useState<THREE.Texture | null>(null);
+  useFrame(({ scene }) => {
+    if (scene.environment !== environment) setEnvironment(scene.environment);
+  });
+  return environment;
+}
+
 function Scene(props: ThreeElements["group"]) {
   const { nodes, materials } = useGLTF(glassModel) as unknown as GLTFResult;
+  const environment = useSceneEnvironment();
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -182,6 +191,7 @@ function Scene(props: ThreeElements["group"]) {
             anisotropicBlur={1}
             clearcoat={1}
             clearcoatRoughness={1}
+            envMap={environment}
             envMapIntensity={2}
           />
         </mesh>
@@ -192,8 +202,13 @@ function Scene(props: ThreeElements["group"]) {
         scale={[0.95, 1, 0.95]}
         geometry={nodes.glass_back.geometry}
         material={innerMaterial}
+        material-envMap={environment}
       />
-      <mesh geometry={nodes.glass_inner.geometry} material={innerMaterial} />
+      <mesh
+        geometry={nodes.glass_inner.geometry}
+        material={innerMaterial}
+        material-envMap={environment}
+      />
     </group>
   );
 }
