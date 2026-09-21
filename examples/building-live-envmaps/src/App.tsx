@@ -52,7 +52,7 @@ export function App() {
       <AccumulativeShadows
         position={[0, -1.16, 0]}
         frames={100}
-        alphaTest={0.9}
+        alphaTest={0.75}
         scale={10}
       >
         <RandomizedLight
