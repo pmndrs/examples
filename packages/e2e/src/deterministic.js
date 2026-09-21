@@ -67,16 +67,10 @@ if (sayCheeseParam) {
   // must not hold the pump forever.
   //
   const owed = new Map();
-  const dead = new WeakSet();
   const RealWorker = window.Worker;
   window.Worker = class extends RealWorker {
     postMessage(message, ...rest) {
-      // A step posted to a terminated worker is a debt nobody will honour:
-      // posting is a silent void, so counting it would hold the pump for the
-      // full 300s budget. It can happen -- `terminate()` runs in one effect's
-      // cleanup and the `useFrame` unsubscribe in another's.
-      if (message?.op === "step" && !dead.has(this))
-        owed.set(this, (owed.get(this) ?? 0) + 1);
+      if (message?.op === "step") owed.set(this, (owed.get(this) ?? 0) + 1);
       super.postMessage(message, ...rest);
     }
     get onmessage() {
@@ -90,7 +84,6 @@ if (sayCheeseParam) {
       };
     }
     terminate() {
-      dead.add(this);
       owed.delete(this);
       super.terminate();
     }

@@ -47,6 +47,15 @@ const STEP = 1 / 60;
 const UNATTENDED = 3000;
 
 //
+// How many animation frames the pump will hold for a physics worker's reply
+// before it stops waiting for that take. A round trip normally lands within
+// a tick or two; a worker that has thrown will never answer, and a shot with
+// frozen physics beats no shot at all -- every other wait in the harness
+// falls through the same way.
+//
+const HELD = 600;
+
+//
 // Keeps the compositor producing frames while the render loop is held at
 // `never`.
 //
@@ -73,6 +82,8 @@ function SayCheese() {
     let frame = 0;
     let started = 0;
     let odd = 0;
+    let held = 0;
+    let unsettled = false;
     let raf;
 
     function tick() {
@@ -104,10 +115,17 @@ function SayCheese() {
         // which keeps the count this reads. Skipping the advance (rather
         // than blocking) keeps the compositor pixel moving above.
         //
-        if (window.__cheesePhysicsSettled?.() === false) {
-          raf = requestAnimationFrame(tick);
-          return;
+        if (!unsettled && window.__cheesePhysicsSettled?.() === false) {
+          if (++held < HELD) {
+            raf = requestAnimationFrame(tick);
+            return;
+          }
+          unsettled = true;
+          console.log(
+            `A physics worker never replied within ${HELD} frames, shooting anyway`,
+          );
         }
+        held = 0;
 
         if (frame === 0) started = window.__cheeseRealNow?.() ?? 0;
 
