@@ -11,7 +11,12 @@ import {
   Center,
   PresentationControls as PresentationControlsImpl,
 } from "@react-three/drei";
-import { EffectComposer, Bloom } from "@react-three/postprocessing";
+import {
+  EffectComposer,
+  Bloom,
+  ToneMapping,
+} from "@react-three/postprocessing";
+import { ToneMappingMode } from "postprocessing";
 import { RGBELoader, type GLTF } from "three-stdlib";
 import { HexColorPicker } from "react-colorful";
 
@@ -122,6 +127,7 @@ export default function App() {
       </PresentationControls>
       <EffectComposer>
         <Bloom luminanceThreshold={1} intensity={0.85} levels={9} mipmapBlur />
+        <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
       </EffectComposer>
     </Canvas>
   );

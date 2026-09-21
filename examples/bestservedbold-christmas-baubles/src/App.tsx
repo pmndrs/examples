@@ -3,7 +3,8 @@ import { useRef } from "react";
 import { type GLTF } from "three-stdlib";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, useEnvironment, useGLTF } from "@react-three/drei";
-import { EffectComposer, N8AO } from "@react-three/postprocessing";
+import { EffectComposer, N8AO, ToneMapping } from "@react-three/postprocessing";
+import { ToneMappingMode } from "postprocessing";
 import {
   BallCollider,
   Physics,
@@ -161,7 +162,8 @@ export const App = () => (
     <Environment files={adamsbridgeHdr} />
     {/* `disableNormalPass` no longer exists in this postprocessing version; the normal pass is already disabled by default */}
     <EffectComposer>
-      <N8AO color="red" aoRadius={2} intensity={1} />
+      <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
+      <N8AO color="red" aoRadius={2} distanceFalloff={2.5} intensity={1} />
     </EffectComposer>
   </Canvas>
 );

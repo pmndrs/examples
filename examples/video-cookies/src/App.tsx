@@ -6,7 +6,6 @@ import {
   AccumulativeShadows,
   RandomizedLight,
   OrbitControls,
-  Environment,
   useGLTF,
   useVideoTexture,
 } from "@react-three/drei";
@@ -19,6 +18,7 @@ import {
   WaterEffect,
   ToneMapping,
 } from "@react-three/postprocessing";
+import { ToneMappingMode } from "postprocessing";
 
 import causticsVid from "./caustics.mp4?url";
 
@@ -84,7 +84,6 @@ export default function App() {
         <planeGeometry />
         <meshLambertMaterial color="#353535" />
       </mesh>
-      <Environment preset="city" />
       <OrbitControls
         autoRotate
         autoRotateSpeed={0.1}
@@ -107,7 +106,7 @@ function Postpro() {
         <WaterEffect factor={0.75} />
         <TiltShift2 samples={6} blur={0.5} />
         <Bloom mipmapBlur luminanceThreshold={0} intensity={30} />
-        <ToneMapping />
+        <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
       </EffectComposer>
     </>
   );
