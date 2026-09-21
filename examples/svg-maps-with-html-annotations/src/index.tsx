@@ -70,7 +70,7 @@ function Svg({ url }: { url: string }) {
   const shapes = useMemo(
     () =>
       paths.flatMap((p) =>
-        p.toShapes(true).map((shape) => ({
+        p.toShapes().map((shape) => ({
           shape,
           color: p.color,
           fillOpacity: p.userData!.style.fillOpacity,
