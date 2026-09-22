@@ -28,3 +28,4 @@ patchedDependencies:
 
 minimumReleaseAgeExclude:
   - material-theme-builder@3.0.0
+  - "@react-three/postprocessing@3.1.2"

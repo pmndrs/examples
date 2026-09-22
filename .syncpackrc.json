@@ -58,7 +58,7 @@
       "label": "@react-three/postprocessing 3.1 is the wrapper line for fiber 9.7 and three 0.182+",
       "packages": ["@example/**"],
       "dependencies": ["@react-three/postprocessing"],
-      "pinVersion": "^3.1.0"
+      "pinVersion": "^3.1.2"
     },
     {
       "label": "suspend-react is pinned for all examples (the suspend(promise) pattern requires >= 0.1.3)",
