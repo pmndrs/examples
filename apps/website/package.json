@@ -121,6 +121,7 @@
     "@example/physics-with-convex-polyhedrons": "workspace:*",
     "@example/pinball-in-70-lines": "workspace:*",
     "@example/pixelation": "workspace:*",
+    "@example/plane-crash": "workspace:*",
     "@example/pmndrs-vercel": "workspace:*",
     "@example/portal-shapes": "workspace:*",
     "@example/portals": "workspace:*",
