@@ -1,0 +1,50 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Plane Crash",
+  "description": "A crashed plane wreck with animated crows on a Leva-toggled day/night hill, layering a targeted spotlight rig and seven @react-three/postprocessing effects at once: autofocus depth of field, bloom, vignette, brightness/contrast, hue/saturation, noise, and chromatic aberration.",
+  "tags": [
+    "gltf",
+    "animation",
+    "spotlight",
+    "environment",
+    "postprocessing",
+    "bloom",
+    "dof",
+    "autofocus",
+    "vignette",
+    "brightness-contrast",
+    "hue-saturation",
+    "noise",
+    "chromatic-aberration"
+  ],
+  "authors": ["Łukasz Kwas"],
+  "source": "https://github.com/kvvasuu/fiber-photo-mode",
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing",
+    "leva",
+    "maath"
+  ],
+  "assets": [
+    {
+      "name": "Crow",
+      "files": ["src/crow-transformed.glb"],
+      "creator": "LostBoyz2078",
+      "source": "https://sketchfab.com/3d-models/crow-2001eaf8e667446c969a69ca5b1b65ae",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
+      "modified": true,
+      "notes": "Transformed/compressed with gltfjsx --transform (2.88MB -> 594KB)."
+    },
+    {
+      "name": "Plane Crash by a Brothel in Nevada",
+      "files": ["src/plane.glb"],
+      "creator": "Azad Balabanian",
+      "source": "https://sketchfab.com/3d-models/plane-crash-by-a-brothel-in-nevada-9931703442a14a3db2cd53c368706c64",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
+      "modified": false
+    }
+  ]
+}
