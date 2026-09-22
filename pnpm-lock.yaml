@@ -399,6 +399,9 @@ importers:
       '@example/pixelation':
         specifier: workspace:*
         version: link:../../examples/pixelation
+      '@example/plane-crash':
+        specifier: workspace:*
+        version: link:../../examples/plane-crash
       '@example/pmndrs-vercel':
         specifier: workspace:*
         version: link:../../examples/pmndrs-vercel
