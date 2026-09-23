@@ -73,6 +73,13 @@ const HELD = 600;
 function SayCheese() {
   const advance = useThree((state) => state.advance);
 
+  //
+  // The unit of the timestamp `advance` takes. v9 sets `clock.elapsedTime` to
+  // it, in seconds. v10 has no clock and passes it to its scheduler, which
+  // counts in milliseconds and throttles `fps` jobs by them.
+  //
+  const second = useThree((state) => ("clock" in state ? 1 : 1000));
+
   useEffect(() => {
     const pixel = document.createElement("div");
     pixel.style.cssText =
@@ -93,8 +100,9 @@ function SayCheese() {
       // Every frame the scene will ever see, one per animation frame. Under
       // `frameloop="never"` r3f takes the delta from the timestamp we pass
       // rather than from the wall clock, so `useFrame` receives exactly `STEP`
-      // each time and `clock.elapsedTime` lands on `FRAMES * STEP` -- how long
-      // the browser really took between two of them changes nothing.
+      // each time, and how long the browser really took between two of them
+      // changes nothing. On v10 the first frame receives zero, since its
+      // scheduler has no earlier step to measure from.
       //
       // One per animation frame rather than sixty in a row: a synchronous
       // burst holds the main thread for as long as the heaviest scene needs,
@@ -137,7 +145,7 @@ function SayCheese() {
         //
         window.__cheeseAdvanceClock?.(STEP * 1000);
 
-        flushSync(() => advance(++frame * STEP));
+        flushSync(() => advance(++frame * STEP * second));
 
         if (frame === FRAMES) {
           console.log(
@@ -162,7 +170,7 @@ function SayCheese() {
       cancelAnimationFrame(raf);
       pixel.remove();
     };
-  }, [advance]);
+  }, [advance, second]);
 
   return null;
 }

@@ -7,6 +7,6 @@ import head from "./vite-plugin-head";
 export default defineConfig({
   plugins: [react(), monkeyPatch(), head()],
   resolve: {
-    dedupe: ["three", "postprocessing"],
+    dedupe: ["three", "postprocessing", "@react-three/fiber"],
   },
 });
