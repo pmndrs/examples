@@ -34,7 +34,7 @@
       "label": "@react-three/fiber is pinned: 9.x is the React 19 line, and a caret could raise the three floor",
       "packages": ["@example/**"],
       "dependencies": ["@react-three/fiber"],
-      "pinVersion": "9.7.0"
+      "pinVersion": "9.8.1"
     },
     {
       "label": "@react-three/drei is pinned: 10.x is the line matching @react-three/fiber 9",

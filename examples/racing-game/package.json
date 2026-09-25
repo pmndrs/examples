@@ -5,7 +5,7 @@
     "@pmndrs/branding": "^0.0.8",
     "@react-three/cannon": "^6.6.0",
     "@react-three/drei": "10.7.8",
-    "@react-three/fiber": "9.7.0",
+    "@react-three/fiber": "9.8.1",
     "inter-ui": "^3.19.3",
     "leva": "^0.10.1",
     "lodash-es": "^4.17.21",
