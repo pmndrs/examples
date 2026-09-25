@@ -40,7 +40,7 @@
       "label": "@react-three/drei is pinned: 10.x is the line matching @react-three/fiber 9",
       "packages": ["@example/**"],
       "dependencies": ["@react-three/drei"],
-      "pinVersion": "10.7.8"
+      "pinVersion": "10.7.9"
     },
     {
       "label": "Update lamina to 1.2.2 for all examples.",
