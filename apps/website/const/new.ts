@@ -1,1 +1,1 @@
-export const NEW_EXAMPLES = new Set(["flow-shield"]);
+export const NEW_EXAMPLES = new Set(["plane-crash"]);
