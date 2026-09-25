@@ -2,7 +2,7 @@
   "name": "@example/brightness-contrast",
   "version": "1.0.0",
   "dependencies": {
-    "@react-three/drei": "10.7.8",
+    "@react-three/drei": "10.7.9",
     "@react-three/fiber": "9.8.1",
     "@react-three/postprocessing": "^3.1.2",
     "leva": "^0.10.1",
