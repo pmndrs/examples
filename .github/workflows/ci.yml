@@ -274,8 +274,9 @@ jobs:
     if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
     env:
-      # No token, no preview: that is a fork's pull request, which cannot read
-      # the repo secrets, or a checkout of this repo that never set them.
+      # No token, no deploy from here: that is a fork's pull request, which
+      # cannot read the repo secrets, or a checkout of this repo that never set
+      # them. It still builds; the artifact at the bottom is where that goes.
       PREVIEW: ${{ secrets.VERCEL_TOKEN != '' }}
     steps:
       - uses: actions/checkout@v7
@@ -302,7 +303,6 @@ jobs:
       # domain root, since the pages link to each other by absolute path. That
       # is the production layout, which is what a preview should be showing.
       - run: pnpm build
-        if: ${{ env.PREVIEW == 'true' }}
         env:
           BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
           # The production origin, deliberately: the <head> URLs are canonical
@@ -353,6 +353,21 @@ jobs:
               state: "success",
               environment_url: process.env.URL,
             });
+
+      # Otherwise the build stops here, which is all a fork's used to do.
+      # `preview.yml` deploys it when a maintainer asks, and needs `base_path`
+      # with it: `configure-pages` reads the Pages settings, and that is a
+      # permission a workflow holding the Vercel token has no other use for.
+      - if: ${{ env.PREVIEW != 'true' }}
+        run: echo "${{ steps.configurepages.outputs.base_path }}" > base_path
+      - if: ${{ env.PREVIEW != 'true' }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: preview
+          path: |
+            out
+            base_path
+          retention-days: 7 # pressed while it is being looked at, or not at all
 
   deploy-job:
     # only for pushes on main
