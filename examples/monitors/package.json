@@ -5,7 +5,7 @@
     "@pmndrs/assets": "^1.6.0",
     "@pmndrs/branding": "^0.0.8",
     "@react-three/drei": "10.7.8",
-    "@react-three/fiber": "9.7.0",
+    "@react-three/fiber": "9.8.1",
     "@react-three/postprocessing": "^3.1.2",
     "maath": "^0.10.8",
     "react": "19.2.8",
