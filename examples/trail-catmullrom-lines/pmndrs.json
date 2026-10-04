@@ -1,0 +1,11 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Trail & CatmullRom Lines",
+  "description": "Ribbon light trails following animated objects along 3D CatmullRom spline curves with configurable line tension, decay and float dynamics.",
+  "tags": ["animation", "lighting", "geometry", "controls"],
+  "authors": ["KuraPiee"],
+  "publishedAt": "2026-09-12",
+  "source": "https://github.com/pmndrs/examples/tree/main/examples/trail-catmullrom-lines",
+  "libraries": ["@react-three/drei", "@react-three/fiber", "leva"],
+  "assets": []
+}
