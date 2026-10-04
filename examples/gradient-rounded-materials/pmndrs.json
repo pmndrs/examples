@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Gradient Rounded Materials",
+  "description": "Material showcase combining GradientTexture, RoundedBox, and MeshWobbleMaterial on geometric primitives.",
+  "tags": ["materials", "shapes"],
+  "authors": ["Sumit Ridhal"],
+  "source": "https://github.com/pmndrs/examples/tree/main/examples/gradient-rounded-materials",
+  "libraries": ["@react-three/drei", "@react-three/fiber", "leva"],
+  "assets": []
+}

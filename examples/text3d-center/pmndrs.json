@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Text3D Center",
+  "description": "3D text rendering with Text3D and Center components, featuring matcap material and configurable bevel.",
+  "tags": ["text", "staging"],
+  "authors": ["Sumit Ridhal"],
+  "source": "https://github.com/pmndrs/examples/tree/main/examples/text3d-center",
+  "libraries": ["@react-three/drei", "@react-three/fiber", "leva"],
+  "assets": []
+}
