@@ -26,7 +26,7 @@ Single-context: one `CONTEXT.md` + `docs/adr/` at the repo root (created lazily 
 
 ### UI components
 
-`apps/website` has Tailwind v4 + shadcn/ui set up (style `base-maia` — the Base UI half of the registry, so the primitives are `@base-ui/react` and composition is the `render` prop, not `asChild` — base colour `neutral`, icons `lucide`). The vendored `shadcn` skill in `.claude/skills/shadcn/` is the source of truth for adding, updating and styling components — use it, and run the `shadcn` CLI rather than hand-writing registry files.
+`apps/website` has Tailwind v4 + shadcn/ui set up (style `base-luma` — the Base UI half of the registry, so the primitives are `@base-ui/react` and composition is the `render` prop, not `asChild` — base colour `neutral`, icons `lucide`). The vendored `shadcn` skill in `.claude/skills/shadcn/` is the source of truth for adding, updating and styling components — use it, and run the `shadcn` CLI rather than hand-writing registry files.
 
 **Components come from the CLI, never from a fetch.** `pnpm dlx shadcn@latest add <component>` ([docs](https://ui.shadcn.com/docs/cli)) — it resolves the registry for our `style`/`baseColor`/`iconLibrary`, pulls transitive components, and writes to the aliases in `components.json`. Never copy a component out of the docs site, `curl` a registry JSON, or hand-write a file into `components/ui/`: those bypass the preset and drift from what `shadcn@latest info` reports as installed. Reading the docs for a component's API is fine — installing from them is not.
 
