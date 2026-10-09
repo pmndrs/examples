@@ -1,0 +1,15 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Tilt Shift",
+  "description": "A low-poly town with traffic, turned into a miniature by @react-three/postprocessing's TiltShift and TiltShift2 effects - blurred everywhere but a band across the screen.",
+  "tags": ["postprocessing", "blur", "dof"],
+  "authors": ["Łukasz Kwas"],
+  "source": "https://react-postprocessing.docs.pmnd.rs/effects/tilt-shift",
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing",
+    "leva"
+  ],
+  "assets": []
+}

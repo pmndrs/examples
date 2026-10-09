@@ -179,6 +179,7 @@
     "@example/threejs-journey-lv-1-fisheye": "workspace:*",
     "@example/threejs-journey-portal": "workspace:*",
     "@example/thunder-clouds": "workspace:*",
+    "@example/tilt-shift": "workspace:*",
     "@example/tone-mapping": "workspace:*",
     "@example/trails": "workspace:*",
     "@example/transformcontrols-and-makedefault": "workspace:*",
