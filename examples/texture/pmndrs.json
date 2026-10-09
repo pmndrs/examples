@@ -1,0 +1,15 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Texture",
+  "description": "A low-poly planet, moon and asteroid belt seen through a helmet HUD, a dirty lens or a scope - canvas-drawn overlays blended over the scene by @react-three/postprocessing's Texture effect.",
+  "tags": ["postprocessing", "texture", "hud"],
+  "authors": ["Łukasz Kwas"],
+  "source": "https://react-postprocessing.docs.pmnd.rs/effects/texture",
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing",
+    "leva"
+  ],
+  "assets": []
+}
