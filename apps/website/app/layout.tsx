@@ -8,8 +8,6 @@ import { BASE_PATH, catalogIndexUrl, getExamples } from "@/lib/helper";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "cn";
-import { builder } from "material-theme-builder";
-import { examplesMtb } from "@/lib/mtb";
 
 // The design-system `font-mono` item writes this call without `subsets`. Ours
 // names the same one as Inter's: next/font preloads only a named subset, and
@@ -66,25 +64,6 @@ function bootNav(storageKey: string) {
   root.toggleAttribute("data-nav-filtering", filtering);
 }
 
-/**
- * `:root { <light roles> } .dark { <dark roles> }` -- the shape next-themes'
- * `attribute="class"` already switches on, so the two need nothing wiring them
- * together. The seed and the site's overrides of it are `examplesMtb`.
- *
- * It has to stay a build-time call. This file is a server component, so the
- * palette is computed once at build and ships inside the prerendered HTML,
- * with nothing left to do on hydration -- and, since the package root is
- * React-free, nothing reaching the browser bundle either. Don't move it into
- * a client component, and don't reach for the package's `<Mtb>` (behind
- * `material-theme-builder/react`, with `useMtb`): this app is
- * `output: "export"`, so the browser paints the whole page well before
- * hydration, and anything that supplies the colours later gives a frame with
- * none of them. Looking at the running app proves nothing here, since
- * hydration hides the gap.
- */
-const { source, ...mtbOptions } = examplesMtb;
-const md3Css = builder(source, mtbOptions).toCss();
-
 export const metadata: Metadata = {
   title: "pmndrs examples",
   description: "",
@@ -135,14 +114,6 @@ export default function RootLayout({
           "**:data-[slot=sheet-overlay]:backdrop-filter-none",
         )}
       >
-        {/* `href` + `precedence` is what gets React to hoist this into <head>.
-            Safe here because the palette is a build-time constant: React
-            treats a hoisted sheet as immutable and keyed by `href`. */}
-        <style
-          href="md3"
-          precedence="high"
-          dangerouslySetInnerHTML={{ __html: md3Css }}
-        />
         {/* Blocking on purpose: `bootNav` settles what the rail looks like
             before anything paints. */}
         <script
