@@ -9,6 +9,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 import { builder } from "material-theme-builder";
+import { examplesMtb } from "@/lib/mtb";
 
 const inter = Inter({ subsets: ["latin"] });
 const examples = getExamples();
@@ -58,33 +59,19 @@ function bootNav(storageKey: string) {
 }
 
 /**
- * The one hex the whole palette hangs off -- poimandres' signature mint.
- * Material Color Utilities derives every `--md-sys-color-*` role from it, and
- * `globals.css` hands those on to shadcn's tokens. `scheme`, `contrast`, core
- * colour overrides and `customColors` all go in the second argument.
- *
- * Kept even though `monochrome` throws the hue away: it is what the source
- * *is*, and it is the one line to change to see the site in colour again --
- * every other scheme reads it.
- */
-const MCU_SOURCE = "#5de4c7";
-
-/**
  * `:root { <light roles> } .dark { <dark roles> }` -- the shape next-themes'
  * `attribute="class"` already switches on, so the two need nothing wiring them
- * together.
+ * together. The seed and the site's overrides of it are `examplesMtb`.
  *
- * Built here rather than through the package's `<Mcu>`: this file is a server
+ * Built here rather than through the package's `<Mtb>`: this file is a server
  * component, so the palette is computed once at build time and ships inside
  * the prerendered HTML, with nothing left to do on hydration -- and, since
- * the package root is React-free as of 3.0.0, nothing reaching the browser
- * bundle either. `<Mcu>` and `useMcu` live behind `material-theme-builder/react`
- * if a runtime theme picker ever lands.
+ * the package root is React-free, nothing reaching the browser bundle either.
+ * `<Mtb>` and `useMtb` live behind `material-theme-builder/react` if a
+ * runtime theme picker ever lands.
  */
-const mcuCss = builder(MCU_SOURCE, {
-  scheme: "monochrome",
-  customColors: [{ name: "new", hex: "#e8756a", blend: false }],
-}).toCss();
+const { source, ...mtbOptions } = examplesMtb;
+const mcuCss = builder(source, mtbOptions).toCss();
 
 export const metadata: Metadata = {
   title: "pmndrs examples",

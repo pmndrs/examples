@@ -13,8 +13,8 @@ export const golden = {
    */
   colorTokens: {
     "--md-sys-color-background": "rgb(249, 249, 249)",
-    "--md-sys-color-error": "rgb(186, 26, 26)",
-    "--md-sys-color-error-container": "rgb(255, 218, 214)",
+    "--md-sys-color-error": "rgb(94, 94, 94)",
+    "--md-sys-color-error-container": "rgb(226, 226, 226)",
     "--md-sys-color-inverse-on-surface": "rgb(241, 241, 241)",
     "--md-sys-color-inverse-primary": "rgb(198, 198, 198)",
     "--md-sys-color-inverse-surface": "rgb(48, 48, 48)",
@@ -22,7 +22,7 @@ export const golden = {
     "--md-sys-color-new-container": "rgb(226, 226, 226)",
     "--md-sys-color-on-background": "rgb(27, 27, 27)",
     "--md-sys-color-on-error": "rgb(255, 255, 255)",
-    "--md-sys-color-on-error-container": "rgb(65, 0, 2)",
+    "--md-sys-color-on-error-container": "rgb(27, 27, 27)",
     "--md-sys-color-on-new": "rgb(255, 255, 255)",
     "--md-sys-color-on-new-container": "rgb(71, 71, 71)",
     "--md-sys-color-on-primary": "rgb(226, 226, 226)",
@@ -80,7 +80,7 @@ export const golden = {
     "--muted-foreground": "rgb(71, 71, 71)",
     "--accent": "rgb(232, 232, 232)",
     "--accent-foreground": "rgb(27, 27, 27)",
-    "--destructive": "rgb(186, 26, 26)",
+    "--destructive": "rgb(94, 94, 94)",
     "--border": "oklab(0.869916 0.0000396892 0.0000174493)",
     "--input": "oklab(0.999994 0.0000455678 0.0000200868 / 0.92)",
     "--ring": "rgb(0, 0, 0)",
