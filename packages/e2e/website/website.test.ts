@@ -1,43 +1,23 @@
 import { expect, test } from "@playwright/test";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import { golden } from "./golden.ts";
 
-//
-// The shadcn tokens the website's components read. The `--md-sys-color-*`
-// roles are not listed: the test takes whichever the page defines, so a role
-// that disappears or appears is a diff too.
-//
-const SHADCN_TOKENS = [
-  "--background",
-  "--foreground",
-  "--card",
-  "--card-foreground",
-  "--popover",
-  "--popover-foreground",
-  "--primary",
-  "--primary-foreground",
-  "--secondary",
-  "--secondary-foreground",
-  "--muted",
-  "--muted-foreground",
-  "--accent",
-  "--accent-foreground",
-  "--destructive",
-  "--border",
-  "--input",
-  "--ring",
-  "--sidebar",
-  "--sidebar-foreground",
-  "--sidebar-primary",
-  "--sidebar-primary-foreground",
-  "--sidebar-accent",
-  "--sidebar-accent-foreground",
-  "--sidebar-border",
-  "--sidebar-ring",
-  "--new",
-  "--new-foreground",
-];
+const IDLE_LOGO = path.resolve(
+  import.meta.dirname,
+  "../../../apps/website/public/pmndrs/logo_idle.svg",
+);
 
-test("renders the colour tokens captured on main", async ({ page }) => {
+//
+// The shadcn tokens the website's components read: the golden's own, minus the
+// `--md-sys-color-*` roles, which the test takes from whichever the page
+// defines, so a role that disappears or appears is a diff too.
+//
+const SHADCN_TOKENS = Object.keys(golden.colorTokens).filter(
+  (name) => !name.startsWith("--md-sys-color-"),
+);
+
+test("renders the golden colour tokens", async ({ page }) => {
   await page.goto("./");
 
   const colorTokens = await page.evaluate((shadcnTokens) => {
@@ -78,17 +58,19 @@ test("renders the colour tokens captured on main", async ({ page }) => {
 //
 // The tab shows the pmndrs logo -- the static ("idle") one the design-system
 // `logo` item installs under `public/pmndrs/`. Fetched through the page's own
-// link, so a link that forgets `BASE_PATH` 404s rather than passing.
+// link and compared with that file, so a link that forgets `BASE_PATH`, or
+// points at another logo, fails.
 //
 test("uses the pmndrs logo as its favicon", async ({ page }) => {
   await page.goto("./");
 
   const href = await page.locator('link[rel="icon"]').getAttribute("href");
-  expect(href).toBe(`${process.env.BASE_PATH ?? ""}/pmndrs/logo_idle.svg`);
+  expect(href).not.toBeNull();
 
   const response = await page.request.get(href!);
   expect(response.status()).toBe(200);
   expect(response.headers()["content-type"]).toMatch(/^image\/svg\+xml/);
+  expect(await response.text()).toBe(await readFile(IDLE_LOGO, "utf8"));
 });
 
 //

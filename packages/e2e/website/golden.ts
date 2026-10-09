@@ -1,8 +1,10 @@
 /**
  * What the gallery website renders, as Chromium computes it on the home page
  * of a fresh static export. Captured on `main` before the website moved onto
- * the pmndrs/design-system registry (#231), so that every difference the
- * migration makes is either one the spec names, or a bug.
+ * the pmndrs/design-system registry (#231), then changed only where the spec
+ * names it: the error roles and `--destructive`, grey now that the shared
+ * error seed goes through monochrome, and `monoFamily`. Any other difference
+ * the migration makes is a bug.
  *
  * Change a value here only alongside the change that is meant to move it.
  */
