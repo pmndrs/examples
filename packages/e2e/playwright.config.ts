@@ -32,6 +32,10 @@ const config: PlaywrightTestConfig<ChromaticConfig> = {
   // hands each run an output directory inside its own example instead, which
   // also lets turbo cache the archive as that example's `test` output.
   outputDir: process.env.PLAYWRIGHT_OUTPUT_DIR,
+
+  // Without it Playwright collects every `*.test.*` under this folder,
+  // including the website's own suite in `website/`, which has its own config.
+  testMatch: "snapshot.test.js",
 };
 
 export default config;

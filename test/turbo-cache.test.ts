@@ -59,6 +59,7 @@ const LINT = ["lint", "lint:examples", "lint:metadata", "lint:versions"];
 const FORMAT = ["format:check"];
 const BUILD = ["build2"];
 const WEBSITE_BUILD = ["build3"];
+const WEBSITE_TEST = ["test"];
 
 const EXAMPLE = "@example/basic-example";
 const EXAMPLE_SOURCE = "examples/basic-example/src/App.tsx";
@@ -161,6 +162,26 @@ describe("catalog", () => {
 
     withTouched("docs/agents/domain.md", () => {
       expect(hashOf("website#build3", WEBSITE_BUILD)).toBe(before);
+    });
+  });
+});
+
+/**
+ * The website's colour-token test is cached like any other task, so a cache hit
+ * is a pass replayed without a browser. It has to re-run for a stylesheet the
+ * build reads -- the change it exists to catch -- and for its own golden data,
+ * which lives outside the package.
+ */
+describe("website test", () => {
+  it.each([
+    "apps/website/app/globals.css",
+    "packages/e2e/website/golden.ts",
+    "packages/e2e/website/website.test.ts",
+  ])("re-runs when %s moves", (file) => {
+    const before = hashOf("website#test", WEBSITE_TEST, "website");
+
+    withTouched(file, () => {
+      expect(hashOf("website#test", WEBSITE_TEST, "website")).not.toBe(before);
     });
   });
 });
