@@ -1,0 +1,15 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Shock Wave",
+  "description": "A field of colored blocks on a grid - click anywhere to send a @react-three/postprocessing ShockWave rippling out from the point you hit.",
+  "tags": ["postprocessing", "distortion", "interaction"],
+  "authors": ["Łukasz Kwas"],
+  "source": "https://react-postprocessing.docs.pmnd.rs/effects/shockwave",
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing",
+    "leva"
+  ],
+  "assets": []
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Water",
+  "description": "The view from the bottom of a tiled swimming pool - rising bubbles, diving rings and floaties seen from below - rippled by @react-three/postprocessing's animated screen-space Water distortion.",
+  "tags": ["postprocessing", "distortion"],
+  "authors": ["Łukasz Kwas"],
+  "source": "https://react-postprocessing.docs.pmnd.rs/effects/water",
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing",
+    "leva"
+  ],
+  "assets": []
+}
