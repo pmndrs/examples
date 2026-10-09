@@ -59,38 +59,31 @@ Before styling:
 
 ### Design system
 
-The site takes three items from [pmndrs/design-system](https://github.com/pmndrs/design-system), all pinned to the same tag, `v0.7.0`. Each is installed from `apps/website` with the `shadcn` CLI:
+The site takes its colours, monospace and logo from [pmndrs/design-system](https://github.com/pmndrs/design-system), as its defaults, pinned to the tag `v0.7.0`. Two items, each installed from `apps/website` with the `shadcn` CLI:
 
 ```sh
-pnpm dlx shadcn@latest add pmndrs/design-system/md3-base#v0.7.0
-pnpm dlx shadcn@latest add pmndrs/design-system/font-mono#v0.7.0
+pnpm dlx shadcn@latest add pmndrs/design-system/theme#v0.7.0
 pnpm dlx shadcn@latest add pmndrs/design-system/logo#v0.7.0
 ```
 
-- `md3-base` — the pmndrs seed `pmndrsMtb` in `lib/md3.ts`, the `material-theme-builder` range it declares, and its Tailwind plugin and shadcn mapping in `app/globals.css`.
-- `font-mono` — Inconsolata through `next/font/google` as `--font-mono` on `<html>` in `layout.tsx`, and `code, kbd, samp, pre` set in `font-mono` in `globals.css`.
+- `theme` — the pmndrs palette, baked: every `--md-sys-color-*` role, light and dark, written into the `:root` and `.dark` blocks of `app/globals.css`. It pulls two items of the same tag:
+  - `md3-base` — the `material-theme-builder` range, its Tailwind plugin and its shadcn mapping in `globals.css`, and the seed in `lib/md3.ts`. The site never calls the seed: the palette is already baked, so its `THEME_*` env vars reseed nothing here.
+  - `font-mono` — Inconsolata through `next/font/google` as `--font-mono` on `<html>` in `layout.tsx`, and `code, kbd, samp, pre` set in `font-mono` in `globals.css`.
 - `logo` — the four SVGs in `public/pmndrs/`; the favicon is `logo_idle.svg`, set in `layout.tsx`'s metadata.
 
-**Installed files are registry output, like `components/ui/*` — never edit them.** `lib/md3.ts` and `public/pmndrs/*` stay what the item emits, so the next `add` is a clean overwrite; `lib/md3.ts` is even prettier-ignored, to stay byte-identical. A site-specific change is a spread or a call-site change in a file of ours.
+**Installed files are registry output, like `components/ui/*` — never edit them.** `lib/md3.ts`, `public/pmndrs/*` and the baked roles in `globals.css` stay what the items emit, so the next `add` is a clean overwrite; `lib/md3.ts` is even prettier-ignored, to stay byte-identical. The shadcn tokens read the roles through the shared `material-theme-builder/shadcn.css`, untouched.
+
+The one colour of the site's own is `--new` / `--new-foreground`, the "new" badge: two literals in their own `:root` block in `globals.css`, since none of the design system's colours is meant for it.
 
 **Bumping the pin is one `add` per item, with `--overwrite`.** From `apps/website`, `<tag>` being the new tag:
 
 ```sh
-pnpm dlx shadcn@latest add pmndrs/design-system/md3-base#<tag> --overwrite
-pnpm dlx shadcn@latest add pmndrs/design-system/font-mono#<tag> --overwrite
+pnpm dlx shadcn@latest add pmndrs/design-system/theme#<tag> --overwrite
 pnpm dlx shadcn@latest add pmndrs/design-system/logo#<tag> --overwrite
 pnpm exec turbo test --filter=website
 ```
 
-Review what the `add`s changed in our own `globals.css` and `layout.tsx` — `subsets` on the Inconsolata call is ours, keep it — and update the tag here. Change a value in `packages/e2e/website/golden.ts` only when the release is meant to move it, in the same commit; any other diff is a regression.
-
-**The colour tokens are Material Design 3.** Every shadcn token in `app/globals.css` reads an `--md-sys-color-*` role, and [`material-theme-builder`](https://github.com/abernier/material-theme-builder) derives all of them from `examplesMtb` in `lib/mtb.ts` — the shared seed with the site's overrides spread over it, each one explained in its JSDoc. Retuning the palette means changing that spread, never editing a token by hand.
-
-**`THEME_*` env vars reseed the palette at build.** `lib/md3.ts` reads `THEME_PRIMARY`, `THEME_NEUTRAL`, `THEME_NEUTRAL_VARIANT`, `THEME_ERROR` and `THEME_CONTRAST`, each falling back to the pmndrs value; under monochrome only their tone shows. `turbo.json` declares none of them on `website#build3`, and turbo passes an undeclared variable to no task — so `pnpm build` ignores them. Declare one in that task's `env` before relying on it, which also keys the cache on it.
-
-**The site's shadcn mapping has to outrank the shared one.** `material-theme-builder/shadcn.css` points shadcn's tokens at M3 roles at `:root:root, .dark.dark`; the site's own, tuned mapping at the end of `globals.css` uses the same doubled selectors and comes after it. Write it at a plain `:root` and the shared one silently wins.
-
-**It has to stay a build-time call** — never a client component, never the package's `<Mtb>`. Why is on `md3Css` in `layout.tsx`.
+Review what the `add`s changed in our own files, and keep only the new release's values. `theme` re-applies `md3-base` and `font-mono` every time, so discard what they write twice: a second `material-theme-builder/shadcn.css` import and `code, kbd, samp, pre` block in `globals.css`, the Inconsolata call in `layout.tsx` rewritten without `subsets` (ours, keep it), and the `material-theme-builder` range in `package.json` and the lockfile bumped to the installed version. Then update the tag here. Change a value in `packages/e2e/website/golden.ts` only when the release is meant to move it, in the same commit; any other diff is a regression.
 
 **The golden test is how a change here is verified.**
 
