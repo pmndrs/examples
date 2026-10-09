@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import "material-theme-builder/shadcn.css";
+
+@plugin "material-theme-builder/tailwind";
 
 /* Automatic source detection doesn't reach this app (pnpm workspace, and the
    route folder is bracketed), so the sources are declared explicitly. */
@@ -272,10 +275,13 @@
 /* Every shadcn token stays on a Material Design 3 role, but the surface
    hierarchy is tuned to the original examples site: a #eee canvas, white
    cards and controls, and darker hover/selected layers. The
-   `--md-sys-color-*` half is emitted by `app/layout.tsx`. Same specificity as
-   the two blocks above, so it only wins by coming after them: keep it last. */
-:root,
-.dark {
+   `--md-sys-color-*` half is emitted by `app/layout.tsx`.
+   `material-theme-builder/shadcn.css` (imported above) maps the same tokens
+   at `:root:root, .dark.dark`, which outranks a plain `:root` wherever it
+   lands. This block matches that specificity and only wins by coming after
+   it, and after the stock `:root`/`.dark` blocks above: keep it last. */
+:root:root,
+.dark.dark {
   --background: var(--md-sys-color-surface-container);
   --foreground: var(--md-sys-color-on-surface);
   --card: var(--md-sys-color-surface-container-lowest);

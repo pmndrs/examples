@@ -9,6 +9,11 @@ patches/
 # to what its registry emits.
 .claude/
 
+# The pmndrs/design-system `md3-base` seed, installed by `shadcn add`: kept
+# byte-identical to the registry file, so re-installing it is a clean overwrite.
+# Site overrides spread it rather than edit it.
+apps/website/lib/md3.ts
+
 # Compiled payloads and 3D assets. Prettier claims a parser for every one of
 # these -- `.gltf` is json to it, minified draco is babel -- so
 # `--ignore-unknown` does not cover them: a single 200k-character line would
