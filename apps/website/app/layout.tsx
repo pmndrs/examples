@@ -11,7 +11,13 @@ import { cn } from "cn";
 import { builder } from "material-theme-builder";
 import { examplesMtb } from "@/lib/mtb";
 
-const inconsolata = Inconsolata({ variable: "--font-mono" });
+// The design-system `font-mono` item writes this call without `subsets`. Ours
+// names the same one as Inter's: next/font preloads only a named subset, and
+// its webpack loader fails the build on a preloaded font that names none.
+const inconsolata = Inconsolata({
+  subsets: ["latin"],
+  variable: "--font-mono",
+});
 
 const inter = Inter({ subsets: ["latin"] });
 const examples = getExamples();
