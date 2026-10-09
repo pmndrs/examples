@@ -175,6 +175,7 @@
     "@example/svg-renderer": "workspace:*",
     "@example/t-shirt-configurator": "workspace:*",
     "@example/take-control": "workspace:*",
+    "@example/texture": "workspace:*",
     "@example/the-three-graces": "workspace:*",
     "@example/threejs-journey-lv-1-fisheye": "workspace:*",
     "@example/threejs-journey-portal": "workspace:*",
