@@ -95,4 +95,11 @@ export const golden = {
     "--new": "rgb(232, 117, 106)",
     "--new-foreground": "rgb(255, 255, 255)",
   } satisfies Record<string, string>,
+
+  /**
+   * The face a `code` element renders in: the pmndrs monospace, from the
+   * design-system `font-mono` item (#235) -- not on `main`, which fell back
+   * to the browser's own.
+   */
+  monoFamily: "Inconsolata",
 };
