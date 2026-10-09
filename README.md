@@ -146,6 +146,19 @@ and `test/e2e-exceptions.test.ts` fails if that list and the scripts disagree.
 
 </details>
 
+## The website
+
+```sh
+$ pnpm exec turbo test --filter=website
+```
+
+Builds the website, serves its static export, and reads the colour tokens the
+browser computes on the home page — every `--md-sys-color-*` role and the shadcn
+tokens — against [`packages/e2e/website/golden.ts`](packages/e2e/website/golden.ts),
+captured on `main`. A value there moves only with the change that is meant to
+move it; any other diff is a regression, named token by token. The CI runs it in
+the jobs that build the website.
+
 ## Is it reproducible?
 
 ```sh

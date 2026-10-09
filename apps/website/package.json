@@ -8,7 +8,8 @@
     "build": "node ../../bin/build-catalog.mjs && NODE_ENV=production next build",
     "build3": "pnpm run build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "playwright test --config ../../packages/e2e/website/playwright.config.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
