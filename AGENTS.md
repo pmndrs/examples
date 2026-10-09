@@ -75,11 +75,7 @@ pnpm dlx shadcn@latest add pmndrs/design-system/logo#v0.7.0
 
 **Bumping the pin is one `add` per item.** Re-run each of the three commands above with the new tag and `--overwrite`, review what it changed in our own `globals.css` and `layout.tsx`, update the tag here, then run the golden test. Change a value in `packages/e2e/website/golden.ts` only when the release is meant to move it, in the same commit; any other diff is a regression.
 
-**The colour tokens are Material Design 3.** Every shadcn token in `app/globals.css` reads an `--md-sys-color-*` role, and [`material-theme-builder`](https://github.com/abernier/material-theme-builder) derives all of them from `examplesMtb` in `lib/mtb.ts` — the shared seed with the site's overrides spread over it. Retuning the palette means changing that spread, never editing a token by hand. The overrides:
-
-- `colorMatch: false`, `scheme: "monochrome"` — every role comes from the source's _tone_ alone and its hue is discarded: the chrome is greyscale on purpose, so that the only colour on an example page is the example. Color match has to be off: while it is on, `scheme` is ignored.
-- The pmndrs `error` seed is kept, by decision, so monochrome greys it too: the error roles, and `--destructive` which reads them, render grey.
-- `customColors` holds only `new`, the "new" badge, in place of the seven pmndrs brand colours. Anything else the m3 roles don't cover goes there; each entry mints `--md-sys-color-<name>` and a matching `-on-` foreground.
+**The colour tokens are Material Design 3.** Every shadcn token in `app/globals.css` reads an `--md-sys-color-*` role, and [`material-theme-builder`](https://github.com/abernier/material-theme-builder) derives all of them from `examplesMtb` in `lib/mtb.ts` — the shared seed with the site's overrides spread over it, each one explained in its JSDoc. Retuning the palette means changing that spread, never editing a token by hand.
 
 **`THEME_*` env vars reseed the palette at build.** `lib/md3.ts` reads `THEME_PRIMARY`, `THEME_NEUTRAL`, `THEME_NEUTRAL_VARIANT`, `THEME_ERROR` and `THEME_CONTRAST`, each falling back to the pmndrs value; under monochrome only their tone shows. `turbo.json` declares none of them on `website#build3`, and turbo passes an undeclared variable to no task — so `pnpm build` ignores them. Declare one in that task's `env` before relying on it, which also keys the cache on it.
 
