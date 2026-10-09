@@ -51,6 +51,7 @@
     "@example/csg-operations-rapier-physics": "workspace:*",
     "@example/dbismut-furniture": "workspace:*",
     "@example/depth-of-field": "workspace:*",
+    "@example/depth-picking": "workspace:*",
     "@example/diamond-refraction": "workspace:*",
     "@example/diamond-ring": "workspace:*",
     "@example/dot-screen": "workspace:*",
