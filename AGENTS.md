@@ -73,7 +73,16 @@ pnpm dlx shadcn@latest add pmndrs/design-system/logo#v0.7.0
 
 **Installed files are registry output, like `components/ui/*` — never edit them.** `lib/md3.ts` and `public/pmndrs/*` stay what the item emits, so the next `add` is a clean overwrite; `lib/md3.ts` is even prettier-ignored, to stay byte-identical. A site-specific change is a spread or a call-site change in a file of ours.
 
-**Bumping the pin is one `add` per item.** Re-run each of the three commands above with the new tag and `--overwrite`, review what it changed in our own `globals.css` and `layout.tsx`, update the tag here, then run the golden test. Change a value in `packages/e2e/website/golden.ts` only when the release is meant to move it, in the same commit; any other diff is a regression.
+**Bumping the pin is one `add` per item, with `--overwrite`.** From `apps/website`, `<tag>` being the new tag:
+
+```sh
+pnpm dlx shadcn@latest add pmndrs/design-system/md3-base#<tag> --overwrite
+pnpm dlx shadcn@latest add pmndrs/design-system/font-mono#<tag> --overwrite
+pnpm dlx shadcn@latest add pmndrs/design-system/logo#<tag> --overwrite
+pnpm exec turbo test --filter=website
+```
+
+Review what the `add`s changed in our own `globals.css` and `layout.tsx` — `subsets` on the Inconsolata call is ours, keep it — and update the tag here. Change a value in `packages/e2e/website/golden.ts` only when the release is meant to move it, in the same commit; any other diff is a regression.
 
 **The colour tokens are Material Design 3.** Every shadcn token in `app/globals.css` reads an `--md-sys-color-*` role, and [`material-theme-builder`](https://github.com/abernier/material-theme-builder) derives all of them from `examplesMtb` in `lib/mtb.ts` — the shared seed with the site's overrides spread over it, each one explained in its JSDoc. Retuning the palette means changing that spread, never editing a token by hand.
 
