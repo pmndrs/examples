@@ -44,7 +44,10 @@ pnpm dlx shadcn@latest init --preset b1VlIttI --force --no-reinstall
 pnpm dlx shadcn@latest add --overwrite $(ls components/ui | sed 's/\.tsx$//')
 ```
 
-Keep what lands in `components.json` and `components/ui/`. Discard the init's rewrite of `app/globals.css` and its bump of `shadcn`: the preset carries radius and typography, never the colours, and the golden test (below) has to pass untouched.
+Keep what lands in `components.json` and `components/ui/`, and discard everything else the init writes:
+
+- its rewrite of `app/globals.css`, and its bump of `shadcn` — the preset carries radius and typography, never the colours, and the golden test (below) has to pass untouched;
+- `lib/utils.ts`, a one-line re-export of `cn` that nothing needs. The registry's components import `cn` from the `cn` package, and `add` writes them the same way without that file. Our own call sites do too: `import { cn } from "cn"`, not the `@/lib/utils` the vendored shadcn skill shows.
 
 Before styling:
 

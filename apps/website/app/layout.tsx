@@ -7,7 +7,7 @@ import { TagFilterProvider } from "@/components/TagFilterProvider";
 import { catalogIndexUrl, getExamples } from "@/lib/helper";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "@/components/ui/sonner";
-import { cn } from "@/lib/utils";
+import { cn } from "cn";
 import { builder } from "material-theme-builder";
 import { examplesMtb } from "@/lib/mtb";
 
