@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Inconsolata } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/react";
 import "./globals.css";
 import Nav from "@/components/Nav";
@@ -10,6 +10,8 @@ import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 import { builder } from "material-theme-builder";
 import { examplesMtb } from "@/lib/mtb";
+
+const inconsolata = Inconsolata({ variable: "--font-mono" });
 
 const inter = Inter({ subsets: ["latin"] });
 const examples = getExamples();
@@ -94,7 +96,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={cn(inconsolata.variable)}
+    >
       {/* The whole gallery as one line per example, the way every site built
           with pmndrs/docs points at its own `llms.txt`. Site-wide rather than on
           the home page alone, and as a literal `<link>` rather than page

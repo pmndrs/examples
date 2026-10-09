@@ -90,3 +90,36 @@ test("uses the pmndrs logo as its favicon", async ({ page }) => {
   expect(response.status()).toBe(200);
   expect(response.headers()["content-type"]).toMatch(/^image\/svg\+xml/);
 });
+
+//
+// Code, keyboard, sample and preformatted text use the pmndrs monospace -- the
+// design-system `font-mono` item. A `code` probe, as the home page need not
+// have one. Its face is checked as loaded, not merely named: a font file the
+// export serves outside `BASE_PATH` would leave the family set and the text in
+// a fallback.
+//
+test("sets code in the shared monospace face", async ({ page }) => {
+  await page.goto("./");
+
+  const face = await page.evaluate(async () => {
+    const probe = document.createElement("code");
+    probe.textContent = "pmndrs";
+    document.body.append(probe);
+
+    const family = getComputedStyle(probe).fontFamily;
+    const first = family
+      .split(",")[0]
+      .trim()
+      .replace(/^["']|["']$/g, "");
+    const faces = await document.fonts.load(`16px "${first}"`, "pmndrs");
+
+    probe.remove();
+    return {
+      family: first,
+      loaded: faces.some((fontFace) => fontFace.status === "loaded"),
+    };
+  });
+
+  expect(face.family).toBe(golden.monoFamily);
+  expect(face.loaded).toBe(true);
+});
