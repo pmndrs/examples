@@ -89,6 +89,16 @@ const mcuCss = builder(MCU_SOURCE, {
 export const metadata: Metadata = {
   title: "pmndrs examples",
   description: "",
+  icons: {
+    // The static pmndrs logo, from the design-system `logo` item in
+    // `public/pmndrs/`. Next writes a metadata URL as given, `basePath` or
+    // not, so the prefix is ours to add -- the same one `components/Image`
+    // adds.
+    icon: {
+      url: `${process.env.BASE_PATH ?? ""}/pmndrs/logo_idle.svg`,
+      type: "image/svg+xml",
+    },
+  },
 };
 
 export default function RootLayout({
