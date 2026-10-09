@@ -102,11 +102,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={cn(inconsolata.variable)}
-    >
+    <html lang="en" suppressHydrationWarning className={inconsolata.variable}>
       {/* The whole gallery as one line per example, the way every site built
           with pmndrs/docs points at its own `llms.txt`. Site-wide rather than on
           the home page alone, and as a literal `<link>` rather than page
