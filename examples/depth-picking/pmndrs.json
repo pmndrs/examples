@@ -1,0 +1,15 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Depth Picking",
+  "description": "Click to plant trees on low-poly hills that exist only in a displacement map - @react-three/postprocessing's DepthPicking reads the real surface from the depth buffer, so the cursor follows the hills and skips trees, rocks and the lake.",
+  "tags": ["postprocessing", "depth", "interaction"],
+  "authors": ["Łukasz Kwas"],
+  "source": "https://react-postprocessing.docs.pmnd.rs/passes/depth-picking",
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing",
+    "leva"
+  ],
+  "assets": []
+}
