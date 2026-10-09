@@ -1,0 +1,15 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Depth",
+  "description": "A low-poly forest receding into the distance, rendered as its raw depth buffer by @react-three/postprocessing's Depth effect - with the camera's near and far planes exposed to show how they shape it.",
+  "tags": ["postprocessing", "depth"],
+  "authors": ["Łukasz Kwas"],
+  "source": "https://react-postprocessing.docs.pmnd.rs/effects/depth",
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing",
+    "leva"
+  ],
+  "assets": []
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Color Depth",
+  "description": "Matte spheres on a white backdrop under three orbiting colored lights, their smooth gradients posterized into hard bands by @react-three/postprocessing's ColorDepth effect.",
+  "tags": ["postprocessing"],
+  "authors": ["Łukasz Kwas"],
+  "source": "https://react-postprocessing.docs.pmnd.rs/effects/color-depth",
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing",
+    "leva"
+  ],
+  "assets": []
+}
