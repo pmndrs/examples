@@ -74,3 +74,19 @@ test("renders the colour tokens captured on main", async ({ page }) => {
 
   expect(colorTokens).toEqual(golden.colorTokens);
 });
+
+//
+// The tab shows the pmndrs logo -- the static ("idle") one the design-system
+// `logo` item installs under `public/pmndrs/`. Fetched through the page's own
+// link, so a link that forgets `BASE_PATH` 404s rather than passing.
+//
+test("uses the pmndrs logo as its favicon", async ({ page }) => {
+  await page.goto("./");
+
+  const href = await page.locator('link[rel="icon"]').getAttribute("href");
+  expect(href).toBe(`${process.env.BASE_PATH ?? ""}/pmndrs/logo_idle.svg`);
+
+  const response = await page.request.get(href!);
+  expect(response.status()).toBe(200);
+  expect(response.headers()["content-type"]).toMatch(/^image\/svg\+xml/);
+});
