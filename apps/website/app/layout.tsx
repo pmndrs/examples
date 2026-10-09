@@ -4,7 +4,7 @@ import { NuqsAdapter } from "nuqs/adapters/react";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import { TagFilterProvider } from "@/components/TagFilterProvider";
-import { catalogIndexUrl, getExamples } from "@/lib/helper";
+import { BASE_PATH, catalogIndexUrl, getExamples } from "@/lib/helper";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "cn";
@@ -91,10 +91,9 @@ export const metadata: Metadata = {
   icons: {
     // The static pmndrs logo, from the design-system `logo` item in
     // `public/pmndrs/`. Next writes a metadata URL as given, `basePath` or
-    // not, so the prefix is ours to add -- the same one `components/Image`
-    // adds.
+    // not, so the prefix is ours to add.
     icon: {
-      url: `${process.env.BASE_PATH ?? ""}/pmndrs/logo_idle.svg`,
+      url: `${BASE_PATH}/pmndrs/logo_idle.svg`,
       type: "image/svg+xml",
     },
   },

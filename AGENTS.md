@@ -69,7 +69,7 @@ pnpm dlx shadcn@latest add pmndrs/design-system/logo#v0.7.0
 
 - `md3-base` — the pmndrs seed `pmndrsMtb` in `lib/md3.ts`, the `material-theme-builder` range it declares, and its Tailwind plugin and shadcn mapping in `app/globals.css`.
 - `font-mono` — Inconsolata through `next/font/google` as `--font-mono` on `<html>` in `layout.tsx`, and `code, kbd, samp, pre` set in `font-mono` in `globals.css`.
-- `logo` — the four SVGs in `public/pmndrs/`; the favicon is `logo_idle.svg`, prefixed with `BASE_PATH` by hand in `layout.tsx`'s metadata.
+- `logo` — the four SVGs in `public/pmndrs/`; the favicon is `logo_idle.svg`, set in `layout.tsx`'s metadata.
 
 **Installed files are registry output, like `components/ui/*` — never edit them.** `lib/md3.ts` and `public/pmndrs/*` stay what the item emits, so the next `add` is a clean overwrite; `lib/md3.ts` is even prettier-ignored, to stay byte-identical. A site-specific change is a spread or a call-site change in a file of ours.
 
