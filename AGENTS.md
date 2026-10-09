@@ -85,7 +85,7 @@ pnpm dlx shadcn@latest add pmndrs/design-system/logo#v0.7.0
 
 **The site's shadcn mapping has to outrank the shared one.** `material-theme-builder/shadcn.css` points shadcn's tokens at M3 roles at `:root:root, .dark.dark`; the site's own, tuned mapping at the end of `globals.css` uses the same doubled selectors and comes after it. Write it at a plain `:root` and the shared one silently wins.
 
-**It has to stay a build-time call.** `layout.tsx` is a server component, so `builder(...).toCss()` runs once at build and the CSS ships inside the prerendered HTML. Don't move it into a client component, and don't reach for the package's `<Mtb>`: this app is `output: "export"`, so the browser paints the whole page well before hydration, and anything that supplies the colours later gives you a frame with none of them. Looking at the running app proves nothing here, since hydration hides the gap.
+**It has to stay a build-time call** — never a client component, never the package's `<Mtb>`. Why is on `md3Css` in `layout.tsx`.
 
 **The golden test is how a change here is verified.**
 

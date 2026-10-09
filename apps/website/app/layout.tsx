@@ -71,15 +71,19 @@ function bootNav(storageKey: string) {
  * `attribute="class"` already switches on, so the two need nothing wiring them
  * together. The seed and the site's overrides of it are `examplesMtb`.
  *
- * Built here rather than through the package's `<Mtb>`: this file is a server
- * component, so the palette is computed once at build time and ships inside
- * the prerendered HTML, with nothing left to do on hydration -- and, since
- * the package root is React-free, nothing reaching the browser bundle either.
- * `<Mtb>` and `useMtb` live behind `material-theme-builder/react` if a
- * runtime theme picker ever lands.
+ * It has to stay a build-time call. This file is a server component, so the
+ * palette is computed once at build and ships inside the prerendered HTML,
+ * with nothing left to do on hydration -- and, since the package root is
+ * React-free, nothing reaching the browser bundle either. Don't move it into
+ * a client component, and don't reach for the package's `<Mtb>` (behind
+ * `material-theme-builder/react`, with `useMtb`): this app is
+ * `output: "export"`, so the browser paints the whole page well before
+ * hydration, and anything that supplies the colours later gives a frame with
+ * none of them. Looking at the running app proves nothing here, since
+ * hydration hides the gap.
  */
 const { source, ...mtbOptions } = examplesMtb;
-const mcuCss = builder(source, mtbOptions).toCss();
+const md3Css = builder(source, mtbOptions).toCss();
 
 export const metadata: Metadata = {
   title: "pmndrs examples",
@@ -136,9 +140,9 @@ export default function RootLayout({
             Safe here because the palette is a build-time constant: React
             treats a hoisted sheet as immutable and keyed by `href`. */}
         <style
-          href="mcu"
+          href="md3"
           precedence="high"
-          dangerouslySetInnerHTML={{ __html: mcuCss }}
+          dangerouslySetInnerHTML={{ __html: md3Css }}
         />
         {/* Blocking on purpose: `bootNav` settles what the rail looks like
             before anything paints. */}
