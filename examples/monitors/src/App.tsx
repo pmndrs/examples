@@ -85,7 +85,7 @@ export default function App() {
         />
         <DepthOfField
           target={[0, 0, 13]}
-          focalLength={0.3}
+          focusRange={5.7}
           bokehScale={15}
           height={700}
         />
