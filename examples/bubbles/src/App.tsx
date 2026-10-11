@@ -137,7 +137,7 @@ export default function App() {
       <EffectComposer>
         <DepthOfField
           focusDistance={0}
-          focalLength={0.02}
+          focusRange={20}
           bokehScale={2}
           resolutionY={480}
         />

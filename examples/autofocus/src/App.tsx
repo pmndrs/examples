@@ -45,7 +45,7 @@ function Scene() {
     }),
     DepthOfField: folder(
       {
-        focusRange: { min: 0, max: 0.05, value: 0.005, step: 0.001 },
+        focusRange: { min: 0, max: 50, value: 5, step: 0.1 },
         bokehScale: { min: 0, max: 50, value: 8 },
       },
       { collapsed: true },

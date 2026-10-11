@@ -1,32 +1,32 @@
-import * as THREE from "three";
-import { MathUtils } from "three";
-import { type GLTF } from "three-stdlib";
-import { Canvas, type ThreeElements } from "@react-three/fiber";
+import { Addition, Base, Geometry } from "@react-three/csg";
 import {
-  useGLTF,
   AccumulativeShadows,
-  RandomizedLight,
-  OrbitControls,
   Environment,
   Lightformer,
+  OrbitControls,
+  RandomizedLight,
+  useGLTF,
 } from "@react-three/drei";
+import { Canvas, type ThreeElements } from "@react-three/fiber";
 import {
-  EffectComposer,
   DepthOfField,
+  EffectComposer,
   N8AO,
   ToneMapping,
 } from "@react-three/postprocessing";
-import { Geometry, Base, Addition } from "@react-three/csg";
 import {
-  Physics,
-  RigidBody,
   CuboidCollider,
   InstancedRigidBodies,
+  Physics,
+  RigidBody,
   type InstancedRigidBodyProps,
 } from "@react-three/rapier";
+import * as THREE from "three";
+import { MathUtils } from "three";
+import { type GLTF } from "three-stdlib";
 
-import twentyModel from "./blender-threejs-journey-20k-transformed.glb?url";
 import hatModel from "./blender-threejs-journey-20k-hat-transformed.glb?url";
+import twentyModel from "./blender-threejs-journey-20k-transformed.glb?url";
 
 type TwentyGLTFResult = GLTF & {
   nodes: {
@@ -111,7 +111,7 @@ export const App = () => (
     {/* Effects */}
     <EffectComposer>
       <N8AO aoRadius={0.5} intensity={1} />
-      <DepthOfField target={[0, 0, -2.5]} focusRange={0.1} bokehScale={10} />
+      <DepthOfField target={[0, 0, -2.5]} focusRange={4} bokehScale={10} />
       <ToneMapping />
     </EffectComposer>
     {/* Controls */}

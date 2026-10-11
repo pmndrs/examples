@@ -15,8 +15,8 @@ const row = [
 
 export default function App() {
   const { focusDistance, focusRange, bokehScale } = useControls({
-    focusDistance: { value: 0.58, min: 0, max: 1, step: 0.01 },
-    focusRange: { value: 0.1, min: 0, max: 1, step: 0.01 },
+    focusDistance: { value: 12, min: 0, max: 20, step: 0.1 },
+    focusRange: { value: 2, min: 0, max: 20, step: 0.1 },
     bokehScale: { value: 5, min: 0, max: 10, step: 0.1 },
   });
 

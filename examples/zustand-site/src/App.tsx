@@ -1,22 +1,21 @@
-import * as THREE from "three";
-import React, { useLayoutEffect, useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
 import { Plane, useAspect, useTexture } from "@react-three/drei";
+import { Canvas, useFrame } from "@react-three/fiber";
 import {
-  EffectComposer,
   DepthOfField,
+  EffectComposer,
   Vignette,
-  TiltShift2,
 } from "@react-three/postprocessing";
-import { MaskFunction, type DepthOfFieldEffect } from "postprocessing";
+import { type DepthOfFieldEffect } from "postprocessing";
+import React, { useRef, useState } from "react";
+import * as THREE from "three";
 import Fireflies from "./components/Fireflies";
-import bgUrl from "./resources/bg.jpg";
-import starsUrl from "./resources/stars.png";
-import groundUrl from "./resources/ground.png";
+import "./materials/layerMaterial";
 import bearUrl from "./resources/bear.png";
+import bgUrl from "./resources/bg.jpg";
+import groundUrl from "./resources/ground.png";
 import leaves1Url from "./resources/leaves1.png";
 import leaves2Url from "./resources/leaves2.png";
-import "./materials/layerMaterial";
+import starsUrl from "./resources/stars.png";
 
 type Layer = {
   texture: THREE.Texture;
@@ -130,7 +129,7 @@ function Effects() {
         ref={ref}
         target={[0, 0, 30]}
         bokehScale={8}
-        focalLength={0.1}
+        focusRange={60}
         width={1024}
       />
       <Vignette />
