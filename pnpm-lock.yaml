@@ -851,8 +851,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -940,8 +940,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -1137,8 +1137,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       '@react-three/rapier':
         specifier: ^2.2.0
         version: 2.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(react@19.2.8)(three@0.186.0)
@@ -1220,8 +1220,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -1374,8 +1374,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -1420,8 +1420,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       '@react-three/rapier':
         specifier: ^2.2.0
         version: 2.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(react@19.2.8)(three@0.186.0)
@@ -1463,8 +1463,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       react:
         specifier: 19.2.8
         version: 19.2.8
@@ -1503,8 +1503,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -1906,8 +1906,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -2029,8 +2029,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -2075,8 +2075,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -2152,8 +2152,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -2370,8 +2370,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -2413,8 +2413,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -2456,8 +2456,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -2499,8 +2499,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -2542,8 +2542,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       react:
         specifier: 19.2.8
         version: 19.2.8
@@ -2585,8 +2585,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -2929,8 +2929,8 @@ importers:
         specifier: ^1.0.1
         version: 1.0.1(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       postprocessing:
         specifier: 6.39.5
         version: 6.39.5(three@0.186.0)
@@ -2972,8 +2972,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       react:
         specifier: 19.2.8
         version: 19.2.8
@@ -3095,8 +3095,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -3141,8 +3141,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       react:
         specifier: 19.2.8
         version: 19.2.8
@@ -3273,8 +3273,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       react:
         specifier: 19.2.8
         version: 19.2.8
@@ -3313,8 +3313,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -3433,8 +3433,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       react:
         specifier: 19.2.8
         version: 19.2.8
@@ -3476,8 +3476,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       maath:
         specifier: ^0.10.8
         version: 0.10.8(@types/three@0.186.0)(three@0.186.0)
@@ -3599,8 +3599,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -3722,8 +3722,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       react:
         specifier: 19.2.8
         version: 19.2.8
@@ -3922,8 +3922,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -4085,8 +4085,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       nice-color-palettes:
         specifier: ^3.0.0
         version: 3.0.0
@@ -4171,8 +4171,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -4500,8 +4500,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       '@react-three/rapier':
         specifier: ^2.2.0
         version: 2.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(react@19.2.8)(three@0.186.0)
@@ -4838,8 +4838,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       maath:
         specifier: ^0.10.8
         version: 0.10.8(@types/three@0.186.0)(three@0.186.0)
@@ -4884,8 +4884,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -4933,8 +4933,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       react:
         specifier: 19.2.8
         version: 19.2.8
@@ -5028,8 +5028,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -5071,8 +5071,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       react:
         specifier: 19.2.8
         version: 19.2.8
@@ -5148,8 +5148,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -5194,8 +5194,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -5409,8 +5409,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -5452,8 +5452,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -5765,8 +5765,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -5854,8 +5854,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       '@react-three/rapier':
         specifier: ^2.2.0
         version: 2.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(react@19.2.8)(three@0.186.0)
@@ -6017,8 +6017,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       react:
         specifier: 19.2.8
         version: 19.2.8
@@ -6057,8 +6057,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -6192,8 +6192,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       react:
         specifier: 19.2.8
         version: 19.2.8
@@ -6238,8 +6238,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -6401,8 +6401,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -6444,8 +6444,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       react:
         specifier: 19.2.8
         version: 19.2.8
@@ -6484,8 +6484,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -6638,8 +6638,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -6724,8 +6724,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       react:
         specifier: 19.2.8
         version: 19.2.8
@@ -7004,8 +7004,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       meshline:
         specifier: ^3.3.1
         version: 3.3.1(three@0.186.0)
@@ -7210,8 +7210,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -7302,8 +7302,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -7431,8 +7431,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -7649,8 +7649,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -7692,8 +7692,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -7895,8 +7895,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -7938,8 +7938,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -8221,8 +8221,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       react:
         specifier: 19.2.8
         version: 19.2.8
@@ -8381,8 +8381,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -8461,8 +8461,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       react:
         specifier: 19.2.8
         version: 19.2.8
@@ -8538,8 +8538,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       leva:
         specifier: ^0.10.1
         version: 0.10.1(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -8707,8 +8707,8 @@ importers:
         specifier: 9.8.1
         version: 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       '@react-three/postprocessing':
-        specifier: ^3.1.2
-        version: 3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)
       meshline:
         specifier: ^3.3.1
         version: 3.3.1(three@0.186.0)
@@ -10226,8 +10226,8 @@ packages:
       react: ^18.0.0
       three: '>=0.137'
 
-  '@react-three/postprocessing@3.1.2':
-    resolution: {integrity: sha512-KOAg0BzMAEbHSKPjQ7eGKJ83Pspp3N1mH+RmtnR5OxBYk71CPeqDT2RbV3gWVbFHjeiEe92fg6ZdDAeyyg9OFw==}
+  '@react-three/postprocessing@3.2.0':
+    resolution: {integrity: sha512-VSwaG1cimKOF3d4LWtR5BumcI4k1B+CJ8HfbeJ7msuEgtZiOnkNBGyLfRQtai3evrup+9QNRbNIIZ4UsuyEh9A==}
     peerDependencies:
       '@react-three/fiber': '>=9.7.0'
       postprocessing: 6.39.5
@@ -16454,7 +16454,7 @@ snapshots:
       react-merge-refs: 1.1.0
       three: 0.186.0
 
-  '@react-three/postprocessing@3.1.2(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)':
+  '@react-three/postprocessing@3.2.0(@react-three/fiber@9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.0))(react@19.2.8)(three@0.186.0)':
     dependencies:
       '@react-three/fiber': 9.8.1(@types/react@19.2.17)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(three@0.186.0)
       maath: 0.10.8(@types/three@0.186.0)(three@0.186.0)

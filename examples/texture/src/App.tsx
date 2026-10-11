@@ -3,7 +3,7 @@ import { Canvas, useThree } from "@react-three/fiber";
 import { EffectComposer, Texture } from "@react-three/postprocessing";
 import { useControls } from "leva";
 import { BlendFunction } from "postprocessing";
-import { Suspense, useEffect, useLayoutEffect, useMemo } from "react";
+import { useEffect, useLayoutEffect, useMemo } from "react";
 import * as THREE from "three";
 import { drawHelmet, drawLensDirt, drawScope } from "./overlays";
 import { Space } from "./Space";
@@ -17,11 +17,6 @@ const DEFAULT_BLEND: Record<OverlayName, BlendFunction> = {
 };
 
 const MAX_DPR = 1.5;
-
-// <Texture> always loads textureSrc, even when a ready texture is passed in
-// - so it gets a 1×1 placeholder, and the canvas texture goes in `texture`.
-const PLACEHOLDER =
-  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=";
 
 function Overlay({
   overlay,
@@ -58,7 +53,6 @@ function Overlay({
   return (
     <EffectComposer>
       <Texture
-        textureSrc={PLACEHOLDER}
         texture={texture}
         blendFunction={blendFunction}
         opacity={opacity}
@@ -92,15 +86,13 @@ export default function App() {
   return (
     <Canvas camera={{ position: [0, 6, 34], fov: 50 }}>
       <Space />
-      <Suspense fallback={null}>
-        <Overlay
-          overlay={overlay}
-          blendFunction={
-            blend === "auto" ? DEFAULT_BLEND[overlay] : (blend as BlendFunction)
-          }
-          opacity={opacity}
-        />
-      </Suspense>
+      <Overlay
+        overlay={overlay}
+        blendFunction={
+          blend === "auto" ? DEFAULT_BLEND[overlay] : (blend as BlendFunction)
+        }
+        opacity={opacity}
+      />
       <OrbitControls
         autoRotate
         autoRotateSpeed={0.4}
