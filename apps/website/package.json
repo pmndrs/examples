@@ -103,6 +103,7 @@
     "@example/learn-with-jason": "workspace:*",
     "@example/lensflare": "workspace:*",
     "@example/lulaby-city": "workspace:*",
+    "@example/lut": "workspace:*",
     "@example/lusion-connectors": "workspace:*",
     "@example/magic-box": "workspace:*",
     "@example/merged-instance": "workspace:*",
