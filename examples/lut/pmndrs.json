@@ -1,0 +1,15 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "LUT",
+  "description": "A low-poly fishing island at sunset, color graded by @react-three/postprocessing's LUT effect with lookup textures built in code - teal & orange, noir, faded film and more.",
+  "tags": ["postprocessing", "lut"],
+  "authors": ["Łukasz Kwas"],
+  "source": "https://react-postprocessing.docs.pmnd.rs/effects/lut",
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing",
+    "leva"
+  ],
+  "assets": []
+}

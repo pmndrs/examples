@@ -1,0 +1,29 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Lens Flare",
+  "description": "A floating iridescent glass dome against a golden-hour sky, with @react-three/postprocessing's LensFlare dimming as the sun passes behind the glass, plus bloom, vignette and SMAA.",
+  "tags": ["postprocessing", "bloom", "transmission", "environment"],
+  "authors": ["Anderson Mancini"],
+  "source": "https://codesandbox.io/p/sandbox/anderson-mancini-lens-lensflare-glass-dome-gjl302",
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing",
+    "leva"
+  ],
+  "assets": [
+    {
+      "name": "Ultimate Lens Flare demo assets",
+      "files": [
+        "src/background.hdr",
+        "src/digital_painting_golden_hour_sunset.jpg",
+        "src/lensDirtTexture.png",
+        "src/sphere-transformed.glb"
+      ],
+      "creator": "Anderson Mancini",
+      "source": "https://github.com/ektogamat/R3F-Ultimate-Lens-Flare",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+    }
+  ]
+}
