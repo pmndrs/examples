@@ -101,6 +101,7 @@
     "@example/lamina-1x": "workspace:*",
     "@example/landing-page": "workspace:*",
     "@example/learn-with-jason": "workspace:*",
+    "@example/lens-distortion": "workspace:*",
     "@example/lulaby-city": "workspace:*",
     "@example/lusion-connectors": "workspace:*",
     "@example/magic-box": "workspace:*",

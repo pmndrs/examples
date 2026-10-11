@@ -1,0 +1,15 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Lens Distortion",
+  "description": "A slowly turning lattice of chrome rods and glowing nodes, bent into a fisheye bulge or a pincushion by @react-three/postprocessing's LensDistortion effect.",
+  "tags": ["postprocessing", "distortion", "instances"],
+  "authors": ["Łukasz Kwas"],
+  "source": "https://react-postprocessing.docs.pmnd.rs/effects/lens-distortion",
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing",
+    "leva"
+  ],
+  "assets": []
+}
