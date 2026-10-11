@@ -156,6 +156,7 @@
     "@example/shader-fire": "workspace:*",
     "@example/shader-hmr": "workspace:*",
     "@example/shadermaterials": "workspace:*",
+    "@example/sharpness": "workspace:*",
     "@example/shoe-configurator": "workspace:*",
     "@example/shockwave": "workspace:*",
     "@example/shopping": "workspace:*",
