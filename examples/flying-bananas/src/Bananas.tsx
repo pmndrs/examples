@@ -1,13 +1,13 @@
-import * as THREE from "three";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useRef, useState } from "react";
-import { Canvas, useThree, useFrame } from "@react-three/fiber";
+import * as THREE from "three";
 // https://github.com/pmndrs/drei
-import { useGLTF, Detailed, Environment } from "@react-three/drei";
+import { Detailed, Environment, useGLTF } from "@react-three/drei";
 // https://github.com/pmndrs/react-postprocessing
 // https://github.com/vanruesc/postprocessing
 import {
-  EffectComposer,
   DepthOfField,
+  EffectComposer,
   ToneMapping,
 } from "@react-three/postprocessing";
 
@@ -145,7 +145,7 @@ export default function Bananas({
       <EffectComposer multisampling={0}>
         <DepthOfField
           target={[0, 0, 60]}
-          focalLength={0.4}
+          focusRange={38}
           bokehScale={14}
           height={700}
         />

@@ -1,18 +1,18 @@
-import * as THREE from "three";
-import { useMemo, useRef } from "react";
-import { Canvas, useThree, useFrame } from "@react-three/fiber";
-import { type GLTF } from "three-stdlib";
 import {
+  CubeCamera,
+  MeshRefractionMaterial,
   useGLTF,
   useTexture,
-  MeshRefractionMaterial,
-  CubeCamera,
 } from "@react-three/drei";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
-  EffectComposer,
   Bloom,
   DepthOfField,
+  EffectComposer,
 } from "@react-three/postprocessing";
+import { useMemo, useRef } from "react";
+import * as THREE from "three";
+import { type GLTF } from "three-stdlib";
 import "./styles.css";
 
 import img1 from "./233.jpg";
@@ -128,7 +128,7 @@ export default function App() {
         />
         <DepthOfField
           target={[0, 0, -10]}
-          focalLength={0.1}
+          focusRange={10}
           bokehScale={10}
           height={1000}
         />
