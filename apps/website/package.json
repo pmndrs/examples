@@ -83,6 +83,7 @@
     "@example/grid": "workspace:*",
     "@example/ground-projected-envmaps-lamina": "workspace:*",
     "@example/ground-reflections-and-video-textures": "workspace:*",
+    "@example/halftone": "workspace:*",
     "@example/hi-key-bubbles": "workspace:*",
     "@example/horizontal-tiles": "workspace:*",
     "@example/html-annotations": "workspace:*",
