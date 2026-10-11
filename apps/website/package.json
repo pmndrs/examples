@@ -99,6 +99,7 @@
     "@example/interactive-spline-scene-live-html": "workspace:*",
     "@example/inverted-stencil-buffer": "workspace:*",
     "@example/iridescent-decals": "workspace:*",
+    "@example/kuwahara": "workspace:*",
     "@example/lamina-1x": "workspace:*",
     "@example/landing-page": "workspace:*",
     "@example/learn-with-jason": "workspace:*",

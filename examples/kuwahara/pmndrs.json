@@ -1,0 +1,34 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Kuwahara",
+  "description": "A photoscanned apple and lemon on a muted olive backdrop, repainted in oil-like brush strokes by @react-three/postprocessing's anisotropic Kuwahara filter.",
+  "tags": ["postprocessing", "gltf", "environment"],
+  "authors": ["Łukasz Kwas"],
+  "source": "https://react-postprocessing.docs.pmnd.rs/effects/kuwahara",
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing",
+    "leva"
+  ],
+  "assets": [
+    {
+      "name": "Food Apple 01",
+      "files": ["src/models/food_apple_01-transformed.glb"],
+      "creator": "Oliver Harries",
+      "source": "https://polyhaven.com/a/food_apple_01",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "modified": true
+    },
+    {
+      "name": "Lemon",
+      "files": ["src/models/lemon-transformed.glb"],
+      "creator": "Kuutti Siitonen",
+      "source": "https://polyhaven.com/a/lemon",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "modified": true
+    }
+  ]
+}
