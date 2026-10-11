@@ -1,0 +1,15 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Linocut",
+  "description": "A small boat riding shader-driven swells under a low moon, carved into a black-and-white print by @react-three/postprocessing's Linocut effect, its lines ringing out from the moon.",
+  "tags": ["postprocessing", "shader"],
+  "authors": ["Łukasz Kwas"],
+  "source": "https://react-postprocessing.docs.pmnd.rs/effects/linocut",
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing",
+    "leva"
+  ],
+  "assets": []
+}
