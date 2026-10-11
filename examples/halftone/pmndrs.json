@@ -1,0 +1,15 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Halftone",
+  "description": "Glossy pop-art shapes floating over a cream backdrop, printed as a rotated CMY dot screen by @react-three/postprocessing's Halftone effect.",
+  "tags": ["postprocessing", "shader"],
+  "authors": ["Łukasz Kwas"],
+  "source": "https://react-postprocessing.docs.pmnd.rs/effects/halftone",
+  "libraries": [
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing",
+    "leva"
+  ],
+  "assets": []
+}
