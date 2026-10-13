@@ -36,25 +36,6 @@ available.
 
 Run `pnpm lint:metadata` to validate every metadata file.
 
-## R3F alpha examples
-
-Stable and alpha examples share the gallery, but each example installs and builds
-its own dependencies. Stable examples use the default Fiber 9 and Drei 10 pins
-in `.syncpackrc.json`.
-
-To add an alpha example, add its `package.json` name to the `packages` arrays in
-both R3F alpha version groups at the top of `.syncpackrc.json`, then use their
-exact Fiber 10 and Drei 11 preview versions in the example's dependencies. These
-groups reserve `@example/glyph-hero` for its upcoming example; they do not add it
-to the gallery. Keep the alpha groups ahead of the stable groups: syncpack uses
-the first matching group. Run `pnpm install` and `pnpm lint:versions` after
-changing the dependencies.
-
-For WebGPU scenes, import `Canvas` and the Fiber hooks from
-`@react-three/fiber/webgpu`, and Drei helpers from `@react-three/drei/webgpu`.
-The shared `e2e-build` plugin wraps that Canvas with `CheesyWebGPUCanvas`, so
-`?saycheese` snapshots use the same fixed-frame capture as stable examples.
-
 # INSTALL
 
 Prerequisites:

@@ -1,13 +1,13 @@
 {
   "versionGroups": [
     {
-      "label": "R3F alpha examples use the Fiber 10 WebGPU preview",
+      "label": "Fiber 10 alpha",
       "packages": ["@example/glyph-hero"],
       "dependencies": ["@react-three/fiber"],
       "pinVersion": "10.0.0-alpha.4"
     },
     {
-      "label": "R3F alpha examples use the matching Drei 11 preview",
+      "label": "Drei 11 alpha",
       "packages": ["@example/glyph-hero"],
       "dependencies": ["@react-three/drei"],
       "pinVersion": "11.0.0-alpha.7"

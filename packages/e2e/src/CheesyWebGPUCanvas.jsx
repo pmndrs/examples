@@ -1,4 +1,6 @@
 import { Canvas } from "@react-three/fiber/webgpu";
-import { createCheesyCanvas } from "./CheesyCanvas";
+import CheesyCanvas from "./CheesyCanvas";
 
-export default createCheesyCanvas(Canvas);
+export default function CheesyWebGPUCanvas(props) {
+  return <CheesyCanvas {...props} CanvasComponent={Canvas} />;
+}

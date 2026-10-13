@@ -105,7 +105,6 @@ export default function vitePluginMonkey() {
         ImportDeclaration(path) {
           const { node } = path;
 
-          // `from '@react-three/fiber'`
           const wrapper =
             node.source.value === "@react-three/fiber"
               ? "@examples/e2e/CheesyCanvas"

@@ -175,78 +175,79 @@ function SayCheese() {
   return null;
 }
 
-export function createCheesyCanvas(CanvasComponent) {
-  return function CheesyCanvas({ children, frameloop, ...props }) {
-    useEffect(() => {
-      console.log(
-        "CheesyCanvas: use ?saycheese in the URL to stop the animation",
-      );
-    }, []);
-
-    const sayCheeseParam = new URLSearchParams(window.location.search).has(
-      "saycheese",
+export default function CheesyCanvas({
+  children,
+  frameloop,
+  CanvasComponent = Canvas,
+  ...props
+}) {
+  useEffect(() => {
+    console.log(
+      "CheesyCanvas: use ?saycheese in the URL to stop the animation",
     );
+  }, []);
 
-    //
-    // Held from the very first render, not switched off after a wait. That is
-    // the difference between a deterministic shot and the previous one: letting
-    // the loop run for three seconds and *then* freezing it captured whatever
-    // number of frames the machine had managed, and every `useFrame` had
-    // already integrated that many deltas of wall clock into the scene.
-    //
-    // The one thing here that `deterministic.js` cannot do from outside React,
-    // and the reason the plugin still has to reach the file holding the
-    // `<Canvas>` -- `preserveDrawingBuffer` moved there, this cannot.
-    //
-    const cheesyFrameloop = sayCheeseParam ? "never" : frameloop;
+  const sayCheeseParam = new URLSearchParams(window.location.search).has(
+    "saycheese",
+  );
 
-    //
-    // The second take.
-    //
-    // The first mount happens in asset-arrival order: each suspense boundary
-    // resolves when its download does, so which component mounts first -- and
-    // with it the order `useFrame` callbacks register, the order children land
-    // in the scene graph, the order physics bodies enter the world, the order
-    // draws are taken from the seeded `Math.random` sequence -- is decided by
-    // the network, run to run. That order is the drift no amount of waiting
-    // fixed: serialising `fetch` was measured and changed nothing, because
-    // arrival is only the first domino.
-    //
-    // So once everything has arrived, the harness asks for a second mount, by
-    // key. Every `useLoader` is now warm in the suspend-react cache and answers
-    // synchronously, so nothing suspends: the whole scene mounts in one
-    // synchronous render, in JSX order -- the same order every run, on every
-    // machine. The seeded sequence is rewound first (see `deterministic.js`) so
-    // the draws land on the same values too. The canvas, its GL context and its
-    // compiled shaders survive, since the key sits below `<Canvas>`; what gets
-    // rebuilt is exactly the part whose order was wrong.
-    //
-    const [take, setTake] = useState(0);
+  //
+  // Held from the very first render, not switched off after a wait. That is
+  // the difference between a deterministic shot and the previous one: letting
+  // the loop run for three seconds and *then* freezing it captured whatever
+  // number of frames the machine had managed, and every `useFrame` had
+  // already integrated that many deltas of wall clock into the scene.
+  //
+  // The one thing here that `deterministic.js` cannot do from outside React,
+  // and the reason the plugin still has to reach the file holding the
+  // `<Canvas>` -- `preserveDrawingBuffer` moved there, this cannot.
+  //
+  const cheesyFrameloop = sayCheeseParam ? "never" : frameloop;
 
-    useEffect(() => {
-      if (!sayCheeseParam) return;
+  //
+  // The second take.
+  //
+  // The first mount happens in asset-arrival order: each suspense boundary
+  // resolves when its download does, so which component mounts first -- and
+  // with it the order `useFrame` callbacks register, the order children land
+  // in the scene graph, the order physics bodies enter the world, the order
+  // draws are taken from the seeded `Math.random` sequence -- is decided by
+  // the network, run to run. That order is the drift no amount of waiting
+  // fixed: serialising `fetch` was measured and changed nothing, because
+  // arrival is only the first domino.
+  //
+  // So once everything has arrived, the harness asks for a second mount, by
+  // key. Every `useLoader` is now warm in the suspend-react cache and answers
+  // synchronously, so nothing suspends: the whole scene mounts in one
+  // synchronous render, in JSX order -- the same order every run, on every
+  // machine. The seeded sequence is rewound first (see `deterministic.js`) so
+  // the draws land on the same values too. The canvas, its GL context and its
+  // compiled shaders survive, since the key sits below `<Canvas>`; what gets
+  // rebuilt is exactly the part whose order was wrong.
+  //
+  const [take, setTake] = useState(0);
 
-      window.__cheeseRemount = () => {
-        window.__cheeseReseed?.();
-        flushSync(() => setTake((take) => take + 1));
-      };
-      return () => delete window.__cheeseRemount;
-    }, [sayCheeseParam]);
+  useEffect(() => {
+    if (!sayCheeseParam) return;
 
-    return (
-      <CanvasComponent {...props} frameloop={cheesyFrameloop}>
-        {sayCheeseParam && <SayCheese />}
+    window.__cheeseRemount = () => {
+      window.__cheeseReseed?.();
+      flushSync(() => setTake((take) => take + 1));
+    };
+    return () => delete window.__cheeseRemount;
+  }, [sayCheeseParam]);
 
-        <React.Fragment key={take}>
-          {children}
-          {sayCheeseParam && <Probe take={take} />}
-        </React.Fragment>
-      </CanvasComponent>
-    );
-  };
+  return (
+    <CanvasComponent {...props} frameloop={cheesyFrameloop}>
+      {sayCheeseParam && <SayCheese />}
+
+      <React.Fragment key={take}>
+        {children}
+        {sayCheeseParam && <Probe take={take} />}
+      </React.Fragment>
+    </CanvasComponent>
+  );
 }
-
-export default createCheesyCanvas(Canvas);
 
 //
 // Announces that a take has *finished* mounting -- render committed, effects
