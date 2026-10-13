@@ -98,6 +98,7 @@ describe("build", () => {
     "packages/e2e/src/vite.config.build.ts",
     "packages/e2e/src/vite-plugin-head.js",
     "packages/e2e/src/vite-plugin-monkey.js",
+    "packages/e2e/src/CheesyWebGPUCanvas.jsx",
   ])("re-runs every example build when %s moves", (file) => {
     const before = hashOf(`${EXAMPLE}#build2`, BUILD, EXAMPLE);
 
