@@ -2,13 +2,13 @@
   "versionGroups": [
     {
       "label": "Fiber 10 alpha",
-      "packages": ["@example/glyph-hero"],
+      "packages": ["!**"],
       "dependencies": ["@react-three/fiber"],
-      "pinVersion": "10.0.0-alpha.4"
+      "pinVersion": "10.0.0-alpha.5"
     },
     {
       "label": "Drei 11 alpha",
-      "packages": ["@example/glyph-hero"],
+      "packages": ["!**"],
       "dependencies": ["@react-three/drei"],
       "pinVersion": "11.0.0-alpha.7"
     },
