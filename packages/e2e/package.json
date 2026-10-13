@@ -6,6 +6,7 @@
   "exports": {
     ".": "./index.mjs",
     "./CheesyCanvas": "./src/CheesyCanvas.jsx",
+    "./CheesyWebGPUCanvas": "./src/CheesyWebGPUCanvas.jsx",
     "./deterministic": "./src/deterministic.js"
   },
   "bin": {

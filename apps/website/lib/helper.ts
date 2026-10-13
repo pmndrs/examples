@@ -76,6 +76,12 @@ export function getExamples(): Example[] {
     .map((pkgname) => {
       const examplename = pkgname.split("@example/")[1];
       const metadata = getMetadata(examplename);
+      const packageJson = JSON.parse(
+        fs.readFileSync(
+          path.join(EXAMPLES_DIRECTORY, examplename, "package.json"),
+          "utf8",
+        ),
+      ) as { dependencies: Record<string, string> };
       const port = generatePort(examplename);
       const h = host(port);
 
@@ -84,6 +90,12 @@ export function getExamples(): Example[] {
 
       return {
         ...metadata,
+        libraries: metadata.libraries.map((library) =>
+          library === "@react-three/fiber" &&
+          packageJson.dependencies[library]?.startsWith("10.")
+            ? "@react-three/fiber@10"
+            : library,
+        ),
         name: examplename,
         thumb: `${embed_url}/thumbnail.webp`,
         embed_url,

@@ -14,7 +14,7 @@
       "inputs": [
         "$TURBO_DEFAULT$",
         "../../packages/e2e/bin/build.mjs",
-        "../../packages/e2e/src/{CheesyCanvas.jsx,deterministic.js,vite-plugin-monkey.js,vite-plugin-head.js,vite.config.build.ts}"
+        "../../packages/e2e/src/{CheesyCanvas.jsx,CheesyWebGPUCanvas.jsx,deterministic.js,vite-plugin-monkey.js,vite-plugin-head.js,vite.config.build.ts}"
       ],
       "outputs": ["dist/**"],
       "cache": true

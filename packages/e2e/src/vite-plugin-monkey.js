@@ -105,8 +105,13 @@ export default function vitePluginMonkey() {
         ImportDeclaration(path) {
           const { node } = path;
 
-          // `from '@react-three/fiber'`
-          if (node.source.value !== "@react-three/fiber") return;
+          const wrapper =
+            node.source.value === "@react-three/fiber"
+              ? "@examples/e2e/CheesyCanvas"
+              : node.source.value === "@react-three/fiber/webgpu"
+                ? "@examples/e2e/CheesyWebGPUCanvas"
+                : null;
+          if (wrapper === null) return;
 
           // Transform `import { ..., Canvas, ... }` into `import { ... }`,
           // keeping whatever local name it was given -- `Canvas as R3FCanvas`
@@ -135,7 +140,7 @@ export default function vitePluginMonkey() {
           // (I)
           const customCanvasImport = t.importDeclaration(
             [t.importDefaultSpecifier(t.identifier("CheesyCanvas"))],
-            t.stringLiteral("@examples/e2e/CheesyCanvas"),
+            t.stringLiteral(wrapper),
           );
 
           // (II)

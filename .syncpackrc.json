@@ -1,6 +1,18 @@
 {
   "versionGroups": [
     {
+      "label": "React Three Fiber v10",
+      "packages": ["!**"],
+      "dependencies": ["@react-three/fiber"],
+      "pinVersion": "10.0.0-alpha.5"
+    },
+    {
+      "label": "Drei v11",
+      "packages": ["!**"],
+      "dependencies": ["@react-three/drei"],
+      "pinVersion": "11.0.0-alpha.7"
+    },
+    {
       "label": "React is pinned for all examples (19.x is required by @react-three/fiber 9)",
       "packages": ["@example/**"],
       "dependencies": ["react", "react-dom"],

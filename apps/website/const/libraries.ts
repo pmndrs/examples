@@ -6,6 +6,7 @@ export const LIBRARY_LABELS: Record<string, string> = {
   "@react-three/csg": "CSG",
   "@react-three/drei": "Drei",
   "@react-three/fiber": "R3F",
+  "@react-three/fiber@10": "R3F v10",
   "@react-three/flex": "Flex",
   "@react-three/postprocessing": "Postprocessing",
   "@react-three/rapier": "Rapier",

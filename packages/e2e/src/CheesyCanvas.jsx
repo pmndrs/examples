@@ -175,7 +175,12 @@ function SayCheese() {
   return null;
 }
 
-export default function CheesyCanvas({ children, frameloop, ...props }) {
+export default function CheesyCanvas({
+  children,
+  frameloop,
+  CanvasComponent = Canvas,
+  ...props
+}) {
   useEffect(() => {
     console.log(
       "CheesyCanvas: use ?saycheese in the URL to stop the animation",
@@ -233,14 +238,14 @@ export default function CheesyCanvas({ children, frameloop, ...props }) {
   }, [sayCheeseParam]);
 
   return (
-    <Canvas {...props} frameloop={cheesyFrameloop}>
+    <CanvasComponent {...props} frameloop={cheesyFrameloop}>
       {sayCheeseParam && <SayCheese />}
 
       <React.Fragment key={take}>
         {children}
         {sayCheeseParam && <Probe take={take} />}
       </React.Fragment>
-    </Canvas>
+    </CanvasComponent>
   );
 }
 

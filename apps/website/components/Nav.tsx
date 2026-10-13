@@ -356,7 +356,10 @@ export default function Nav({
   const libraryOptions = useMemo(() => {
     const popularityByLabel = new Map<string, number>();
     const usageByLabel = new Map<string, number>();
-    const libraries = new Set(examples.flatMap((example) => example.libraries));
+    const libraries = new Set([
+      "@react-three/fiber@10",
+      ...examples.flatMap((example) => example.libraries),
+    ]);
 
     libraries.forEach((exampleLibrary) => {
       const label = getLibraryLabel(exampleLibrary);
