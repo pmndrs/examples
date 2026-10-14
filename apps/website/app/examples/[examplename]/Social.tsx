@@ -6,7 +6,7 @@ import { GoCommandPalette } from "react-icons/go";
 import { RxOpenInNewWindow } from "react-icons/rx";
 import { SiCodesandbox, SiGithub, SiStackblitz } from "react-icons/si";
 
-import { cn } from "@/lib/utils";
+import { cn } from "cn";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
 import {

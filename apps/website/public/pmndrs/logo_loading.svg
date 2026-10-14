@@ -1,0 +1,94 @@
+<svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" width="600" height="600">
+  <!--
+    Loading loop: the logo_animated.svg spring, out to each corner and back.
+
+    One quarter (1333ms) runs idle → complete → idle: 400ms on idle, 333ms
+    out, 267ms on the complete mark, 333ms back. The complete mark points
+    bottom-left; the group turns 90° clockwise each quarter for top-left,
+    top-right, then bottom-right.
+
+    The idle mark is concentric rings, so it looks the same at any quarter
+    turn. The turn is a step, taken partway through the idle hold, which is
+    why the loop has no visible seam.
+
+    Under reduced motion the shapes stay put and the mark only fades gently.
+  -->
+  <style>
+    rect.m {
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+    g {
+      transform-origin: 300px 300px;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      rect.m {
+        animation-duration: 1333ms;
+        animation-iteration-count: infinite;
+      }
+      .a { animation-name: a; }
+      .b { animation-name: b; }
+      .c { animation-name: c; }
+      .d { animation-name: d; }
+      .e { animation-name: e; }
+      g {
+        animation: turn 5332ms step-end infinite;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      g {
+        animation: fade 2400ms ease-in-out infinite alternate;
+      }
+    }
+    /* Each rect's attributes are its complete position; these are its idle one. */
+    @keyframes a {
+      0%, 30% { transform: translate(62px, -61px); }
+      30%, 75% { animation-timing-function: cubic-bezier(0.24, 1, 0.4, 1); }
+      55%, 75% { transform: none; }
+      100% { transform: translate(62px, -61px); }
+    }
+    @keyframes b {
+      0%, 30% { transform: translate(-61px, 62px); }
+      30%, 75% { animation-timing-function: cubic-bezier(0.24, 1, 0.4, 1); }
+      55%, 75% { transform: none; }
+      100% { transform: translate(-61px, 62px); }
+    }
+    @keyframes c {
+      0%, 30% { transform: translate(0.5px, 0.5px) scale(1.6947); }
+      30%, 75% { animation-timing-function: cubic-bezier(0.24, 1, 0.4, 1); }
+      55%, 75% { transform: none; }
+      100% { transform: translate(0.5px, 0.5px) scale(1.6947); }
+    }
+    @keyframes d {
+      0%, 30% { transform: translate(0.5px, 0.5px) scale(1.7913); }
+      30%, 75% { animation-timing-function: cubic-bezier(0.24, 1, 0.4, 1); }
+      55%, 75% { transform: none; }
+      100% { transform: translate(0.5px, 0.5px) scale(1.7913); }
+    }
+    @keyframes e {
+      0%, 30% { transform: translate(188px, -187px) scale(0.7308); }
+      30%, 75% { animation-timing-function: cubic-bezier(0.24, 1, 0.4, 1); }
+      55%, 75% { transform: none; }
+      100% { transform: translate(188px, -187px) scale(0.7308); }
+    }
+    /* Steps 3.75% into each quarter: 200ms into the idle hold. */
+    @keyframes turn {
+      0% { transform: rotate(270deg); }
+      3.75% { transform: rotate(0deg); }
+      28.75% { transform: rotate(90deg); }
+      53.75% { transform: rotate(180deg); }
+      78.75%, 100% { transform: rotate(270deg); }
+    }
+    @keyframes fade {
+      to { opacity: 0.45; }
+    }
+  </style>
+  <rect height="600" width="600" fill="#000000" />
+  <g>
+    <rect class="m a" height="238" width="238" x="119" y="242" fill="#FFFFFF" />
+    <rect class="m b" height="238" width="238" x="242" y="119" fill="#FFFFFF" />
+    <rect class="m c" height="131" width="131" x="234" y="234" fill="#000000" />
+    <rect class="m d" height="115" width="115" x="242" y="242" fill="#FFFFFF" />
+    <rect class="m e" height="260" width="260" x="-18" y="357" fill="#000000" />
+  </g>
+</svg>

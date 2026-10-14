@@ -29,7 +29,7 @@ import { getLibraryLabel, getLibraryPopularity } from "@/const/libraries";
 import { useRovingTabIndex } from "@/hooks/use-roving-tabindex";
 import { filterParsers, serializeFilters } from "@/lib/filters";
 import type { Example } from "@/lib/helper";
-import { cn } from "@/lib/utils";
+import { cn } from "cn";
 import { TagBadge } from "@/components/TagBadge";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";

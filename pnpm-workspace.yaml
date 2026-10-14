@@ -25,9 +25,3 @@ patchedDependencies:
   # failing on the package's own errors. Point the re-export at the sibling
   # declaration, which is what every other export in the file already does.
   ecctrl@1.0.88: patches/ecctrl@1.0.88.patch
-
-minimumReleaseAgeExclude:
-  - material-theme-builder@3.0.0
-  - "@react-three/postprocessing@3.1.2"
-  - "@react-three/fiber@9.8.1"
-  - its-fine@2.1.1

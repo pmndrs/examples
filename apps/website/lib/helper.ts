@@ -6,7 +6,12 @@ import pkg from "@/package.json";
 
 import { generatePort } from "@examples/e2e";
 
-const BASE_PATH = process.env.BASE_PATH || "";
+/**
+ * The path the site is deployed under (`/examples` on GitHub Pages), or `""`
+ * at the root. Next's `basePath` prefixes its own links and assets, never a URL
+ * we write by hand -- which is what this is for.
+ */
+export const BASE_PATH = process.env.BASE_PATH || "";
 const BASE_URL = process.env.BASE_URL;
 const EXAMPLES_DIRECTORY = path.resolve(process.cwd(), "../../examples");
 

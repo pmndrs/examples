@@ -146,6 +146,16 @@ and `test/e2e-exceptions.test.ts` fails if that list and the scripts disagree.
 
 </details>
 
+## The website
+
+```sh
+$ pnpm exec turbo test --filter=website
+```
+
+The golden test of the website's colours, favicon and monospace. What it
+checks, and why two worktrees cannot run it at once, is in
+[`AGENTS.md`](AGENTS.md#design-system).
+
 ## Is it reproducible?
 
 ```sh

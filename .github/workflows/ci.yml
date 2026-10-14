@@ -244,6 +244,15 @@ jobs:
         env:
           BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
           BASE_URL: ${{ steps.configurepages.outputs.base_url }}
+      # The website's colour tokens, read off the export just built, and before
+      # it is uploaded: a token that moved never reaches production. The same
+      # env as the build, so `build3` and every `build2` under it are cache
+      # hits and the test reads exactly what ships.
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm exec turbo test --filter=website
+        env:
+          BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
+          BASE_URL: ${{ steps.configurepages.outputs.base_url }}
       - uses: actions/upload-pages-artifact@v5
         with:
           path: ./out${{ steps.configurepages.outputs.base_path }}
@@ -353,6 +362,17 @@ jobs:
               state: "success",
               environment_url: process.env.URL,
             });
+
+      # The website's colour tokens, read off its static export. Whatever
+      # `PREVIEW` says: a fork's pull request gets no preview, but a token that
+      # moved is still something it should hear about -- and when the build
+      # above ran, this is a cache hit on it, under the same env. Last, so that
+      # a red one still leaves a preview to look at, which is what it is for.
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm exec turbo test --filter=website
+        env:
+          BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
+          BASE_URL: ${{ steps.configurepages.outputs.base_url }}
 
   deploy-job:
     # only for pushes on main

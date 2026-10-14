@@ -1,0 +1,42 @@
+<svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" width="600" height="600">
+  <!--
+    Springs from the idle mark (logo_idle.svg: four nested rings on the centre)
+    into the complete one. Each rect's attributes are its final, complete
+    position; the keyframes start from where that rect sits in the idle mark.
+    `backwards` holds the idle frame through the 400ms delay. Under
+    reduced motion nothing runs and the complete mark shows as-is.
+  -->
+  <style>
+    rect.m {
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      rect.m {
+        animation-duration: 333ms;
+        animation-timing-function: cubic-bezier(0.24, 1, 0.4, 1);
+        animation-delay: 400ms;
+        animation-fill-mode: backwards;
+      }
+      .a { animation-name: a; }
+      .b { animation-name: b; }
+      .c { animation-name: c; }
+      .d { animation-name: d; }
+      .e { animation-name: e; }
+    }
+    /* Outer ring: both 238px squares stacked at (181, 181). */
+    @keyframes a { from { transform: translate(62px, -61px); } }
+    @keyframes b { from { transform: translate(-61px, 62px); } }
+    /* Inner rings: 131 → 222 and 115 → 206, on the centre. */
+    @keyframes c { from { transform: translate(0.5px, 0.5px) scale(1.6947); } }
+    @keyframes d { from { transform: translate(0.5px, 0.5px) scale(1.7913); } }
+    /* The mask that cuts the L starts as the 190px black centre. */
+    @keyframes e { from { transform: translate(188px, -187px) scale(0.7308); } }
+  </style>
+  <rect height="600" width="600" fill="#000000" />
+  <rect class="m a" height="238" width="238" x="119" y="242" fill="#FFFFFF" />
+  <rect class="m b" height="238" width="238" x="242" y="119" fill="#FFFFFF" />
+  <rect class="m c" height="131" width="131" x="234" y="234" fill="#000000" />
+  <rect class="m d" height="115" width="115" x="242" y="242" fill="#FFFFFF" />
+  <rect class="m e" height="260" width="260" x="-18" y="357" fill="#000000" />
+</svg>

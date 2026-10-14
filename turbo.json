@@ -48,6 +48,20 @@
       "outputs": ["test-results/chromatic-archives/**"],
       "cache": true
     },
+    // The website's colour tokens, read off its static export -- so after
+    // `build3`, which writes `out/`. The examples' `test` waits on `build2`,
+    // a task the website does not have. No outputs: a pass is all it leaves.
+    "website#test": {
+      "env": ["PLAYWRIGHT_BROWSERS_PATH"],
+      "dependsOn": ["build3"],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "../../packages/e2e/lib/port.mjs",
+        "../../packages/e2e/website/**"
+      ],
+      "outputs": [],
+      "cache": true
+    },
     "lint": {
       "dependsOn": ["^lint"]
     },
