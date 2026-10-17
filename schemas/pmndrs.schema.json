@@ -147,12 +147,14 @@
           "trail",
           "transitions",
           "transmission",
+          "tsl",
           "vertex-colors",
           "vertical",
           "video-texture",
           "views",
           "vignette",
           "volumetric",
+          "webgpu",
           "wireframe"
         ]
       },
@@ -182,6 +184,7 @@
       "type": "array",
       "items": {
         "enum": [
+          "@pmndrs/glyph",
           "@react-spring/core",
           "@react-spring/three",
           "@react-spring/web",

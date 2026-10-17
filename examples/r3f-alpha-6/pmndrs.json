@@ -1,0 +1,55 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "R3F Alpha 6",
+  "description": "The React Three Fiber v10 Alpha 6 announcement, WebGPU first. Glass type on a TSL floor shatters into live shards with refraction, colored caustics and room reflections. Click the shards to pop them.",
+  "tags": [
+    "webgpu",
+    "tsl",
+    "transmission",
+    "refraction",
+    "reflections",
+    "shadows",
+    "cell-fracture",
+    "physics",
+    "text",
+    "hdr"
+  ],
+  "authors": ["Dennis Smolek", "Anderson Mancini"],
+  "source": "https://github.com/DennisSmolek/r3f-alpha-6",
+  "libraries": ["@react-three/fiber", "@pmndrs/glyph", "leva"],
+  "assets": [
+    {
+      "name": "Studio Small 09",
+      "files": ["src/assets/studio_small_09_1k.hdr"],
+      "creator": "Sergej Majboroda",
+      "source": "https://polyhaven.com/a/studio_small_09",
+      "license": "CC0-1.0"
+    },
+    {
+      "name": "Manrope",
+      "files": ["src/assets/Manrope-SemiBold.font.glb"],
+      "source": "https://github.com/google/fonts/tree/main/ofl/manrope",
+      "license": "OFL-1.1",
+      "modified": true,
+      "notes": "Weight 600 baked to a Glyph font with outlines."
+    },
+    {
+      "name": "Space Grotesk",
+      "files": ["src/assets/SpaceGrotesk-SemiBold.font.glb"],
+      "creator": "Florian Karsten",
+      "source": "https://github.com/google/fonts/tree/main/ofl/spacegrotesk",
+      "license": "OFL-1.1",
+      "modified": true,
+      "notes": "Weight 600 baked to a Glyph font with outlines."
+    },
+    {
+      "name": "IBM Plex Mono",
+      "files": ["src/assets/IBMPlexMono-Regular.font.glb"],
+      "creator": "IBM",
+      "source": "https://github.com/google/fonts/tree/main/ofl/ibmplexmono",
+      "license": "OFL-1.1",
+      "modified": true,
+      "notes": "Regular baked to a Glyph Slug font."
+    }
+  ]
+}

@@ -2,9 +2,9 @@
   "versionGroups": [
     {
       "label": "React Three Fiber v10",
-      "packages": ["!**"],
+      "packages": ["@example/r3f-alpha-6"],
       "dependencies": ["@react-three/fiber"],
-      "pinVersion": "10.0.0-alpha.5"
+      "pinVersion": "10.0.0-alpha.6"
     },
     {
       "label": "Drei v11",
