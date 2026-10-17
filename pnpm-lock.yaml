@@ -441,6 +441,9 @@ importers:
       '@example/progressive-loading-states-with-suspense':
         specifier: workspace:*
         version: link:../../examples/progressive-loading-states-with-suspense
+      '@example/r3f-alpha-6':
+        specifier: workspace:*
+        version: link:../../examples/r3f-alpha-6
       '@example/racing-game':
         specifier: workspace:*
         version: link:../../examples/racing-game

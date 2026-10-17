@@ -135,6 +135,7 @@
     "@example/portal-shapes": "workspace:*",
     "@example/portals": "workspace:*",
     "@example/progressive-loading-states-with-suspense": "workspace:*",
+    "@example/r3f-alpha-6": "workspace:*",
     "@example/racing-game": "workspace:*",
     "@example/ragdoll-physics": "workspace:*",
     "@example/ramp": "workspace:*",
