@@ -13,28 +13,28 @@
       "pinVersion": "11.0.0-alpha.7"
     },
     {
-      "label": "React is pinned for all examples (19.x is required by @react-three/fiber 9)",
-      "packages": ["@example/**"],
+      "label": "React 19 is pinned across the workspace",
+      "packages": ["**"],
       "dependencies": ["react", "react-dom"],
-      "pinVersion": "19.2.8"
+      "pinVersion": "19.2.9"
     },
     {
-      "label": "React types are pinned for all examples",
-      "packages": ["@example/**"],
+      "label": "React types are pinned across the workspace",
+      "packages": ["**"],
       "dependencies": ["@types/react"],
-      "pinVersion": "19.2.17"
+      "pinVersion": "19.2.18"
     },
     {
-      "label": "React DOM types are pinned for all examples",
-      "packages": ["@example/**"],
+      "label": "React DOM types are pinned across the workspace",
+      "packages": ["**"],
       "dependencies": ["@types/react-dom"],
-      "pinVersion": "19.2.3"
+      "pinVersion": "19.2.7"
     },
     {
       "label": "three is pinned to the latest release accepted by postprocessing 6.39.5 (its peer range is >= 0.168 < 0.187)",
       "packages": ["@example/**"],
       "dependencies": ["three"],
-      "pinVersion": "0.186.0"
+      "pinVersion": "0.186.1"
     },
     {
       "label": "three types track the pinned three line",
@@ -46,13 +46,13 @@
       "label": "@react-three/fiber is pinned: 9.x is the React 19 line, and a caret could raise the three floor",
       "packages": ["@example/**"],
       "dependencies": ["@react-three/fiber"],
-      "pinVersion": "9.8.1"
+      "pinVersion": "9.8.2"
     },
     {
       "label": "@react-three/drei is pinned: 10.x is the line matching @react-three/fiber 9",
       "packages": ["@example/**"],
       "dependencies": ["@react-three/drei"],
-      "pinVersion": "10.7.8"
+      "pinVersion": "10.7.9"
     },
     {
       "label": "Update lamina to 1.2.2 for all examples.",
