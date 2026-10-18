@@ -68,6 +68,13 @@ export const EXCEPTIONS = {
   // spread is the problem. Why it costs what it costs is worth its own look.
   //
   "merged-instance": "3.2min to over 5min for the same shot, run to run",
+  //
+  // Needs WebGPU, and the harness browser has none. Headless Chromium reports
+  // no adapter, so the page shows its static fallback, no canvas mounts, and
+  // the shot waits out the full budget for a frame that never comes. Measured
+  // locally: 300s timeout on `__cheeseReady`, fallback copy on screen.
+  //
+  "r3f-alpha-6": "WebGPU only, and the harness Chromium has no adapter",
 };
 
 //
