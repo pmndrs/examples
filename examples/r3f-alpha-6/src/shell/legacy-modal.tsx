@@ -197,23 +197,11 @@ export function LegacyLink() {
           <p className="legacy-lead">
             WebGPU is the new default, but nobody is getting left behind. If
             your project runs on <code>WebGLRenderer</code> it still has a home
-            in v10. Pick whichever switch suits you.
+            in v10. Switching back is one import.
           </p>
           <ol className="legacy-options">
             <li>
-              <h3>Add one prop</h3>
-              <pre>
-                <code>
-                  &lt;Canvas <mark>legacy</mark>&gt;
-                </code>
-              </pre>
-              <p>
-                Tag your Canvas with <code>legacy</code> and r3f loads the
-                WebGLRenderer for you. Nothing else changes.
-              </p>
-            </li>
-            <li>
-              <h3>Or move your imports</h3>
+              <h3>Import the legacy Canvas</h3>
               <pre>
                 <code>
                   import {"{ Canvas }"} from '@react-three/fiber/
@@ -221,8 +209,21 @@ export function LegacyLink() {
                 </code>
               </pre>
               <p>
-                Point your imports at the legacy entry and the whole tree
-                renders with WebGL, types included.
+                That Canvas creates a <code>WebGLRenderer</code>. Nothing else
+                in your scene has to change.
+              </p>
+            </li>
+            <li>
+              <h3>Point the hooks there too</h3>
+              <pre>
+                <code>
+                  import {"{ useThree }"} from '@react-three/fiber/
+                  <mark>legacy</mark>'
+                </code>
+              </pre>
+              <p>
+                Hooks from the same entry are typed for WebGL, so{" "}
+                <code>state.renderer</code> needs no cast.
               </p>
             </li>
           </ol>
@@ -233,7 +234,7 @@ export function LegacyLink() {
             still young though, and existing shaders, materials and
             post-processing don't carry over one to one. Rather than swap
             renderers under your feet, we made WebGPU the default and kept WebGL
-            one prop away.
+            one import away.
           </p>
           <div className="legacy-actions">
             <a
