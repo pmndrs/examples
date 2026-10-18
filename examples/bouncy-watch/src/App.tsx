@@ -1,10 +1,9 @@
-import { type ComponentProps } from "react";
 import * as THREE from "three";
 import { type GLTF } from "three-stdlib";
 import { Canvas, type ThreeElements } from "@react-three/fiber";
 import {
   useGLTF,
-  PresentationControls as PresentationControlsImpl,
+  PresentationControls,
   Environment,
   ContactShadows,
   Html,
@@ -23,20 +22,6 @@ type GLTFResult = GLTF & {
   };
 };
 
-// The installed @react-three/drei types dropped the legacy react-spring
-// `config` prop and the object form of `snap` that this example still
-// passes; widen the prop type locally instead of changing the values.
-type PresentationControlsProps = Omit<
-  ComponentProps<typeof PresentationControlsImpl>,
-  "snap"
-> & {
-  config?: { mass?: number; tension?: number };
-  snap?: boolean | number | { mass?: number; tension?: number };
-};
-const PresentationControls = PresentationControlsImpl as unknown as (
-  props: PresentationControlsProps,
-) => ReturnType<typeof PresentationControlsImpl>;
-
 export default function App() {
   return (
     <Canvas shadows camera={{ position: [0, 0, 10], fov: 25 }}>
@@ -52,8 +37,7 @@ export default function App() {
       />
       <PresentationControls
         global
-        config={{ mass: 2, tension: 500 }}
-        snap={{ mass: 4, tension: 1500 }}
+        snap
         rotation={[0, 0.3, 0]}
         polar={[-Math.PI / 3, Math.PI / 3]}
         azimuth={[-Math.PI / 1.4, Math.PI / 2]}

@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { useState, type ComponentProps } from "react";
+import { useState } from "react";
 import { Canvas, useLoader, type ThreeElements } from "@react-three/fiber";
 import {
   useGLTF,
@@ -9,7 +9,7 @@ import {
   Html,
   Environment,
   Center,
-  PresentationControls as PresentationControlsImpl,
+  PresentationControls,
 } from "@react-three/drei";
 import {
   EffectComposer,
@@ -26,23 +26,6 @@ type GLTFResult = GLTF & {
   nodes: { diamonds: THREE.Mesh; ring: THREE.Mesh };
   materials: { ring: THREE.MeshStandardMaterial };
 };
-
-// The installed @react-three/drei types dropped the legacy react-spring
-// `config` prop and the object form of `snap` that this example still
-// passes; widen the prop type locally instead of changing the values.
-type PresentationControlsProps = Omit<
-  ComponentProps<typeof PresentationControlsImpl>,
-  "snap"
-> & {
-  config?: { mass?: number; tension?: number; friction?: number };
-  snap?:
-    | boolean
-    | number
-    | { mass?: number; tension?: number; friction?: number };
-};
-const PresentationControls = PresentationControlsImpl as unknown as (
-  props: PresentationControlsProps,
-) => ReturnType<typeof PresentationControlsImpl>;
 
 function Ring({
   map,
@@ -96,8 +79,7 @@ export default function App() {
       <Environment map={texture} />
       <PresentationControls
         global
-        config={{ mass: 1, tension: 250, friction: 25 }}
-        snap={{ mass: 2, tension: 250, friction: 50 }}
+        snap
         zoom={1.25}
         rotation={[0.5, 0.5, 0]}
         polar={[-Math.PI / 5, Math.PI / 4]}
