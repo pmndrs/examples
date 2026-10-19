@@ -324,6 +324,11 @@ button.hit-area {
   background: #88888820;
 }
 
+/* A quiet recording shows only the scene, so the link hit areas take no hover, focus, or clicks. */
+.is-quiet .hit-area {
+  visibility: hidden;
+}
+
 /* While a scene tracks the link hit areas, each link is placed over its drawn text relative to the page. */
 .is-tracked :is(.primary-links, .credits) {
   position: static;

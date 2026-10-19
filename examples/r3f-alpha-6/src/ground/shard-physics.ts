@@ -58,16 +58,46 @@ export function bakeShards(
       quaternion.fromArray(blend);
     },
     /**
-     * A live world that continues from the final baked frame with the letters at rest.
-     * Shards start asleep and wake when the pusher or a kick reaches them.
+     * A live world that continues from the baked frame at `from` seconds after the strike, by default the
+     * last. Shards keep the speed and spin they had there, unlaunched ones still launch on their delays,
+     * and the letters keep gliding on the same clock until they rest. Shards that had settled start asleep
+     * and wake when the pusher or a kick reaches them.
      */
-    live() {
+    live(from = options.duration) {
+      const step = keep / rate;
+      const frame = Math.max(0, Math.min(frames - 1, Math.round(from / step)));
+      const settled = frame === frames - 1;
+      const before = Math.max(0, frame - 1),
+        after = Math.min(frames - 1, frame + 1),
+        span = (after - before) * step;
+      const turn = new Quaternion(),
+        start = new Quaternion();
+      let clock = frame * step;
       const resting = shards.map((shard, i) => {
         const body = createBody(shard);
-        const o = ((frames - 1) * count + i) * 7;
-        body.x.fromArray(track, o);
-        body.q.fromArray(track, o + 3);
-        body.released = body.asleep = true;
+        const at = (f: number) => (f * count + i) * 7;
+        body.x.fromArray(track, at(frame));
+        body.q.fromArray(track, at(frame) + 3);
+        body.released = clock >= body.delay;
+        body.asleep = settled;
+        if (body.released && !settled && span > 0) {
+          body.v
+            .fromArray(track, at(after))
+            .sub(p.fromArray(track, at(before)))
+            .divideScalar(span);
+          // The spin is the world-space turn between the neighboring frames.
+          turn
+            .fromArray(track, at(after) + 3)
+            .multiply(start.fromArray(track, at(before) + 3).invert());
+          if (turn.w < 0) turn.set(-turn.x, -turn.y, -turn.z, -turn.w);
+          const sine = Math.sqrt(Math.max(0, 1 - turn.w * turn.w));
+          if (sine > 1e-6)
+            body.w
+              .set(turn.x, turn.y, turn.z)
+              .multiplyScalar(
+                (2 * Math.acos(Math.min(1, turn.w))) / sine / span,
+              );
+        }
         return body;
       });
       const world = createShardWorld(
@@ -75,7 +105,7 @@ export function bakeShards(
         shards,
         obstacles.map((obstacle) => ({
           ...obstacle,
-          offset: () => obstacle.offset(options.duration),
+          offset: (t: number) => obstacle.offset(Math.min(t, options.duration)),
         })),
         options,
       );
@@ -91,7 +121,8 @@ export function bakeShards(
               pusher.center
                 .copy(end)
                 .addScaledVector(pusher.velocity, -delta * (1 - i / count));
-            world.step(options.duration, delta / count, pusher);
+            clock += delta / count;
+            world.step(clock, delta / count, pusher);
           }
         },
         pose(index: number, position: Vector3, quaternion: Quaternion) {

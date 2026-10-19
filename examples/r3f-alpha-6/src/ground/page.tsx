@@ -10,6 +10,7 @@ import { Credits, SiteLinks } from "../shell/site-links";
 import { AnnouncementCopy } from "../shell/announcement-copy";
 import { DesignControls } from "../shell/design-controls";
 import { Loader } from "../shell/loader";
+import { quiet, useQuietKeys } from "../shell/quiet";
 import { loadTypography } from "../typography";
 import {
   animationDuration,
@@ -22,7 +23,10 @@ import { GroundScene } from "./scene";
 /** The announcement with glass type standing on the ground and the copy printed on the floor. */
 export default function GroundPage() {
   const { settings, setCameraPose } = useGroundSettings();
-  const duration = animationDuration(settings.breakDelay);
+  const duration = animationDuration(
+    settings.breakDelay,
+    settings.flyIn ? settings.flyDuration + settings.flySettleDuration : 0,
+  );
   // Fonts download while the canvas starts. The scene reads the same cached load.
   loadTypography(settings.displayFont, settings.detailFont);
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -46,6 +50,7 @@ export default function GroundPage() {
     );
     setLight(t >= impactTime + 0.6);
   });
+  useQuietKeys(player);
   const onError = useCallback((error: unknown) => {
     console.error("Announcement:", error);
     setError(true);
@@ -54,7 +59,7 @@ export default function GroundPage() {
   return (
     <main
       ref={page}
-      className={`announcement is-ground ${light ? "is-light" : ""} ${fallback ? "is-fallback" : ""} ${player.ready && !fallback ? "is-tracked" : ""}`}
+      className={`announcement is-ground ${light ? "is-light" : ""} ${fallback ? "is-fallback" : ""} ${player.ready && !fallback ? "is-tracked" : ""} ${quiet ? "is-quiet" : ""}`}
       aria-label="React Three Fiber v10 Alpha 6 announcement"
     >
       {!fallback && support === "yes" && (
@@ -104,14 +109,18 @@ export default function GroundPage() {
       {!fallback && <Loader ready={player.ready} />}
       <AnnouncementCopy fallback={fallback} error={error} />
       {!fallback && <DesignControls open={settingsOpen} />}
-      <PlaybackControls
-        player={player}
-        fallback={fallback}
-        settingsOpen={settingsOpen}
-        onSettingsOpen={setSettingsOpen}
-      />
+      {!quiet && (
+        <PlaybackControls
+          player={player}
+          fallback={fallback}
+          settingsOpen={settingsOpen}
+          onSettingsOpen={setSettingsOpen}
+        />
+      )}
       <SiteLinks />
-      <Scrubber player={player} duration={duration} fallback={fallback} />
+      {!quiet && (
+        <Scrubber player={player} duration={duration} fallback={fallback} />
+      )}
       <Credits />
     </main>
   );

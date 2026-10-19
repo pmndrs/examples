@@ -12,8 +12,28 @@ type CameraPose = Pick<
 >;
 
 /**
+ * How far the intro holds the camera from the saved pose. Angles are in degrees and `distance` scales
+ * the resting distance. The pitch offset may take the camera below the cursor's pitch range.
+ * `focus` is the point the camera circles and looks at, in world units from the scene origin.
+ * `tilt` and `pan` turn the view after it is aimed, in degrees, and `zoom` scales the saved zoom.
+ * `pointer` from 0 to 1 is how much the cursor may nudge the camera during the flight.
+ */
+export type CameraFlight = {
+  yaw: number;
+  pitch: number;
+  roll: number;
+  distance: number;
+  focus: Vector3;
+  tilt: number;
+  pan: number;
+  zoom: number;
+  pointer: number;
+};
+
+/**
  * Keep pointer animation separate from the saved camera pose.
  * `pitch` bounds drag orbiting and `pointerPitch` bounds the pose plus cursor offset, both in degrees above the horizon.
+ * A `flight` handed to the returned update drives the camera in every mode until it lands on the saved pose.
  */
 export function useCameraRig(
   settings: CameraSettings,
@@ -33,6 +53,7 @@ export function useCameraRig(
   const controls = useRef<OrbitControls | null>(null);
   const pointer = useRef(new Vector2());
   const offset = useRef(new Vector2());
+  const flying = useRef(false);
   const live = useRef({ settings, onPose });
   live.current = { settings, onPose };
 
@@ -50,12 +71,14 @@ export function useCameraRig(
     orbit.maxPolarAngle = MathUtils.degToRad(90 - pitch[0]);
     orbit.minZoom = 0.65;
     orbit.maxZoom = 1.8;
-    const save = () =>
+    const save = () => {
+      if (flying.current) return;
       live.current.onPose({
         cameraYaw: MathUtils.radToDeg(orbit.getAzimuthalAngle()),
         cameraPitch: 90 - MathUtils.radToDeg(orbit.getPolarAngle()),
         cameraZoom: camera.zoom,
       });
+    };
     const change = () => invalidate();
     orbit.addEventListener("change", change);
     orbit.addEventListener("end", save);
@@ -149,12 +172,17 @@ export function useCameraRig(
     settings.orbitSpeed,
   ]);
 
-  return (delta: number) => {
+  return (delta: number, flight?: CameraFlight) => {
     const s = live.current.settings;
-    if (s.cameraMode !== "Orbit") {
+    const orbit = controls.current;
+    // Replays start from the authored shot even after a pan. A drag mid-flight is not saved as the pose.
+    if (flight) orbit?.target.copy(origin);
+    const landed = !flight && flying.current;
+    flying.current = !!flight;
+    if (s.cameraMode !== "Orbit" || flight || landed) {
       const strength =
         s.cameraMode === "Pointer" && !playback.current.reduced
-          ? s.parallax
+          ? s.parallax * (flight?.pointer ?? 1)
           : 0;
       const blend = 1 - Math.exp(-s.cameraSmoothing * Math.min(delta, 0.05));
       offset.current.x = MathUtils.lerp(
@@ -167,24 +195,38 @@ export function useCameraRig(
         pointer.current.y * s.pointerY * strength,
         blend,
       );
-      const target = controls.current?.target ?? origin;
+      const target = flight?.focus ?? orbit?.target ?? origin;
       camera.position
         .setFromSphericalCoords(
-          distance,
+          distance * (flight?.distance ?? 1),
           MathUtils.degToRad(
             90 -
               MathUtils.clamp(
                 s.cameraPitch + offset.current.y,
                 pointerPitch[0],
                 pointerPitch[1],
-              ),
+              ) -
+              (flight?.pitch ?? 0),
           ),
           MathUtils.degToRad(
-            MathUtils.clamp(s.cameraYaw + offset.current.x, -80, 80),
+            MathUtils.clamp(s.cameraYaw + offset.current.x, -80, 80) +
+              (flight?.yaw ?? 0),
           ),
         )
         .add(target);
       camera.lookAt(target);
+      if (flight) {
+        camera.rotateZ(MathUtils.degToRad(flight.roll));
+        camera.rotateX(MathUtils.degToRad(flight.tilt));
+        camera.rotateY(MathUtils.degToRad(flight.pan));
+      }
+      if (flight || landed) {
+        const zoom = s.cameraZoom * (flight?.zoom ?? 1);
+        if (camera.zoom !== zoom) {
+          camera.zoom = zoom;
+          camera.updateProjectionMatrix();
+        }
+      }
     }
     camera.updateMatrixWorld();
   };

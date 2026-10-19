@@ -11,6 +11,7 @@ export function useGroundCursor() {
   const state = useRef({
     ndc: null as Vector2 | null,
     press: null as Vector2 | null,
+    movedAt: 0,
   });
 
   useEffect(() => {
@@ -27,6 +28,7 @@ export function useGroundCursor() {
         ((event.clientX - bounds.left) / bounds.width) * 2 - 1,
         1 - ((event.clientY - bounds.top) / bounds.height) * 2,
       );
+      state.current.movedAt = performance.now();
       invalidate();
     };
     const press = (event: PointerEvent) => {
@@ -69,10 +71,18 @@ export function useGroundCursor() {
     raycaster.setFromCamera(ndc, camera);
     return raycaster.ray.intersectPlane(ground, new Vector3()) ?? undefined;
   };
-  /** The ground points under the pointer and under a press since the previous read, plus the pointer in screen space. */
+  /**
+   * The ground points under the pointer and under a press since the previous read, the pointer in screen
+   * space, and whether it is resting: off the canvas, or still for two seconds.
+   */
   return () => {
-    const { ndc, press } = state.current;
+    const { ndc, press, movedAt } = state.current;
     state.current.press = null;
-    return { point: onGround(ndc), press: onGround(press), ndc };
+    return {
+      point: onGround(ndc),
+      press: onGround(press),
+      ndc,
+      resting: !ndc || performance.now() - movedAt > 2000,
+    };
   };
 }

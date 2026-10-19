@@ -158,6 +158,7 @@ export function createGlassTitle(
       max: [keepClear.max.x / endScale, 1e3, keepClear.max.z / endScale],
     },
   };
+  let previous = 0;
   let pose: ReturnType<typeof tagPose> | undefined,
     poseKey = "";
   let live: ShardLive | undefined, last: Vector3 | undefined;
@@ -254,8 +255,13 @@ export function createGlassTitle(
           shardCollisions: settings.shardCollisions,
         });
       }
-      if (!baked || t - impactTime < duration - 1e-3) live = last = undefined;
-      else live ??= baked.live();
+      // The pointer takes the shards over from the moment it reaches them after the strike. Left alone the
+      // baked fall plays out, so an untouched take is the same every time, and going back returns to it.
+      if (!baked || t < impactTime || t < previous - 1e-3)
+        live = last = undefined;
+      else if (!live && (cursor || t - impactTime >= duration - 1e-3))
+        live = baked.live(Math.min(t - impactTime, duration));
+      previous = t;
       if (live && cursor) {
         const point = root.worldToLocal(cursor.clone());
         if (last)
