@@ -16,10 +16,18 @@ import { credits } from "../credits";
 import { ease } from "../timeline";
 import { createLabels, spreadRow, type LabelOptions } from "../labels";
 import { createHitAreas } from "../shell/hit-areas";
-import { impactTime } from "./choreography";
+import { impactTime, spring } from "./choreography";
+import { quiet } from "../shell/quiet";
 import type { Typography } from "../typography";
 import type { GroundLayout } from "./layout";
 import type { GroundSettings } from "./settings";
+
+/** The closing copy starts building this long into the choreography, as the world turns light. */
+const beat = impactTime + 0.3;
+
+/** Overshoots past 1 and settles back, for entrances with a little snap. */
+const backOut = (x: number) =>
+  1 + 2.70158 * (x - 1) ** 3 + 1.70158 * (x - 1) ** 2;
 
 /**
  * Announcement copy printed flat on the ground. Each item sits under the same screen position as the flat
@@ -40,8 +48,13 @@ export function createGroundCopy(
     hits = createHitAreas();
   root.add(screen);
   const labels = createLabels(typography, onError, true);
-  const appear = uniform(0),
-    alphaAppear = uniform(0);
+  // Entrance cues for the closing copy, each run from 0 to 1 by `update`.
+  const enter = {
+    version: uniform(0),
+    alpha: uniform(0),
+    now: uniform(0),
+    headline: uniform(0),
+  };
   const compact = w < 650;
   const patches: { group: Group; scale: number; slant: number }[] = [];
   const geometries: BufferGeometry[] = [];
@@ -113,10 +126,12 @@ export function createGroundCopy(
   ).visible = !compact;
 
   const versionSize = compact ? 17 : 21;
-  const version = labels.create("r3f v10", versionSize);
+  const version = labels.create("r3f v10", versionSize, {
+    reveal: { progress: enter.version, rise: 0.6, stagger: 0.8 },
+  });
   const alpha = labels.create("Alpha 6", versionSize, {
     tone: "accent",
-    opacity: alphaAppear,
+    reveal: { progress: enter.alpha, rise: 0.8, tracking: 0.4, stagger: 0.8 },
   });
   const versionWidth = version.measure().width,
     alphaWidth = alpha.measure().width;
@@ -124,14 +139,22 @@ export function createGroundCopy(
   place(0, -h * 0.067, version, alpha);
   label("is now", 0, -h * 0.118, compact ? 14 : 16, {
     tone: "muted",
-    opacity: appear,
+    reveal: { progress: enter.now, rise: 0.6, stagger: 0.6 },
   });
   label(
     "WebGPU First",
     0,
     -h * 0.182,
     Math.min(compact ? w * 0.087 : 50, h * 0.065),
-    { bold: true, opacity: appear },
+    {
+      bold: true,
+      reveal: {
+        progress: enter.headline,
+        rise: 0.7,
+        tracking: 0.35,
+        stagger: 1.2,
+      },
+    },
   );
 
   // The Poimandres mark from the HTML logo, drawn at the same 36.52 px.
@@ -171,22 +194,20 @@ export function createGroundCopy(
     toneMapped: false,
   });
   markMaterial.colorNode = labels.ink;
+  const mark = new Mesh(markGeometry, markMaterial);
   geometries.push(markGeometry);
   materials.push(markMaterial);
-  hits.add(
-    "logo",
-    place(0, -h * 0.286, new Mesh(markGeometry, markMaterial)),
-    0,
-    0,
-    56,
-    56,
-  );
+  hits.add("logo", place(0, -h * 0.286, mark), 0, 0, 56, 56);
 
-  const links = ["Docs", "/", "Examples", "/", "WebGL"].map((text) =>
-    text === "/"
-      ? labels.create(text, 12, { tone: "muted" })
-      : labels.create(text, 14),
+  const linkCues = ["Docs", "/", "Examples", "/", "WebGL"].map(() =>
+    uniform(0),
   );
+  const links = ["Docs", "/", "Examples", "/", "WebGL"].map((text, i) => {
+    const reveal = { progress: linkCues[i], rise: 0.6, stagger: 0.5 };
+    return text === "/"
+      ? labels.create(text, 12, { tone: "muted", reveal })
+      : labels.create(text, 14, { reveal });
+  });
   const centers = spreadRow(links, 18);
   const row = place(0, -h * 0.353, ...links);
   ["docs", "examples", "webgl"].forEach((key, i) =>
@@ -254,6 +275,11 @@ export function createGroundCopy(
   foot("BUILT WITH", -w / 2 + 32, footY, 9, { align: "left" }).visible =
     w > 800;
   foot("ALPHA 6", w / 2 - 32, footY, 9, { align: "right" }).visible = w > 800;
+  // A quiet recording keeps the announcement and drops the header and credits around it.
+  if (quiet) {
+    screen.visible = false;
+    footer.forEach(({ carrier }) => (carrier.visible = false));
+  }
 
   return {
     root,
@@ -262,13 +288,30 @@ export function createGroundCopy(
     update(t: number, amount: number, settings: GroundSettings) {
       labels.theme.value = ease(t, impactTime + 0.05, impactTime + 1.2);
       labels.headingColor.value.set(settings.color2);
-      alphaAppear.value = ease(t, 2, 2.8);
-      appear.value = ease(t, 2.6, 3.7);
-      const slide = ease(t, 1.9, 2.9);
+      // The sentence builds on a beat once the world turns light, each line overlapping the last.
+      const cue = (start: number, length: number) =>
+        Math.max(0, Math.min(1, (t - beat - start) / length));
+      enter.version.value = cue(0, 0.5);
+      enter.alpha.value = cue(0.3, 0.5);
+      // "Alpha 6" drives in from the right and shoves "r3f v10" aside on a spring.
+      const shove =
+        t < beat + 0.3 ? 0 : 1 - spring(t - beat - 0.3, 1, 0, -6, 11, 0.5);
       version.position.x =
-        -versionWidth / 2 + (-releaseWidth / 2 + versionWidth / 2) * slide;
-      alpha.position.x = -releaseWidth / 2 + versionWidth + 14;
-      progress.scale.x = Math.max(0.001, amount);
+        -versionWidth / 2 + (-releaseWidth / 2 + versionWidth / 2) * shove;
+      alpha.position.x =
+        -releaseWidth / 2 + versionWidth + 14 + (1 - shove) * alphaWidth * 0.6;
+      enter.now.value = cue(0.6, 0.45);
+      enter.headline.value = cue(0.75, 0.95);
+      // The mark spins a quarter turn as it pops in, then the links follow one by one.
+      const pop = backOut(cue(1.35, 0.5));
+      mark.scale.setScalar(pop);
+      mark.rotation.z = (pop - 1) * (Math.PI / 2);
+      linkCues.forEach((link, i) => (link.value = cue(1.45 + i * 0.07, 0.45)));
+      // The track draws on from the left, and the playback progress fills only what is drawn.
+      const draw = 1 - (1 - cue(1.75, 0.5)) ** 3;
+      track.scale.x = Math.max(0.001, draw);
+      track.position.x = (-trackWidth * (1 - track.scale.x)) / 2;
+      progress.scale.x = Math.max(0.001, Math.min(amount, draw));
       progress.position.x = (-trackWidth * (1 - progress.scale.x)) / 2;
       for (const { group, scale, slant } of patches)
         group.scale.set(
@@ -276,6 +319,7 @@ export function createGroundCopy(
           scale * (1 + (1 / slant - 1) * settings.copyStretch),
           scale,
         );
+      labels.update();
       for (const spot of footer)
         (settings.footerOnGround ? spot.ground : spot.screen).add(spot.carrier);
     },

@@ -27,7 +27,10 @@ import { ease } from "../timeline";
 import type { Playback } from "../shell/use-playback";
 import {
   animationDuration,
+  buffet,
   choreographyTime,
+  flight,
+  impactKick,
   impactTime,
 } from "./choreography";
 import { groundLayout } from "./layout";
@@ -37,6 +40,7 @@ import { createShadowLight } from "./shadow-light";
 import { createGlassTitle } from "./glass-title";
 import { createGroundCopy } from "./ground-copy";
 import { useGroundCursor } from "./use-ground-cursor";
+import { quiet } from "../shell/quiet";
 import type { GroundSettings } from "./settings";
 
 /**
@@ -74,6 +78,8 @@ export function GroundScene({
   const startup = useRef({ compiled: false, frames: 0 });
   // The pointer eased in screen space, from -1 to 1. It swings the HDR and the key light.
   const aim = useRef(new Vector2());
+  const circle = useRef(new Vector2());
+  const focus = useRef(new Vector3());
   const parts = useRef<{
     key?: { light: DirectionalLight; home: Vector3 };
     reflections?: ReturnType<typeof createReflections>;
@@ -94,7 +100,8 @@ export function GroundScene({
   });
   const { environment, depth, bevel, fractureSeed, fragmentCount } = settings;
   const layout = groundLayout(size.width, size.height, fov, distance);
-  const titleAt = layout.at(0, size.height * (size.width < 650 ? 0.09 : 0.04));
+  // The title sits clear above the release line, so the copy block reads as its own tier.
+  const titleAt = layout.at(0, size.height * (size.width < 650 ? 0.12 : 0.075));
   const titlePixel = layout.scale(titleAt);
 
   useEffect(() => {
@@ -263,11 +270,11 @@ export function GroundScene({
       const p = playback.current;
       const s = live.current;
       const { ground, title, copy, glass } = parts.current;
+      const flightEnd = s.flyDuration + s.flySettleDuration;
+      const duration = animationDuration(s.breakDelay, s.flyIn ? flightEnd : 0);
       // The opening hold lasts until the shards arrive from the worker.
       const end =
-        title?.shattered || p.time > s.breakDelay
-          ? animationDuration(s.breakDelay)
-          : s.breakDelay;
+        title?.shattered || p.time > s.breakDelay ? duration : s.breakDelay;
       if (p.ready && p.playing && !document.hidden)
         p.time = Math.min(end, p.time + Math.min(state.delta, 0.05));
       if (s.animate && !p.reduced && !document.hidden) {
@@ -275,13 +282,59 @@ export function GroundScene({
         clock.current.flow += Math.min(state.delta, 0.05) * s.speed;
         invalidate();
       }
-      updateCamera(state.delta);
+      const inFlight = s.flyIn && !p.reduced && p.time < flightEnd;
+      const { approach, speed, climb } = flight(
+        p.time,
+        s.flyDuration,
+        s.flySettleDuration,
+        s.flyOvershoot,
+        s.flyRush,
+      );
+      // The rush closes in through log distance, so the word grows at a steady rate whatever the start.
+      const low =
+        s.flyPassDistance * (s.flyDistance / s.flyPassDistance) ** approach;
+      // It swoops down from high above to the low pass, so the shot opens looking down on the word.
+      const lowPitch = s.flyPitch + (s.flyStartPitch - s.flyPitch) * approach;
       const t = choreographyTime(p.time, s.breakDelay);
+      // The strike jolts the shot, so the camera feels the hit instead of watching it.
+      const kick = impactKick(t);
+      const shake =
+        s.flyShake * Math.max(0, speed) + s.flyImpact * 0.8 * kick.shake;
+      updateCamera(
+        state.delta,
+        inFlight
+          ? {
+              yaw: (s.flyYaw - s.cameraYaw) * approach,
+              pitch: (lowPitch - s.cameraPitch) * climb,
+              // Bank, a wider lens, and buffeting all follow the rush's speed, so they die on the stop.
+              roll: s.flyRoll * speed,
+              zoom:
+                (1 - s.flyWiden * speed) *
+                (1 + s.flyImpact * 0.05 * kick.punch),
+              tilt: shake * buffet(p.time, 0),
+              pan: shake * buffet(p.time, 1),
+              // The cursor joins in once the word shatters, so the settle already answers the pointer.
+              pointer: ease(t, impactTime, impactTime + 0.5),
+              // Low down the camera circles the word itself, so it stays centered until the climb.
+              focus: focus.current.copy(titleAt).multiplyScalar(climb),
+              distance: 1 + (low - 1) * climb,
+            }
+          : undefined,
+      );
       const light = ease(t, impactTime, impactTime + 2.1);
       ground?.update(s, light);
       if (ground) ground.time.value = clock.current.flow;
       const cursor = readCursor();
-      const target = cursor.ndc && !p.reduced ? cursor.ndc : { x: 0, y: 0 };
+      // In a quiet recording a resting pointer hands the light to a slow circle, so the shadows and
+      // reflections keep sweeping without a hand on the mouse.
+      const target = p.reduced
+        ? { x: 0, y: 0 }
+        : quiet && cursor.resting
+          ? circle.current.set(
+              Math.cos(state.elapsed * 0.8) * 0.7,
+              Math.sin(state.elapsed * 0.8) * 0.7,
+            )
+          : (cursor.ndc ?? { x: 0, y: 0 });
       aim.current.lerp(
         target as Vector2,
         1 - Math.exp(-4 * Math.min(state.delta, 0.05)),
@@ -312,7 +365,7 @@ export function GroundScene({
         )
       )
         invalidate();
-      copy?.update(t, Math.min(1, p.time / animationDuration(s.breakDelay)), s);
+      copy?.update(t, Math.min(1, p.time / duration), s);
       copy?.follow(camera as PerspectiveCamera, renderer.domElement);
       glyph.shape();
       const { reflections, key: sun } = parts.current;
