@@ -1,5 +1,6 @@
 import { useMemo, useRef } from "react";
 import { button, folder, useControls } from "leva";
+import { layoutPitch } from "./layout";
 import {
   backgroundControls,
   cameraControls,
@@ -47,7 +48,7 @@ export function useGroundSettings() {
   const camera: CameraSettings = {
     cameraMode: "Pointer",
     cameraYaw: 0.1,
-    cameraPitch: 65.2,
+    cameraPitch: layoutPitch,
     cameraZoom: 0.91,
     parallax: 0.25,
     pointerX: 8,

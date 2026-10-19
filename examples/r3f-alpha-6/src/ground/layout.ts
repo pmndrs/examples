@@ -7,21 +7,23 @@ import {
   Vector3,
 } from "three/webgpu";
 
+export const layoutPitch = 65.2;
+
 /**
- * Maps screen positions onto the ground plane for the resting camera pose, so flat copy lands where the
- * HTML hit areas sit. Positions are pixels from the screen center with y up.
+ * Maps screen positions onto the ground plane for a fixed reference pose, so flat copy lands where the
+ * HTML hit areas sit. Orbiting moves the camera without changing the layout.
+ * Positions are pixels from the screen center with y up.
  */
 export function groundLayout(
   width: number,
   height: number,
   fov: number,
   distance: number,
-  pitch: number,
 ) {
   const camera = new PerspectiveCamera(fov, width / height, 1, distance * 20);
   camera.position.setFromSphericalCoords(
     distance,
-    MathUtils.degToRad(90 - pitch),
+    MathUtils.degToRad(90 - layoutPitch),
     0,
   );
   camera.lookAt(0, 0, 0);

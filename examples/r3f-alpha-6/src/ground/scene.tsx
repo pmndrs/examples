@@ -92,21 +92,8 @@ export function GroundScene({
     pitch: [14, 70],
     pointerPitch: [10, 80],
   });
-  const {
-    environment,
-    depth,
-    bevel,
-    fractureSeed,
-    fragmentCount,
-    cameraPitch,
-  } = settings;
-  const layout = groundLayout(
-    size.width,
-    size.height,
-    fov,
-    distance,
-    cameraPitch,
-  );
+  const { environment, depth, bevel, fractureSeed, fragmentCount } = settings;
+  const layout = groundLayout(size.width, size.height, fov, distance);
   const titleAt = layout.at(0, size.height * (size.width < 650 ? 0.09 : 0.04));
   const titlePixel = layout.scale(titleAt);
 
@@ -231,7 +218,7 @@ export function GroundScene({
       typography,
       live.current,
       onError,
-      groundLayout(size.width, size.height, fov, distance, cameraPitch),
+      groundLayout(size.width, size.height, fov, distance),
       size.width,
       size.height,
     );
@@ -244,16 +231,7 @@ export function GroundScene({
       glyph.shape();
       own.copy = undefined;
     };
-  }, [
-    scene,
-    typography,
-    onError,
-    size.width,
-    size.height,
-    fov,
-    distance,
-    cameraPitch,
-  ]);
+  }, [scene, typography, onError, size.width, size.height, fov, distance]);
 
   useLayoutEffect(() => {
     traceStartup("Compiling ground scene", 0.95);
