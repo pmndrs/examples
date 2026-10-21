@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "WebGPU Multi Canvas",
+  "description": "Four canvases, one WebGPU device. The primary canvas owns the renderer and the others share it, each on its own frame rate, and a 5 fps HUD redraws the primary's scene from above with an orthographic camera.",
+  "tags": ["webgpu", "views"],
+  "authors": ["Dennis Smolek", "Kris Baumgartner"],
+  "source": "https://github.com/pmndrs/react-three-fiber/tree/v10/example/src/demos/webgpu/WebGPUMultiCanvas.tsx",
+  "libraries": ["@react-three/fiber", "@react-three/drei"],
+  "assets": []
+}

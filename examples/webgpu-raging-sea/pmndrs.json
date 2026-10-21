@@ -1,0 +1,15 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "WebGPU Raging Sea",
+  "description": "The raging sea shader rebuilt in TSL. Leva values become uniforms through useUniforms, and useNodes builds the displacement and color nodes once under a name the material reads back.",
+  "tags": ["webgpu", "tsl", "shader", "noise", "environment"],
+  "authors": ["Dennis Smolek", "Kris Baumgartner"],
+  "source": "https://github.com/pmndrs/react-three-fiber/tree/v10/example/src/demos/webgpu/WebGPURagingSea.tsx",
+  "libraries": [
+    "@react-three/fiber",
+    "@react-three/tsl",
+    "@react-three/drei",
+    "leva"
+  ],
+  "assets": []
+}

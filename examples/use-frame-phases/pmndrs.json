@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "useFrame Phases",
+  "description": "Why a follow camera has to run after interpolation. Physics steps at 15 Hz in the fixed physics phase, an update job interpolates it, and a custom camera phase follows. Swap the two and watch the camera stutter.",
+  "tags": ["webgpu", "frame-loop", "shadows"],
+  "authors": ["Dennis Smolek", "Kris Baumgartner"],
+  "source": "https://github.com/pmndrs/react-three-fiber/tree/v10/example/src/demos/webgpu/UseFramePhases.tsx",
+  "libraries": ["@react-three/fiber"],
+  "assets": []
+}

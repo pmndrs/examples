@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "WebGPU Shared Uniforms",
+  "description": "One TSL graph drives three shapes. useUniform and useUniforms register named uniforms on the root, useNodes builds the color and position nodes from them, and a hover springs one uniform without rebuilding anything.",
+  "tags": ["webgpu", "tsl", "shader", "interaction"],
+  "authors": ["Dennis Smolek", "Shaoyu Meng", "Kris Baumgartner"],
+  "source": "https://github.com/pmndrs/react-three-fiber/tree/v10/example/src/demos/webgpu/WebGPUSharedUniforms.tsx",
+  "libraries": ["@react-three/fiber", "@react-three/tsl"],
+  "assets": []
+}

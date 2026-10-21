@@ -11,6 +11,7 @@ export const LIBRARY_LABELS: Record<string, string> = {
   "@react-three/flex": "Flex",
   "@react-three/postprocessing": "Postprocessing",
   "@react-three/rapier": "Rapier",
+  "@react-three/tsl": "TSL",
   "@use-gesture/react": "useGesture",
   ecctrl: "Ecctrl",
   jotai: "Jotai",
