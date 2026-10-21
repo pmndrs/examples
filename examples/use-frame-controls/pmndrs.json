@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "useFrame Controls",
+  "description": "The controls useFrame returns. Pause, resume and step a single job, pause another by id through the scheduler, or stop the whole loop and step every job by hand.",
+  "tags": ["webgpu", "frame-loop", "shadows", "controls"],
+  "authors": ["Dennis Smolek", "Kris Baumgartner"],
+  "source": "https://github.com/pmndrs/react-three-fiber/tree/v10/example/src/demos/webgpu/UseFrameControls.tsx",
+  "libraries": ["@react-three/fiber", "@react-three/drei"],
+  "assets": []
+}

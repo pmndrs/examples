@@ -1,0 +1,35 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "WebGPU Motion Blur",
+  "description": "Per-object motion blur from a velocity MRT, set up with useRenderPipeline. An animated character and spinning tori show the effect; toggle it and tune the amount from Leva. Based on three.js webgpu_postprocessing_motion_blur.",
+  "tags": ["webgpu", "tsl", "postprocessing", "animation", "gltf", "shadows"],
+  "authors": ["Dennis Smolek", "Victor Zakharov", "Kris Baumgartner"],
+  "source": "https://github.com/pmndrs/react-three-fiber/tree/v10/example/src/demos/webgpu/WebGPUMotionBlur.tsx",
+  "libraries": [
+    "@react-three/fiber",
+    "@react-three/tsl",
+    "@react-three/drei",
+    "leva"
+  ],
+  "assets": [
+    {
+      "name": "X Bot",
+      "files": ["src/assets/Xbot.glb"],
+      "creator": "Mixamo",
+      "source": "https://github.com/mrdoob/three.js/blob/dev/examples/models/gltf/Xbot.glb",
+      "notes": "From the three.js examples."
+    },
+    {
+      "name": "UV grid",
+      "files": ["src/assets/uv_grid_opengl.jpg"],
+      "source": "https://github.com/mrdoob/three.js/blob/dev/examples/textures/uv_grid_opengl.jpg",
+      "notes": "From the three.js examples."
+    },
+    {
+      "name": "Checkerboard floor",
+      "files": ["src/assets/FloorsCheckerboard_S_Diffuse.jpg"],
+      "source": "https://github.com/mrdoob/three.js/blob/dev/examples/textures/floors/FloorsCheckerboard_S_Diffuse.jpg",
+      "notes": "From the three.js examples."
+    }
+  ]
+}

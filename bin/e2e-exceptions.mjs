@@ -75,6 +75,27 @@ export const EXCEPTIONS = {
   // locally: 300s timeout on `__cheeseReady`, fallback copy on screen.
   //
   "r3f-alpha-6": "WebGPU only, and the harness Chromium has no adapter",
+  //
+  // The R3F v10 WebGPU examples. Same missing adapter as `r3f-alpha-6`, and a
+  // second wall behind it: the monkey plugin swaps their `<Canvas>` for
+  // `CheesyCanvas`, which imports the workspace's hoisted fiber 9, so the shot
+  // would mount a v9 root around v10 children. Bring them back when the
+  // harness has an adapter and a v10 `CheesyCanvas`.
+  //
+  "use-frame-controls": "WebGPU only, and the harness Chromium has no adapter",
+  "use-frame-fps": "WebGPU only, and the harness Chromium has no adapter",
+  "use-frame-phases": "WebGPU only, and the harness Chromium has no adapter",
+  "webgpu-basics": "WebGPU only, and the harness Chromium has no adapter",
+  "webgpu-fog": "WebGPU only, and the harness Chromium has no adapter",
+  "webgpu-motion-blur": "WebGPU only, and the harness Chromium has no adapter",
+  "webgpu-multi-canvas": "WebGPU only, and the harness Chromium has no adapter",
+  "webgpu-raging-sea": "WebGPU only, and the harness Chromium has no adapter",
+  "webgpu-shared-renderer":
+    "WebGPU only, and the harness Chromium has no adapter",
+  "webgpu-shared-uniforms":
+    "WebGPU only, and the harness Chromium has no adapter",
+  "webgpu-visibility-events":
+    "WebGPU only, and the harness Chromium has no adapter",
 };
 
 //

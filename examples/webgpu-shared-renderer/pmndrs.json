@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "WebGPU Shared Renderer",
+  "description": "Who owns the renderer when canvases share one: a primary, a canvas that borrows it automatically, one that names it with share=\"id\", and one that opts out with share={false} and builds its own. Each label reads its canvas's state live.",
+  "tags": ["webgpu", "views"],
+  "authors": ["Dennis Smolek"],
+  "source": "https://github.com/pmndrs/react-three-fiber/tree/v10/example/src/demos/webgpu/WebGPUShareOptOut.tsx",
+  "libraries": ["@react-three/fiber"],
+  "assets": []
+}

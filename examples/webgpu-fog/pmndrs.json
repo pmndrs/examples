@@ -1,0 +1,15 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "WebGPU Fog",
+  "description": "Procedural height fog with animated noise, written in TSL. Scoped useUniforms read from Leva, and useLocalNodes installs the fogNode and backgroundNode on the scene. Based on three.js webgpu_custom_fog.",
+  "tags": ["webgpu", "tsl", "fog", "noise"],
+  "authors": ["Dennis Smolek", "Victor Zakharov"],
+  "source": "https://github.com/pmndrs/react-three-fiber/tree/v10/example/src/demos/webgpu/WebGPUFog.tsx",
+  "libraries": [
+    "@react-three/fiber",
+    "@react-three/tsl",
+    "@react-three/drei",
+    "leva"
+  ],
+  "assets": []
+}

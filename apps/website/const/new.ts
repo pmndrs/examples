@@ -1,1 +1,15 @@
-export const NEW_EXAMPLES = new Set(["plane-crash", "r3f-alpha-6"]);
+export const NEW_EXAMPLES = new Set([
+  "plane-crash",
+  "r3f-alpha-6",
+  "use-frame-controls",
+  "use-frame-fps",
+  "use-frame-phases",
+  "webgpu-basics",
+  "webgpu-fog",
+  "webgpu-motion-blur",
+  "webgpu-multi-canvas",
+  "webgpu-raging-sea",
+  "webgpu-shared-renderer",
+  "webgpu-shared-uniforms",
+  "webgpu-visibility-events",
+]);

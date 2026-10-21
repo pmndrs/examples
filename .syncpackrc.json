@@ -2,13 +2,34 @@
   "versionGroups": [
     {
       "label": "React Three Fiber v10",
-      "packages": ["@example/r3f-alpha-6"],
-      "dependencies": ["@react-three/fiber"],
+      "packages": [
+        "@example/r3f-alpha-6",
+        "@example/use-frame-controls",
+        "@example/use-frame-fps",
+        "@example/use-frame-phases",
+        "@example/webgpu-basics",
+        "@example/webgpu-fog",
+        "@example/webgpu-motion-blur",
+        "@example/webgpu-multi-canvas",
+        "@example/webgpu-raging-sea",
+        "@example/webgpu-shared-renderer",
+        "@example/webgpu-shared-uniforms",
+        "@example/webgpu-visibility-events"
+      ],
+      "dependencies": ["@react-three/fiber", "@react-three/tsl"],
       "pinVersion": "10.0.0-alpha.6"
     },
     {
       "label": "Drei v11",
-      "packages": ["!**"],
+      "packages": [
+        "@example/use-frame-controls",
+        "@example/use-frame-fps",
+        "@example/webgpu-fog",
+        "@example/webgpu-motion-blur",
+        "@example/webgpu-multi-canvas",
+        "@example/webgpu-raging-sea",
+        "@example/webgpu-visibility-events"
+      ],
       "dependencies": ["@react-three/drei"],
       "pinVersion": "11.0.0-alpha.7"
     },

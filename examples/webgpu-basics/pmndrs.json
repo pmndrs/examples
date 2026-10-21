@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "WebGPU Basics",
+  "description": "The smallest React Three Fiber v10 scene on WebGPU. Three planes with TSL color and position nodes, an environment preset set straight on the Canvas background, and a hover that springs a uniform toward a third color.",
+  "tags": ["webgpu", "tsl", "shader", "interaction", "environment"],
+  "authors": ["Dennis Smolek", "Cody Bennett", "Shaoyu Meng"],
+  "source": "https://github.com/pmndrs/react-three-fiber/tree/v10/example/src/demos/webgpu/WebGPU.tsx",
+  "libraries": ["@react-three/fiber"],
+  "assets": []
+}

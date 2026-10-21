@@ -1,0 +1,17 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "WebGPU Visibility Events",
+  "description": "onFramed, onOccluded and onVisible on WebGPU. A sphere orbits in and out of view and behind panels, and each object recolors through a TSL uniform as its visibility changes.",
+  "tags": ["webgpu", "tsl", "events", "occlusion", "gltf"],
+  "authors": ["Dennis Smolek", "Kris Baumgartner"],
+  "source": "https://github.com/pmndrs/react-three-fiber/tree/v10/example/src/demos/webgpu/VisibilityEvents.tsx",
+  "libraries": ["@react-three/fiber", "@react-three/tsl", "@react-three/drei"],
+  "assets": [
+    {
+      "name": "Lightning",
+      "files": ["src/assets/lightning.gltf"],
+      "source": "https://github.com/pmndrs/react-three-fiber/tree/v10/example/public/models",
+      "notes": "Taken from the react-three-fiber example app."
+    }
+  ]
+}

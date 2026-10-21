@@ -1,0 +1,17 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "useFrame FPS",
+  "description": "Three apples spin at the same speed with different useFrame fps limits: unlimited, 15 and 5. Each job runs at its own rate on one render loop.",
+  "tags": ["webgpu", "frame-loop", "gltf"],
+  "authors": ["Kris Baumgartner"],
+  "source": "https://github.com/pmndrs/react-three-fiber/tree/v10/example/src/demos/webgpu/UseFrameFPS.tsx",
+  "libraries": ["@react-three/fiber", "@react-three/drei"],
+  "assets": [
+    {
+      "name": "Apple",
+      "files": ["src/assets/apple.gltf"],
+      "source": "https://github.com/pmndrs/react-three-fiber/tree/v10/example/public/models",
+      "notes": "Taken from the react-three-fiber example app."
+    }
+  ]
+}

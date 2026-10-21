@@ -1,0 +1,60 @@
+import { Canvas, type ThreeElements } from "@react-three/fiber";
+import { Leva, useControls } from "leva";
+import { getLevaSeaConfig, makeSeaNodes, TerrainGeometry } from "./seaNodes";
+import { CameraControls, Environment } from "@react-three/drei";
+import { useUniforms, useNodes } from "@react-three/tsl";
+
+// single setup of nodes for the app
+const Experience = () => {
+  //* Leva Controls ==============================
+  const levaUniforms = useControls("Raging Sea", getLevaSeaConfig());
+  const uniforms = useUniforms(levaUniforms);
+
+  //* Nodes Setup ==============================
+  useNodes(() => makeSeaNodes(uniforms), "sea");
+
+  return (
+    <>
+      <Lights />
+      <SeaSurface />
+      <CameraControls makeDefault />
+    </>
+  );
+};
+
+function Lights() {
+  const { envIntensity } = useControls("Environment", {
+    envIntensity: { value: 0.5, min: 0, max: 1, step: 0.01 },
+  });
+  return (
+    <>
+      <ambientLight intensity={Math.PI} />
+      <directionalLight position={[-4, 2, 0]} intensity={Math.PI} />
+      <Environment preset="city" environmentIntensity={envIntensity} />
+    </>
+  );
+}
+
+function SeaSurface(props: ThreeElements["mesh"]) {
+  const matNodes = useNodes("sea");
+  return (
+    <mesh {...props}>
+      <TerrainGeometry />
+      <meshStandardMaterial {...matNodes} color={"#271442"} roughness={0.15} />
+    </mesh>
+  );
+}
+
+export default function App() {
+  return (
+    <>
+      <Canvas
+        camera={{ fov: 50, position: [0, 1.5, 2.5] }}
+        background={"#271442"}
+      >
+        <Experience />
+      </Canvas>
+      <Leva collapsed />
+    </>
+  );
+}
