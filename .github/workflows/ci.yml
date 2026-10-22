@@ -44,7 +44,7 @@ jobs:
           node-version-file: ".nvmrc"
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
-      - uses: rharkor/caching-for-turbo@v2.5.1
+      - uses: rharkor/caching-for-turbo@v2.5.2
       - run: pnpm check
       # Asserts the `inputs` in turbo.json stay honest: which file makes which
       # task re-run. Runs turbo with `--dry`, so it costs hashes, not builds.
@@ -86,7 +86,7 @@ jobs:
           node-version-file: ".nvmrc"
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
-      - uses: rharkor/caching-for-turbo@v2.5.1
+      - uses: rharkor/caching-for-turbo@v2.5.2
 
       # `--concurrency=1`, and it is not a detail. One e2e test already pins the
       # runner: two cores, no GPU, every pixel through SwiftShader. Turbo's
@@ -239,7 +239,7 @@ jobs:
           node-version-file: ".nvmrc"
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
-      - uses: rharkor/caching-for-turbo@v2.5.1
+      - uses: rharkor/caching-for-turbo@v2.5.2
       - run: pnpm build
         env:
           BASE_PATH: ${{ steps.configurepages.outputs.base_path }}
@@ -287,7 +287,7 @@ jobs:
           node-version-file: ".nvmrc"
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
-      - uses: rharkor/caching-for-turbo@v2.5.1
+      - uses: rharkor/caching-for-turbo@v2.5.2
 
       # The same `BASE_PATH` as the Pages build, and not for tidiness:
       # `BASE_PATH` is a `globalEnv`, and it really does change every example's
