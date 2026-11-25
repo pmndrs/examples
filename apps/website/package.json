@@ -106,6 +106,7 @@
     "@example/lens-distortion": "workspace:*",
     "@example/lensflare": "workspace:*",
     "@example/linocut": "workspace:*",
+    "@example/littlest-tokyo": "workspace:*",
     "@example/lulaby-city": "workspace:*",
     "@example/lusion-connectors": "workspace:*",
     "@example/lut": "workspace:*",
