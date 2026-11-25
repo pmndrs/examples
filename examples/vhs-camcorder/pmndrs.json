@@ -1,0 +1,26 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "VHS Camcorder",
+  "description": "An orbitable 1980s camcorder with hotspots: picking one blends the camera into a close-up seen through a viewfinder, with depth of field, chromatic aberration, scanlines and a REC readout. Cameras by @pmndrs/klipp.",
+  "tags": ["annotations", "html", "dof", "postprocessing", "gltf"],
+  "authors": ["Łukasz Kwas"],
+  "source": "https://pmndrs.github.io/klipp/#vhs",
+  "libraries": [
+    "@pmndrs/klipp",
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing"
+  ],
+  "assets": [
+    {
+      "name": "Panasonic M5 VHS Camcorder | Game Ready Model",
+      "files": ["src/models/camcorder.glb"],
+      "creator": "kennethtzh",
+      "source": "https://sketchfab.com/3d-models/panasonic-m5-vhs-camcorder-game-ready-model-2d60a254516b4b639a0097520c4b0db6",
+      "license": "CC BY 4.0",
+      "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
+      "modified": true,
+      "notes": "Compressed with gltfjsx --transform."
+    }
+  ]
+}

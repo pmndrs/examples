@@ -187,6 +187,7 @@
       "items": {
         "enum": [
           "@pmndrs/glyph",
+          "@pmndrs/klipp",
           "@react-spring/core",
           "@react-spring/three",
           "@react-spring/web",

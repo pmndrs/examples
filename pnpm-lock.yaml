@@ -633,6 +633,9 @@ importers:
       '@example/useintersect-and-scrollcontrols':
         specifier: workspace:*
         version: link:../../examples/useintersect-and-scrollcontrols
+      '@example/vhs-camcorder':
+        specifier: workspace:*
+        version: link:../../examples/vhs-camcorder
       '@example/video-cookies':
         specifier: workspace:*
         version: link:../../examples/video-cookies
@@ -8721,6 +8724,52 @@ importers:
         specifier: ^8.3.4
         version: 8.3.4(@types/node@24.19.2)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.9.0)
 
+  examples/vhs-camcorder:
+    dependencies:
+      '@pmndrs/klipp':
+        specifier: ^0.19.0
+        version: 0.19.0(@react-three/fiber@9.8.2(@types/react@19.2.18)(react-dom@19.2.9(react@19.2.9))(react@19.2.9)(three@0.186.1))(react@19.2.9)(three@0.186.1)
+      '@react-three/drei':
+        specifier: 10.7.9
+        version: 10.7.9(@react-three/fiber@9.8.2(@types/react@19.2.18)(react-dom@19.2.9(react@19.2.9))(react@19.2.9)(three@0.186.1))(@types/react@19.2.18)(@types/three@0.186.0)(react-dom@19.2.9(react@19.2.9))(react@19.2.9)(three@0.186.1)
+      '@react-three/fiber':
+        specifier: 9.8.2
+        version: 9.8.2(@types/react@19.2.18)(react-dom@19.2.9(react@19.2.9))(react@19.2.9)(three@0.186.1)
+      '@react-three/postprocessing':
+        specifier: ^3.2.0
+        version: 3.2.0(@react-three/fiber@9.8.2(@types/react@19.2.18)(react-dom@19.2.9(react@19.2.9))(react@19.2.9)(three@0.186.1))(@types/three@0.186.0)(postprocessing@6.39.5(three@0.186.1))(react@19.2.9)(three@0.186.1)
+      postprocessing:
+        specifier: 6.39.5
+        version: 6.39.5(three@0.186.1)
+      react:
+        specifier: 19.2.9
+        version: 19.2.9
+      react-dom:
+        specifier: 19.2.9
+        version: 19.2.9(react@19.2.9)
+      three:
+        specifier: 0.186.1
+        version: 0.186.1
+    devDependencies:
+      '@types/react':
+        specifier: 19.2.18
+        version: 19.2.18
+      '@types/react-dom':
+        specifier: 19.2.7
+        version: 19.2.7(@types/react@19.2.18)
+      '@types/three':
+        specifier: ^0.186.0
+        version: 0.186.0
+      '@vitejs/plugin-react':
+        specifier: ^6.1.2
+        version: 6.1.2(vite@8.3.4(@types/node@24.19.2)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.9.0))
+      typescript:
+        specifier: ^7.0.2
+        version: 7.0.2
+      vite:
+        specifier: ^8.3.4
+        version: 8.3.4(@types/node@24.19.2)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.9.0)
+
   examples/video-cookies:
     dependencies:
       '@react-three/drei':
@@ -10802,6 +10851,26 @@ packages:
       three:
         optional: true
       typegpu:
+        optional: true
+      vue:
+        optional: true
+
+  '@pmndrs/klipp@0.19.0':
+    resolution: {integrity: sha512-QnmzyyQz1FPeKQ+ejdK0lAX+/ewnZinRTDTzqvQamt762uhE8zL4j8OWIpduM71+PN9ok3Droa+Z28eghfoMZA==}
+    peerDependencies:
+      '@react-three/fiber': ^9.7.0
+      '@tresjs/core': '>=5.12.0'
+      react: '>=19.2.0'
+      three: '>=0.156.0'
+      vue: '>=3.4.0'
+    peerDependenciesMeta:
+      '@react-three/fiber':
+        optional: true
+      '@tresjs/core':
+        optional: true
+      react:
+        optional: true
+      three:
         optional: true
       vue:
         optional: true
@@ -14063,6 +14132,9 @@ packages:
     resolution: {integrity: sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==}
     engines: {node: '>= 0.4'}
 
+  math@0.0.0-canary-20261026-7c55d752:
+    resolution: {integrity: sha512-/j7DIzYW1HH1HzhamMnG7FmQ63H4RaWSokfPFZbaGS9evolX2d90SEgn+LRD0b2BO6NWyn75zxXCyhM9yITg/Q==}
+
   math@0.1.0:
     resolution: {integrity: sha512-hq5KkLblFiR8OO8ZYqPK02mBqrXuxJ6hwvhL3ZM9OFkAR82/20n4H768SWl4yVVrufh8VijEm42D4V9N8hDa2g==}
 
@@ -17187,6 +17259,14 @@ snapshots:
     transitivePeerDependencies:
       - '@oxc-project/types'
       - rolldown
+
+  '@pmndrs/klipp@0.19.0(@react-three/fiber@9.8.2(@types/react@19.2.18)(react-dom@19.2.9(react@19.2.9))(react@19.2.9)(three@0.186.1))(react@19.2.9)(three@0.186.1)':
+    dependencies:
+      math: 0.0.0-canary-20261026-7c55d752
+    optionalDependencies:
+      '@react-three/fiber': 9.8.2(@types/react@19.2.18)(react-dom@19.2.9(react@19.2.9))(react@19.2.9)(three@0.186.1)
+      react: 19.2.9
+      three: 0.186.1
 
   '@pmndrs/scheduler@0.3.0(react-dom@19.2.9(react@19.2.9))(react@19.2.9)':
     optionalDependencies:
@@ -20604,6 +20684,8 @@ snapshots:
       zod: 4.4.3
 
   math-intrinsics@1.1.0: {}
+
+  math@0.0.0-canary-20261026-7c55d752: {}
 
   math@0.1.0: {}
 
