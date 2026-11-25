@@ -1,0 +1,26 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Littlest Tokyo",
+  "description": "A scroll-driven camera tour of an animated town: a dive down a spline into an alley, a shot that keeps the running mascot in frame, a ride on the tram and a long lens on the birds, with depth of field following each shot and speed lines on the drop. Cameras by @pmndrs/klipp.",
+  "tags": ["scroll", "animation", "gltf", "dof", "postprocessing", "shader"],
+  "authors": ["Łukasz Kwas"],
+  "source": "https://pmndrs.github.io/klipp/#tokyo",
+  "libraries": [
+    "@pmndrs/klipp",
+    "@react-three/drei",
+    "@react-three/fiber",
+    "@react-three/postprocessing"
+  ],
+  "assets": [
+    {
+      "name": "Littlest Tokyo",
+      "files": ["src/models/littlest-tokyo.glb"],
+      "creator": "glenatron",
+      "source": "https://sketchfab.com/3d-models/littlest-tokyo-94b24a60dc1b48248de50bf087c0f042",
+      "license": "CC BY 4.0",
+      "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
+      "modified": true,
+      "notes": "From the three.js examples, compressed with gltfjsx --transform --keepnames --keepgroups."
+    }
+  ]
+}
