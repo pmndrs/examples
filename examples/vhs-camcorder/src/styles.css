@@ -1,0 +1,264 @@
+@import url("https://fonts.googleapis.com/css2?family=Righteous&family=Share+Tech+Mono&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  position: relative;
+  user-select: none;
+}
+
+body {
+  background: #0e0c16;
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
+}
+
+canvas {
+  display: block;
+}
+
+.infopoint {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  color: #fff;
+  font:
+    600 1rem/1 "Share Tech Mono",
+    monospace;
+  background: rgb(10 10 14 / 0.7);
+  border: 1px solid rgb(255 255 255 / 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.infopoint::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 1px solid rgb(255 255 255 / 0.6);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: infopoint-pulse 2.4s ease-out infinite;
+}
+
+.infopoint:hover {
+  transform: scale(1.15);
+}
+
+@keyframes infopoint-pulse {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.8);
+  }
+}
+
+.infopoint-card {
+  position: absolute;
+  left: 2rem;
+  bottom: 2rem;
+  width: 22rem;
+  max-width: calc(100% - 2rem);
+  padding: 1.25rem 1.5rem;
+  color: #fff;
+  background: rgb(10 10 14 / 0.75);
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 0.75rem;
+}
+
+.infopoint-card h2 {
+  margin: 0 0 0.5rem;
+  font:
+    400 1.5rem/1.2 "Righteous",
+    sans-serif;
+}
+
+.infopoint-card p {
+  margin: 0 0 1rem;
+  color: rgb(255 255 255 / 0.75);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.infopoint-card button {
+  padding: 0.375rem 1rem;
+  color: inherit;
+  font:
+    0.8125rem "Share Tech Mono",
+    monospace;
+  background: transparent;
+  border: 1px solid rgb(255 255 255 / 0.4);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.infopoint-card button:hover {
+  background: rgb(255 255 255 / 0.12);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .infopoint-card {
+    backdrop-filter: blur(12px);
+  }
+}
+
+.viewfinder-hud {
+  position: absolute;
+  inset: 0;
+  color: rgb(255 255 255 / 0.85);
+  font:
+    1rem "Share Tech Mono",
+    monospace;
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 6px rgb(0 0 0 / 0.6);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.viewfinder-hud.is-on {
+  opacity: 1;
+}
+
+.viewfinder-hud-frame {
+  --corner: rgb(255 255 255 / 0.7);
+  position: absolute;
+  inset: 14% 16%;
+  background:
+    linear-gradient(var(--corner), var(--corner)) top left / 1.75rem 2px,
+    linear-gradient(var(--corner), var(--corner)) top left / 2px 1.75rem,
+    linear-gradient(var(--corner), var(--corner)) top right / 1.75rem 2px,
+    linear-gradient(var(--corner), var(--corner)) top right / 2px 1.75rem,
+    linear-gradient(var(--corner), var(--corner)) bottom left / 1.75rem 2px,
+    linear-gradient(var(--corner), var(--corner)) bottom left / 2px 1.75rem,
+    linear-gradient(var(--corner), var(--corner)) bottom right / 1.75rem 2px,
+    linear-gradient(var(--corner), var(--corner)) bottom right / 2px 1.75rem;
+  background-repeat: no-repeat;
+}
+
+.viewfinder-hud-rec,
+.viewfinder-hud-tape,
+.viewfinder-hud-counter {
+  position: absolute;
+}
+
+.viewfinder-hud-rec {
+  top: 1rem;
+  left: 1.25rem;
+}
+
+.viewfinder-hud-dot {
+  color: #ff3b3b;
+  animation: viewfinder-blink 1s steps(2, jump-none) infinite;
+}
+
+@keyframes viewfinder-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.viewfinder-hud-tape {
+  top: 1rem;
+  right: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.viewfinder-hud-battery {
+  display: flex;
+  gap: 2px;
+  padding: 2px;
+  border: 1.5px solid currentColor;
+  border-radius: 2px;
+}
+
+.viewfinder-hud-battery span {
+  width: 0.375rem;
+  height: 0.625rem;
+  background: currentColor;
+}
+
+.viewfinder-hud-counter {
+  right: 1.25rem;
+  bottom: 1rem;
+}
+
+.showcase-credit {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.25rem;
+  color: rgb(255 255 255 / 0.45);
+  font-size: 0.6875rem;
+  text-decoration: none;
+}
+
+.showcase-credit:hover {
+  color: rgb(255 255 255 / 0.8);
+}
+
+@media (max-width: 40rem) {
+  .infopoint-card {
+    left: 3%;
+    right: 3%;
+    bottom: 1.75rem;
+    width: 94%;
+    max-width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 0.625rem;
+    background: rgb(10 10 14);
+  }
+
+  .infopoint-card h2 {
+    margin-bottom: 0.25rem;
+    font-size: 1.125rem;
+  }
+
+  .infopoint-card p {
+    margin-bottom: 0.625rem;
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+
+  .infopoint-card button {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .viewfinder-hud {
+    font-size: 0.75rem;
+  }
+
+  .viewfinder-hud-frame {
+    inset: 18% 6%;
+    bottom: 30%;
+  }
+
+  .showcase-credit {
+    width: 100%;
+    right: 0;
+    text-align: center;
+  }
+}

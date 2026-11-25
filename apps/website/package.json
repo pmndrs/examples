@@ -199,6 +199,7 @@
     "@example/use-frame-fps": "workspace:*",
     "@example/use-frame-phases": "workspace:*",
     "@example/useintersect-and-scrollcontrols": "workspace:*",
+    "@example/vhs-camcorder": "workspace:*",
     "@example/video-cookies": "workspace:*",
     "@example/video-textures": "workspace:*",
     "@example/view-tracking": "workspace:*",
