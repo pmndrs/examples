@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Camera Controls",
+  "description": "Interactive camera controls demo showcasing CameraControls with smooth transitions, zoom limits, and dolly controls.",
+  "tags": ["controls", "camera"],
+  "authors": ["Sumit Ridhal"],
+  "source": "https://github.com/pmndrs/examples/tree/main/examples/camera-controls-basic",
+  "libraries": ["@react-three/drei", "@react-three/fiber", "leva"],
+  "assets": []
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schemas/pmndrs.schema.json",
+  "title": "Accumulative Contact Shadows",
+  "description": "Shadow staging techniques comparing AccumulativeShadows with RandomizedLight and ContactShadows on simple geometry.",
+  "tags": ["staging", "shadows"],
+  "authors": ["Sumit Ridhal"],
+  "source": "https://github.com/pmndrs/examples/tree/main/examples/accumulative-contact-shadows",
+  "libraries": ["@react-three/drei", "@react-three/fiber", "leva"],
+  "assets": []
+}
