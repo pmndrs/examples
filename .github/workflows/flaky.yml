@@ -56,7 +56,7 @@ jobs:
           node-version-file: ".nvmrc"
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
-      - uses: rharkor/caching-for-turbo@v2.5.1
+      - uses: rharkor/caching-for-turbo@v2.5.2
 
       # An empty shard has nothing to say, and `e2e-flaky` with no names would
       # take that as "every example".
